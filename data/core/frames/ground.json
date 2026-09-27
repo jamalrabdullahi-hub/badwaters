@@ -1,0 +1,132 @@
+[
+ {
+  "id": "gc-truck-6x6",
+  "name": "6×6 truck chassis",
+  "kind": "ground",
+  "type": "launcher-vehicle",
+  "budgets": {
+   "mass": 18,
+   "volume": 4,
+   "power": 0,
+   "cooling": 2,
+   "crew": 6
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "deck-launcher": 2
+  },
+  "base": {
+   "mobility": 2
+  },
+  "requires": {
+   "structures": 1
+  },
+  "cost": 2,
+  "factory": "vehicle-plant",
+  "workUnits": 3
+ },
+ {
+  "id": "gc-truck-8x8",
+  "name": "8×8 heavy chassis",
+  "kind": "ground",
+  "type": "launcher-vehicle",
+  "budgets": {
+   "mass": 30,
+   "volume": 6,
+   "power": 0,
+   "cooling": 3,
+   "crew": 8
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "deck-launcher": 4,
+   "cell-block": 1
+  },
+  "base": {
+   "mobility": 1
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 4,
+  "factory": "vehicle-plant",
+  "workUnits": 5
+ },
+ {
+  "id": "gc-tracked",
+  "name": "Tracked chassis",
+  "kind": "ground",
+  "type": "launcher-vehicle",
+  "budgets": {
+   "mass": 24,
+   "volume": 5,
+   "power": 0,
+   "cooling": 2,
+   "crew": 6
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "deck-launcher": 2
+  },
+  "base": {
+   "mobility": 1,
+   "survivability": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 5,
+  "factory": "vehicle-plant",
+  "workUnits": 6
+ },
+ {
+  "id": "gc-radar-trailer",
+  "name": "Radar site vehicle set",
+  "kind": "ground",
+  "type": "radar-unit",
+  "budgets": {
+   "mass": 230,
+   "volume": 8,
+   "power": 0,
+   "cooling": 4,
+   "crew": 10
+  },
+  "ports": {
+   "mast-sensor": 1
+  },
+  "base": {
+   "mobility": 0
+  },
+  "requires": {
+   "structures": 1
+  },
+  "cost": 2,
+  "factory": "vehicle-plant",
+  "workUnits": 2
+ },
+ {
+  "id": "gc-fixed-site",
+  "name": "Fixed site",
+  "kind": "ground",
+  "type": "fixed-site",
+  "budgets": {
+   "mass": 400,
+   "volume": 20,
+   "power": 0,
+   "cooling": 10,
+   "crew": 40
+  },
+  "ports": {
+   "mast-sensor": 2,
+   "cell-block": 4,
+   "pd-mount": 2
+  },
+  "base": {
+   "survivability": 3
+  },
+  "requires": {},
+  "cost": 30,
+  "factory": "vehicle-plant",
+  "workUnits": 20
+ }
+]

@@ -24,6 +24,13 @@ foreach (var p in presets.Where(p => p.Nation != "" && !ids.Contains(p.Nation)))
 foreach (var p in people.Where(p => p.CareerYears <= p.TrainingYears))
     loader.Errors.Add($"personnel.json #{p.Id}: career must be longer than training");
 
+var content = GameContent.Load(dataDir, mods);
+loader.Errors.AddRange(content.Errors);
+var eval = new BadWaters.Sim.Engineering.Evaluator(content.Catalog);
+var maxTech = content.Tech.Keys.ToDictionary(k => k, k => content.Tech[k].MaxLevel);
+foreach (var d in content.Designs.Values)
+    foreach (var i in eval.Evaluate(d, maxTech).Issues) loader.Errors.Add($"designs.json #{d.Id}: {i.Text}");
+Console.WriteLine($"Components {content.Catalog.Components.Count} · frames {content.Catalog.Frames.Count} · factories {content.Factories.Count} · trade routes {content.Routes.Count} · designs {content.Designs.Count}");
 Console.WriteLine($"Nations {nations.Count} · start dates {dates.Count} · personnel categories {people.Count} · presets {presets.Count}");
 Console.WriteLine($"Target classes under policy: {TargetPolicy.AllClasses.Count()}");
 foreach (var e in loader.Errors) Console.Error.WriteLine($"ERROR {e}");

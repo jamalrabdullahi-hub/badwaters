@@ -1,0 +1,32 @@
+[
+ {
+  "id": "mass",
+  "name": "Weight",
+  "unit": "t"
+ },
+ {
+  "id": "volume",
+  "name": "Space",
+  "unit": "slots"
+ },
+ {
+  "id": "power",
+  "name": "Power",
+  "unit": "pts"
+ },
+ {
+  "id": "cooling",
+  "name": "Cooling",
+  "unit": "pts"
+ },
+ {
+  "id": "crew",
+  "name": "Crew",
+  "unit": "people"
+ },
+ {
+  "id": "data",
+  "name": "Data bandwidth",
+  "unit": "pts"
+ }
+]

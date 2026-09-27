@@ -1,0 +1,860 @@
+[
+ {
+  "id": "hull-patrol-boat",
+  "name": "Patrol boat",
+  "kind": "ship",
+  "type": "patrol-boat",
+  "budgets": {
+   "mass": 66,
+   "volume": 3,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.075,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 24,
+  "factory": "shipyard",
+  "workUnits": 1
+ },
+ {
+  "id": "hull-fac",
+  "name": "Fast attack craft",
+  "kind": "ship",
+  "type": "fac",
+  "budgets": {
+   "mass": 110,
+   "volume": 4,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.125,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 40,
+  "factory": "shipyard",
+  "workUnits": 2
+ },
+ {
+  "id": "hull-corvette",
+  "name": "Corvette",
+  "kind": "ship",
+  "type": "corvette",
+  "budgets": {
+   "mass": 396,
+   "volume": 8,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.45,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 144,
+  "factory": "shipyard",
+  "workUnits": 6
+ },
+ {
+  "id": "hull-opv",
+  "name": "Offshore patrol vessel",
+  "kind": "ship",
+  "type": "opv",
+  "budgets": {
+   "mass": 440,
+   "volume": 8,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.5,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 160,
+  "factory": "shipyard",
+  "workUnits": 7
+ },
+ {
+  "id": "hull-frigate-asw",
+  "name": "Anti-submarine frigate",
+  "kind": "ship",
+  "type": "frigate-asw",
+  "budgets": {
+   "mass": 990,
+   "volume": 14,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 3,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 2.125,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 360,
+  "factory": "shipyard",
+  "workUnits": 15
+ },
+ {
+  "id": "hull-frigate-gp",
+  "name": "General-purpose frigate",
+  "kind": "ship",
+  "type": "frigate-gp",
+  "budgets": {
+   "mass": 1100,
+   "volume": 15,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 3,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 2.25,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 400,
+  "factory": "shipyard",
+  "workUnits": 17
+ },
+ {
+  "id": "hull-destroyer-ad",
+  "name": "Air-defence destroyer",
+  "kind": "ship",
+  "type": "destroyer-ad",
+  "budgets": {
+   "mass": 1870,
+   "volume": 32,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 4,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 3.125,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 680,
+  "factory": "shipyard",
+  "workUnits": 28
+ },
+ {
+  "id": "hull-destroyer-gp",
+  "name": "Multi-mission destroyer",
+  "kind": "ship",
+  "type": "destroyer-gp",
+  "budgets": {
+   "mass": 1650,
+   "volume": 30,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 4,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 2.875,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 600,
+  "factory": "shipyard",
+  "workUnits": 25
+ },
+ {
+  "id": "hull-cruiser",
+  "name": "Cruiser",
+  "kind": "ship",
+  "type": "cruiser",
+  "budgets": {
+   "mass": 2420,
+   "volume": 38,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 5,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 3.75,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 880,
+  "factory": "shipyard",
+  "workUnits": 37
+ },
+ {
+  "id": "hull-carrier-cat",
+  "name": "Catapult carrier",
+  "kind": "ship",
+  "type": "carrier-cat",
+  "budgets": {
+   "mass": 19800,
+   "volume": 80,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 4,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 2,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 7200,
+  "factory": "shipyard",
+  "workUnits": 300
+ },
+ {
+  "id": "hull-carrier-stovl",
+  "name": "STOVL carrier",
+  "kind": "ship",
+  "type": "carrier-stovl",
+  "budgets": {
+   "mass": 8800,
+   "volume": 50,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 3,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 2,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 3200,
+  "factory": "shipyard",
+  "workUnits": 133
+ },
+ {
+  "id": "hull-amphib-assault",
+  "name": "Amphibious assault ship",
+  "kind": "ship",
+  "type": "amphib-assault",
+  "budgets": {
+   "mass": 8800,
+   "volume": 45,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 2,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 3200,
+  "factory": "shipyard",
+  "workUnits": 133
+ },
+ {
+  "id": "hull-landing-dock",
+  "name": "Dock landing ship",
+  "kind": "ship",
+  "type": "landing-dock",
+  "budgets": {
+   "mass": 4400,
+   "volume": 30,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1600,
+  "factory": "shipyard",
+  "workUnits": 67
+ },
+ {
+  "id": "hull-mine-warfare",
+  "name": "Mine countermeasures vessel",
+  "kind": "ship",
+  "type": "mine-warfare",
+  "budgets": {
+   "mass": 154,
+   "volume": 4,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.175,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 56,
+  "factory": "shipyard",
+  "workUnits": 2
+ },
+ {
+  "id": "hull-intel-ship",
+  "name": "Intelligence collection ship",
+  "kind": "ship",
+  "type": "intel-ship",
+  "budgets": {
+   "mass": 660,
+   "volume": 10,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.75,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 240,
+  "factory": "shipyard",
+  "workUnits": 10
+ },
+ {
+  "id": "hull-command-ship",
+  "name": "Command ship",
+  "kind": "ship",
+  "type": "command-ship",
+  "budgets": {
+   "mass": 3960,
+   "volume": 30,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 5.5,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1440,
+  "factory": "shipyard",
+  "workUnits": 60
+ },
+ {
+  "id": "hull-oiler",
+  "name": "Fleet oiler",
+  "kind": "ship",
+  "type": "oiler",
+  "budgets": {
+   "mass": 8800,
+   "volume": 20,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 3200,
+  "factory": "shipyard",
+  "workUnits": 133
+ },
+ {
+  "id": "hull-stores-ship",
+  "name": "Ammunition & stores ship",
+  "kind": "ship",
+  "type": "stores-ship",
+  "budgets": {
+   "mass": 8800,
+   "volume": 20,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 3200,
+  "factory": "shipyard",
+  "workUnits": 133
+ },
+ {
+  "id": "hull-hospital-ship",
+  "name": "Hospital ship",
+  "kind": "ship",
+  "type": "hospital-ship",
+  "budgets": {
+   "mass": 4400,
+   "volume": 20,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 6,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1600,
+  "factory": "shipyard",
+  "workUnits": 67
+ },
+ {
+  "id": "hull-icebreaker",
+  "name": "Icebreaking patrol ship",
+  "kind": "ship",
+  "type": "icebreaker",
+  "budgets": {
+   "mass": 1320,
+   "volume": 12,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 2.5,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 480,
+  "factory": "shipyard",
+  "workUnits": 20
+ },
+ {
+  "id": "hull-ssk",
+  "name": "Diesel-electric submarine",
+  "kind": "ship",
+  "type": "ssk",
+  "budgets": {
+   "mass": 660,
+   "volume": 10,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 0,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.75,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 240,
+  "factory": "shipyard",
+  "workUnits": 10
+ },
+ {
+  "id": "hull-ssn",
+  "name": "Nuclear attack submarine",
+  "kind": "ship",
+  "type": "ssn",
+  "budgets": {
+   "mass": 1760,
+   "volume": 16,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 0,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 3.0,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 640,
+  "factory": "shipyard",
+  "workUnits": 27
+ },
+ {
+  "id": "hull-ssgn",
+  "name": "Guided-missile submarine",
+  "kind": "ship",
+  "type": "ssgn",
+  "budgets": {
+   "mass": 3740,
+   "volume": 24,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 0,
+   "cell-block": 4,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 5.25,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1360,
+  "factory": "shipyard",
+  "workUnits": 57
+ },
+ {
+  "id": "hull-ssbn",
+  "name": "Deterrent submarine",
+  "kind": "ship",
+  "type": "ssbn",
+  "budgets": {
+   "mass": 3960,
+   "volume": 24,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 0,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 2,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 5.5,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1440,
+  "factory": "shipyard",
+  "workUnits": 60
+ },
+ {
+  "id": "hull-usv",
+  "name": "Uncrewed surface vessel",
+  "kind": "ship",
+  "type": "usv",
+  "budgets": {
+   "mass": 110,
+   "volume": 3,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.125,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 40,
+  "factory": "shipyard",
+  "workUnits": 2
+ },
+ {
+  "id": "hull-xluuv",
+  "name": "Large uncrewed underwater vehicle",
+  "kind": "ship",
+  "type": "xluuv",
+  "budgets": {
+   "mass": 18,
+   "volume": 2,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2
+  },
+  "ports": {
+   "mast-sensor": 0,
+   "cell-block": 0,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.02,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 6,
+  "factory": "shipyard",
+  "workUnits": 0
+ }
+]

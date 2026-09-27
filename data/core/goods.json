@@ -1,0 +1,46 @@
+[
+ {
+  "id": "steel",
+  "name": "Steel"
+ },
+ {
+  "id": "aluminium",
+  "name": "Aluminium"
+ },
+ {
+  "id": "titanium",
+  "name": "Titanium"
+ },
+ {
+  "id": "composites",
+  "name": "Composites"
+ },
+ {
+  "id": "rare-materials",
+  "name": "Rare Materials"
+ },
+ {
+  "id": "semiconductors",
+  "name": "Semiconductors"
+ },
+ {
+  "id": "rf-modules",
+  "name": "Rf Modules"
+ },
+ {
+  "id": "precision-electronics",
+  "name": "Precision Electronics"
+ },
+ {
+  "id": "energetics",
+  "name": "Energetics"
+ },
+ {
+  "id": "fuel",
+  "name": "Fuel"
+ },
+ {
+  "id": "engine-parts",
+  "name": "Engine Parts"
+ }
+]

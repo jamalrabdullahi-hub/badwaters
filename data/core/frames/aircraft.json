@@ -1,0 +1,191 @@
+[
+ {
+  "id": "af-light-fighter",
+  "name": "Light fighter airframe",
+  "kind": "aircraft",
+  "type": "light-multirole",
+  "budgets": {
+   "mass": 6,
+   "volume": 6,
+   "power": 0,
+   "cooling": 2,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 3,
+   "payload": 3
+  },
+  "requires": {
+   "structures": 3
+  },
+  "cost": 20,
+  "factory": "aerospace-assembly",
+  "workUnits": 20
+ },
+ {
+  "id": "af-heavy-fighter",
+  "name": "Heavy fighter airframe",
+  "kind": "aircraft",
+  "type": "heavy-fighter",
+  "budgets": {
+   "mass": 10,
+   "volume": 9,
+   "power": 0,
+   "cooling": 3,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 2,
+   "payload": 5,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 4
+  },
+  "cost": 35,
+  "factory": "aerospace-assembly",
+  "workUnits": 30
+ },
+ {
+  "id": "af-stealth-fighter",
+  "name": "Low-observable fighter airframe",
+  "kind": "aircraft",
+  "type": "stealth-multirole",
+  "budgets": {
+   "mass": 9,
+   "volume": 8,
+   "power": 0,
+   "cooling": 2,
+   "data": 2
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 2,
+   "payload": 3,
+   "signature": 3
+  },
+  "requires": {
+   "structures": 6,
+   "low-observables": 5
+  },
+  "cost": 60,
+  "factory": "aerospace-assembly",
+  "workUnits": 45
+ },
+ {
+  "id": "af-flying-wing",
+  "name": "Flying-wing bomber airframe",
+  "kind": "aircraft",
+  "type": "stealth-bomber",
+  "budgets": {
+   "mass": 30,
+   "volume": 20,
+   "power": 0,
+   "cooling": 4,
+   "data": 2
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "payload": 8,
+   "endurance": 5,
+   "signature": 4
+  },
+  "requires": {
+   "structures": 7,
+   "low-observables": 7,
+   "flight-control": 7
+  },
+  "cost": 300,
+  "factory": "aerospace-assembly",
+  "workUnits": 200
+ },
+ {
+  "id": "af-carrier-fighter",
+  "name": "Carrier fighter airframe",
+  "kind": "aircraft",
+  "type": "carrier-multirole",
+  "budgets": {
+   "mass": 9,
+   "volume": 8,
+   "power": 0,
+   "cooling": 2,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 2,
+   "payload": 4
+  },
+  "requires": {
+   "structures": 4
+  },
+  "cost": 40,
+  "factory": "aerospace-assembly",
+  "workUnits": 32
+ },
+ {
+  "id": "af-large",
+  "name": "Large support airframe",
+  "kind": "aircraft",
+  "type": "support",
+  "budgets": {
+   "mass": 40,
+   "volume": 25,
+   "power": 0,
+   "cooling": 6,
+   "data": 4
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "endurance": 6,
+   "payload": 4
+  },
+  "requires": {
+   "structures": 3
+  },
+  "cost": 150,
+  "factory": "aerospace-assembly",
+  "workUnits": 80
+ },
+ {
+  "id": "af-uav",
+  "name": "Uncrewed airframe",
+  "kind": "aircraft",
+  "type": "ucav",
+  "budgets": {
+   "mass": 3,
+   "volume": 4,
+   "power": 0,
+   "cooling": 1,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "endurance": 6,
+   "payload": 2
+  },
+  "requires": {
+   "structures": 3,
+   "autonomy": 4
+  },
+  "cost": 10,
+  "factory": "aerospace-assembly",
+  "workUnits": 8
+ }
+]

@@ -1,0 +1,435 @@
+[
+ {
+  "id": "east-asia-europe",
+  "name": "East Asia – Europe (Suez)",
+  "path": [
+   [
+    121.5,
+    31
+   ],
+   [
+    114,
+    19
+   ],
+   [
+    104,
+    1.3
+   ],
+   [
+    80,
+    6
+   ],
+   [
+    58,
+    13
+   ],
+   [
+    43.4,
+    12.6
+   ],
+   [
+    38,
+    21
+   ],
+   [
+    32.5,
+    30
+   ],
+   [
+    25,
+    34
+   ],
+   [
+    5,
+    37
+   ],
+   [
+    -5.6,
+    36
+   ],
+   [
+    -10,
+    45
+   ],
+   [
+    4,
+    51.9
+   ]
+  ],
+  "theatres": [
+   "ECS",
+   "SCS",
+   "IND",
+   "RED",
+   "MED",
+   "NATL"
+  ],
+  "chokepoints": [
+   "Malacca",
+   "Bab-el-Mandeb",
+   "Suez",
+   "Gibraltar"
+  ],
+  "throughput": 120,
+  "transitDays": 32
+ },
+ {
+  "id": "gulf-asia",
+  "name": "Persian Gulf – East Asia",
+  "path": [
+   [
+    51.5,
+    26.5
+   ],
+   [
+    56.3,
+    26.5
+   ],
+   [
+    60,
+    22
+   ],
+   [
+    75,
+    8
+   ],
+   [
+    95,
+    6
+   ],
+   [
+    104,
+    1.3
+   ],
+   [
+    114,
+    19
+   ],
+   [
+    127,
+    33
+   ]
+  ],
+  "theatres": [
+   "GULF",
+   "IND",
+   "SCS",
+   "ECS"
+  ],
+  "chokepoints": [
+   "Hormuz",
+   "Malacca"
+  ],
+  "throughput": 100,
+  "transitDays": 22
+ },
+ {
+  "id": "gulf-europe",
+  "name": "Persian Gulf – Europe",
+  "path": [
+   [
+    51.5,
+    26.5
+   ],
+   [
+    56.3,
+    26.5
+   ],
+   [
+    58,
+    17
+   ],
+   [
+    45,
+    12.5
+   ],
+   [
+    43.4,
+    12.6
+   ],
+   [
+    38,
+    21
+   ],
+   [
+    32.5,
+    30
+   ],
+   [
+    25,
+    34
+   ],
+   [
+    5,
+    37
+   ],
+   [
+    -5.6,
+    36
+   ],
+   [
+    4,
+    51.9
+   ]
+  ],
+  "theatres": [
+   "GULF",
+   "IND",
+   "RED",
+   "MED",
+   "NATL"
+  ],
+  "chokepoints": [
+   "Hormuz",
+   "Bab-el-Mandeb",
+   "Suez",
+   "Gibraltar"
+  ],
+  "throughput": 80,
+  "transitDays": 24
+ },
+ {
+  "id": "north-atlantic",
+  "name": "North Atlantic",
+  "path": [
+   [
+    -74,
+    40.5
+   ],
+   [
+    -50,
+    45
+   ],
+   [
+    -25,
+    50
+   ],
+   [
+    -5,
+    50
+   ],
+   [
+    4,
+    51.9
+   ]
+  ],
+  "theatres": [
+   "NATL"
+  ],
+  "chokepoints": [
+   "English Channel"
+  ],
+  "throughput": 110,
+  "transitDays": 12
+ },
+ {
+  "id": "north-pacific",
+  "name": "North Pacific",
+  "path": [
+   [
+    -122.4,
+    37.8
+   ],
+   [
+    -150,
+    45
+   ],
+   [
+    170,
+    45
+   ],
+   [
+    140,
+    35
+   ]
+  ],
+  "theatres": [
+   "NPAC",
+   "WPAC"
+  ],
+  "chokepoints": [],
+  "throughput": 90,
+  "transitDays": 16
+ },
+ {
+  "id": "east-asia-australia",
+  "name": "East Asia – Australia",
+  "path": [
+   [
+    121.5,
+    31
+   ],
+   [
+    122,
+    22
+   ],
+   [
+    120,
+    10
+   ],
+   [
+    117,
+    -5
+   ],
+   [
+    125,
+    -12
+   ],
+   [
+    151,
+    -34
+   ]
+  ],
+  "theatres": [
+   "ECS",
+   "SCS",
+   "WPAC"
+  ],
+  "chokepoints": [
+   "Taiwan Strait",
+   "Lombok"
+  ],
+  "throughput": 50,
+  "transitDays": 14
+ },
+ {
+  "id": "black-sea",
+  "name": "Black Sea – Mediterranean",
+  "path": [
+   [
+    30.7,
+    46.5
+   ],
+   [
+    29,
+    41.2
+   ],
+   [
+    26.4,
+    40.2
+   ],
+   [
+    25,
+    34
+   ]
+  ],
+  "theatres": [
+   "BLK",
+   "MED"
+  ],
+  "chokepoints": [
+   "Bosporus",
+   "Dardanelles"
+  ],
+  "throughput": 30,
+  "transitDays": 4
+ },
+ {
+  "id": "baltic",
+  "name": "Baltic – North Sea",
+  "path": [
+   [
+    24.7,
+    59.4
+   ],
+   [
+    18,
+    57
+   ],
+   [
+    12.6,
+    55.7
+   ],
+   [
+    10,
+    57.7
+   ],
+   [
+    4,
+    51.9
+   ]
+  ],
+  "theatres": [
+   "BALT",
+   "NATL"
+  ],
+  "chokepoints": [
+   "Danish Straits"
+  ],
+  "throughput": 40,
+  "transitDays": 5
+ },
+ {
+  "id": "arctic",
+  "name": "Northern Sea Route",
+  "path": [
+   [
+    33,
+    69
+   ],
+   [
+    60,
+    74
+   ],
+   [
+    100,
+    77
+   ],
+   [
+    150,
+    72
+   ],
+   [
+    -169,
+    66
+   ]
+  ],
+  "theatres": [
+   "ARCT"
+  ],
+  "chokepoints": [
+   "Bering Strait"
+  ],
+  "throughput": 15,
+  "transitDays": 20
+ },
+ {
+  "id": "cape-route",
+  "name": "Cape of Good Hope",
+  "path": [
+   [
+    58,
+    13
+   ],
+   [
+    40,
+    -20
+   ],
+   [
+    18,
+    -35
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    -10,
+    30
+   ],
+   [
+    -5.6,
+    36
+   ]
+  ],
+  "theatres": [
+   "IND",
+   "NATL"
+  ],
+  "chokepoints": [
+   "Cape of Good Hope"
+  ],
+  "throughput": 60,
+  "transitDays": 40
+ }
+]

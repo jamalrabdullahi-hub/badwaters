@@ -1,0 +1,166 @@
+[
+ {
+  "id": "steel-mill",
+  "name": "Steel mill",
+  "produces": "steel",
+  "capacityPerLevel": 40,
+  "inputsPerWork": {
+   "rare-materials": 0.05
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "aluminium-plant",
+  "name": "Aluminium plant",
+  "produces": "aluminium",
+  "capacityPerLevel": 25,
+  "inputsPerWork": {},
+  "outputPerWork": 1
+ },
+ {
+  "id": "titanium-works",
+  "name": "Titanium works",
+  "produces": "titanium",
+  "capacityPerLevel": 8,
+  "inputsPerWork": {
+   "rare-materials": 0.2
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "composite-factory",
+  "name": "Composite factory",
+  "produces": "composites",
+  "capacityPerLevel": 12,
+  "inputsPerWork": {
+   "rare-materials": 0.1
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "semiconductor-fab",
+  "name": "Semiconductor fab",
+  "produces": "semiconductors",
+  "capacityPerLevel": 10,
+  "inputsPerWork": {
+   "rare-materials": 0.3
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "rf-module-plant",
+  "name": "RF module plant",
+  "produces": "rf-modules",
+  "capacityPerLevel": 8,
+  "inputsPerWork": {
+   "semiconductors": 0.8
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "electronics-plant",
+  "name": "Precision electronics",
+  "produces": "precision-electronics",
+  "capacityPerLevel": 15,
+  "inputsPerWork": {
+   "semiconductors": 0.5
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "energetics-plant",
+  "name": "Energetics plant",
+  "produces": "energetics",
+  "capacityPerLevel": 20,
+  "inputsPerWork": {},
+  "outputPerWork": 1
+ },
+ {
+  "id": "refinery",
+  "name": "Refinery",
+  "produces": "fuel",
+  "capacityPerLevel": 50,
+  "inputsPerWork": {},
+  "outputPerWork": 1
+ },
+ {
+  "id": "engine-parts-plant",
+  "name": "Engine parts plant",
+  "produces": "engine-parts",
+  "capacityPerLevel": 10,
+  "inputsPerWork": {
+   "titanium": 0.4,
+   "steel": 0.2
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "shipyard",
+  "name": "Shipyard",
+  "produces": "",
+  "capacityPerLevel": 30,
+  "inputsPerWork": {
+   "steel": 1.0,
+   "precision-electronics": 0.1
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "aerospace-assembly",
+  "name": "Aerospace assembly",
+  "produces": "",
+  "capacityPerLevel": 20,
+  "inputsPerWork": {
+   "aluminium": 0.4,
+   "composites": 0.4,
+   "engine-parts": 0.3,
+   "precision-electronics": 0.2
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "missile-works",
+  "name": "Missile works",
+  "produces": "",
+  "capacityPerLevel": 25,
+  "inputsPerWork": {
+   "aluminium": 0.2,
+   "energetics": 0.4,
+   "precision-electronics": 0.3
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "radar-factory",
+  "name": "Radar factory",
+  "produces": "",
+  "capacityPerLevel": 8,
+  "inputsPerWork": {
+   "rf-modules": 1.0,
+   "precision-electronics": 0.5
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "vehicle-plant",
+  "name": "Vehicle plant",
+  "produces": "",
+  "capacityPerLevel": 20,
+  "inputsPerWork": {
+   "steel": 0.6,
+   "precision-electronics": 0.1
+  },
+  "outputPerWork": 1
+ },
+ {
+  "id": "avionics-factory",
+  "name": "Avionics factory",
+  "produces": "",
+  "capacityPerLevel": 10,
+  "inputsPerWork": {
+   "precision-electronics": 0.8,
+   "semiconductors": 0.3
+  },
+  "outputPerWork": 1
+ }
+]

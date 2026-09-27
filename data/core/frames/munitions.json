@@ -1,0 +1,84 @@
+[
+ {
+  "id": "mb-small",
+  "name": "Small munition body",
+  "kind": "munition",
+  "type": "small",
+  "budgets": {
+   "mass": 0.3,
+   "volume": 4,
+   "power": 0,
+   "cooling": 0
+  },
+  "ports": {},
+  "base": {
+   "reach": 0
+  },
+  "requires": {
+   "structures": 1
+  },
+  "cost": 0.1,
+  "factory": "missile-works",
+  "workUnits": 0.5
+ },
+ {
+  "id": "mb-medium",
+  "name": "Medium munition body",
+  "kind": "munition",
+  "type": "medium",
+  "budgets": {
+   "mass": 0.6,
+   "volume": 6,
+   "power": 0,
+   "cooling": 0
+  },
+  "ports": {},
+  "base": {},
+  "requires": {
+   "structures": 2
+  },
+  "cost": 0.2,
+  "factory": "missile-works",
+  "workUnits": 1
+ },
+ {
+  "id": "mb-large",
+  "name": "Large munition body",
+  "kind": "munition",
+  "type": "large",
+  "budgets": {
+   "mass": 1.2,
+   "volume": 8,
+   "power": 0,
+   "cooling": 0
+  },
+  "ports": {},
+  "base": {},
+  "requires": {
+   "structures": 2
+  },
+  "cost": 0.4,
+  "factory": "missile-works",
+  "workUnits": 2
+ },
+ {
+  "id": "mb-heavy",
+  "name": "Heavy munition body",
+  "kind": "munition",
+  "type": "heavy",
+  "budgets": {
+   "mass": 4,
+   "volume": 10,
+   "power": 0,
+   "cooling": 0
+  },
+  "ports": {},
+  "base": {},
+  "requires": {
+   "structures": 3
+  },
+  "cost": 1,
+  "factory": "missile-works",
+  "workUnits": 4
+ }
+]

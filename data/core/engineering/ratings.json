@@ -1,0 +1,122 @@
+[
+ {
+  "id": "detection",
+  "name": "Detection",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "air-defence",
+  "name": "Air defence",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "strike",
+  "name": "Strike",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "anti-ship",
+  "name": "Anti-ship",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "anti-sub",
+  "name": "Anti-submarine",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "survivability",
+  "name": "Survivability",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "signature",
+  "name": "Stealth",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "speed",
+  "name": "Speed",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "endurance",
+  "name": "Endurance",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "accuracy",
+  "name": "Accuracy",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "reach",
+  "name": "Reach",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "punch",
+  "name": "Punch",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "jam-resistance",
+  "name": "Jam resistance",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "ew",
+  "name": "Electronic warfare",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "networking",
+  "name": "Networking",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "agility",
+  "name": "Agility",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "payload",
+  "name": "Payload",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "reliability",
+  "name": "Reliability",
+  "aggregate": "min",
+  "cap": 10
+ },
+ {
+  "id": "mobility",
+  "name": "Mobility",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "fire-channels",
+  "name": "Fire channels",
+  "aggregate": "sum",
+  "cap": 10
+ }
+]

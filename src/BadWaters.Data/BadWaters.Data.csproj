@@ -7,4 +7,7 @@
     <RootNamespace>BadWaters.Data</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BadWaters.Sim\BadWaters.Sim.csproj" />
+  </ItemGroup>
 </Project>

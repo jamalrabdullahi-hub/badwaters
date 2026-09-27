@@ -1,0 +1,112 @@
+[
+ {
+  "id": "materials",
+  "name": "Materials",
+  "maxLevel": 10
+ },
+ {
+  "id": "structures",
+  "name": "Structures",
+  "maxLevel": 10
+ },
+ {
+  "id": "power-systems",
+  "name": "Power Systems",
+  "maxLevel": 10
+ },
+ {
+  "id": "gas-turbines",
+  "name": "Gas Turbines",
+  "maxLevel": 10
+ },
+ {
+  "id": "jet-engines",
+  "name": "Jet Engines",
+  "maxLevel": 10
+ },
+ {
+  "id": "rocket-motors",
+  "name": "Rocket Motors",
+  "maxLevel": 10
+ },
+ {
+  "id": "navigation",
+  "name": "Navigation",
+  "maxLevel": 10
+ },
+ {
+  "id": "flight-control",
+  "name": "Flight Control",
+  "maxLevel": 10
+ },
+ {
+  "id": "radar",
+  "name": "Radar",
+  "maxLevel": 10
+ },
+ {
+  "id": "ir-systems",
+  "name": "Ir Systems",
+  "maxLevel": 10
+ },
+ {
+  "id": "sonar",
+  "name": "Sonar",
+  "maxLevel": 10
+ },
+ {
+  "id": "computing",
+  "name": "Computing",
+  "maxLevel": 10
+ },
+ {
+  "id": "datalinks",
+  "name": "Datalinks",
+  "maxLevel": 10
+ },
+ {
+  "id": "ew-systems",
+  "name": "Ew Systems",
+  "maxLevel": 10
+ },
+ {
+  "id": "payloads",
+  "name": "Payloads",
+  "maxLevel": 10
+ },
+ {
+  "id": "fuzing",
+  "name": "Fuzing",
+  "maxLevel": 10
+ },
+ {
+  "id": "thermal",
+  "name": "Thermal",
+  "maxLevel": 10
+ },
+ {
+  "id": "low-observables",
+  "name": "Low Observables",
+  "maxLevel": 10
+ },
+ {
+  "id": "autonomy",
+  "name": "Autonomy",
+  "maxLevel": 10
+ },
+ {
+  "id": "manufacturing",
+  "name": "Manufacturing",
+  "maxLevel": 10
+ },
+ {
+  "id": "testing",
+  "name": "Testing",
+  "maxLevel": 10
+ },
+ {
+  "id": "doctrine",
+  "name": "Doctrine",
+  "maxLevel": 10
+ }
+]

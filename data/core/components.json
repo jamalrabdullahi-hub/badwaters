@@ -1,0 +1,1895 @@
+[
+ {
+  "id": "mat-steel",
+  "name": "Steel structure",
+  "family": "materials",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "materials": 1
+  },
+  "uses": {
+   "mass": 0
+  },
+  "adds": {
+   "survivability": 1
+  },
+  "port": null,
+  "cost": 0,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "mat-composite",
+  "name": "Composite structure",
+  "family": "materials",
+  "fitsKinds": [
+   "aircraft",
+   "munition"
+  ],
+  "requires": {
+   "materials": 4
+  },
+  "uses": {
+   "mass": -2
+  },
+  "adds": {
+   "signature": 1
+  },
+  "port": null,
+  "cost": 5,
+  "factory": "aerospace-assembly",
+  "workUnits": 2,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "mat-ram",
+  "name": "Radar-absorbent coating",
+  "family": "materials",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "low-observables": 5
+  },
+  "uses": {
+   "mass": 1
+  },
+  "adds": {
+   "signature": 3
+  },
+  "port": null,
+  "cost": 8,
+  "factory": "aerospace-assembly",
+  "workUnits": 3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "str-armoured-citadel",
+  "name": "Armoured citadel",
+  "family": "structure",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "structures": 3
+  },
+  "uses": {
+   "mass": 300,
+   "volume": 2
+  },
+  "adds": {
+   "survivability": 2
+  },
+  "port": null,
+  "cost": 40,
+  "factory": "shipyard",
+  "workUnits": 10,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pw-gen-diesel",
+  "name": "Diesel generators",
+  "family": "power",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "power-systems": 1
+  },
+  "uses": {
+   "mass": 60,
+   "volume": 2,
+   "power": -12
+  },
+  "adds": {},
+  "port": null,
+  "cost": 10,
+  "factory": "shipyard",
+  "workUnits": 3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pw-gen-turbine",
+  "name": "Gas-turbine generators",
+  "family": "power",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "power-systems": 4,
+   "gas-turbines": 3
+  },
+  "uses": {
+   "mass": 90,
+   "volume": 3,
+   "power": -30
+  },
+  "adds": {},
+  "port": null,
+  "cost": 35,
+  "factory": "shipyard",
+  "workUnits": 5,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pw-iep",
+  "name": "Integrated electric plant",
+  "family": "power",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "power-systems": 7
+  },
+  "uses": {
+   "mass": 200,
+   "volume": 5,
+   "power": -60,
+   "cooling": 4
+  },
+  "adds": {
+   "endurance": 1
+  },
+  "port": null,
+  "cost": 160,
+  "factory": "shipyard",
+  "workUnits": 20,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pw-apu",
+  "name": "Auxiliary power unit",
+  "family": "power",
+  "fitsKinds": [
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "power-systems": 2
+  },
+  "uses": {
+   "mass": 1,
+   "power": -6
+  },
+  "adds": {},
+  "port": null,
+  "cost": 2,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pw-battery",
+  "name": "Thermal battery",
+  "family": "power",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "power-systems": 2
+  },
+  "uses": {
+   "mass": 0.01,
+   "power": -1
+  },
+  "adds": {},
+  "port": null,
+  "cost": 0.05,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-cogag",
+  "name": "Gas turbines (combined)",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "gas-turbines": 3
+  },
+  "uses": {
+   "mass": 400,
+   "volume": 6,
+   "crew": 20
+  },
+  "adds": {
+   "speed": 7,
+   "endurance": 3
+  },
+  "port": null,
+  "cost": 90,
+  "factory": "shipyard",
+  "workUnits": 15,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-diesel",
+  "name": "Diesel propulsion",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "power-systems": 1
+  },
+  "uses": {
+   "mass": 250,
+   "volume": 5,
+   "crew": 15
+  },
+  "adds": {
+   "speed": 5,
+   "endurance": 6
+  },
+  "port": null,
+  "cost": 40,
+  "factory": "shipyard",
+  "workUnits": 10,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-nuclear",
+  "name": "Naval reactor",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "power-systems": 8
+  },
+  "uses": {
+   "mass": 2000,
+   "volume": 20,
+   "crew": 80,
+   "power": -80,
+   "cooling": -10
+  },
+  "adds": {
+   "speed": 8,
+   "endurance": 10
+  },
+  "port": null,
+  "cost": 900,
+  "factory": "shipyard",
+  "workUnits": 120,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-aip",
+  "name": "Air-independent propulsion",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "power-systems": 6
+  },
+  "uses": {
+   "mass": 150,
+   "volume": 4,
+   "crew": 8
+  },
+  "adds": {
+   "speed": 4,
+   "endurance": 6,
+   "signature": 2
+  },
+  "port": null,
+  "cost": 120,
+  "factory": "shipyard",
+  "workUnits": 20,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-turbofan",
+  "name": "Turbofan engines",
+  "family": "propulsion",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "jet-engines": 4
+  },
+  "uses": {
+   "mass": 3,
+   "volume": 2,
+   "crew": 0,
+   "power": -6
+  },
+  "adds": {
+   "speed": 7,
+   "endurance": 6,
+   "agility": 6
+  },
+  "port": null,
+  "cost": 12,
+  "factory": "aerospace-assembly",
+  "workUnits": 8,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-turbofan-adv",
+  "name": "Advanced turbofan",
+  "family": "propulsion",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "jet-engines": 7
+  },
+  "uses": {
+   "mass": 3,
+   "volume": 2,
+   "cooling": 1,
+   "power": -10
+  },
+  "adds": {
+   "speed": 8,
+   "endurance": 7,
+   "agility": 8
+  },
+  "port": null,
+  "cost": 20,
+  "factory": "aerospace-assembly",
+  "workUnits": 12,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-rocket",
+  "name": "Solid rocket motor",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "rocket-motors": 2
+  },
+  "uses": {
+   "mass": 0.2,
+   "volume": 1
+  },
+  "adds": {
+   "speed": 8,
+   "reach": 3
+  },
+  "port": null,
+  "cost": 0.2,
+  "factory": "missile-works",
+  "workUnits": 0.5,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-cruise",
+  "name": "Small turbofan (cruise)",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "jet-engines": 3
+  },
+  "uses": {
+   "mass": 0.15,
+   "volume": 1
+  },
+  "adds": {
+   "speed": 3,
+   "reach": 8
+  },
+  "port": null,
+  "cost": 0.4,
+  "factory": "missile-works",
+  "workUnits": 0.8,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-truck",
+  "name": "Wheeled drivetrain",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ground"
+  ],
+  "requires": {
+   "structures": 1
+  },
+  "uses": {
+   "mass": 4,
+   "crew": 1
+  },
+  "adds": {
+   "mobility": 6
+  },
+  "port": null,
+  "cost": 1,
+  "factory": "vehicle-plant",
+  "workUnits": 1,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "nv-ins",
+  "name": "Inertial navigation",
+  "family": "navigation",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "navigation": 2
+  },
+  "uses": {
+   "mass": 0.01,
+   "power": 0.2
+  },
+  "adds": {
+   "accuracy": 3
+  },
+  "port": null,
+  "cost": 0.1,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "nv-gnss",
+  "name": "Satellite navigation",
+  "family": "navigation",
+  "fitsKinds": [
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "navigation": 4
+  },
+  "uses": {
+   "mass": 0.01,
+   "power": 0.1
+  },
+  "adds": {
+   "accuracy": 5
+  },
+  "port": null,
+  "cost": 0.05,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "nv-star",
+  "name": "Star navigation",
+  "family": "navigation",
+  "fitsKinds": [
+   "aircraft",
+   "munition"
+  ],
+  "requires": {
+   "navigation": 6
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.3
+  },
+  "adds": {
+   "accuracy": 6,
+   "jam-resistance": 2
+  },
+  "port": null,
+  "cost": 0.4,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "nv-terrain",
+  "name": "Terrain matching",
+  "family": "navigation",
+  "fitsKinds": [
+   "aircraft",
+   "munition"
+  ],
+  "requires": {
+   "navigation": 5,
+   "radar": 3
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.3
+  },
+  "adds": {
+   "accuracy": 6,
+   "jam-resistance": 1
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "nv-fusion",
+  "name": "Anti-jam navigation fusion",
+  "family": "navigation",
+  "fitsKinds": [
+   "aircraft",
+   "munition",
+   "ship"
+  ],
+  "requires": {
+   "navigation": 8,
+   "computing": 6
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.3
+  },
+  "adds": {
+   "accuracy": 7,
+   "jam-resistance": 3
+  },
+  "port": null,
+  "cost": 0.6,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "gc-autopilot",
+  "name": "Autopilot",
+  "family": "guidance",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "flight-control": 2
+  },
+  "uses": {
+   "mass": 0.01,
+   "power": 0.1
+  },
+  "adds": {
+   "accuracy": 1
+  },
+  "port": null,
+  "cost": 0.05,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "gc-fbw",
+  "name": "Digital flight controls",
+  "family": "guidance",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "flight-control": 5
+  },
+  "uses": {
+   "mass": 0.2,
+   "power": 0.5
+  },
+  "adds": {
+   "agility": 2
+  },
+  "port": null,
+  "cost": 3,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "gc-fire-control",
+  "name": "Fire-control system",
+  "family": "guidance",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "computing": 3
+  },
+  "uses": {
+   "mass": 5,
+   "volume": 1,
+   "power": 2
+  },
+  "adds": {
+   "fire-channels": 2
+  },
+  "port": null,
+  "cost": 15,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "sn-radar-search",
+  "name": "Rotating search radar",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "radar": 2
+  },
+  "uses": {
+   "mass": 8,
+   "power": 4,
+   "cooling": 1
+  },
+  "adds": {
+   "detection": 4
+  },
+  "port": "mast-sensor",
+  "cost": 20,
+  "factory": "radar-factory",
+  "workUnits": 4,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sn-radar-pesa",
+  "name": "Phased-array radar",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "radar": 5
+  },
+  "uses": {
+   "mass": 60,
+   "power": 10,
+   "cooling": 4
+  },
+  "adds": {
+   "detection": 6,
+   "fire-channels": 4
+  },
+  "port": "mast-sensor",
+  "cost": 180,
+  "factory": "radar-factory",
+  "workUnits": 15,
+  "offers": [
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "sn-radar-aesa",
+  "name": "Active array radar",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "radar": 7
+  },
+  "uses": {
+   "mass": 50,
+   "power": 16,
+   "cooling": 8
+  },
+  "adds": {
+   "detection": 8,
+   "fire-channels": 8
+  },
+  "port": "mast-sensor",
+  "cost": 260,
+  "factory": "radar-factory",
+  "workUnits": 25,
+  "offers": [
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "sn-radar-aesa-air",
+  "name": "Airborne active array",
+  "family": "sensors",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "radar": 7
+  },
+  "uses": {
+   "mass": 0.3,
+   "power": 4,
+   "cooling": 3
+  },
+  "adds": {
+   "detection": 7,
+   "fire-channels": 4
+  },
+  "port": "nose-sensor",
+  "cost": 12,
+  "factory": "radar-factory",
+  "workUnits": 6,
+  "offers": [
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "sn-radar-pd-air",
+  "name": "Airborne pulse-Doppler radar",
+  "family": "sensors",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "radar": 3
+  },
+  "uses": {
+   "mass": 0.3,
+   "power": 2,
+   "cooling": 1
+  },
+  "adds": {
+   "detection": 5,
+   "fire-channels": 1
+  },
+  "port": "nose-sensor",
+  "cost": 4,
+  "factory": "radar-factory",
+  "workUnits": 2,
+  "offers": [
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "sn-irst",
+  "name": "Infrared search & track",
+  "family": "sensors",
+  "fitsKinds": [
+   "aircraft",
+   "ship"
+  ],
+  "requires": {
+   "ir-systems": 5
+  },
+  "uses": {
+   "mass": 0.1,
+   "power": 0.5
+  },
+  "adds": {
+   "detection": 4
+  },
+  "port": null,
+  "cost": 2,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sn-sonar-hull",
+  "name": "Hull sonar",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "sonar": 2
+  },
+  "uses": {
+   "mass": 30,
+   "power": 2
+  },
+  "adds": {
+   "anti-sub": 3
+  },
+  "port": "bow-sonar",
+  "cost": 20,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sn-sonar-towed",
+  "name": "Towed array",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "sonar": 5
+  },
+  "uses": {
+   "mass": 20,
+   "power": 1
+  },
+  "adds": {
+   "anti-sub": 3
+  },
+  "port": null,
+  "cost": 30,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sk-radar",
+  "name": "Radar seeker",
+  "family": "sensors",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "radar": 4
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.2
+  },
+  "adds": {
+   "accuracy": 6
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": "missile-works",
+  "workUnits": 0.5,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sk-ir",
+  "name": "Imaging IR seeker",
+  "family": "sensors",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "ir-systems": 6
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.2
+  },
+  "adds": {
+   "accuracy": 7,
+   "jam-resistance": 2
+  },
+  "port": null,
+  "cost": 0.4,
+  "factory": "missile-works",
+  "workUnits": 0.6,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sk-ir8",
+  "name": "IR seeker (level 8)",
+  "family": "sensors",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "ir-systems": 8
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.2
+  },
+  "adds": {
+   "accuracy": 8,
+   "jam-resistance": 3
+  },
+  "port": null,
+  "cost": 0.6,
+  "factory": "missile-works",
+  "workUnits": 0.8,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sk-emitter",
+  "name": "Emitter-homing seeker",
+  "family": "sensors",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "ew-systems": 4
+  },
+  "uses": {
+   "mass": 0.02,
+   "power": 0.1
+  },
+  "adds": {
+   "accuracy": 6
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "cp-cms-basic",
+  "name": "Combat management (basic)",
+  "family": "computing",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "computing": 2
+  },
+  "uses": {
+   "mass": 5,
+   "power": 2,
+   "crew": 6
+  },
+  "adds": {
+   "fire-channels": 2,
+   "networking": 2
+  },
+  "port": null,
+  "cost": 20,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [
+   "datalink-bus",
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "cp-cms-integrated",
+  "name": "Integrated combat system",
+  "family": "computing",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "computing": 6
+  },
+  "uses": {
+   "mass": 10,
+   "power": 6,
+   "cooling": 2,
+   "crew": 10
+  },
+  "adds": {
+   "fire-channels": 8,
+   "networking": 6
+  },
+  "port": null,
+  "cost": 150,
+  "factory": "avionics-factory",
+  "workUnits": 10,
+  "offers": [
+   "datalink-bus",
+   "fire-control"
+  ],
+  "needs": []
+ },
+ {
+  "id": "cp-mission",
+  "name": "Mission computer",
+  "family": "computing",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "computing": 4
+  },
+  "uses": {
+   "mass": 0.05,
+   "power": 1
+  },
+  "adds": {
+   "networking": 3
+  },
+  "port": null,
+  "cost": 2,
+  "factory": "avionics-factory",
+  "workUnits": 1,
+  "offers": [
+   "datalink-bus",
+   "weapon-bus"
+  ],
+  "needs": []
+ },
+ {
+  "id": "cp-fusion",
+  "name": "Sensor fusion computer",
+  "family": "computing",
+  "fitsKinds": [
+   "aircraft",
+   "ship"
+  ],
+  "requires": {
+   "computing": 7
+  },
+  "uses": {
+   "mass": 0.1,
+   "power": 2,
+   "cooling": 1
+  },
+  "adds": {
+   "detection": 1,
+   "networking": 6
+  },
+  "port": null,
+  "cost": 8,
+  "factory": "avionics-factory",
+  "workUnits": 3,
+  "offers": [
+   "datalink-bus"
+  ],
+  "needs": []
+ },
+ {
+  "id": "cp-flight",
+  "name": "Munition flight computer",
+  "family": "computing",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "computing": 3
+  },
+  "uses": {
+   "mass": 0.005,
+   "power": 0.1
+  },
+  "adds": {
+   "accuracy": 1
+  },
+  "port": null,
+  "cost": 0.05,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "cm-radio",
+  "name": "Tactical radios",
+  "family": "comms",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "datalinks": 1
+  },
+  "uses": {
+   "mass": 0.1,
+   "power": 0.5
+  },
+  "adds": {
+   "networking": 1
+  },
+  "port": null,
+  "cost": 1,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "cm-datalink",
+  "name": "Tactical datalink",
+  "family": "comms",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "datalinks": 4
+  },
+  "uses": {
+   "mass": 0.1,
+   "power": 1,
+   "data": -4
+  },
+  "adds": {
+   "networking": 4
+  },
+  "port": null,
+  "cost": 3,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": [
+   "datalink-bus"
+  ]
+ },
+ {
+  "id": "cm-satcom",
+  "name": "Satellite communications",
+  "family": "comms",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "datalinks": 6
+  },
+  "uses": {
+   "mass": 0.3,
+   "power": 2,
+   "data": -8
+  },
+  "adds": {
+   "networking": 6
+  },
+  "port": null,
+  "cost": 6,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": [
+   "datalink-bus"
+  ]
+ },
+ {
+  "id": "cm-weapon-link",
+  "name": "Weapon datalink",
+  "family": "comms",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "datalinks": 5
+  },
+  "uses": {
+   "mass": 0.005,
+   "power": 0.1
+  },
+  "adds": {
+   "accuracy": 1,
+   "jam-resistance": 1
+  },
+  "port": null,
+  "cost": 0.1,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ew-chaff",
+  "name": "Chaff & flares",
+  "family": "ew",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "ew-systems": 1
+  },
+  "uses": {
+   "mass": 0.5
+  },
+  "adds": {
+   "ew": 1,
+   "survivability": 1
+  },
+  "port": null,
+  "cost": 1,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ew-jammer",
+  "name": "Self-protection jammer",
+  "family": "ew",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "ew-systems": 4
+  },
+  "uses": {
+   "mass": 1,
+   "power": 3,
+   "cooling": 1
+  },
+  "adds": {
+   "ew": 3
+  },
+  "port": null,
+  "cost": 12,
+  "factory": "avionics-factory",
+  "workUnits": 3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ew-decoys",
+  "name": "Offboard decoys",
+  "family": "ew",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "ew-systems": 6
+  },
+  "uses": {
+   "mass": 5
+  },
+  "adds": {
+   "ew": 2,
+   "survivability": 1
+  },
+  "port": null,
+  "cost": 20,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ew-eccm",
+  "name": "ECCM package",
+  "family": "ew",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "ew-systems": 5
+  },
+  "uses": {
+   "mass": 0.01,
+   "power": 0.2
+  },
+  "adds": {
+   "jam-resistance": 2
+  },
+  "port": null,
+  "cost": 0.5,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pl-blast",
+  "name": "Blast warhead",
+  "family": "payload",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "payloads": 1
+  },
+  "uses": {
+   "mass": 0.2,
+   "volume": 1
+  },
+  "adds": {
+   "punch": 5
+  },
+  "port": null,
+  "cost": 0.05,
+  "factory": "missile-works",
+  "workUnits": 0.3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pl-penetrator",
+  "name": "Penetrator warhead",
+  "family": "payload",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "payloads": 4
+  },
+  "uses": {
+   "mass": 0.25,
+   "volume": 1
+  },
+  "adds": {
+   "punch": 7
+  },
+  "port": null,
+  "cost": 0.1,
+  "factory": "missile-works",
+  "workUnits": 0.4,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pl-shaped",
+  "name": "Shaped anti-ship warhead",
+  "family": "payload",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "payloads": 3
+  },
+  "uses": {
+   "mass": 0.2,
+   "volume": 1
+  },
+  "adds": {
+   "punch": 6,
+   "anti-ship": 3
+  },
+  "port": null,
+  "cost": 0.08,
+  "factory": "missile-works",
+  "workUnits": 0.3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pl-frag",
+  "name": "Fragmentation warhead",
+  "family": "payload",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "payloads": 2
+  },
+  "uses": {
+   "mass": 0.05,
+   "volume": 1
+  },
+  "adds": {
+   "punch": 3,
+   "air-defence": 3
+  },
+  "port": null,
+  "cost": 0.04,
+  "factory": "missile-works",
+  "workUnits": 0.2,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "fz-impact",
+  "name": "Impact fuze",
+  "family": "fuzing",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "fuzing": 1
+  },
+  "uses": {},
+  "adds": {},
+  "port": null,
+  "cost": 0.005,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "fz-proximity",
+  "name": "Proximity fuze",
+  "family": "fuzing",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "fuzing": 3
+  },
+  "uses": {
+   "power": 0.05
+  },
+  "adds": {
+   "accuracy": 1
+  },
+  "port": null,
+  "cost": 0.02,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "fz-delay",
+  "name": "Delayed fuze",
+  "family": "fuzing",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "fuzing": 4
+  },
+  "uses": {},
+  "adds": {
+   "punch": 1
+  },
+  "port": null,
+  "cost": 0.02,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "th-cooling",
+  "name": "Liquid cooling plant",
+  "family": "thermal",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "thermal": 3
+  },
+  "uses": {
+   "mass": 20,
+   "power": 2,
+   "cooling": -12
+  },
+  "adds": {},
+  "port": null,
+  "cost": 15,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "th-cooling-adv",
+  "name": "High-capacity cooling",
+  "family": "thermal",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "thermal": 6
+  },
+  "uses": {
+   "mass": 30,
+   "power": 3,
+   "cooling": -25
+  },
+  "adds": {},
+  "port": null,
+  "cost": 40,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "th-air-ecs",
+  "name": "Aircraft thermal management",
+  "family": "thermal",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "thermal": 4
+  },
+  "uses": {
+   "mass": 0.2,
+   "power": 1,
+   "cooling": -6
+  },
+  "adds": {},
+  "port": null,
+  "cost": 3,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "if-cell-block",
+  "name": "Launch cell block (8)",
+  "family": "interfaces",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "structures": 4
+  },
+  "uses": {
+   "mass": 30,
+   "volume": 2
+  },
+  "adds": {},
+  "port": "cell-block",
+  "cost": 12,
+  "factory": "shipyard",
+  "workUnits": 3,
+  "offers": [
+   "launch-cell"
+  ],
+  "needs": []
+ },
+ {
+  "id": "if-rail",
+  "name": "Launch rails",
+  "family": "interfaces",
+  "fitsKinds": [
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "structures": 1
+  },
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {},
+  "port": null,
+  "cost": 0.2,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [
+   "launch-rail"
+  ],
+  "needs": []
+ },
+ {
+  "id": "if-bay",
+  "name": "Internal weapons bay",
+  "family": "interfaces",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "requires": {
+   "low-observables": 5
+  },
+  "uses": {
+   "mass": 0.3,
+   "volume": 1
+  },
+  "adds": {
+   "signature": 1
+  },
+  "port": null,
+  "cost": 4,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [
+   "launch-bay"
+  ],
+  "needs": []
+ },
+ {
+  "id": "if-canister",
+  "name": "Launch canisters (4)",
+  "family": "interfaces",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "structures": 2
+  },
+  "uses": {
+   "mass": 8,
+   "volume": 1
+  },
+  "adds": {},
+  "port": "deck-launcher",
+  "cost": 4,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [
+   "launch-cell"
+  ],
+  "needs": []
+ },
+ {
+  "id": "rl-modular",
+  "name": "Modular maintenance design",
+  "family": "reliability",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "testing": 3
+  },
+  "uses": {
+   "volume": 1
+  },
+  "adds": {
+   "reliability": 7
+  },
+  "port": null,
+  "cost": 5,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "rl-basic",
+  "name": "Basic maintainability",
+  "family": "reliability",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {},
+  "uses": {},
+  "adds": {
+   "reliability": 5
+  },
+  "port": null,
+  "cost": 0,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "mf-automated",
+  "name": "Automated production process",
+  "family": "manufacturing",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "manufacturing": 6
+  },
+  "uses": {},
+  "adds": {},
+  "port": null,
+  "cost": 2,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ts-extended",
+  "name": "Extended test campaign",
+  "family": "testing",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "munition",
+   "ground"
+  ],
+  "requires": {
+   "testing": 4
+  },
+  "uses": {},
+  "adds": {
+   "reliability": 1
+  },
+  "port": null,
+  "cost": 10,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "dc-sop",
+  "name": "Standard operating procedures",
+  "family": "doctrine",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "requires": {
+   "doctrine": 2
+  },
+  "uses": {},
+  "adds": {
+   "reliability": 1
+  },
+  "port": null,
+  "cost": 1,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "wp-gun-medium",
+  "name": "Medium gun",
+  "family": "payload",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "structures": 2
+  },
+  "uses": {
+   "mass": 40,
+   "volume": 2,
+   "crew": 6
+  },
+  "adds": {
+   "strike": 1,
+   "air-defence": 1
+  },
+  "port": "fore-gun",
+  "cost": 15,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "wp-point-defence",
+  "name": "Point-defence mount",
+  "family": "payload",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "requires": {
+   "radar": 4
+  },
+  "uses": {
+   "mass": 10,
+   "power": 2
+  },
+  "adds": {
+   "air-defence": 2
+  },
+  "port": "pd-mount",
+  "cost": 20,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sy-hangar",
+  "name": "Helicopter hangar",
+  "family": "structure",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {
+   "structures": 2
+  },
+  "uses": {
+   "mass": 150,
+   "volume": 4,
+   "crew": 20
+  },
+  "adds": {
+   "anti-sub": 2
+  },
+  "port": "hangar",
+  "cost": 20,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sy-crew-std",
+  "name": "Standard crew spaces",
+  "family": "structure",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {},
+  "uses": {
+   "volume": 2,
+   "crew": -240
+  },
+  "adds": {},
+  "port": null,
+  "cost": 10,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "sy-crew-small",
+  "name": "Small crew spaces",
+  "family": "structure",
+  "fitsKinds": [
+   "ship"
+  ],
+  "requires": {},
+  "uses": {
+   "volume": 1,
+   "crew": -60
+  },
+  "adds": {},
+  "port": null,
+  "cost": 4,
+  "factory": null,
+  "workUnits": 0,
+  "offers": [],
+  "needs": []
+ }
+]
