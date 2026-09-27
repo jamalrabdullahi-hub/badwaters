@@ -31,11 +31,17 @@ public partial class TheatreOps : Control
     private OptionButton _launcher = null!, _target = null!;
     private readonly List<string> _launcherIds = new(), _targetIds = new();
     private SpinBox _count = null!;
-    private Control _firePanel = null!;
+    private VBoxContainer _firePanel = null!;
     private Button _blueAi = null!, _bluePlayer = null!, _redAi = null!, _redPlayer = null!;
     private double _uiTimer;
     private OptionButton _cmd = null!, _view = null!;
     private int _logSeen = -1;
+    public const int TopH = 44, ConsoleW = 640, TimelineH = 210;
+    private readonly Dictionary<string, VBoxContainer> _pages = new();
+    private VBoxContainer _contacts = null!;
+    public AtoTimeline Timeline { get; private set; } = null!;
+    /// <summary>Switch the console to a tab (used by the timeline when a row is clicked).</summary>
+    public void ShowTab(string name) { foreach (var (k, v) in _pages) v.Visible = k == name; UpdateUi(); }
 
     /// <summary>The single-battery trial gets design pickers; big scenarios use their own order of battle.</summary>
     private bool IsTrial => Scenario.Batteries.Count == 1 && Scenario.Launchers.Count == 1;
@@ -48,8 +54,9 @@ public partial class TheatreOps : Control
         MouseFilter = MouseFilterEnum.Ignore;
         Layer.Ops = this;
 
-        // top bar: clock, speed, control modes
-        var top = Panel(new Vector2(10, 10));
+        // ---- layout: top bar · console (left) · map (right) · ATO sync timeline (bottom) ----
+        var top = new PanelContainer { AnchorRight = 1, OffsetBottom = TopH };
+        AddChild(top);
         var th = new HBoxContainer();
         th.AddThemeConstantOverride("separation", 8);
         top.AddChild(th);
@@ -65,16 +72,17 @@ public partial class TheatreOps : Control
             sb.Pressed += () => Speed = s;
             th.AddChild(sb);
         }
-        _blueName = UiTheme.Text("  Blue", 14, TheatreLayer.Blue);
+        th.AddChild(new Control { SizeFlagsHorizontal = SizeFlags.ExpandFill });
+        _blueName = UiTheme.Text("Blue", 14, TheatreLayer.Blue);
         th.AddChild(_blueName);
         (_blueAi, _bluePlayer) = ModeButtons(th, "blue");
-        _redName = UiTheme.Text("  Red", 14, TheatreLayer.Red);
+        _redName = UiTheme.Text("Red", 14, TheatreLayer.Red);
         th.AddChild(_redName);
         (_redAi, _redPlayer) = ModeButtons(th, "red");
         var reset = new Button { Text = "Reset" };
         reset.Pressed += () => Reset();
         th.AddChild(reset);
-        th.AddChild(UiTheme.Text("  Command", 13, UiTheme.Dim));
+        th.AddChild(UiTheme.Text("Command", 13, UiTheme.Dim));
         _cmd = new OptionButton();
         _cmd.ItemSelected += i => { CommandSide = i == 0 ? "blue" : "red"; FillLaunchers(); FillPlanner(); UpdateUi(); };
         th.AddChild(_cmd);
@@ -83,10 +91,33 @@ public partial class TheatreOps : Control
         _view.ItemSelected += i => { ViewSide = i switch { 0 => "blue", 1 => "red", _ => "all" }; UpdateUi(); };
         th.AddChild(_view);
 
-        // left: order of battle (and design pickers for the trial)
-        var left = Panel(new Vector2(10, 64), 350);
-        var lv = new VBoxContainer();
-        left.AddChild(lv);
+        var console = new PanelContainer { AnchorBottom = 1, OffsetTop = TopH + 4, OffsetRight = ConsoleW, OffsetBottom = -(TimelineH + 4), ClipContents = true };
+        AddChild(console);
+        var cv = new VBoxContainer();
+        console.AddChild(cv);
+        var tabs = new HBoxContainer();
+        tabs.AddThemeConstantOverride("separation", 4);
+        cv.AddChild(tabs);
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled, SizeFlagsVertical = SizeFlags.ExpandFill };
+        cv.AddChild(scroll);
+        var pages = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        scroll.AddChild(pages);
+        var tg = new ButtonGroup();
+        var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", _ => "AIR DEF" };
+        VBoxContainer Page(string name)
+        {
+            var page = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = name == start };
+            page.AddThemeConstantOverride("separation", 6);
+            pages.AddChild(page);
+            var b = new Button { Text = name, ToggleMode = true, ButtonGroup = tg, ButtonPressed = name == start, SizeFlagsHorizontal = SizeFlags.ExpandFill };
+            b.Pressed += () => { foreach (var c in pages.GetChildren()) ((Control)c).Visible = c == page; UpdateUi(); };
+            tabs.AddChild(b);
+            _pages[name] = page;
+            return page;
+        }
+
+        // PICTURE: order of battle + what our sensors hold
+        var lv = Page("PICTURE");
         lv.AddChild(UiTheme.Text("ORDER OF BATTLE", 13, UiTheme.Accent));
         _pickBox = new VBoxContainer();
         lv.AddChild(_pickBox);
@@ -94,80 +125,44 @@ public partial class TheatreOps : Control
         Picker(_pickBox, "Blue interceptor", d => d.Kind == "munition" && d.Ratings.GetValueOrDefault("reach") < 7, () => _interceptor, v => _interceptor = v);
         Picker(_pickBox, "Blue radar", d => d.Kind is "ground" or "ship" && d.Ratings.GetValueOrDefault("detection") > 0, () => _radar, v => _radar = v);
         _oob = UiTheme.Text("", 12, UiTheme.Ink, wrap: true);
-        _oob.CustomMinimumSize = new Vector2(330, 0);
+        _oob.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
         lv.AddChild(_oob);
+        lv.AddChild(UiTheme.Text("CONTACTS · YOUR SENSORS", 13, UiTheme.Accent));
+        _contacts = new VBoxContainer();
+        lv.AddChild(_contacts);
 
-        // fire orders for any side the player controls
-        _firePanel = Panel(new Vector2(10, 440), 350);
-        var rv = new VBoxContainer();
-        _firePanel.AddChild(rv);
-        rv.AddChild(UiTheme.Text("FIRE ORDER", 13, UiTheme.Accent));
-        _launcher = new OptionButton { ClipText = true };
-        _launcher.ItemSelected += _ => FillTargets();
-        rv.AddChild(_launcher);
-        var rh = new HBoxContainer();
-        _target = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill, ClipText = true };
-        _count = new SpinBox { MinValue = 1, MaxValue = 4, Value = 2 };
-        var fire = new Button { Text = "Fire ▸" };
-        fire.Pressed += () =>
-        {
-            if (_launcher.Selected < 0 || _target.Selected < 0) return;
-            var r = Trial.Launch(_launcherIds[_launcher.Selected], _targetIds[_target.Selected], (int)_count.Value, _aim.Selected > 0 ? _aimIds[_aim.Selected] : "");
-            _fireResult.Text = r.Message;
-            _fireResult.AddThemeColorOverride("font_color", r.Ok ? UiTheme.Good : UiTheme.Bad);
-            FillLaunchers();
-        };
-        _target.ItemSelected += _ => FillAim();
-        rh.AddChild(_target); rh.AddChild(_count); rh.AddChild(fire);
-        rv.AddChild(rh);
-        _aim = new OptionButton { ClipText = true };
-        rv.AddChild(_aim);
-        _fireResult = UiTheme.Text("", 12, UiTheme.Dim, wrap: true);
-        _fireResult.CustomMinimumSize = new Vector2(330, 0);
-        rv.AddChild(_fireResult);
-
-        // right: tracks, selected-track detail, kill-chance breakdown (scrolls, never covers the whole map)
-        var right = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, AnchorBottom = 1, OffsetLeft = -520, OffsetRight = -10, OffsetTop = 64, OffsetBottom = -10, ClipContents = true, GrowHorizontal = GrowDirection.Begin };
-        AddChild(right);
-        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
-        right.AddChild(scroll);
-        var outer = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, CustomMinimumSize = new Vector2(410, 0) };
-        scroll.AddChild(outer);
-        var tabs = new HBoxContainer();
-        var tg = new ButtonGroup();
-        var tMis = new Button { Text = "Missiles & AD", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") is not ("air" or "bases"), SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        var tAir = new Button { Text = "Air tasking", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") == "air", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        var tBase = new Button { Text = "Bases & ISR", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") == "bases", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        tabs.AddChild(tMis); tabs.AddChild(tAir); tabs.AddChild(tBase);
-        outer.AddChild(tabs);
-        var rsv = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tMis.ButtonPressed };
-        outer.AddChild(rsv);
-        _airView = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tAir.ButtonPressed };
-        outer.AddChild(_airView);
-        _basesView = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tBase.ButtonPressed };
-        outer.AddChild(_basesView);
-        tMis.Pressed += () => { rsv.Visible = true; _airView.Visible = false; _basesView.Visible = false; };
-        tAir.Pressed += () => { rsv.Visible = false; _airView.Visible = true; _basesView.Visible = false; UpdateAir(true); };
-        tBase.Pressed += () => { rsv.Visible = false; _airView.Visible = false; _basesView.Visible = true; UpdateBases(); };
+        // ATO: flights table, package planner, flight card
+        _airView = Page("ATO");
         BuildAirView();
+
+        // FIRES: surface-to-surface missile scheduling (ground launchers and ships)
+        _firePanel = Page("FIRES");
+        BuildFires((VBoxContainer)_firePanel);
+
+        // AIR DEF: inbound tracks and kill-chance breakdown
+        var rsv = Page("AIR DEF");
         rsv.AddChild(UiTheme.Text("TRACKS", 13, UiTheme.Accent));
         _tracks = new VBoxContainer();
         rsv.AddChild(_tracks);
         rsv.AddChild(UiTheme.Text("SELECTED TRACK · COMPONENTS IN EFFECT", 13, UiTheme.Accent));
         _detail = UiTheme.Text("Click a track.", 12, UiTheme.Dim, wrap: true);
-        _detail.CustomMinimumSize = new Vector2(410, 0);
+        _detail.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
         rsv.AddChild(_detail);
         rsv.AddChild(UiTheme.Text("KILL CHANCE BREAKDOWN", 13, UiTheme.Accent));
         _terms = new VBoxContainer();
         rsv.AddChild(_terms);
 
+        // BASES: status grid + component detail
+        _basesView = Page("BASES");
+
+        // LOG
+        _log = Page("LOG");
+
         var labels = new MapLabels { Layer = Layer };
         AddChild(labels);
         MoveChild(labels, 0); // under every panel
-        var bottom = new PanelContainer { AnchorTop = 1, AnchorBottom = 1, OffsetLeft = 370, OffsetRight = 940, OffsetTop = -178, OffsetBottom = -10 };
-        _log = new VBoxContainer();
-        bottom.AddChild(_log);
-        AddChild(bottom);
+        Timeline = new AtoTimeline { Ops = this, AnchorTop = 1, AnchorRight = 1, AnchorBottom = 1, OffsetTop = -TimelineH };
+        AddChild(Timeline);
 
         Load(DevScreenshot.Arg("scenario") ?? "intercept-trial");
         if (DevScreenshot.Arg("blue") == "player") SetMode("blue", SideControl.Player);
@@ -228,7 +223,6 @@ public partial class TheatreOps : Control
             _launcherIds.Add(l.Def.Id);
             _launcher.AddItem($"{(l.IsShip ? "⚓ " : "")}{l.Def.Name} · {l.Missile.Name} ×{l.Stock}");
         }
-        _firePanel.Visible = _launcherIds.Count > 0;
         if (_launcherIds.Count > 0) { _launcher.Select(0); FillTargets(); }
     }
 
@@ -369,6 +363,9 @@ public partial class TheatreOps : Control
 
         if (_airView.Visible) UpdateAir(false);
         if (_basesView.Visible) UpdateBases();
+        if (_firePanel.Visible) UpdateFires();
+        if (_pages["PICTURE"].Visible) UpdateContacts();
+        Timeline.QueueRedraw();
         Clear(_tracks);
         var shown = Trial.Tracks.Where(x => x.Launched <= Trial.Time && (ViewSide == "all" || x.Side == ViewSide || x.Detected))
             .OrderByDescending(x => x.State == TrackState.Flying).ThenByDescending(x => x.EndedAt).ThenBy(x => x.Id).Take(14).ToList();
@@ -427,7 +424,7 @@ public partial class TheatreOps : Control
                 : inReach ? "No firing solution yet: waiting for the track to enter reach."
                 : $"No firing solution: {trk.Target.Name} is outside every {SideName(def)} battery's reach (nearest: {nearest.Def.Name}, {nearest.ReachKm:0} km from {nearest.Interceptor.Sources("reach")}).";
         }
-        var hl = UiTheme.Text(head, 12, UiTheme.Dim, wrap: true); hl.CustomMinimumSize = new Vector2(410, 0);
+        var hl = UiTheme.Text(head, 12, UiTheme.Dim, wrap: true); hl.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
         _terms.AddChild(hl);
         foreach (var x in terms)
         {
@@ -435,7 +432,7 @@ public partial class TheatreOps : Control
             var v = UiTheme.Text($"{(x.Delta >= 0 ? "+" : "")}{x.Delta * 100:0}%", 13, x.Delta >= 0 ? UiTheme.Good : UiTheme.Bad);
             v.CustomMinimumSize = new Vector2(52, 0);
             var d = UiTheme.Text($"{x.Label}\n  ← {x.Sources}", 12, UiTheme.Ink, wrap: true);
-            d.CustomMinimumSize = new Vector2(350, 0);
+            d.CustomMinimumSize = new Vector2(ConsoleW - 110, 0);
             row.AddChild(v); row.AddChild(d);
             _terms.AddChild(row);
         }
@@ -445,12 +442,12 @@ public partial class TheatreOps : Control
         {
             _logSeen = Trial.Log.Count;
             Clear(_log);
-            foreach (var e in Trial.Log.TakeLast(7))
+            foreach (var e in Trial.Log.TakeLast(60).Reverse())
             {
                 var c = e.Kind switch { "hit" => UiTheme.Good, "impact" or "refused" => UiTheme.Bad, "miss" => new Color("ffb347"), "launch" => new Color("ff8a8a"), _ => UiTheme.Ink };
                 var lbl = UiTheme.Text($"T+{e.T,5:0}  {e.Text}", 12, c);
                 lbl.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
-                lbl.CustomMinimumSize = new Vector2(640, 0);
+                lbl.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
                 _log.AddChild(lbl);
             }
         }
@@ -465,7 +462,7 @@ public partial class TheatreLayer : Node2D
     public TheatreOps Ops = null!;
     /// <summary>Label anchors in map space; drawn crisp in screen space by <see cref="MapLabels"/>.</summary>
     public readonly List<(Vector2 At, string Text, Color Color)> Labels = new();
-    public static readonly Color Blue = new("7fe3ff"), Red = new("ff4d5a"), Green = new("5cf2b0");
+    public static readonly Color Blue = new("4fbfee"), Red = new("ff4d5a"), Green = new("5cf2b0");
     private static Color SideColor(string side) => side == "blue" ? Blue : Red;
     /// <summary>True when this side's things are enemy to the viewer and must come from the viewer's picture.</summary>
     private bool Fogged(string side) => Ops.ViewSide != "all" && side != Ops.ViewSide;

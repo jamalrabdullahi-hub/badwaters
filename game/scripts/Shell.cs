@@ -91,7 +91,7 @@ public partial class Shell : Control
     private Control TopBar()
     {
         var bar = new PanelContainer { CustomMinimumSize = new Vector2(0, 54) };
-        bar.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.015f, 0.045f, 0.08f, 0.96f), new Color(UiTheme.Accent, 0.18f), 0));
+        bar.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.006f, 0.018f, 0.038f, 0.97f), new Color(UiTheme.Accent, 0.18f), 0));
         var h = new HBoxContainer();
         h.AddThemeConstantOverride("separation", 16);
         bar.AddChild(h);
@@ -147,7 +147,7 @@ public partial class Shell : Control
     private Control DockBar()
     {
         var bar = new PanelContainer { CustomMinimumSize = new Vector2(0, 50) };
-        bar.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.015f, 0.045f, 0.08f, 0.96f), new Color(UiTheme.Accent, 0.18f), 0));
+        bar.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.006f, 0.018f, 0.038f, 0.97f), new Color(UiTheme.Accent, 0.18f), 0));
         var h = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center };
         h.AddThemeConstantOverride("separation", 6);
         bar.AddChild(h);
@@ -190,6 +190,8 @@ public partial class Shell : Control
             if (_theatre.Scenario.Id != id) _theatre.Load(id);
             var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
+            // the console covers the left and the ATO strip the bottom: put the theatre in the open area
+            _map.PanScreen(new Vector2(-TheatreOps.ConsoleW / 2f, TheatreOps.TimelineH / 2f - TheatreOps.TopH / 2f));
             return;
         }
         ShowPlaceholder(name);

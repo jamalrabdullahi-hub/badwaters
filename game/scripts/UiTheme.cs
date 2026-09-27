@@ -3,17 +3,17 @@ using Godot;
 namespace BadWaters.Game;
 
 /// <summary>
-/// Placeholder palette: "Ops Floor · War Room colours". Swap the constants here once a UI direction is picked.
+/// Final palette: "Ops Floor · War Room colours", deep navy (darkened on user feedback). The single source of UI colour.
 /// </summary>
 public static class UiTheme
 {
-    public static readonly Color Bg = new("03070c");
-    public static readonly Color Panel = new(0.03f, 0.08f, 0.13f, 0.94f);
-    public static readonly Color Panel2 = new(0.05f, 0.12f, 0.19f, 0.94f);
-    public static readonly Color Line = new(0.50f, 0.85f, 1.0f, 0.20f);
+    public static readonly Color Bg = new("010408");
+    public static readonly Color Panel = new(0.012f, 0.035f, 0.065f, 0.96f);
+    public static readonly Color Panel2 = new(0.022f, 0.058f, 0.100f, 0.96f);
+    public static readonly Color Line = new(0.30f, 0.60f, 0.85f, 0.22f);
     public static readonly Color Ink = new("d8f3ff");
-    public static readonly Color Dim = new("72a0b6");
-    public static readonly Color Accent = new("7fd8ff");
+    public static readonly Color Dim = new("6a8fa6");
+    public static readonly Color Accent = new("4fb0e0");
     public static readonly Color AccentInk = new("02121c");
     public static readonly Color Bad = new("ff4d5a");
     public static readonly Color Good = new("5cf2b0");

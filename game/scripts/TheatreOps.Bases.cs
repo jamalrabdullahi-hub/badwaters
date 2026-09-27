@@ -14,6 +14,8 @@ public partial class TheatreOps
         var me = ViewSide == "all" ? CommandSide : ViewSide;
         var enemy = me == "blue" ? "red" : "blue";
         var pic = Trial.Intel?.Pictures[me];
+        _basesView.AddChild(UiTheme.Text($"BASE STATUS · {SideName(me).ToUpperInvariant()} (actual) · {SideName(enemy).ToUpperInvariant()} (your estimate)", 13, UiTheme.Accent));
+        _basesView.AddChild(StatusGrid(me, enemy, pic));
         _basesView.AddChild(UiTheme.Text($"{SideName(me).ToUpperInvariant()} BASES · actual state", 13, UiTheme.Accent));
         foreach (var b in Trial.Bases.Values.Where(b => b.Site.Side == me))
         {
@@ -40,6 +42,41 @@ public partial class TheatreOps
                 _basesView.AddChild(Row(c.Def.Name, bel.Integrity, $"est. {bel.Integrity:0}% · {bel.Source} · {(bel.AsOf <= 0 ? "pre-war" : $"{age / 60:0} min old")} · conf {bel.Confidence:P0}", bel.Confidence));
             }
         }
+    }
+
+    private static readonly (string Effect, string Short)[] GridCols =
+        { ("sorties", "RWY"), ("launch-pads", "PADS"), ("piers", "PIER"), ("fuel", "FUEL"), ("munitions", "MUN"), ("sensors", "RDR"), ("apron", "APR"), ("shelter", "HAS"), ("readiness", "MNT"), ("command", "CMD") };
+
+    /// <summary>Bases down, components across, one coloured cell each: truth for your side, belief for the enemy.</summary>
+    private Control StatusGrid(string me, string enemy, Picture? pic)
+    {
+        var g = new GridContainer { Columns = GridCols.Length + 1 };
+        g.AddThemeConstantOverride("h_separation", 3);
+        g.AddThemeConstantOverride("v_separation", 3);
+        g.AddChild(new Control());
+        foreach (var (_, sh) in GridCols) { var l = UiTheme.Text(sh, 10, UiTheme.Dim); l.HorizontalAlignment = HorizontalAlignment.Center; l.CustomMinimumSize = new Vector2(40, 0); g.AddChild(l); }
+        foreach (var side in new[] { me, enemy })
+            foreach (var b in Trial.Bases.Values.Where(b => b.Site.Side == side))
+            {
+                var n = UiTheme.Text(b.Site.Name.Replace(" Air Base", " AB").Replace(" naval base", " NB").Replace(" Naval Base", " NB"), 11, side == "blue" ? TheatreLayer.Blue : TheatreLayer.Red);
+                n.CustomMinimumSize = new Vector2(130, 0); n.ClipText = true;
+                g.AddChild(n);
+                foreach (var (eff, _) in GridCols)
+                {
+                    var c = b.Components.Values.FirstOrDefault(x => x.Def.Effect == eff);
+                    if (c == null) { g.AddChild(new Control { CustomMinimumSize = new Vector2(40, 18) }); continue; }
+                    var val = side == me || pic == null ? c.Integrity : pic.Belief(b.Site.Id, c.Def.Id).Integrity;
+                    var conf = side == me || pic == null ? 1 : pic.Belief(b.Site.Id, c.Def.Id).Confidence;
+                    var col = val >= 80 ? UiTheme.Good : val >= 50 ? new Color("ffb347") : UiTheme.Bad;
+                    var cell = new PanelContainer { CustomMinimumSize = new Vector2(40, 18), TooltipText = $"{c.Def.Name}: {val:0}%{(side == me ? "" : $" (estimate, confidence {conf:P0})")}" };
+                    cell.AddThemeStyleboxOverride("panel", new StyleBoxFlat { BgColor = new Color(col, (float)(0.25 + 0.6 * conf * (0.4 + val / 170))), ContentMarginLeft = 2, ContentMarginRight = 2 });
+                    var t = UiTheme.Text($"{val:0}", 10, new Color("02121c"));
+                    t.HorizontalAlignment = HorizontalAlignment.Center;
+                    cell.AddChild(t);
+                    g.AddChild(cell);
+                }
+            }
+        return g;
     }
 
     private static Control Row(string name, double integrity, string note, double confidence)

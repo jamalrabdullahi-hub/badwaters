@@ -130,6 +130,9 @@ public partial class StrategicMap : Node2D
     public void AddOverlay(Node2D n) { if (n.GetParent() == null) AddChild(n); }
     public void ShowRoutes(bool on) { _routes.Visible = on; if (!on) RouteHovered?.Invoke(null); }
 
+    /// <summary>Move the view by screen pixels (e.g. so a point sits in the middle of the uncovered map area).</summary>
+    public void PanScreen(Vector2 px) { _cam.Position += px / _cam.Zoom; _grid.QueueRedraw(); }
+
     public void CenterOn(double lon, double lat, float zoom) { _cam.Position = Session.Project(lon, lat); _cam.Zoom = new Vector2(zoom, zoom); UpdateLod(); }
 }
 

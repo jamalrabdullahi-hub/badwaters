@@ -17,10 +17,10 @@ void vertex() {
 void fragment() {
 	vec3 c;
 	if (mode == 2) {
-		c = is_land > 0.5 ? vec3(0.10, 0.125, 0.15) : vec3(0.035, 0.055, 0.075);
+		c = is_land > 0.5 ? vec3(0.10, 0.125, 0.15) : vec3(0.018, 0.030, 0.050);
 	} else if (is_land < 0.5) {
 		float n = texture(noise_tex, world / 900.0).r;
-		c = mode == 0 ? mix(vec3(0.03, 0.10, 0.20), vec3(0.06, 0.18, 0.30), n) : mix(vec3(0.60, 0.74, 0.84), vec3(0.72, 0.84, 0.90), n);
+		c = mode == 0 ? mix(vec3(0.012, 0.045, 0.100), vec3(0.028, 0.085, 0.160), n) : mix(vec3(0.60, 0.74, 0.84), vec3(0.72, 0.84, 0.90), n);
 	} else {
 		float e = clamp((texture(noise_tex, world / 1500.0).r - 0.35) * 1.8 + (texture(noise_tex, world / 260.0).r - 0.5) * 0.35, 0.0, 1.0);
 		// hillshade from screen-space derivatives, normalised to world units so it looks the same at every zoom

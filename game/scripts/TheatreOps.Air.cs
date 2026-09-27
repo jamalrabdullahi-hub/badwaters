@@ -82,14 +82,14 @@ public partial class TheatreOps
         r3.AddChild(plan); r3.AddChild(commit);
         _planner.AddChild(r3);
         _planResult = UiTheme.Text("Pick a target and flights. Strike packages get take-off, ingress, IP, target, egress and landing times worked back from the TOT. With only CAP/AEW flights, the target becomes the patrol station.", 12, UiTheme.Dim, wrap: true);
-        _planResult.CustomMinimumSize = new Vector2(410, 0);
+        _planResult.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
         _planner.AddChild(_planResult);
         _airView.AddChild(UiTheme.Text("AIR TASKING ORDER", 13, UiTheme.Accent));
         _atoList = new VBoxContainer();
         _airView.AddChild(_atoList);
         _airView.AddChild(UiTheme.Text("SELECTED FLIGHT · CHARACTERISTICS", 13, UiTheme.Accent));
         _flightCard = UiTheme.Text("Click a flight.", 12, UiTheme.Dim, wrap: true);
-        _flightCard.CustomMinimumSize = new Vector2(410, 0);
+        _flightCard.CustomMinimumSize = new Vector2(ConsoleW - 40, 0);
         _airView.AddChild(_flightCard);
         _flightControls = new HBoxContainer();
         _airView.AddChild(_flightControls);
@@ -214,27 +214,30 @@ public partial class TheatreOps
         Clear(_atoList);
         foreach (var side in ViewSide == "all" ? new[] { "blue", "red" } : new[] { ViewSide })
         {
-            _atoList.AddChild(UiTheme.Text($"{SideName(side).ToUpperInvariant()} ATO", 12, side == "blue" ? TheatreLayer.Blue : TheatreLayer.Red));
-            var fires = air.Fires.Where(f => f.Side == side).OrderBy(f => f.Tot).ToList();
-            if (fires.Count > 0) _atoList.AddChild(UiTheme.Text("Missile & naval fires", 12, UiTheme.Dim));
-            foreach (var f in fires.Where(f => f.State == FireState.Planned || Trial.Time - f.Tot < 600).Take(10))
+            _atoList.AddChild(UiTheme.Text($"{SideName(side).ToUpperInvariant()} FLIGHTS", 12, side == "blue" ? TheatreLayer.Blue : TheatreLayer.Red));
+            var grid = new GridContainer { Columns = 8 };
+            grid.AddThemeConstantOverride("h_separation", 10);
+            grid.AddThemeConstantOverride("v_separation", 2);
+            foreach (var h in new[] { "Callsign", "Type", "n", "Mission", "Form.", "T/O", "TOT / stn", "State" }) grid.AddChild(UiTheme.Text(h, 11, UiTheme.Dim));
+            var order = air.Flights.Where(f => f.Side == side).OrderBy(f => f.State is FlightState.Landed or FlightState.Lost).ThenBy(f => f.PackageId).ThenBy(f => f.Takeoff);
+            foreach (var f in order)
             {
-                var aimName = f.Aimpoint != "" && Trial.Bases.TryGetValue(f.Target.Id, out var tb) ? tb.Components[f.Aimpoint].Def.Name : "doctrine";
-                var l = UiTheme.Text($"{(f.Launcher.IsShip ? "⚓" : "▲")} {f.Launcher.Def.Name} · {f.Count}× {f.Launcher.Missile.Name} → {f.Target.Name} ({aimName}) · launch {AirTasking.Clock(f.LaunchAt)} · TOT {AirTasking.Clock(f.Tot)} · {f.State}", 11,
-                    f.State == FireState.Failed ? UiTheme.Bad : f.State == FireState.Launched ? UiTheme.Dim : UiTheme.Ink);
-                l.ClipText = true; l.TooltipText = f.Note;
-                _atoList.AddChild(l);
+                var col = f.State == FlightState.Lost ? UiTheme.Bad : f.State == FlightState.Landed ? UiTheme.Dim : side == "blue" ? TheatreLayer.Blue : new Color("ff8a8a");
+                var cs = new Button { Text = f.Callsign, ToggleMode = true, ButtonPressed = SelectedFlight == f, Flat = SelectedFlight != f, Alignment = HorizontalAlignment.Left };
+                cs.AddThemeFontSizeOverride("font_size", 12);
+                cs.AddThemeColorOverride("font_color", col);
+                var ff = f;
+                cs.Pressed += () => { SelectedFlight = SelectedFlight == ff ? null : ff; UpdateAir(true); };
+                grid.AddChild(cs);
+                var tot = f.Route.FirstOrDefault(w => w.Name is "Target" or "Sweep" or "SEAD" or "Station");
+                foreach (var v in new[] { f.Type.Name, $"{f.Aircraft.Count}", f.Mission.ToString(), f.Formation.ToString(), AirTasking.Clock(f.Takeoff), tot != null ? AirTasking.Clock(tot.T) : "—", f.State.ToString() })
+                {
+                    var l = UiTheme.Text(v, 12, col);
+                    l.ClipText = true;
+                    grid.AddChild(l);
+                }
             }
-            foreach (var p in air.Packages.Where(p => p.Side == side))
-            {
-                var head = UiTheme.Text($"{p.Name} → {p.Target.Name} · TOT T+{AirTasking.Clock(p.Tot)}{(p.Tanker ? " · tanker" : "")}", 12, UiTheme.Ink);
-                head.ClipText = true;
-                _atoList.AddChild(head);
-                foreach (var f in p.Flights) _atoList.AddChild(FlightRow(f));
-            }
-            var stations = air.Flights.Where(f => f.Side == side && f.PackageId != "" && air.Packages.All(p => p.Id != f.PackageId)).ToList();
-            if (stations.Count > 0) _atoList.AddChild(UiTheme.Text("Stations (CAP / AEW)", 12, UiTheme.Dim));
-            foreach (var f in stations) _atoList.AddChild(FlightRow(f));
+            _atoList.AddChild(grid);
         }
 
         Clear(_timeline);

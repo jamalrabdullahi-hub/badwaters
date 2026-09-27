@@ -37,7 +37,7 @@ public partial class DevelopmentScreen : PanelContainer
     public override void _Ready()
     {
         AnchorRight = 1; AnchorBottom = 1;
-        AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.02f, 0.05f, 0.09f, 0.97f), UiTheme.Line, 6));
+        AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.008f, 0.024f, 0.048f, 0.97f), UiTheme.Line, 6));
         var root = new HBoxContainer();
         root.AddThemeConstantOverride("separation", 12);
         AddChild(root);

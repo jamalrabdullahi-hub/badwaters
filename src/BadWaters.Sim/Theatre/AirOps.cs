@@ -363,6 +363,14 @@ public sealed class AirTasking
         return $"{f.Callsign} is returning to base.";
     }
 
+    /// <summary>Cancel a fire mission that hasn't launched yet.</summary>
+    public void Cancel(MissileTask t)
+    {
+        if (t.State != FireState.Planned) return;
+        t.State = FireState.Failed; t.Note = "cancelled";
+        _t.Report("ato", $"{Side(t.Side)} ATO: fire mission {t.Launcher.Def.Name} → {t.Target.Name} cancelled.");
+    }
+
     public void SetFormation(Flight f, Formation form) { f.Formation = form; _t.Report("air", $"{f.Callsign} changed formation to {form}."); }
 
     /// <summary>Aircraft on the ground at a hit base: apron aircraft are exposed, sheltered ones much less.</summary>
