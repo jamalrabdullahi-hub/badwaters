@@ -20,6 +20,24 @@ Bad Waters is a 2D game for Steam with fictional assets and abstract game stats.
 
 v0.1's real names and real-figure-calibrated formulas are **not** ported. M1 becomes "port the game loop and systems", not "port the stat models". See `CLAUDE.md`.
 
+## 1c. Fidelity and screen targets (from UI round 4)
+
+- **Strategic fidelity target: Falcon BMS Mission Commander.** A dense theatre map shows hundreds of objectives by type and owner:
+  - airbases, air defence and radar
+  - power, fuel, command and control, garrisons, factories
+  - ports, depots, bridges, ISR sites and fusion centres
+  - protected cities
+
+  It also has a sector grid, unit markers with facing, a front line, category filter checkboxes and an info readout. All objectives are data-driven JSON and fictional.
+- **Ordnance Lab** replaces "missile workshop". Choose class, then size, warhead, guidance, propulsion, profile and fuze. These are game categories that move 1–10 ratings and "effective against" values. Nothing is simulated.
+- **Air Tasking Order** replaces the sortie generator, modelled on a frag order:
+  - a package list with takeoff, role, package, flight and status
+  - a package route map with waypoint times and TOT
+  - a package builder with a target-confidence gate
+  - squadron availability
+  - sorties committed against sorties available, with the limiting constraint
+- **Map modes:** satellite, topographic and tactical, on a shaded Earth.
+
 ## 2. Platform and solution layout
 
 - **.NET 8, C# 12.** Target Windows first, with Linux and Steam Deck later.
