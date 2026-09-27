@@ -10,6 +10,16 @@ The rebuild keeps the proven models, ports them to C#, and grows them into the "
 
 > SEE → FUSE → PLAN → GENERATE → EXECUTE → ASSESS → ADAPT, sustained by PERSONNEL + EQUIPMENT + LOGISTICS + INDUSTRY.
 
+## 1b. Game, not simulation (binding)
+
+Bad Waters is a 2D game for Steam with fictional assets and abstract game stats. The rebuild:
+- names every weapon, platform and component fictionally
+- expresses stats as game ratings and tiers in JSON (for example range tier, hit rating, defence rating, cost in credits), not physical quantities
+- resolves combat and movement with rules-based mechanics (ratings, probability tables, turns and ticks), with no physics or engineering models
+- treats the designers as component selection and adjustment within game rules
+
+v0.1's real names and real-figure-calibrated formulas are **not** ported. M1 becomes "port the game loop and systems", not "port the stat models". See `CLAUDE.md`.
+
 ## 2. Platform and solution layout
 
 - **.NET 8, C# 12.** Target Windows first, with Linux and Steam Deck later.
@@ -104,7 +114,7 @@ Every building type has a map location, component slots, hardening, air-defence 
 8. Intelligence agency offices and fusion centres.
 9. Also: radar sites, space ground stations, satellite launch sites and training schools (the personnel pipelines).
 
-Design rule: population centres are defended, and they can suffer collateral damage and strikes by the AI's doctrine. The player's target list covers military, state and infrastructure targets. There is no "attack population" order.
+Design rule (enforced in code by `src/sim/policy.ts`, see `CLAUDE.md`): population centres and civilian shelters are defended and can suffer collateral damage, but no player order, mission, AI plan or mod may target them. The C# `BadWaters.Sim` carries the same policy and tests.
 
 ## 8. Base designer
 
@@ -192,7 +202,7 @@ Higher postures cost money, fuel, personnel fatigue, airframe life and diplomati
 | # | Milestone | Done when |
 |---|---|---|
 | M0 | Toolchain: .NET 8 SDK and Godot 4 .NET installed (needs your OK to download), solution skeleton, CI tests, data validator | `dotnet test` and an empty Godot scene both run |
-| M1 | Sim core port: v0.1 models ported to C#, JSON data layer and schemas, headless runner | 1980→2050 soak run passes; 1990 design ranges match v0.1 |
+| M1 | Sim core: game loop and systems in C# with abstract rating-based stats, JSON data layer and schemas, fictional content set, headless runner | 1980→2050 soak run passes; no real-world names or figures in data |
 | M2 | Game shell: chosen UI direction, main menu, date and nation selection (15 nations × 3 dates, placeholder data for new nations), strategic map with countries, camera and zoom | You can start any nation in any start year and pan the world |
 | M3 | State machine: offices and ratings, personnel pools, pipelines and retirement, finance split, readiness postures, logistics network, industry lines | Readiness numbers explain themselves in the UI |
 | M4 | Information: truth/belief split, sensors, Fusion Office buildings and throughput, COP view, ISR missions, deception | A decoy can fool weak fusion and be caught by multi-source fusion |

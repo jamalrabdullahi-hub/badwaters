@@ -7,6 +7,7 @@ import { distKm, knownSet, newId, statsOf, tension, unitLatLon, yearOf } from ".
 import { transitMonths } from "./ai";
 import { resolveEventChoice } from "./events";
 import { clone } from "./turn";
+import { isLegitimateTarget, PROTECTED_TARGET_MESSAGE, targetClassOfBase } from "../policy";
 import { declareWar, offerPeace, resolveCrisisChoice } from "./war";
 
 export type Result = Campaign | string;
@@ -188,6 +189,8 @@ export function playerOfferPeace(c0: Campaign, enemy: NationId): { c: Campaign; 
 export function planStrike(c0: Campaign, targetBaseId: string, sources: string[]): { c: Campaign; pending: PendingBattle } | string {
   const target = c0.bases.find((b) => b.id === targetBaseId);
   if (!target) return "Unknown target.";
+  const cls = targetClassOfBase(target.type);
+  if (!cls || !isLegitimateTarget(cls)) return PROTECTED_TARGET_MESSAGE; // see src/sim/policy.ts
   const enemy = target.nation;
   const war = c0.wars.some((w) => (w.a === c0.player && w.b === enemy) || (w.b === c0.player && w.a === enemy));
   if (!war) return "You can only strike a nation you're at war with.";

@@ -6,6 +6,7 @@ import type { Base, Campaign, Design, NationId, PendingBattle, Stats, Unit } fro
 import { createBattle, KTS, MACH, type BattleState, type BUnit, type BWeapon, type Mission, type Side } from "./engine";
 import { isLand, makeProj, seaPoint } from "./geo";
 import { rng } from "../campaign/core";
+import { isLegitimateTarget, targetClassOfBase } from "../policy";
 
 type Pools = Record<NationId, Record<string, number>>;
 
@@ -299,6 +300,8 @@ function buildEngagement(c: Campaign, p: Extract<PendingBattle, { kind: "engagem
 /** Units of `n` that can reach a target base with an offensive weapon, with the weapons and ranges that do. */
 export function strikeCandidates(c: Campaign, n: NationId, target: Base): { unit: Unit; weapons: { name: string; count: number; range: number }[]; distKm: number }[] {
   const out: { unit: Unit; weapons: { name: string; count: number; range: number }[]; distKm: number }[] = [];
+  const cls = targetClassOfBase(target.type);
+  if (!cls || !isLegitimateTarget(cls)) return out; // protected by policy (src/sim/policy.ts)
   for (const u of c.units) {
     if (u.nation !== n || u.location.kind === "transit" || u.damage > 0.7) continue;
     const ll = unitLatLon(c, u);

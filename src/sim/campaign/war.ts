@@ -4,6 +4,7 @@ import { runToEnd } from "../battle/engine";
 import { applyBattle } from "../battle/results";
 import type { Campaign, NationId, PendingBattle } from "../types";
 import { NATION_IDS } from "../types";
+import { isLegitimateTarget, targetClassOfBase } from "../policy";
 import { addTension, atWar, dateLabel, forceValue, monthRng, newId, pairKey, pushNews, statsOf, tension, unitTheatre } from "./core";
 
 const BASELINE: Record<string, number> = Object.fromEntries(START_TENSION.map(([a, b, v]) => [pairKey(a, b), v]));
@@ -68,6 +69,8 @@ export function planAiStrike(c: Campaign, attacker: NationId, defender: NationId
   let best: { baseId: string; sources: string[]; weight: number; name: string } | null = null;
   for (const b of c.bases) {
     if (b.nation !== defender) continue;
+    const cls = targetClassOfBase(b.type);
+    if (!cls || !isLegitimateTarget(cls)) continue; // the AI obeys the same targeting policy (src/sim/policy.ts)
     const cands = strikeCandidates(c, attacker, b);
     const weight = cands.reduce((a, x) => a + x.weapons.reduce((q, w) => q + w.count, 0), 0) * (b.type === "air" || b.type === "missile" ? 1.3 : 1);
     if (weight > (best?.weight ?? 0)) best = { baseId: b.id, sources: cands.slice(0, 14).map((x) => x.unit.id), weight, name: b.name };
