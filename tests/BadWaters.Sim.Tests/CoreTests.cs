@@ -124,7 +124,7 @@ public class DataTests
         Assert.Equal(12, people.Single(p => p.Id == "surface-warfare").CareerYears);
         Assert.Equal(12, people.Single(p => p.Id == "sam-operators").CareerYears);
         Assert.Equal(45, people.Single(p => p.Id == "senior-officers").CareerYears);
-        Assert.Contains(presets, p => p.Name == "USF35A");
+        Assert.Contains(presets, p => p.Id == "USF35A" && p.Name == "F-35A Lightning II" && p.Ratings["signature"] > p.Ratings["speed"]);
     }
 
     [Fact]
