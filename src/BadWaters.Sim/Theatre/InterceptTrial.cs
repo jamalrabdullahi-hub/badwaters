@@ -265,8 +265,8 @@ public sealed class InterceptTrial
         Add($"Target agility {m.R("agility"):0}", -0.04 * Math.Max(0, m.R("agility") - i.R("agility") / 2), m.Sources("agility") + (i.R("agility") > 0 ? $" vs {i.Sources("agility")}" : ""));
         var ew = Math.Max(0, m.R("ew") - i.R("jam-resistance"));
         Add($"Target decoys {m.R("ew"):0} vs jam resistance {i.R("jam-resistance"):0}", -0.05 * ew, $"{m.Sources("ew")} vs {i.Sources("jam-resistance")}");
-        Add($"Speed gap {m.R("speed"):0} vs {i.R("speed"):0}", -0.03 * Math.Max(0, m.R("speed") - i.R("speed")), $"{m.Sources("speed")} vs {i.Sources("speed")}");
-        if (tr.Phase(atTime) == "terminal") Add("Terminal-phase shot", -0.05, "late intercept");
+        Add($"Speed gap {m.R("speed"):0} vs {i.R("speed"):0}", -0.08 * Math.Max(0, m.R("speed") - i.R("speed")), $"{m.Sources("speed")} vs {i.Sources("speed")}");
+        if (tr.Phase(atTime) == "terminal") Add("Terminal-phase shot", -0.08, "late intercept");
         var pk = Math.Clamp(terms.Sum(t => t.Delta), 0.05, 0.95);
         return (terms, pk);
     }

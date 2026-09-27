@@ -1089,5 +1089,235 @@
    "air-defence": 0,
    "strike": 0
   }
+ },
+ {
+  "id": "ILF35I",
+  "designer": "aircraft",
+  "name": "F-35I Adir",
+  "archetype": "Stealth multirole, extended range",
+  "nation": "ISR",
+  "fromYear": 2017,
+  "ratings": {
+   "detection": 9,
+   "speed": 6,
+   "agility": 6,
+   "reach": 8,
+   "signature": 9,
+   "payload": 5,
+   "air-defence": 7,
+   "strike": 8
+  }
+ },
+ {
+  "id": "ILF15I",
+  "designer": "aircraft",
+  "name": "F-15I Ra'am",
+  "archetype": "Long-range strike fighter",
+  "nation": "ISR",
+  "fromYear": 1998,
+  "ratings": {
+   "detection": 7,
+   "speed": 8,
+   "agility": 6,
+   "reach": 9,
+   "signature": 0,
+   "payload": 9,
+   "air-defence": 7,
+   "strike": 8
+  }
+ },
+ {
+  "id": "ILF16I",
+  "designer": "aircraft",
+  "name": "F-16I Sufa",
+  "archetype": "Multirole, conformal tanks",
+  "nation": "ISR",
+  "fromYear": 2004,
+  "ratings": {
+   "detection": 6,
+   "speed": 7,
+   "agility": 8,
+   "reach": 7,
+   "signature": 1,
+   "payload": 6,
+   "air-defence": 7,
+   "strike": 7
+  }
+ },
+ {
+  "id": "ILKC707",
+  "designer": "aircraft",
+  "name": "Boeing 707 Re'em",
+  "archetype": "Aerial refuelling tanker",
+  "nation": "ISR",
+  "fromYear": 1990,
+  "ratings": {
+   "detection": 3,
+   "speed": 5,
+   "agility": 1,
+   "reach": 9,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
+ },
+ {
+  "id": "ILG550",
+  "designer": "aircraft",
+  "name": "G550 Eitam (CAEW)",
+  "archetype": "Airborne early warning",
+  "nation": "ISR",
+  "fromYear": 2008,
+  "ratings": {
+   "detection": 10,
+   "speed": 6,
+   "agility": 2,
+   "reach": 8,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
+ },
+ {
+  "id": "ILSAAR6",
+  "designer": "ship",
+  "name": "Sa'ar 6-class corvette",
+  "archetype": "Air-defence corvette",
+  "nation": "ISR",
+  "fromYear": 2020,
+  "ratings": {
+   "air-defence": 7,
+   "strike": 4,
+   "anti-ship": 6,
+   "anti-sub": 4,
+   "detection": 7,
+   "survivability": 5,
+   "endurance": 5
+  }
+ },
+ {
+  "id": "ILDOLPHIN",
+  "designer": "ship",
+  "name": "Dolphin-class submarine",
+  "archetype": "Conventional submarine",
+  "nation": "ISR",
+  "fromYear": 1999,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 5,
+   "anti-ship": 6,
+   "anti-sub": 6,
+   "detection": 5,
+   "survivability": 7,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "IRF14AM",
+  "designer": "aircraft",
+  "name": "F-14AM Tomcat",
+  "archetype": "Upgraded fleet interceptor",
+  "nation": "IRN",
+  "fromYear": 2000,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 5,
+   "reach": 6,
+   "signature": 0,
+   "payload": 5,
+   "air-defence": 6,
+   "strike": 2
+  }
+ },
+ {
+  "id": "IRMIG29",
+  "designer": "aircraft",
+  "name": "MiG-29A",
+  "archetype": "Light air superiority",
+  "nation": "IRN",
+  "fromYear": 1990,
+  "ratings": {
+   "detection": 4,
+   "speed": 8,
+   "agility": 8,
+   "reach": 3,
+   "signature": 0,
+   "payload": 3,
+   "air-defence": 5,
+   "strike": 2
+  }
+ },
+ {
+  "id": "IRF4E",
+  "designer": "aircraft",
+  "name": "F-4E Phantom II",
+  "archetype": "Multirole, 3rd generation",
+  "nation": "IRN",
+  "fromYear": 1970,
+  "ratings": {
+   "detection": 3,
+   "speed": 7,
+   "agility": 4,
+   "reach": 4,
+   "signature": 0,
+   "payload": 6,
+   "air-defence": 3,
+   "strike": 5
+  }
+ },
+ {
+  "id": "IRSU24",
+  "designer": "aircraft",
+  "name": "Su-24MK",
+  "archetype": "Variable-sweep strike",
+  "nation": "IRN",
+  "fromYear": 1991,
+  "ratings": {
+   "detection": 3,
+   "speed": 7,
+   "agility": 3,
+   "reach": 5,
+   "signature": 0,
+   "payload": 7,
+   "air-defence": 1,
+   "strike": 5
+  }
+ },
+ {
+  "id": "IRJAMARAN",
+  "designer": "ship",
+  "name": "Moudge-class frigate (Jamaran)",
+  "archetype": "Light frigate",
+  "nation": "IRN",
+  "fromYear": 2010,
+  "ratings": {
+   "air-defence": 3,
+   "strike": 3,
+   "anti-ship": 5,
+   "anti-sub": 3,
+   "detection": 4,
+   "survivability": 3,
+   "endurance": 5
+  }
+ },
+ {
+  "id": "IRKILO",
+  "designer": "ship",
+  "name": "Kilo-class submarine",
+  "archetype": "Conventional submarine",
+  "nation": "IRN",
+  "fromYear": 1992,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 3,
+   "anti-ship": 5,
+   "anti-sub": 5,
+   "detection": 4,
+   "survivability": 6,
+   "endurance": 6
+  }
  }
 ]

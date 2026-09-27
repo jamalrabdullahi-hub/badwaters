@@ -441,5 +441,281 @@
    "pl-penetrator",
    "fz-delay"
   ]
+ },
+ {
+  "id": "arrow-3",
+  "name": "Arrow 3",
+  "frame": "mb-medium",
+  "lineage": "arrow",
+  "components": [
+   "pr-rocket-exo",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "sk-ir8",
+   "cm-weapon-link",
+   "pl-hit",
+   "ew-eccm"
+  ]
+ },
+ {
+  "id": "arrow-2",
+  "name": "Arrow 2",
+  "frame": "mb-medium",
+  "lineage": "arrow",
+  "components": [
+   "pr-rocket-dual",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "sk-radar",
+   "cm-weapon-link",
+   "pl-frag",
+   "fz-proximity"
+  ]
+ },
+ {
+  "id": "davids-sling",
+  "name": "David's Sling (Stunner)",
+  "frame": "mb-medium",
+  "lineage": "davids-sling",
+  "components": [
+   "pr-rocket-dual",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "sk-ir",
+   "cm-weapon-link",
+   "pl-hit"
+  ]
+ },
+ {
+  "id": "iron-dome",
+  "name": "Iron Dome (Tamir)",
+  "frame": "mb-small",
+  "lineage": "iron-dome",
+  "components": [
+   "pr-rocket",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "sk-radar",
+   "pl-frag",
+   "fz-proximity"
+  ]
+ },
+ {
+  "id": "green-pine",
+  "name": "EL/M-2080 Green Pine radar",
+  "frame": "gc-radar-trailer",
+  "lineage": "green-pine",
+  "components": [
+   "pw-gen-diesel",
+   "pw-gen-diesel",
+   "th-cooling",
+   "sn-radar-aesa",
+   "cp-cms-basic",
+   "cm-radio",
+   "cm-datalink",
+   "rl-basic"
+  ]
+ },
+ {
+  "id": "elm-2084",
+  "name": "EL/M-2084 radar",
+  "frame": "gc-radar-trailer",
+  "lineage": "elm-2084",
+  "components": [
+   "pw-gen-diesel",
+   "pw-gen-diesel",
+   "th-cooling",
+   "sn-radar-pesa",
+   "cp-cms-basic",
+   "cm-radio",
+   "cm-datalink",
+   "rl-basic"
+  ]
+ },
+ {
+  "id": "emad",
+  "name": "Emad",
+  "frame": "mb-heavy",
+  "lineage": "shahab",
+  "components": [
+   "pr-rocket-mrbm",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "cp-flight",
+   "gc-rv-manoeuvre",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "ghadr",
+  "name": "Ghadr-110",
+  "frame": "mb-heavy",
+  "lineage": "shahab",
+  "components": [
+   "pr-rocket-mrbm",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "gc-autopilot",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "kheibar-shekan",
+  "name": "Kheibar Shekan",
+  "frame": "mb-heavy",
+  "lineage": "kheibar",
+  "components": [
+   "pr-rocket-mrbm",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "cp-flight",
+   "gc-rv-manoeuvre",
+   "ew-penaids",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "shahed-136",
+  "name": "Shahed-136",
+  "frame": "mb-large",
+  "lineage": "shahed",
+  "components": [
+   "pr-piston-drone",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "cp-flight",
+   "gc-autopilot",
+   "pl-blast",
+   "fz-impact",
+   "mat-composite"
+  ]
+ },
+ {
+  "id": "paveh",
+  "name": "Paveh",
+  "frame": "mb-large",
+  "lineage": "paveh",
+  "components": [
+   "pr-cruise-lr",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "nv-terrain",
+   "gc-autopilot",
+   "cp-flight",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "bavar-373",
+  "name": "Bavar-373",
+  "frame": "mb-medium",
+  "lineage": "bavar",
+  "components": [
+   "pr-rocket",
+   "pw-battery",
+   "nv-ins",
+   "gc-autopilot",
+   "cp-flight",
+   "sk-radar",
+   "cm-weapon-link",
+   "pl-frag",
+   "fz-proximity",
+   "ew-eccm"
+  ]
+ },
+ {
+  "id": "s-300pmu2",
+  "name": "S-300PMU-2 (48N6)",
+  "frame": "mb-medium",
+  "lineage": "s-300",
+  "components": [
+   "pr-rocket-dual",
+   "pw-battery",
+   "nv-ins",
+   "gc-autopilot",
+   "cp-flight",
+   "sk-radar",
+   "cm-weapon-link",
+   "pl-frag",
+   "fz-proximity"
+  ]
+ },
+ {
+  "id": "khordad-15",
+  "name": "3rd Khordad / Khordad-15",
+  "frame": "mb-medium",
+  "lineage": "khordad",
+  "components": [
+   "pr-rocket",
+   "pw-battery",
+   "nv-ins",
+   "gc-autopilot",
+   "cp-flight",
+   "sk-radar",
+   "cm-weapon-link",
+   "pl-frag",
+   "fz-proximity"
+  ]
+ },
+ {
+  "id": "bavar-radar",
+  "name": "Bavar-373 engagement radar",
+  "frame": "gc-radar-trailer",
+  "lineage": "bavar",
+  "components": [
+   "pw-gen-diesel",
+   "pw-gen-diesel",
+   "th-cooling",
+   "sn-radar-pesa",
+   "cp-cms-basic",
+   "cm-radio",
+   "cm-datalink",
+   "rl-basic"
+  ]
+ },
+ {
+  "id": "s-300-radar",
+  "name": "30N6E2 engagement radar",
+  "frame": "gc-radar-trailer",
+  "lineage": "s-300",
+  "components": [
+   "pw-gen-diesel",
+   "pw-gen-diesel",
+   "th-cooling",
+   "sn-radar-pesa",
+   "cp-cms-basic",
+   "cm-radio",
+   "cm-datalink",
+   "rl-basic"
+  ]
+ },
+ {
+  "id": "ir-tel",
+  "name": "Iranian SAM launcher vehicle",
+  "frame": "gc-truck-8x8",
+  "lineage": "ir-tel",
+  "components": [
+   "pr-truck",
+   "pw-apu",
+   "if-canister",
+   "if-canister",
+   "cm-radio",
+   "cm-datalink",
+   "cp-cms-basic",
+   "rl-basic"
+  ]
  }
 ]

@@ -1477,6 +1477,81 @@
   "needs": []
  },
  {
+  "id": "pr-rocket-exo",
+  "name": "Exo-atmospheric booster",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "rocket-motors": 8
+  },
+  "uses": {
+   "mass": 0.35,
+   "volume": 2.5
+  },
+  "adds": {
+   "speed": 10,
+   "reach": 10
+  },
+  "port": null,
+  "cost": 0.8,
+  "factory": "missile-works",
+  "workUnits": 2,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-piston-drone",
+  "name": "Small piston engine (long endurance)",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "jet-engines": 1
+  },
+  "uses": {
+   "mass": 0.1,
+   "volume": 2
+  },
+  "adds": {
+   "speed": 1,
+   "reach": 10
+  },
+  "port": null,
+  "cost": 0.05,
+  "factory": "missile-works",
+  "workUnits": 0.2,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-cruise-lr",
+  "name": "Long-range cruise turbojet",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "jet-engines": 4
+  },
+  "uses": {
+   "mass": 0.3,
+   "volume": 2
+  },
+  "adds": {
+   "speed": 3,
+   "reach": 10
+  },
+  "port": null,
+  "cost": 0.5,
+  "factory": "missile-works",
+  "workUnits": 1,
+  "offers": [],
+  "needs": []
+ },
+ {
   "id": "pr-rocket-dual",
   "name": "Dual-pulse rocket motor",
   "family": "propulsion",

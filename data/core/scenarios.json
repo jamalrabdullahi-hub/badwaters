@@ -2167,21 +2167,21 @@
    {
     "side": "red",
     "launcher": "rf-ningde",
-    "target": "ishigaki-gs",
+    "target": "amami-gs",
     "count": 2,
     "tot": 1643
    },
    {
     "side": "red",
     "launcher": "rf-ningde",
-    "target": "miyako-gs",
+    "target": "sasebo-nb",
     "count": 2,
     "tot": 2048
    },
    {
     "side": "red",
     "launcher": "rf-ningde",
-    "target": "naha-ab",
+    "target": "kanoya-ab",
     "count": 2,
     "tot": 2467
    },
@@ -2251,21 +2251,21 @@
    {
     "side": "red",
     "launcher": "rf-wenzhou",
-    "target": "ishigaki-gs",
+    "target": "amami-gs",
     "count": 2,
     "tot": 1638
    },
    {
     "side": "red",
     "launcher": "rf-wenzhou",
-    "target": "miyako-gs",
+    "target": "sasebo-nb",
     "count": 2,
     "tot": 2053
    },
    {
     "side": "red",
     "launcher": "rf-wenzhou",
-    "target": "naha-ab",
+    "target": "kanoya-ab",
     "count": 2,
     "tot": 2461
    },
@@ -2408,6 +2408,2070 @@
     "target": "miyako-gs",
     "count": 4,
     "tot": 807
+   }
+  ]
+ },
+ {
+  "id": "isr-irn",
+  "name": "Middle East: Israel vs Iran",
+  "theatre": "GULF",
+  "brief": "Test conflict between Israel (Blue) and Iran (Red). Iran sends drones and cruise missiles first, then times ballistic salvos to arrive with them; Israel's layered air defence (Arrow 3, Arrow 2, David's Sling, Iron Dome) defends, then Israel strikes missile bases with tanker-supported packages. Cities are protected and never targeted; nuclear forces stay abstract.",
+  "center": [
+   43.5,
+   32.8
+  ],
+  "zoom": 1.45,
+  "sides": {
+   "blue": "Israel",
+   "red": "Iran"
+  },
+  "sites": [
+   {
+    "id": "nevatim-ab",
+    "name": "Nevatim Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 35.01,
+    "lat": 31.21,
+    "type": "airbase"
+   },
+   {
+    "id": "ramon-ab",
+    "name": "Ramon Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 34.67,
+    "lat": 30.78,
+    "type": "airbase"
+   },
+   {
+    "id": "hatzerim-ab",
+    "name": "Hatzerim Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 34.66,
+    "lat": 31.23,
+    "type": "airbase"
+   },
+   {
+    "id": "telnof-ab",
+    "name": "Tel Nof Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 34.82,
+    "lat": 31.84,
+    "type": "airbase"
+   },
+   {
+    "id": "ramatdavid-ab",
+    "name": "Ramat David Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 35.18,
+    "lat": 32.67,
+    "type": "airbase"
+   },
+   {
+    "id": "palmachim-ab",
+    "name": "Palmachim Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 34.69,
+    "lat": 31.9,
+    "type": "airbase"
+   },
+   {
+    "id": "hatzor-ab",
+    "name": "Hatzor Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 34.73,
+    "lat": 31.76,
+    "type": "airbase"
+   },
+   {
+    "id": "haifa-nb",
+    "name": "Haifa naval base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 35.0,
+    "lat": 32.83,
+    "type": "navalbase"
+   },
+   {
+    "id": "tabriz-ab",
+    "name": "Tabriz Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 46.24,
+    "lat": 38.13,
+    "type": "airbase"
+   },
+   {
+    "id": "hamadan-ab",
+    "name": "Hamadan Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 48.65,
+    "lat": 35.21,
+    "type": "airbase"
+   },
+   {
+    "id": "dezful-ab",
+    "name": "Dezful Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 48.4,
+    "lat": 32.43,
+    "type": "airbase"
+   },
+   {
+    "id": "isfahan-ab",
+    "name": "Isfahan Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 51.87,
+    "lat": 32.75,
+    "type": "airbase"
+   },
+   {
+    "id": "shiraz-ab",
+    "name": "Shiraz Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 52.59,
+    "lat": 29.54,
+    "type": "airbase"
+   },
+   {
+    "id": "bandarabbas-nb",
+    "name": "Bandar Abbas naval base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 56.33,
+    "lat": 27.15,
+    "type": "navalbase"
+   },
+   {
+    "id": "kermanshah-gs",
+    "name": "Kermanshah missile base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 47.15,
+    "lat": 34.4,
+    "type": "garrison"
+   },
+   {
+    "id": "khorramabad-gs",
+    "name": "Khorramabad missile base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 48.4,
+    "lat": 33.55,
+    "type": "garrison"
+   },
+   {
+    "id": "tel-aviv",
+    "name": "Tel Aviv",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 34.78,
+    "lat": 32.08,
+    "type": ""
+   },
+   {
+    "id": "jerusalem",
+    "name": "Jerusalem",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 35.21,
+    "lat": 31.77,
+    "type": ""
+   },
+   {
+    "id": "haifa",
+    "name": "Haifa",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 34.99,
+    "lat": 32.79,
+    "type": ""
+   },
+   {
+    "id": "beersheba",
+    "name": "Beersheba",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 34.79,
+    "lat": 31.25,
+    "type": ""
+   },
+   {
+    "id": "tehran",
+    "name": "Tehran",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 51.39,
+    "lat": 35.69,
+    "type": ""
+   },
+   {
+    "id": "tabriz",
+    "name": "Tabriz",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 46.29,
+    "lat": 38.08,
+    "type": ""
+   },
+   {
+    "id": "isfahan",
+    "name": "Isfahan",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 51.67,
+    "lat": 32.65,
+    "type": ""
+   },
+   {
+    "id": "kermanshah",
+    "name": "Kermanshah",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 47.07,
+    "lat": 34.31,
+    "type": ""
+   },
+   {
+    "id": "shiraz",
+    "name": "Shiraz",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 52.53,
+    "lat": 29.59,
+    "type": ""
+   }
+  ],
+  "batteries": [
+   {
+    "id": "arrow3-palmachim",
+    "name": "Arrow 3 battery (Palmachim)",
+    "side": "blue",
+    "lon": 34.73,
+    "lat": 31.93,
+    "radar": "green-pine",
+    "launcher": "gs-launcher",
+    "interceptor": "arrow-3",
+    "stock": 4,
+    "platform": "ground"
+   },
+   {
+    "id": "arrow3-negev",
+    "name": "Arrow 3 battery (Negev)",
+    "side": "blue",
+    "lon": 34.91,
+    "lat": 31.01,
+    "radar": "green-pine",
+    "launcher": "gs-launcher",
+    "interceptor": "arrow-3",
+    "stock": 4,
+    "platform": "ground"
+   },
+   {
+    "id": "arrow2-hatzerim",
+    "name": "Arrow 2 battery (Hatzerim)",
+    "side": "blue",
+    "lon": 34.699999999999996,
+    "lat": 31.26,
+    "radar": "green-pine",
+    "launcher": "gs-launcher",
+    "interceptor": "arrow-2",
+    "stock": 6,
+    "platform": "ground"
+   },
+   {
+    "id": "arrow2-ramatdavid",
+    "name": "Arrow 2 battery (Ramat David)",
+    "side": "blue",
+    "lon": 35.22,
+    "lat": 32.64,
+    "radar": "green-pine",
+    "launcher": "gs-launcher",
+    "interceptor": "arrow-2",
+    "stock": 6,
+    "platform": "ground"
+   },
+   {
+    "id": "ds-telnof",
+    "name": "David's Sling battery (Tel Nof)",
+    "side": "blue",
+    "lon": 34.86,
+    "lat": 31.86,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "davids-sling",
+    "stock": 8,
+    "platform": "ground"
+   },
+   {
+    "id": "ds-haifa",
+    "name": "David's Sling battery (Haifa)",
+    "side": "blue",
+    "lon": 35.04,
+    "lat": 32.8,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "davids-sling",
+    "stock": 8,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-nevatim-ab",
+    "name": "Iron Dome (Nevatim)",
+    "side": "blue",
+    "lon": 34.97,
+    "lat": 31.240000000000002,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-ramon-ab",
+    "name": "Iron Dome (Ramon)",
+    "side": "blue",
+    "lon": 34.63,
+    "lat": 30.810000000000002,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-hatzerim-ab",
+    "name": "Iron Dome (Hatzerim)",
+    "side": "blue",
+    "lon": 34.62,
+    "lat": 31.26,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-telnof-ab",
+    "name": "Iron Dome (Tel Nof)",
+    "side": "blue",
+    "lon": 34.78,
+    "lat": 31.87,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-ramatdavid-ab",
+    "name": "Iron Dome (Ramat David)",
+    "side": "blue",
+    "lon": 35.14,
+    "lat": 32.7,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "idome-haifa-nb",
+    "name": "Iron Dome (Haifa)",
+    "side": "blue",
+    "lon": 34.96,
+    "lat": 32.86,
+    "radar": "elm-2084",
+    "launcher": "gs-launcher",
+    "interceptor": "iron-dome",
+    "stock": 20,
+    "platform": "ground"
+   },
+   {
+    "id": "bavar-isfahan",
+    "name": "Bavar-373 battery (Isfahan)",
+    "side": "red",
+    "lon": 51.919999999999995,
+    "lat": 32.78,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "bavar-373",
+    "stock": 16,
+    "platform": "ground"
+   },
+   {
+    "id": "s300-hamadan",
+    "name": "S-300PMU-2 battery (Hamadan)",
+    "side": "red",
+    "lon": 48.61,
+    "lat": 35.24,
+    "radar": "s-300-radar",
+    "launcher": "ir-tel",
+    "interceptor": "s-300pmu2",
+    "stock": 16,
+    "platform": "ground"
+   },
+   {
+    "id": "s300-bandarabbas",
+    "name": "S-300PMU-2 battery (Bandar Abbas)",
+    "side": "red",
+    "lon": 56.37,
+    "lat": 27.2,
+    "radar": "s-300-radar",
+    "launcher": "ir-tel",
+    "interceptor": "s-300pmu2",
+    "stock": 16,
+    "platform": "ground"
+   },
+   {
+    "id": "khordad-kermanshah-gs",
+    "name": "Khordad-15 battery (Kermanshah)",
+    "side": "red",
+    "lon": 47.199999999999996,
+    "lat": 34.37,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "khordad-15",
+    "stock": 12,
+    "platform": "ground"
+   },
+   {
+    "id": "khordad-khorramabad-gs",
+    "name": "Khordad-15 battery (Khorramabad)",
+    "side": "red",
+    "lon": 48.449999999999996,
+    "lat": 33.519999999999996,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "khordad-15",
+    "stock": 12,
+    "platform": "ground"
+   },
+   {
+    "id": "khordad-dezful-ab",
+    "name": "Khordad-15 battery (Dezful)",
+    "side": "red",
+    "lon": 48.449999999999996,
+    "lat": 32.4,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "khordad-15",
+    "stock": 12,
+    "platform": "ground"
+   },
+   {
+    "id": "khordad-tabriz-ab",
+    "name": "Khordad-15 battery (Tabriz)",
+    "side": "red",
+    "lon": 46.29,
+    "lat": 38.1,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "khordad-15",
+    "stock": 12,
+    "platform": "ground"
+   },
+   {
+    "id": "khordad-shiraz-ab",
+    "name": "Khordad-15 battery (Shiraz)",
+    "side": "red",
+    "lon": 52.64,
+    "lat": 29.509999999999998,
+    "radar": "bavar-radar",
+    "launcher": "ir-tel",
+    "interceptor": "khordad-15",
+    "stock": 12,
+    "platform": "ground"
+   }
+  ],
+  "launchers": [
+   {
+    "id": "irgc-kermanshah",
+    "name": "IRGC missile brigade (Kermanshah)",
+    "side": "red",
+    "lon": 47.12,
+    "lat": 34.44,
+    "missile": "emad",
+    "stock": 12
+   },
+   {
+    "id": "irgc-khorramabad",
+    "name": "IRGC missile brigade (Khorramabad)",
+    "side": "red",
+    "lon": 48.36,
+    "lat": 33.58,
+    "missile": "kheibar-shekan",
+    "stock": 12
+   },
+   {
+    "id": "irgc-tabriz",
+    "name": "IRGC missile brigade (Tabriz)",
+    "side": "red",
+    "lon": 46.3,
+    "lat": 38.1,
+    "missile": "ghadr",
+    "stock": 12
+   },
+   {
+    "id": "irgc-drones",
+    "name": "Drone launch site (Hamadan)",
+    "side": "red",
+    "lon": 48.7,
+    "lat": 35.24,
+    "missile": "shahed-136",
+    "stock": 32
+   },
+   {
+    "id": "irgc-cruise",
+    "name": "Cruise missile unit (Dezful)",
+    "side": "red",
+    "lon": 48.45,
+    "lat": 32.4,
+    "missile": "paveh",
+    "stock": 8
+   }
+  ],
+  "script": [],
+  "units": [
+   {
+    "id": "blue-ilf35i-01",
+    "name": "F-35I Adir #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.159,
+    "lat": 31.177,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-02",
+    "name": "F-35I Adir #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.421,
+    "lat": 31.126,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-03",
+    "name": "F-35I Adir #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.329,
+    "lat": 31.314,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-04",
+    "name": "F-35I Adir #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 34.946,
+    "lat": 31.405,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-05",
+    "name": "F-35I Adir #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 34.93,
+    "lat": 31.358,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-06",
+    "name": "F-35I Adir #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 34.956,
+    "lat": 31.138,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-07",
+    "name": "F-35I Adir #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.24,
+    "lat": 31.609,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-08",
+    "name": "F-35I Adir #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 34.999,
+    "lat": 31.223,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-09",
+    "name": "F-35I Adir #09",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.402,
+    "lat": 31.687,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-10",
+    "name": "F-35I Adir #10",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.362,
+    "lat": 31.334,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-11",
+    "name": "F-35I Adir #11",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.681,
+    "lat": 31.11,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf35i-12",
+    "name": "F-35I Adir #12",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF35I",
+    "lon": 35.587,
+    "lat": 31.265,
+    "patrolKm": 50,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilf15i-01",
+    "name": "F-15I Ra'am #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.715,
+    "lat": 31.155,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-02",
+    "name": "F-15I Ra'am #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.847,
+    "lat": 31.602,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-03",
+    "name": "F-15I Ra'am #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.745,
+    "lat": 31.452,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-04",
+    "name": "F-15I Ra'am #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 35.111,
+    "lat": 31.318,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-05",
+    "name": "F-15I Ra'am #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 35.038,
+    "lat": 31.12,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-06",
+    "name": "F-15I Ra'am #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.648,
+    "lat": 31.212,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-07",
+    "name": "F-15I Ra'am #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 35.144,
+    "lat": 31.354,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-08",
+    "name": "F-15I Ra'am #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.851,
+    "lat": 31.455,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-09",
+    "name": "F-15I Ra'am #09",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 34.963,
+    "lat": 31.272,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf15i-10",
+    "name": "F-15I Ra'am #10",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF15I",
+    "lon": 35.236,
+    "lat": 31.527,
+    "patrolKm": 50,
+    "base": "hatzerim-ab"
+   },
+   {
+    "id": "blue-ilf16i-01",
+    "name": "F-16I Sufa #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 34.995,
+    "lat": 30.948,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-02",
+    "name": "F-16I Sufa #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.22,
+    "lat": 31.14,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-03",
+    "name": "F-16I Sufa #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.384,
+    "lat": 30.764,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-04",
+    "name": "F-16I Sufa #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.584,
+    "lat": 30.656,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-05",
+    "name": "F-16I Sufa #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.134,
+    "lat": 31.065,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-06",
+    "name": "F-16I Sufa #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 34.922,
+    "lat": 30.893,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-07",
+    "name": "F-16I Sufa #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 34.831,
+    "lat": 31.008,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-08",
+    "name": "F-16I Sufa #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.412,
+    "lat": 30.947,
+    "patrolKm": 50,
+    "base": "ramon-ab"
+   },
+   {
+    "id": "blue-ilf16i-09",
+    "name": "F-16I Sufa #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.7,
+    "lat": 32.481,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-10",
+    "name": "F-16I Sufa #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.556,
+    "lat": 32.66,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-11",
+    "name": "F-16I Sufa #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.464,
+    "lat": 32.572,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-12",
+    "name": "F-16I Sufa #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.672,
+    "lat": 32.885,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-13",
+    "name": "F-16I Sufa #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.379,
+    "lat": 32.705,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-14",
+    "name": "F-16I Sufa #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.049,
+    "lat": 32.729,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-15",
+    "name": "F-16I Sufa #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.518,
+    "lat": 32.916,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilf16i-16",
+    "name": "F-16I Sufa #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILF16I",
+    "lon": 35.658,
+    "lat": 32.462,
+    "patrolKm": 50,
+    "base": "ramatdavid-ab"
+   },
+   {
+    "id": "blue-ilkc707-01",
+    "name": "Re'em tanker #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILKC707",
+    "lon": 35.431,
+    "lat": 31.381,
+    "patrolKm": 40,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilkc707-02",
+    "name": "Re'em tanker #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILKC707",
+    "lon": 35.214,
+    "lat": 31.282,
+    "patrolKm": 40,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilkc707-03",
+    "name": "Re'em tanker #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "ILKC707",
+    "lon": 35.301,
+    "lat": 31.116,
+    "patrolKm": 40,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilg550-01",
+    "name": "G550 Eitam #01",
+    "side": "blue",
+    "kind": "aew",
+    "preset": "ILG550",
+    "lon": 34.635,
+    "lat": 31.729,
+    "patrolKm": 40,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilg550-02",
+    "name": "G550 Eitam #02",
+    "side": "blue",
+    "kind": "aew",
+    "preset": "ILG550",
+    "lon": 34.678,
+    "lat": 31.479,
+    "patrolKm": 40,
+    "base": "nevatim-ab"
+   },
+   {
+    "id": "blue-ilsaar6-01",
+    "name": "Sa'ar 6 corvette #01",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "ILSAAR6",
+    "lon": 34.291,
+    "lat": 32.897,
+    "patrolKm": 15,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "blue-ilsaar6-02",
+    "name": "Sa'ar 6 corvette #02",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "ILSAAR6",
+    "lon": 33.981,
+    "lat": 32.559,
+    "patrolKm": 15,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "blue-ilsaar6-03",
+    "name": "Sa'ar 6 corvette #03",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "ILSAAR6",
+    "lon": 34.449,
+    "lat": 32.907,
+    "patrolKm": 15,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "blue-ilsaar6-04",
+    "name": "Sa'ar 6 corvette #04",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "ILSAAR6",
+    "lon": 34.719,
+    "lat": 32.891,
+    "patrolKm": 15,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "blue-ildolphin-01",
+    "name": "Dolphin-class #01",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "ILDOLPHIN",
+    "lon": 33.645,
+    "lat": 32.092,
+    "patrolKm": 10,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "blue-ildolphin-02",
+    "name": "Dolphin-class #02",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "ILDOLPHIN",
+    "lon": 33.774,
+    "lat": 32.692,
+    "patrolKm": 10,
+    "base": "haifa-nb"
+   },
+   {
+    "id": "red-irf14am-01",
+    "name": "F-14AM Tomcat #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 51.232,
+    "lat": 33.053,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-02",
+    "name": "F-14AM Tomcat #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 49.982,
+    "lat": 33.157,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-03",
+    "name": "F-14AM Tomcat #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.073,
+    "lat": 33.481,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-04",
+    "name": "F-14AM Tomcat #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.643,
+    "lat": 33.196,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-05",
+    "name": "F-14AM Tomcat #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 49.707,
+    "lat": 33.396,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-06",
+    "name": "F-14AM Tomcat #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.291,
+    "lat": 33.585,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-07",
+    "name": "F-14AM Tomcat #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 51.225,
+    "lat": 33.744,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-08",
+    "name": "F-14AM Tomcat #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.525,
+    "lat": 33.651,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-09",
+    "name": "F-14AM Tomcat #09",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.782,
+    "lat": 32.929,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-10",
+    "name": "F-14AM Tomcat #10",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 51.139,
+    "lat": 33.858,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-11",
+    "name": "F-14AM Tomcat #11",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 51.099,
+    "lat": 33.881,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irf14am-12",
+    "name": "F-14AM Tomcat #12",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF14AM",
+    "lon": 50.328,
+    "lat": 33.371,
+    "patrolKm": 60,
+    "base": "isfahan-ab"
+   },
+   {
+    "id": "red-irmig29-01",
+    "name": "MiG-29A #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.324,
+    "lat": 37.329,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-02",
+    "name": "MiG-29A #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.275,
+    "lat": 36.785,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-03",
+    "name": "MiG-29A #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.451,
+    "lat": 36.876,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-04",
+    "name": "MiG-29A #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.608,
+    "lat": 36.77,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-05",
+    "name": "MiG-29A #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.2,
+    "lat": 36.865,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-06",
+    "name": "MiG-29A #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.322,
+    "lat": 37.069,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-07",
+    "name": "MiG-29A #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.231,
+    "lat": 37.559,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-08",
+    "name": "MiG-29A #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.937,
+    "lat": 36.863,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-09",
+    "name": "MiG-29A #09",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.503,
+    "lat": 37.053,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irmig29-10",
+    "name": "MiG-29A #10",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 46.637,
+    "lat": 36.838,
+    "patrolKm": 60,
+    "base": "tabriz-ab"
+   },
+   {
+    "id": "red-irf4e-01",
+    "name": "F-4E Phantom II #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 48.419,
+    "lat": 35.073,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-02",
+    "name": "F-4E Phantom II #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 47.959,
+    "lat": 34.584,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-03",
+    "name": "F-4E Phantom II #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 47.503,
+    "lat": 34.218,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-04",
+    "name": "F-4E Phantom II #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 47.811,
+    "lat": 34.374,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-05",
+    "name": "F-4E Phantom II #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 48.395,
+    "lat": 34.275,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-06",
+    "name": "F-4E Phantom II #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 47.428,
+    "lat": 35.033,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-07",
+    "name": "F-4E Phantom II #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 48.034,
+    "lat": 34.261,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-08",
+    "name": "F-4E Phantom II #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 48.052,
+    "lat": 34.146,
+    "patrolKm": 60,
+    "base": "hamadan-ab"
+   },
+   {
+    "id": "red-irf4e-09",
+    "name": "F-4E Phantom II #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 56.028,
+    "lat": 27.983,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-10",
+    "name": "F-4E Phantom II #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 56.363,
+    "lat": 27.757,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-11",
+    "name": "F-4E Phantom II #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 55.761,
+    "lat": 27.493,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-12",
+    "name": "F-4E Phantom II #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 55.667,
+    "lat": 27.818,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-13",
+    "name": "F-4E Phantom II #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 56.033,
+    "lat": 27.823,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-14",
+    "name": "F-4E Phantom II #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 55.83,
+    "lat": 27.378,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-15",
+    "name": "F-4E Phantom II #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 56.312,
+    "lat": 27.988,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irf4e-16",
+    "name": "F-4E Phantom II #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRF4E",
+    "lon": 56.353,
+    "lat": 27.845,
+    "patrolKm": 60,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irsu24-01",
+    "name": "Su-24MK #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 52.518,
+    "lat": 30.092,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-02",
+    "name": "Su-24MK #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 51.927,
+    "lat": 29.914,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-03",
+    "name": "Su-24MK #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 52.056,
+    "lat": 29.523,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-04",
+    "name": "Su-24MK #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 51.728,
+    "lat": 29.724,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-05",
+    "name": "Su-24MK #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 51.959,
+    "lat": 30.054,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-06",
+    "name": "Su-24MK #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 52.657,
+    "lat": 29.858,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-07",
+    "name": "Su-24MK #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 52.637,
+    "lat": 30.29,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irsu24-08",
+    "name": "Su-24MK #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRSU24",
+    "lon": 52.655,
+    "lat": 29.792,
+    "patrolKm": 60,
+    "base": "shiraz-ab"
+   },
+   {
+    "id": "red-irmig29-11",
+    "name": "MiG-29A #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 47.92,
+    "lat": 32.481,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irmig29-12",
+    "name": "MiG-29A #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 47.897,
+    "lat": 32.463,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irmig29-13",
+    "name": "MiG-29A #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 48.324,
+    "lat": 33.02,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irmig29-14",
+    "name": "MiG-29A #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 48.54,
+    "lat": 32.684,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irmig29-15",
+    "name": "MiG-29A #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 48.353,
+    "lat": 32.94,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irmig29-16",
+    "name": "MiG-29A #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "IRMIG29",
+    "lon": 47.785,
+    "lat": 32.828,
+    "patrolKm": 60,
+    "base": "dezful-ab"
+   },
+   {
+    "id": "red-irjamaran-01",
+    "name": "Moudge-class frigate #01",
+    "side": "red",
+    "kind": "ship",
+    "preset": "IRJAMARAN",
+    "lon": 56.628,
+    "lat": 26.981,
+    "patrolKm": 15,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irjamaran-02",
+    "name": "Moudge-class frigate #02",
+    "side": "red",
+    "kind": "ship",
+    "preset": "IRJAMARAN",
+    "lon": 56.5,
+    "lat": 26.786,
+    "patrolKm": 15,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irjamaran-03",
+    "name": "Moudge-class frigate #03",
+    "side": "red",
+    "kind": "ship",
+    "preset": "IRJAMARAN",
+    "lon": 56.043,
+    "lat": 26.985,
+    "patrolKm": 15,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irkilo-01",
+    "name": "Kilo-class #01",
+    "side": "red",
+    "kind": "sub",
+    "preset": "IRKILO",
+    "lon": 56.599,
+    "lat": 26.789,
+    "patrolKm": 10,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irkilo-02",
+    "name": "Kilo-class #02",
+    "side": "red",
+    "kind": "sub",
+    "preset": "IRKILO",
+    "lon": 57.366,
+    "lat": 26.4,
+    "patrolKm": 10,
+    "base": "bandarabbas-nb"
+   },
+   {
+    "id": "red-irkilo-03",
+    "name": "Kilo-class #03",
+    "side": "red",
+    "kind": "sub",
+    "preset": "IRKILO",
+    "lon": 56.682,
+    "lat": 26.929,
+    "patrolKm": 10,
+    "base": "bandarabbas-nb"
+   }
+  ],
+  "ato": [
+   {
+    "side": "blue",
+    "name": "Negev CAP",
+    "stationLon": 35.7,
+    "stationLat": 31.0,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "ILF16I",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Northern CAP",
+    "stationLon": 35.6,
+    "stationLat": 32.9,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "ILF16I",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Eastern barrier CAP",
+    "stationLon": 38.5,
+    "stationLat": 32.0,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "ILF15I",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "AEW orbit",
+    "stationLon": 35.1,
+    "stationLat": 31.7,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "ILG550",
+      "count": 1,
+      "mission": "AEW",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Package OPAL",
+    "target": "kermanshah-gs",
+    "tot": 6300,
+    "ipKm": 80,
+    "flights": [
+     {
+      "preset": "ILF35I",
+      "count": 4,
+      "mission": "Strike",
+      "formation": "Box"
+     },
+     {
+      "preset": "ILF35I",
+      "count": 2,
+      "mission": "Escort",
+      "formation": "Wedge"
+     },
+     {
+      "preset": "ILF35I",
+      "count": 2,
+      "mission": "SEAD",
+      "formation": "Trail"
+     },
+     {
+      "preset": "ILKC707",
+      "count": 1,
+      "mission": "Tanker",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Package ONYX",
+    "target": "hamadan-ab",
+    "tot": 6600,
+    "ipKm": 80,
+    "flights": [
+     {
+      "preset": "ILF15I",
+      "count": 4,
+      "mission": "Strike",
+      "formation": "Box"
+     },
+     {
+      "preset": "ILF15I",
+      "count": 2,
+      "mission": "SEAD",
+      "formation": "Trail"
+     },
+     {
+      "preset": "ILF15I",
+      "count": 2,
+      "mission": "Escort",
+      "formation": "Wedge"
+     },
+     {
+      "preset": "ILKC707",
+      "count": 1,
+      "mission": "Tanker",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Package JASPER",
+    "target": "khorramabad-gs",
+    "tot": 7200,
+    "ipKm": 60,
+    "flights": [
+     {
+      "preset": "ILF35I",
+      "count": 2,
+      "mission": "Strike",
+      "formation": "Trail"
+     },
+     {
+      "preset": "ILKC707",
+      "count": 1,
+      "mission": "Tanker",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Kermanshah CAP",
+    "stationLon": 47.6,
+    "stationLat": 34.1,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "IRF14AM",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Hamadan CAP",
+    "stationLon": 48.3,
+    "stationLat": 34.9,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "IRF4E",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Tabriz CAP",
+    "stationLon": 46.8,
+    "stationLat": 37.4,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "IRMIG29",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Dezful CAP",
+    "stationLon": 48.0,
+    "stationLat": 32.8,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "IRMIG29",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "nevatim-ab",
+    "count": 4,
+    "tot": 5480,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "ramon-ab",
+    "count": 4,
+    "tot": 5676,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "hatzerim-ab",
+    "count": 4,
+    "tot": 5600,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "telnof-ab",
+    "count": 4,
+    "tot": 5444,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "ramatdavid-ab",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-drones",
+    "target": "nevatim-ab",
+    "count": 4,
+    "tot": 5480,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-cruise",
+    "target": "ramatdavid-ab",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-cruise",
+    "target": "haifa-nb",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-kermanshah",
+    "target": "ramon-ab",
+    "count": 2,
+    "tot": 900,
+    "aimpoint": "runway"
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-kermanshah",
+    "target": "nevatim-ab",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": "shelters"
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-kermanshah",
+    "target": "nevatim-ab",
+    "count": 4,
+    "tot": 5460,
+    "aimpoint": "runway"
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-khorramabad",
+    "target": "hatzerim-ab",
+    "count": 2,
+    "tot": 2400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-khorramabad",
+    "target": "telnof-ab",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-khorramabad",
+    "target": "palmachim-ab",
+    "count": 4,
+    "tot": 5460,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-tabriz",
+    "target": "palmachim-ab",
+    "count": 2,
+    "tot": 3000,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-tabriz",
+    "target": "ramatdavid-ab",
+    "count": 4,
+    "tot": 5400,
+    "aimpoint": ""
+   },
+   {
+    "side": "red",
+    "launcher": "irgc-tabriz",
+    "target": "haifa-nb",
+    "count": 4,
+    "tot": 5460,
+    "aimpoint": ""
    }
   ]
  }

@@ -48,7 +48,8 @@ public sealed class SystemProfile
 public static class Pacing
 {
     public static double SpeedKmPerSec(double speed) => 0.25 * Math.Max(1, speed);
-    public static double StrikeReachKm(double reach) => 40 + 80 * reach;
+    /// <summary>Strike reach: tiers 1–8 are theatre ranges; 9–10 are the long-range tiers (medium-range missiles, long-endurance drones).</summary>
+    public static double StrikeReachKm(double reach) => 40 + 80 * reach + Math.Max(0, reach - 8) * 400;
     public static double InterceptReachKm(double reach) => 20 + 20 * reach;
     public static double RadarRangeKm(double detection) => 80 + 45 * detection;
 

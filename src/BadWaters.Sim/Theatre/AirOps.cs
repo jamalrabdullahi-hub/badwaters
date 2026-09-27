@@ -178,7 +178,10 @@ public sealed class AirTasking
         _preset = preset;
         _rng = new Random(seed * 7919 + 3);
         foreach (var e in trial.Scenario.Ato.Where(e => trial.Control.GetValueOrDefault(e.Side) == SideControl.AI))
-            Commit(e);
+        {
+            var r = Commit(e);
+            if (!r.Ok) trial.Report("ato", $"{Side(e.Side)} ATO line not flown ({(e.Name != "" ? e.Name : e.Launcher)}): {string.Join(" ", r.Issues)}");
+        }
     }
 
     // ---------------- availability ----------------

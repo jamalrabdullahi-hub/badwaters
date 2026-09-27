@@ -11,7 +11,8 @@ def km(a, b):
     return math.hypot((b[0] - a[0]) * 111 * math.cos(mid), (b[1] - a[1]) * 111)
 
 # game reach tables (must match Sim/Theatre/Profiles.cs Pacing.StrikeReachKm with the design's reach rating)
-REACH = {"df-15b": 40 + 80 * 7, "df-17": 40 + 80 * 10, "type-12": 40 + 80 * 8, "cm-cruise": 40 + 80 * 8, "cj-10": 40 + 80 * 8}
+def RK(r): return 40 + 80 * r + max(0, r - 8) * 400
+REACH = {"df-15b": RK(7), "df-17": RK(10), "type-12": 40 + 80 * 8, "cm-cruise": 40 + 80 * 8, "cj-10": 40 + 80 * 8}
 SPEED = {"df-15b": 9, "df-17": 10, "type-12": 3, "cm-cruise": 3, "cj-10": 3}
 
 def site(i, n, side, lon, lat, cls="military-base"):
