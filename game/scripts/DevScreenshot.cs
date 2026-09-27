@@ -13,6 +13,13 @@ public static class DevScreenshot
 
     public static async void MaybeCapture(Node node)
     {
+        if (Arg("fps") != null)
+        {
+            DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
+            for (var i = 0; i < 240; i++) await node.ToSignal(node.GetTree(), SceneTree.SignalName.ProcessFrame);
+            GD.Print($"FPS {Engine.GetFramesPerSecond()} · process {Performance.GetMonitor(Performance.Monitor.TimeProcess) * 1000:0.0} ms · draw calls {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)} · primitives {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)} · objects {Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame)} · video mem {Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed) / 1e6:0} MB");
+            if (Arg("screenshot") == null) { node.GetTree().Quit(); return; }
+        }
         var path = Arg("screenshot");
         if (path == null) return;
         for (var i = 0; i < 6; i++) await node.ToSignal(node.GetTree(), SceneTree.SignalName.ProcessFrame);

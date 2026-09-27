@@ -156,8 +156,8 @@ public partial class MainMenu : Control
 
     private void OnStart()
     {
-        // Campaign start lands in M2/M3; for now confirm the selection.
-        _brief.Text += $"\n\nStarting {_nation} in {_year}: campaign setup arrives in the next milestone.";
-        GD.Print($"New campaign: {_nation} {_year}");
+        if (_nation == null) return;
+        Session.Start(_nation, _year);
+        GetTree().ChangeSceneToFile("res://scenes/Shell.tscn");
     }
 }

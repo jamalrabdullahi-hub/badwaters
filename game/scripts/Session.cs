@@ -1,0 +1,80 @@
+using System.Text.Json;
+using BadWaters.Data;
+using BadWaters.Sim;
+using BadWaters.Sim.Trade;
+using Godot;
+
+namespace BadWaters.Game;
+
+/// <summary>The running campaign: loaded content plus the one shared World that every screen views.</summary>
+public static class Session
+{
+    public static GameContent Content { get; private set; } = null!;
+    public static World World { get; private set; } = null!;
+    public static Scheduler Scheduler { get; private set; } = null!;
+    public static int StartYear { get; private set; }
+
+    public static string DataDir()
+    {
+        var project = ProjectSettings.GlobalizePath("res://");
+        var dir = Path.GetFullPath(Path.Combine(project, "..", "data", "core"));
+        return Directory.Exists(dir) ? dir : Path.Combine(project, "data", "core");
+    }
+
+    public static IEnumerable<string>? ModDirs()
+    {
+        var mods = Path.GetFullPath(Path.Combine(DataDir(), "..", "..", "mods"));
+        return Directory.Exists(mods) ? Directory.GetDirectories(mods) : null;
+    }
+
+    public static void Start(string nation, int year)
+    {
+        Content = GameContent.Load(DataDir(), ModDirs());
+        foreach (var e in Content.Errors) GD.PushError(e);
+        StartYear = year;
+        World = new World { Now = new DateTime(year, 1, 1), End = new DateTime(2050, 12, 31), Player = nation };
+        foreach (var t in Content.Theatres.Keys) World.Theatres[t] = new TheatreState { Id = t };
+        foreach (var r in Content.Routes.Keys) World.Routes[r] = new RouteState();
+        Scheduler = new Scheduler(World);
+        foreach (var r in Content.Routes.Values) Scheduler.RouteTheatres[r.Id] = r.Theatres.ToHashSet();
+        LoadLand();
+    }
+
+    private static void LoadLand()
+    {
+        if (LandMeshes.Count > 0) return;
+        foreach (var res in new[] { "110m", "50m" })
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(DataDir(), "geo", $"land-{res}.json")));
+            // pre-triangulated land (earcut, tools/geo-convert.mjs) as one mesh in map pixels
+            var verts = new List<Vector2>();
+            var idx = new List<int>();
+            foreach (var poly in doc.RootElement.GetProperty("polys").EnumerateArray())
+            {
+                var baseIndex = verts.Count;
+                var v = poly.GetProperty("v").EnumerateArray().Select(x => x.GetDouble()).ToArray();
+                for (var i = 0; i < v.Length; i += 2) verts.Add(Project(v[i], v[i + 1]));
+                foreach (var t in poly.GetProperty("t").EnumerateArray()) idx.Add(baseIndex + t.GetInt32());
+            }
+            var arrays = new Godot.Collections.Array();
+            arrays.Resize((int)Mesh.ArrayType.Max);
+            arrays[(int)Mesh.ArrayType.Vertex] = verts.ToArray();
+            arrays[(int)Mesh.ArrayType.Index] = idx.ToArray();
+            var mesh = new ArrayMesh();
+            mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, arrays);
+            LandMeshes[res] = mesh;
+        }
+    }
+
+    /// <summary>Land meshes by resolution: "110m" for zoomed-out views, "50m" for detail.</summary>
+    public static Dictionary<string, ArrayMesh> LandMeshes { get; } = new();
+
+    // ---- Mercator projection in map pixels
+    public const float PxPerDeg = 20f;
+    public static Vector2 Project(double lon, double lat)
+    {
+        lat = Math.Clamp(lat, -80, 84);
+        var y = Math.Log(Math.Tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI;
+        return new Vector2((float)(lon * PxPerDeg), (float)(-y * PxPerDeg));
+    }
+}

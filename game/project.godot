@@ -4,7 +4,7 @@ config_version=5
 [application]
 config/name="Bad Waters"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.7", "C#", "Mobile")
 
 [display]
 window/size/viewport_width=1600
@@ -16,5 +16,5 @@ window/stretch/aspect="expand"
 project/assembly_name="BadWaters.Game"
 
 [rendering]
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
+rendering_device/fallback_to_opengl3=true

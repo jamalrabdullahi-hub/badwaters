@@ -179,14 +179,14 @@ dump("theatres.json", [{"id":i,"name":n} for i,n in [("NATL","North Atlantic"),(
  ("IND","Indian Ocean"),("SCS","South China Sea"),("ECS","East China Sea"),("WPAC","Western Pacific"),("NPAC","North Pacific"),("BLK","Black Sea"),("BALT","Baltic")]])
 R=lambda i,n,path,th,ck,tp,days:{"id":i,"name":n,"path":path,"theatres":th,"chokepoints":ck,"throughput":tp,"transitDays":days}
 dump("trade_routes.json", [
- R("east-asia-europe","East Asia – Europe (Suez)",[[121.5,31],[114,19],[104,1.3],[80,6],[58,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,45],[4,51.9]],["ECS","SCS","IND","RED","MED","NATL"],["Malacca","Bab-el-Mandeb","Suez","Gibraltar"],120,32),
- R("gulf-asia","Persian Gulf – East Asia",[[51.5,26.5],[56.3,26.5],[60,22],[75,8],[95,6],[104,1.3],[114,19],[127,33]],["GULF","IND","SCS","ECS"],["Hormuz","Malacca"],100,22),
- R("gulf-europe","Persian Gulf – Europe",[[51.5,26.5],[56.3,26.5],[58,17],[45,12.5],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[4,51.9]],["GULF","IND","RED","MED","NATL"],["Hormuz","Bab-el-Mandeb","Suez","Gibraltar"],80,24),
+ R("east-asia-europe","East Asia – Europe (Suez)",[[122.5,31],[123,27],[119,22],[114,17],[108,10],[104,1.3],[97,5],[80,5.5],[58,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["ECS","SCS","IND","RED","MED","NATL"],["Malacca","Bab-el-Mandeb","Suez","Gibraltar"],120,32),
+ R("gulf-asia","Persian Gulf – East Asia",[[51.5,26.5],[56.3,26.5],[59,23],[70,15],[80,5.5],[97,5],[104,1.3],[108,10],[114,17],[119,20.5],[122,22],[126,29],[129,33]],["GULF","IND","SCS","ECS"],["Hormuz","Malacca"],100,22),
+ R("gulf-europe","Persian Gulf – Europe",[[51.5,26.5],[56.3,26.5],[59,23],[57,17],[51,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["GULF","IND","RED","MED","NATL"],["Hormuz","Bab-el-Mandeb","Suez","Gibraltar"],80,24),
  R("north-atlantic","North Atlantic",[[-74,40.5],[-50,45],[-25,50],[-5,50],[4,51.9]],["NATL"],["English Channel"],110,12),
  R("north-pacific","North Pacific",[[-122.4,37.8],[-150,45],[170,45],[140,35]],["NPAC","WPAC"],[],90,16),
- R("east-asia-australia","East Asia – Australia",[[121.5,31],[122,22],[120,10],[117,-5],[125,-12],[151,-34]],["ECS","SCS","WPAC"],["Taiwan Strait","Lombok"],50,14),
+ R("east-asia-australia","East Asia – Australia",[[122.5,31],[124,26],[122.5,20],[125,12],[119.5,4],[118.5,-3],[117,-8.5],[125,-14],[150,-24],[153,-30],[151.3,-34]],["ECS","SCS","WPAC"],["Taiwan Strait","Lombok"],50,14),
  R("black-sea","Black Sea – Mediterranean",[[30.7,46.5],[29,41.2],[26.4,40.2],[25,34]],["BLK","MED"],["Bosporus","Dardanelles"],30,4),
- R("baltic","Baltic – North Sea",[[24.7,59.4],[18,57],[12.6,55.7],[10,57.7],[4,51.9]],["BALT","NATL"],["Danish Straits"],40,5),
+ R("baltic","Baltic – North Sea",[[24.7,59.6],[19,57.5],[14.5,55.5],[12.7,55.9],[11.5,57.2],[10.7,58],[8,57.9],[6.5,55],[4,51.9]],["BALT","NATL"],["Danish Straits"],40,5),
  R("arctic","Northern Sea Route",[[33,69],[60,74],[100,77],[150,72],[-169,66]],["ARCT"],["Bering Strait"],15,20),
- R("cape-route","Cape of Good Hope",[[58,13],[40,-20],[18,-35],[0,0],[-10,30],[-5.6,36]],["IND","NATL"],["Cape of Good Hope"],60,40)])
+ R("cape-route","Cape of Good Hope",[[58,13],[52,5],[42,-12],[36,-25],[20,-36],[12,-20],[3,-2],[-10,5],[-18,15],[-18,28],[-10,34],[-5.6,36]],["IND","NATL"],["Cape of Good Hope"],60,40)])
 print("content written")
