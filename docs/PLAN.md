@@ -208,11 +208,32 @@ Higher postures cost money, fuel, personnel fatigue, airframe life and diplomati
 - **Strategic forces:** the deterrent is managed as posture, survivability and second-strike assurance. Nuclear use stays abstract: it's a catastrophic, campaign-ending escalation with no detailed targeting gameplay. Long-range conventional strike is fully playable.
 - **Foreign Affairs:** alliances, basing and overflight rights, intelligence sharing, arms sales and purchases, sanctions and embargoes, and coalition operations.
 
-## 14. Time model (decided: turn-based strategy, real-time conflict)
+## 14. Time model (decided: strategic turns wrap real-time theatre ops)
 
-- **Strategic layer is turn-based.** One turn is one week by default; the UI picker offers 2 weeks or a month. Orders queue during the turn: deployments, postures, programmes, production and ISR tasking. Ending the turn resolves budgets, industry, personnel, research and AI.
-- **Conflicts run in real time with pause.** When shooting starts, the clock goes live with speeds of pause, 1×, 5× and 30×. It covers sorties, fusion and engagements, using rule-based game mechanics with no physics. At the ceasefire, strategic turns resume.
-- Sortie generation and logistics are computed per day during a conflict, and summarised per turn in peacetime.
+- **Strategic turns** advance by 1 day, 1 week, 1 month, 3 months, 6 months or 1 year, chosen per turn. The strategic map is the turn view: the BMS-density theatre map, deployments, posture, programmes and production.
+- **Theatre Ops** is the real-time layer, at 1×, 2×, 5×, 10×, 30×, 50× and 100×. It plays like an RTS (Mission Commander / C:MO style): generate tasks and watch them execute. Battles interrupt and auto-pause.
+- Radar and air defence aren't separate screens. They're pop-down tabs (Status, Radar, Engagements, Orders) on the selected system in Theatre Ops.
+- Advancing a strategic turn auto-resolves operations: it generates movements, sorties and engagements and summarises them. A battle interrupts the advance and opens Theatre Ops.
+
+## 14b. Command, control and comms (defeat condition)
+
+- Command nodes (national command, joint ops, alternate sites, sector HQs, fleet HQ, base ops centres, fusion centres) form a graph linked by comms: fibre, microwave, satcom and HF radio, plus relay sites.
+- Links and nodes need maintenance (crews and parts). Enemies can strike nodes, cut links, jam radio paths and run cyber operations; so can you.
+- **Defeat:** if every command node is destroyed or disconnected from national command, the state can no longer fight and the game is over.
+
+## 14c. Tasking ("sorties" of every kind)
+
+Air sorties, naval actions (ship-days), missile battalion salvos, strikes, ISR, SAR and logistics all draw on daily availability pools. A single task board generates and tracks them, and each type has confidence gates where relevant.
+
+## 14d. The four designers (dense, Rule the Waves / Aurora style, each with a visualizer)
+
+- **Ships:** at least 25 vessel types, from carriers, amphibious ships and cruisers through destroyers, frigates, corvettes, patrol craft and mine warfare, submarines of every kind, auxiliaries, command and intelligence ships, down to uncrewed surface and underwater vessels. Presets cover current modern ship archetypes. The screen is a dense hull/systems form with weight and cost columns, a mounts table showing certified ordnance, and a side/top visualizer.
+- **Aircraft:** purpose, take-off type (CTOL/STOL/STOVL/catapult/ski-jump), carrier capability, wing type, engines, crew/autonomy, signature, avionics generation and hardpoints. It has game ratings, a top-view visualizer, pilot and maintainer needs, and certified ordnance. Presets are archetypes spanning the F-4 era to 5th generation (both Western and Eastern lineages).
+- **Ordnance:** deployment, mount, size, warhead, guidance, flight method, propulsion and profile. All are game categories that move ratings. A **certification matrix** shows which platforms can carry it, with integration time and cost.
+- **Bases:** drag-and-drop facilities on a grid over a satellite site: runways, hangars, fuel, munitions, radar, air defence, point defence, fusion node, command bunker, comms relay, repair depot, piers and decoys.
+- Visualizers appear in the design screens. The theatre only shows detail when zoomed in.
+
+Inspirations: Rule the Waves (designers), Falcon BMS Mission Commander (theatre density and ATO), Command: Modern Operations (real-time ops), Aurora 4X and spreadsheets (dense data).
 
 ## 15. Milestones
 
