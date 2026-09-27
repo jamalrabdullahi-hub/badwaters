@@ -67,7 +67,9 @@ public class BackboneTests
     {
         var planner = new RefitPlanner(C.Value.Catalog);
         var ok = planner.Plan(C.Value.Designs["ddg-1998"], C.Value.Designs["ddg-2031"], AllTech(10));
-        var bad = planner.Plan(C.Value.Designs["ddg-1998"], C.Value.Designs["ddg-1998-overreach"], AllTech(10));
+        var old = C.Value.Designs["ddg-1998"];
+        var overreach = old with { Id = "overreach", Components = old.Components.Select(c => c == "sn-radar-pesa" ? "sn-radar-aesa" : c == "cp-cms-basic" ? "cp-cms-integrated" : c).ToList() };
+        var bad = planner.Plan(old, overreach, AllTech(10));
         foreach (var i in bad.Issues) _out.WriteLine(i.Text);
         Assert.True(ok.Feasible);
         Assert.False(bad.Feasible);
