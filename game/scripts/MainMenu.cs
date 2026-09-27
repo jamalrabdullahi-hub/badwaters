@@ -60,6 +60,7 @@ public partial class MainMenu : Control
 
         col.AddChild(UiTheme.Text("BAD WATERS", 64, UiTheme.Accent));
         col.AddChild(UiTheme.Text("Naval, air and strategic command · 2D strategy", 18, UiTheme.Dim));
+        col.AddChild(UiTheme.Text("A game. Real system names are used for identification only; all trademarks belong to their owners. Performance is abstract game ratings.", 12, UiTheme.Dim, wrap: true));
 
         // start dates
         col.AddChild(UiTheme.Text("START DATE", 13, UiTheme.Dim));

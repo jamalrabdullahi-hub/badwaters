@@ -3,7 +3,7 @@
 ## Design intent (fixed, not negotiable)
 
 **This is a 2D strategy game for Steam, not a simulation of real life.**
-- **Fictional content:** all weapons, platforms, components and designs are fictional game assets with fictional names. The art is 2D.
+- **Real names, game stats:** real-world system names are used for identification (see `DISCLAIMER.md`), in the C:MO style. The art is 2D. Performance stays abstract 0–10 game ratings for relative feel; never real specifications.
 - **Game stats, not real data:** stats are abstract game ratings and tiers (for example range tier 1–10, a "hit rating", a cost in game credits), tuned for fun and balance. They are not derived from, calibrated to, or presented as real-world performance data.
 - **No physics simulation:** combat and movement are rules-based game mechanics (tiers, ratings, dice/probability tables), not physical or engineering models.
 - **Designers are gameplay:** "missile designer", "ship designer" and similar mean choosing and adjusting game components from a list to trade off game stats. They never do real engineering or design work.
@@ -26,6 +26,6 @@ When you add a new target type, site type or mission type, classify it in `Targe
 
 - C# / .NET 8 solution: `BadWaters.sln`. The engine-free game systems are in `src/BadWaters.Sim`, JSON loading in `src/BadWaters.Data`, and the Godot 4 .NET UI in `game/`.
 - Content is JSON in `data/core`; mods in `mods/` override by `id`. Keep content and names out of code.
-- Preset names use compact designations (for example `USF35A`) and live only in `data/core/presets.json`, so they can be renamed in one place.
+- Names (real systems) live only in JSON (`designs.json`, `presets.json`), so they can be renamed in one place. `DISCLAIMER.md` covers them.
 - Personnel career lengths (from the user) are in `data/core/personnel.json`: command 45, air 25, naval 12, intelligence 35, air defence 12, cyber 25.
 - The plan is in `docs/PLAN.md`. The TypeScript v0.1 prototype in `prototype-ts/` is reference only; don't port its real-world names or figure-calibrated formulas.

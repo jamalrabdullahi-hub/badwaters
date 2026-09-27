@@ -1,7 +1,7 @@
 [
  {
   "id": "ddg-1998",
-  "name": "Kestrel-class destroyer (1998)",
+  "name": "Arleigh Burke-class destroyer (Flight IIA)",
   "frame": "hull-destroyer-ad",
   "lineage": "kestrel",
   "components": [
@@ -30,7 +30,7 @@
  },
  {
   "id": "ddg-2031",
-  "name": "Kestrel-class destroyer (2031 refit)",
+  "name": "Arleigh Burke-class destroyer (Flight III)",
   "frame": "hull-destroyer-ad",
   "lineage": "kestrel",
   "components": [
@@ -61,7 +61,7 @@
  },
  {
   "id": "bomber-lo",
-  "name": "Night Heron stealth bomber",
+  "name": "B-2A Spirit",
   "frame": "af-flying-wing",
   "lineage": "night-heron",
   "components": [
@@ -84,7 +84,7 @@
  },
  {
   "id": "cm-cruise",
-  "name": "OL-21 land-attack cruise missile",
+  "name": "BGM-109 Tomahawk",
   "frame": "mb-large",
   "lineage": "ol-21",
   "components": [
@@ -102,7 +102,7 @@
  },
  {
   "id": "sam-interceptor",
-  "name": "OL-9 area-defence interceptor",
+  "name": "MIM-104C Patriot (PAC-2)",
   "frame": "mb-medium",
   "lineage": "ol-9",
   "components": [
@@ -119,7 +119,7 @@
  },
  {
   "id": "gs-radar",
-  "name": "Watchtower engagement radar (vehicle)",
+  "name": "AN/MPQ-53 Patriot radar set",
   "frame": "gc-radar-trailer",
   "lineage": "watchtower",
   "components": [
@@ -135,7 +135,7 @@
  },
  {
   "id": "gs-launcher",
-  "name": "Kaede launcher vehicle",
+  "name": "M901 Patriot launching station",
   "frame": "gc-truck-8x8",
   "lineage": "kaede",
   "components": [
@@ -151,7 +151,7 @@
  },
  {
   "id": "bm-tactical",
-  "name": "Tempest-7 tactical ballistic missile",
+  "name": "9M723 Iskander-M",
   "frame": "mb-heavy",
   "lineage": "tempest",
   "components": [
@@ -167,7 +167,7 @@
  },
  {
   "id": "bm-tactical-b",
-  "name": "Tempest-7B (manoeuvring, decoys)",
+  "name": "9M723 Iskander-M (with decoys)",
   "frame": "mb-heavy",
   "lineage": "tempest",
   "components": [
@@ -184,7 +184,7 @@
  },
  {
   "id": "sam-hit",
-  "name": "OL-12 hit-to-kill interceptor",
+  "name": "MIM-104F Patriot (PAC-3 MSE)",
   "frame": "mb-medium",
   "lineage": "ol-9",
   "components": [
