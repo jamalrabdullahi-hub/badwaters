@@ -112,7 +112,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 127.65,
-    "lat": 26.2
+    "lat": 26.2,
+    "type": "airbase"
    },
    {
     "id": "nyutabaru-ab",
@@ -120,7 +121,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 131.45,
-    "lat": 32.08
+    "lat": 32.08,
+    "type": "airbase"
    },
    {
     "id": "tsuiki-ab",
@@ -128,7 +130,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 131.04,
-    "lat": 33.68
+    "lat": 33.68,
+    "type": "airbase"
    },
    {
     "id": "kanoya-ab",
@@ -136,7 +139,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 130.84,
-    "lat": 31.37
+    "lat": 31.37,
+    "type": "airbase"
    },
    {
     "id": "sasebo-nb",
@@ -144,7 +148,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 129.72,
-    "lat": 33.16
+    "lat": 33.16,
+    "type": "navalbase"
    },
    {
     "id": "amami-gs",
@@ -152,7 +157,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 129.49,
-    "lat": 28.39
+    "lat": 28.39,
+    "type": "garrison"
    },
    {
     "id": "miyako-gs",
@@ -160,7 +166,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 125.3,
-    "lat": 24.78
+    "lat": 24.78,
+    "type": "garrison"
    },
    {
     "id": "ishigaki-gs",
@@ -168,7 +175,8 @@
     "side": "blue",
     "class": "military-base",
     "lon": 124.18,
-    "lat": 24.4
+    "lat": 24.4,
+    "type": "garrison"
    },
    {
     "id": "longtian-ab",
@@ -176,7 +184,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 119.66,
-    "lat": 25.68
+    "lat": 25.68,
+    "type": "airbase"
    },
    {
     "id": "shuimen-ab",
@@ -184,7 +193,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 120.08,
-    "lat": 26.99
+    "lat": 26.99,
+    "type": "airbase"
    },
    {
     "id": "luqiao-ab",
@@ -192,7 +202,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 121.43,
-    "lat": 28.56
+    "lat": 28.56,
+    "type": "airbase"
    },
    {
     "id": "jinjiang-ab",
@@ -200,7 +211,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 118.59,
-    "lat": 24.8
+    "lat": 24.8,
+    "type": "airbase"
    },
    {
     "id": "zhangzhou-ab",
@@ -208,7 +220,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 117.6,
-    "lat": 24.55
+    "lat": 24.55,
+    "type": "airbase"
    },
    {
     "id": "wuyishan-ab",
@@ -216,7 +229,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 118.0,
-    "lat": 27.7
+    "lat": 27.7,
+    "type": "airbase"
    },
    {
     "id": "ningbo-nb",
@@ -224,7 +238,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 121.85,
-    "lat": 29.95
+    "lat": 29.95,
+    "type": "navalbase"
    },
    {
     "id": "daishan-ab",
@@ -232,7 +247,8 @@
     "side": "red",
     "class": "military-base",
     "lon": 122.2,
-    "lat": 30.28
+    "lat": 30.28,
+    "type": "airbase"
    },
    {
     "id": "naha-city",
@@ -240,7 +256,8 @@
     "side": "blue",
     "class": "population-centre",
     "lon": 127.72,
-    "lat": 26.24
+    "lat": 26.24,
+    "type": ""
    },
    {
     "id": "kagoshima",
@@ -248,7 +265,8 @@
     "side": "blue",
     "class": "population-centre",
     "lon": 130.56,
-    "lat": 31.6
+    "lat": 31.6,
+    "type": ""
    },
    {
     "id": "fukuoka",
@@ -256,7 +274,8 @@
     "side": "blue",
     "class": "population-centre",
     "lon": 130.4,
-    "lat": 33.59
+    "lat": 33.59,
+    "type": ""
    },
    {
     "id": "nagasaki",
@@ -264,7 +283,8 @@
     "side": "blue",
     "class": "population-centre",
     "lon": 129.87,
-    "lat": 32.75
+    "lat": 32.75,
+    "type": ""
    },
    {
     "id": "shanghai",
@@ -272,7 +292,8 @@
     "side": "red",
     "class": "population-centre",
     "lon": 121.47,
-    "lat": 31.23
+    "lat": 31.23,
+    "type": ""
    },
    {
     "id": "fuzhou",
@@ -280,7 +301,8 @@
     "side": "red",
     "class": "population-centre",
     "lon": 119.3,
-    "lat": 26.08
+    "lat": 26.08,
+    "type": ""
    },
    {
     "id": "xiamen",
@@ -288,7 +310,8 @@
     "side": "red",
     "class": "population-centre",
     "lon": 118.09,
-    "lat": 24.48
+    "lat": 24.48,
+    "type": ""
    },
    {
     "id": "wenzhou",
@@ -296,7 +319,8 @@
     "side": "red",
     "class": "population-centre",
     "lon": 120.7,
-    "lat": 28.0
+    "lat": 28.0,
+    "type": ""
    },
    {
     "id": "ningbo",
@@ -304,7 +328,8 @@
     "side": "red",
     "class": "population-centre",
     "lon": 121.55,
-    "lat": 29.87
+    "lat": 29.87,
+    "type": ""
    }
   ],
   "batteries": [
@@ -317,7 +342,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pac3-nyutabaru-ab",
@@ -328,7 +354,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pac3-tsuiki-ab",
@@ -339,7 +366,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pac3-kanoya-ab",
@@ -350,7 +378,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pac3-sasebo-nb",
@@ -361,7 +390,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pac3-miyako-gs",
@@ -372,7 +402,8 @@
     "radar": "gs-radar",
     "launcher": "gs-launcher",
     "interceptor": "sam-hit",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "maya-0",
@@ -383,7 +414,8 @@
     "radar": "maya-ddg",
     "launcher": "maya-ddg",
     "interceptor": "sm-2",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    },
    {
     "id": "maya-1",
@@ -394,7 +426,8 @@
     "radar": "maya-ddg",
     "launcher": "maya-ddg",
     "interceptor": "sm-2",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    },
    {
     "id": "maya-2",
@@ -405,7 +438,8 @@
     "radar": "maya-ddg",
     "launcher": "maya-ddg",
     "interceptor": "sm-2",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    },
    {
     "id": "hq9-longtian-ab",
@@ -416,7 +450,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "hq9-shuimen-ab",
@@ -427,7 +462,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "hq9-luqiao-ab",
@@ -438,7 +474,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "hq9-jinjiang-ab",
@@ -449,7 +486,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "hq9-zhangzhou-ab",
@@ -460,7 +498,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "hq9-ningbo-nb",
@@ -471,7 +510,8 @@
     "radar": "hq-9-radar",
     "launcher": "hq-9-tel",
     "interceptor": "hq-9b",
-    "stock": 16
+    "stock": 16,
+    "platform": "ground"
    },
    {
     "id": "pla-ddg-0",
@@ -482,7 +522,8 @@
     "radar": "type-055",
     "launcher": "type-055",
     "interceptor": "hhq-9",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    },
    {
     "id": "pla-ddg-1",
@@ -493,7 +534,8 @@
     "radar": "type-052d",
     "launcher": "type-052d",
     "interceptor": "hhq-9",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    },
    {
     "id": "pla-ddg-2",
@@ -504,7 +546,8 @@
     "radar": "type-052d",
     "launcher": "type-052d",
     "interceptor": "hhq-9",
-    "stock": 24
+    "stock": 24,
+    "platform": "ship"
    }
   ],
   "launchers": [
@@ -561,190 +604,49 @@
     "lat": 28.33,
     "missile": "type-12",
     "stock": 12
+   },
+   {
+    "id": "maya-tlam",
+    "name": "JS Maya · strike cells",
+    "side": "blue",
+    "lon": 126.2,
+    "lat": 27.0,
+    "missile": "cm-cruise",
+    "stock": 8,
+    "platform": "ship"
+   },
+   {
+    "id": "haguro-tlam",
+    "name": "JS Haguro · strike cells",
+    "side": "blue",
+    "lon": 128.3,
+    "lat": 29.5,
+    "missile": "cm-cruise",
+    "stock": 8,
+    "platform": "ship"
+   },
+   {
+    "id": "nanchang-cj10",
+    "name": "Nanchang · strike cells",
+    "side": "red",
+    "lon": 123.2,
+    "lat": 28.5,
+    "missile": "cj-10",
+    "stock": 16,
+    "platform": "ship"
+   },
+   {
+    "id": "changsha-cj10",
+    "name": "Changsha · strike cells",
+    "side": "red",
+    "lon": 122.5,
+    "lat": 26.5,
+    "missile": "cj-10",
+    "stock": 8,
+    "platform": "ship"
    }
   ],
-  "script": [
-   {
-    "t": 31,
-    "launcher": "rf-wenzhou",
-    "target": "naha-ab",
-    "count": 2
-   },
-   {
-    "t": 34,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 50,
-    "launcher": "rf-ningde",
-    "target": "naha-ab",
-    "count": 2
-   },
-   {
-    "t": 103,
-    "launcher": "ssm-miyako",
-    "target": "longtian-ab",
-    "count": 2
-   },
-   {
-    "t": 109,
-    "launcher": "ssm-ishigaki",
-    "target": "longtian-ab",
-    "count": 2
-   },
-   {
-    "t": 150,
-    "launcher": "rf-wenzhou",
-    "target": "miyako-gs",
-    "count": 2
-   },
-   {
-    "t": 153,
-    "launcher": "rf-ningde",
-    "target": "miyako-gs",
-    "count": 2
-   },
-   {
-    "t": 153,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 240,
-    "launcher": "ssm-ishigaki",
-    "target": "shuimen-ab",
-    "count": 2
-   },
-   {
-    "t": 247,
-    "launcher": "ssm-miyako",
-    "target": "shuimen-ab",
-    "count": 2
-   },
-   {
-    "t": 300,
-    "launcher": "rf-ningde",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 302,
-    "launcher": "rf-wenzhou",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 317,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 434,
-    "launcher": "ssm-miyako",
-    "target": "luqiao-ab",
-    "count": 2
-   },
-   {
-    "t": 437,
-    "launcher": "ssm-ishigaki",
-    "target": "luqiao-ab",
-    "count": 2
-   },
-   {
-    "t": 452,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 456,
-    "launcher": "rf-wenzhou",
-    "target": "naha-ab",
-    "count": 2
-   },
-   {
-    "t": 458,
-    "launcher": "rf-ningde",
-    "target": "naha-ab",
-    "count": 2
-   },
-   {
-    "t": 606,
-    "launcher": "ssm-ishigaki",
-    "target": "jinjiang-ab",
-    "count": 2
-   },
-   {
-    "t": 607,
-    "launcher": "rf-ningde",
-    "target": "miyako-gs",
-    "count": 2
-   },
-   {
-    "t": 607,
-    "launcher": "rf-wenzhou",
-    "target": "miyako-gs",
-    "count": 2
-   },
-   {
-    "t": 618,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 618,
-    "launcher": "ssm-miyako",
-    "target": "jinjiang-ab",
-    "count": 2
-   },
-   {
-    "t": 757,
-    "launcher": "rf-ningde",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 763,
-    "launcher": "rf-putian",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 766,
-    "launcher": "rf-wenzhou",
-    "target": "ishigaki-gs",
-    "count": 2
-   },
-   {
-    "t": 788,
-    "launcher": "ssm-miyako",
-    "target": "ningbo-nb",
-    "count": 2
-   },
-   {
-    "t": 800,
-    "launcher": "ssm-ishigaki",
-    "target": "zhangzhou-ab",
-    "count": 2
-   },
-   {
-    "t": 900,
-    "launcher": "ssm-miyako",
-    "target": "daishan-ab",
-    "count": 2
-   },
-   {
-    "t": 917,
-    "launcher": "ssm-ishigaki",
-    "target": "ningbo-nb",
-    "count": 2
-   }
-  ],
+  "script": [],
   "units": [
    {
     "id": "blue-jpf15j-01",
@@ -752,8 +654,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 126.818,
-    "lat": 25.855,
+    "lon": 125.313,
+    "lat": 26.889,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -763,8 +665,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 126.145,
-    "lat": 26.045,
+    "lon": 126.696,
+    "lat": 26.144,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -774,8 +676,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 125.731,
-    "lat": 26.822,
+    "lon": 125.611,
+    "lat": 27.132,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -785,8 +687,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 125.504,
-    "lat": 26.208,
+    "lon": 125.973,
+    "lat": 25.748,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -796,8 +698,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 126.018,
-    "lat": 26.15,
+    "lon": 125.493,
+    "lat": 26.956,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -807,8 +709,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 125.829,
-    "lat": 25.67,
+    "lon": 126.507,
+    "lat": 26.891,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -818,8 +720,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 126.219,
-    "lat": 25.8,
+    "lon": 126.759,
+    "lat": 26.458,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -829,8 +731,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 127.145,
-    "lat": 25.726,
+    "lon": 127.246,
+    "lat": 26.206,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -840,8 +742,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 125.886,
-    "lat": 26.606,
+    "lon": 126.404,
+    "lat": 26.927,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -851,8 +753,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 127.071,
-    "lat": 26.179,
+    "lon": 126.537,
+    "lat": 26.979,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -862,8 +764,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 125.685,
-    "lat": 25.711,
+    "lon": 126.455,
+    "lat": 26.727,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -873,8 +775,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF15J",
-    "lon": 126.623,
-    "lat": 26.837,
+    "lon": 125.392,
+    "lat": 25.965,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -884,8 +786,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 130.57,
-    "lat": 31.169,
+    "lon": 129.179,
+    "lat": 29.928,
     "patrolKm": 60,
     "base": "nyutabaru-ab"
    },
@@ -895,8 +797,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 130.333,
-    "lat": 30.408,
+    "lon": 129.066,
+    "lat": 29.962,
     "patrolKm": 60,
     "base": "nyutabaru-ab"
    },
@@ -906,8 +808,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 129.507,
-    "lat": 31.135,
+    "lon": 129.156,
+    "lat": 30.817,
     "patrolKm": 60,
     "base": "nyutabaru-ab"
    },
@@ -917,8 +819,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 128.925,
-    "lat": 30.368,
+    "lon": 129.33,
+    "lat": 30.392,
     "patrolKm": 60,
     "base": "nyutabaru-ab"
    },
@@ -928,8 +830,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 127.204,
-    "lat": 26.794,
+    "lon": 126.651,
+    "lat": 26.376,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -939,8 +841,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 127.22,
-    "lat": 26.189,
+    "lon": 127.524,
+    "lat": 26.742,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -950,8 +852,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 127.162,
-    "lat": 26.633,
+    "lon": 127.131,
+    "lat": 26.284,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -961,8 +863,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 126.694,
-    "lat": 26.564,
+    "lon": 127.275,
+    "lat": 26.277,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -972,8 +874,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.124,
-    "lat": 27.208,
+    "lon": 127.255,
+    "lat": 27.27,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -983,8 +885,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.626,
-    "lat": 26.531,
+    "lon": 127.568,
+    "lat": 26.855,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -994,8 +896,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.189,
-    "lat": 27.058,
+    "lon": 127.622,
+    "lat": 27.129,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1005,8 +907,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 126.867,
-    "lat": 27.109,
+    "lon": 127.731,
+    "lat": 26.54,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1016,8 +918,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.766,
-    "lat": 26.705,
+    "lon": 126.839,
+    "lat": 26.623,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1027,8 +929,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 126.879,
-    "lat": 27.197,
+    "lon": 127.121,
+    "lat": 26.523,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1038,8 +940,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.481,
-    "lat": 27.009,
+    "lon": 127.931,
+    "lat": 27.161,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1049,8 +951,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.055,
-    "lat": 26.799,
+    "lon": 127.178,
+    "lat": 26.949,
     "patrolKm": 60,
     "base": "naha-ab"
    },
@@ -1060,8 +962,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPKC46A",
-    "lon": 128.031,
-    "lat": 26.969,
+    "lon": 127.737,
+    "lat": 27.099,
     "patrolKm": 40,
     "base": "naha-ab"
    },
@@ -1071,8 +973,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPKC46A",
-    "lon": 127.586,
-    "lat": 26.727,
+    "lon": 127.775,
+    "lat": 26.787,
     "patrolKm": 40,
     "base": "naha-ab"
    },
@@ -1082,8 +984,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
-    "lon": 128.235,
-    "lat": 29.094,
+    "lon": 126.74,
+    "lat": 29.147,
     "patrolKm": 90,
     "base": "kanoya-ab"
    },
@@ -1093,8 +995,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
-    "lon": 128.241,
-    "lat": 28.828,
+    "lon": 126.788,
+    "lat": 29.203,
     "patrolKm": 90,
     "base": "kanoya-ab"
    },
@@ -1104,8 +1006,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
-    "lon": 127.751,
-    "lat": 28.669,
+    "lon": 128.693,
+    "lat": 28.759,
     "patrolKm": 90,
     "base": "kanoya-ab"
    },
@@ -1115,8 +1017,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
-    "lon": 128.992,
-    "lat": 28.132,
+    "lon": 126.658,
+    "lat": 30.194,
     "patrolKm": 90,
     "base": "kanoya-ab"
    },
@@ -1126,8 +1028,8 @@
     "side": "blue",
     "kind": "aew",
     "preset": "JPE2D",
-    "lon": 126.992,
-    "lat": 27.546,
+    "lon": 127.011,
+    "lat": 26.907,
     "patrolKm": 50,
     "base": "naha-ab"
    },
@@ -1137,8 +1039,8 @@
     "side": "blue",
     "kind": "aew",
     "preset": "JPE2D",
-    "lon": 127.433,
-    "lat": 26.967,
+    "lon": 126.457,
+    "lat": 26.925,
     "patrolKm": 50,
     "base": "naha-ab"
    },
@@ -1148,8 +1050,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDG-KONGO",
-    "lon": 126.72,
-    "lat": 28.589,
+    "lon": 127.655,
+    "lat": 28.767,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1159,8 +1061,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDG-KONGO",
-    "lon": 127.593,
-    "lat": 28.116,
+    "lon": 127.244,
+    "lat": 27.602,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1170,8 +1072,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 126.83,
-    "lat": 27.739,
+    "lon": 126.316,
+    "lat": 28.753,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1181,8 +1083,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 126.003,
-    "lat": 27.902,
+    "lon": 126.67,
+    "lat": 28.704,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1192,8 +1094,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 127.662,
-    "lat": 28.146,
+    "lon": 127.466,
+    "lat": 26.862,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1203,8 +1105,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 125.675,
-    "lat": 28.539,
+    "lon": 127.13,
+    "lat": 28.149,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1214,8 +1116,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDH-183",
-    "lon": 128.3,
-    "lat": 28.086,
+    "lon": 128.215,
+    "lat": 27.925,
     "patrolKm": 12,
     "base": "sasebo-nb"
    },
@@ -1225,8 +1127,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.708,
-    "lat": 28.002,
+    "lon": 128.069,
+    "lat": 27.827,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1236,8 +1138,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.49,
-    "lat": 27.723,
+    "lon": 127.822,
+    "lat": 28.156,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1247,8 +1149,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.167,
-    "lat": 28.411,
+    "lon": 128.445,
+    "lat": 28.561,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1258,8 +1160,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.466,
-    "lat": 28.451,
+    "lon": 127.616,
+    "lat": 28.201,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1269,8 +1171,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.909,
-    "lat": 27.822,
+    "lon": 127.514,
+    "lat": 28.596,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1280,8 +1182,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.05,
-    "lat": 28.528,
+    "lon": 128.345,
+    "lat": 28.007,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1291,8 +1193,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 125.523,
-    "lat": 26.477,
+    "lon": 125.917,
+    "lat": 27.462,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1302,8 +1204,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 125.122,
-    "lat": 26.388,
+    "lon": 124.459,
+    "lat": 27.83,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1313,8 +1215,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 126.86,
-    "lat": 28.214,
+    "lon": 125.618,
+    "lat": 27.869,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1324,8 +1226,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 126.755,
-    "lat": 27.437,
+    "lon": 125.591,
+    "lat": 26.001,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1335,8 +1237,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.982,
-    "lat": 24.903,
+    "lon": 120.719,
+    "lat": 24.785,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1346,8 +1248,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.781,
-    "lat": 26.021,
+    "lon": 121.687,
+    "lat": 25.885,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1357,8 +1259,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.491,
-    "lat": 25.066,
+    "lon": 121.531,
+    "lat": 25.154,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1368,8 +1270,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.585,
-    "lat": 25.486,
+    "lon": 120.293,
+    "lat": 25.884,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1379,8 +1281,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.326,
-    "lat": 25.697,
+    "lon": 121.715,
+    "lat": 24.87,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1390,8 +1292,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.506,
-    "lat": 26.012,
+    "lon": 120.978,
+    "lat": 24.849,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1401,8 +1303,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.052,
-    "lat": 24.921,
+    "lon": 121.417,
+    "lat": 25.74,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1412,8 +1314,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.256,
-    "lat": 25.972,
+    "lon": 120.405,
+    "lat": 25.368,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1423,8 +1325,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.264,
-    "lat": 26.935,
+    "lon": 121.88,
+    "lat": 26.599,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1434,8 +1336,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.971,
-    "lat": 27.494,
+    "lon": 122.396,
+    "lat": 26.802,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1445,8 +1347,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 122.486,
-    "lat": 27.227,
+    "lon": 121.339,
+    "lat": 26.95,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1456,8 +1358,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 122.104,
-    "lat": 27.173,
+    "lon": 122.168,
+    "lat": 26.517,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1467,8 +1369,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.638,
-    "lat": 27.12,
+    "lon": 121.499,
+    "lat": 27.534,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1478,8 +1380,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.597,
-    "lat": 27.412,
+    "lon": 122.04,
+    "lat": 26.821,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1489,8 +1391,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.722,
-    "lat": 26.577,
+    "lon": 121.828,
+    "lat": 26.415,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1500,8 +1402,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.102,
-    "lat": 26.287,
+    "lon": 121.36,
+    "lat": 26.693,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1511,8 +1413,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 123.097,
-    "lat": 28.127,
+    "lon": 123.159,
+    "lat": 27.611,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1522,8 +1424,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.113,
-    "lat": 28.299,
+    "lon": 122.496,
+    "lat": 27.382,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1533,8 +1435,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.206,
-    "lat": 27.377,
+    "lon": 123.236,
+    "lat": 27.61,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1544,8 +1446,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.157,
-    "lat": 27.756,
+    "lon": 123.73,
+    "lat": 28.518,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1555,8 +1457,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 123.025,
-    "lat": 27.681,
+    "lon": 122.228,
+    "lat": 27.623,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1566,8 +1468,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.974,
-    "lat": 28.056,
+    "lon": 123.304,
+    "lat": 27.589,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1577,8 +1479,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.713,
-    "lat": 24.828,
+    "lon": 119.885,
+    "lat": 24.888,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1588,8 +1490,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.507,
-    "lat": 24.112,
+    "lon": 120.499,
+    "lat": 24.369,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1599,8 +1501,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.362,
-    "lat": 24.296,
+    "lon": 120.798,
+    "lat": 24.744,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1610,8 +1512,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 119.832,
-    "lat": 24.578,
+    "lon": 119.967,
+    "lat": 23.949,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1621,8 +1523,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.196,
-    "lat": 24.3,
+    "lon": 120.303,
+    "lat": 24.314,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1632,8 +1534,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.909,
-    "lat": 23.901,
+    "lon": 120.354,
+    "lat": 24.657,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1643,8 +1545,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.615,
-    "lat": 24.564,
+    "lon": 120.643,
+    "lat": 24.942,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1654,8 +1556,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 119.785,
-    "lat": 24.656,
+    "lon": 119.838,
+    "lat": 24.291,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1665,8 +1567,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 122.481,
-    "lat": 28.5,
+    "lon": 121.743,
+    "lat": 29.463,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1676,8 +1578,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.507,
-    "lat": 29.046,
+    "lon": 121.598,
+    "lat": 28.603,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1687,8 +1589,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.424,
-    "lat": 28.595,
+    "lon": 121.918,
+    "lat": 28.9,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1698,8 +1600,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.94,
-    "lat": 29.479,
+    "lon": 121.646,
+    "lat": 28.68,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1709,8 +1611,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.321,
-    "lat": 29.394,
+    "lon": 122.677,
+    "lat": 28.927,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1720,8 +1622,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 122.57,
-    "lat": 28.485,
+    "lon": 122.578,
+    "lat": 29.064,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1731,8 +1633,8 @@
     "side": "red",
     "kind": "aew",
     "preset": "CNKJ500",
-    "lon": 121.452,
-    "lat": 27.632,
+    "lon": 120.851,
+    "lat": 27.999,
     "patrolKm": 50,
     "base": "shuimen-ab"
    },
@@ -1742,8 +1644,8 @@
     "side": "red",
     "kind": "aew",
     "preset": "CNKJ500",
-    "lon": 120.815,
-    "lat": 27.275,
+    "lon": 121.636,
+    "lat": 27.975,
     "patrolKm": 50,
     "base": "shuimen-ab"
    },
@@ -1753,8 +1655,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNY20U",
-    "lon": 119.152,
-    "lat": 27.373,
+    "lon": 119.256,
+    "lat": 27.667,
     "patrolKm": 40,
     "base": "wuyishan-ab"
    },
@@ -1764,8 +1666,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNY20U",
-    "lon": 118.944,
-    "lat": 27.491,
+    "lon": 118.8,
+    "lat": 27.493,
     "patrolKm": 40,
     "base": "wuyishan-ab"
    },
@@ -1775,8 +1677,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNCV-001",
-    "lon": 124.346,
-    "lat": 29.129,
+    "lon": 124.085,
+    "lat": 28.968,
     "patrolKm": 12,
     "base": "ningbo-nb"
    },
@@ -1786,8 +1688,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 123.998,
-    "lat": 28.722,
+    "lon": 123.87,
+    "lat": 29.084,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1797,8 +1699,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.269,
-    "lat": 29.609,
+    "lon": 124.982,
+    "lat": 28.975,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1808,8 +1710,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.742,
-    "lat": 28.994,
+    "lon": 124.741,
+    "lat": 29.157,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1819,8 +1721,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.636,
-    "lat": 29.421,
+    "lon": 124.308,
+    "lat": 29.639,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1830,8 +1732,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.74,
-    "lat": 29.355,
+    "lon": 124.995,
+    "lat": 29.254,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1841,8 +1743,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.384,
-    "lat": 28.902,
+    "lon": 124.662,
+    "lat": 28.869,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1852,8 +1754,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.061,
-    "lat": 28.776,
+    "lon": 124.156,
+    "lat": 29.65,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1863,8 +1765,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.683,
-    "lat": 28.779,
+    "lon": 124.495,
+    "lat": 29.241,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1874,8 +1776,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 122.553,
-    "lat": 26.436,
+    "lon": 123.595,
+    "lat": 26.45,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1885,8 +1787,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 122.944,
-    "lat": 28.105,
+    "lon": 123.202,
+    "lat": 27.305,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1896,8 +1798,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 123.075,
-    "lat": 26.449,
+    "lon": 123.847,
+    "lat": 26.642,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1907,8 +1809,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 123.019,
-    "lat": 27.975,
+    "lon": 124.106,
+    "lat": 26.494,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1918,8 +1820,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNDDG-052D",
-    "lon": 123.11,
-    "lat": 27.647,
+    "lon": 123.297,
+    "lat": 28.322,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1929,8 +1831,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNDDG-052D",
-    "lon": 124.379,
-    "lat": 28.077,
+    "lon": 124.08,
+    "lat": 27.861,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1940,8 +1842,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 125.225,
-    "lat": 26.567,
+    "lon": 122.76,
+    "lat": 27.337,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1951,8 +1853,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 124.137,
-    "lat": 25.295,
+    "lon": 123.139,
+    "lat": 26.627,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1962,8 +1864,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 122.646,
-    "lat": 26.778,
+    "lon": 124.258,
+    "lat": 26.206,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1973,8 +1875,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 124.096,
-    "lat": 25.959,
+    "lon": 124.151,
+    "lat": 26.455,
     "patrolKm": 10,
     "base": "ningbo-nb"
    }
@@ -2188,6 +2090,324 @@
       "formation": "EchelonRight"
      }
     ]
+   },
+   {
+    "side": "blue",
+    "name": "Maritime patrol",
+    "stationLon": 125.8,
+    "stationLat": 27.6,
+    "start": 0,
+    "duration": 9000,
+    "flights": [
+     {
+      "preset": "JPP1",
+      "count": 2,
+      "mission": "Recon",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Recon SHUIMEN",
+    "target": "shuimen-ab",
+    "tot": 4500,
+    "ipKm": 60,
+    "flights": [
+     {
+      "preset": "JPF15J",
+      "count": 2,
+      "mission": "Recon",
+      "formation": "LineAbreast"
+     },
+     {
+      "preset": "JPKC46A",
+      "count": 1,
+      "mission": "Tanker",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Recon NAHA",
+    "target": "naha-ab",
+    "tot": 3900,
+    "ipKm": 60,
+    "flights": [
+     {
+      "preset": "CNJ16",
+      "count": 2,
+      "mission": "Recon",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 380
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "miyako-gs",
+    "count": 2,
+    "tot": 783
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "naha-ab",
+    "count": 2,
+    "tot": 1200
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 1643
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "miyako-gs",
+    "count": 2,
+    "tot": 2048
+   },
+   {
+    "side": "red",
+    "launcher": "rf-ningde",
+    "target": "naha-ab",
+    "count": 2,
+    "tot": 2467
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 367
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 784
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 1223
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 1623
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 2061
+   },
+   {
+    "side": "red",
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 2483
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 388
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "miyako-gs",
+    "count": 2,
+    "tot": 797
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "naha-ab",
+    "count": 2,
+    "tot": 1202
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "ishigaki-gs",
+    "count": 2,
+    "tot": 1638
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "miyako-gs",
+    "count": 2,
+    "tot": 2053
+   },
+   {
+    "side": "red",
+    "launcher": "rf-wenzhou",
+    "target": "naha-ab",
+    "count": 2,
+    "tot": 2461
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "longtian-ab",
+    "count": 2,
+    "tot": 1300
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "shuimen-ab",
+    "count": 2,
+    "tot": 1722
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "luqiao-ab",
+    "count": 2,
+    "tot": 2146
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "jinjiang-ab",
+    "count": 2,
+    "tot": 2567
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "ningbo-nb",
+    "count": 2,
+    "tot": 2996
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-ishigaki",
+    "target": "zhangzhou-ab",
+    "count": 2,
+    "tot": 3419
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "luqiao-ab",
+    "count": 2,
+    "tot": 1300
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "longtian-ab",
+    "count": 2,
+    "tot": 1737
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "shuimen-ab",
+    "count": 2,
+    "tot": 2146
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "ningbo-nb",
+    "count": 2,
+    "tot": 2582
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "jinjiang-ab",
+    "count": 2,
+    "tot": 3000
+   },
+   {
+    "side": "blue",
+    "launcher": "ssm-miyako",
+    "target": "daishan-ab",
+    "count": 2,
+    "tot": 3422
+   },
+   {
+    "side": "blue",
+    "launcher": "maya-tlam",
+    "target": "luqiao-ab",
+    "count": 4,
+    "tot": 1317
+   },
+   {
+    "side": "blue",
+    "launcher": "maya-tlam",
+    "target": "daishan-ab",
+    "count": 4,
+    "tot": 1733
+   },
+   {
+    "side": "blue",
+    "launcher": "haguro-tlam",
+    "target": "daishan-ab",
+    "count": 4,
+    "tot": 1307
+   },
+   {
+    "side": "blue",
+    "launcher": "haguro-tlam",
+    "target": "ningbo-nb",
+    "count": 4,
+    "tot": 1734
+   },
+   {
+    "side": "red",
+    "launcher": "nanchang-cj10",
+    "target": "miyako-gs",
+    "count": 4,
+    "tot": 695
+   },
+   {
+    "side": "red",
+    "launcher": "nanchang-cj10",
+    "target": "ishigaki-gs",
+    "count": 4,
+    "tot": 788
+   },
+   {
+    "side": "red",
+    "launcher": "changsha-cj10",
+    "target": "ishigaki-gs",
+    "count": 4,
+    "tot": 468
+   },
+   {
+    "side": "red",
+    "launcher": "changsha-cj10",
+    "target": "miyako-gs",
+    "count": 4,
+    "tot": 807
    }
   ]
  }

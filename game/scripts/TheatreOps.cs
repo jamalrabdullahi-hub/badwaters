@@ -18,6 +18,12 @@ public partial class TheatreOps : Control
     public int Speed { get; private set; } = 10;
     public int? SelectedTrack;
     public TheatreLayer Layer { get; } = new();
+    /// <summary>The side you are giving orders for (the AI keeps running unless that side is set to "You").</summary>
+    public string CommandSide = "blue";
+    /// <summary>Whose picture the map shows: "blue", "red" (fog of war) or "all" (umpire view).</summary>
+    public string ViewSide = "blue";
+    private OptionButton _aim = null!;
+    private readonly List<string> _aimIds = new();
 
     private string _missile = "", _interceptor = "", _radar = "";
     private Label _clock = null!, _fireResult = null!, _oob = null!, _detail = null!, _title = null!, _blueName = null!, _redName = null!;
@@ -28,6 +34,7 @@ public partial class TheatreOps : Control
     private Control _firePanel = null!;
     private Button _blueAi = null!, _bluePlayer = null!, _redAi = null!, _redPlayer = null!;
     private double _uiTimer;
+    private OptionButton _cmd = null!, _view = null!;
     private int _logSeen = -1;
 
     /// <summary>The single-battery trial gets design pickers; big scenarios use their own order of battle.</summary>
@@ -67,6 +74,14 @@ public partial class TheatreOps : Control
         var reset = new Button { Text = "Reset" };
         reset.Pressed += () => Reset();
         th.AddChild(reset);
+        th.AddChild(UiTheme.Text("  Command", 13, UiTheme.Dim));
+        _cmd = new OptionButton();
+        _cmd.ItemSelected += i => { CommandSide = i == 0 ? "blue" : "red"; FillLaunchers(); FillPlanner(); UpdateUi(); };
+        th.AddChild(_cmd);
+        th.AddChild(UiTheme.Text("View", 13, UiTheme.Dim));
+        _view = new OptionButton();
+        _view.ItemSelected += i => { ViewSide = i switch { 0 => "blue", 1 => "red", _ => "all" }; UpdateUi(); };
+        th.AddChild(_view);
 
         // left: order of battle (and design pickers for the trial)
         var left = Panel(new Vector2(10, 64), 350);
@@ -97,19 +112,22 @@ public partial class TheatreOps : Control
         fire.Pressed += () =>
         {
             if (_launcher.Selected < 0 || _target.Selected < 0) return;
-            var r = Trial.Launch(_launcherIds[_launcher.Selected], _targetIds[_target.Selected], (int)_count.Value);
+            var r = Trial.Launch(_launcherIds[_launcher.Selected], _targetIds[_target.Selected], (int)_count.Value, _aim.Selected > 0 ? _aimIds[_aim.Selected] : "");
             _fireResult.Text = r.Message;
             _fireResult.AddThemeColorOverride("font_color", r.Ok ? UiTheme.Good : UiTheme.Bad);
             FillLaunchers();
         };
+        _target.ItemSelected += _ => FillAim();
         rh.AddChild(_target); rh.AddChild(_count); rh.AddChild(fire);
         rv.AddChild(rh);
+        _aim = new OptionButton { ClipText = true };
+        rv.AddChild(_aim);
         _fireResult = UiTheme.Text("", 12, UiTheme.Dim, wrap: true);
         _fireResult.CustomMinimumSize = new Vector2(330, 0);
         rv.AddChild(_fireResult);
 
         // right: tracks, selected-track detail, kill-chance breakdown (scrolls, never covers the whole map)
-        var right = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, AnchorBottom = 1, OffsetLeft = -450, OffsetRight = -10, OffsetTop = 64, OffsetBottom = -10 };
+        var right = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, AnchorBottom = 1, OffsetLeft = -520, OffsetRight = -10, OffsetTop = 64, OffsetBottom = -10, ClipContents = true, GrowHorizontal = GrowDirection.Begin };
         AddChild(right);
         var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
         right.AddChild(scroll);
@@ -117,16 +135,20 @@ public partial class TheatreOps : Control
         scroll.AddChild(outer);
         var tabs = new HBoxContainer();
         var tg = new ButtonGroup();
-        var tMis = new Button { Text = "Missiles & AD", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") != "air", SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        var tMis = new Button { Text = "Missiles & AD", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") is not ("air" or "bases"), SizeFlagsHorizontal = SizeFlags.ExpandFill };
         var tAir = new Button { Text = "Air tasking", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") == "air", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        tabs.AddChild(tMis); tabs.AddChild(tAir);
+        var tBase = new Button { Text = "Bases & ISR", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") == "bases", SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        tabs.AddChild(tMis); tabs.AddChild(tAir); tabs.AddChild(tBase);
         outer.AddChild(tabs);
         var rsv = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tMis.ButtonPressed };
         outer.AddChild(rsv);
         _airView = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tAir.ButtonPressed };
         outer.AddChild(_airView);
-        tMis.Pressed += () => { rsv.Visible = true; _airView.Visible = false; };
-        tAir.Pressed += () => { rsv.Visible = false; _airView.Visible = true; UpdateAir(true); };
+        _basesView = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tBase.ButtonPressed };
+        outer.AddChild(_basesView);
+        tMis.Pressed += () => { rsv.Visible = true; _airView.Visible = false; _basesView.Visible = false; };
+        tAir.Pressed += () => { rsv.Visible = false; _airView.Visible = true; _basesView.Visible = false; UpdateAir(true); };
+        tBase.Pressed += () => { rsv.Visible = false; _airView.Visible = false; _basesView.Visible = true; UpdateBases(); };
         BuildAirView();
         rsv.AddChild(UiTheme.Text("TRACKS", 13, UiTheme.Accent));
         _tracks = new VBoxContainer();
@@ -139,8 +161,10 @@ public partial class TheatreOps : Control
         _terms = new VBoxContainer();
         rsv.AddChild(_terms);
 
-        AddChild(new MapLabels { Layer = Layer });
-        var bottom = new PanelContainer { AnchorTop = 1, AnchorBottom = 1, OffsetLeft = 370, OffsetRight = 1040, OffsetTop = -178, OffsetBottom = -10 };
+        var labels = new MapLabels { Layer = Layer };
+        AddChild(labels);
+        MoveChild(labels, 0); // under every panel
+        var bottom = new PanelContainer { AnchorTop = 1, AnchorBottom = 1, OffsetLeft = 370, OffsetRight = 940, OffsetTop = -178, OffsetBottom = -10 };
         _log = new VBoxContainer();
         bottom.AddChild(_log);
         AddChild(bottom);
@@ -157,8 +181,11 @@ public partial class TheatreOps : Control
         _missile = DevScreenshot.Arg("missile") ?? Scenario.Launchers.FirstOrDefault()?.Missile ?? "";
         _interceptor = DevScreenshot.Arg("interceptor") ?? Scenario.Batteries.FirstOrDefault()?.Interceptor ?? "";
         _radar = Scenario.Batteries.FirstOrDefault()?.Radar ?? "";
-        _title.Text = $"THEATRE OPS · {Scenario.Name.ToUpperInvariant()}";
+        _title.Text = "THEATRE OPS";
         _blueName.Text = $"  {SideName("blue")}";
+        _cmd.Clear(); _cmd.AddItem(SideName("blue")); _cmd.AddItem(SideName("red")); _cmd.Select(CommandSide == "blue" ? 0 : 1);
+        _view.Clear(); _view.AddItem(SideName("blue")); _view.AddItem(SideName("red")); _view.AddItem("All (umpire)");
+        _view.Select(ViewSide switch { "blue" => 0, "red" => 1, _ => 2 });
         _redName.Text = $"  {SideName("red")}";
         _pickBox.Visible = IsTrial;
         Trial = null!;
@@ -196,10 +223,10 @@ public partial class TheatreOps : Control
     private void FillLaunchers()
     {
         _launcher.Clear(); _launcherIds.Clear();
-        foreach (var l in Trial.Launchers.Where(l => Trial.Control.GetValueOrDefault(l.Def.Side) == SideControl.Player))
+        foreach (var l in Trial.Launchers.Where(l => l.Def.Side == CommandSide))
         {
             _launcherIds.Add(l.Def.Id);
-            _launcher.AddItem($"{SideName(l.Def.Side)} · {l.Def.Name} · {l.Missile.Name} ×{l.Stock}");
+            _launcher.AddItem($"{(l.IsShip ? "⚓ " : "")}{l.Def.Name} · {l.Missile.Name} ×{l.Stock}");
         }
         _firePanel.Visible = _launcherIds.Count > 0;
         if (_launcherIds.Count > 0) { _launcher.Select(0); FillTargets(); }
@@ -214,6 +241,22 @@ public partial class TheatreOps : Control
             _targetIds.Add(s.Id);
             var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, s.Lon, s.Lat);
             _target.AddItem(!TargetPolicy.IsLegitimate(s.Class) ? $"{s.Name} (protected)" : d > l.ReachKm ? $"{s.Name} (out of reach)" : $"{s.Name} · {d:0} km");
+        }
+        FillAim();
+    }
+
+    /// <summary>Aimpoints of the chosen target base, labelled with what your own picture believes.</summary>
+    private void FillAim()
+    {
+        _aim.Clear(); _aimIds.Clear();
+        _aim.AddItem("Aimpoint: doctrine (auto)"); _aimIds.Add("");
+        if (_target.Selected < 0 || !Trial.Bases.TryGetValue(_targetIds[_target.Selected], out var b)) return;
+        var pic = Trial.Intel?.Pictures[CommandSide];
+        foreach (var c in b.Components.Values)
+        {
+            _aimIds.Add(c.Def.Id);
+            var bel = pic?.Belief(b.Site.Id, c.Def.Id);
+            _aim.AddItem($"{c.Def.Name} · hardness {c.Def.Hardness:0}" + (bel != null ? $" · est. {bel.Integrity:0}% ({bel.Source})" : ""));
         }
     }
 
@@ -258,8 +301,9 @@ public partial class TheatreOps : Control
             Launchers = Scenario.Launchers.Select(l => l with { Missile = _missile }).ToList(),
         };
         var keep = Trial?.Control.ToDictionary(k => k.Key, k => k.Value);
-        Trial = new InterceptTrial(sc, Session.Profile, seed);
+        Trial = new InterceptTrial(sc, Session.Profile, seed, Session.Content.BaseTypes);
         if (keep != null) foreach (var (k, v) in keep) Trial.Control[k] = v;
+        Trial.Intel = new IntelService(Trial, Session.Content.PresetInfo, seed);
         Trial.Air = new AirTasking(Trial, Session.Content.PresetInfo, seed);
         SelectedFlight = null; Preview.Clear();
         SelectedTrack = null;
@@ -298,11 +342,21 @@ public partial class TheatreOps : Control
                $"  intercepted {stopped} · impacts taken {taken}\n";
     }
 
+    private string FoggedSummary(string enemy)
+    {
+        var pic = Trial.Intel?.Pictures[ViewSide];
+        if (pic == null) return "";
+        var c = pic.Contacts.Values.Where(x => Trial.Time - x.LastSeen < IntelRules.StaleAfter).GroupBy(x => x.Kind).ToDictionary(g => g.Key, g => g.Count());
+        return $"{SideName(enemy)} (your picture) · {Scenario.Sites.Count(s => s.Side == enemy && TargetPolicy.IsLegitimate(s.Class))} known bases\n" +
+               $"  current contacts: air {c.GetValueOrDefault("air")} · surface {c.GetValueOrDefault("ship")} · subs {c.GetValueOrDefault("sub")} · launchers {c.GetValueOrDefault("launcher")}\n" +
+               $"  next satellite pass T+{AirTasking.Clock(pic.NextSatellite)}\n";
+    }
+
     public void UpdateUi()
     {
         var t = TimeSpan.FromSeconds(Trial.Time);
         _clock.Text = $"T+{(int)t.TotalMinutes:00}:{t.Seconds:00}";
-        var text = SideSummary("blue") + SideSummary("red");
+        var text = ViewSide == "all" ? SideSummary("blue") + SideSummary("red") : SideSummary(ViewSide) + FoggedSummary(ViewSide == "blue" ? "red" : "blue");
         if (IsTrial)
         {
             var b = Trial.Batteries[0]; var l = Trial.Launchers[0];
@@ -314,8 +368,9 @@ public partial class TheatreOps : Control
         _oob.Text = text + $"Most hit: {(Trial.Hits.Count == 0 ? "none" : string.Join(", ", hits))}";
 
         if (_airView.Visible) UpdateAir(false);
+        if (_basesView.Visible) UpdateBases();
         Clear(_tracks);
-        var shown = Trial.Tracks.Where(x => x.Launched <= Trial.Time)
+        var shown = Trial.Tracks.Where(x => x.Launched <= Trial.Time && (ViewSide == "all" || x.Side == ViewSide || x.Detected))
             .OrderByDescending(x => x.State == TrackState.Flying).ThenByDescending(x => x.EndedAt).ThenBy(x => x.Id).Take(14).ToList();
         foreach (var tr in shown)
         {
@@ -331,7 +386,7 @@ public partial class TheatreOps : Control
             sel.Pressed += () => { SelectedTrack = id; UpdateUi(); };
             h.AddChild(sel);
             var defender = Enemy(tr.Side);
-            if (Trial.Control.GetValueOrDefault(defender) == SideControl.Player && tr.State == TrackState.Flying)
+            if (defender == CommandSide && tr.State == TrackState.Flying)
             {
                 var best = tr.Detected ? Trial.BestBattery(defender, tr) : null;
                 var e = new Button { Text = "Engage ×2", Disabled = best == null, TooltipText = best == null ? "No battery has a firing solution yet" : $"Fire from {best.Def.Name}" };
@@ -412,6 +467,12 @@ public partial class TheatreLayer : Node2D
     public readonly List<(Vector2 At, string Text, Color Color)> Labels = new();
     public static readonly Color Blue = new("7fe3ff"), Red = new("ff4d5a"), Green = new("5cf2b0");
     private static Color SideColor(string side) => side == "blue" ? Blue : Red;
+    /// <summary>True when this side's things are enemy to the viewer and must come from the viewer's picture.</summary>
+    private bool Fogged(string side) => Ops.ViewSide != "all" && side != Ops.ViewSide;
+    private Picture? Pic => Ops.ViewSide == "all" ? null : Ops.Trial.Intel?.Pictures[Ops.ViewSide];
+    /// <summary>The viewer's contact for a key, or null if the viewer doesn't hold it.</summary>
+    private Contact? Seen(string key) => Pic != null && Pic.Contacts.TryGetValue(key, out var c) ? c : null;
+    private float Fade(Contact c) => (float)Math.Clamp(1 - (Ops.Trial.Time - c.LastSeen) / IntelRules.DropAfter, 0.25, 1);
 
     private static Vector2 P(double lon, double lat) => Session.Project(lon, lat);
     private static float PxPerKm(double lat) => (float)(Session.PxPerDeg / (111.0 * Math.Cos(lat * Math.PI / 180)));
@@ -438,6 +499,7 @@ public partial class TheatreLayer : Node2D
 
         foreach (var b in tr.Batteries)
         {
+            if (Fogged(b.Def.Side) && b.IsShip && Seen(b.Def.Id) == null) continue; // enemy ships only when detected
             var p = P(b.Def.Lon, b.Def.Lat);
             var k = PxPerKm(b.Def.Lat);
             var c = SideColor(b.Def.Side);
@@ -451,6 +513,7 @@ public partial class TheatreLayer : Node2D
         }
         foreach (var l in tr.Launchers)
         {
+            if (Fogged(l.Def.Side) && Seen(l.Def.Id) == null) continue; // mobile launchers hide until seen
             var p = P(l.Def.Lon, l.Def.Lat);
             var c = SideColor(l.Def.Side);
             DrawColoredPolygon(new[] { p + new Vector2(0, -8) / zoom, p + new Vector2(8, 0) / zoom, p + new Vector2(0, 8) / zoom, p + new Vector2(-8, 0) / zoom }, c);
@@ -460,8 +523,16 @@ public partial class TheatreLayer : Node2D
         foreach (var u in tr.Scenario.Units.Where(u => u.Kind is not ("air" or "aew")))
         {
             var (lon, lat) = tr.UnitPos(u);
-            var p = P(lon, lat);
             var c = SideColor(u.Side);
+            if (Fogged(u.Side))
+            {
+                var seen = Seen(u.Id);
+                if (seen == null) continue;
+                (lon, lat) = (seen.Lon, seen.Lat); // where we last saw it, not where it is
+                c = new Color(c, Fade(seen));
+                if (zoom > 2.5f || seen.IdLevel == 2) Label(P(lon, lat), seen.Label + (tr.Time - seen.LastSeen > IntelRules.StaleAfter ? $" · {(tr.Time - seen.LastSeen) / 60:0} min old" : ""), c);
+            }
+            var p = P(lon, lat);
             switch (u.Kind)
             {
                 case "air":
@@ -488,11 +559,24 @@ public partial class TheatreLayer : Node2D
             var c = prot ? Green : SideColor(s.Side);
             if (prot) { DrawArc(p, 8 / zoom, 0, Mathf.Tau, 24, c, w); DrawCircle(p, 2.5f / zoom, c); }
             else DrawRect(new Rect2(p - new Vector2(6, 6) / zoom, new Vector2(12, 12) / zoom), c, false, w * 1.4f);
-            var ready = tr.Air?.Idle(s.Side).Count(u => u.Base == s.Id) ?? 0;
-            if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (ready > 0 ? $" · {ready} ready" : "") + (tr.Hits.TryGetValue(s.Id, out var h) ? $" · hit ×{h}" : ""), c);
+            var status = "";
+            if (tr.Bases.TryGetValue(s.Id, out var bs))
+            {
+                if (Fogged(s.Side) && Pic != null)
+                {
+                    var down = bs.Components.Keys.Select(k => (k, b: Pic.Belief(s.Id, k))).Where(x => x.b.Integrity < 60).Select(x => $"{bs.Components[x.k].Def.Name} ~{x.b.Integrity:0}%");
+                    status = string.Join(", ", down);
+                }
+                else
+                {
+                    var ready = tr.Air?.Idle(s.Side).Count(u => u.Base == s.Id) ?? 0;
+                    status = (ready > 0 ? $"{ready} ready" : "") + (bs.Type.Components.Any(x => x.Effect == "sorties") && !bs.RunwayOpen ? " · RUNWAY CLOSED" : "") + (bs.Type.Components.Any(x => x.Effect == "launch-pads") && !bs.PadsOk ? " · PADS DOWN" : "");
+                }
+            }
+            if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (status.Trim(' ', '·') != "" ? $" · {status.Trim(' ', '·')}" : ""), c);
         }
 
-        foreach (var t in tr.Tracks.Where(t => t.Launched <= tr.Time))
+        foreach (var t in tr.Tracks.Where(t => t.Launched <= tr.Time && (!Fogged(t.Side) || t.Detected)))
         {
             var end = t.State == TrackState.Flying ? tr.Time : t.EndedAt;
             var c = SideColor(t.Side);
@@ -514,6 +598,7 @@ public partial class TheatreLayer : Node2D
         }
 
         DrawAir(tr, zoom, w);
+        DrawAirContacts(zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))
         {
             var c = SideColor(Enemy(s.Target.Side));
@@ -537,6 +622,7 @@ public partial class TheatreLayer : Node2D
         {
             var preview = Ops.Preview.Contains(f);
             if (!preview && f.State is FlightState.Landed || f.State == FlightState.Lost && !preview) continue;
+            if (Fogged(f.Side)) continue; // enemy flights are drawn from contacts below
             var c = preview ? Colors.White : SideColor(f.Side);
             var sel = Ops.SelectedFlight == f || preview;
             var pts = f.Route.Select(x => P(x.Lon, x.Lat)).ToArray();
@@ -583,6 +669,21 @@ public partial class TheatreLayer : Node2D
     }
 
     private void Tag(Vector2 p, string text, Color c) => Labels.Add((p, text, c));
+
+    /// <summary>Enemy air as the viewer's sensors hold it: a symbol at the last-seen spot, labelled by ID level.</summary>
+    private void DrawAirContacts(float zoom, float w)
+    {
+        if (Pic == null) return;
+        foreach (var c in Pic.Contacts.Values.Where(c => c.Kind == "air"))
+        {
+            var col = new Color(SideColor(Ops.ViewSide == "blue" ? "red" : "blue"), Fade(c));
+            var p = P(c.Lon, c.Lat);
+            Chevron(p, Vector2.Up, Vector2.Right, col, zoom);
+            DrawArc(p, 9 / zoom, 0, Mathf.Tau, 16, col, w);
+            var age = Ops.Trial.Time - c.LastSeen;
+            Tag(p, c.Label + (c.IdLevel < 2 ? " ?" : "") + (age > 60 ? $" · {age / 60:0} min" : ""), col);
+        }
+    }
 
     private void Chevron(Vector2 p, Vector2 head, Vector2 right, Color c, float zoom)
     {

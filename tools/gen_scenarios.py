@@ -11,9 +11,12 @@ def km(a, b):
     return math.hypot((b[0] - a[0]) * 111 * math.cos(mid), (b[1] - a[1]) * 111)
 
 # game reach tables (must match Sim/Theatre/Profiles.cs Pacing.StrikeReachKm with the design's reach rating)
-REACH = {"df-15b": 40 + 80 * 7, "df-17": 40 + 80 * 10, "type-12": 40 + 80 * 8}
+REACH = {"df-15b": 40 + 80 * 7, "df-17": 40 + 80 * 10, "type-12": 40 + 80 * 8, "cm-cruise": 40 + 80 * 8, "cj-10": 40 + 80 * 8}
+SPEED = {"df-15b": 9, "df-17": 10, "type-12": 3, "cm-cruise": 3, "cj-10": 3}
 
-def site(i, n, side, lon, lat, cls="military-base"): return {"id": i, "name": n, "side": side, "class": cls, "lon": lon, "lat": lat}
+def site(i, n, side, lon, lat, cls="military-base"):
+    typ = "" if cls != "military-base" else "navalbase" if i.endswith("-nb") else "garrison" if i.endswith("-gs") else "airbase"
+    return {"id": i, "name": n, "side": side, "class": cls, "lon": lon, "lat": lat, "type": typ}
 
 blue_bases = [site("naha-ab", "Naha Air Base", "blue", 127.65, 26.20), site("nyutabaru-ab", "Nyutabaru Air Base", "blue", 131.45, 32.08),
     site("tsuiki-ab", "Tsuiki Air Base", "blue", 131.04, 33.68), site("kanoya-ab", "Kanoya Air Base", "blue", 130.84, 31.37),
@@ -30,16 +33,16 @@ cities = [site("naha-city", "Naha", "blue", 127.72, 26.24, "population-centre"),
     site("ningbo", "Ningbo", "red", 121.55, 29.87, "population-centre")]
 bases = {b["id"]: b for b in blue_bases + red_bases}
 
-def battery(i, n, side, lon, lat, radar, launcher, interceptor, stock):
-    return {"id": i, "name": n, "side": side, "lon": lon, "lat": lat, "radar": radar, "launcher": launcher, "interceptor": interceptor, "stock": stock}
+def battery(i, n, side, lon, lat, radar, launcher, interceptor, stock, platform="ground"):
+    return {"id": i, "name": n, "side": side, "lon": lon, "lat": lat, "radar": radar, "launcher": launcher, "interceptor": interceptor, "stock": stock, "platform": platform}
 
 batteries = [battery(f"pac3-{b}", f"PAC-3 battery ({bases[b]['name'].split()[0]})", "blue", bases[b]["lon"] + 0.05, bases[b]["lat"] - 0.04, "gs-radar", "gs-launcher", "sam-hit", 16)
              for b in ["naha-ab", "nyutabaru-ab", "tsuiki-ab", "kanoya-ab", "sasebo-nb", "miyako-gs"]]
-batteries += [battery(f"maya-{k}", f"JS {n} (Maya-class)" if k < 2 else f"JS {n} (Kongo-class)", "blue", lon, lat, "maya-ddg", "maya-ddg", "sm-2", 24)
+batteries += [battery(f"maya-{k}", f"JS {n} (Maya-class)" if k < 2 else f"JS {n} (Kongo-class)", "blue", lon, lat, "maya-ddg", "maya-ddg", "sm-2", 24, "ship")
               for k, (n, lon, lat) in enumerate([("Maya", 126.2, 27.0), ("Haguro", 128.3, 29.5), ("Kirishima", 124.8, 25.9)])]
 batteries += [battery(f"hq9-{b}", f"HQ-9B battery ({bases[b]['name'].split()[0]})", "red", bases[b]["lon"] - 0.05, bases[b]["lat"] + 0.04, "hq-9-radar", "hq-9-tel", "hq-9b", 16)
               for b in ["longtian-ab", "shuimen-ab", "luqiao-ab", "jinjiang-ab", "zhangzhou-ab", "ningbo-nb"]]
-batteries += [battery(f"pla-ddg-{k}", n, "red", lon, lat, r, r, "hhq-9", 24)
+batteries += [battery(f"pla-ddg-{k}", n, "red", lon, lat, r, r, "hhq-9", 24, "ship")
               for k, (n, lon, lat, r) in enumerate([("Nanchang (Type 055)", 123.2, 28.5, "type-055"), ("Changsha (Type 052D)", 122.5, 26.5, "type-052d"), ("Hefei (Type 052D)", 121.9, 24.9, "type-052d")])]
 
 launchers = [
@@ -48,17 +51,26 @@ launchers = [
     {"id": "rf-wenzhou", "name": "Rocket Force brigade (Wenzhou)", "side": "red", "lon": 120.4, "lat": 27.9, "missile": "df-17", "stock": 12},
     {"id": "ssm-ishigaki", "name": "Type 12 regiment (Ishigaki)", "side": "blue", "lon": 124.10, "lat": 24.47, "missile": "type-12", "stock": 12},
     {"id": "ssm-miyako", "name": "Type 12 regiment (Miyako)", "side": "blue", "lon": 125.22, "lat": 24.83, "missile": "type-12", "stock": 12},
-    {"id": "ssm-amami", "name": "Type 12 regiment (Amami)", "side": "blue", "lon": 129.40, "lat": 28.33, "missile": "type-12", "stock": 12}]
+    {"id": "ssm-amami", "name": "Type 12 regiment (Amami)", "side": "blue", "lon": 129.40, "lat": 28.33, "missile": "type-12", "stock": 12},
+    # ships' strike cells (they sit with the air-defence ships above)
+    {"id": "maya-tlam", "name": "JS Maya · strike cells", "side": "blue", "lon": 126.2, "lat": 27.0, "missile": "cm-cruise", "stock": 8, "platform": "ship"},
+    {"id": "haguro-tlam", "name": "JS Haguro · strike cells", "side": "blue", "lon": 128.3, "lat": 29.5, "missile": "cm-cruise", "stock": 8, "platform": "ship"},
+    {"id": "nanchang-cj10", "name": "Nanchang · strike cells", "side": "red", "lon": 123.2, "lat": 28.5, "missile": "cj-10", "stock": 16, "platform": "ship"},
+    {"id": "changsha-cj10", "name": "Changsha · strike cells", "side": "red", "lon": 122.5, "lat": 26.5, "missile": "cj-10", "stock": 8, "platform": "ship"}]
 
-# scripted salvos: each launcher fires pairs at the enemy bases it can reach, round robin
+# missile fire missions go in the ATO with a time on target (launch time is worked back from it)
 script = []
+fires = []
 for l in launchers:
     enemy = [b for b in (red_bases if l["side"] == "blue" else blue_bases) if km((l["lon"], l["lat"]), (b["lon"], b["lat"])) <= REACH[l["missile"]] - 5]
     if not enemy: continue
-    times = [30, 150, 300, 450, 600, 750] if l["side"] == "red" else [90, 240, 420, 600, 780, 900]
-    for k, t in enumerate(times):
-        script.append({"t": t + rnd.randint(0, 20), "launcher": l["id"], "target": enemy[k % len(enemy)]["id"], "count": 2})
-script.sort(key=lambda s: s["t"])
+    enemy.sort(key=lambda b: km((l["lon"], l["lat"]), (b["lon"], b["lat"])))
+    nfires = l["stock"] // 2 if l.get("platform") != "ship" else 2
+    for k in range(nfires):
+        t = enemy[k % len(enemy)]
+        flight = km((l["lon"], l["lat"]), (t["lon"], t["lat"])) / (0.25 * SPEED[l["missile"]])
+        base_tot = (360 if l["side"] == "red" else 1300) + k * 420
+        fires.append({"side": l["side"], "launcher": l["id"], "target": t["id"], "count": 2 if l.get("platform") != "ship" else 4, "tot": round(max(base_tot, flight + 60) + rnd.randint(0, 30))})
 
 units = []
 def add(side, kind, preset, name, n, base, centre, spread, patrol):
@@ -109,7 +121,10 @@ ato = [
     cap("red", "AEW orbit", 121.9, 27.4, [F("CNKJ500", 1, "AEW", "Trail")]),
     pkg("red", "Package TIANLONG", "naha-ab", 3000, [F("CNJ16", 4, "Strike", "Wedge"), F("CNJ20", 2, "Escort", "Wedge"), F("CNJ16", 2, "SEAD", "Trail")]),
     pkg("red", "Package HAILONG", "miyako-gs", 4500, [F("CNH6K", 2, "Strike", "Trail"), F("CNJ10C", 2, "Escort", "EchelonRight")], ip=80),
-]
+    cap("blue", "Maritime patrol", 125.8, 27.6, [F("JPP1", 2, "Recon", "LineAbreast")], 9000),
+    pkg("blue", "Recon SHUIMEN", "shuimen-ab", 4500, [F("JPF15J", 2, "Recon", "LineAbreast"), F("JPKC46A", 1, "Tanker", "Trail")]),
+    pkg("red", "Recon NAHA", "naha-ab", 3900, [F("CNJ16", 2, "Recon", "LineAbreast")]),
+] + fires
 existing["jpn-chn"] = {"id": "jpn-chn", "name": "East China Sea: Japan vs China", "theatre": "ECS",
     "brief": "Test conflict in the East China Sea. China (Red) opens with Rocket Force salvos on Japanese bases; Japan (Blue) answers with Type 12 regiments. Both sides defend with land SAMs and air-defence ships. Cities are protected and never targeted.",
     "center": [125.2, 28.6], "zoom": 1.9, "sides": {"blue": "Japan", "red": "China"},

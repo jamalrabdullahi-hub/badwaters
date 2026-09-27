@@ -6,9 +6,10 @@ namespace BadWaters.Sim.Theatre;
 // and intercepts them. Everything is rules-based: positions move along a straight line over a fixed flight
 // time (the "arc" is only drawn), detection and kills are dice rolls against 0–10 ratings. No physics.
 
-public sealed record SiteDef(string Id, string Name, string Side, string Class, double Lon, double Lat);
-public sealed record BatteryDef(string Id, string Name, string Side, double Lon, double Lat, string Radar, string Launcher, string Interceptor, int Stock);
-public sealed record LauncherDef(string Id, string Name, string Side, double Lon, double Lat, string Missile, int Stock);
+/// <summary>A map site. Type names a base type (airbase, navalbase, garrison) whose components can be hit.</summary>
+public sealed record SiteDef(string Id, string Name, string Side, string Class, double Lon, double Lat, string Type = "");
+public sealed record BatteryDef(string Id, string Name, string Side, double Lon, double Lat, string Radar, string Launcher, string Interceptor, int Stock, string Platform = "ground");
+public sealed record LauncherDef(string Id, string Name, string Side, double Lon, double Lat, string Missile, int Stock, string Platform = "ground");
 public sealed record ScriptedLaunch(double T, string Launcher, string Target, int Count);
 /// <summary>A force element shown in the theatre (aircraft, ship, submarine, AEW...). Moves on a patrol orbit.</summary>
 public sealed record UnitDef(string Id, string Name, string Side, string Kind, string Preset, double Lon, double Lat, double PatrolKm = 0, string Base = "");
@@ -46,6 +47,8 @@ public sealed class Track
     public required SystemProfile Missile { get; init; }
     public required string LauncherId { get; init; }
     public required SiteDef Target { get; init; }
+    /// <summary>Base component this weapon is aimed at (runway, fuel...), if the target is a base.</summary>
+    public string Aimpoint { get; init; } = "";
     public double FromLon { get; init; }
     public double FromLat { get; init; }
     public double Launched { get; init; }
@@ -96,7 +99,12 @@ public sealed class BatteryState
     public required SystemProfile Launcher { get; init; }
     public required SystemProfile Interceptor { get; init; }
     public int Stock { get; set; }
-    public double RadarKm => Pacing.RadarRangeKm(Radar.R("detection"));
+    public bool IsShip => Def.Platform == "ship";
+    /// <summary>Base the battery is sited at (its radar/C2 damage degrades the battery).</summary>
+    public string BaseId { get; set; } = "";
+    /// <summary>0.2–1 from the host base's sensors component.</summary>
+    public double Degrade { get; set; } = 1;
+    public double RadarKm => Pacing.RadarRangeKm(Radar.R("detection")) * Degrade;
     public double ReachKm => Pacing.InterceptReachKm(Interceptor.R("reach"));
     /// <summary>Simultaneous interceptors the battery can guide (at least one).</summary>
     public int Channels => (int)Math.Max(1, Math.Max(Radar.R("fire-channels"), Launcher.R("fire-channels")));
@@ -108,6 +116,8 @@ public sealed class LauncherState
     public required LauncherDef Def { get; init; }
     public required SystemProfile Missile { get; set; }
     public int Stock { get; set; }
+    public bool IsShip => Def.Platform == "ship";
+    public string BaseId { get; set; } = "";
     public double ReachKm => Pacing.StrikeReachKm(Missile.R("reach"));
 }
 
@@ -127,6 +137,9 @@ public sealed class InterceptTrial
     public List<Shot> Shots { get; } = new();
     public List<LogEntry> Log { get; } = new();
     public Dictionary<string, int> Hits { get; } = new();
+    /// <summary>Bases with components (sites whose Type is a known base type).</summary>
+    public Dictionary<string, BaseState> Bases { get; } = new();
+    public IntelService? Intel { get; set; }
 
     private readonly Random _rng;
     private int _nextId = 1;
@@ -134,13 +147,25 @@ public sealed class InterceptTrial
     public const double Step = 0.5;
     private double _carry;
 
-    public InterceptTrial(ScenarioDef s, Func<string, SystemProfile> profile, int seed = 1)
+    public InterceptTrial(ScenarioDef s, Func<string, SystemProfile> profile, int seed = 1, IReadOnlyDictionary<string, BaseTypeDef>? baseTypes = null)
     {
         Scenario = s;
         _rng = new Random(seed);
+        if (baseTypes != null)
+            foreach (var site in s.Sites.Where(x => baseTypes.ContainsKey(x.Type)))
+            {
+                var bs = new BaseState { Site = site, Type = baseTypes[site.Type] };
+                foreach (var c in bs.Type.Components) bs.Components[c.Id] = new ComponentState { Def = c };
+                Bases[site.Id] = bs;
+            }
         foreach (var b in s.Batteries)
             Batteries.Add(new BatteryState { Def = b, Radar = profile(b.Radar), Launcher = profile(b.Launcher), Interceptor = profile(b.Interceptor), Stock = b.Stock });
         foreach (var l in s.Launchers) Launchers.Add(new LauncherState { Def = l, Missile = profile(l.Missile), Stock = l.Stock });
+        // batteries and land launchers belong to the nearest friendly base within 20 km
+        string Host(string side, double lon, double lat) => Bases.Values.Where(b => b.Site.Side == side)
+            .Select(b => (b, d: Pacing.DistanceKm(b.Site.Lon, b.Site.Lat, lon, lat))).Where(x => x.d <= 20).OrderBy(x => x.d).Select(x => x.b.Site.Id).FirstOrDefault() ?? "";
+        foreach (var b in Batteries.Where(b => !b.IsShip)) b.BaseId = Host(b.Def.Side, b.Def.Lon, b.Def.Lat);
+        foreach (var l in Launchers.Where(l => !l.IsShip)) l.BaseId = Host(l.Def.Side, l.Def.Lon, l.Def.Lat);
         Note("info", s.Brief);
     }
 
@@ -152,7 +177,7 @@ public sealed class InterceptTrial
 
     // ---------------- orders (player or AI use the same calls) ----------------
 
-    public OrderResult Launch(string launcherId, string targetId, int count = 1)
+    public OrderResult Launch(string launcherId, string targetId, int count = 1, string aimpoint = "")
     {
         var l = Launchers.FirstOrDefault(x => x.Def.Id == launcherId);
         var site = Site(targetId);
@@ -162,16 +187,23 @@ public sealed class InterceptTrial
         var dist = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, site.Lon, site.Lat);
         if (dist > l.ReachKm) return Refuse($"{site.Name} is out of reach ({dist:0} km, reach {l.ReachKm:0} km from {l.Missile.Sources("reach")}).");
         if (l.Stock <= 0) return Refuse($"{l.Def.Name} has no missiles left.");
+        if (l.BaseId != "" && Bases.TryGetValue(l.BaseId, out var hostBase) && !hostBase.PadsOk) return Refuse($"{l.Def.Name} can't fire: launch pads at {hostBase.Site.Name} are damaged.");
+        if (Bases.TryGetValue(site.Id, out var tb))
+        {
+            if (aimpoint == "" || !tb.Components.ContainsKey(aimpoint)) aimpoint = AimFor(l.Def.Side, tb);
+        }
+        else aimpoint = "";
         var n = Math.Min(count, l.Stock);
         var flight = dist / Pacing.SpeedKmPerSec(l.Missile.R("speed"));
         for (var i = 0; i < n; i++)
             Tracks.Add(new Track
             {
                 Id = _nextId++, Side = l.Def.Side, Missile = l.Missile, LauncherId = l.Def.Id, Target = site,
-                FromLon = l.Def.Lon, FromLat = l.Def.Lat, Launched = Time + i * 4, FlightTime = flight,
+                FromLon = l.Def.Lon, FromLat = l.Def.Lat, Launched = Time + i * 4, FlightTime = flight, Aimpoint = aimpoint,
             });
         l.Stock -= n;
-        var msg = $"{l.Def.Name} launched {n} × {l.Missile.Name} at {site.Name} ({dist:0} km, {flight:0} s flight).";
+        Intel?.LaunchSeen(l, Time);
+        var msg = $"{l.Def.Name} launched {n} × {l.Missile.Name} at {site.Name}{(aimpoint != "" ? $" ({Bases[site.Id].Components[aimpoint].Def.Name})" : "")} ({dist:0} km, {flight:0} s flight).";
         Note("launch", msg);
         return new OrderResult(true, msg);
 
@@ -250,6 +282,9 @@ public sealed class InterceptTrial
     private void Tick()
     {
         Time += Step;
+        foreach (var b in Bases.Values) b.Repair(Step);
+        foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor;
+        Intel?.Tick(Time);
         RunScript();
 
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Launched <= Time))
@@ -285,7 +320,8 @@ public sealed class InterceptTrial
         {
             tr.State = TrackState.Impacted; tr.EndedAt = Time;
             Hits[tr.Target.Id] = Hits.GetValueOrDefault(tr.Target.Id) + 1;
-            Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}).");
+            var effect = Bases.TryGetValue(tr.Target.Id, out var hb) ? " · " + ApplyHit(tr.Side, hb, tr.Aimpoint, tr.Missile.R("punch"), tr.Missile.R("accuracy"), 0.2, "impact report") : "";
+            Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}){effect}.");
         }
 
         Air?.Tick(Time - Step, Time);
@@ -294,6 +330,32 @@ public sealed class InterceptTrial
     }
 
     private static SystemProfile m(Track t) => t.Missile;
+
+    /// <summary>Aimpoint an attacker picks at a base: doctrine order, skipping what its own picture believes is already down.</summary>
+    public string AimFor(string attacker, BaseState b)
+    {
+        var pic = Intel?.Pictures.GetValueOrDefault(attacker);
+        return b.DefaultAimpoint(pic == null ? null : c => pic.Belief(b.Site.Id, c).Integrity);
+    }
+
+    /// <summary>
+    /// One weapon hit on a base component: accuracy decides a direct hit on the aimpoint or a near miss
+    /// on another component; punch against hardness sets the damage. Parked aircraft can be destroyed.
+    /// The attacker gets a damage report whose quality depends on the source.
+    /// </summary>
+    public string ApplyHit(string attacker, BaseState b, string aim, double punch, double accuracy, double reportConfidence, string reportSource)
+    {
+        if (aim == "" || !b.Components.ContainsKey(aim)) aim = AimFor(attacker, b);
+        var direct = _rng.NextDouble() < DamageRules.OnAimpoint(accuracy);
+        var others = b.Components.Keys.Where(k => k != aim).ToList();
+        var hitId = direct || others.Count == 0 ? aim : others[_rng.Next(others.Count)];
+        var comp = b.Components[hitId];
+        var dmg = DamageRules.Damage(punch, comp.Def.Hardness, direct);
+        comp.Integrity = Math.Max(0, comp.Integrity - dmg);
+        var extra = Air?.GroundLosses(b, comp.Def.Effect) ?? "";
+        Intel?.Report(attacker, b, hitId, reportConfidence, reportSource, Time);
+        return $"{(direct ? "direct hit" : "near miss")} on {comp.Def.Name} −{dmg:0}% → {comp.Integrity:0}%{extra}";
+    }
 
     /// <summary>Where a unit is now: a steady orbit around its station (drawing and presence only).</summary>
     public (double Lon, double Lat) UnitPos(UnitDef u)

@@ -6,7 +6,7 @@ namespace BadWaters.Sim.Theatre;
 // (take-off → ingress → IP → target → egress → land) and resolved with dice against 0–10 ratings.
 // Movement is interpolation between planned waypoint times; there is no flight model or physics.
 
-public enum Mission { Strike, Escort, SEAD, CAP, AEW, Tanker }
+public enum Mission { Strike, Escort, SEAD, CAP, AEW, Tanker, Recon }
 public enum Formation { Wedge, LineAbreast, Trail, EchelonRight, Box }
 public enum FlightState { Planned, Airborne, Ingress, Attack, Egress, OnStation, Landed, Lost }
 
@@ -31,6 +31,28 @@ public sealed record AtoEntry
     public double Start { get; init; }
     public double Duration { get; init; } = 5400;
     public List<FlightRequest> Flights { get; init; } = new();
+    /// <summary>Base component to aim at (runway, fuel...). Empty: doctrine picks from the side's own picture.</summary>
+    public string Aimpoint { get; init; } = "";
+    /// <summary>Missile fire mission: this launcher (ground or ship) fires Count rounds to arrive at Tot.</summary>
+    public string Launcher { get; init; } = "";
+    public int Count { get; init; } = 2;
+}
+
+public enum FireState { Planned, Launched, Failed }
+
+/// <summary>A missile fire mission in the ATO: launch time worked back from the time on target.</summary>
+public sealed class MissileTask
+{
+    public required string Id { get; init; }
+    public required string Side { get; init; }
+    public required LauncherState Launcher { get; init; }
+    public required SiteDef Target { get; init; }
+    public string Aimpoint { get; init; } = "";
+    public int Count { get; init; }
+    public double Tot { get; init; }
+    public double LaunchAt { get; init; }
+    public FireState State { get; set; }
+    public string Note { get; set; } = "";
 }
 
 /// <summary>Game modifiers per formation (shown in the planner). Tuning values, not tactics doctrine.</summary>
@@ -74,9 +96,10 @@ public sealed class Flight
     public required string Callsign { get; init; }
     public required string Side { get; init; }
     public required PresetInfo Type { get; init; }
-    public required string BaseId { get; init; }
+    public required string BaseId { get; set; }
     public Mission Mission { get; init; }
-    public Formation Formation { get; init; }
+    public Formation Formation { get; set; }
+    public bool Aborted { get; set; }
     public string PackageId { get; init; } = "";
     public List<string> Aircraft { get; } = new();
     public List<string> LostAircraft { get; } = new();
@@ -121,6 +144,7 @@ public sealed class Package
     public double Tot { get; init; }
     public bool Tanker { get; init; }
     public double IpKm { get; init; }
+    public string Aimpoint { get; init; } = "";
     public (double Lon, double Lat) Ip { get; init; }
     public List<Flight> Flights { get; } = new();
     public string Result { get; set; } = "";
@@ -135,12 +159,16 @@ public sealed class AirTasking
     private readonly Random _rng;
     public List<Package> Packages { get; } = new();
     public List<Flight> Flights { get; } = new();
+    public List<MissileTask> Fires { get; } = new();
     /// <summary>Aircraft (unit ids) currently assigned to a flight.</summary>
     public HashSet<string> Tasked { get; } = new();
     public HashSet<string> Destroyed { get; } = new();
     private readonly Dictionary<(string, string), double> _lastFight = new();
     private int _next = 1;
     private readonly Dictionary<string, int> _calls = new();
+    /// <summary>Aircraft that landed away from their home base (unit id → base id).</summary>
+    private readonly Dictionary<string, string> _divertBase = new();
+    public string BaseOf(UnitDef u) => _divertBase.TryGetValue(u.Id, out var b) ? b : u.Base;
     private static readonly string[] BlueCalls = { "EAGLE", "VIPER", "COBRA", "HAWK", "RAVEN", "LANCE", "SABRE", "FALCON" };
     private static readonly string[] RedCalls = { "DRAGON", "TIGER", "WOLF", "FLAME", "STORM", "ARROW", "THUNDER", "IRON" };
 
@@ -156,7 +184,8 @@ public sealed class AirTasking
     // ---------------- availability ----------------
 
     public IEnumerable<UnitDef> Idle(string side) =>
-        _t.Scenario.Units.Where(u => u.Side == side && u.Kind is "air" or "aew" && !Tasked.Contains(u.Id) && !Destroyed.Contains(u.Id));
+        _t.Scenario.Units.Where(u => u.Side == side && u.Kind is "air" or "aew" && !Tasked.Contains(u.Id) && !Destroyed.Contains(u.Id))
+            .Select(u => BaseOf(u) == u.Base ? u : u with { Base = BaseOf(u) });
 
     /// <summary>Idle aircraft by type for a side: preset → (name, count).</summary>
     public IEnumerable<(string Preset, string Name, int Count)> IdleByType(string side) =>
@@ -168,6 +197,7 @@ public sealed class AirTasking
 
     public PlanResult Plan(AtoEntry e, bool commit = false)
     {
+        if (e.Launcher != "") return PlanFire(e, commit);
         var issues = new List<string>();
         var strike = e.Target != "";
         SiteDef? target = null;
@@ -193,9 +223,10 @@ public sealed class AirTasking
             if (info == null) { issues.Add($"Unknown aircraft type {req.Preset}."); continue; }
             // the base with enough idle aircraft of this type that is closest to the objective
             var pool = Idle(e.Side).Where(u => u.Preset == req.Preset && !reserved.Contains(u.Id)).GroupBy(u => u.Base)
-                .Select(g => (Base: _t.Site(g.Key), Units: g.ToList())).Where(x => x.Base != null && x.Units.Count >= req.Count)
+                .Select(g => (Base: _t.Site(g.Key), Units: g.ToList())).Where(x => x.Base != null && x.Units.Count >= req.Count && BaseCanLaunch(x.Base.Id, req.Mission))
                 .OrderBy(x => Pacing.DistanceKm(x.Base!.Lon, x.Base.Lat, aim.Item1, aim.Item2)).FirstOrDefault();
-            if (pool.Base == null) { issues.Add($"Not enough idle {info.Name} at any single base for {req.Count} aircraft."); continue; }
+            if (pool.Base == null) { issues.Add($"Not enough idle {info.Name} at any single working base for {req.Count} aircraft (runway closed or munitions store destroyed counts as not working)."); continue; }
+            var prep = AirPacing.PrepSeconds * (_t.Bases.TryGetValue(pool.Base.Id, out var hb) ? hb.PrepFactor : 1);
             var home = pool.Base;
             var dist = Pacing.DistanceKm(home.Lon, home.Lat, aim.Item1, aim.Item2);
             var radius = AirPacing.RadiusKm(info.R("reach")) + (hasTanker && req.Mission != Mission.Tanker ? AirPacing.TankerBonusKm : 0);
@@ -219,7 +250,7 @@ public sealed class AirTasking
                 var first = flights.FirstOrDefault();
                 var anchor = first != null ? _t.Site(first.BaseId)! : home;
                 var st = Lerp((anchor.Lon, anchor.Lat), aim, 0.45);
-                var start = Math.Max(_t.Time + AirPacing.PrepSeconds, (flights.Count > 0 ? flights.Min(x => x.Takeoff) : e.Tot - 3600) - 300);
+                var start = Math.Max(_t.Time + prep, (flights.Count > 0 ? flights.Min(x => x.Takeoff) : e.Tot - 3600) - 300);
                 var tSt = start + Km((home.Lon, home.Lat), st) / v;
                 var end = Math.Max(tSt + 600, e.Tot + 900);
                 f.Route.Add(new("Take-off", home.Lon, home.Lat, start));
@@ -246,15 +277,15 @@ public sealed class AirTasking
                 f.Route.Add(new("Take-off", home.Lon, home.Lat, tTo));
                 f.Route.Add(new("Ingress", ing.Item1, ing.Item2, tIng));
                 f.Route.Add(new("IP", ip.Item1, ip.Item2, tIp));
-                f.Route.Add(new(req.Mission == Mission.Strike ? "Target" : req.Mission == Mission.SEAD ? "SEAD" : "Sweep", aim.Item1, aim.Item2, tot));
+                f.Route.Add(new(req.Mission is Mission.Strike or Mission.Recon ? "Target" : req.Mission == Mission.SEAD ? "SEAD" : "Sweep", aim.Item1, aim.Item2, tot));
                 f.Route.Add(new("Egress", egr.Item1, egr.Item2, tEgr));
                 f.Route.Add(new("Land", home.Lon, home.Lat, tLand));
-                if (tTo < _t.Time + AirPacing.PrepSeconds)
-                    issues.Add($"{f.Callsign} ({info.Name}) would need to take off at T+{Clock(tTo)}; earliest TOT for this flight is T+{Clock(e.Tot + (_t.Time + AirPacing.PrepSeconds - tTo))}.");
+                if (tTo < _t.Time + prep)
+                    issues.Add($"{f.Callsign} ({info.Name}) would need to take off at T+{Clock(tTo)}; earliest TOT for this flight is T+{Clock(e.Tot + (_t.Time + prep - tTo))}{(prep > AirPacing.PrepSeconds ? " (slow turnaround: base fuel or maintenance damaged)" : "")}.");
             }
             else
             {
-                var start = Math.Max(e.Start, _t.Time + AirPacing.PrepSeconds);
+                var start = Math.Max(e.Start, _t.Time + prep);
                 var tSt = start + dist / v;
                 f.Route.Add(new("Take-off", home.Lon, home.Lat, start));
                 f.Route.Add(new("Station", aim.Item1, aim.Item2, tSt));
@@ -264,7 +295,7 @@ public sealed class AirTasking
             flights.Add(f);
         }
         if (flights.Count == 0 && issues.Count == 0) issues.Add("Add at least one flight.");
-        var pkg = strike ? new Package { Id = pkgId, Name = e.Name != "" ? e.Name : $"Package {(char)('A' + (_next - 1) % 26)}", Side = e.Side, Target = target!, Tot = e.Tot, Tanker = hasTanker, IpKm = e.IpKm, Ip = ip } : null;
+        var pkg = strike ? new Package { Id = pkgId, Name = e.Name != "" ? e.Name : $"Package {(char)('A' + (_next - 1) % 26)}", Side = e.Side, Target = target!, Tot = e.Tot, Tanker = hasTanker, IpKm = e.IpKm, Ip = ip, Aimpoint = e.Aimpoint } : null;
         if (pkg != null) pkg.Flights.AddRange(flights);
         var ok = issues.Count == 0;
         if (ok && commit)
@@ -282,6 +313,71 @@ public sealed class AirTasking
         PlanResult Fail(string why) => new(false, new[] { why }, null, Array.Empty<Flight>());
     }
 
+    private bool BaseCanLaunch(string baseId, Mission m) =>
+        !_t.Bases.TryGetValue(baseId, out var b) || (b.RunwayOpen && (m is not (Mission.Strike or Mission.SEAD) || b.CanArm));
+
+    /// <summary>Missile fire mission: launch time = TOT − flight time, checked for reach, stock and pads.</summary>
+    private PlanResult PlanFire(AtoEntry e, bool commit)
+    {
+        var l = _t.Launchers.FirstOrDefault(x => x.Def.Id == e.Launcher);
+        var target = _t.Site(e.Target);
+        if (l == null || target == null) return new(false, new[] { "Unknown launcher or target." }, null, Array.Empty<Flight>());
+        var issues = new List<string>();
+        if (l.Def.Side != e.Side) issues.Add("That launcher belongs to the other side.");
+        if (!TargetPolicy.IsLegitimate(target.Class)) issues.Add(TargetPolicy.IsKnown(target.Class) ? TargetPolicy.ProtectedMessage : "Unclassified target class: refused.");
+        if (target.Side == e.Side) issues.Add("That target is on your own side.");
+        var dist = Km((l.Def.Lon, l.Def.Lat), (target.Lon, target.Lat));
+        if (dist > l.ReachKm) issues.Add($"{target.Name} is {dist:0} km from {l.Def.Name}; reach {l.ReachKm:0} km.");
+        var committed = Fires.Where(f => f.Launcher == l && f.State == FireState.Planned).Sum(f => f.Count);
+        if (l.Stock - committed < e.Count) issues.Add($"{l.Def.Name} has {l.Stock - committed} rounds not already tasked.");
+        var flight = dist / Pacing.SpeedKmPerSec(l.Missile.R("speed"));
+        var launchAt = e.Tot - flight;
+        if (launchAt < _t.Time) issues.Add($"{l.Missile.Name} needs {flight / 60:0.0} min to fly {dist:0} km; earliest TOT is T+{Clock(_t.Time + flight)}.");
+        var ok = issues.Count == 0;
+        if (ok && commit)
+        {
+            var task = new MissileTask { Id = $"{e.Side}-fire-{_next++}", Side = e.Side, Launcher = l, Target = target, Aimpoint = e.Aimpoint, Count = e.Count, Tot = e.Tot, LaunchAt = launchAt };
+            Fires.Add(task);
+            _t.Report("ato", $"{Side(e.Side)} ATO: {l.Def.Name} fires {e.Count}× {l.Missile.Name} at {target.Name}, launch T+{Clock(launchAt)}, TOT T+{Clock(e.Tot)}.");
+        }
+        return new PlanResult(ok, ok ? new[] { $"{l.Def.Name}: {e.Count}× {l.Missile.Name}, {dist:0} km, flight {flight / 60:0.0} min, launch T+{Clock(launchAt)} for TOT T+{Clock(e.Tot)}." } : issues, null, Array.Empty<Flight>());
+    }
+
+    // ---------------- control ----------------
+
+    /// <summary>Abort: the flight turns for home now (strike flights will not release).</summary>
+    public string Abort(Flight f)
+    {
+        if (f.State is FlightState.Landed or FlightState.Lost) return "That flight is not flying.";
+        var now = _t.Time;
+        f.Aborted = true; f.Released = true;
+        var (lon, lat) = f.Pos(now);
+        var home = _t.Site(f.BaseId)!;
+        var v = AirPacing.CruiseKmPerSec(f.Type.R("speed"));
+        var keep = f.Route.Where(w => w.T <= now).ToList();
+        f.Route.Clear();
+        f.Route.AddRange(keep.Count > 0 ? keep : new List<Waypoint> { new("Take-off", home.Lon, home.Lat, now) });
+        if (now < f.Takeoff) { f.Route.Clear(); f.Route.Add(new("Take-off", home.Lon, home.Lat, now)); f.Route.Add(new("Land", home.Lon, home.Lat, now + 1)); }
+        else { f.Route.Add(new("Abort", lon, lat, now)); f.Route.Add(new("Land", home.Lon, home.Lat, now + Km((lon, lat), (home.Lon, home.Lat)) / v)); }
+        _t.Report("air", $"{f.Callsign} aborted, returning to {home.Name}.");
+        return $"{f.Callsign} is returning to base.";
+    }
+
+    public void SetFormation(Flight f, Formation form) { f.Formation = form; _t.Report("air", $"{f.Callsign} changed formation to {form}."); }
+
+    /// <summary>Aircraft on the ground at a hit base: apron aircraft are exposed, sheltered ones much less.</summary>
+    public string GroundLosses(BaseState b, string effect)
+    {
+        if (effect is not ("apron" or "shelter")) return "";
+        var parked = Idle(b.Site.Side).Where(u => u.Base == b.Site.Id).ToList();
+        var cap = b.ShelterCapacity;
+        var exposed = effect == "apron" ? parked.Skip(cap).ToList() : parked.Take(cap).ToList();
+        var p = effect == "apron" ? 0.35 : 0.12;
+        var lost = exposed.Where(_ => _rng.NextDouble() < p).ToList();
+        foreach (var u in lost) Destroyed.Add(u.Id);
+        return lost.Count == 0 ? "" : $" · {lost.Count} aircraft destroyed on the ground ({string.Join(", ", lost.GroupBy(u => _preset(u.Preset)?.Name ?? u.Preset).Select(g => $"{g.Count()}× {g.Key}"))})";
+    }
+
     private string Side(string s) => _t.Scenario.Sides.GetValueOrDefault(s, s);
     public static string Clock(double t) { var ts = TimeSpan.FromSeconds(Math.Max(0, t)); return $"{(int)ts.TotalMinutes:00}:{ts.Seconds:00}"; }
     private static double Km((double, double) a, (double, double) b) => Pacing.DistanceKm(a.Item1, a.Item2, b.Item1, b.Item2);
@@ -291,9 +387,30 @@ public sealed class AirTasking
 
     public void Tick(double prev, double now)
     {
+        foreach (var fire in Fires.Where(x => x.State == FireState.Planned && now >= x.LaunchAt))
+        {
+            var r = _t.Launch(fire.Launcher.Def.Id, fire.Target.Id, fire.Count, fire.Aimpoint);
+            fire.State = r.Ok ? FireState.Launched : FireState.Failed;
+            fire.Note = r.Message;
+        }
         foreach (var f in Flights.Where(f => f.State is not (FlightState.Landed or FlightState.Lost)))
         {
             if (now < f.Takeoff) continue;
+            if (now >= f.LandAt && _t.Bases.TryGetValue(f.BaseId, out var home) && !home.RunwayOpen && f.Route[^1].Name != "Divert")
+            {
+                // runway cratered while airborne: divert to the nearest friendly base with an open runway
+                var alt = _t.Bases.Values.Where(b => b.Site.Side == f.Side && b.RunwayOpen && b.Type.Components.Any(c => c.Effect == "sorties"))
+                    .OrderBy(b => Km((home.Site.Lon, home.Site.Lat), (b.Site.Lon, b.Site.Lat))).FirstOrDefault();
+                if (alt != null)
+                {
+                    var v = AirPacing.CruiseKmPerSec(f.Type.R("speed"));
+                    f.Route.Add(new("Divert", alt.Site.Lon, alt.Site.Lat, now + Km((home.Site.Lon, home.Site.Lat), (alt.Site.Lon, alt.Site.Lat)) / v));
+                    _t.Report("air", $"{f.Callsign} can't land at {home.Site.Name} (runway closed); diverting to {alt.Site.Name}.");
+                    f.BaseId = alt.Site.Id;
+                    foreach (var a in f.Aircraft) _divertBase[a] = alt.Site.Id;
+                    continue;
+                }
+            }
             if (now >= f.LandAt)
             {
                 f.State = FlightState.Landed;
@@ -314,7 +431,11 @@ public sealed class AirTasking
             };
             if (prev < f.Takeoff && now >= f.Takeoff) _t.Report("air", $"{f.Callsign} ({f.Aircraft.Count}× {f.Type.Name}, {f.Formation}) airborne from {_t.Site(f.BaseId)?.Name}.");
             var tgtWp = f.Route.FirstOrDefault(w => w.Name == "Target");
-            if (tgtWp != null && !f.Released && now >= tgtWp.T) { f.Released = true; ResolveStrike(f); }
+            if (tgtWp != null && !f.Released && now >= tgtWp.T)
+            {
+                f.Released = true;
+                if (f.Mission == Mission.Recon) ResolveRecon(f); else ResolveStrike(f);
+            }
         }
         AirCombat(now);
     }
@@ -360,7 +481,11 @@ public sealed class AirTasking
 
     private void Fight(Flight a, Flight b, double now)
     {
-        var pa = AirToAirChance(a, b, now); var pb = AirToAirChance(b, a, now);
+        // you can only shoot what your own sensors hold: an undetected (stealthy) flight gets free shots
+        var seeA = _t.Intel?.Pictures[a.Side].Knows(b.Id, now) ?? true;
+        var seeB = _t.Intel?.Pictures[b.Side].Knows(a.Id, now) ?? true;
+        if (!seeA && !seeB) return;
+        var pa = seeA ? AirToAirChance(a, b, now) : 0; var pb = seeB ? AirToAirChance(b, a, now) : 0;
         var ka = a.Aircraft.Count(_ => _rng.NextDouble() < pa);
         var kb = b.Aircraft.Count(_ => _rng.NextDouble() < pb);
         var lostB = Remove(b, ka); var lostA = Remove(a, kb);
@@ -380,6 +505,16 @@ public sealed class AirTasking
         }
         if (f.Aircraft.Count == 0) f.State = FlightState.Lost;
         return n;
+    }
+
+    private void ResolveRecon(Flight f)
+    {
+        var tgt = Packages.FirstOrDefault(p => p.Id == f.PackageId)?.Target;
+        if (tgt != null && _t.Bases.TryGetValue(tgt.Id, out var b) && _t.Intel != null)
+        {
+            _t.Intel.Recon(f.Side, b, _t.Time);
+            _t.Report("isr", $"{f.Callsign} recon over {tgt.Name}: {b.Status()}.");
+        }
     }
 
     private void ResolveStrike(Flight f)
@@ -403,8 +538,12 @@ public sealed class AirTasking
         var pHit = Math.Clamp(0.25 + 0.06 * f.Type.R("strike") + 0.02 * f.Type.R("payload") + form.Strike, 0.05, 0.95);
         var hits = f.Aircraft.Count(_ => _rng.NextDouble() < pHit);
         if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;
+        var effects = new List<string>();
+        if (_t.Bases.TryGetValue(tgt.Id, out var tb))
+            for (var i = 0; i < hits; i++) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", 3 + 0.5 * f.Type.R("payload"), f.Type.R("strike"), 0.4, "pilot report"));
         var text = $"{f.Callsign}: {f.Aircraft.Count}× {f.Type.Name} released on {tgt.Name} at TOT · {hits} hits ({pHit:P0} each: strike {f.Type.R("strike"):0}, payload {f.Type.R("payload"):0}) · " +
-                   $"{lost} lost to {covering.Count} covering SAM batteries ({pLoss:P0} each{(sead ? ", SEAD suppressing" : "")}, stealth {f.Type.R("signature"):0}).";
+                   $"{lost} lost to {covering.Count} covering SAM batteries ({pLoss:P0} each{(sead ? ", SEAD suppressing" : "")}, stealth {f.Type.R("signature"):0})" +
+                   (effects.Count > 0 ? " · " + string.Join("; ", effects) : "") + ".";
         if (pkg != null) pkg.Result = text;
         _t.Report(hits > 0 ? "impact" : "air", text);
     }

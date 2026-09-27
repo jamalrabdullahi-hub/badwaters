@@ -18,8 +18,9 @@ public class AirOpsTests
     /// <summary>The Japan vs China scenario with both sides on player control (no AI tasking), unless asked.</summary>
     private static (InterceptTrial T, AirTasking Air) Setup(bool ai = false, int seed = 1)
     {
-        var t = new InterceptTrial(Content.Scenarios["jpn-chn"], id => SystemProfile.Build(Content.Catalog, Content.Designs[id]), seed);
+        var t = new InterceptTrial(Content.Scenarios["jpn-chn"], id => SystemProfile.Build(Content.Catalog, Content.Designs[id]), seed, Content.BaseTypes);
         if (!ai) { t.Control["blue"] = SideControl.Player; t.Control["red"] = SideControl.Player; }
+        t.Intel = new IntelService(t, Content.PresetInfo, seed);
         t.Air = new AirTasking(t, Content.PresetInfo, seed);
         return (t, t.Air);
     }
@@ -94,7 +95,8 @@ public class AirOpsTests
         Assert.NotEmpty(air.Packages);
         t.Advance(5000);
         Assert.Contains(t.Log, l => l.Text.StartsWith("Air combat"));
-        Assert.All(air.Packages, p => Assert.True(p.Flights.Any(f => f.Released) || p.Flights.All(f => f.State == FlightState.Lost)));
+        Assert.Contains(air.Packages, p => p.Flights.Any(f => f.Released && f.Mission == Mission.Strike && f.Aircraft.Count > 0));
+        Assert.Contains(air.Fires, f => f.State == FireState.Launched);
     }
 
     [Fact]
@@ -102,5 +104,60 @@ public class AirOpsTests
     {
         Assert.True(FormationRules.Mod(Formation.Trail).SamLoss < FormationRules.Mod(Formation.Box).SamLoss);
         Assert.True(FormationRules.Mod(Formation.Wedge).AirToAir > FormationRules.Mod(Formation.Trail).AirToAir);
+    }
+
+    [Fact]
+    public void Runway_hits_close_the_base_and_repair_reopens_it()
+    {
+        var (t, air) = Setup();
+        var naha = t.Bases["naha-ab"];
+        naha.Components["runway"].Integrity = 20;
+        Assert.False(naha.RunwayOpen);
+        var r = air.Plan(new AtoEntry { Side = "blue", StationLon = 126.6, StationLat = 26.4, Flights = { new FlightRequest("JPF15J", 12, Mission.CAP) } });
+        Assert.False(r.Ok); // all F-15Js are at Naha
+        naha.Repair(3600);
+        Assert.True(naha.RunwayOpen);
+    }
+
+    [Fact]
+    public void Hardened_components_take_less_damage()
+    {
+        Assert.True(DamageRules.Damage(5, 7, true) < DamageRules.Damage(5, 1, true));
+        Assert.True(DamageRules.Damage(5, 1, false) < DamageRules.Damage(5, 1, true));
+        Assert.True(DamageRules.OnAimpoint(9) > DamageRules.OnAimpoint(3));
+    }
+
+    [Fact]
+    public void Attacker_only_knows_damage_through_its_own_reports()
+    {
+        var (t, _) = Setup();
+        var pic = t.Intel!.Pictures["red"];
+        var before = pic.Belief("naha-ab", "fuel").Integrity;
+        t.Bases["naha-ab"].Components["fuel"].Integrity = 10; // damage nobody has observed yet
+        Assert.Equal(before, pic.Belief("naha-ab", "fuel").Integrity);
+        t.Intel.Recon("red", t.Bases["naha-ab"], t.Time);
+        Assert.Equal(10, pic.Belief("naha-ab", "fuel").Integrity);
+        Assert.Equal("recon", pic.Belief("naha-ab", "fuel").Source);
+    }
+
+    [Fact]
+    public void Missile_fire_missions_launch_to_meet_their_tot()
+    {
+        var (t, air) = Setup();
+        var r = air.Commit(new AtoEntry { Side = "red", Launcher = "rf-putian", Target = "ishigaki-gs", Count = 2, Tot = 900, Aimpoint = "radar" });
+        Assert.True(r.Ok, string.Join("; ", r.Issues));
+        var task = air.Fires.Single();
+        Assert.True(task.LaunchAt > 0 && task.LaunchAt < 900);
+        t.Advance(905);
+        Assert.Equal(FireState.Launched, task.State);
+        Assert.All(t.Tracks.Where(x => x.LauncherId == "rf-putian"), x => Assert.Equal("radar", x.Aimpoint));
+        Assert.False(air.Plan(new AtoEntry { Side = "red", Launcher = "rf-putian", Target = "ishigaki-gs", Count = 2, Tot = t.Time + 10 }).Ok);
+    }
+
+    [Fact]
+    public void Undetected_stealth_flights_are_not_on_the_enemy_picture()
+    {
+        var (t, _) = Setup();
+        Assert.Empty(t.Intel!.Pictures["red"].Contacts.Values.Where(c => c.Kind == "air"));
     }
 }

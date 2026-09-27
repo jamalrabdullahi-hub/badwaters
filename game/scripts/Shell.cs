@@ -261,6 +261,7 @@ public partial class Shell : Control
             _theatre.Trial.Advance(secs);
             if (DevScreenshot.Arg("track") is { } tk) _theatre.SelectedTrack = int.Parse(tk);
             if (DevScreenshot.Arg("flight") is { } fl) _theatre.SelectedFlight = _theatre.Trial.Air?.Flights.FirstOrDefault(f => f.Callsign.StartsWith(fl));
+            if (DevScreenshot.Arg("view") is { } vw && vw != "world") { _theatre.ViewSide = vw; _theatre.UpdateUi(); }
             if (DevScreenshot.Arg("plan") is { } pt)
                 _theatre.DevPlan(pt, ("JPF15J", 4, BadWaters.Sim.Theatre.Mission.Strike, BadWaters.Sim.Theatre.Formation.Box),
                     ("USF35A", 2, BadWaters.Sim.Theatre.Mission.Escort, BadWaters.Sim.Theatre.Formation.Wedge),

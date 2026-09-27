@@ -22,6 +22,7 @@ public sealed class GameContent
     public Dictionary<string, DesignDef> Designs { get; } = new();
     public Dictionary<string, ScenarioDef> Scenarios { get; } = new();
     public Dictionary<string, PresetDef> Presets { get; } = new();
+    public Dictionary<string, BaseTypeDef> BaseTypes { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
@@ -43,6 +44,7 @@ public sealed class GameContent
         foreach (var x in l.Load<DesignDef>("designs.json")) g.Designs[x.Id] = x;
         foreach (var x in l.Load<ScenarioDef>("scenarios.json")) g.Scenarios[x.Id] = x;
         foreach (var x in l.Load<PresetDef>("presets.json")) g.Presets[x.Id] = x;
+        foreach (var x in l.Load<BaseTypeDef>("base_types.json")) g.BaseTypes[x.Id] = x;
         g.Errors.AddRange(l.Errors);
         g.Validate();
         return g;
@@ -89,6 +91,8 @@ public sealed class GameContent
             foreach (var la in sc.Launchers) if (!Designs.ContainsKey(la.Missile)) Errors.Add($"scenario {sc.Id}: unknown design {la.Missile}");
             foreach (var u in sc.Units) if (!sc.Sides.ContainsKey(u.Side)) Errors.Add($"scenario {sc.Id}: unit {u.Id} has unknown side {u.Side}");
             foreach (var u in sc.Units) if (!Presets.ContainsKey(u.Preset)) Errors.Add($"scenario {sc.Id}: unit {u.Id} uses unknown preset {u.Preset}");
+            foreach (var st in sc.Sites.Where(x => x.Type != "" && !BaseTypes.ContainsKey(x.Type))) Errors.Add($"scenario {sc.Id}: site {st.Id} has unknown base type {st.Type}");
+            foreach (var e in sc.Ato.Where(e => e.Launcher != "" && sc.Launchers.All(l => l.Id != e.Launcher))) Errors.Add($"scenario {sc.Id}: ATO uses unknown launcher {e.Launcher}");
             foreach (var e in sc.Ato)
             {
                 foreach (var f in e.Flights) if (!Presets.ContainsKey(f.Preset)) Errors.Add($"scenario {sc.Id}: ATO uses unknown preset {f.Preset}");

@@ -1,0 +1,173 @@
+[
+ {
+  "id": "airbase",
+  "name": "Air base",
+  "components": [
+   {
+    "id": "runway",
+    "name": "Runway",
+    "hardness": 1,
+    "repairPerHour": 30,
+    "effect": "sorties",
+    "priority": 1,
+    "capacity": 0
+   },
+   {
+    "id": "fuel",
+    "name": "Fuel storage",
+    "hardness": 2,
+    "repairPerHour": 6,
+    "effect": "fuel",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "munitions",
+    "name": "Munitions storage",
+    "hardness": 5,
+    "repairPerHour": 4,
+    "effect": "munitions",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "radar",
+    "name": "Radar & C2 site",
+    "hardness": 2,
+    "repairPerHour": 8,
+    "effect": "sensors",
+    "priority": 3,
+    "capacity": 0
+   },
+   {
+    "id": "apron",
+    "name": "Parking apron",
+    "hardness": 0,
+    "repairPerHour": 40,
+    "effect": "apron",
+    "priority": 3,
+    "capacity": 0
+   },
+   {
+    "id": "shelters",
+    "name": "Hardened aircraft shelters",
+    "hardness": 7,
+    "repairPerHour": 3,
+    "effect": "shelter",
+    "priority": 4,
+    "capacity": 8
+   },
+   {
+    "id": "maintenance",
+    "name": "Maintenance hangars",
+    "hardness": 3,
+    "repairPerHour": 5,
+    "effect": "readiness",
+    "priority": 5,
+    "capacity": 0
+   }
+  ]
+ },
+ {
+  "id": "navalbase",
+  "name": "Naval base",
+  "components": [
+   {
+    "id": "piers",
+    "name": "Piers & wharves",
+    "hardness": 3,
+    "repairPerHour": 6,
+    "effect": "piers",
+    "priority": 1,
+    "capacity": 0
+   },
+   {
+    "id": "fuel",
+    "name": "Fuel storage",
+    "hardness": 2,
+    "repairPerHour": 6,
+    "effect": "fuel",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "munitions",
+    "name": "Munitions storage",
+    "hardness": 5,
+    "repairPerHour": 4,
+    "effect": "munitions",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "radar",
+    "name": "Radar & C2 site",
+    "hardness": 2,
+    "repairPerHour": 8,
+    "effect": "sensors",
+    "priority": 3,
+    "capacity": 0
+   },
+   {
+    "id": "drydock",
+    "name": "Dry dock & repair yard",
+    "hardness": 3,
+    "repairPerHour": 3,
+    "effect": "readiness",
+    "priority": 4,
+    "capacity": 0
+   }
+  ]
+ },
+ {
+  "id": "garrison",
+  "name": "Island garrison",
+  "components": [
+   {
+    "id": "pads",
+    "name": "Launch pads & hides",
+    "hardness": 3,
+    "repairPerHour": 10,
+    "effect": "launch-pads",
+    "priority": 1,
+    "capacity": 0
+   },
+   {
+    "id": "radar",
+    "name": "Radar & C2 site",
+    "hardness": 2,
+    "repairPerHour": 8,
+    "effect": "sensors",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "munitions",
+    "name": "Munitions storage",
+    "hardness": 5,
+    "repairPerHour": 4,
+    "effect": "munitions",
+    "priority": 3,
+    "capacity": 0
+   },
+   {
+    "id": "command",
+    "name": "Command bunker",
+    "hardness": 8,
+    "repairPerHour": 2,
+    "effect": "command",
+    "priority": 4,
+    "capacity": 0
+   },
+   {
+    "id": "fuel",
+    "name": "Fuel storage",
+    "hardness": 2,
+    "repairPerHour": 6,
+    "effect": "fuel",
+    "priority": 5,
+    "capacity": 0
+   }
+  ]
+ }
+]
