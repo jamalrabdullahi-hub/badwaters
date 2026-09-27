@@ -1,0 +1,25 @@
+[
+  {
+    "id": "player-aircraft-1",
+    "name": "B-2A Spirit (variant)",
+    "frame": "af-flying-wing",
+    "components": [
+      "mat-composite",
+      "mat-ram",
+      "pr-turbofan-adv",
+      "pw-apu",
+      "nv-star",
+      "nv-terrain",
+      "gc-fbw",
+      "cp-mission",
+      "cp-fusion",
+      "sn-radar-aesa-air",
+      "th-air-ecs",
+      "cm-satcom",
+      "ew-jammer",
+      "if-bay",
+      "rl-basic"
+    ],
+    "lineage": "night-heron"
+  }
+]

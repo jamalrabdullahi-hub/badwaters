@@ -924,47 +924,47 @@
    },
    {
     "id": "blue-usf35a-05",
-    "name": "F-35A Lightning II #05",
+    "name": "F-35A Lightning II #01",
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 129.94,
-    "lat": 30.923,
+    "lon": 127.204,
+    "lat": 26.794,
     "patrolKm": 60,
-    "base": "nyutabaru-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-usf35a-06",
-    "name": "F-35A Lightning II #06",
+    "name": "F-35A Lightning II #02",
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 129.967,
-    "lat": 29.914,
+    "lon": 127.22,
+    "lat": 26.189,
     "patrolKm": 60,
-    "base": "nyutabaru-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-usf35a-07",
-    "name": "F-35A Lightning II #07",
+    "name": "F-35A Lightning II #03",
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 129.87,
-    "lat": 30.655,
+    "lon": 127.162,
+    "lat": 26.633,
     "patrolKm": 60,
-    "base": "nyutabaru-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-usf35a-08",
-    "name": "F-35A Lightning II #08",
+    "name": "F-35A Lightning II #04",
     "side": "blue",
     "kind": "air",
     "preset": "USF35A",
-    "lon": 129.09,
-    "lat": 30.54,
+    "lon": 126.694,
+    "lat": 26.564,
     "patrolKm": 60,
-    "base": "nyutabaru-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-01",
@@ -972,10 +972,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.94,
-    "lat": 32.481,
+    "lon": 127.124,
+    "lat": 27.208,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-02",
@@ -983,10 +983,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 128.776,
-    "lat": 31.351,
+    "lon": 127.626,
+    "lat": 26.531,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-03",
@@ -994,10 +994,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 128.049,
-    "lat": 32.229,
+    "lon": 127.189,
+    "lat": 27.058,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-04",
@@ -1005,10 +1005,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.512,
-    "lat": 32.315,
+    "lon": 126.867,
+    "lat": 27.109,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-05",
@@ -1016,10 +1016,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 129.01,
-    "lat": 31.642,
+    "lon": 127.766,
+    "lat": 26.705,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-06",
@@ -1027,10 +1027,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.532,
-    "lat": 32.461,
+    "lon": 126.879,
+    "lat": 27.197,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-07",
@@ -1038,10 +1038,10 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 128.534,
-    "lat": 32.149,
+    "lon": 127.481,
+    "lat": 27.009,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpf2a-08",
@@ -1049,36 +1049,36 @@
     "side": "blue",
     "kind": "air",
     "preset": "JPF2A",
-    "lon": 127.825,
-    "lat": 31.799,
+    "lon": 127.055,
+    "lat": 26.799,
     "patrolKm": 60,
-    "base": "tsuiki-ab"
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpkc46a-01",
+    "name": "KC-46A Pegasus #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPKC46A",
+    "lon": 128.031,
+    "lat": 26.969,
+    "patrolKm": 40,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpkc46a-02",
+    "name": "KC-46A Pegasus #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPKC46A",
+    "lon": 127.586,
+    "lat": 26.727,
+    "patrolKm": 40,
+    "base": "naha-ab"
    },
    {
     "id": "blue-jpp1-01",
     "name": "P-1 patrol #01",
-    "side": "blue",
-    "kind": "air",
-    "preset": "JPP1",
-    "lon": 128.654,
-    "lat": 29.343,
-    "patrolKm": 90,
-    "base": "kanoya-ab"
-   },
-   {
-    "id": "blue-jpp1-02",
-    "name": "P-1 patrol #02",
-    "side": "blue",
-    "kind": "air",
-    "preset": "JPP1",
-    "lon": 126.429,
-    "lat": 28.135,
-    "patrolKm": 90,
-    "base": "kanoya-ab"
-   },
-   {
-    "id": "blue-jpp1-03",
-    "name": "P-1 patrol #03",
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
@@ -1088,8 +1088,8 @@
     "base": "kanoya-ab"
    },
    {
-    "id": "blue-jpp1-04",
-    "name": "P-1 patrol #04",
+    "id": "blue-jpp1-02",
+    "name": "P-1 patrol #02",
     "side": "blue",
     "kind": "air",
     "preset": "JPP1",
@@ -1099,13 +1099,35 @@
     "base": "kanoya-ab"
    },
    {
+    "id": "blue-jpp1-03",
+    "name": "P-1 patrol #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 127.751,
+    "lat": 28.669,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
+    "id": "blue-jpp1-04",
+    "name": "P-1 patrol #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 128.992,
+    "lat": 28.132,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
     "id": "blue-jpe2d-01",
     "name": "E-2D Hawkeye #01",
     "side": "blue",
     "kind": "aew",
     "preset": "JPE2D",
-    "lon": 127.1,
-    "lat": 27.168,
+    "lon": 126.992,
+    "lat": 27.546,
     "patrolKm": 50,
     "base": "naha-ab"
    },
@@ -1115,8 +1137,8 @@
     "side": "blue",
     "kind": "aew",
     "preset": "JPE2D",
-    "lon": 127.597,
-    "lat": 26.953,
+    "lon": 127.433,
+    "lat": 26.967,
     "patrolKm": 50,
     "base": "naha-ab"
    },
@@ -1126,8 +1148,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDG-KONGO",
-    "lon": 127.387,
-    "lat": 28.709,
+    "lon": 126.72,
+    "lat": 28.589,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1137,8 +1159,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDG-KONGO",
-    "lon": 128.122,
-    "lat": 27.745,
+    "lon": 127.593,
+    "lat": 28.116,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1148,8 +1170,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 125.784,
-    "lat": 28.147,
+    "lon": 126.83,
+    "lat": 27.739,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1159,8 +1181,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 126.831,
-    "lat": 27.579,
+    "lon": 126.003,
+    "lat": 27.902,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1170,8 +1192,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 126.83,
-    "lat": 27.739,
+    "lon": 127.662,
+    "lat": 28.146,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1181,8 +1203,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDD-AKIZUKI",
-    "lon": 126.003,
-    "lat": 27.902,
+    "lon": 125.675,
+    "lat": 28.539,
     "patrolKm": 15,
     "base": "sasebo-nb"
    },
@@ -1192,8 +1214,8 @@
     "side": "blue",
     "kind": "ship",
     "preset": "JPDDH-183",
-    "lon": 128.377,
-    "lat": 28.058,
+    "lon": 128.3,
+    "lat": 28.086,
     "patrolKm": 12,
     "base": "sasebo-nb"
    },
@@ -1203,8 +1225,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.437,
-    "lat": 28.569,
+    "lon": 127.708,
+    "lat": 28.002,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1214,8 +1236,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.201,
-    "lat": 28.458,
+    "lon": 127.49,
+    "lat": 27.723,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1225,8 +1247,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.708,
-    "lat": 28.002,
+    "lon": 128.167,
+    "lat": 28.411,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1236,8 +1258,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 127.49,
-    "lat": 27.723,
+    "lon": 128.466,
+    "lat": 28.451,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1247,8 +1269,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.167,
-    "lat": 28.411,
+    "lon": 127.909,
+    "lat": 27.822,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1258,8 +1280,8 @@
     "side": "blue",
     "kind": "air",
     "preset": "USF35B",
-    "lon": 128.466,
-    "lat": 28.451,
+    "lon": 128.05,
+    "lat": 28.528,
     "patrolKm": 45,
     "base": "sasebo-nb"
    },
@@ -1270,7 +1292,7 @@
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
     "lon": 125.523,
-    "lat": 26.255,
+    "lat": 26.477,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1280,8 +1302,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 125.876,
-    "lat": 28.02,
+    "lon": 125.122,
+    "lat": 26.388,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1291,8 +1313,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 125.523,
-    "lat": 26.477,
+    "lon": 126.86,
+    "lat": 28.214,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1302,8 +1324,8 @@
     "side": "blue",
     "kind": "sub",
     "preset": "JPSS-TAIGEI",
-    "lon": 125.122,
-    "lat": 26.388,
+    "lon": 126.755,
+    "lat": 27.437,
     "patrolKm": 10,
     "base": "sasebo-nb"
    },
@@ -1313,8 +1335,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.726,
-    "lat": 25.941,
+    "lon": 120.982,
+    "lat": 24.903,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1324,8 +1346,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.67,
-    "lat": 25.527,
+    "lon": 120.781,
+    "lat": 26.021,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1335,8 +1357,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.982,
-    "lat": 24.903,
+    "lon": 121.491,
+    "lat": 25.066,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1346,8 +1368,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.781,
-    "lat": 26.021,
+    "lon": 120.585,
+    "lat": 25.486,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1357,8 +1379,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.491,
-    "lat": 25.066,
+    "lon": 120.326,
+    "lat": 25.697,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1368,8 +1390,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.585,
-    "lat": 25.486,
+    "lon": 121.506,
+    "lat": 26.012,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1379,8 +1401,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 120.326,
-    "lat": 25.697,
+    "lon": 121.052,
+    "lat": 24.921,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1390,8 +1412,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ10C",
-    "lon": 121.506,
-    "lat": 26.012,
+    "lon": 121.256,
+    "lat": 25.972,
     "patrolKm": 60,
     "base": "longtian-ab"
    },
@@ -1401,8 +1423,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.852,
-    "lat": 26.421,
+    "lon": 121.264,
+    "lat": 26.935,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1412,8 +1434,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 122.056,
-    "lat": 27.472,
+    "lon": 121.971,
+    "lat": 27.494,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1423,8 +1445,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.264,
-    "lat": 26.935,
+    "lon": 122.486,
+    "lat": 27.227,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1434,8 +1456,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.971,
-    "lat": 27.494,
+    "lon": 122.104,
+    "lat": 27.173,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1445,8 +1467,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 122.486,
-    "lat": 27.227,
+    "lon": 121.638,
+    "lat": 27.12,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1456,8 +1478,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 122.104,
-    "lat": 27.173,
+    "lon": 121.597,
+    "lat": 27.412,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1467,8 +1489,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.638,
-    "lat": 27.12,
+    "lon": 121.722,
+    "lat": 26.577,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1478,8 +1500,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ16",
-    "lon": 121.597,
-    "lat": 27.412,
+    "lon": 121.102,
+    "lat": 26.287,
     "patrolKm": 60,
     "base": "shuimen-ab"
    },
@@ -1489,8 +1511,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.913,
-    "lat": 27.637,
+    "lon": 123.097,
+    "lat": 28.127,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1500,8 +1522,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.215,
-    "lat": 27.31,
+    "lon": 122.113,
+    "lat": 28.299,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1511,8 +1533,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 123.097,
-    "lat": 28.127,
+    "lon": 122.206,
+    "lat": 27.377,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1522,8 +1544,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.113,
-    "lat": 28.299,
+    "lon": 122.157,
+    "lat": 27.756,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1533,8 +1555,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.206,
-    "lat": 27.377,
+    "lon": 123.025,
+    "lat": 27.681,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1544,8 +1566,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ20",
-    "lon": 122.157,
-    "lat": 27.756,
+    "lon": 122.974,
+    "lat": 28.056,
     "patrolKm": 70,
     "base": "luqiao-ab"
    },
@@ -1555,8 +1577,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.42,
-    "lat": 24.152,
+    "lon": 120.713,
+    "lat": 24.828,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1566,8 +1588,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.38,
-    "lat": 24.444,
+    "lon": 120.507,
+    "lat": 24.112,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1577,8 +1599,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.713,
-    "lat": 24.828,
+    "lon": 120.362,
+    "lat": 24.296,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1588,8 +1610,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.507,
-    "lat": 24.112,
+    "lon": 119.832,
+    "lat": 24.578,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1599,8 +1621,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.362,
-    "lat": 24.296,
+    "lon": 120.196,
+    "lat": 24.3,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1610,8 +1632,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 119.832,
-    "lat": 24.578,
+    "lon": 120.909,
+    "lat": 23.901,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1621,8 +1643,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.196,
-    "lat": 24.3,
+    "lon": 120.615,
+    "lat": 24.564,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1632,8 +1654,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ11B",
-    "lon": 120.909,
-    "lat": 23.901,
+    "lon": 119.785,
+    "lat": 24.656,
     "patrolKm": 60,
     "base": "jinjiang-ab"
    },
@@ -1643,8 +1665,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 122.246,
-    "lat": 29.187,
+    "lon": 122.481,
+    "lat": 28.5,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1654,8 +1676,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.297,
-    "lat": 29.292,
+    "lon": 121.507,
+    "lat": 29.046,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1665,8 +1687,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 122.481,
-    "lat": 28.5,
+    "lon": 121.424,
+    "lat": 28.595,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1676,8 +1698,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.507,
-    "lat": 29.046,
+    "lon": 121.94,
+    "lat": 29.479,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1687,8 +1709,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.424,
-    "lat": 28.595,
+    "lon": 121.321,
+    "lat": 29.394,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1698,8 +1720,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNH6K",
-    "lon": 121.94,
-    "lat": 29.479,
+    "lon": 122.57,
+    "lat": 28.485,
     "patrolKm": 80,
     "base": "wuyishan-ab"
    },
@@ -1709,8 +1731,8 @@
     "side": "red",
     "kind": "aew",
     "preset": "CNKJ500",
-    "lon": 120.875,
-    "lat": 27.846,
+    "lon": 121.452,
+    "lat": 27.632,
     "patrolKm": 50,
     "base": "shuimen-ab"
    },
@@ -1720,10 +1742,32 @@
     "side": "red",
     "kind": "aew",
     "preset": "CNKJ500",
-    "lon": 121.656,
-    "lat": 27.278,
+    "lon": 120.815,
+    "lat": 27.275,
     "patrolKm": 50,
     "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cny20u-01",
+    "name": "Y-20U #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNY20U",
+    "lon": 119.152,
+    "lat": 27.373,
+    "patrolKm": 40,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cny20u-02",
+    "name": "Y-20U #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNY20U",
+    "lon": 118.944,
+    "lat": 27.491,
+    "patrolKm": 40,
+    "base": "wuyishan-ab"
    },
    {
     "id": "red-cncv-001-01",
@@ -1731,8 +1775,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNCV-001",
-    "lon": 124.261,
-    "lat": 29.013,
+    "lon": 124.346,
+    "lat": 29.129,
     "patrolKm": 12,
     "base": "ningbo-nb"
    },
@@ -1742,8 +1786,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 123.818,
-    "lat": 28.81,
+    "lon": 123.998,
+    "lat": 28.722,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1753,8 +1797,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.704,
-    "lat": 28.947,
+    "lon": 124.269,
+    "lat": 29.609,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1764,8 +1808,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.288,
-    "lat": 29.182,
+    "lon": 124.742,
+    "lat": 28.994,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1775,8 +1819,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.838,
-    "lat": 29.586,
+    "lon": 124.636,
+    "lat": 29.421,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1786,8 +1830,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 123.998,
-    "lat": 28.722,
+    "lon": 124.74,
+    "lat": 29.355,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1797,8 +1841,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.269,
-    "lat": 29.609,
+    "lon": 124.384,
+    "lat": 28.902,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1808,8 +1852,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.742,
-    "lat": 28.994,
+    "lon": 124.061,
+    "lat": 28.776,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1819,8 +1863,8 @@
     "side": "red",
     "kind": "air",
     "preset": "CNJ15",
-    "lon": 124.636,
-    "lat": 29.421,
+    "lon": 124.683,
+    "lat": 28.779,
     "patrolKm": 45,
     "base": "ningbo-nb"
    },
@@ -1830,8 +1874,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 123.68,
-    "lat": 27.611,
+    "lon": 122.553,
+    "lat": 26.436,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1841,8 +1885,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 122.968,
-    "lat": 26.705,
+    "lon": 122.944,
+    "lat": 28.105,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1852,8 +1896,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 122.322,
-    "lat": 26.452,
+    "lon": 123.075,
+    "lat": 26.449,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1863,8 +1907,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNFFG-054A",
-    "lon": 123.566,
-    "lat": 26.457,
+    "lon": 123.019,
+    "lat": 27.975,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1874,8 +1918,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNDDG-052D",
-    "lon": 123.502,
-    "lat": 27.624,
+    "lon": 123.11,
+    "lat": 27.647,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1885,8 +1929,8 @@
     "side": "red",
     "kind": "ship",
     "preset": "CNDDG-052D",
-    "lon": 123.763,
-    "lat": 28.737,
+    "lon": 124.379,
+    "lat": 28.077,
     "patrolKm": 15,
     "base": "ningbo-nb"
    },
@@ -1896,8 +1940,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 123.993,
-    "lat": 25.337,
+    "lon": 125.225,
+    "lat": 26.567,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1907,8 +1951,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 123.923,
-    "lat": 27.243,
+    "lon": 124.137,
+    "lat": 25.295,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1918,8 +1962,8 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 122.606,
-    "lat": 25.363,
+    "lon": 122.646,
+    "lat": 26.778,
     "patrolKm": 10,
     "base": "ningbo-nb"
    },
@@ -1929,10 +1973,221 @@
     "side": "red",
     "kind": "sub",
     "preset": "CNSSK-039A",
-    "lon": 124.985,
-    "lat": 26.169,
+    "lon": 124.096,
+    "lat": 25.959,
     "patrolKm": 10,
     "base": "ningbo-nb"
+   }
+  ],
+  "ato": [
+   {
+    "side": "blue",
+    "name": "Naha CAP",
+    "stationLon": 126.6,
+    "stationLat": 26.4,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "JPF15J",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Amami CAP",
+    "stationLon": 128.3,
+    "stationLat": 28.6,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "JPF15J",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "West Kyushu CAP",
+    "stationLon": 128.8,
+    "stationLat": 31.2,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "USF35A",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "AEW orbit",
+    "stationLon": 127.2,
+    "stationLat": 27.4,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "JPE2D",
+      "count": 1,
+      "mission": "AEW",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "blue",
+    "name": "Package KATANA",
+    "target": "shuimen-ab",
+    "tot": 3600,
+    "ipKm": 60,
+    "flights": [
+     {
+      "preset": "JPF2A",
+      "count": 4,
+      "mission": "Strike",
+      "formation": "Box"
+     },
+     {
+      "preset": "USF35A",
+      "count": 2,
+      "mission": "Escort",
+      "formation": "Wedge"
+     },
+     {
+      "preset": "USF35A",
+      "count": 2,
+      "mission": "SEAD",
+      "formation": "Trail"
+     },
+     {
+      "preset": "JPKC46A",
+      "count": 1,
+      "mission": "Tanker",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Taiwan Strait CAP",
+    "stationLon": 121.8,
+    "stationLat": 25.8,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "CNJ11B",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "LineAbreast"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Wenzhou CAP",
+    "stationLon": 122.3,
+    "stationLat": 27.2,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "CNJ10C",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "East Sea CAP",
+    "stationLon": 123.2,
+    "stationLat": 28.8,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "CNJ20",
+      "count": 2,
+      "mission": "CAP",
+      "formation": "Wedge"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "AEW orbit",
+    "stationLon": 121.9,
+    "stationLat": 27.4,
+    "start": 0,
+    "duration": 7200,
+    "flights": [
+     {
+      "preset": "CNKJ500",
+      "count": 1,
+      "mission": "AEW",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Package TIANLONG",
+    "target": "naha-ab",
+    "tot": 3000,
+    "ipKm": 60,
+    "flights": [
+     {
+      "preset": "CNJ16",
+      "count": 4,
+      "mission": "Strike",
+      "formation": "Wedge"
+     },
+     {
+      "preset": "CNJ20",
+      "count": 2,
+      "mission": "Escort",
+      "formation": "Wedge"
+     },
+     {
+      "preset": "CNJ16",
+      "count": 2,
+      "mission": "SEAD",
+      "formation": "Trail"
+     }
+    ]
+   },
+   {
+    "side": "red",
+    "name": "Package HAILONG",
+    "target": "miyako-gs",
+    "tot": 4500,
+    "ipKm": 80,
+    "flights": [
+     {
+      "preset": "CNH6K",
+      "count": 2,
+      "mission": "Strike",
+      "formation": "Trail"
+     },
+     {
+      "preset": "CNJ10C",
+      "count": 2,
+      "mission": "Escort",
+      "formation": "EchelonRight"
+     }
+    ]
    }
   ]
  }

@@ -1053,5 +1053,41 @@
    "survivability": 7,
    "endurance": 7
   }
+ },
+ {
+  "id": "JPKC46A",
+  "designer": "aircraft",
+  "name": "KC-46A Pegasus",
+  "archetype": "Aerial refuelling tanker",
+  "nation": "JPN",
+  "fromYear": 2021,
+  "ratings": {
+   "detection": 3,
+   "speed": 5,
+   "agility": 1,
+   "reach": 9,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
+ },
+ {
+  "id": "CNY20U",
+  "designer": "aircraft",
+  "name": "Y-20U",
+  "archetype": "Aerial refuelling tanker",
+  "nation": "CHN",
+  "fromYear": 2021,
+  "ratings": {
+   "detection": 3,
+   "speed": 5,
+   "agility": 1,
+   "reach": 9,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
  }
 ]

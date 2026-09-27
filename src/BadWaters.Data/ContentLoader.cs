@@ -49,7 +49,7 @@ public sealed class ContentLoader
 
     public List<T> Load<T>(string fileName)
     {
-        var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() } };
         var list = new List<T>();
         foreach (var (id, obj) in LoadFile(fileName))
         {

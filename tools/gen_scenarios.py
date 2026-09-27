@@ -69,8 +69,10 @@ def add(side, kind, preset, name, n, base, centre, spread, patrol):
 
 # Japan (Blue)
 add("blue", "air", "JPF15J", "F-15J Eagle", 12, "naha-ab", (126.3, 26.4), 1.0, 60)
-add("blue", "air", "USF35A", "F-35A Lightning II", 8, "nyutabaru-ab", (129.6, 30.6), 1.0, 60)
-add("blue", "air", "JPF2A", "F-2A", 8, "tsuiki-ab", (128.4, 31.8), 1.0, 60)
+add("blue", "air", "USF35A", "F-35A Lightning II", 4, "nyutabaru-ab", (129.6, 30.6), 1.0, 60)
+add("blue", "air", "USF35A", "F-35A Lightning II", 4, "naha-ab", (127.0, 26.6), 0.6, 60)
+add("blue", "air", "JPF2A", "F-2A", 8, "naha-ab", (127.4, 26.8), 0.6, 60)
+add("blue", "air", "JPKC46A", "KC-46A Pegasus", 2, "naha-ab", (127.8, 26.9), 0.3, 40)
 add("blue", "air", "JPP1", "P-1 patrol", 4, "kanoya-ab", (127.5, 29.0), 1.5, 90)
 add("blue", "aew", "JPE2D", "E-2D Hawkeye", 2, "naha-ab", (127.0, 27.3), 0.6, 50)
 add("blue", "ship", "JPDDG-KONGO", "Kongo-class", 2, "sasebo-nb", (127.4, 28.3), 1.0, 15)
@@ -85,15 +87,32 @@ add("red", "air", "CNJ20", "J-20", 6, "luqiao-ab", (123.0, 28.0), 0.9, 70)
 add("red", "air", "CNJ11B", "J-11B", 8, "jinjiang-ab", (120.4, 24.4), 0.7, 60)
 add("red", "air", "CNH6K", "H-6K", 6, "wuyishan-ab", (122.0, 29.0), 0.8, 80)
 add("red", "aew", "CNKJ500", "KJ-500", 2, "shuimen-ab", (121.3, 27.6), 0.5, 50)
+add("red", "air", "CNY20U", "Y-20U", 2, "wuyishan-ab", (119.0, 27.5), 0.3, 40)
 add("red", "ship", "CNCV-001", "Liaoning", 1, "ningbo-nb", (124.2, 29.0), 0.2, 12)
 add("red", "air", "CNJ15", "J-15", 8, "ningbo-nb", (124.4, 29.2), 0.6, 45)
 add("red", "ship", "CNFFG-054A", "Type 054A", 4, "ningbo-nb", (123.0, 27.3), 1.2, 15)
 add("red", "ship", "CNDDG-052D", "Type 052D", 2, "ningbo-nb", (123.8, 28.2), 0.8, 15)
 add("red", "sub", "CNSSK-039A", "Type 039A", 4, "ningbo-nb", (123.9, 26.4), 1.5, 10)
 
+def F(preset, count, mission, formation="Wedge"): return {"preset": preset, "count": count, "mission": mission, "formation": formation}
+def cap(side, name, lon, lat, flights, dur=7200): return {"side": side, "name": name, "stationLon": lon, "stationLat": lat, "start": 0, "duration": dur, "flights": flights}
+def pkg(side, name, target, tot, flights, ip=60): return {"side": side, "name": name, "target": target, "tot": tot, "ipKm": ip, "flights": flights}
+ato = [
+    cap("blue", "Naha CAP", 126.6, 26.4, [F("JPF15J", 2, "CAP", "LineAbreast")]),
+    cap("blue", "Amami CAP", 128.3, 28.6, [F("JPF15J", 2, "CAP", "LineAbreast")]),
+    cap("blue", "West Kyushu CAP", 128.8, 31.2, [F("USF35A", 2, "CAP", "Wedge")]),
+    cap("blue", "AEW orbit", 127.2, 27.4, [F("JPE2D", 1, "AEW", "Trail")]),
+    pkg("blue", "Package KATANA", "shuimen-ab", 3600, [F("JPF2A", 4, "Strike", "Box"), F("USF35A", 2, "Escort", "Wedge"), F("USF35A", 2, "SEAD", "Trail"), F("JPKC46A", 1, "Tanker", "Trail")]),
+    cap("red", "Taiwan Strait CAP", 121.8, 25.8, [F("CNJ11B", 2, "CAP", "LineAbreast")]),
+    cap("red", "Wenzhou CAP", 122.3, 27.2, [F("CNJ10C", 2, "CAP", "Wedge")]),
+    cap("red", "East Sea CAP", 123.2, 28.8, [F("CNJ20", 2, "CAP", "Wedge")]),
+    cap("red", "AEW orbit", 121.9, 27.4, [F("CNKJ500", 1, "AEW", "Trail")]),
+    pkg("red", "Package TIANLONG", "naha-ab", 3000, [F("CNJ16", 4, "Strike", "Wedge"), F("CNJ20", 2, "Escort", "Wedge"), F("CNJ16", 2, "SEAD", "Trail")]),
+    pkg("red", "Package HAILONG", "miyako-gs", 4500, [F("CNH6K", 2, "Strike", "Trail"), F("CNJ10C", 2, "Escort", "EchelonRight")], ip=80),
+]
 existing["jpn-chn"] = {"id": "jpn-chn", "name": "East China Sea: Japan vs China", "theatre": "ECS",
     "brief": "Test conflict in the East China Sea. China (Red) opens with Rocket Force salvos on Japanese bases; Japan (Blue) answers with Type 12 regiments. Both sides defend with land SAMs and air-defence ships. Cities are protected and never targeted.",
     "center": [125.2, 28.6], "zoom": 1.9, "sides": {"blue": "Japan", "red": "China"},
-    "sites": blue_bases + red_bases + cities, "batteries": batteries, "launchers": launchers, "script": script, "units": units}
+    "sites": blue_bases + red_bases + cities, "batteries": batteries, "launchers": launchers, "script": script, "units": units, "ato": ato}
 json.dump(list(existing.values()), open(path, "w", encoding="utf8"), indent=1, ensure_ascii=False)
 print(f"jpn-chn: {len(units)} units + {len(batteries)} batteries + {len(launchers)} launchers, {len(blue_bases)}+{len(red_bases)} bases, {len(script)} salvos")

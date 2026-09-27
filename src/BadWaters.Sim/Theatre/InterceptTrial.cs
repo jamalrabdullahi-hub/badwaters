@@ -26,6 +26,8 @@ public sealed record ScenarioDef
     public List<LauncherDef> Launchers { get; init; } = new();
     public List<ScriptedLaunch> Script { get; init; } = new();
     public List<UnitDef> Units { get; init; } = new();
+    /// <summary>Air tasking the AI flies for each side (player sides plan their own).</summary>
+    public List<AtoEntry> Ato { get; init; } = new();
     /// <summary>Strategic theatre this scenario belongs to (for "Enter Theatre Ops" from a war).</summary>
     public string Theatre { get; init; } = "";
 }
@@ -144,6 +146,9 @@ public sealed class InterceptTrial
 
     public SiteDef? Site(string id) => Scenario.Sites.FirstOrDefault(x => x.Id == id);
     private void Note(string kind, string text) => Log.Add(new LogEntry(Time, kind, text));
+    public void Report(string kind, string text) => Note(kind, text);
+    /// <summary>Air tasking layer (packages, flights). Optional; set by the host after construction.</summary>
+    public AirTasking? Air { get; set; }
 
     // ---------------- orders (player or AI use the same calls) ----------------
 
@@ -283,6 +288,7 @@ public sealed class InterceptTrial
             Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}).");
         }
 
+        Air?.Tick(Time - Step, Time);
         if (Control["blue"] == SideControl.AI) AiDefend("blue");
         if (Control["red"] == SideControl.AI) AiDefend("red");
     }
@@ -292,6 +298,13 @@ public sealed class InterceptTrial
     /// <summary>Where a unit is now: a steady orbit around its station (drawing and presence only).</summary>
     public (double Lon, double Lat) UnitPos(UnitDef u)
     {
+        if (u.Kind is "air" or "aew" && Air != null)
+        {
+            var f = Air.Flights.FirstOrDefault(x => x.Aircraft.Contains(u.Id) && x.Airborne(Time));
+            if (f != null) return f.Pos(Time);
+            var home = Site(u.Base);
+            if (home != null) return (home.Lon, home.Lat); // on the ground at its base
+        }
         if (u.PatrolKm <= 0) return (u.Lon, u.Lat);
         var period = u.Kind is "air" or "aew" ? 900.0 : 14400.0;
         var phase = u.Id.Aggregate(17, (h, ch) => h * 31 + ch) % 360 * Math.PI / 180;

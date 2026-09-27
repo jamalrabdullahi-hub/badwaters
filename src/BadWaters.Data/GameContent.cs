@@ -21,6 +21,10 @@ public sealed class GameContent
     public Dictionary<string, TheatreDef> Theatres { get; } = new();
     public Dictionary<string, DesignDef> Designs { get; } = new();
     public Dictionary<string, ScenarioDef> Scenarios { get; } = new();
+    public Dictionary<string, PresetDef> Presets { get; } = new();
+
+    /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
+    public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
     public List<string> Errors { get; } = new();
 
     public static GameContent Load(string coreDir, IEnumerable<string>? mods = null)
@@ -38,6 +42,7 @@ public sealed class GameContent
             foreach (var x in l.Load<FrameDef>($"frames/{f}.json")) g.Catalog.Frames[x.Id] = x;
         foreach (var x in l.Load<DesignDef>("designs.json")) g.Designs[x.Id] = x;
         foreach (var x in l.Load<ScenarioDef>("scenarios.json")) g.Scenarios[x.Id] = x;
+        foreach (var x in l.Load<PresetDef>("presets.json")) g.Presets[x.Id] = x;
         g.Errors.AddRange(l.Errors);
         g.Validate();
         return g;
@@ -83,6 +88,12 @@ public sealed class GameContent
             foreach (var b in sc.Batteries) foreach (var d in new[] { b.Radar, b.Launcher, b.Interceptor }) if (!Designs.ContainsKey(d)) Errors.Add($"scenario {sc.Id}: unknown design {d}");
             foreach (var la in sc.Launchers) if (!Designs.ContainsKey(la.Missile)) Errors.Add($"scenario {sc.Id}: unknown design {la.Missile}");
             foreach (var u in sc.Units) if (!sc.Sides.ContainsKey(u.Side)) Errors.Add($"scenario {sc.Id}: unit {u.Id} has unknown side {u.Side}");
+            foreach (var u in sc.Units) if (!Presets.ContainsKey(u.Preset)) Errors.Add($"scenario {sc.Id}: unit {u.Id} uses unknown preset {u.Preset}");
+            foreach (var e in sc.Ato)
+            {
+                foreach (var f in e.Flights) if (!Presets.ContainsKey(f.Preset)) Errors.Add($"scenario {sc.Id}: ATO uses unknown preset {f.Preset}");
+                if (e.Target != "" && sc.Sites.FirstOrDefault(x => x.Id == e.Target) is { } t && !TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: ATO targets protected site {e.Target}");
+            }
             foreach (var x in sc.Script)
             {
                 if (sc.Launchers.All(la => la.Id != x.Launcher)) Errors.Add($"scenario {sc.Id}: script uses unknown launcher {x.Launcher}");

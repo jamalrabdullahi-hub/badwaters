@@ -260,6 +260,11 @@ public partial class Shell : Control
             if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch(_theatre.Trial.Launchers.First(l => l.Def.Side == "red").Def.Id, target, 2);
             _theatre.Trial.Advance(secs);
             if (DevScreenshot.Arg("track") is { } tk) _theatre.SelectedTrack = int.Parse(tk);
+            if (DevScreenshot.Arg("flight") is { } fl) _theatre.SelectedFlight = _theatre.Trial.Air?.Flights.FirstOrDefault(f => f.Callsign.StartsWith(fl));
+            if (DevScreenshot.Arg("plan") is { } pt)
+                _theatre.DevPlan(pt, ("JPF15J", 4, BadWaters.Sim.Theatre.Mission.Strike, BadWaters.Sim.Theatre.Formation.Box),
+                    ("USF35A", 2, BadWaters.Sim.Theatre.Mission.Escort, BadWaters.Sim.Theatre.Formation.Wedge),
+                    ("JPKC46A", 1, BadWaters.Sim.Theatre.Mission.Tanker, BadWaters.Sim.Theatre.Formation.Trail));
             _theatre.UpdateUi();
         }
         DevScreenshot.MaybeCapture(this);

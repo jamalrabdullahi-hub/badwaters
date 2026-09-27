@@ -113,8 +113,21 @@ public partial class TheatreOps : Control
         AddChild(right);
         var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
         right.AddChild(scroll);
-        var rsv = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        scroll.AddChild(rsv);
+        var outer = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, CustomMinimumSize = new Vector2(410, 0) };
+        scroll.AddChild(outer);
+        var tabs = new HBoxContainer();
+        var tg = new ButtonGroup();
+        var tMis = new Button { Text = "Missiles & AD", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") != "air", SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        var tAir = new Button { Text = "Air tasking", ToggleMode = true, ButtonGroup = tg, ButtonPressed = DevScreenshot.Arg("tab") == "air", SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        tabs.AddChild(tMis); tabs.AddChild(tAir);
+        outer.AddChild(tabs);
+        var rsv = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tMis.ButtonPressed };
+        outer.AddChild(rsv);
+        _airView = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = tAir.ButtonPressed };
+        outer.AddChild(_airView);
+        tMis.Pressed += () => { rsv.Visible = true; _airView.Visible = false; };
+        tAir.Pressed += () => { rsv.Visible = false; _airView.Visible = true; UpdateAir(true); };
+        BuildAirView();
         rsv.AddChild(UiTheme.Text("TRACKS", 13, UiTheme.Accent));
         _tracks = new VBoxContainer();
         rsv.AddChild(_tracks);
@@ -174,6 +187,7 @@ public partial class TheatreOps : Control
     private void SetMode(string side, SideControl c)
     {
         Trial.Control[side] = c;
+        FillPlanner();
         (side == "blue" ? _bluePlayer : _redPlayer).ButtonPressed = c == SideControl.Player;
         (side == "blue" ? _blueAi : _redAi).ButtonPressed = c == SideControl.AI;
         FillLaunchers();
@@ -246,6 +260,8 @@ public partial class TheatreOps : Control
         var keep = Trial?.Control.ToDictionary(k => k.Key, k => k.Value);
         Trial = new InterceptTrial(sc, Session.Profile, seed);
         if (keep != null) foreach (var (k, v) in keep) Trial.Control[k] = v;
+        Trial.Air = new AirTasking(Trial, Session.Content.PresetInfo, seed);
+        SelectedFlight = null; Preview.Clear();
         SelectedTrack = null;
         _logSeen = -1;
         if (_pickers.Count > 0 && _pickers[0].O.ItemCount == 0) RefreshPickers();
@@ -297,6 +313,7 @@ public partial class TheatreOps : Control
         var hits = Trial.Hits.OrderByDescending(h => h.Value).Take(6).Select(h => $"{Trial.Site(h.Key)!.Name} ×{h.Value}");
         _oob.Text = text + $"Most hit: {(Trial.Hits.Count == 0 ? "none" : string.Join(", ", hits))}";
 
+        if (_airView.Visible) UpdateAir(false);
         Clear(_tracks);
         var shown = Trial.Tracks.Where(x => x.Launched <= Trial.Time)
             .OrderByDescending(x => x.State == TrackState.Flying).ThenByDescending(x => x.EndedAt).ThenBy(x => x.Id).Take(14).ToList();
@@ -440,7 +457,7 @@ public partial class TheatreLayer : Node2D
             DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
             if (!many || zoom > 3.5f) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
         }
-        foreach (var u in tr.Scenario.Units)
+        foreach (var u in tr.Scenario.Units.Where(u => u.Kind is not ("air" or "aew")))
         {
             var (lon, lat) = tr.UnitPos(u);
             var p = P(lon, lat);
@@ -471,7 +488,8 @@ public partial class TheatreLayer : Node2D
             var c = prot ? Green : SideColor(s.Side);
             if (prot) { DrawArc(p, 8 / zoom, 0, Mathf.Tau, 24, c, w); DrawCircle(p, 2.5f / zoom, c); }
             else DrawRect(new Rect2(p - new Vector2(6, 6) / zoom, new Vector2(12, 12) / zoom), c, false, w * 1.4f);
-            if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (tr.Hits.TryGetValue(s.Id, out var h) ? $" · hit ×{h}" : ""), c);
+            var ready = tr.Air?.Idle(s.Side).Count(u => u.Base == s.Id) ?? 0;
+            if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (ready > 0 ? $" · {ready} ready" : "") + (tr.Hits.TryGetValue(s.Id, out var h) ? $" · hit ×{h}" : ""), c);
         }
 
         foreach (var t in tr.Tracks.Where(t => t.Launched <= tr.Time))
@@ -495,6 +513,7 @@ public partial class TheatreLayer : Node2D
             Burst(t.State == TrackState.Intercepted ? head : z, t.EndedAt, t.State == TrackState.Intercepted ? Green : t.State == TrackState.Impacted ? Red : default, zoom);
         }
 
+        DrawAir(tr, zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))
         {
             var c = SideColor(Enemy(s.Target.Side));
@@ -508,6 +527,68 @@ public partial class TheatreLayer : Node2D
     }
 
     private static string Enemy(string side) => side == "blue" ? "red" : "blue";
+
+    /// <summary>Flight routes (take-off → ingress → IP → target → egress → land), CAP orbits and formations.</summary>
+    private void DrawAir(InterceptTrial tr, float zoom, float w)
+    {
+        if (tr.Air == null) return;
+        var labelled = new HashSet<string>();
+        foreach (var f in tr.Air.Flights.Concat(Ops.Preview))
+        {
+            var preview = Ops.Preview.Contains(f);
+            if (!preview && f.State is FlightState.Landed || f.State == FlightState.Lost && !preview) continue;
+            var c = preview ? Colors.White : SideColor(f.Side);
+            var sel = Ops.SelectedFlight == f || preview;
+            var pts = f.Route.Select(x => P(x.Lon, x.Lat)).ToArray();
+            var routeCol = new Color(c, sel ? 0.9f : 0.28f);
+            for (var i = 0; i + 1 < pts.Length; i++)
+            {
+                if (pts[i] == pts[i + 1]) continue;
+                if (preview || sel) DrawDashedLine(pts[i], pts[i + 1], routeCol, w * (sel ? 1.4f : 1f), 7 / zoom);
+                else DrawLine(pts[i], pts[i + 1], routeCol, w);
+            }
+            foreach (var x in f.Route.Where(x => x.Name == "Station"))
+                DrawArc(P(x.Lon, x.Lat), 25 * PxPerKm(x.Lat), 0, Mathf.Tau, 32, routeCol, w);
+            foreach (var x in f.Route)
+            {
+                var p = P(x.Lon, x.Lat);
+                if (x.Name is "IP")
+                {
+                    DrawRect(new Rect2(p - new Vector2(4, 4) / zoom, new Vector2(8, 8) / zoom), c, false, w);
+                    var pk = tr.Air.Packages.FirstOrDefault(k => k.Id == f.PackageId);
+                    if (labelled.Add("ip" + f.PackageId)) Tag(p, $"IP · {pk?.Name ?? f.Callsign}", c);
+                }
+                if (x.Name is "Target" && labelled.Add("tot" + f.PackageId)) Tag(p + new Vector2(0, 16 / zoom), $"TOT T+{AirTasking.Clock(x.T)}", c);
+                if (sel && x.Name is not ("IP" or "Target")) { DrawCircle(p, 2.5f / zoom, c); Tag(p, $"{x.Name} T+{AirTasking.Clock(x.T)}", c); }
+            }
+            if (!f.Airborne(tr.Time) && !preview) continue;
+            if (preview) continue;
+            var (lon, lat) = f.Pos(tr.Time);
+            var at = P(lon, lat);
+            var nx = f.Next(tr.Time);
+            var (hl, ht) = nx != null && (nx.Name != "Off station") ? (nx.Lon, nx.Lat) : f.Pos(tr.Time + 5);
+            var head = (P(hl, ht) - at).Normalized();
+            if (head == Vector2.Zero) head = Vector2.Up;
+            var right = new Vector2(-head.Y, head.X);
+            var slots = FormationRules.Slots(f.Formation);
+            var sp = 7 / zoom;
+            for (var i = 0; i < f.Aircraft.Count && i < slots.Length; i++)
+            {
+                var q = at + right * slots[i].X * sp - head * slots[i].Y * sp;
+                Chevron(q, head, right, c, zoom);
+            }
+            if (sel) DrawArc(at, 14 / zoom, 0, Mathf.Tau, 24, Colors.White, w);
+            if (sel || f.Mission is Mission.Strike or Mission.Escort or Mission.SEAD || zoom > 3f) Tag(at, f.Callsign, c);
+        }
+    }
+
+    private void Tag(Vector2 p, string text, Color c) => Labels.Add((p, text, c));
+
+    private void Chevron(Vector2 p, Vector2 head, Vector2 right, Color c, float zoom)
+    {
+        var s = 1 / zoom;
+        DrawColoredPolygon(new[] { p + head * 6 * s, p - head * 5 * s + right * 5 * s, p - head * 2 * s, p - head * 5 * s - right * 5 * s }, c);
+    }
 
     private void Ship(Vector2 p, Color c, float zoom, float scale)
     {
