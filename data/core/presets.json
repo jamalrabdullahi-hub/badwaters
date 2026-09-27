@@ -826,5 +826,232 @@
    "survivability": 6,
    "endurance": 7
   }
+ },
+ {
+  "id": "JPF15J",
+  "designer": "aircraft",
+  "name": "F-15J Eagle",
+  "archetype": "Air superiority, 4th generation",
+  "nation": "JPN",
+  "fromYear": 1981,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 7,
+   "reach": 5,
+   "signature": 0,
+   "payload": 4,
+   "air-defence": 8,
+   "strike": 2
+  }
+ },
+ {
+  "id": "JPF2A",
+  "designer": "aircraft",
+  "name": "Mitsubishi F-2A",
+  "archetype": "Anti-ship multirole",
+  "nation": "JPN",
+  "fromYear": 2000,
+  "ratings": {
+   "detection": 6,
+   "speed": 7,
+   "agility": 7,
+   "reach": 5,
+   "signature": 1,
+   "payload": 7,
+   "air-defence": 6,
+   "strike": 7
+  }
+ },
+ {
+  "id": "JPE2D",
+  "designer": "aircraft",
+  "name": "E-2D Advanced Hawkeye",
+  "archetype": "Carrier airborne early warning",
+  "nation": "JPN",
+  "fromYear": 2020,
+  "ratings": {
+   "detection": 10,
+   "speed": 3,
+   "agility": 2,
+   "reach": 6,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
+ },
+ {
+  "id": "JPP1",
+  "designer": "aircraft",
+  "name": "Kawasaki P-1",
+  "archetype": "Maritime patrol",
+  "nation": "JPN",
+  "fromYear": 2013,
+  "ratings": {
+   "detection": 8,
+   "speed": 4,
+   "agility": 2,
+   "reach": 8,
+   "signature": 0,
+   "payload": 5,
+   "air-defence": 0,
+   "strike": 3
+  }
+ },
+ {
+  "id": "CNKJ500",
+  "designer": "aircraft",
+  "name": "KJ-500",
+  "archetype": "Airborne early warning",
+  "nation": "CHN",
+  "fromYear": 2015,
+  "ratings": {
+   "detection": 10,
+   "speed": 4,
+   "agility": 2,
+   "reach": 6,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0
+  }
+ },
+ {
+  "id": "CNH6K",
+  "designer": "aircraft",
+  "name": "H-6K",
+  "archetype": "Missile bomber",
+  "nation": "CHN",
+  "fromYear": 2011,
+  "ratings": {
+   "detection": 4,
+   "speed": 4,
+   "agility": 1,
+   "reach": 8,
+   "signature": 0,
+   "payload": 8,
+   "air-defence": 0,
+   "strike": 7
+  }
+ },
+ {
+  "id": "JPDDG-MAYA",
+  "designer": "ship",
+  "name": "Maya-class destroyer",
+  "archetype": "Aegis air and missile defence destroyer",
+  "nation": "JPN",
+  "fromYear": 2020,
+  "ratings": {
+   "air-defence": 10,
+   "strike": 5,
+   "anti-ship": 6,
+   "anti-sub": 6,
+   "detection": 10,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "JPDDG-KONGO",
+  "designer": "ship",
+  "name": "Kongo-class destroyer",
+  "archetype": "Aegis air-defence destroyer",
+  "nation": "JPN",
+  "fromYear": 1993,
+  "ratings": {
+   "air-defence": 9,
+   "strike": 4,
+   "anti-ship": 5,
+   "anti-sub": 6,
+   "detection": 9,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "JPDD-AKIZUKI",
+  "designer": "ship",
+  "name": "Akizuki-class destroyer",
+  "archetype": "General-purpose destroyer",
+  "nation": "JPN",
+  "fromYear": 2012,
+  "ratings": {
+   "air-defence": 7,
+   "strike": 3,
+   "anti-ship": 5,
+   "anti-sub": 7,
+   "detection": 8,
+   "survivability": 5,
+   "endurance": 6
+  }
+ },
+ {
+  "id": "JPSS-TAIGEI",
+  "designer": "ship",
+  "name": "Taigei-class submarine",
+  "archetype": "Conventional attack submarine",
+  "nation": "JPN",
+  "fromYear": 2022,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 3,
+   "anti-ship": 7,
+   "anti-sub": 8,
+   "detection": 6,
+   "survivability": 8,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "CNFFG-054A",
+  "designer": "ship",
+  "name": "Type 054A frigate",
+  "archetype": "Multi-role frigate",
+  "nation": "CHN",
+  "fromYear": 2008,
+  "ratings": {
+   "air-defence": 6,
+   "strike": 3,
+   "anti-ship": 5,
+   "anti-sub": 6,
+   "detection": 6,
+   "survivability": 5,
+   "endurance": 6
+  }
+ },
+ {
+  "id": "CNSSK-039A",
+  "designer": "ship",
+  "name": "Type 039A submarine",
+  "archetype": "Conventional attack submarine",
+  "nation": "CHN",
+  "fromYear": 2006,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 3,
+   "anti-ship": 6,
+   "anti-sub": 6,
+   "detection": 5,
+   "survivability": 7,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "CNCV-001",
+  "designer": "ship",
+  "name": "Liaoning (Type 001) carrier",
+  "archetype": "STOBAR carrier",
+  "nation": "CHN",
+  "fromYear": 2012,
+  "ratings": {
+   "air-defence": 4,
+   "strike": 6,
+   "anti-ship": 5,
+   "anti-sub": 3,
+   "detection": 7,
+   "survivability": 7,
+   "endurance": 7
+  }
  }
 ]

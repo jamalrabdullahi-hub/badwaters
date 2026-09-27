@@ -83,6 +83,10 @@ public sealed class Scheduler
     {
         var before = _w.Now;
         _w.Now = _w.Now.Date.AddDays(1);
+        // events first, so a war that starts today already shapes today's shipping
+        if (_w.Now.Month != before.Month) MonthlyHook?.Invoke(_w);
+        var irq = DailyHook?.Invoke(_w, _w.Now);
+        Interrupt? routeIrq = null;
         foreach (var (id, r) in _w.Routes)
         {
             var hostile = 0.0; var friendly = 0.0; var war = 0.0;
@@ -95,15 +99,13 @@ public sealed class Scheduler
             var wasClosed = r.Status == RouteStatus.EffectivelyClosed;
             r.UpdateFromThreat(hostile, friendly, war);
             if (!wasClosed && r.Status == RouteStatus.EffectivelyClosed)
-                return Record(new Interrupt(_w.Now, "route-closed", $"Trade route {id} is effectively closed.", null));
+                routeIrq ??= new Interrupt(_w.Now, "route-closed", $"Trade route {id} is effectively closed.", null);
         }
-        if (_w.Now.Month != before.Month) MonthlyHook?.Invoke(_w);
-        var irq = DailyHook?.Invoke(_w, _w.Now);
         if (irq != null) return Record(irq);
         foreach (var t in _w.Theatres.Values)
             if (t.AtWar && t.PlayerInvolved)
                 return Record(new Interrupt(_w.Now, "war", $"You are at war in {t.Id}. Theatre Ops is live.", t.Id));
-        return null;
+        return routeIrq == null ? null : Record(routeIrq);
     }
 
     /// <summary>Route↔theatre membership is registered by the data layer.</summary>

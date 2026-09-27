@@ -1452,6 +1452,31 @@
   "needs": []
  },
  {
+  "id": "pr-rocket-mrbm",
+  "name": "Medium-range rocket motor",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "rocket-motors": 7
+  },
+  "uses": {
+   "mass": 2.2,
+   "volume": 5
+  },
+  "adds": {
+   "speed": 10,
+   "reach": 10
+  },
+  "port": null,
+  "cost": 1.0,
+  "factory": "missile-works",
+  "workUnits": 2.5,
+  "offers": [],
+  "needs": []
+ },
+ {
   "id": "pr-rocket-dual",
   "name": "Dual-pulse rocket motor",
   "family": "propulsion",

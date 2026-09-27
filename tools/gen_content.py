@@ -112,6 +112,7 @@ c("pl-shaped","Shaped anti-ship warhead","payload",M,{"payloads":3},{"mass":0.2,
 c("pl-frag","Fragmentation warhead","payload",M,{"payloads":2},{"mass":0.05,"volume":1},{"punch":3,"air-defence":3},cost=0.04,fac="missile-works",work=0.2)
 # ballistic and interceptor parts (game ratings only)
 c("pr-rocket-2stage","Two-stage rocket motor","propulsion",M,{"rocket-motors":5},{"mass":1.5,"volume":4},{"speed":9,"reach":7},cost=0.6,fac="missile-works",work=1.5)
+c("pr-rocket-mrbm","Medium-range rocket motor","propulsion",M,{"rocket-motors":7},{"mass":2.2,"volume":5},{"speed":10,"reach":10},cost=1.0,fac="missile-works",work=2.5)
 c("pr-rocket-dual","Dual-pulse rocket motor","propulsion",M,{"rocket-motors":5},{"mass":0.3,"volume":2},{"speed":9,"reach":5},cost=0.3,fac="missile-works",work=0.8)
 c("gc-rv-manoeuvre","Manoeuvring re-entry body","guidance",M,{"flight-control":6},{"mass":0.3,"volume":1,"power":0.2},{"agility":4,"accuracy":2},cost=0.3,fac="missile-works",work=0.6)
 c("ew-penaids","Penetration aids (decoys)","ew",M,{"ew-systems":4},{"mass":0.3,"volume":2},{"ew":3},cost=0.2,fac="missile-works",work=0.3)

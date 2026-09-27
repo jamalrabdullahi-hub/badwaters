@@ -8,7 +8,7 @@ var cmd = args.Length > 0 ? args[0] : "validate";
 if (cmd == "trial")
 {
     var gc = GameContent.Load(Path.Combine("data", "core"));
-    var t = new BadWaters.Sim.Theatre.InterceptTrial(gc.Scenarios["intercept-trial"],
+    var t = new BadWaters.Sim.Theatre.InterceptTrial(gc.Scenarios[args.Length > 2 ? args[2] : "intercept-trial"],
         id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), args.Length > 1 ? int.Parse(args[1]) : 1);
     t.Advance(1200);
     foreach (var l in t.Log) Console.WriteLine($"T+{l.T,6:0.0}  {l.Kind,-8} {l.Text}");
@@ -36,6 +36,9 @@ foreach (var p in people.Where(p => p.CareerYears <= p.TrainingYears))
 
 var content = GameContent.Load(dataDir, mods);
 loader.Errors.AddRange(content.Errors);
+var presetIds = presets.Select(p => p.Id).ToHashSet();
+foreach (var sc in content.Scenarios.Values)
+    foreach (var u in sc.Units.Where(u => !presetIds.Contains(u.Preset))) loader.Errors.Add($"scenario {sc.Id}: unit {u.Id} uses unknown preset {u.Preset}");
 foreach (var p in presets)
     foreach (var (r, v) in p.Ratings)
     {

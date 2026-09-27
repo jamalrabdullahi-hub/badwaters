@@ -184,7 +184,11 @@ public partial class Shell : Control
         {
             if (_theatre == null) { _theatre = new TheatreOps(); _stack.AddChild(_theatre); _map.AddOverlay(_theatre.Layer); }
             _theatre.Visible = true; _theatre.Layer.Visible = true;
-            var sc = Session.Content.Scenarios["intercept-trial"];
+            // a theatre at war with the player opens its own scenario; otherwise the proving-ground trial
+            var war = Session.World.Theatres.Values.Where(t => t.AtWar && t.PlayerInvolved).Select(t => t.Id).ToHashSet();
+            var id = DevScreenshot.Arg("scenario") ?? Session.Content.Scenarios.Values.FirstOrDefault(x => war.Contains(x.Theatre))?.Id ?? "intercept-trial";
+            if (_theatre.Scenario.Id != id) _theatre.Load(id);
+            var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
             return;
         }
@@ -253,7 +257,7 @@ public partial class Shell : Control
         if (DevScreenshot.Arg("screen") is { } screen) Open(screen == "dev" ? "Development" : screen == "theatre" ? "Theatre Ops" : "Map");
         if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))
         {
-            if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch("cinder", target, 2);
+            if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch(_theatre.Trial.Launchers.First(l => l.Def.Side == "red").Def.Id, target, 2);
             _theatre.Trial.Advance(secs);
             if (DevScreenshot.Arg("track") is { } tk) _theatre.SelectedTrack = int.Parse(tk);
             _theatre.UpdateUi();

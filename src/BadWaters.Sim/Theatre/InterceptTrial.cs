@@ -10,6 +10,8 @@ public sealed record SiteDef(string Id, string Name, string Side, string Class, 
 public sealed record BatteryDef(string Id, string Name, string Side, double Lon, double Lat, string Radar, string Launcher, string Interceptor, int Stock);
 public sealed record LauncherDef(string Id, string Name, string Side, double Lon, double Lat, string Missile, int Stock);
 public sealed record ScriptedLaunch(double T, string Launcher, string Target, int Count);
+/// <summary>A force element shown in the theatre (aircraft, ship, submarine, AEW...). Moves on a patrol orbit.</summary>
+public sealed record UnitDef(string Id, string Name, string Side, string Kind, string Preset, double Lon, double Lat, double PatrolKm = 0, string Base = "");
 
 public sealed record ScenarioDef
 {
@@ -23,6 +25,9 @@ public sealed record ScenarioDef
     public List<BatteryDef> Batteries { get; init; } = new();
     public List<LauncherDef> Launchers { get; init; } = new();
     public List<ScriptedLaunch> Script { get; init; } = new();
+    public List<UnitDef> Units { get; init; } = new();
+    /// <summary>Strategic theatre this scenario belongs to (for "Enter Theatre Ops" from a war).</summary>
+    public string Theatre { get; init; } = "";
 }
 
 public enum SideControl { AI, Player }
@@ -123,7 +128,7 @@ public sealed class InterceptTrial
 
     private readonly Random _rng;
     private int _nextId = 1;
-    private int _script;
+    private readonly HashSet<int> _scriptDone = new();
     public const double Step = 0.5;
     private double _carry;
 
@@ -240,7 +245,7 @@ public sealed class InterceptTrial
     private void Tick()
     {
         Time += Step;
-        if (Control["red"] == SideControl.AI) RunScript();
+        RunScript();
 
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Launched <= Time))
         {
@@ -284,12 +289,31 @@ public sealed class InterceptTrial
 
     private static SystemProfile m(Track t) => t.Missile;
 
+    /// <summary>Where a unit is now: a steady orbit around its station (drawing and presence only).</summary>
+    public (double Lon, double Lat) UnitPos(UnitDef u)
+    {
+        if (u.PatrolKm <= 0) return (u.Lon, u.Lat);
+        var period = u.Kind is "air" or "aew" ? 900.0 : 14400.0;
+        var phase = u.Id.Aggregate(17, (h, ch) => h * 31 + ch) % 360 * Math.PI / 180;
+        var a = Time / period * Math.PI * 2 + phase;
+        var r = u.PatrolKm / 111.0;
+        return (u.Lon + r * Math.Cos(a) / Math.Cos(u.Lat * Math.PI / 180), u.Lat + r * Math.Sin(a));
+    }
+
+    /// <summary>The best battery of a side to engage a track now (has stock, a free channel and a solution).</summary>
+    public BatteryState? BestBattery(string side, Track tr) =>
+        Batteries.Where(b => b.Def.Side == side && b.Stock > 0 && Shots.Count(s => s.BatteryId == b.Def.Id && s.State == ShotState.Flying) < b.Channels)
+            .Select(b => (b, plan: PlanIntercept(b, tr))).Where(x => x.plan != null).OrderBy(x => x.plan!.Value.T).Select(x => x.b).FirstOrDefault();
+
     private void RunScript()
     {
-        while (_script < Scenario.Script.Count && Scenario.Script[_script].T <= Time)
+        for (var i = 0; i < Scenario.Script.Count; i++)
         {
-            var s = Scenario.Script[_script++];
-            Launch(s.Launcher, s.Target, s.Count);
+            var s = Scenario.Script[i];
+            if (s.T > Time || _scriptDone.Contains(i)) continue;
+            _scriptDone.Add(i);
+            var side = Launchers.FirstOrDefault(l => l.Def.Id == s.Launcher)?.Def.Side;
+            if (side != null && Control.GetValueOrDefault(side) == SideControl.AI) Launch(s.Launcher, s.Target, s.Count); // player sides give their own orders
         }
     }
 
@@ -305,5 +329,5 @@ public sealed class InterceptTrial
             }
     }
 
-    public bool Finished => _script >= Scenario.Script.Count && Tracks.All(t => t.State != TrackState.Flying) && Shots.All(s => s.State != ShotState.Flying);
+    public bool Finished => _scriptDone.Count >= Scenario.Script.Count && Tracks.All(t => t.State != TrackState.Flying) && Shots.All(s => s.State != ShotState.Flying);
 }

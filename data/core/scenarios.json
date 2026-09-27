@@ -90,5 +90,1850 @@
     "count": 2
    }
   ]
+ },
+ {
+  "id": "jpn-chn",
+  "name": "East China Sea: Japan vs China",
+  "theatre": "ECS",
+  "brief": "Test conflict in the East China Sea. China (Red) opens with Rocket Force salvos on Japanese bases; Japan (Blue) answers with Type 12 regiments. Both sides defend with land SAMs and air-defence ships. Cities are protected and never targeted.",
+  "center": [
+   125.2,
+   28.6
+  ],
+  "zoom": 1.9,
+  "sides": {
+   "blue": "Japan",
+   "red": "China"
+  },
+  "sites": [
+   {
+    "id": "naha-ab",
+    "name": "Naha Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 127.65,
+    "lat": 26.2
+   },
+   {
+    "id": "nyutabaru-ab",
+    "name": "Nyutabaru Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 131.45,
+    "lat": 32.08
+   },
+   {
+    "id": "tsuiki-ab",
+    "name": "Tsuiki Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 131.04,
+    "lat": 33.68
+   },
+   {
+    "id": "kanoya-ab",
+    "name": "Kanoya Air Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 130.84,
+    "lat": 31.37
+   },
+   {
+    "id": "sasebo-nb",
+    "name": "Sasebo Naval Base",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 129.72,
+    "lat": 33.16
+   },
+   {
+    "id": "amami-gs",
+    "name": "Amami garrison",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 129.49,
+    "lat": 28.39
+   },
+   {
+    "id": "miyako-gs",
+    "name": "Miyako garrison",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 125.3,
+    "lat": 24.78
+   },
+   {
+    "id": "ishigaki-gs",
+    "name": "Ishigaki garrison",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 124.18,
+    "lat": 24.4
+   },
+   {
+    "id": "longtian-ab",
+    "name": "Longtian Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 119.66,
+    "lat": 25.68
+   },
+   {
+    "id": "shuimen-ab",
+    "name": "Shuimen Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 120.08,
+    "lat": 26.99
+   },
+   {
+    "id": "luqiao-ab",
+    "name": "Luqiao Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 121.43,
+    "lat": 28.56
+   },
+   {
+    "id": "jinjiang-ab",
+    "name": "Jinjiang Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 118.59,
+    "lat": 24.8
+   },
+   {
+    "id": "zhangzhou-ab",
+    "name": "Zhangzhou Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 117.6,
+    "lat": 24.55
+   },
+   {
+    "id": "wuyishan-ab",
+    "name": "Wuyishan Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 118.0,
+    "lat": 27.7
+   },
+   {
+    "id": "ningbo-nb",
+    "name": "Ningbo naval base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 121.85,
+    "lat": 29.95
+   },
+   {
+    "id": "daishan-ab",
+    "name": "Daishan Air Base",
+    "side": "red",
+    "class": "military-base",
+    "lon": 122.2,
+    "lat": 30.28
+   },
+   {
+    "id": "naha-city",
+    "name": "Naha",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 127.72,
+    "lat": 26.24
+   },
+   {
+    "id": "kagoshima",
+    "name": "Kagoshima",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 130.56,
+    "lat": 31.6
+   },
+   {
+    "id": "fukuoka",
+    "name": "Fukuoka",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 130.4,
+    "lat": 33.59
+   },
+   {
+    "id": "nagasaki",
+    "name": "Nagasaki",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 129.87,
+    "lat": 32.75
+   },
+   {
+    "id": "shanghai",
+    "name": "Shanghai",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 121.47,
+    "lat": 31.23
+   },
+   {
+    "id": "fuzhou",
+    "name": "Fuzhou",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 119.3,
+    "lat": 26.08
+   },
+   {
+    "id": "xiamen",
+    "name": "Xiamen",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 118.09,
+    "lat": 24.48
+   },
+   {
+    "id": "wenzhou",
+    "name": "Wenzhou",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 120.7,
+    "lat": 28.0
+   },
+   {
+    "id": "ningbo",
+    "name": "Ningbo",
+    "side": "red",
+    "class": "population-centre",
+    "lon": 121.55,
+    "lat": 29.87
+   }
+  ],
+  "batteries": [
+   {
+    "id": "pac3-naha-ab",
+    "name": "PAC-3 battery (Naha)",
+    "side": "blue",
+    "lon": 127.7,
+    "lat": 26.16,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "pac3-nyutabaru-ab",
+    "name": "PAC-3 battery (Nyutabaru)",
+    "side": "blue",
+    "lon": 131.5,
+    "lat": 32.04,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "pac3-tsuiki-ab",
+    "name": "PAC-3 battery (Tsuiki)",
+    "side": "blue",
+    "lon": 131.09,
+    "lat": 33.64,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "pac3-kanoya-ab",
+    "name": "PAC-3 battery (Kanoya)",
+    "side": "blue",
+    "lon": 130.89000000000001,
+    "lat": 31.330000000000002,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "pac3-sasebo-nb",
+    "name": "PAC-3 battery (Sasebo)",
+    "side": "blue",
+    "lon": 129.77,
+    "lat": 33.12,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "pac3-miyako-gs",
+    "name": "PAC-3 battery (Miyako)",
+    "side": "blue",
+    "lon": 125.35,
+    "lat": 24.740000000000002,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-hit",
+    "stock": 16
+   },
+   {
+    "id": "maya-0",
+    "name": "JS Maya (Maya-class)",
+    "side": "blue",
+    "lon": 126.2,
+    "lat": 27.0,
+    "radar": "maya-ddg",
+    "launcher": "maya-ddg",
+    "interceptor": "sm-2",
+    "stock": 24
+   },
+   {
+    "id": "maya-1",
+    "name": "JS Haguro (Maya-class)",
+    "side": "blue",
+    "lon": 128.3,
+    "lat": 29.5,
+    "radar": "maya-ddg",
+    "launcher": "maya-ddg",
+    "interceptor": "sm-2",
+    "stock": 24
+   },
+   {
+    "id": "maya-2",
+    "name": "JS Kirishima (Kongo-class)",
+    "side": "blue",
+    "lon": 124.8,
+    "lat": 25.9,
+    "radar": "maya-ddg",
+    "launcher": "maya-ddg",
+    "interceptor": "sm-2",
+    "stock": 24
+   },
+   {
+    "id": "hq9-longtian-ab",
+    "name": "HQ-9B battery (Longtian)",
+    "side": "red",
+    "lon": 119.61,
+    "lat": 25.72,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "hq9-shuimen-ab",
+    "name": "HQ-9B battery (Shuimen)",
+    "side": "red",
+    "lon": 120.03,
+    "lat": 27.029999999999998,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "hq9-luqiao-ab",
+    "name": "HQ-9B battery (Luqiao)",
+    "side": "red",
+    "lon": 121.38000000000001,
+    "lat": 28.599999999999998,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "hq9-jinjiang-ab",
+    "name": "HQ-9B battery (Jinjiang)",
+    "side": "red",
+    "lon": 118.54,
+    "lat": 24.84,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "hq9-zhangzhou-ab",
+    "name": "HQ-9B battery (Zhangzhou)",
+    "side": "red",
+    "lon": 117.55,
+    "lat": 24.59,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "hq9-ningbo-nb",
+    "name": "HQ-9B battery (Ningbo)",
+    "side": "red",
+    "lon": 121.8,
+    "lat": 29.99,
+    "radar": "hq-9-radar",
+    "launcher": "hq-9-tel",
+    "interceptor": "hq-9b",
+    "stock": 16
+   },
+   {
+    "id": "pla-ddg-0",
+    "name": "Nanchang (Type 055)",
+    "side": "red",
+    "lon": 123.2,
+    "lat": 28.5,
+    "radar": "type-055",
+    "launcher": "type-055",
+    "interceptor": "hhq-9",
+    "stock": 24
+   },
+   {
+    "id": "pla-ddg-1",
+    "name": "Changsha (Type 052D)",
+    "side": "red",
+    "lon": 122.5,
+    "lat": 26.5,
+    "radar": "type-052d",
+    "launcher": "type-052d",
+    "interceptor": "hhq-9",
+    "stock": 24
+   },
+   {
+    "id": "pla-ddg-2",
+    "name": "Hefei (Type 052D)",
+    "side": "red",
+    "lon": 121.9,
+    "lat": 24.9,
+    "radar": "type-052d",
+    "launcher": "type-052d",
+    "interceptor": "hhq-9",
+    "stock": 24
+   }
+  ],
+  "launchers": [
+   {
+    "id": "rf-ningde",
+    "name": "Rocket Force brigade (Ningde)",
+    "side": "red",
+    "lon": 119.5,
+    "lat": 26.9,
+    "missile": "df-17",
+    "stock": 12
+   },
+   {
+    "id": "rf-putian",
+    "name": "Rocket Force brigade (Putian)",
+    "side": "red",
+    "lon": 119.2,
+    "lat": 25.4,
+    "missile": "df-15b",
+    "stock": 12
+   },
+   {
+    "id": "rf-wenzhou",
+    "name": "Rocket Force brigade (Wenzhou)",
+    "side": "red",
+    "lon": 120.4,
+    "lat": 27.9,
+    "missile": "df-17",
+    "stock": 12
+   },
+   {
+    "id": "ssm-ishigaki",
+    "name": "Type 12 regiment (Ishigaki)",
+    "side": "blue",
+    "lon": 124.1,
+    "lat": 24.47,
+    "missile": "type-12",
+    "stock": 12
+   },
+   {
+    "id": "ssm-miyako",
+    "name": "Type 12 regiment (Miyako)",
+    "side": "blue",
+    "lon": 125.22,
+    "lat": 24.83,
+    "missile": "type-12",
+    "stock": 12
+   },
+   {
+    "id": "ssm-amami",
+    "name": "Type 12 regiment (Amami)",
+    "side": "blue",
+    "lon": 129.4,
+    "lat": 28.33,
+    "missile": "type-12",
+    "stock": 12
+   }
+  ],
+  "script": [
+   {
+    "t": 31,
+    "launcher": "rf-wenzhou",
+    "target": "naha-ab",
+    "count": 2
+   },
+   {
+    "t": 34,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 50,
+    "launcher": "rf-ningde",
+    "target": "naha-ab",
+    "count": 2
+   },
+   {
+    "t": 103,
+    "launcher": "ssm-miyako",
+    "target": "longtian-ab",
+    "count": 2
+   },
+   {
+    "t": 109,
+    "launcher": "ssm-ishigaki",
+    "target": "longtian-ab",
+    "count": 2
+   },
+   {
+    "t": 150,
+    "launcher": "rf-wenzhou",
+    "target": "miyako-gs",
+    "count": 2
+   },
+   {
+    "t": 153,
+    "launcher": "rf-ningde",
+    "target": "miyako-gs",
+    "count": 2
+   },
+   {
+    "t": 153,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 240,
+    "launcher": "ssm-ishigaki",
+    "target": "shuimen-ab",
+    "count": 2
+   },
+   {
+    "t": 247,
+    "launcher": "ssm-miyako",
+    "target": "shuimen-ab",
+    "count": 2
+   },
+   {
+    "t": 300,
+    "launcher": "rf-ningde",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 302,
+    "launcher": "rf-wenzhou",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 317,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 434,
+    "launcher": "ssm-miyako",
+    "target": "luqiao-ab",
+    "count": 2
+   },
+   {
+    "t": 437,
+    "launcher": "ssm-ishigaki",
+    "target": "luqiao-ab",
+    "count": 2
+   },
+   {
+    "t": 452,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 456,
+    "launcher": "rf-wenzhou",
+    "target": "naha-ab",
+    "count": 2
+   },
+   {
+    "t": 458,
+    "launcher": "rf-ningde",
+    "target": "naha-ab",
+    "count": 2
+   },
+   {
+    "t": 606,
+    "launcher": "ssm-ishigaki",
+    "target": "jinjiang-ab",
+    "count": 2
+   },
+   {
+    "t": 607,
+    "launcher": "rf-ningde",
+    "target": "miyako-gs",
+    "count": 2
+   },
+   {
+    "t": 607,
+    "launcher": "rf-wenzhou",
+    "target": "miyako-gs",
+    "count": 2
+   },
+   {
+    "t": 618,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 618,
+    "launcher": "ssm-miyako",
+    "target": "jinjiang-ab",
+    "count": 2
+   },
+   {
+    "t": 757,
+    "launcher": "rf-ningde",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 763,
+    "launcher": "rf-putian",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 766,
+    "launcher": "rf-wenzhou",
+    "target": "ishigaki-gs",
+    "count": 2
+   },
+   {
+    "t": 788,
+    "launcher": "ssm-miyako",
+    "target": "ningbo-nb",
+    "count": 2
+   },
+   {
+    "t": 800,
+    "launcher": "ssm-ishigaki",
+    "target": "zhangzhou-ab",
+    "count": 2
+   },
+   {
+    "t": 900,
+    "launcher": "ssm-miyako",
+    "target": "daishan-ab",
+    "count": 2
+   },
+   {
+    "t": 917,
+    "launcher": "ssm-ishigaki",
+    "target": "ningbo-nb",
+    "count": 2
+   }
+  ],
+  "units": [
+   {
+    "id": "blue-jpf15j-01",
+    "name": "F-15J Eagle #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 126.818,
+    "lat": 25.855,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-02",
+    "name": "F-15J Eagle #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 126.145,
+    "lat": 26.045,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-03",
+    "name": "F-15J Eagle #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 125.731,
+    "lat": 26.822,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-04",
+    "name": "F-15J Eagle #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 125.504,
+    "lat": 26.208,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-05",
+    "name": "F-15J Eagle #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 126.018,
+    "lat": 26.15,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-06",
+    "name": "F-15J Eagle #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 125.829,
+    "lat": 25.67,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-07",
+    "name": "F-15J Eagle #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 126.219,
+    "lat": 25.8,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-08",
+    "name": "F-15J Eagle #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 127.145,
+    "lat": 25.726,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-09",
+    "name": "F-15J Eagle #09",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 125.886,
+    "lat": 26.606,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-10",
+    "name": "F-15J Eagle #10",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 127.071,
+    "lat": 26.179,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-11",
+    "name": "F-15J Eagle #11",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 125.685,
+    "lat": 25.711,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpf15j-12",
+    "name": "F-15J Eagle #12",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF15J",
+    "lon": 126.623,
+    "lat": 26.837,
+    "patrolKm": 60,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-usf35a-01",
+    "name": "F-35A Lightning II #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 130.57,
+    "lat": 31.169,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-02",
+    "name": "F-35A Lightning II #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 130.333,
+    "lat": 30.408,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-03",
+    "name": "F-35A Lightning II #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 129.507,
+    "lat": 31.135,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-04",
+    "name": "F-35A Lightning II #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 128.925,
+    "lat": 30.368,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-05",
+    "name": "F-35A Lightning II #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 129.94,
+    "lat": 30.923,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-06",
+    "name": "F-35A Lightning II #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 129.967,
+    "lat": 29.914,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-07",
+    "name": "F-35A Lightning II #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 129.87,
+    "lat": 30.655,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-usf35a-08",
+    "name": "F-35A Lightning II #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35A",
+    "lon": 129.09,
+    "lat": 30.54,
+    "patrolKm": 60,
+    "base": "nyutabaru-ab"
+   },
+   {
+    "id": "blue-jpf2a-01",
+    "name": "F-2A #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 127.94,
+    "lat": 32.481,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-02",
+    "name": "F-2A #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 128.776,
+    "lat": 31.351,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-03",
+    "name": "F-2A #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 128.049,
+    "lat": 32.229,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-04",
+    "name": "F-2A #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 127.512,
+    "lat": 32.315,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-05",
+    "name": "F-2A #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 129.01,
+    "lat": 31.642,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-06",
+    "name": "F-2A #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 127.532,
+    "lat": 32.461,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-07",
+    "name": "F-2A #07",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 128.534,
+    "lat": 32.149,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpf2a-08",
+    "name": "F-2A #08",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPF2A",
+    "lon": 127.825,
+    "lat": 31.799,
+    "patrolKm": 60,
+    "base": "tsuiki-ab"
+   },
+   {
+    "id": "blue-jpp1-01",
+    "name": "P-1 patrol #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 128.654,
+    "lat": 29.343,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
+    "id": "blue-jpp1-02",
+    "name": "P-1 patrol #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 126.429,
+    "lat": 28.135,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
+    "id": "blue-jpp1-03",
+    "name": "P-1 patrol #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 128.235,
+    "lat": 29.094,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
+    "id": "blue-jpp1-04",
+    "name": "P-1 patrol #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPP1",
+    "lon": 128.241,
+    "lat": 28.828,
+    "patrolKm": 90,
+    "base": "kanoya-ab"
+   },
+   {
+    "id": "blue-jpe2d-01",
+    "name": "E-2D Hawkeye #01",
+    "side": "blue",
+    "kind": "aew",
+    "preset": "JPE2D",
+    "lon": 127.1,
+    "lat": 27.168,
+    "patrolKm": 50,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpe2d-02",
+    "name": "E-2D Hawkeye #02",
+    "side": "blue",
+    "kind": "aew",
+    "preset": "JPE2D",
+    "lon": 127.597,
+    "lat": 26.953,
+    "patrolKm": 50,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpddg-kongo-01",
+    "name": "Kongo-class #01",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDDG-KONGO",
+    "lon": 127.387,
+    "lat": 28.709,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpddg-kongo-02",
+    "name": "Kongo-class #02",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDDG-KONGO",
+    "lon": 128.122,
+    "lat": 27.745,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpdd-akizuki-01",
+    "name": "Akizuki-class #01",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDD-AKIZUKI",
+    "lon": 125.784,
+    "lat": 28.147,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpdd-akizuki-02",
+    "name": "Akizuki-class #02",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDD-AKIZUKI",
+    "lon": 126.831,
+    "lat": 27.579,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpdd-akizuki-03",
+    "name": "Akizuki-class #03",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDD-AKIZUKI",
+    "lon": 126.83,
+    "lat": 27.739,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpdd-akizuki-04",
+    "name": "Akizuki-class #04",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDD-AKIZUKI",
+    "lon": 126.003,
+    "lat": 27.902,
+    "patrolKm": 15,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpddh-183-01",
+    "name": "JS Kaga (Izumo-class) #01",
+    "side": "blue",
+    "kind": "ship",
+    "preset": "JPDDH-183",
+    "lon": 128.377,
+    "lat": 28.058,
+    "patrolKm": 12,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-01",
+    "name": "F-35B Lightning II #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 127.437,
+    "lat": 28.569,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-02",
+    "name": "F-35B Lightning II #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 128.201,
+    "lat": 28.458,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-03",
+    "name": "F-35B Lightning II #03",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 127.708,
+    "lat": 28.002,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-04",
+    "name": "F-35B Lightning II #04",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 127.49,
+    "lat": 27.723,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-05",
+    "name": "F-35B Lightning II #05",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 128.167,
+    "lat": 28.411,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-usf35b-06",
+    "name": "F-35B Lightning II #06",
+    "side": "blue",
+    "kind": "air",
+    "preset": "USF35B",
+    "lon": 128.466,
+    "lat": 28.451,
+    "patrolKm": 45,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpss-taigei-01",
+    "name": "Taigei-class #01",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "JPSS-TAIGEI",
+    "lon": 125.523,
+    "lat": 26.255,
+    "patrolKm": 10,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpss-taigei-02",
+    "name": "Taigei-class #02",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "JPSS-TAIGEI",
+    "lon": 125.876,
+    "lat": 28.02,
+    "patrolKm": 10,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpss-taigei-03",
+    "name": "Taigei-class #03",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "JPSS-TAIGEI",
+    "lon": 125.523,
+    "lat": 26.477,
+    "patrolKm": 10,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "blue-jpss-taigei-04",
+    "name": "Taigei-class #04",
+    "side": "blue",
+    "kind": "sub",
+    "preset": "JPSS-TAIGEI",
+    "lon": 125.122,
+    "lat": 26.388,
+    "patrolKm": 10,
+    "base": "sasebo-nb"
+   },
+   {
+    "id": "red-cnj10c-01",
+    "name": "J-10C #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 121.726,
+    "lat": 25.941,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-02",
+    "name": "J-10C #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 121.67,
+    "lat": 25.527,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-03",
+    "name": "J-10C #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 120.982,
+    "lat": 24.903,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-04",
+    "name": "J-10C #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 120.781,
+    "lat": 26.021,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-05",
+    "name": "J-10C #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 121.491,
+    "lat": 25.066,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-06",
+    "name": "J-10C #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 120.585,
+    "lat": 25.486,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-07",
+    "name": "J-10C #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 120.326,
+    "lat": 25.697,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj10c-08",
+    "name": "J-10C #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ10C",
+    "lon": 121.506,
+    "lat": 26.012,
+    "patrolKm": 60,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnj16-01",
+    "name": "J-16 #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 121.852,
+    "lat": 26.421,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-02",
+    "name": "J-16 #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 122.056,
+    "lat": 27.472,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-03",
+    "name": "J-16 #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 121.264,
+    "lat": 26.935,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-04",
+    "name": "J-16 #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 121.971,
+    "lat": 27.494,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-05",
+    "name": "J-16 #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 122.486,
+    "lat": 27.227,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-06",
+    "name": "J-16 #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 122.104,
+    "lat": 27.173,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-07",
+    "name": "J-16 #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 121.638,
+    "lat": 27.12,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj16-08",
+    "name": "J-16 #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ16",
+    "lon": 121.597,
+    "lat": 27.412,
+    "patrolKm": 60,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnj20-01",
+    "name": "J-20 #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 122.913,
+    "lat": 27.637,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj20-02",
+    "name": "J-20 #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 122.215,
+    "lat": 27.31,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj20-03",
+    "name": "J-20 #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 123.097,
+    "lat": 28.127,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj20-04",
+    "name": "J-20 #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 122.113,
+    "lat": 28.299,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj20-05",
+    "name": "J-20 #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 122.206,
+    "lat": 27.377,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj20-06",
+    "name": "J-20 #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ20",
+    "lon": 122.157,
+    "lat": 27.756,
+    "patrolKm": 70,
+    "base": "luqiao-ab"
+   },
+   {
+    "id": "red-cnj11b-01",
+    "name": "J-11B #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.42,
+    "lat": 24.152,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-02",
+    "name": "J-11B #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.38,
+    "lat": 24.444,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-03",
+    "name": "J-11B #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.713,
+    "lat": 24.828,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-04",
+    "name": "J-11B #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.507,
+    "lat": 24.112,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-05",
+    "name": "J-11B #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.362,
+    "lat": 24.296,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-06",
+    "name": "J-11B #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 119.832,
+    "lat": 24.578,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-07",
+    "name": "J-11B #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.196,
+    "lat": 24.3,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnj11b-08",
+    "name": "J-11B #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ11B",
+    "lon": 120.909,
+    "lat": 23.901,
+    "patrolKm": 60,
+    "base": "jinjiang-ab"
+   },
+   {
+    "id": "red-cnh6k-01",
+    "name": "H-6K #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 122.246,
+    "lat": 29.187,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnh6k-02",
+    "name": "H-6K #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 121.297,
+    "lat": 29.292,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnh6k-03",
+    "name": "H-6K #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 122.481,
+    "lat": 28.5,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnh6k-04",
+    "name": "H-6K #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 121.507,
+    "lat": 29.046,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnh6k-05",
+    "name": "H-6K #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 121.424,
+    "lat": 28.595,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnh6k-06",
+    "name": "H-6K #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNH6K",
+    "lon": 121.94,
+    "lat": 29.479,
+    "patrolKm": 80,
+    "base": "wuyishan-ab"
+   },
+   {
+    "id": "red-cnkj500-01",
+    "name": "KJ-500 #01",
+    "side": "red",
+    "kind": "aew",
+    "preset": "CNKJ500",
+    "lon": 120.875,
+    "lat": 27.846,
+    "patrolKm": 50,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cnkj500-02",
+    "name": "KJ-500 #02",
+    "side": "red",
+    "kind": "aew",
+    "preset": "CNKJ500",
+    "lon": 121.656,
+    "lat": 27.278,
+    "patrolKm": 50,
+    "base": "shuimen-ab"
+   },
+   {
+    "id": "red-cncv-001-01",
+    "name": "Liaoning #01",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNCV-001",
+    "lon": 124.261,
+    "lat": 29.013,
+    "patrolKm": 12,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-01",
+    "name": "J-15 #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 123.818,
+    "lat": 28.81,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-02",
+    "name": "J-15 #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.704,
+    "lat": 28.947,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-03",
+    "name": "J-15 #03",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.288,
+    "lat": 29.182,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-04",
+    "name": "J-15 #04",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.838,
+    "lat": 29.586,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-05",
+    "name": "J-15 #05",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 123.998,
+    "lat": 28.722,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-06",
+    "name": "J-15 #06",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.269,
+    "lat": 29.609,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-07",
+    "name": "J-15 #07",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.742,
+    "lat": 28.994,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnj15-08",
+    "name": "J-15 #08",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNJ15",
+    "lon": 124.636,
+    "lat": 29.421,
+    "patrolKm": 45,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnffg-054a-01",
+    "name": "Type 054A #01",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNFFG-054A",
+    "lon": 123.68,
+    "lat": 27.611,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnffg-054a-02",
+    "name": "Type 054A #02",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNFFG-054A",
+    "lon": 122.968,
+    "lat": 26.705,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnffg-054a-03",
+    "name": "Type 054A #03",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNFFG-054A",
+    "lon": 122.322,
+    "lat": 26.452,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnffg-054a-04",
+    "name": "Type 054A #04",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNFFG-054A",
+    "lon": 123.566,
+    "lat": 26.457,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnddg-052d-01",
+    "name": "Type 052D #01",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNDDG-052D",
+    "lon": 123.502,
+    "lat": 27.624,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnddg-052d-02",
+    "name": "Type 052D #02",
+    "side": "red",
+    "kind": "ship",
+    "preset": "CNDDG-052D",
+    "lon": 123.763,
+    "lat": 28.737,
+    "patrolKm": 15,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnssk-039a-01",
+    "name": "Type 039A #01",
+    "side": "red",
+    "kind": "sub",
+    "preset": "CNSSK-039A",
+    "lon": 123.993,
+    "lat": 25.337,
+    "patrolKm": 10,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnssk-039a-02",
+    "name": "Type 039A #02",
+    "side": "red",
+    "kind": "sub",
+    "preset": "CNSSK-039A",
+    "lon": 123.923,
+    "lat": 27.243,
+    "patrolKm": 10,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnssk-039a-03",
+    "name": "Type 039A #03",
+    "side": "red",
+    "kind": "sub",
+    "preset": "CNSSK-039A",
+    "lon": 122.606,
+    "lat": 25.363,
+    "patrolKm": 10,
+    "base": "ningbo-nb"
+   },
+   {
+    "id": "red-cnssk-039a-04",
+    "name": "Type 039A #04",
+    "side": "red",
+    "kind": "sub",
+    "preset": "CNSSK-039A",
+    "lon": 124.985,
+    "lat": 26.169,
+    "patrolKm": 10,
+    "base": "ningbo-nb"
+   }
+  ]
  }
 ]
