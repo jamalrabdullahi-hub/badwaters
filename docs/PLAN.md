@@ -190,12 +190,11 @@ Higher postures cost money, fuel, personnel fatigue, airframe life and diplomati
 - **Strategic forces:** the deterrent is managed as posture, survivability and second-strike assurance. Nuclear use stays abstract: it's a catastrophic, campaign-ending escalation with no detailed targeting gameplay. Long-range conventional strike is fully playable.
 - **Foreign Affairs:** alliances, basing and overflight rights, intelligence sharing, arms sales and purchases, sanctions and embargoes, and coalition operations.
 
-## 14. Time model (recommended: pausable real time)
+## 14. Time model (decided: turn-based strategy, real-time conflict)
 
-- Sim tick: 1 game hour at strategic level. Speeds are paused, 1 h/s, 6 h/s and 1 day/s, with auto-pause on flagged events.
-- Budgets, industry output and personnel pipelines settle monthly. Sorties, logistics and fusion run hourly.
-- Tactical engagements resolve at 1-second steps when the player takes command, or at coarse steps in the background.
-- If the picker chooses daily turns, the same systems run with the day as the smallest player-facing step.
+- **Strategic layer is turn-based.** One turn is one week by default; the UI picker offers 2 weeks or a month. Orders queue during the turn: deployments, postures, programmes, production and ISR tasking. Ending the turn resolves budgets, industry, personnel, research and AI.
+- **Conflicts run in real time with pause.** When shooting starts, the clock goes live with speeds of pause, 1×, 5× and 30×. It covers sorties, fusion and engagements, using rule-based game mechanics with no physics. At the ceasefire, strategic turns resume.
+- Sortie generation and logistics are computed per day during a conflict, and summarised per turn in peacetime.
 
 ## 15. Milestones
 
