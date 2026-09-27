@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "bad-waters", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "C:/Games/Bad-Waters", "run", "dev"], "port": 5173 }
+    { "name": "bad-waters", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "C:/Games/Bad-Waters/prototype-ts", "run", "dev"], "port": 5173 }
   ]
 }

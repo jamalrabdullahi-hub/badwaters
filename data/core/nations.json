@@ -1,0 +1,17 @@
+[
+  { "id": "USA", "name": "United States", "tier": "great", "color": "#4d8fd6", "summary": "Global power with the largest navy and air force, stretched across every ocean." },
+  { "id": "RUS", "name": "Russia", "tier": "great", "color": "#c8453c", "nameByYear": { "1980": "Soviet Union" }, "summary": "Continental power with deep air defences and long-range strike." },
+  { "id": "CHN", "name": "China", "tier": "great", "color": "#d6a73a", "summary": "Rising maritime power with the world's largest shipbuilding base." },
+  { "id": "GBR", "name": "United Kingdom", "tier": "great", "color": "#3aa39a", "summary": "Blue-water navy and submarines on a tight budget." },
+  { "id": "FRA", "name": "France", "tier": "great", "color": "#7f84d8", "summary": "Independent power with its own carrier, fighters and deterrent." },
+  { "id": "ISR", "name": "Israel", "tier": "regional", "color": "#72bde8", "summary": "Small, technologically elite, layered missile defence." },
+  { "id": "IRN", "name": "Iran", "tier": "regional", "color": "#5fae62", "summary": "Missiles, drones and the Strait of Hormuz under sanctions." },
+  { "id": "EGY", "name": "Egypt", "tier": "regional", "color": "#c9a86a", "summary": "Largest Arab military, guardian of the Suez Canal." },
+  { "id": "TUR", "name": "Türkiye", "tier": "regional", "color": "#d0605a", "summary": "Straits power with a fast-growing defence industry." },
+  { "id": "SAU", "name": "Saudi Arabia", "tier": "regional", "color": "#4f9a5e", "summary": "Rich, well equipped, dependent on foreign support." },
+  { "id": "PRK", "name": "North Korea", "tier": "regional", "color": "#a3413c", "summary": "Isolated state with a large missile force and old equipment." },
+  { "id": "KOR", "name": "South Korea", "tier": "regional", "color": "#5a7fc4", "summary": "Advanced industry and a massive shipbuilding sector." },
+  { "id": "JPN", "name": "Japan", "tier": "regional", "color": "#e0e0e0", "summary": "Maritime democracy with superb anti-submarine forces." },
+  { "id": "DEU", "name": "Germany", "tier": "regional", "color": "#9a9a9a", "nameByYear": { "1980": "West Germany" }, "summary": "Industrial heavyweight rebuilding its armed forces." },
+  { "id": "UKR", "name": "Ukraine", "tier": "regional", "color": "#e8c94a", "startYears": [2000, 2020], "summary": "Inherited Soviet industry; independent from 1991." }
+]

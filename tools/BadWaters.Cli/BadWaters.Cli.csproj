@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\BadWaters.Sim\BadWaters.Sim.csproj" />
+    <ProjectReference Include="..\..\src\BadWaters.Data\BadWaters.Data.csproj" />
+  </ItemGroup>
+</Project>

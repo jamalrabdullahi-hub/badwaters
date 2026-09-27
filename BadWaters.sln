@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A305B47-5534-492C-B8F3-DC1E9147922C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadWaters.Sim", "src\BadWaters.Sim\BadWaters.Sim.csproj", "{761D7630-F709-4B1A-94B9-14B08DE1A171}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadWaters.Data", "src\BadWaters.Data\BadWaters.Data.csproj", "{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{638DE079-C611-4BD9-8115-26530224D348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadWaters.Cli", "tools\BadWaters.Cli\BadWaters.Cli.csproj", "{45318E39-4ACF-44CE-B019-44CBFEB09EA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{764CFE7A-258B-4D48-9A16-5AA356F161E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadWaters.Sim.Tests", "tests\BadWaters.Sim.Tests\BadWaters.Sim.Tests.csproj", "{73CBDD0C-357A-412F-988F-ABF6692BD6B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadWaters.Game", "game\BadWaters.Game.csproj", "{B07A5D18-D187-4FE9-B1E6-4DD01BEE238F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{761D7630-F709-4B1A-94B9-14B08DE1A171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761D7630-F709-4B1A-94B9-14B08DE1A171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761D7630-F709-4B1A-94B9-14B08DE1A171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761D7630-F709-4B1A-94B9-14B08DE1A171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45318E39-4ACF-44CE-B019-44CBFEB09EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45318E39-4ACF-44CE-B019-44CBFEB09EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45318E39-4ACF-44CE-B019-44CBFEB09EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45318E39-4ACF-44CE-B019-44CBFEB09EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73CBDD0C-357A-412F-988F-ABF6692BD6B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73CBDD0C-357A-412F-988F-ABF6692BD6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73CBDD0C-357A-412F-988F-ABF6692BD6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73CBDD0C-357A-412F-988F-ABF6692BD6B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07A5D18-D187-4FE9-B1E6-4DD01BEE238F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07A5D18-D187-4FE9-B1E6-4DD01BEE238F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07A5D18-D187-4FE9-B1E6-4DD01BEE238F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07A5D18-D187-4FE9-B1E6-4DD01BEE238F}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{761D7630-F709-4B1A-94B9-14B08DE1A171} = {8A305B47-5534-492C-B8F3-DC1E9147922C}
+		{11510415-D6D4-4A42-A9D1-EFE93BF3ADAF} = {8A305B47-5534-492C-B8F3-DC1E9147922C}
+		{45318E39-4ACF-44CE-B019-44CBFEB09EA2} = {638DE079-C611-4BD9-8115-26530224D348}
+		{73CBDD0C-357A-412F-988F-ABF6692BD6B1} = {764CFE7A-258B-4D48-9A16-5AA356F161E5}
+	EndGlobalSection
+EndGlobal
