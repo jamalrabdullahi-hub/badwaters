@@ -41,4 +41,6 @@ public sealed record PresetDef
     public string Archetype { get; init; } = "";
     public string Nation { get; init; } = "";
     public int FromYear { get; init; }
+    /// <summary>Relative 0–10 game ratings (same ids as engineering/ratings.json). Game balance, not specifications.</summary>
+    public Dictionary<string, double> Ratings { get; init; } = new();
 }

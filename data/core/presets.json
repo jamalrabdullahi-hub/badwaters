@@ -1,50 +1,830 @@
 [
-  { "id": "USF4E", "designer": "aircraft", "name": "USF4E", "archetype": "Twin-engine multirole, 3rd generation", "nation": "USA", "fromYear": 1967 },
-  { "id": "USF14D", "designer": "aircraft", "name": "USF14D", "archetype": "Carrier fleet interceptor, variable-sweep", "nation": "USA", "fromYear": 1991 },
-  { "id": "USF15C", "designer": "aircraft", "name": "USF15C", "archetype": "Air superiority, 4th generation", "nation": "USA", "fromYear": 1979 },
-  { "id": "USF15E", "designer": "aircraft", "name": "USF15E", "archetype": "Two-seat strike fighter", "nation": "USA", "fromYear": 1988 },
-  { "id": "USF16C", "designer": "aircraft", "name": "USF16C", "archetype": "Light multirole, 4th generation", "nation": "USA", "fromYear": 1984 },
-  { "id": "USFA18C", "designer": "aircraft", "name": "USFA18C", "archetype": "Carrier multirole", "nation": "USA", "fromYear": 1987 },
-  { "id": "USFA18E", "designer": "aircraft", "name": "USFA18E", "archetype": "Carrier multirole, 4.5 generation", "nation": "USA", "fromYear": 2001 },
-  { "id": "USF22A", "designer": "aircraft", "name": "USF22A", "archetype": "Stealth air dominance, 5th generation", "nation": "USA", "fromYear": 2005 },
-  { "id": "USF35A", "designer": "aircraft", "name": "USF35A", "archetype": "Stealth multirole, conventional take-off", "nation": "USA", "fromYear": 2016 },
-  { "id": "USF35B", "designer": "aircraft", "name": "USF35B", "archetype": "Stealth multirole, STOVL", "nation": "USA", "fromYear": 2015 },
-  { "id": "USF35C", "designer": "aircraft", "name": "USF35C", "archetype": "Stealth multirole, carrier", "nation": "USA", "fromYear": 2019 },
-  { "id": "RUSU24M", "designer": "aircraft", "name": "RUSU24M", "archetype": "Variable-sweep strike", "nation": "RUS", "fromYear": 1983 },
-  { "id": "RUSU27S", "designer": "aircraft", "name": "RUSU27S", "archetype": "Heavy air superiority, 4th generation", "nation": "RUS", "fromYear": 1985 },
-  { "id": "RUSU30SM", "designer": "aircraft", "name": "RUSU30SM", "archetype": "Two-seat heavy multirole", "nation": "RUS", "fromYear": 2012 },
-  { "id": "RUSU33", "designer": "aircraft", "name": "RUSU33", "archetype": "Carrier heavy fighter, ski-jump", "nation": "RUS", "fromYear": 1998 },
-  { "id": "RUSU34", "designer": "aircraft", "name": "RUSU34", "archetype": "Two-seat strike", "nation": "RUS", "fromYear": 2014 },
-  { "id": "RUSU35S", "designer": "aircraft", "name": "RUSU35S", "archetype": "Heavy multirole, 4.5 generation", "nation": "RUS", "fromYear": 2014 },
-  { "id": "RUSU57", "designer": "aircraft", "name": "RUSU57", "archetype": "Stealth heavy fighter, 5th generation", "nation": "RUS", "fromYear": 2020 },
-  { "id": "RUMIG29", "designer": "aircraft", "name": "RUMIG29", "archetype": "Light air superiority", "nation": "RUS", "fromYear": 1983 },
-  { "id": "RUMIG31BM", "designer": "aircraft", "name": "RUMIG31BM", "archetype": "Long-range interceptor", "nation": "RUS", "fromYear": 2008 },
-  { "id": "CNJ8II", "designer": "aircraft", "name": "CNJ8II", "archetype": "Twin-engine interceptor", "nation": "CHN", "fromYear": 1988 },
-  { "id": "CNJ10C", "designer": "aircraft", "name": "CNJ10C", "archetype": "Light multirole, 4.5 generation", "nation": "CHN", "fromYear": 2018 },
-  { "id": "CNJ11B", "designer": "aircraft", "name": "CNJ11B", "archetype": "Heavy air superiority", "nation": "CHN", "fromYear": 2007 },
-  { "id": "CNJ15", "designer": "aircraft", "name": "CNJ15", "archetype": "Carrier heavy fighter, ski-jump", "nation": "CHN", "fromYear": 2013 },
-  { "id": "CNJ16", "designer": "aircraft", "name": "CNJ16", "archetype": "Two-seat strike fighter", "nation": "CHN", "fromYear": 2015 },
-  { "id": "CNJ20", "designer": "aircraft", "name": "CNJ20", "archetype": "Stealth heavy fighter, 5th generation", "nation": "CHN", "fromYear": 2017 },
-  { "id": "FRM2000-5", "designer": "aircraft", "name": "FRM2000-5", "archetype": "Delta multirole, 4th generation", "nation": "FRA", "fromYear": 1997 },
-  { "id": "FRRFL-M", "designer": "aircraft", "name": "FRRFL-M", "archetype": "Carrier canard-delta, 4.5 generation", "nation": "FRA", "fromYear": 2001 },
-  { "id": "UKEF2000", "designer": "aircraft", "name": "UKEF2000", "archetype": "Canard-delta air superiority, 4.5 generation", "nation": "GBR", "fromYear": 2003 },
-
-  { "id": "USCVN-NMZ", "designer": "ship", "name": "USCVN-NMZ", "archetype": "Nuclear catapult carrier", "nation": "USA", "fromYear": 1975 },
-  { "id": "USCVN-FRD", "designer": "ship", "name": "USCVN-FRD", "archetype": "Nuclear catapult carrier, electric catapults", "nation": "USA", "fromYear": 2017 },
-  { "id": "USCG-47", "designer": "ship", "name": "USCG-47", "archetype": "Air-defence cruiser", "nation": "USA", "fromYear": 1983 },
-  { "id": "USDDG-51IIA", "designer": "ship", "name": "USDDG-51IIA", "archetype": "Multi-mission destroyer", "nation": "USA", "fromYear": 2000 },
-  { "id": "USDDG-51III", "designer": "ship", "name": "USDDG-51III", "archetype": "Air and missile defence destroyer", "nation": "USA", "fromYear": 2023 },
-  { "id": "USSSN-774", "designer": "ship", "name": "USSSN-774", "archetype": "Nuclear attack submarine", "nation": "USA", "fromYear": 2004 },
-  { "id": "USLHA-6", "designer": "ship", "name": "USLHA-6", "archetype": "Amphibious assault ship", "nation": "USA", "fromYear": 2014 },
-  { "id": "RUCG-1164", "designer": "ship", "name": "RUCG-1164", "archetype": "Missile cruiser", "nation": "RUS", "fromYear": 1982 },
-  { "id": "RUFFG-22350", "designer": "ship", "name": "RUFFG-22350", "archetype": "Multi-role frigate", "nation": "RUS", "fromYear": 2018 },
-  { "id": "RUSSGN-885", "designer": "ship", "name": "RUSSGN-885", "archetype": "Guided-missile submarine", "nation": "RUS", "fromYear": 2014 },
-  { "id": "CNDDG-055", "designer": "ship", "name": "CNDDG-055", "archetype": "Large multi-mission destroyer", "nation": "CHN", "fromYear": 2020 },
-  { "id": "CNDDG-052D", "designer": "ship", "name": "CNDDG-052D", "archetype": "Air-defence destroyer", "nation": "CHN", "fromYear": 2014 },
-  { "id": "CNCV-003", "designer": "ship", "name": "CNCV-003", "archetype": "Conventional catapult carrier", "nation": "CHN", "fromYear": 2025 },
-  { "id": "UKDDG-T45", "designer": "ship", "name": "UKDDG-T45", "archetype": "Air-defence destroyer", "nation": "GBR", "fromYear": 2009 },
-  { "id": "UKCV-QE", "designer": "ship", "name": "UKCV-QE", "archetype": "STOVL carrier", "nation": "GBR", "fromYear": 2017 },
-  { "id": "FRCVN-CDG", "designer": "ship", "name": "FRCVN-CDG", "archetype": "Nuclear catapult carrier", "nation": "FRA", "fromYear": 2001 },
-  { "id": "JPDDH-183", "designer": "ship", "name": "JPDDH-183", "archetype": "Helicopter destroyer / light carrier", "nation": "JPN", "fromYear": 2015 },
-  { "id": "KRDDG-KDX3", "designer": "ship", "name": "KRDDG-KDX3", "archetype": "Air-defence destroyer", "nation": "KOR", "fromYear": 2008 }
+ {
+  "id": "USF4E",
+  "designer": "aircraft",
+  "name": "F-4E Phantom II",
+  "archetype": "Twin-engine multirole, 3rd generation",
+  "nation": "USA",
+  "fromYear": 1967,
+  "ratings": {
+   "detection": 3,
+   "speed": 7,
+   "agility": 4,
+   "reach": 4,
+   "signature": 0,
+   "payload": 6,
+   "air-defence": 4,
+   "strike": 5
+  }
+ },
+ {
+  "id": "USF14D",
+  "designer": "aircraft",
+  "name": "F-14D Tomcat",
+  "archetype": "Carrier fleet interceptor, variable-sweep",
+  "nation": "USA",
+  "fromYear": 1991,
+  "ratings": {
+   "detection": 7,
+   "speed": 8,
+   "agility": 5,
+   "reach": 6,
+   "signature": 0,
+   "payload": 6,
+   "air-defence": 8,
+   "strike": 4
+  }
+ },
+ {
+  "id": "USF15C",
+  "designer": "aircraft",
+  "name": "F-15C Eagle",
+  "archetype": "Air superiority, 4th generation",
+  "nation": "USA",
+  "fromYear": 1979,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 7,
+   "reach": 5,
+   "signature": 0,
+   "payload": 5,
+   "air-defence": 8,
+   "strike": 2
+  }
+ },
+ {
+  "id": "USF15E",
+  "designer": "aircraft",
+  "name": "F-15E Strike Eagle",
+  "archetype": "Two-seat strike fighter",
+  "nation": "USA",
+  "fromYear": 1988,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 6,
+   "reach": 7,
+   "signature": 0,
+   "payload": 9,
+   "air-defence": 6,
+   "strike": 8
+  }
+ },
+ {
+  "id": "USF16C",
+  "designer": "aircraft",
+  "name": "F-16C Fighting Falcon",
+  "archetype": "Light multirole, 4th generation",
+  "nation": "USA",
+  "fromYear": 1984,
+  "ratings": {
+   "detection": 5,
+   "speed": 7,
+   "agility": 8,
+   "reach": 4,
+   "signature": 1,
+   "payload": 5,
+   "air-defence": 6,
+   "strike": 6
+  }
+ },
+ {
+  "id": "USFA18C",
+  "designer": "aircraft",
+  "name": "F/A-18C Hornet",
+  "archetype": "Carrier multirole",
+  "nation": "USA",
+  "fromYear": 1987,
+  "ratings": {
+   "detection": 5,
+   "speed": 6,
+   "agility": 7,
+   "reach": 4,
+   "signature": 1,
+   "payload": 5,
+   "air-defence": 6,
+   "strike": 6
+  }
+ },
+ {
+  "id": "USFA18E",
+  "designer": "aircraft",
+  "name": "F/A-18E Super Hornet",
+  "archetype": "Carrier multirole, 4.5 generation",
+  "nation": "USA",
+  "fromYear": 2001,
+  "ratings": {
+   "detection": 7,
+   "speed": 6,
+   "agility": 6,
+   "reach": 5,
+   "signature": 2,
+   "payload": 7,
+   "air-defence": 7,
+   "strike": 7
+  }
+ },
+ {
+  "id": "USF22A",
+  "designer": "aircraft",
+  "name": "F-22A Raptor",
+  "archetype": "Stealth air dominance, 5th generation",
+  "nation": "USA",
+  "fromYear": 2005,
+  "ratings": {
+   "detection": 8,
+   "speed": 9,
+   "agility": 9,
+   "reach": 5,
+   "signature": 9,
+   "payload": 3,
+   "air-defence": 10,
+   "strike": 4
+  }
+ },
+ {
+  "id": "USF35A",
+  "designer": "aircraft",
+  "name": "F-35A Lightning II",
+  "archetype": "Stealth multirole, conventional take-off",
+  "nation": "USA",
+  "fromYear": 2016,
+  "ratings": {
+   "detection": 9,
+   "speed": 6,
+   "agility": 6,
+   "reach": 6,
+   "signature": 9,
+   "payload": 5,
+   "air-defence": 7,
+   "strike": 8
+  }
+ },
+ {
+  "id": "USF35B",
+  "designer": "aircraft",
+  "name": "F-35B Lightning II",
+  "archetype": "Stealth multirole, STOVL",
+  "nation": "USA",
+  "fromYear": 2015,
+  "ratings": {
+   "detection": 9,
+   "speed": 6,
+   "agility": 6,
+   "reach": 4,
+   "signature": 9,
+   "payload": 4,
+   "air-defence": 7,
+   "strike": 7
+  }
+ },
+ {
+  "id": "USF35C",
+  "designer": "aircraft",
+  "name": "F-35C Lightning II",
+  "archetype": "Stealth multirole, carrier",
+  "nation": "USA",
+  "fromYear": 2019,
+  "ratings": {
+   "detection": 9,
+   "speed": 6,
+   "agility": 6,
+   "reach": 7,
+   "signature": 9,
+   "payload": 5,
+   "air-defence": 7,
+   "strike": 8
+  }
+ },
+ {
+  "id": "RUSU24M",
+  "designer": "aircraft",
+  "name": "Su-24M Fencer",
+  "archetype": "Variable-sweep strike",
+  "nation": "RUS",
+  "fromYear": 1983,
+  "ratings": {
+   "detection": 3,
+   "speed": 7,
+   "agility": 3,
+   "reach": 5,
+   "signature": 0,
+   "payload": 7,
+   "air-defence": 1,
+   "strike": 6
+  }
+ },
+ {
+  "id": "RUSU27S",
+  "designer": "aircraft",
+  "name": "Su-27S Flanker",
+  "archetype": "Heavy air superiority, 4th generation",
+  "nation": "RUS",
+  "fromYear": 1985,
+  "ratings": {
+   "detection": 5,
+   "speed": 8,
+   "agility": 8,
+   "reach": 7,
+   "signature": 0,
+   "payload": 4,
+   "air-defence": 8,
+   "strike": 2
+  }
+ },
+ {
+  "id": "RUSU30SM",
+  "designer": "aircraft",
+  "name": "Su-30SM Flanker-H",
+  "archetype": "Two-seat heavy multirole",
+  "nation": "RUS",
+  "fromYear": 2012,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 8,
+   "reach": 7,
+   "signature": 0,
+   "payload": 7,
+   "air-defence": 8,
+   "strike": 6
+  }
+ },
+ {
+  "id": "RUSU33",
+  "designer": "aircraft",
+  "name": "Su-33 Flanker-D",
+  "archetype": "Carrier heavy fighter, ski-jump",
+  "nation": "RUS",
+  "fromYear": 1998,
+  "ratings": {
+   "detection": 5,
+   "speed": 7,
+   "agility": 8,
+   "reach": 6,
+   "signature": 0,
+   "payload": 4,
+   "air-defence": 7,
+   "strike": 2
+  }
+ },
+ {
+  "id": "RUSU34",
+  "designer": "aircraft",
+  "name": "Su-34 Fullback",
+  "archetype": "Two-seat strike",
+  "nation": "RUS",
+  "fromYear": 2014,
+  "ratings": {
+   "detection": 6,
+   "speed": 7,
+   "agility": 5,
+   "reach": 8,
+   "signature": 0,
+   "payload": 9,
+   "air-defence": 4,
+   "strike": 8
+  }
+ },
+ {
+  "id": "RUSU35S",
+  "designer": "aircraft",
+  "name": "Su-35S Flanker-E",
+  "archetype": "Heavy multirole, 4.5 generation",
+  "nation": "RUS",
+  "fromYear": 2014,
+  "ratings": {
+   "detection": 7,
+   "speed": 8,
+   "agility": 9,
+   "reach": 7,
+   "signature": 0,
+   "payload": 7,
+   "air-defence": 9,
+   "strike": 6
+  }
+ },
+ {
+  "id": "RUSU57",
+  "designer": "aircraft",
+  "name": "Su-57 Felon",
+  "archetype": "Stealth heavy fighter, 5th generation",
+  "nation": "RUS",
+  "fromYear": 2020,
+  "ratings": {
+   "detection": 8,
+   "speed": 9,
+   "agility": 9,
+   "reach": 7,
+   "signature": 6,
+   "payload": 5,
+   "air-defence": 9,
+   "strike": 6
+  }
+ },
+ {
+  "id": "RUMIG29",
+  "designer": "aircraft",
+  "name": "MiG-29 Fulcrum",
+  "archetype": "Light air superiority",
+  "nation": "RUS",
+  "fromYear": 1983,
+  "ratings": {
+   "detection": 4,
+   "speed": 8,
+   "agility": 8,
+   "reach": 3,
+   "signature": 0,
+   "payload": 3,
+   "air-defence": 7,
+   "strike": 2
+  }
+ },
+ {
+  "id": "RUMIG31BM",
+  "designer": "aircraft",
+  "name": "MiG-31BM Foxhound",
+  "archetype": "Long-range interceptor",
+  "nation": "RUS",
+  "fromYear": 2008,
+  "ratings": {
+   "detection": 8,
+   "speed": 10,
+   "agility": 3,
+   "reach": 7,
+   "signature": 0,
+   "payload": 4,
+   "air-defence": 8,
+   "strike": 2
+  }
+ },
+ {
+  "id": "CNJ8II",
+  "designer": "aircraft",
+  "name": "J-8II Finback",
+  "archetype": "Twin-engine interceptor",
+  "nation": "CHN",
+  "fromYear": 1988,
+  "ratings": {
+   "detection": 3,
+   "speed": 8,
+   "agility": 3,
+   "reach": 4,
+   "signature": 0,
+   "payload": 3,
+   "air-defence": 4,
+   "strike": 2
+  }
+ },
+ {
+  "id": "CNJ10C",
+  "designer": "aircraft",
+  "name": "J-10C Vigorous Dragon",
+  "archetype": "Light multirole, 4.5 generation",
+  "nation": "CHN",
+  "fromYear": 2018,
+  "ratings": {
+   "detection": 7,
+   "speed": 7,
+   "agility": 8,
+   "reach": 4,
+   "signature": 2,
+   "payload": 5,
+   "air-defence": 8,
+   "strike": 5
+  }
+ },
+ {
+  "id": "CNJ11B",
+  "designer": "aircraft",
+  "name": "J-11B Flanker",
+  "archetype": "Heavy air superiority",
+  "nation": "CHN",
+  "fromYear": 2007,
+  "ratings": {
+   "detection": 6,
+   "speed": 8,
+   "agility": 8,
+   "reach": 7,
+   "signature": 0,
+   "payload": 4,
+   "air-defence": 8,
+   "strike": 2
+  }
+ },
+ {
+  "id": "CNJ15",
+  "designer": "aircraft",
+  "name": "J-15 Flying Shark",
+  "archetype": "Carrier heavy fighter, ski-jump",
+  "nation": "CHN",
+  "fromYear": 2013,
+  "ratings": {
+   "detection": 6,
+   "speed": 7,
+   "agility": 7,
+   "reach": 6,
+   "signature": 0,
+   "payload": 5,
+   "air-defence": 7,
+   "strike": 5
+  }
+ },
+ {
+  "id": "CNJ16",
+  "designer": "aircraft",
+  "name": "J-16",
+  "archetype": "Two-seat strike fighter",
+  "nation": "CHN",
+  "fromYear": 2015,
+  "ratings": {
+   "detection": 7,
+   "speed": 8,
+   "agility": 7,
+   "reach": 7,
+   "signature": 0,
+   "payload": 8,
+   "air-defence": 8,
+   "strike": 7
+  }
+ },
+ {
+  "id": "CNJ20",
+  "designer": "aircraft",
+  "name": "J-20 Mighty Dragon",
+  "archetype": "Stealth heavy fighter, 5th generation",
+  "nation": "CHN",
+  "fromYear": 2017,
+  "ratings": {
+   "detection": 8,
+   "speed": 8,
+   "agility": 7,
+   "reach": 8,
+   "signature": 7,
+   "payload": 4,
+   "air-defence": 9,
+   "strike": 5
+  }
+ },
+ {
+  "id": "FRM2000-5",
+  "designer": "aircraft",
+  "name": "Mirage 2000-5",
+  "archetype": "Delta multirole, 4th generation",
+  "nation": "FRA",
+  "fromYear": 1997,
+  "ratings": {
+   "detection": 5,
+   "speed": 8,
+   "agility": 7,
+   "reach": 4,
+   "signature": 1,
+   "payload": 4,
+   "air-defence": 7,
+   "strike": 4
+  }
+ },
+ {
+  "id": "FRRFL-M",
+  "designer": "aircraft",
+  "name": "Rafale M",
+  "archetype": "Carrier canard-delta, 4.5 generation",
+  "nation": "FRA",
+  "fromYear": 2001,
+  "ratings": {
+   "detection": 7,
+   "speed": 7,
+   "agility": 8,
+   "reach": 6,
+   "signature": 2,
+   "payload": 7,
+   "air-defence": 8,
+   "strike": 8
+  }
+ },
+ {
+  "id": "UKEF2000",
+  "designer": "aircraft",
+  "name": "Eurofighter Typhoon FGR4",
+  "archetype": "Canard-delta air superiority, 4.5 generation",
+  "nation": "GBR",
+  "fromYear": 2003,
+  "ratings": {
+   "detection": 7,
+   "speed": 8,
+   "agility": 9,
+   "reach": 5,
+   "signature": 2,
+   "payload": 6,
+   "air-defence": 9,
+   "strike": 6
+  }
+ },
+ {
+  "id": "USCVN-NMZ",
+  "designer": "ship",
+  "name": "Nimitz-class carrier",
+  "archetype": "Nuclear catapult carrier",
+  "nation": "USA",
+  "fromYear": 1975,
+  "ratings": {
+   "air-defence": 4,
+   "strike": 10,
+   "anti-ship": 8,
+   "anti-sub": 5,
+   "detection": 8,
+   "survivability": 9,
+   "endurance": 10
+  }
+ },
+ {
+  "id": "USCVN-FRD",
+  "designer": "ship",
+  "name": "Gerald R. Ford-class carrier",
+  "archetype": "Nuclear catapult carrier, electric catapults",
+  "nation": "USA",
+  "fromYear": 2017,
+  "ratings": {
+   "air-defence": 5,
+   "strike": 10,
+   "anti-ship": 8,
+   "anti-sub": 5,
+   "detection": 9,
+   "survivability": 9,
+   "endurance": 10
+  }
+ },
+ {
+  "id": "USCG-47",
+  "designer": "ship",
+  "name": "Ticonderoga-class cruiser",
+  "archetype": "Air-defence cruiser",
+  "nation": "USA",
+  "fromYear": 1983,
+  "ratings": {
+   "air-defence": 9,
+   "strike": 7,
+   "anti-ship": 6,
+   "anti-sub": 6,
+   "detection": 8,
+   "survivability": 6,
+   "endurance": 8
+  }
+ },
+ {
+  "id": "USDDG-51IIA",
+  "designer": "ship",
+  "name": "Arleigh Burke-class destroyer (Flight IIA)",
+  "archetype": "Multi-mission destroyer",
+  "nation": "USA",
+  "fromYear": 2000,
+  "ratings": {
+   "air-defence": 8,
+   "strike": 6,
+   "anti-ship": 5,
+   "anti-sub": 7,
+   "detection": 8,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "USDDG-51III",
+  "designer": "ship",
+  "name": "Arleigh Burke-class destroyer (Flight III)",
+  "archetype": "Air and missile defence destroyer",
+  "nation": "USA",
+  "fromYear": 2023,
+  "ratings": {
+   "air-defence": 10,
+   "strike": 6,
+   "anti-ship": 5,
+   "anti-sub": 7,
+   "detection": 10,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "USSSN-774",
+  "designer": "ship",
+  "name": "Virginia-class submarine",
+  "archetype": "Nuclear attack submarine",
+  "nation": "USA",
+  "fromYear": 2004,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 6,
+   "anti-ship": 7,
+   "anti-sub": 9,
+   "detection": 6,
+   "survivability": 8,
+   "endurance": 10
+  }
+ },
+ {
+  "id": "USLHA-6",
+  "designer": "ship",
+  "name": "America-class amphibious assault ship",
+  "archetype": "Amphibious assault ship",
+  "nation": "USA",
+  "fromYear": 2014,
+  "ratings": {
+   "air-defence": 3,
+   "strike": 6,
+   "anti-ship": 2,
+   "anti-sub": 4,
+   "detection": 6,
+   "survivability": 6,
+   "endurance": 8
+  }
+ },
+ {
+  "id": "RUCG-1164",
+  "designer": "ship",
+  "name": "Slava-class cruiser",
+  "archetype": "Missile cruiser",
+  "nation": "RUS",
+  "fromYear": 1982,
+  "ratings": {
+   "air-defence": 6,
+   "strike": 4,
+   "anti-ship": 8,
+   "anti-sub": 4,
+   "detection": 6,
+   "survivability": 5,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "RUFFG-22350",
+  "designer": "ship",
+  "name": "Admiral Gorshkov-class frigate",
+  "archetype": "Multi-role frigate",
+  "nation": "RUS",
+  "fromYear": 2018,
+  "ratings": {
+   "air-defence": 7,
+   "strike": 6,
+   "anti-ship": 7,
+   "anti-sub": 6,
+   "detection": 7,
+   "survivability": 5,
+   "endurance": 6
+  }
+ },
+ {
+  "id": "RUSSGN-885",
+  "designer": "ship",
+  "name": "Yasen-class submarine",
+  "archetype": "Guided-missile submarine",
+  "nation": "RUS",
+  "fromYear": 2014,
+  "ratings": {
+   "air-defence": 0,
+   "strike": 8,
+   "anti-ship": 8,
+   "anti-sub": 8,
+   "detection": 6,
+   "survivability": 8,
+   "endurance": 10
+  }
+ },
+ {
+  "id": "CNDDG-055",
+  "designer": "ship",
+  "name": "Type 055 destroyer",
+  "archetype": "Large multi-mission destroyer",
+  "nation": "CHN",
+  "fromYear": 2020,
+  "ratings": {
+   "air-defence": 9,
+   "strike": 7,
+   "anti-ship": 7,
+   "anti-sub": 6,
+   "detection": 9,
+   "survivability": 7,
+   "endurance": 8
+  }
+ },
+ {
+  "id": "CNDDG-052D",
+  "designer": "ship",
+  "name": "Type 052D destroyer",
+  "archetype": "Air-defence destroyer",
+  "nation": "CHN",
+  "fromYear": 2014,
+  "ratings": {
+   "air-defence": 8,
+   "strike": 5,
+   "anti-ship": 6,
+   "anti-sub": 5,
+   "detection": 8,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "CNCV-003",
+  "designer": "ship",
+  "name": "Fujian (Type 003) carrier",
+  "archetype": "Conventional catapult carrier",
+  "nation": "CHN",
+  "fromYear": 2025,
+  "ratings": {
+   "air-defence": 4,
+   "strike": 8,
+   "anti-ship": 6,
+   "anti-sub": 4,
+   "detection": 8,
+   "survivability": 8,
+   "endurance": 8
+  }
+ },
+ {
+  "id": "UKDDG-T45",
+  "designer": "ship",
+  "name": "Type 45 destroyer",
+  "archetype": "Air-defence destroyer",
+  "nation": "GBR",
+  "fromYear": 2009,
+  "ratings": {
+   "air-defence": 9,
+   "strike": 2,
+   "anti-ship": 3,
+   "anti-sub": 3,
+   "detection": 9,
+   "survivability": 5,
+   "endurance": 6
+  }
+ },
+ {
+  "id": "UKCV-QE",
+  "designer": "ship",
+  "name": "Queen Elizabeth-class carrier",
+  "archetype": "STOVL carrier",
+  "nation": "GBR",
+  "fromYear": 2017,
+  "ratings": {
+   "air-defence": 3,
+   "strike": 7,
+   "anti-ship": 6,
+   "anti-sub": 4,
+   "detection": 7,
+   "survivability": 8,
+   "endurance": 8
+  }
+ },
+ {
+  "id": "FRCVN-CDG",
+  "designer": "ship",
+  "name": "Charles de Gaulle carrier",
+  "archetype": "Nuclear catapult carrier",
+  "nation": "FRA",
+  "fromYear": 2001,
+  "ratings": {
+   "air-defence": 4,
+   "strike": 8,
+   "anti-ship": 6,
+   "anti-sub": 4,
+   "detection": 7,
+   "survivability": 8,
+   "endurance": 9
+  }
+ },
+ {
+  "id": "JPDDH-183",
+  "designer": "ship",
+  "name": "Izumo-class helicopter destroyer",
+  "archetype": "Helicopter destroyer / light carrier",
+  "nation": "JPN",
+  "fromYear": 2015,
+  "ratings": {
+   "air-defence": 4,
+   "strike": 3,
+   "anti-ship": 2,
+   "anti-sub": 8,
+   "detection": 6,
+   "survivability": 6,
+   "endurance": 7
+  }
+ },
+ {
+  "id": "KRDDG-KDX3",
+  "designer": "ship",
+  "name": "Sejong the Great-class destroyer",
+  "archetype": "Air-defence destroyer",
+  "nation": "KOR",
+  "fromYear": 2008,
+  "ratings": {
+   "air-defence": 9,
+   "strike": 6,
+   "anti-ship": 6,
+   "anti-sub": 6,
+   "detection": 8,
+   "survivability": 6,
+   "endurance": 7
+  }
+ }
 ]

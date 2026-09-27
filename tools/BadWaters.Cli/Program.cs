@@ -36,6 +36,12 @@ foreach (var p in people.Where(p => p.CareerYears <= p.TrainingYears))
 
 var content = GameContent.Load(dataDir, mods);
 loader.Errors.AddRange(content.Errors);
+foreach (var p in presets)
+    foreach (var (r, v) in p.Ratings)
+    {
+        if (!content.Catalog.Ratings.ContainsKey(r)) loader.Errors.Add($"presets.json #{p.Id}: unknown rating {r}");
+        if (v < 0 || v > 10) loader.Errors.Add($"presets.json #{p.Id}: rating {r} must be 0-10");
+    }
 var eval = new BadWaters.Sim.Engineering.Evaluator(content.Catalog);
 var maxTech = content.Tech.Keys.ToDictionary(k => k, k => content.Tech[k].MaxLevel);
 foreach (var d in content.Designs.Values)
