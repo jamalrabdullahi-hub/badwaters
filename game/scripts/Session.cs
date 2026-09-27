@@ -2,6 +2,8 @@ using System.Text.Json;
 using BadWaters.Data;
 using BadWaters.Sim;
 using BadWaters.Sim.Trade;
+using BadWaters.Sim.Engineering;
+using BadWaters.Sim.Theatre;
 using Godot;
 
 namespace BadWaters.Game;
@@ -64,6 +66,20 @@ public static class Session
             mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, arrays);
             LandMeshes[res] = mesh;
         }
+    }
+
+    public static SystemProfile Profile(string designId) => SystemProfile.Build(Content.Catalog, Content.Designs[designId]);
+
+    /// <summary>Player designs live in a mod folder, so they layer over core content like any other mod.</summary>
+    public static string PlayerModDir() => Path.GetFullPath(Path.Combine(DataDir(), "..", "..", "mods", "player"));
+
+    public static void SaveDesign(DesignDef d)
+    {
+        Content.Designs[d.Id] = d;
+        Directory.CreateDirectory(PlayerModDir());
+        var mine = Content.Designs.Values.Where(x => x.Id.StartsWith("player-")).ToList();
+        File.WriteAllText(Path.Combine(PlayerModDir(), "designs.json"),
+            JsonSerializer.Serialize(mine, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
     }
 
     /// <summary>Land meshes by resolution: "110m" for zoomed-out views, "50m" for detail.</summary>

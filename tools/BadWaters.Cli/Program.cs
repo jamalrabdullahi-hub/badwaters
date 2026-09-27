@@ -3,7 +3,17 @@ using BadWaters.Sim.Policy;
 
 // Bad Waters command-line tools.
 //   validate [dataDir] [modDir...]   check that all content loads and cross-references resolve
+//   trial [seed]                     run the intercept trial scenario with both sides on AI and print the log
 var cmd = args.Length > 0 ? args[0] : "validate";
+if (cmd == "trial")
+{
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    var t = new BadWaters.Sim.Theatre.InterceptTrial(gc.Scenarios["intercept-trial"],
+        id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), args.Length > 1 ? int.Parse(args[1]) : 1);
+    t.Advance(1200);
+    foreach (var l in t.Log) Console.WriteLine($"T+{l.T,6:0.0}  {l.Kind,-8} {l.Text}");
+    return 0;
+}
 if (cmd != "validate")
 {
     Console.Error.WriteLine("Usage: BadWaters.Cli validate [dataDir] [modDir...]");

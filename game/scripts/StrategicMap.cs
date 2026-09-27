@@ -113,7 +113,7 @@ public partial class StrategicMap : Node2D
         else if (e is InputEventMouseMotion mm)
         {
             if (_drag) { _cam.Position -= mm.Relative / _cam.Zoom; _grid.QueueRedraw(); }
-            RouteHovered?.Invoke(HitRoute(GetGlobalMousePosition()));
+            if (_routes.Visible) RouteHovered?.Invoke(HitRoute(GetGlobalMousePosition()));
         }
     }
 
@@ -126,6 +126,9 @@ public partial class StrategicMap : Node2D
                     if (Geometry2D.GetClosestPointToSegment(p, l.Points[i], l.Points[i + 1]).DistanceTo(p) < tol) return (string)l.GetMeta("route");
         return null;
     }
+
+    public void AddOverlay(Node2D n) { if (n.GetParent() == null) AddChild(n); }
+    public void ShowRoutes(bool on) { _routes.Visible = on; if (!on) RouteHovered?.Invoke(null); }
 
     public void CenterOn(double lon, double lat, float zoom) { _cam.Position = Session.Project(lon, lat); _cam.Zoom = new Vector2(zoom, zoom); UpdateLod(); }
 }

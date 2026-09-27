@@ -1427,6 +1427,134 @@
   "needs": []
  },
  {
+  "id": "pr-rocket-2stage",
+  "name": "Two-stage rocket motor",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "rocket-motors": 5
+  },
+  "uses": {
+   "mass": 1.5,
+   "volume": 4
+  },
+  "adds": {
+   "speed": 9,
+   "reach": 7
+  },
+  "port": null,
+  "cost": 0.6,
+  "factory": "missile-works",
+  "workUnits": 1.5,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pr-rocket-dual",
+  "name": "Dual-pulse rocket motor",
+  "family": "propulsion",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "rocket-motors": 5
+  },
+  "uses": {
+   "mass": 0.3,
+   "volume": 2
+  },
+  "adds": {
+   "speed": 9,
+   "reach": 5
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": "missile-works",
+  "workUnits": 0.8,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "gc-rv-manoeuvre",
+  "name": "Manoeuvring re-entry body",
+  "family": "guidance",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "flight-control": 6
+  },
+  "uses": {
+   "mass": 0.3,
+   "volume": 1,
+   "power": 0.2
+  },
+  "adds": {
+   "agility": 4,
+   "accuracy": 2
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": "missile-works",
+  "workUnits": 0.6,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "ew-penaids",
+  "name": "Penetration aids (decoys)",
+  "family": "ew",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "ew-systems": 4
+  },
+  "uses": {
+   "mass": 0.3,
+   "volume": 2
+  },
+  "adds": {
+   "ew": 3
+  },
+  "port": null,
+  "cost": 0.2,
+  "factory": "missile-works",
+  "workUnits": 0.3,
+  "offers": [],
+  "needs": []
+ },
+ {
+  "id": "pl-hit",
+  "name": "Hit-to-kill vehicle",
+  "family": "payload",
+  "fitsKinds": [
+   "munition"
+  ],
+  "requires": {
+   "payloads": 5,
+   "flight-control": 5
+  },
+  "uses": {
+   "mass": 0.04,
+   "volume": 1,
+   "power": 0.2
+  },
+  "adds": {
+   "punch": 2,
+   "accuracy": 8,
+   "agility": 5
+  },
+  "port": null,
+  "cost": 0.3,
+  "factory": "missile-works",
+  "workUnits": 0.6,
+  "offers": [],
+  "needs": []
+ },
+ {
   "id": "fz-impact",
   "name": "Impact fuze",
   "family": "fuzing",

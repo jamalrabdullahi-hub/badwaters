@@ -1,0 +1,94 @@
+[
+ {
+  "id": "intercept-trial",
+  "name": "Proving ground: intercept trial",
+  "brief": "A test-range exercise. Red fires tactical ballistic missiles at a range target; Blue's battery must detect and intercept them. Everything is a fictional game system with game ratings.",
+  "center": [
+   143.2,
+   -40.6
+  ],
+  "zoom": 4.6,
+  "sides": {
+   "blue": "Blue force",
+   "red": "Red force"
+  },
+  "sites": [
+   {
+    "id": "target-alpha",
+    "name": "Range target Alpha",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 146.8,
+    "lat": -41.6
+   },
+   {
+    "id": "outpost-kite",
+    "name": "Radar outpost Kite",
+    "side": "blue",
+    "class": "military-base",
+    "lon": 145.3,
+    "lat": -40.9
+   },
+   {
+    "id": "harbour-town",
+    "name": "Harbour town",
+    "side": "blue",
+    "class": "population-centre",
+    "lon": 147.3,
+    "lat": -41.35
+   },
+   {
+    "id": "depot-ember",
+    "name": "Range depot Ember",
+    "side": "red",
+    "class": "logistics",
+    "lon": 141.9,
+    "lat": -38.1
+   }
+  ],
+  "batteries": [
+   {
+    "id": "aster",
+    "name": "Battery Aster",
+    "side": "blue",
+    "lon": 146.45,
+    "lat": -41.25,
+    "radar": "gs-radar",
+    "launcher": "gs-launcher",
+    "interceptor": "sam-interceptor",
+    "stock": 8
+   }
+  ],
+  "launchers": [
+   {
+    "id": "cinder",
+    "name": "Launch area Cinder",
+    "side": "red",
+    "lon": 141.6,
+    "lat": -38.3,
+    "missile": "bm-tactical",
+    "stock": 6
+   }
+  ],
+  "script": [
+   {
+    "t": 20,
+    "launcher": "cinder",
+    "target": "target-alpha",
+    "count": 1
+   },
+   {
+    "t": 140,
+    "launcher": "cinder",
+    "target": "outpost-kite",
+    "count": 2
+   },
+   {
+    "t": 300,
+    "launcher": "cinder",
+    "target": "target-alpha",
+    "count": 2
+   }
+  ]
+ }
+]

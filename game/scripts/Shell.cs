@@ -24,6 +24,9 @@ public partial class Shell : Control
     private PanelContainer _bannerBox = null!, _placeholder = null!;
     private Label _placeholderText = null!;
     private StrategicMap _map = null!;
+    private Control _stack = null!, _mapUi = null!;
+    private DevelopmentScreen? _dev;
+    private TheatreOps? _theatre;
 
     public override void _Ready()
     {
@@ -51,14 +54,17 @@ public partial class Shell : Control
         middle.AddChild(bezel);
         var stack = new Control { MouseFilter = MouseFilterEnum.Ignore };
         bezel.AddChild(stack);
+        _stack = stack;
+        _mapUi = new Control { AnchorRight = 1, AnchorBottom = 1, MouseFilter = MouseFilterEnum.Ignore };
+        stack.AddChild(_mapUi);
 
         stack.AddChild(MapModes());
         _info = UiTheme.Text("Hover a trade corridor for details.", 13, UiTheme.Dim, wrap: true);
         _info.CustomMinimumSize = new Vector2(330, 0); // fixed width: autowrap labels without one re-layout every frame
         var infoBox = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, OffsetLeft = -360, OffsetRight = -10, OffsetTop = 10 };
         infoBox.AddChild(_info);
-        stack.AddChild(infoBox);
-        stack.AddChild(Legend());
+        _mapUi.AddChild(infoBox);
+        _mapUi.AddChild(Legend());
 
         _bannerBox = new PanelContainer { AnchorLeft = 0.5f, AnchorRight = 0.5f, OffsetLeft = -330, OffsetRight = 330, OffsetTop = 10, Visible = false };
         _bannerBox.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.25f, 0.03f, 0.05f, 0.95f), UiTheme.Bad, 6, 2));
@@ -66,7 +72,7 @@ public partial class Shell : Control
         _banner = UiTheme.Text("", 15);
         bh.AddChild(_banner);
         var enter = new Button { Text = "Enter Theatre Ops ▸" };
-        enter.Pressed += () => ShowPlaceholder("Theatre Ops");
+        enter.Pressed += () => { _bannerBox.Visible = false; Open("Theatre Ops"); };
         bh.AddChild(enter);
         _bannerBox.AddChild(bh);
         stack.AddChild(_bannerBox);
@@ -149,13 +155,43 @@ public partial class Shell : Control
         foreach (var name in Dock)
         {
             var b = new Button { Text = name, ToggleMode = true, ButtonGroup = group, ButtonPressed = name == "Map" };
-            b.Pressed += () => { if (name == "Map") ShowMap(); else ShowPlaceholder(name); };
+            b.Pressed += () => Open(name);
+            _dockButtons[name] = b;
             h.AddChild(b);
         }
         return bar;
     }
 
-    private void ShowMap() { _placeholder.Visible = false; }
+    private readonly Dictionary<string, Button> _dockButtons = new();
+
+    private void Open(string name)
+    {
+        if (_dockButtons.TryGetValue(name, out var btn)) btn.ButtonPressed = true;
+        _placeholder.Visible = false;
+        if (_dev != null) _dev.Visible = name == "Development";
+        var theatre = name == "Theatre Ops";
+        if (_theatre != null) { _theatre.Visible = theatre; _theatre.Layer.Visible = theatre; }
+        _mapUi.Visible = name == "Map";
+        _map.ShowRoutes(!theatre);
+        if (name == "Map") return;
+        if (name == "Development")
+        {
+            if (_dev == null) { _dev = new DevelopmentScreen(); _stack.AddChild(_dev); _dev.DesignsChanged += () => { if (_theatre != null) { _theatre.RefreshPickers(); _theatre.Reset(); } }; }
+            _dev.Visible = true;
+            return;
+        }
+        if (theatre)
+        {
+            if (_theatre == null) { _theatre = new TheatreOps(); _stack.AddChild(_theatre); _map.AddOverlay(_theatre.Layer); }
+            _theatre.Visible = true; _theatre.Layer.Visible = true;
+            var sc = Session.Content.Scenarios["intercept-trial"];
+            _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
+            return;
+        }
+        ShowPlaceholder(name);
+    }
+
+    private void ShowMap() => Open("Map");
     private void ShowPlaceholder(string name)
     {
         _placeholder.Visible = true;
@@ -214,6 +250,14 @@ public partial class Shell : Control
         if (DevScreenshot.Arg("view") == "world") _map.CenterOn(60, 20, 0.32f);
         if (DevScreenshot.Arg("hover") is { } r) ShowRoute(r);
         if (DevScreenshot.Arg("advance") is { } a) Advance(a == "year" ? TurnLength.Year : TurnLength.Month);
+        if (DevScreenshot.Arg("screen") is { } screen) Open(screen == "dev" ? "Development" : screen == "theatre" ? "Theatre Ops" : "Map");
+        if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))
+        {
+            if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch("cinder", target, 2);
+            _theatre.Trial.Advance(secs);
+            if (DevScreenshot.Arg("track") is { } tk) _theatre.SelectedTrack = int.Parse(tk);
+            _theatre.UpdateUi();
+        }
         DevScreenshot.MaybeCapture(this);
     }
 }

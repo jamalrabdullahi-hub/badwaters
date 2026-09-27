@@ -148,5 +148,54 @@
    "cp-cms-basic",
    "rl-basic"
   ]
+ },
+ {
+  "id": "bm-tactical",
+  "name": "Tempest-7 tactical ballistic missile",
+  "frame": "mb-heavy",
+  "lineage": "tempest",
+  "components": [
+   "pr-rocket-2stage",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "cp-flight",
+   "gc-autopilot",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "bm-tactical-b",
+  "name": "Tempest-7B (manoeuvring, decoys)",
+  "frame": "mb-heavy",
+  "lineage": "tempest",
+  "components": [
+   "pr-rocket-2stage",
+   "pw-battery",
+   "nv-ins",
+   "nv-gnss",
+   "cp-flight",
+   "gc-rv-manoeuvre",
+   "ew-penaids",
+   "pl-blast",
+   "fz-impact"
+  ]
+ },
+ {
+  "id": "sam-hit",
+  "name": "OL-12 hit-to-kill interceptor",
+  "frame": "mb-medium",
+  "lineage": "ol-9",
+  "components": [
+   "pr-rocket-dual",
+   "pw-battery",
+   "nv-ins",
+   "cp-flight",
+   "sk-radar",
+   "cm-weapon-link",
+   "ew-eccm",
+   "pl-hit"
+  ]
  }
 ]
