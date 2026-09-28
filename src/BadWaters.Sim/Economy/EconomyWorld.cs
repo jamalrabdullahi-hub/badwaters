@@ -75,6 +75,11 @@ public sealed class EconomyWorld
     public TradeReach Reach { get; }
     public MacroRules Macro { get; }
     public Dictionary<string, NationReport> LastReports { get; } = new();
+    /// <summary>The strategic AI (optional) and the nations it runs (every nation but the player, unless delegated).</summary>
+    public StrategicCommander? Strategy { get; set; }
+    public HashSet<string> AiNations { get; } = new();
+    /// <summary>Is this nation at war (in a live theatre)? Set by the game.</summary>
+    public Func<string, bool> AtWar { get; set; } = _ => false;
 
     public EconomyWorld(EconomyCatalog cat, EconomyGeo geo, Catalog eng, IReadOnlyDictionary<string, DesignDef> designs, IReadOnlyDictionary<string, RouteDef> routes)
     {
@@ -167,6 +172,7 @@ public sealed class EconomyWorld
             LastReports[n] = rep;
             var e = Macro.Apply(st, st.Nations[n], rep);
             if (e != null) events.Add(e);
+            if (Strategy != null && AiNations.Contains(n)) Strategy.Act(st, n, rep, AtWar(n));
         }
         st.Month++;
         return events;

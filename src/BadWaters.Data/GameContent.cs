@@ -31,11 +31,28 @@ public sealed class GameContent
     public Dictionary<string, NationDef> Nations { get; } = new();
     public List<BadWaters.Sim.Economy.TradeRegime> TradeRegimes { get; } = new();
     public Dictionary<string, BadWaters.Sim.Command.DoctrineProfile> Doctrines { get; } = new();
+    public Dictionary<string, BadWaters.Sim.Economy.Disposition> Dispositions { get; } = new();
+    public BadWaters.Sim.Economy.Disposition DispositionFor(string nation) =>
+        Dispositions.TryGetValue(nation, out var d) ? d : Dispositions.GetValueOrDefault("default") ?? new BadWaters.Sim.Economy.Disposition();
     /// <summary>A nation's theatre doctrine: its own entry merged over the default (data/core/theatre/doctrine.json).</summary>
     public BadWaters.Sim.Command.DoctrineProfile DoctrineFor(string? nation) =>
         nation != null && Doctrines.TryGetValue(nation, out var d) ? d : Doctrines.GetValueOrDefault("default") ?? new BadWaters.Sim.Command.DoctrineProfile();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
+    /// <summary>A content file whose records each merge over its "default" record.</summary>
+    private static void MergedOverDefault<T>(ContentLoader l, string file, Dictionary<string, T> into)
+    {
+        var all = l.LoadFile(file);
+        var def = all.GetValueOrDefault("default");
+        foreach (var (id, obj) in all)
+        {
+            var merged = def != null && id != "default" ? (System.Text.Json.Nodes.JsonObject)def.DeepClone() : new System.Text.Json.Nodes.JsonObject();
+            foreach (var (k, v) in obj) merged[k] = v?.DeepClone();
+            merged["id"] = id;
+            into[id] = System.Text.Json.JsonSerializer.Deserialize<T>(merged, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        }
+    }
+
     private void ValidateEconomy()
     {
         var e = Economy;
@@ -72,6 +89,7 @@ public sealed class GameContent
         foreach (var t in geo.Seeding.SectorFacilities.Values.SelectMany(x => x).Concat(geo.Seeding.Always.Keys).Concat(geo.Seeding.Capital.Keys).Concat(geo.Seeding.Coastal.Keys).Concat(geo.Seeding.EnergyMix.Values))
             if (!e.Facilities.ContainsKey(t)) Errors.Add($"seeding: unknown facility type {t}");
         foreach (var (sec, sd) in geo.Seeding.SectorDesigns) if (!Designs.ContainsKey(sd.Design)) Errors.Add($"seeding sector {sec}: unknown design {sd.Design}");
+        foreach (var (id, d) in Dispositions) foreach (var p in d.Programmes) if (!Designs.ContainsKey(p)) Errors.Add($"disposition {id}: unknown design {p}");
         foreach (var g in geo.Seeding.IndustrialBasket.Keys.Concat(geo.Rules.CivilianBasket.Keys)) if (!Good(g)) Errors.Add($"basket: unknown good {g}");
     }
 
@@ -107,6 +125,7 @@ public sealed class GameContent
             merged["id"] = id;
             g.Doctrines[id] = System.Text.Json.JsonSerializer.Deserialize<BadWaters.Sim.Command.DoctrineProfile>(merged, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         }
+        MergedOverDefault<BadWaters.Sim.Economy.Disposition>(l, "strategic/dispositions.json", g.Dispositions);
         g.TradeRegimes.AddRange(l.Load<BadWaters.Sim.Economy.TradeRegime>("economy/trade.json"));
         g.Geo.Seeding = l.LoadObject<BadWaters.Sim.Economy.SeedingRules>("economy/seeding.json") ?? g.Geo.Seeding;
         g.Geo.Rules = l.LoadObject<BadWaters.Sim.Economy.EconomyRules>("economy/economy_rules.json") ?? g.Geo.Rules;

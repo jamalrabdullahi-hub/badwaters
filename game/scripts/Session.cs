@@ -67,6 +67,10 @@ public static class Session
         LoadLand();
         Econ = new BadWaters.Sim.Economy.EconomyWorld(Content.Economy, Content.Geo, Content.Catalog, Content.Designs, Content.Routes);
         Econ.Start(World.Economy, Content.Nations.Keys, year, Content.TradeRegimes);
+        // every other nation is run by its strategic AI; the player can delegate their own too
+        Econ.Strategy = new BadWaters.Sim.Economy.StrategicCommander(Econ, Content.DispositionFor);
+        foreach (var n in World.Economy.Nations.Keys.Where(n => n != nation)) Econ.AiNations.Add(n);
+        Econ.AtWar = n => World.Theatres.Values.Any(t => t.AtWar && Content.Scenarios.Values.Any(sc => sc.Theatre == t.Id && sc.Sides.Values.Any(v => NationId(v) == n)));
         Campaign = new BadWaters.Sim.Command.TheatreCampaign(th => Content.Scenarios.Values.FirstOrDefault(x => x.Theatre == th), BuildTheatre, NationId);
         Scheduler.DailyHook = (w, now) =>
         {

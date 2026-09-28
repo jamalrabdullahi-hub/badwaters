@@ -83,6 +83,7 @@ public sealed class EconomySolver
     }
 
     public BillResolver Bills => _bills;
+    public bool HasDesign(string id) => _designs.ContainsKey(id);
     public int GoodDepth(string g) => _depth.GetValueOrDefault(g);
 
     /// <summary>Topological depth over every producing process (not just the primary), so a good is always planned

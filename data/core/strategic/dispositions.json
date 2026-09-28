@@ -1,0 +1,12 @@
+[
+ {"id": "default", "baseDefenceShare": 0.02, "warDefenceShare": 0.05, "reciprocate": true, "buildAggression": 1.0, "programmes": []},
+ {"id": "USA", "baseDefenceShare": 0.035, "warDefenceShare": 0.06, "programmes": ["sm-2", "cm-cruise"]},
+ {"id": "CHN", "baseDefenceShare": 0.017, "warDefenceShare": 0.05, "programmes": ["df-17", "hq-9b", "cj-10"]},
+ {"id": "JPN", "baseDefenceShare": 0.01, "warDefenceShare": 0.03, "reciprocate": false, "programmes": ["type-12", "sm-2"]},
+ {"id": "ISR", "baseDefenceShare": 0.05, "warDefenceShare": 0.08, "programmes": ["arrow-3", "davids-sling", "iron-dome"]},
+ {"id": "IRN", "baseDefenceShare": 0.025, "warDefenceShare": 0.06, "programmes": ["emad", "kheibar-shekan", "shahed-136", "bavar-373"]},
+ {"id": "RUS", "baseDefenceShare": 0.04, "warDefenceShare": 0.07, "programmes": ["s-300pmu2"]},
+ {"id": "PRK", "baseDefenceShare": 0.2, "warDefenceShare": 0.25, "programmes": ["bm-tactical"]},
+ {"id": "KOR", "baseDefenceShare": 0.027, "warDefenceShare": 0.05, "programmes": ["sam-interceptor"]},
+ {"id": "SAU", "baseDefenceShare": 0.07, "warDefenceShare": 0.09, "programmes": ["sam-interceptor"]}
+]
