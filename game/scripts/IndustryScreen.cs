@@ -63,6 +63,13 @@ public partial class IndustryScreen : PanelContainer
             _left.AddChild(UiTheme.Text($"Civilian needs met {rep.BasketSatisfaction:P0} · maintenance {rep.MaintenanceMet:P0} · electricity {rep.EnergySupply:0}/{rep.EnergyDemand:0} · imports {rep.ImportCost:0}/month", 12, UiTheme.Dim, wrap: true));
         else _left.AddChild(UiTheme.Text("Advance a month to see this month's production.", 12, UiTheme.Dim));
 
+        // control spectrum at the strategic level: let the strategic AI run our economy and procurement
+        var delegate_ = new CheckBox { Text = "Delegate: let the strategic AI run our economy (you can still change anything)", ButtonPressed = Session.Econ.AiNations.Contains(Me) };
+        delegate_.Toggled += on => { if (on) Session.Econ.AiNations.Add(Me); else Session.Econ.AiNations.Remove(Me); };
+        _left.AddChild(delegate_);
+        if (Session.Econ.Strategy?.Decisions.GetValueOrDefault(Me) is { Count: > 0 } dec)
+            foreach (var d in dec.AsEnumerable().Reverse().Take(4)) _left.AddChild(UiTheme.Text("AI: " + d, 11, UiTheme.Dim, wrap: true));
+
         // defence budget
         var db = new HBoxContainer();
         var dl = UiTheme.Text("", 12); dl.CustomMinimumSize = new Vector2(230, 0);

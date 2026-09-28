@@ -98,7 +98,8 @@ public partial class Shell : Control
         _placeholder.AddChild(_placeholderText);
         stack.AddChild(_placeholder);
 
-        col.AddChild(DockBar());
+        _dock = DockBar();
+        col.AddChild(_dock);
         UpdateDate();
         DevAfterBuild();
     }
@@ -204,6 +205,7 @@ public partial class Shell : Control
 
     private readonly Dictionary<string, Button> _dockButtons = new();
     private string? _bannerTheatre;
+    private Control _dock = null!;
 
     private void Open(string name)
     {
@@ -215,6 +217,8 @@ public partial class Shell : Control
         var theatre = name == "Theatre Ops";
         if (_theatre != null) { _theatre.Visible = theatre; _theatre.Layer.Visible = theatre; }
         _mapUi.Visible = name == "Map";
+        // Theatre Ops is its own game: no strategic dock, no strategy/design/economy screens while you're in it
+        _dock.Visible = !theatre;
         _map.ShowRoutes(!theatre);
         if (name == "Map") return;
         if (name == "Development")
@@ -237,7 +241,22 @@ public partial class Shell : Control
         }
         if (theatre)
         {
-            if (_theatre == null) { _theatre = new TheatreOps(); _stack.AddChild(_theatre); _map.AddOverlay(_theatre.Layer); }
+            if (_theatre == null)
+            {
+                _theatre = new TheatreOps(); _stack.AddChild(_theatre); _map.AddOverlay(_theatre.Layer);
+                _theatre.ReturnRequested += () => Open("Map");
+                _theatre.AutoResolveRequested += () =>
+                {
+                    var th = _theatre.Scenario.Theatre;
+                    if (Session.Campaign != null && th != "" && Session.Campaign.Live.TryGetValue(th, out var live))
+                    {
+                        Session.Campaign.Mode[th] = BadWaters.Sim.Command.TheatreMode.Auto;
+                        Session.Campaign.Resolve(live, Session.Campaign.Days.GetValueOrDefault(th) * BadWaters.Sim.Command.TheatreCampaign.Day);
+                        Session.Campaign.WriteBack(Session.World, live);
+                    }
+                    Open("Map");
+                };
+            }
             _theatre.Visible = true; _theatre.Layer.Visible = true;
             // a theatre at war with the player opens its own scenario; otherwise the proving-ground trial
             var war = Session.World.Theatres.Values.Where(t => t.AtWar && t.PlayerInvolved).Select(t => t.Id).ToHashSet();
@@ -347,6 +366,7 @@ public partial class Shell : Control
         {
             if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch(_theatre.Trial.Launchers.First(l => l.Def.Side == "red").Def.Id, target, 2);
             _theatre.Trial.Advance(secs);
+            _theatre.RefreshWindows(force: true);
             if (DevScreenshot.Arg("track") is { } tk) _theatre.SelectedTrack = int.Parse(tk);
             if (DevScreenshot.Arg("flight") is { } fl) _theatre.SelectedFlight = _theatre.Trial.Air?.Flights.FirstOrDefault(f => f.Callsign.StartsWith(fl));
             if (DevScreenshot.Arg("view") is { } vw && vw != "world") { _theatre.ViewSide = vw; _theatre.UpdateUi(); }

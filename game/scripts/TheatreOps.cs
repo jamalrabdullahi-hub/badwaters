@@ -33,7 +33,8 @@ public partial class TheatreOps : Control
     private SpinBox _count = null!;
     private VBoxContainer _firePanel = null!;
     private Button _blueAi = null!, _bluePlayer = null!, _redAi = null!, _redPlayer = null!;
-    private double _uiTimer;
+    private double _uiTimer, _winTimer;
+    private PanelContainer? _console;
     private OptionButton _cmd = null!, _view = null!;
     private int _logSeen = -1;
     public const int TopH = 44, ConsoleW = 640, TimelineH = 210;
@@ -48,10 +49,26 @@ public partial class TheatreOps : Control
     public string SideName(string side) => Scenario.Sides.GetValueOrDefault(side, side);
     private static string Enemy(string side) => side == "blue" ? "red" : "blue";
 
+    /// <summary>Leave the theatre for the strategic game (the war keeps its state).</summary>
+    public event Action? ReturnRequested;
+    /// <summary>Auto-resolve the rest of this turn: the commanders fight it headless, then back to strategic.</summary>
+    public event Action? AutoResolveRequested;
+
+    /// <summary>Theatre Ops has its own visual language: any label added below it takes the tactical palette.</summary>
+    private void Retone(Node n)
+    {
+        if (n is not Label l || !IsAncestorOf(l) || !l.HasThemeColorOverride("font_color")) return;
+        UiTheme.Tactical = true;
+        l.AddThemeColorOverride("font_color", UiTheme.Map(l.GetThemeColor("font_color")));
+        UiTheme.Tactical = false;
+    }
+    private void RetoneAll(Node n) { Retone(n); foreach (var c in n.GetChildren()) RetoneAll(c); }
+
     public override void _Ready()
     {
         AnchorRight = 1; AnchorBottom = 1;
         MouseFilter = MouseFilterEnum.Ignore;
+        Theme = UiTheme.BuildTactical();
         Layer.Ops = this;
 
         // ---- layout: top bar · console (left) · map (right) · ATO sync timeline (bottom) ----
@@ -60,6 +77,9 @@ public partial class TheatreOps : Control
         var th = new HBoxContainer();
         th.AddThemeConstantOverride("separation", 8);
         top.AddChild(th);
+        var back = new Button { Text = "◂ STRATEGIC", TooltipText = "Return to the strategic game. The war keeps its state; next turn you fight or auto-resolve again." };
+        back.Pressed += () => ReturnRequested?.Invoke();
+        th.AddChild(back);
         _title = UiTheme.Text("THEATRE OPS", 16, UiTheme.Accent);
         th.AddChild(_title);
         _clock = UiTheme.Text("", 16);
@@ -79,6 +99,9 @@ public partial class TheatreOps : Control
         _redName = UiTheme.Text("Red", 14, TheatreLayer.Red);
         th.AddChild(_redName);
         (_redAi, _redPlayer) = ModeButtons(th, "red");
+        var autoRes = new Button { Text = "AUTO-RESOLVE TURN", TooltipText = "The commanders fight the rest of this turn headless; results carry into the strategic game." };
+        autoRes.Pressed += () => AutoResolveRequested?.Invoke();
+        th.AddChild(autoRes);
         var reset = new Button { Text = "Reset" };
         reset.Pressed += () => Reset();
         th.AddChild(reset);
@@ -92,6 +115,7 @@ public partial class TheatreOps : Control
         th.AddChild(_view);
 
         var console = new PanelContainer { AnchorBottom = 1, OffsetTop = TopH + 4, OffsetRight = ConsoleW, OffsetBottom = -(TimelineH + 4), ClipContents = true };
+        _console = console;
         AddChild(console);
         var cv = new VBoxContainer();
         console.AddChild(cv);
@@ -170,7 +194,12 @@ public partial class TheatreOps : Control
         Load(DevScreenshot.Arg("scenario") ?? "intercept-trial");
         if (DevScreenshot.Arg("blue") == "player") SetMode("blue", SideControl.Player);
         if (DevScreenshot.Arg("red") == "player") SetMode("red", SideControl.Player);
+        BuildWindows();
+        RetoneAll(this);
+        GetTree().NodeAdded += Retone;
     }
+
+    public override void _ExitTree() { if (GetTree() != null) GetTree().NodeAdded -= Retone; }
 
     /// <summary>Switch to another scenario (for example the one for a theatre that just went to war).</summary>
     public void Load(string scenarioId)
@@ -330,6 +359,8 @@ public partial class TheatreOps : Control
         Layer.QueueRedraw();
         _uiTimer += delta;
         if (_uiTimer > 0.25) { _uiTimer = 0; UpdateUi(); }
+        _winTimer += delta;
+        if (_winTimer > 1.5) { _winTimer = 0; RefreshWindows(); }
     }
 
     private string SideSummary(string side)
@@ -481,6 +512,8 @@ public partial class TheatreLayer : Node2D
     private bool Fogged(string side) => Ops.ViewSide != "all" && side != Ops.ViewSide;
     private Picture? Pic => Ops.ViewSide == "all" ? null : Ops.Trial.Intel?.Pictures[Ops.ViewSide];
     /// <summary>The viewer's contact for a key, or null if the viewer doesn't hold it.</summary>
+    /// <summary>Intel replay: contact positions from a recorded snapshot (drawn instead of the live picture).</summary>
+    public List<(double Lon, double Lat, string Kind)>? Replay;
     private Contact? Seen(string key) => Pic != null && Pic.Contacts.TryGetValue(key, out var c) ? c : null;
     private float Fade(Contact c) => (float)Math.Clamp(1 - (Ops.Trial.Time - c.LastSeen) / IntelRules.DropAfter, 0.25, 1);
 
@@ -504,6 +537,14 @@ public partial class TheatreLayer : Node2D
         var zoom = GetViewport().GetCamera2D()?.Zoom.X ?? 1;
         var w = 1.5f / zoom;
         var many = tr.Batteries.Count > 2;
+        if (Replay != null)
+            foreach (var (lon, lat, kind) in Replay)
+            {
+                var at = P(lon, lat);
+                var col = new Color(UiTheme.TacAccent, 0.9f);
+                if (kind == "air") DrawArc(at, 5 / zoom, 0, Mathf.Tau, 12, col, 1.5f / zoom);
+                else DrawRect(new Rect2(at - new Vector2(4, 4) / zoom, new Vector2(8, 8) / zoom), col, false, 1.5f / zoom);
+            }
         Labels.Clear();
         void Label(Vector2 p, string s, Color c) => Labels.Add((p, s, c));
 

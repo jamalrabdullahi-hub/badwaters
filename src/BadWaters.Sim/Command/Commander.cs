@@ -376,6 +376,7 @@ public sealed class Commander
             if (op == null) continue;
             op.Author = Author.AI;
             op.Score = score.Score;
+            op.Start = Math.Max(op.Start, now);
             if (Board.Add(op).Count > 0) continue;
             _opFor[score.Key] = op.Id;
             if (score.Family == "strike") foreach (var t in op.Targets) _followUps.Remove(t);
