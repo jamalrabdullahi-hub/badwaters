@@ -15,6 +15,12 @@ public static class Session
     public static World World { get; private set; } = null!;
     public static Scheduler Scheduler { get; private set; } = null!;
     public static int StartYear { get; private set; }
+    /// <summary>The national production economy (every nation), run on each strategic month.</summary>
+    public static BadWaters.Sim.Economy.EconomyWorld Econ { get; private set; } = null!;
+    public static List<string> EconomyEvents { get; } = new();
+    /// <summary>Nation id from a scenario side name ("China" → "CHN").</summary>
+    public static string? NationId(string sideName) =>
+        Content.Nations.ContainsKey(sideName) ? sideName : Content.Nations.Values.FirstOrDefault(n => n.Name == sideName)?.Id;
 
     public static string DataDir()
     {
@@ -40,6 +46,12 @@ public static class Session
         Scheduler = new Scheduler(World);
         foreach (var r in Content.Routes.Values) { Scheduler.RouteTheatres[r.Id] = r.Theatres.ToHashSet(); Scheduler.RoutePaths[r.Id] = r.Path; Scheduler.RouteDefs[r.Id] = r; }
         LoadLand();
+        Econ = new BadWaters.Sim.Economy.EconomyWorld(Content.Economy, Content.Geo, Content.Catalog, Content.Designs, Content.Routes);
+        Econ.Start(World.Economy, Content.Nations.Keys, year, Content.TradeRegimes);
+        Scheduler.MonthlyHook = w =>
+        {
+            foreach (var e in Econ.RunMonth(w.Economy, w.Routes)) { EconomyEvents.Add(e); w.Log.Add($"{w.Now:yyyy-MM-dd} {e}"); }
+        };
     }
 
     private static void LoadLand()

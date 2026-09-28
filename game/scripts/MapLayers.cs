@@ -198,3 +198,121 @@ public partial class ChokepointLayer : Node2D
         }
     }
 }
+
+/// <summary>Simulated: the facilities of the economy (game entities placed in regions), coloured by class, sized by level.</summary>
+public partial class FacilityLayer : Node2D
+{
+    public float MinZoom = 0.6f;
+    public static Color ClassColor(string c) => c switch
+    {
+        "extraction" => new Color("b08a58"), "processing" => new Color("e0a040"), "high-tech" => new Color("4fd0f0"), "defence" => new Color("ff6a6a"),
+        "energy" => new Color("f5e050"), "logistics" => new Color("a0a8b0"), "knowledge" => new Color("b890ff"), "military" => new Color("c04040"), _ => new Color("d0d0d0"),
+    };
+    public override void _Draw()
+    {
+        var cam = GetViewport().GetCamera2D(); var z = cam?.Zoom.X ?? 1;
+        if (z < MinZoom) return;
+        var c = cam?.GetScreenCenterPosition() ?? Vector2.Zero; var half = GetViewportRect().Size / (2 * z);
+        var view = new Rect2(c - half, half * 2); var s = 1 / z; var font = ThemeDB.FallbackFont;
+        foreach (var site in Session.World.Economy.Sites.Values)
+        {
+            var p = Session.Project(site.Lon, site.Lat);
+            if (!view.HasPoint(p)) continue;
+            var ft = Session.Content.Economy.Facilities[site.Type];
+            var r = (2.2f + MathF.Min(6, MathF.Sqrt(site.Level))) * s;
+            var col = ClassColor(ft.Class);
+            if (!site.Active) col = new Color(col, 0.35f);
+            DrawRect(new Rect2(p - new Vector2(r, r), new Vector2(r, r) * 2), col);
+            if (site.Damage > 0.05) { DrawLine(p - new Vector2(r, r), p + new Vector2(r, r), Colors.White, 1.5f * s); DrawLine(p + new Vector2(-r, r), p + new Vector2(r, -r), Colors.White, 1.5f * s); }
+            if (z >= 2.5f)
+            {
+                DrawSetTransform(p + new Vector2(r + 2 * s, 3 * s), 0, Vector2.One / z);
+                DrawString(font, Vector2.Zero, $"{ft.Name} {site.Level}", HorizontalAlignment.Left, -1, 10, col);
+                DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+            }
+        }
+    }
+}
+
+/// <summary>Simulated: regional deposits (game-scaled endowments), strategic ones highlighted, faded as they deplete.</summary>
+public partial class DepositLayer : Node2D
+{
+    public override void _Draw()
+    {
+        var z = GetViewport().GetCamera2D()?.Zoom.X ?? 1; var s = 1 / z; var font = ThemeDB.FallbackFont;
+        var geo = Session.Content.Geo; var cat = Session.Content.Economy;
+        foreach (var g in geo.Deposits.Values.Where(d => cat.Resources.TryGetValue(d.Resource, out var r) && r.Category != "agri" && d.Resource is not ("limestone" or "silica-sand" or "salt"))
+                     .GroupBy(d => d.Region))
+        {
+            var reg = geo.Regions[g.Key];
+            var list = g.OrderByDescending(d => d.Size).ToList();
+            for (var i = 0; i < list.Count; i++)
+            {
+                var d = list[i];
+                var a = i * 2.4f; var rad = (8 + i * 3) * s;
+                var p = Session.Project(reg.Lon, reg.Lat) + new Vector2(MathF.Cos(a), MathF.Sin(a)) * rad;
+                var left = Session.World.Economy.Reserves.GetValueOrDefault(d.Id, d.Reserve) / Math.Max(1, d.Reserve);
+                var strategic = cat.Resources[d.Resource].Category is "strategic" or "energy";
+                var col = strategic ? new Color("ffcc55") : new Color("c8b89a");
+                DrawCircle(p, (1.5f + d.Size) * s, new Color(col, (float)(0.35 + 0.65 * left)));
+                if (z >= 1.4f)
+                {
+                    DrawSetTransform(p + new Vector2(5 * s, 3 * s), 0, Vector2.One / z);
+                    DrawString(font, Vector2.Zero, cat.Resources[d.Resource].Name.Split(' ', '(')[0], HorizontalAlignment.Left, -1, 9, col);
+                    DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+                }
+            }
+        }
+    }
+}
+
+/// <summary>Simulated: stockpile value held in each region.</summary>
+public partial class StockLayer : Node2D
+{
+    public override void _Draw()
+    {
+        var z = GetViewport().GetCamera2D()?.Zoom.X ?? 1; var s = 1 / z; var font = ThemeDB.FallbackFont;
+        var cat = Session.Content.Economy;
+        foreach (var r in Session.Content.Geo.Regions.Values)
+        {
+            var val = Session.World.Economy.Stock(r.Id).Sum(k => k.Value * (cat.Goods.GetValueOrDefault(k.Key)?.Price ?? 0));
+            if (val <= 0) continue;
+            var p = Session.Project(r.Lon, r.Lat);
+            var rad = MathF.Min(40, 2 + MathF.Sqrt((float)val) / 30) * s;
+            DrawCircle(p, rad, new Color(0.3f, 0.8f, 1f, 0.18f));
+            DrawArc(p, rad, 0, Mathf.Tau, 32, new Color(0.3f, 0.8f, 1f, 0.7f), 1.2f * s);
+            if (z >= 1f)
+            {
+                DrawSetTransform(p + new Vector2(-rad, rad + 10 * s), 0, Vector2.One / z);
+                DrawString(font, Vector2.Zero, $"{val / 1000:0}k", HorizontalAlignment.Left, -1, 10, new Color(0.6f, 0.9f, 1f));
+                DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+            }
+        }
+    }
+}
+
+/// <summary>Simulated: where our imports came from last month (lines into our capital, width by volume).</summary>
+public partial class FlowLayer : Node2D
+{
+    public override void _Draw()
+    {
+        var z = GetViewport().GetCamera2D()?.Zoom.X ?? 1; var s = 1 / z;
+        var me = Session.World.Player; var geo = Session.Content.Geo;
+        var rep = Session.Econ?.LastReports.GetValueOrDefault(me);
+        var cap = geo.Regions.Values.FirstOrDefault(r => r.Nation == me && r.Capital);
+        if (rep == null || cap == null) return;
+        var to = Session.Project(cap.Lon, cap.Lat);
+        var max = rep.Imported.Where(k => k.Key.Contains(':')).Select(k => k.Value).DefaultIfEmpty(1).Max();
+        foreach (var (k, q) in rep.Imported.Where(k => k.Key.Contains(':')))
+        {
+            var src = k[(k.IndexOf(':') + 1)..];
+            (double Lon, double Lat)? at = geo.Suppliers.TryGetValue(src, out var sp) ? (sp.Lon, sp.Lat)
+                : geo.Regions.Values.Where(r => r.Nation == src && r.Capital).Select(r => ((double, double)?)(r.Lon, r.Lat)).FirstOrDefault();
+            if (at == null) continue;
+            var from = Session.Project(at.Value.Lon, at.Value.Lat);
+            var w = (float)(1 + 5 * q / max) * s;
+            DrawLine(from, to, new Color(1f, 0.75f, 0.3f, 0.55f), w);
+            DrawCircle(from, 3 * s, new Color(1f, 0.75f, 0.3f));
+        }
+    }
+}

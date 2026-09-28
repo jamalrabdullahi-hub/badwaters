@@ -26,6 +26,8 @@ public partial class Shell : Control
     private StrategicMap _map = null!;
     private Control _stack = null!, _mapUi = null!;
     private DevelopmentScreen? _dev;
+    private IndustryScreen? _industry;
+    private TradeScreen? _trade;
     private TheatreOps? _theatre;
 
     public override void _Ready()
@@ -195,6 +197,8 @@ public partial class Shell : Control
         if (_dockButtons.TryGetValue(name, out var btn)) btn.ButtonPressed = true;
         _placeholder.Visible = false;
         if (_dev != null) _dev.Visible = name == "Development";
+        if (_industry != null) _industry.Visible = name == "Industry";
+        if (_trade != null) _trade.Visible = name == "Trade & Logistics";
         var theatre = name == "Theatre Ops";
         if (_theatre != null) { _theatre.Visible = theatre; _theatre.Layer.Visible = theatre; }
         _mapUi.Visible = name == "Map";
@@ -204,6 +208,18 @@ public partial class Shell : Control
         {
             if (_dev == null) { _dev = new DevelopmentScreen(); _stack.AddChild(_dev); _dev.DesignsChanged += () => { if (_theatre != null) { _theatre.RefreshPickers(); _theatre.Reset(); } }; }
             _dev.Visible = true;
+            return;
+        }
+        if (name == "Industry")
+        {
+            if (_industry == null) { _industry = new IndustryScreen(); _stack.AddChild(_industry); } else _industry.Refresh();
+            _industry.Visible = true;
+            return;
+        }
+        if (name == "Trade & Logistics")
+        {
+            if (_trade == null) { _trade = new TradeScreen(); _stack.AddChild(_trade); } else _trade.Refresh();
+            _trade.Visible = true;
             return;
         }
         if (theatre)
@@ -237,6 +253,8 @@ public partial class Shell : Control
         var irq = Session.Scheduler.AdvanceStrategic(len);
         UpdateDate();
         _map.RefreshRoutes(); _map.Redraw();
+        if (_industry?.Visible == true) _industry.Refresh();
+        if (_trade?.Visible == true) _trade.Refresh();
         if (irq != null)
         {
             _bannerBox.Visible = true;
@@ -305,8 +323,12 @@ public partial class Shell : Control
         if (DevScreenshot.Arg("view") == "world") _map.CenterOn(60, 20, 0.32f);
         if (DevScreenshot.Arg("center")?.Split(',') is { Length: 3 } cz) _map.CenterOn(double.Parse(cz[0]), double.Parse(cz[1]), float.Parse(cz[2]));
         if (DevScreenshot.Arg("hover") is { } r) ShowRoute(r);
+        if (DevScreenshot.Arg("programme")?.Split(':') is { Length: 2 } pg)
+            Session.World.Economy.Nations[Session.World.Player].Programmes.Add(new BadWaters.Sim.Economy.Programme { Id = "dev", Design = pg[0], RatePerMonth = double.Parse(pg[1]) });
+        if (DevScreenshot.Arg("sanction")?.Split(':') is { Length: >= 3 } sc)
+            Session.World.Economy.Sanction(sc[0], sc[1], sc[2], sc.Length > 3 && sc[3] == "global");
         if (DevScreenshot.Arg("advance") is { } a) Advance(a == "year" ? TurnLength.Year : TurnLength.Month);
-        if (DevScreenshot.Arg("screen") is { } screen) Open(screen == "dev" ? "Development" : screen == "theatre" ? "Theatre Ops" : "Map");
+        if (DevScreenshot.Arg("screen") is { } screen) Open(screen switch { "dev" => "Development", "theatre" => "Theatre Ops", "industry" => "Industry", "trade" => "Trade & Logistics", _ => "Map" });
         if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))
         {
             if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch(_theatre.Trial.Launchers.First(l => l.Def.Side == "red").Def.Id, target, 2);

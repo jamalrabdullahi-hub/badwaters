@@ -56,6 +56,9 @@ public sealed record EconomyRules
     public GdpRules Gdp { get; init; } = new();
     public Dictionary<string, double> Transport { get; init; } = new();
     public MaintenanceRules Maintenance { get; init; } = new();
+    /// <summary>Spares per fielded unit per month by frame kind (the kind's spares good, see bill templates).</summary>
+    public Dictionary<string, double> FleetSpares { get; init; } = new();
+    public double FleetDecay { get; init; } = 0.03;
     public WorldMarketRules WorldMarket { get; init; } = new();
     /// <summary>Civilian goods per million people per month.</summary>
     public Dictionary<string, double> CivilianBasket { get; init; } = new();
@@ -134,6 +137,16 @@ public sealed class ConstructionProject
     public required string Site { get; init; }
     public Dictionary<string, double> Remaining { get; set; } = new();
     public double MonthsLeft { get; set; }
+    /// <summary>Levels added to an existing site (0 = a new site, which is inactive until finished).</summary>
+    public int AddLevels { get; set; }
+}
+
+/// <summary>Units a nation fields (from its production programmes): they wear and need spares like facilities do.</summary>
+public sealed class FleetEntry
+{
+    public double Count { get; set; }
+    /// <summary>0..1: share of the force that is mission-capable.</summary>
+    public double Readiness { get; set; } = 1;
 }
 
 public sealed class NationEconomy
@@ -158,6 +171,8 @@ public sealed class NationEconomy
     /// <summary>Strategic reserve targets in months of consumption per good.</summary>
     public Dictionary<string, double> StockTargets { get; set; } = new();
     public List<ConstructionProject> Construction { get; set; } = new();
+    /// <summary>Fielded units by design.</summary>
+    public Dictionary<string, FleetEntry> Fleet { get; set; } = new();
     public Dictionary<string, int> Tech { get; set; } = new();
     /// <summary>Workers available per skill (same units as facility staffing).</summary>
     public Dictionary<string, double> Labour { get; set; } = new();
@@ -227,6 +242,22 @@ public sealed class EconomyState
 
     public Dictionary<string, double> Stock(string region) => RegionStock.TryGetValue(region, out var d) ? d : RegionStock[region] = new();
 
+
+    /// <summary>
+    /// A theatre strike at (lon, lat) on a site of a target class: damage the nearest facility of that nation within
+    /// range whose own target class matches (else the nearest legitimate one). Protected facilities are never hit.
+    /// Returns the economy site id damaged, or null.
+    /// </summary>
+    public string? DamageNear(string nation, double lon, double lat, string targetClass, double fraction, EconomyCatalog cat, double rangeKm = 250)
+    {
+        var cands = Sites.Values.Where(s => s.Nation == nation && cat.Facilities.TryGetValue(s.Type, out var f) && Policy.TargetPolicy.IsLegitimate(f.TargetClass))
+            .Select(s => (s, d: Trade.TradeReachKm(lon, lat, s.Lon, s.Lat))).Where(x => x.d <= rangeKm).ToList();
+        var pick = cands.Where(x => cat.Facilities[x.s.Type].TargetClass == targetClass).OrderBy(x => x.d).Select(x => x.s).FirstOrDefault()
+                   ?? cands.OrderBy(x => x.d).Select(x => x.s).FirstOrDefault();
+        if (pick == null) return null;
+        ApplyDamage(pick.Id, fraction, cat);
+        return pick.Id;
+    }
 
     /// <summary>Damage a site (theatre strike, sabotage). Stock in its region is destroyed in proportion to the site's share of storage.</summary>
     public void ApplyDamage(string siteId, double fraction, EconomyCatalog cat)

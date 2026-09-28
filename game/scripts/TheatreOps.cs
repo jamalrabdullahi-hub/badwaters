@@ -312,6 +312,14 @@ public partial class TheatreOps : Control
         Trial.Naval = new NavalForces(Trial, Session.Content.PresetInfo, seed);
         Trial.Intel = new IntelService(Trial, Session.Content.PresetInfo, seed);
         Trial.Air = new AirTasking(Trial, Session.Content.PresetInfo, seed);
+        // strikes write back into the strategic economy: the hit facility loses capacity (and stock) next month
+        Trial.SiteDamaged += (site, frac) =>
+        {
+            var nation = Session.NationId(Trial.Scenario.Sides.GetValueOrDefault(site.Side, ""));
+            if (nation == null) return;
+            var hit = Session.World.Economy.DamageNear(nation, site.Lon, site.Lat, site.Class, frac, Session.Content.Economy);
+            if (hit != null) Trial.Report("industry", $"Strategic effect: {hit} damaged {frac:P0}.");
+        };
         SelectedFlight = null; Preview.Clear();
         SelectedTrack = null;
         _logSeen = -1;

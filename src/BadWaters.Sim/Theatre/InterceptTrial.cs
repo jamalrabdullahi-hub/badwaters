@@ -415,6 +415,10 @@ public sealed class InterceptTrial
     /// on another component; punch against hardness sets the damage. Parked aircraft can be destroyed.
     /// The attacker gets a damage report whose quality depends on the source.
     /// </summary>
+    /// <summary>Raised when a strike damages a site: (site, fraction of the whole site destroyed). The strategic economy
+    /// maps it onto its own facility there, so the loss shows up in production next month.</summary>
+    public event Action<SiteDef, double>? SiteDamaged;
+
     public string ApplyHit(string attacker, BaseState b, string aim, double punch, double accuracy, double reportConfidence, string reportSource)
     {
         if (aim == "" || !b.Components.ContainsKey(aim)) aim = AimFor(attacker, b);
@@ -424,6 +428,7 @@ public sealed class InterceptTrial
         var comp = b.Components[hitId];
         var dmg = DamageRules.Damage(punch, comp.Def.Hardness, direct);
         comp.Integrity = Math.Max(0, comp.Integrity - dmg);
+        SiteDamaged?.Invoke(b.Site, dmg / 100.0 / Math.Max(1, b.Components.Count));
         var extra = Air?.GroundLosses(b, comp.Def.Effect) ?? "";
         Intel?.Report(attacker, b, hitId, reportConfidence, reportSource, Time);
         return $"{(direct ? "direct hit" : "near miss")} on {comp.Def.Name} −{dmg:0}% → {comp.Integrity:0}%{extra}";

@@ -85,4 +85,49 @@ public class EconomySolverTests
         Assert.True(without.Produced.GetValueOrDefault("tungsten-heavy-alloy") < 1e-6);
         Assert.NotEqual("", without.Programmes.Single().Limit);
     }
+
+    [Fact]
+    public void Construction_consumes_its_bill_and_brings_the_plant_online()
+    {
+        var st = Seed("DEU");
+        var ew = new EconomyWorld(C.Economy, C.Geo, C.Catalog, C.Designs, C.Routes);
+        var id = ew.OrderConstruction(st, "DEU", "steelworks", "DEU-bav", 2);
+        var site = st.Sites.Values.Single(s => s.Type == "steelworks" && s.Id.Contains("new"));
+        Assert.False(site.Active);
+        var months = (int)C.Economy.Facilities["steelworks"].BuildMonths;
+        var rep = Run(st, "DEU", 1);
+        Assert.True(rep.Consumed.GetValueOrDefault("cement") > 0);
+        Run(st, "DEU", months + 6);
+        Assert.True(site.Active);
+        Assert.DoesNotContain(st.Nations["DEU"].Construction, c => c.Id == id);
+    }
+
+    [Fact]
+    public void Fleet_readiness_falls_without_spares_and_holds_with_them()
+    {
+        var st = Seed("JPN");
+        st.Nations["JPN"].Fleet["ddg-2031"] = new FleetEntry { Count = 20 };
+        Run(st, "JPN", 6);
+        var held = st.Nations["JPN"].Fleet["ddg-2031"].Readiness;
+        foreach (var r in st.RegionStock.Values) r.Remove("spares-naval");
+        foreach (var x in st.Sites.Values.Where(x => x.Nation == "JPN" && x.Type == "heavy-engineering")) x.Damage = 1;
+        st.Sanction("USA", "JPN", "spares-naval", true); st.Sanction("CHN", "JPN", "spares-naval", true);
+        Run(st, "JPN", 8);
+        Assert.True(held > 0.9, $"held {held}");
+        Assert.True(st.Nations["JPN"].Fleet["ddg-2031"].Readiness < held - 0.1);
+    }
+
+    [Fact]
+    public void A_theatre_strike_damages_the_facility_there_in_the_strategic_economy()
+    {
+        var st = Seed("CHN");
+        var t = new BadWaters.Sim.Theatre.InterceptTrial(C.Scenarios["jpn-chn"], id => BadWaters.Sim.Theatre.SystemProfile.Build(C.Catalog, C.Designs[id]), 1, C.BaseTypes);
+        string? hit = null;
+        t.SiteDamaged += (site, frac) => hit = st.DamageNear("CHN", site.Lon, site.Lat, site.Class, frac, C.Economy, 600);
+        var b = t.Bases.Values.First(x => x.Site.Side == "red");
+        for (var i = 0; i < 5; i++) t.ApplyHit("blue", b, "", 9, 9, 0.5, "test");
+        Assert.NotNull(hit);
+        Assert.True(st.Sites[hit!].Damage > 0);
+        Assert.True(BadWaters.Sim.Policy.TargetPolicy.IsLegitimate(C.Economy.Facilities[st.Sites[hit!].Type].TargetClass));
+    }
 }

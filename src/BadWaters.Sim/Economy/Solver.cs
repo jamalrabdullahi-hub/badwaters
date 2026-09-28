@@ -71,12 +71,13 @@ public sealed class EconomySolver
     private readonly EconomyCatalog _cat;
     private readonly EconomyGeo _geo;
     private readonly BillResolver _bills;
+    private readonly Catalog _eng;
     private readonly IReadOnlyDictionary<string, DesignDef> _designs;
     private readonly Dictionary<string, int> _depth = new();
     private readonly List<string> _upstreamFirst;
     public EconomySolver(EconomyCatalog cat, EconomyGeo geo, Catalog eng, IReadOnlyDictionary<string, DesignDef> designs)
     {
-        _cat = cat; _geo = geo; _bills = new BillResolver(cat, eng); _designs = designs;
+        _cat = cat; _geo = geo; _eng = eng; _bills = new BillResolver(cat, eng); _designs = designs;
         foreach (var g in cat.Goods.Keys) Depth(g, new HashSet<string>());
         _upstreamFirst = cat.Goods.Keys.OrderBy(g => _depth[g]).ThenBy(g => g, StringComparer.Ordinal).ToList();
     }
@@ -171,6 +172,13 @@ public sealed class EconomySolver
         }
         foreach (var s in sites.Where(s => _cat.Facilities[s.Type].Spares.Count > 0))
             demands.Add(new Demand("maintenance", s.Id, _cat.Facilities[s.Type].Spares.ToDictionary(k => k.Key, k => k.Value * s.Level), 2, pools.CompOf[s.Region]));
+        // fielded forces: spares by frame kind, per unit
+        foreach (var (design, f) in ne.Fleet)
+        {
+            if (f.Count <= 0 || !_designs.TryGetValue(design, out var dd) || !_eng.Frames.TryGetValue(dd.Frame, out var fr) || !_cat.Bills.Frames.TryGetValue(fr.Kind, out var fb)) continue;
+            var per = _geo.Rules.FleetSpares.GetValueOrDefault(fr.Kind);
+            if (per > 0) demands.Add(new Demand("fleet", design, new() { [fb.Spares] = per * f.Count }, 2));
+        }
         foreach (var c in ne.Construction)
             if (c.MonthsLeft > 0) demands.Add(new Demand("construction", c.Id, c.Remaining.ToDictionary(k => k.Key, k => k.Value / Math.Max(1, c.MonthsLeft)), 2));
         var basket = _geo.Rules.CivilianBasket.ToDictionary(k => k.Key, k => k.Value * ne.Population);
@@ -348,12 +356,18 @@ public sealed class EconomySolver
                     if (cap / Math.Max(1e-9, b) < units) { units = cap / Math.Max(1e-9, b); limit = cap <= 0 ? $"no {_cat.Facilities[f].Name}" : $"{_cat.Facilities[f].Name} capacity"; }
                 }
                 // defence funds: a unit costs its bill at market prices plus assembly
-                var unitCost = d.Goods.Sum(k => k.Value / prog.RatePerMonth * _cat.Goods[k.Key].Price) * 1.25 / 1000;
+                var unitCost = d.Goods.Sum(k => k.Value / prog.RatePerMonth * _cat.Goods[k.Key].Price) * 1.25 / 5000; // game bn: a destroyer ~2.6, a bomber ~2.1, a missile ~0.03
                 if (unitCost > 0 && ne.DefenceFunds < units * unitCost) { units = Math.Max(0, ne.DefenceFunds / unitCost); limit = "defence budget"; }
                 units = Math.Max(0, units);
                 ne.DefenceFunds -= units * unitCost; rep.DefenceSpent += units * unitCost;
                 foreach (var (g, q) in d.Goods) Count(rep.Consumed, g, pools.TakeAll(g, q / prog.RatePerMonth * units));
-                prog.Built += units; prog.LastMonth = units; prog.Status = units >= prog.RatePerMonth * 0.98 ? "on rate" : limit;
+                prog.Built += units;
+                if (units > 0)
+                {
+                    var fe = ne.Fleet.TryGetValue(prog.Design, out var x) ? x : ne.Fleet[prog.Design] = new FleetEntry();
+                    fe.Readiness = (fe.Readiness * fe.Count + units) / (fe.Count + units); // new units arrive ready
+                    fe.Count += units;
+                } prog.LastMonth = units; prog.Status = units >= prog.RatePerMonth * 0.98 ? "on rate" : limit;
                 rep.Programmes.Add(new ProgrammeStatus(prog.Id, prog.Design, prog.RatePerMonth, units, units >= prog.RatePerMonth * 0.98 ? "" : limit));
                 continue;
             }
@@ -375,6 +389,8 @@ public sealed class EconomySolver
             else if (d.Kind == "civilian") { basketNeed += need; basketGot += got; }
             if (d.Kind is "civilian" or "industry") { econNeed += need; econGot += got; }
             else if (d.Kind == "construction") ProgressConstruction(st, ne, d.Owner, frac);
+            else if (d.Kind == "fleet" && ne.Fleet.TryGetValue(d.Owner, out var fl))
+                fl.Readiness = Math.Clamp(fl.Readiness - _geo.Rules.FleetDecay + _geo.Rules.Maintenance.RestorePerMonth * frac, _geo.Rules.Maintenance.ReadinessFloor, 1);
             if (d.Kind is "civilian" or "industry") rep.ValueAdded += got * 0.3; // final consumption carries retail and service value
         }
         foreach (var s in sites.Where(s => _cat.Facilities[s.Type].Spares.Count == 0)) s.Condition = Math.Max(_geo.Rules.Maintenance.ReadinessFloor, s.Condition - _cat.Facilities[s.Type].Decay * 0.5);
@@ -405,8 +421,13 @@ public sealed class EconomySolver
         if (c == null) return;
         foreach (var k in c.Remaining.Keys.ToList()) c.Remaining[k] = Math.Max(0, c.Remaining[k] - c.Remaining[k] / Math.Max(1, c.MonthsLeft) * frac);
         c.MonthsLeft -= frac;
-        if (st.Sites.TryGetValue(c.Site, out var s)) s.BuildLeft = Math.Max(0, c.MonthsLeft);
-        if (c.MonthsLeft <= 1e-6) ne.Construction.Remove(c);
+        if (!st.Sites.TryGetValue(c.Site, out var s)) { ne.Construction.Remove(c); return; }
+        if (c.AddLevels == 0) s.BuildLeft = Math.Max(0, c.MonthsLeft);
+        if (c.MonthsLeft <= 1e-6)
+        {
+            if (c.AddLevels > 0) s.Level += c.AddLevels;
+            ne.Construction.Remove(c);
+        }
     }
 
     public const string WorldMarket = "world";

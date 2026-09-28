@@ -31,6 +31,17 @@ if (cmd == "auto")
     }
     return 0;
 }
+if (cmd == "bills")
+{
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    var br = new BadWaters.Sim.Economy.BillResolver(gc.Economy, gc.Catalog);
+    foreach (var d in gc.Designs.Values.Take(40))
+    {
+        var (goods, _) = br.DesignBill(d);
+        Console.WriteLine($"{d.Id,-16} bill value {goods.Sum(k => k.Value * gc.Economy.Goods[k.Key].Price):0}");
+    }
+    return 0;
+}
 if (cmd == "world")
 {
     // world [months] [year] [shut-chokepoint]

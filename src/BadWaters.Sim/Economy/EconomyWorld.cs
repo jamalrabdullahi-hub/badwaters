@@ -3,6 +3,11 @@ using BadWaters.Sim.Trade;
 
 namespace BadWaters.Sim.Economy;
 
+internal static class Trade
+{
+    public static double TradeReachKm(double lon1, double lat1, double lon2, double lat2) => TradeReach.Km(lon1, lat1, lon2, lat2);
+}
+
 /// <summary>Default sanctions for a start date (data/core/economy/trade.json).</summary>
 public sealed record TradeRegime(string Id, int Year, List<Sanction> Sanctions);
 
@@ -89,6 +94,36 @@ public sealed class EconomyWorld
     }
 
     public const int PreRollMonths = 24;
+
+    /// <summary>
+    /// Order construction: a new facility in a region, or more levels on an existing site. The build bill (materials,
+    /// machinery) is consumed over the build months; a new site only works once finished. Returns the project id.
+    /// </summary>
+    public string OrderConstruction(EconomyState st, string nation, string type, string region, int levels = 1, string? upgradeSite = null)
+    {
+        var ft = Catalog.Facilities[type];
+        var ne = st.Nations[nation];
+        var id = $"build-{nation}-{st.Month}-{ne.Construction.Count + 1}-{type}";
+        string siteId;
+        if (upgradeSite != null && st.Sites.ContainsKey(upgradeSite)) siteId = upgradeSite;
+        else
+        {
+            var r = Geo.Regions[region];
+            var rng = new Random(EconomySeeder.StableHash(id));
+            siteId = $"{region}-{type}-new{st.Sites.Count + 1}";
+            st.Sites[siteId] = new Site
+            {
+                Id = siteId, Type = type, Nation = nation, Region = region, Level = levels, BuildLeft = ft.BuildMonths,
+                Lon = Math.Round(r.Lon + (rng.NextDouble() - 0.5) * 2 * Geo.Seeding.JitterDeg, 3), Lat = Math.Round(r.Lat + (rng.NextDouble() - 0.5) * 1.4 * Geo.Seeding.JitterDeg, 3),
+            };
+        }
+        ne.Construction.Add(new ConstructionProject
+        {
+            Id = id, Type = type, Region = region, Site = siteId, MonthsLeft = ft.BuildMonths, AddLevels = upgradeSite != null ? levels : 0,
+            Remaining = ft.Build.ToDictionary(k => k.Key, k => k.Value * levels),
+        });
+        return id;
+    }
 
     /// <summary>
     /// Run the economy silently until stocks, yields and flows settle, then calibrate every nation's GDP to its start

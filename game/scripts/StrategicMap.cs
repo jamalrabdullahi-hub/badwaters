@@ -77,6 +77,10 @@ public partial class StrategicMap : Node2D
                 "military" => new MilitaryLayer(),
                 "theatres" => new TheatreRings(),
                 "weather" => new WeatherLayer(),
+                "facilities" => new FacilityLayer { MinZoom = d.MinZoom },
+                "deposits" => new DepositLayer(),
+                "stocks" => new StockLayer(),
+                "flows" => new FlowLayer(),
                 _ => null,
             };
             if (n != null) { _layers[d.Id] = n; if (n is LineLayer or PointLayer) _base.AddChild(n); else AddChild(n); }

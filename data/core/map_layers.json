@@ -21,7 +21,10 @@
  {"id": "routes", "name": "Sea lanes", "group": "ECONOMIC", "kind": "routes", "sim": true, "on": true},
  {"id": "landroutes", "name": "Land corridors", "group": "ECONOMIC", "kind": "landroutes", "sim": true, "on": true},
  {"id": "chokepoints", "name": "Control points (can be shut)", "group": "ECONOMIC", "kind": "chokepoints", "sim": true, "on": true},
- {"id": "industry", "name": "Industry and energy regions", "group": "ECONOMIC", "kind": "later", "sim": true},
+ {"id": "facilities", "name": "Facilities (game)", "group": "ECONOMIC", "kind": "facilities", "sim": true, "minZoom": 0.6, "on": false},
+ {"id": "deposits", "name": "Deposits", "group": "ECONOMIC", "kind": "deposits", "sim": true, "on": false},
+ {"id": "stocks", "name": "Stockpiles by region", "group": "ECONOMIC", "kind": "stocks", "sim": true, "on": false},
+ {"id": "flows", "name": "Our trade flows", "group": "ECONOMIC", "kind": "flows", "sim": true, "on": false},
 
  {"id": "infra", "name": "Power, comms, water", "group": "INFRASTRUCTURE", "kind": "later", "sim": true},
 

@@ -434,6 +434,9 @@ dump("economy_rules.json", {
     "gdp": {"civilianShare": 0.85, "trendGrowthAnnual": 0.02, "lossValueFactor": 1.0},
     "transport": {"bulk": 1.0, "general": 0.6, "high": 0.2, "grid": 0.0},
     "maintenance": {"readinessFloor": 0.2, "restorePerMonth": 0.08},
+    # fielded units: spares per unit per month by frame kind, and how fast readiness falls without them
+    "fleetSpares": {"ship": 4, "aircraft": 0.6, "ground": 0.3, "munition": 0.002},
+    "fleetDecay": 0.03,
     # the rest of the world: any ordinary good can be bought up to this value per good per month (game units, scaled by
     # the buyer's GDP), subject to embargoes and sea-lane reach. Restricted goods only come from named suppliers or allies.
     "worldMarket": {"depthPerGdp": 0.004, "priceMarkup": 1.3,

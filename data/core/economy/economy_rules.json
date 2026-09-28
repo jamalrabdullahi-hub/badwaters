@@ -27,6 +27,13 @@
   "readinessFloor": 0.2,
   "restorePerMonth": 0.08
  },
+ "fleetSpares": {
+  "ship": 4,
+  "aircraft": 0.6,
+  "ground": 0.3,
+  "munition": 0.002
+ },
+ "fleetDecay": 0.03,
  "worldMarket": {
   "depthPerGdp": 0.004,
   "priceMarkup": 1.3,
