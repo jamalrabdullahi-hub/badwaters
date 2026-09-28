@@ -1,6 +1,6 @@
 // Real-Earth base for the Strategic Map. earth_tex is Mercator (Natural Earth, public domain):
 // R = shaded relief, G = ocean depth band at sea / urban area on land, B = lake.
-// mode: 0 = satellite, 1 = topographic, 2 = tactical. is_land: 1 for land polygons, 0 for the sea plane.
+// mode: 0 = satellite (Blue Marble imagery), 1 = topographic, 2 = tactical. is_land: 1 for land polygons, 0 for the sea plane.
 // One linear texture lookup per pixel: cheap on integrated GPUs.
 shader_type canvas_item;
 
@@ -14,6 +14,9 @@ uniform bool show_lakes = true;
 uniform float y_max = 168.948; // Mercator y (degrees) of the texture's top (84 N) and bottom (80 S) rows
 uniform float y_min = -139.587;
 uniform sampler2D earth_tex : filter_linear_mipmap, repeat_enable; // wraps past the date line
+// satellite mode: NASA Blue Marble (topography + bathymetry, public domain), same Mercator layout
+uniform sampler2D sat_tex : filter_linear_mipmap, repeat_enable;
+uniform float sat_brightness = 0.9;
 varying vec2 world;
 varying float lat;
 
@@ -40,6 +43,8 @@ void fragment() {
 		if (show_lakes && e.b > 0.5) c = mode == 1 ? vec3(0.62, 0.78, 0.88) : mode == 0 ? vec3(0.04, 0.11, 0.18) : vec3(0.03, 0.05, 0.08);
 		if (show_urban && e.g > 0.5) c = mix(c, mode == 1 ? vec3(0.80, 0.55, 0.45) : vec3(0.85, 0.72, 0.40), 0.3);
 	}
+	// satellite: real imagery for land and sea alike, toned slightly to sit under the dark UI
+	if (mode == 0) c = texture(sat_tex, uv).rgb * sat_brightness;
 	COLOR = vec4(c, 1.0);
 }
 

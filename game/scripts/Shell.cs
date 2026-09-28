@@ -148,7 +148,7 @@ public partial class Shell : Control
                 v.AddChild(cb);
             }
         }
-        v.AddChild(UiTheme.Text("Map data: Natural Earth (public domain). Civil geography only.", 10, UiTheme.Dim, wrap: true));
+        v.AddChild(UiTheme.Text("Map data: Natural Earth, NASA Blue Marble (public domain). Civil geography only.", 10, UiTheme.Dim, wrap: true));
         return box;
     }
 

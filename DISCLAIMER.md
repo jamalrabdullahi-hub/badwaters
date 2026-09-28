@@ -8,3 +8,4 @@ armed force. All in-game performance is abstract game ratings chosen for balance
 Map data: Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com (public domain).
 The map shows civil geography only (relief, water, borders, major highways and rail, capitals and major
 cities, major civil ports and airports). Bases, sites and other military features are fictional game content.
+Satellite imagery: NASA Earth Observatory, Blue Marble Next Generation (topography and bathymetry), R. Stockli et al. (public domain).

@@ -33,8 +33,9 @@ public partial class StrategicMap : Node2D
         _land.Shader = shader;
         _sea.Shader = shader;
         // real Earth: relief, ocean depth, lakes and urban areas (Natural Earth, tools/geo-build.py)
-        var earth = ImageTexture.CreateFromImage(LoadEarth());
-        foreach (var m in new[] { _land, _sea }) { m.SetShaderParameter("earth_tex", earth); m.SetShaderParameter("px_per_deg", Session.PxPerDeg); }
+        var earth = LoadEarth("earth.png");
+        var sat = LoadEarth("satellite.jpg");
+        foreach (var m in new[] { _land, _sea }) { m.SetShaderParameter("earth_tex", earth); m.SetShaderParameter("sat_tex", sat); m.SetShaderParameter("px_per_deg", Session.PxPerDeg); }
         _land.SetShaderParameter("is_land", 1.0f);
         _sea.SetShaderParameter("is_land", 0.0f);
 
@@ -129,13 +130,14 @@ public partial class StrategicMap : Node2D
         _baseVp.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
     }
 
-    private static Image LoadEarth()
+    /// <summary>Load a map image to the GPU (mipmapped, S3TC-compressed) and free the CPU copy straight away.</summary>
+    private static ImageTexture LoadEarth(string file)
     {
-        var img = Image.LoadFromFile(Path.Combine(Session.DataDir(), "geo", "earth.png"));
+        using var img = Image.LoadFromFile(Path.Combine(Session.DataDir(), "geo", file));
         img.GenerateMipmaps();
         // block-compressed in VRAM: a quarter of the memory traffic per lookup (matters on integrated GPUs)
         img.Compress(Image.CompressMode.S3Tc, Image.CompressSource.Generic);
-        return img;
+        return ImageTexture.CreateFromImage(img);
     }
 
     public void SetMode(int mode)

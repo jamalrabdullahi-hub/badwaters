@@ -147,4 +147,24 @@ for row in range(H2):
 out.save(os.path.join(OUT, "earth.png"), optimize=True)
 print(f"earth.png Mercator {W}x{H2}, y range {YMIN:.3f}..{YMAX:.3f}")
 sizes["earth.png"] = os.path.getsize(os.path.join(OUT, "earth.png"))
+# ---- satellite base: NASA Blue Marble Next Generation, topography + bathymetry (public domain, NASA Earth Observatory)
+def mercator_rows(eq, width):
+    w0, h0 = eq.size
+    eq = eq.resize((width, h0 * width // w0), Image.LANCZOS)
+    hh = eq.size[1]
+    h2 = round(width * (YMAX - YMIN) / 360)
+    out = Image.new(eq.mode, (width, h2))
+    for row in range(h2):
+        y = YMAX - (row + 0.5) / h2 * (YMAX - YMIN)
+        lat = math.degrees(2 * math.atan(math.exp(math.radians(y))) - math.pi / 2)
+        src = min(hh - 1, max(0, int((90 - lat) / 180 * hh)))
+        out.paste(eq.crop((0, src, width, src + 1)), (0, row))
+    return out
+
+bm = os.path.join(SRC, "bluemarble-topo-bathy-21600.jpg")
+if os.path.exists(bm):
+    sat = mercator_rows(Image.open(bm).convert("RGB"), 8192)
+    sat.save(os.path.join(OUT, "satellite.jpg"), quality=88, optimize=True)
+    sizes["satellite.jpg"] = os.path.getsize(os.path.join(OUT, "satellite.jpg"))
+    print(f"satellite.jpg Mercator {sat.size[0]}x{sat.size[1]}")
 print("sizes:", {k: f"{v / 1e6:.2f} MB" for k, v in sizes.items()}, f"total {sum(sizes.values()) / 1e6:.1f} MB")
