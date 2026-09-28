@@ -60,7 +60,7 @@ public sealed class Evaluator
         {
             if (!_cat.Parts.TryGetValue(pl.Part, out var p)) { issues.Add(new(IssueKind.UnknownPart, $"Unknown part {pl.Part}.")); continue; }
             if (p.FitsKinds.Length > 0 && !p.FitsKinds.Contains(frame.Kind)) issues.Add(new(IssueKind.WrongKind, $"{p.Name} can't be fitted to a {frame.Kind}."));
-            if (frame.Hull != null && !HullGeometry.Inside(frame.Hull, pl.X, pl.Y, 1)) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
+            if (frame.Hull != null && !HullGeometry.Inside(frame.Hull, pl.X, pl.Y, Math.Max(0.1, frame.Hull.Width * 0.05))) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
             var uses = new Dictionary<string, double>(p.Uses);
             double partCost = p.Cost;
             if (p.Component != null && _cat.Components.TryGetValue(p.Component, out var pc))

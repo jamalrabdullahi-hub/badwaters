@@ -185,19 +185,77 @@
   "components": [
    "mat-composite",
    "mat-ram",
-   "pr-turbofan-adv",
    "pw-apu",
    "nv-star",
    "nv-terrain",
    "gc-fbw",
    "cp-mission",
    "cp-fusion",
-   "sn-radar-aesa-air",
    "th-air-ecs",
-   "cm-satcom",
    "ew-jammer",
-   "if-bay",
    "rl-basic"
+  ],
+  "parts": [
+   {
+    "part": "ac-radar-aesa",
+    "x": 0,
+    "y": 9,
+    "rot": 0
+   },
+   {
+    "part": "ac-canopy-2",
+    "x": 0,
+    "y": 6.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-satcom",
+    "x": 0,
+    "y": 3.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-bay",
+    "x": -2.6,
+    "y": -0.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-bay",
+    "x": 2.6,
+    "y": -0.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-intake-dsi",
+    "x": -4.8,
+    "y": 0,
+    "rot": 0
+   },
+   {
+    "part": "ac-intake-dsi",
+    "x": 4.8,
+    "y": 0,
+    "rot": 0
+   },
+   {
+    "part": "ac-engine-adv",
+    "x": -4.2,
+    "y": -3.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-engine-adv",
+    "x": 4.2,
+    "y": -3.5,
+    "rot": 0
+   },
+   {
+    "part": "ac-chaff",
+    "x": 0,
+    "y": -6,
+    "rot": 0
+   }
   ]
  },
  {

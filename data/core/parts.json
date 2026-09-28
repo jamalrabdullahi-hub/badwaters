@@ -6215,5 +6215,1403 @@
   "component": null,
   "offers": [],
   "arc": 0
+ },
+ {
+  "id": "ac-canopy-1",
+  "name": "Canopy (single seat)",
+  "category": "Cockpit",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     1.2,
+     0.45,
+     0.5,
+     0.4,
+     -0.9,
+     -0.4,
+     -0.9,
+     -0.45,
+     0.5
+    ],
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-canopy-2",
+  "name": "Canopy (two seats)",
+  "category": "Cockpit",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     1.8,
+     0.45,
+     1.0,
+     0.42,
+     -1.6,
+     -0.42,
+     -1.6,
+     -0.45,
+     1.0
+    ],
+    "fill": "glass"
+   },
+   {
+    "t": "line",
+    "p": [
+     -0.4,
+     0,
+     0.4,
+     0
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.2
+  },
+  "adds": {
+   "strike": 1
+  },
+  "cost": 1.5,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-canopy-flat",
+  "name": "Flush cockpit (large aircraft)",
+  "category": "Cockpit",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -0.9,
+     0,
+     0.9,
+     0,
+     0.6,
+     0.7,
+     -0.6,
+     0.7
+    ],
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-radar-aesa",
+  "name": "Nose radar (active array)",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     1.4,
+     0.55,
+     0.3,
+     0.55,
+     -0.4,
+     -0.55,
+     -0.4,
+     -0.55,
+     0.3
+    ],
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.1,
+    "r": 0.35,
+    "fill": "glass"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 2,
+  "topside": false,
+  "component": "sn-radar-aesa-air",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-radar-pd",
+  "name": "Nose radar (pulse-Doppler)",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     1.3,
+     0.5,
+     0.3,
+     0.5,
+     -0.3,
+     -0.5,
+     -0.3,
+     -0.5,
+     0.3
+    ],
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.1,
+    "r": 0.3,
+    "fill": "dark"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": "sn-radar-pd-air",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-irst",
+  "name": "IRST ball",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.25,
+    "fill": "glass"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": "sn-irst",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-targeting-pod",
+  "name": "Targeting pod",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.35,
+    "h": 2.4,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 1.2,
+    "r": 0.18,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 0.25,
+   "power": 0.5
+  },
+  "adds": {
+   "strike": 1
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-ew-pod",
+  "name": "Jammer pod",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.35,
+    "h": 3.0,
+    "fill": "light"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 1.3,
+    "w": 0.3,
+    "h": 0.3,
+    "fill": "dark"
+   }
+  ],
+  "uses": {},
+  "adds": {
+   "signature": -1
+  },
+  "cost": 3,
+  "topside": false,
+  "component": "ew-jammer",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-chaff",
+  "name": "Chaff and flare dispensers",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": -0.2,
+    "y": 0,
+    "w": 0.25,
+    "h": 0.5,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": 0.2,
+    "y": 0,
+    "w": 0.25,
+    "h": 0.5,
+    "fill": "dark"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 0.3,
+  "topside": false,
+  "component": "ew-chaff",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-engine",
+  "name": "Turbofan",
+  "category": "Engines",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.0,
+    "h": 4.2,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": -2.2,
+    "r": 0.5,
+    "fill": "black"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 4,
+  "topside": false,
+  "component": "pr-turbofan",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-engine-adv",
+  "name": "Advanced turbofan",
+  "category": "Engines",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.1,
+    "h": 4.4,
+    "fill": "steel"
+   },
+   {
+    "t": "poly",
+    "p": [
+     -0.55,
+     -2.2,
+     0.55,
+     -2.2,
+     0.4,
+     -2.6,
+     -0.4,
+     -2.6
+    ],
+    "fill": "black"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 6,
+  "topside": false,
+  "component": "pr-turbofan-adv",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-engine-pod",
+  "name": "Podded engine (large aircraft)",
+  "category": "Engines",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.6,
+    "h": 4.5,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 2.2,
+    "r": 0.7,
+    "fill": "black"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 4,
+  "topside": false,
+  "component": "pr-turbofan",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-intakes-side",
+  "name": "Side intakes (pair)",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -1.2,
+     1,
+     -0.7,
+     1,
+     -0.7,
+     -1,
+     -1.1,
+     -1
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "poly",
+    "p": [
+     1.2,
+     1,
+     0.7,
+     1,
+     0.7,
+     -1,
+     1.1,
+     -1
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.2
+  },
+  "adds": {},
+  "cost": 0.5,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-intake-chin",
+  "name": "Chin intake",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -0.6,
+     0.6,
+     0.6,
+     0.6,
+     0.5,
+     -0.8,
+     -0.5,
+     -0.8
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {},
+  "cost": 0.3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-intake-dsi",
+  "name": "Bump (DSI) intakes",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -1.1,
+     0.8,
+     -0.7,
+     1.1,
+     -0.7,
+     -0.9,
+     -1.0,
+     -0.9
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "poly",
+    "p": [
+     1.1,
+     0.8,
+     0.7,
+     1.1,
+     0.7,
+     -0.9,
+     1.0,
+     -0.9
+    ],
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 0.15
+  },
+  "adds": {
+   "signature": 1
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-tail-single",
+  "name": "Single fin",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -0.12,
+     1.5,
+     0.12,
+     1.5,
+     0.1,
+     -1.5,
+     -0.1,
+     -1.5
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.2
+  },
+  "adds": {},
+  "cost": 0.3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-tail-twin",
+  "name": "Twin fins",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -1.0,
+     1.4,
+     -0.8,
+     1.4,
+     -0.8,
+     -1.4,
+     -1.0,
+     -1.4
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "poly",
+    "p": [
+     1.0,
+     1.4,
+     0.8,
+     1.4,
+     0.8,
+     -1.4,
+     1.0,
+     -1.4
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.35
+  },
+  "adds": {
+   "agility": 1
+  },
+  "cost": 0.6,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-tail-canted",
+  "name": "Canted twin fins",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -1.2,
+     1.2,
+     -0.8,
+     1.4,
+     -0.7,
+     -1.3,
+     -1.1,
+     -1.4
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "poly",
+    "p": [
+     1.2,
+     1.2,
+     0.8,
+     1.4,
+     0.7,
+     -1.3,
+     1.1,
+     -1.4
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.35
+  },
+  "adds": {
+   "signature": 1,
+   "agility": 1
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-canards",
+  "name": "Canards",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0.5,
+     0.3,
+     2.0,
+     -0.4,
+     2.0,
+     -0.7,
+     0.5,
+     -0.5
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "poly",
+    "p": [
+     -0.5,
+     0.3,
+     -2.0,
+     -0.4,
+     -2.0,
+     -0.7,
+     -0.5,
+     -0.5
+    ],
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 0.2
+  },
+  "adds": {
+   "agility": 2
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-bay",
+  "name": "Internal weapons bay",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.2,
+    "h": 4.0,
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -0.6,
+     0,
+     0.6,
+     0
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {},
+  "adds": {
+   "payload": 1
+  },
+  "cost": 3,
+  "topside": false,
+  "component": "if-bay",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-bay-side",
+  "name": "Side bay (1 missile)",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.4,
+    "h": 2.2,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {
+   "payload": 0.5
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-pylon",
+  "name": "Wing pylon",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.18,
+    "h": 1.2,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.05
+  },
+  "adds": {
+   "payload": 1,
+   "signature": -1
+  },
+  "cost": 0.3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-rail",
+  "name": "Wingtip rail",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.12,
+    "h": 2.8,
+    "fill": "light"
+   }
+  ],
+  "uses": {},
+  "adds": {
+   "payload": 0.5
+  },
+  "cost": 0.3,
+  "topside": false,
+  "component": "if-rail",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-droptank",
+  "name": "Drop tank",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     2.2,
+     0.3,
+     1.6,
+     0.3,
+     -1.6,
+     0,
+     -2.2,
+     -0.3,
+     -1.6,
+     -0.3,
+     1.6
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 0.3
+  },
+  "adds": {
+   "endurance": 1,
+   "signature": -1
+  },
+  "cost": 0.4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-conformal",
+  "name": "Conformal fuel tank",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.5,
+    "h": 5.0,
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 0.4
+  },
+  "adds": {
+   "endurance": 1
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-probe",
+  "name": "Refuelling probe",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.12,
+    "h": 1.4,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.05
+  },
+  "adds": {
+   "endurance": 1
+  },
+  "cost": 0.3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-hook",
+  "name": "Arrestor hook",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.12,
+    "h": 1.6,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": -0.8,
+    "w": 0.4,
+    "h": 0.12,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.1
+  },
+  "adds": {},
+  "cost": 0.3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-gun",
+  "name": "Internal cannon",
+  "category": "Stores",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.2,
+    "h": 1.6,
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 0.3
+  },
+  "adds": {
+   "air-defence": 1
+  },
+  "cost": 1,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-rotodome",
+  "name": "AEW rotodome",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 3.6,
+    "fill": "light"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 7.0,
+    "h": 0.7,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 1.5,
+   "power": 10,
+   "cooling": 4
+  },
+  "adds": {
+   "detection": 9
+  },
+  "cost": 25,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-erieye",
+  "name": "Dorsal AEW array",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.8,
+    "h": 8.0,
+    "fill": "light"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.4,
+    "h": 7.2,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 0.9,
+   "power": 8,
+   "cooling": 3
+  },
+  "adds": {
+   "detection": 8
+  },
+  "cost": 18,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-sensor-turret",
+  "name": "EO sensor turret",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.35,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.12,
+    "r": 0.15,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 0.1,
+   "power": 0.5
+  },
+  "adds": {
+   "detection": 2
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-satcom",
+  "name": "Satcom hump",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     0.8,
+     0.4,
+     0.3,
+     0.4,
+     -0.6,
+     -0.4,
+     -0.6,
+     -0.4,
+     0.3
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 2,
+  "topside": false,
+  "component": "cm-satcom",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-datalink",
+  "name": "Datalink antenna",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.3,
+    "h": 0.5,
+    "fill": "light"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": "cm-datalink",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-mission-computer",
+  "name": "Mission computer bay",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.6,
+    "h": 0.8,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.3,
+    "h": 0.5,
+    "fill": "glass"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": "cp-mission",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-fusion-computer",
+  "name": "Sensor fusion core",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.7,
+    "h": 0.9,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.2,
+    "fill": "glass"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 3,
+  "topside": false,
+  "component": "cp-fusion",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-fbw",
+  "name": "Fly-by-wire computers",
+  "category": "Avionics",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.5,
+    "h": 0.6,
+    "fill": "dark"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 1,
+  "topside": false,
+  "component": "gc-fbw",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-apu",
+  "name": "Auxiliary power unit",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.5,
+    "h": 0.8,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": -0.4,
+    "r": 0.12,
+    "fill": "black"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 0.5,
+  "topside": false,
+  "component": "pw-apu",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-ecs",
+  "name": "Cooling pack",
+  "category": "Airframe",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 0.6,
+    "h": 0.6,
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     -0.3,
+     0,
+     0.3,
+     0
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {},
+  "adds": {},
+  "cost": 0.5,
+  "topside": false,
+  "component": "th-air-ecs",
+  "offers": [],
+  "arc": 0
+ },
+ {
+  "id": "ac-rotor",
+  "name": "Rotor disc (uncrewed)",
+  "category": "Engines",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 2.2,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.2,
+     0,
+     2.2,
+     0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     -2.2,
+     0,
+     2.2
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 0.4
+  },
+  "adds": {
+   "endurance": 1
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0
  }
 ]

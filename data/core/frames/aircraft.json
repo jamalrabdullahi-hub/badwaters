@@ -23,7 +23,13 @@
   },
   "cost": 20,
   "factory": "aerospace-assembly",
-  "workUnits": 20
+  "workUnits": 20,
+  "hull": {
+   "length": 15,
+   "beam": 1.8,
+   "span": 10,
+   "style": "delta"
+  }
  },
  {
   "id": "af-heavy-fighter",
@@ -50,7 +56,13 @@
   },
   "cost": 35,
   "factory": "aerospace-assembly",
-  "workUnits": 30
+  "workUnits": 30,
+  "hull": {
+   "length": 19,
+   "beam": 2.4,
+   "span": 13,
+   "style": "fighter"
+  }
  },
  {
   "id": "af-stealth-fighter",
@@ -78,7 +90,13 @@
   },
   "cost": 60,
   "factory": "aerospace-assembly",
-  "workUnits": 45
+  "workUnits": 45,
+  "hull": {
+   "length": 15.7,
+   "beam": 2.4,
+   "span": 11,
+   "style": "stealth"
+  }
  },
  {
   "id": "af-flying-wing",
@@ -107,7 +125,13 @@
   },
   "cost": 300,
   "factory": "aerospace-assembly",
-  "workUnits": 200
+  "workUnits": 200,
+  "hull": {
+   "length": 21,
+   "beam": 4,
+   "span": 52,
+   "style": "flying-wing"
+  }
  },
  {
   "id": "af-carrier-fighter",
@@ -133,7 +157,13 @@
   },
   "cost": 40,
   "factory": "aerospace-assembly",
-  "workUnits": 32
+  "workUnits": 32,
+  "hull": {
+   "length": 17,
+   "beam": 2.2,
+   "span": 12.5,
+   "style": "fighter"
+  }
  },
  {
   "id": "af-large",
@@ -159,7 +189,13 @@
   },
   "cost": 150,
   "factory": "aerospace-assembly",
-  "workUnits": 80
+  "workUnits": 80,
+  "hull": {
+   "length": 45,
+   "beam": 3.8,
+   "span": 40,
+   "style": "large"
+  }
  },
  {
   "id": "af-uav",
@@ -186,6 +222,12 @@
   },
   "cost": 10,
   "factory": "aerospace-assembly",
-  "workUnits": 8
+  "workUnits": 8,
+  "hull": {
+   "length": 12,
+   "beam": 1.2,
+   "span": 16,
+   "style": "uav"
+  }
  }
 ]

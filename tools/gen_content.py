@@ -173,19 +173,26 @@ for i,n,disp,vol,cells in ships:
     SH[-1]["budgets"]["topside"]=round(usable*0.25)
     L,B,st=HULL[i]; SH[-1]["hull"]={"length":L,"beam":B,"style":st}
 dump("frames/ships.json", SH)
-dump("frames/aircraft.json", [
+AF=[
  fr("af-light-fighter","Light fighter airframe","aircraft","light-multirole",{"mass":6,"volume":6,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":3,"payload":3},{"structures":3},20,"aerospace-assembly",20),
  fr("af-heavy-fighter","Heavy fighter airframe","aircraft","heavy-fighter",{"mass":10,"volume":9,"power":0,"cooling":3,"data":1},{"nose-sensor":1},{"agility":2,"payload":5,"endurance":2},{"structures":4},35,"aerospace-assembly",30),
  fr("af-stealth-fighter","Low-observable fighter airframe","aircraft","stealth-multirole",{"mass":9,"volume":8,"power":0,"cooling":2,"data":2},{"nose-sensor":1},{"agility":2,"payload":3,"signature":3},{"structures":6,"low-observables":5},60,"aerospace-assembly",45),
  fr("af-flying-wing","Flying-wing bomber airframe","aircraft","stealth-bomber",{"mass":30,"volume":20,"power":0,"cooling":4,"data":2},{"nose-sensor":1},{"payload":8,"endurance":5,"signature":4},{"structures":7,"low-observables":7,"flight-control":7},300,"aerospace-assembly",200),
  fr("af-carrier-fighter","Carrier fighter airframe","aircraft","carrier-multirole",{"mass":9,"volume":8,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":2,"payload":4},{"structures":4},40,"aerospace-assembly",32),
  fr("af-large","Large support airframe","aircraft","support",{"mass":40,"volume":25,"power":0,"cooling":6,"data":4},{"nose-sensor":1},{"endurance":6,"payload":4},{"structures":3},150,"aerospace-assembly",80),
- fr("af-uav","Uncrewed airframe","aircraft","ucav",{"mass":3,"volume":4,"power":0,"cooling":1,"data":1},{"nose-sensor":1},{"endurance":6,"payload":2},{"structures":3,"autonomy":4},10,"aerospace-assembly",8)])
-dump("frames/munitions.json", [
+ fr("af-uav","Uncrewed airframe","aircraft","ucav",{"mass":3,"volume":4,"power":0,"cooling":1,"data":1},{"nose-sensor":1},{"endurance":6,"payload":2},{"structures":3,"autonomy":4},10,"aerospace-assembly",8)]
+# planform for the designer: length, fuselage width, span, style
+for f,(L,B,S,st) in zip(AF,[(15,1.8,10,"delta"),(19,2.4,13,"fighter"),(15.7,2.4,11,"stealth"),(21,4,52,"flying-wing"),(17,2.2,12.5,"fighter"),(45,3.8,40,"large"),(12,1.2,16,"uav")]):
+    f["hull"]={"length":L,"beam":B,"span":S,"style":st}
+dump("frames/aircraft.json", AF)
+MB=[
  fr("mb-small","Small munition body","munition","small",{"mass":0.3,"volume":4,"power":0,"cooling":0},{},{"reach":0},{"structures":1},0.1,"missile-works",0.5),
  fr("mb-medium","Medium munition body","munition","medium",{"mass":0.6,"volume":6,"power":0,"cooling":0},{},{},{"structures":2},0.2,"missile-works",1),
  fr("mb-large","Large munition body","munition","large",{"mass":1.2,"volume":8,"power":0,"cooling":0},{},{},{"structures":2},0.4,"missile-works",2),
- fr("mb-heavy","Heavy munition body","munition","heavy",{"mass":4,"volume":10,"power":0,"cooling":0},{},{},{"structures":3},1,"missile-works",4)])
+ fr("mb-heavy","Heavy munition body","munition","heavy",{"mass":4,"volume":10,"power":0,"cooling":0},{},{},{"structures":3},1,"missile-works",4)]
+for f,(L,B,S) in zip(MB,[(3,0.2,0.6),(5,0.35,1.0),(6.2,0.5,1.4),(12,1.0,2.4)]):
+    f["hull"]={"length":L,"beam":B,"span":S,"style":"missile"}
+dump("frames/munitions.json", MB)
 GR=[
  fr("gc-truck-6x6","6×6 truck chassis","ground","launcher-vehicle",{"mass":18,"volume":4,"power":0,"cooling":2,"crew":6},{"mast-sensor":1,"deck-launcher":2},{"mobility":2},{"structures":1},2,"vehicle-plant",3),
  fr("gc-truck-8x8","8×8 heavy chassis","ground","launcher-vehicle",{"mass":30,"volume":6,"power":0,"cooling":3,"crew":8},{"mast-sensor":1,"deck-launcher":4,"cell-block":1},{"mobility":1},{"structures":2},4,"vehicle-plant",5),

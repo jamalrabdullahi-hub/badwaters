@@ -44,6 +44,8 @@ public partial class DevelopmentScreen : PanelContainer
     {
         AnchorRight = 1; AnchorBottom = 1;
         AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.008f, 0.024f, 0.048f, 0.97f), UiTheme.Line, 6));
+        // open on the requested design's own system type
+        if (DevScreenshot.Arg("design") is { } want && Session.Content.Designs.TryGetValue(want, out var wd) && Cat.Frames.TryGetValue(wd.Frame, out var wf)) _kind = wf.Kind;
         var root = new HBoxContainer();
         root.AddThemeConstantOverride("separation", 10);
         AddChild(root);
@@ -209,7 +211,7 @@ public partial class DevelopmentScreen : PanelContainer
         foreach (var f in Cat.Frames.Values.Where(f => f.Kind == _kind))
         {
             _frameIds.Add(f.Id);
-            _frame.AddItem(f.Hull != null ? $"{f.Name} · {f.Hull.Length:0} m" : f.Name);
+            _frame.AddItem(f.Hull != null ? $"{f.Name} · {f.Hull.Length:0.#} m" : f.Name);
         }
         _frame.Select(Math.Max(0, _frameIds.IndexOf(d.Frame)));
         _partCat.Clear(); _partCats.Clear();
@@ -262,11 +264,11 @@ public partial class DevelopmentScreen : PanelContainer
     private void Recalc()
     {
         var frame = Cat.Frames.GetValueOrDefault(_work.Frame);
-        var hasHull = frame?.Hull != null;
+        var hasHull = frame?.Hull != null && frame.Kind != "munition"; // munitions keep the simple sections diagram
         _blueprint.Visible = hasHull; _viz.Visible = !hasHull;
         if (!hasHull) _viz.Show(_work);
         _blueprint.QueueRedraw();
-        _hullInfo.Text = frame?.Hull is { } hl ? $"{hl.Length:0} × {hl.Beam:0.#} m · {_work.Parts.Count} parts placed · {_work.Components.Count} internal systems" : "No blueprint for this kind: internal systems only.";
+        _hullInfo.Text = frame?.Hull is { } hl ? $"{hl.Length:0.#} m long · {hl.Width:0.#} m {(hl.Span > 0 ? "span" : "beam")} · {_work.Parts.Count} parts placed · {_work.Components.Count} internal systems" : "No blueprint for this kind: internal systems only.";
         var ev = new Evaluator(Cat).Evaluate(_work);
 
         // weight/cost sheet, RTW style
@@ -348,7 +350,7 @@ public partial class DevelopmentScreen : PanelContainer
 
     private static Label Num(double v, Color? c = null, string suffix = "")
     {
-        var l = UiTheme.Text($"{v:#,0}{suffix}", 13, c ?? UiTheme.Ink);
+        var l = UiTheme.Text(Math.Abs(v) < 100 ? $"{v:0.##}{suffix}" : $"{v:#,0}{suffix}", 13, c ?? UiTheme.Ink);
         l.HorizontalAlignment = HorizontalAlignment.Right;
         l.CustomMinimumSize = new Vector2(90, 0);
         return l;

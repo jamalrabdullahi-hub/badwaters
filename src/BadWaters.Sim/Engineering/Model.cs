@@ -62,7 +62,11 @@ public sealed record FrameDef
 }
 
 /// <summary>Hull outline: length and beam in metres and a drawing style (warship, merchant, carrier, sub, vehicle, tracked, pad).</summary>
-public sealed record HullDef(double Length, double Beam, string Style = "warship");
+public sealed record HullDef(double Length, double Beam, string Style = "warship", double Span = 0)
+{
+    /// <summary>Widest extent (beam, or wingspan / fin span).</summary>
+    public double Width => Math.Max(Beam, Span);
+}
 
 /// <summary>One primitive of a part's low-res drawing, in metres, top-down (front = +y). t: rect | circle | poly | line.</summary>
 public sealed record ShapePrim
@@ -125,8 +129,51 @@ public static class HullGeometry
         };
     }
 
-    public static bool Inside(HullDef h, double x, double y, double margin = 0.5) =>
-        Math.Abs(y) <= h.Length / 2 + margin && Math.Abs(x) <= h.Beam / 2 * Profile(h.Style, h.Length, y) + margin;
+    /// <summary>Right-hand half of the outline (x ≥ 0) from the bow/nose (y = +L/2) to the stern/tail.</summary>
+    public static List<(double X, double Y)> Outline(HullDef h)
+    {
+        double L = h.Length, S = h.Span > 0 ? h.Span : h.Beam, fw = h.Beam / 2;
+        List<(double, double)> P(params (double, double)[] pts) => pts.ToList();
+        switch (h.Style)
+        {
+            case "fighter":
+                return P((0, .5 * L), (fw, .3 * L), (fw, .08 * L), (S / 2, -.16 * L), (S / 2, -.25 * L), (fw, -.22 * L), (fw * .9, -.36 * L), (S * .3, -.45 * L), (S * .3, -.5 * L), (fw * .6, -.5 * L));
+            case "delta":
+                return P((0, .5 * L), (fw, .25 * L), (fw, .05 * L), (S / 2, -.38 * L), (S / 2, -.46 * L), (fw, -.46 * L), (fw * .7, -.5 * L));
+            case "stealth":
+                return P((0, .5 * L), (fw * 1.1, .3 * L), (fw * 1.3, .1 * L), (S / 2, -.17 * L), (S / 2, -.27 * L), (fw * 1.3, -.25 * L), (S * .28, -.42 * L), (S * .28, -.5 * L), (fw, -.47 * L));
+            case "flying-wing":
+                return P((0, .5 * L), (S / 2, -.2 * L), (S / 2 * .92, -.5 * L), (S * .3, -.36 * L), (S * .16, -.5 * L), (0, -.38 * L));
+            case "large":
+                return P((0, .5 * L), (fw, .44 * L), (fw, .12 * L), (S / 2, -.1 * L), (S / 2, -.16 * L), (fw, -.05 * L), (fw, -.36 * L), (S * .2, -.45 * L), (S * .2, -.5 * L), (fw * .4, -.5 * L));
+            case "uav":
+                return P((0, .5 * L), (fw, .4 * L), (fw, .1 * L), (S / 2, .05 * L), (S / 2, -.05 * L), (fw, -.08 * L), (fw * .6, -.4 * L), (S * .18, -.46 * L), (S * .18, -.5 * L), (fw * .3, -.5 * L));
+            case "missile":
+                var r = fw;
+                return P((0, .5 * L), (r * .45, .5 * L - r), (r * .85, .5 * L - 2 * r), (r, .5 * L - 3.2 * r), (r, -.5 * L + .12 * L), (S / 2, -.5 * L + .03 * L), (S / 2, -.5 * L), (r, -.5 * L));
+            default:
+                var n = 48;
+                return Enumerable.Range(0, n + 1).Select(i => L / 2 - L * i / n).Select(y => (h.Beam / 2 * Profile(h.Style, L, y), y)).ToList();
+        }
+    }
+
+    /// <summary>Is the point on the outline (with a margin in metres)?</summary>
+    public static bool Inside(HullDef h, double x, double y, double margin = 0.5)
+    {
+        var half = Outline(h);
+        var poly = half.Concat(half.AsEnumerable().Reverse().Select(p => (X: -p.X, p.Y))).ToList();
+        bool In(double px, double py)
+        {
+            var inside = false;
+            for (int i = 0, j = poly.Count - 1; i < poly.Count; j = i++)
+                if ((poly[i].Y > py) != (poly[j].Y > py) && px < (poly[j].X - poly[i].X) * (py - poly[i].Y) / (poly[j].Y - poly[i].Y + 1e-12) + poly[i].X) inside = !inside;
+            return inside;
+        }
+        if (In(x, y)) return true;
+        // within the margin of the outline: try a few nudged points
+        foreach (var (dx, dy) in new[] { (margin, 0.0), (-margin, 0.0), (0.0, margin), (0.0, -margin) }) if (In(x + dx, y + dy)) return true;
+        return false;
+    }
 }
 
 /// <summary>How a capability rating aggregates across components: "sum", "max", "min".</summary>

@@ -64,7 +64,7 @@ public partial class Blueprint : Control
 
     public override void _Ready() { FocusMode = FocusModeEnum.All; ClipContents = true; }
 
-    private float Scale => (float)Math.Min((Size.Y - 30) / Hull.Length, (Size.X - 30) / (Hull.Beam * 1.25)) * Zoom;
+    private float Scale => (float)Math.Min((Size.Y - 30) / Hull.Length, (Size.X - 30) / (Hull.Width * 1.15)) * Zoom;
     private Vector2 Centre => Size / 2;
     public Vector2 ToScreen(double x, double y) => Centre + new Vector2((float)x * Scale, -(float)y * Scale);
     public (double X, double Y) ToWorld(Vector2 p) => ((p.X - Centre.X) / Scale, -(p.Y - Centre.Y) / Scale);
@@ -73,11 +73,10 @@ public partial class Blueprint : Control
     {
         DrawRect(new Rect2(Vector2.Zero, Size), new Color("0a1a2a"));
         var s = Scale;
-        for (var gy = -Hull.Length; gy <= Hull.Length; gy += Hull.Length > 60 ? 10 : 1)
-            DrawLine(ToScreen(-Hull.Beam, gy), ToScreen(Hull.Beam, gy), new Color(0.3f, 0.6f, 0.85f, 0.06f), 1);
+        for (var gy = -Hull.Length; gy <= Hull.Length; gy += Hull.Length > 60 ? 10 : Hull.Length > 8 ? 1 : 0.25)
+            DrawLine(ToScreen(-Hull.Width, gy), ToScreen(Hull.Width, gy), new Color(0.3f, 0.6f, 0.85f, 0.06f), 1);
         // hull outline from the shared profile
-        var n = 48;
-        var right = Enumerable.Range(0, n + 1).Select(i => -Hull.Length / 2 + Hull.Length * i / n).Select(y => ToScreen(Hull.Beam / 2 * HullGeometry.Profile(Hull.Style, Hull.Length, y), y)).ToList();
+        var right = HullGeometry.Outline(Hull).Select(p => ToScreen(p.X, p.Y)).ToList();
         var left = right.Select(p => new Vector2(2 * Centre.X - p.X, p.Y)).Reverse();
         var poly = right.Concat(left).ToArray();
         try { DrawColoredPolygon(poly, new Color("56626b")); } catch { /* degenerate outline at extreme zoom */ }
@@ -101,10 +100,10 @@ public partial class Blueprint : Control
                 DrawLine(c, c + new Vector2(Mathf.Cos(a1), Mathf.Sin(a1)) * reach, new Color(1, 0.85f, 0.3f, i == Selected ? 0.5f : 0.15f), 1);
             }
             if (i == Selected) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 3, 0, Mathf.Tau, 32, new Color("7fe3ff"), 1.5f);
-            if (!HullGeometry.Inside(Hull, pl.X, pl.Y, 1)) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
+            if (!HullGeometry.Inside(Hull, pl.X, pl.Y, Math.Max(0.1, Hull.Width * 0.05))) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
         }
         var font = ThemeDB.FallbackFont;
-        DrawString(font, new Vector2(8, 16), $"{Frame?.Name}  ·  {Hull.Length:0} × {Hull.Beam:0.#} m  ·  bow ↑", HorizontalAlignment.Left, -1, 12, UiTheme.Dim);
+        DrawString(font, new Vector2(8, 16), $"{Frame?.Name}  ·  {Hull.Length:0.#} × {Hull.Width:0.#} m  ·  {(Frame?.Kind is "aircraft" or "munition" ? "nose" : "bow")} ↑", HorizontalAlignment.Left, -1, 12, UiTheme.Dim);
     }
 
     private int HitTest(Vector2 at)
@@ -116,7 +115,12 @@ public partial class Blueprint : Control
         return -1;
     }
 
-    private (double, double) Snap(double x, double y) => (Math.Abs(x) < 0.6 ? 0 : Math.Round(x * 2) / 2, Math.Round(y * 2) / 2);
+    /// <summary>Snap to the centreline and to a grid that suits the size (0.5 m ships, 0.1 m aircraft, 0.05 m missiles).</summary>
+    private (double, double) Snap(double x, double y)
+    {
+        var g = Hull.Length > 60 ? 0.5 : Hull.Length > 8 ? 0.1 : 0.05;
+        return (Math.Abs(x) < g * 1.2 ? 0 : Math.Round(x / g) * g, Math.Round(y / g) * g);
+    }
 
     public override void _GuiInput(InputEvent e)
     {

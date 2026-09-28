@@ -19,7 +19,13 @@
   },
   "cost": 0.1,
   "factory": "missile-works",
-  "workUnits": 0.5
+  "workUnits": 0.5,
+  "hull": {
+   "length": 3,
+   "beam": 0.2,
+   "span": 0.6,
+   "style": "missile"
+  }
  },
  {
   "id": "mb-medium",
@@ -39,7 +45,13 @@
   },
   "cost": 0.2,
   "factory": "missile-works",
-  "workUnits": 1
+  "workUnits": 1,
+  "hull": {
+   "length": 5,
+   "beam": 0.35,
+   "span": 1.0,
+   "style": "missile"
+  }
  },
  {
   "id": "mb-large",
@@ -59,7 +71,13 @@
   },
   "cost": 0.4,
   "factory": "missile-works",
-  "workUnits": 2
+  "workUnits": 2,
+  "hull": {
+   "length": 6.2,
+   "beam": 0.5,
+   "span": 1.4,
+   "style": "missile"
+  }
  },
  {
   "id": "mb-heavy",
@@ -79,6 +97,12 @@
   },
   "cost": 1,
   "factory": "missile-works",
-  "workUnits": 4
+  "workUnits": 4,
+  "hull": {
+   "length": 12,
+   "beam": 1.0,
+   "span": 2.4,
+   "style": "missile"
+  }
  }
 ]
