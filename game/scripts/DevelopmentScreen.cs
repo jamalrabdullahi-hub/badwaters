@@ -5,13 +5,14 @@ using Godot;
 namespace BadWaters.Game;
 
 /// <summary>
-/// Development tab: pick a system type, pick a design, swap components and see budgets, ratings,
-/// issues and which components produce each rating. Designing means choosing game parts; ratings are
+/// Development tab, laid out like a naval design office: the blueprint on the left (drag parts on, move,
+/// rotate, mirror), the weight/cost sheet in the middle, and Systems / Parts / Selected tabs on the right.
+/// Limits are plausible game budgets (weight, space, power, cooling, crew, topside load); ratings are
 /// abstract 0–10 game values. Saved designs go to mods/player and are usable in Theatre Ops.
 /// </summary>
 public partial class DevelopmentScreen : PanelContainer
 {
-    private static readonly (string Label, string Kind)[] Kinds = { ("Munition", "munition"), ("Ground system", "ground"), ("Ship", "ship"), ("Aircraft", "aircraft") };
+    private static readonly (string Label, string Kind)[] Kinds = { ("Ship", "ship"), ("Ground", "ground"), ("Aircraft", "aircraft"), ("Munition", "munition") };
     public static readonly Dictionary<string, Color> FamilyColor = new()
     {
         ["sensors"] = new("7fe3ff"), ["payload"] = new("ff6b6b"), ["fuzing"] = new("ff9f6b"), ["guidance"] = new("c49bff"),
@@ -19,17 +20,22 @@ public partial class DevelopmentScreen : PanelContainer
         ["power"] = new("f2e15c"), ["propulsion"] = new("ffb347"), ["materials"] = new("8aa0b3"), ["structure"] = new("6f8599"),
         ["thermal"] = new("6be3ff"), ["interfaces"] = new("b3c7d6"), ["reliability"] = new("9ad0a8"),
     };
+    private static readonly string[] SheetOrder = { "Hull and fittings", "Machinery", "Sensors", "Weapons", "Combat systems", "Guns", "Point defence", "Launchers",
+        "Masts", "Funnels", "Superstructure", "Aviation", "Boats", "Electronics", "Deck gear", "Vehicle" };
 
-    private string _kind = "munition";
+    private string _kind = "ship";
     private DesignDef _work = null!;
-    private ItemList _designs = null!, _catalog = null!;
-    private readonly List<string> _designIds = new(), _catIds = new();
+    private OptionButton _design = null!, _frame = null!, _family = null!, _partCat = null!;
+    private readonly List<string> _designIds = new(), _frameIds = new(), _catIds = new(), _partCats = new();
+    private ItemList _catalog = null!;
     private LineEdit _name = null!;
-    private OptionButton _frame = null!, _family = null!;
-    private readonly List<string> _frameIds = new();
-    private VBoxContainer _fitted = null!, _budgets = null!, _ratings = null!, _issues = null!, _effect = null!;
+    private VBoxContainer _fitted = null!, _budgets = null!, _ratings = null!, _issues = null!, _sheet = null!, _selected = null!, _effect = null!;
+    private GridContainer _partGrid = null!;
+    private Blueprint _blueprint = null!;
     private DesignVisual _viz = null!;
-    private Label _status = null!;
+    private Label _status = null!, _hullInfo = null!;
+    private CheckBox _arcs = null!, _mirror = null!;
+    private readonly Dictionary<string, Control> _tabs = new();
     public event Action? DesignsChanged;
 
     private static Catalog Cat => Session.Content.Catalog;
@@ -39,14 +45,13 @@ public partial class DevelopmentScreen : PanelContainer
         AnchorRight = 1; AnchorBottom = 1;
         AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.008f, 0.024f, 0.048f, 0.97f), UiTheme.Line, 6));
         var root = new HBoxContainer();
-        root.AddThemeConstantOverride("separation", 12);
+        root.AddThemeConstantOverride("separation", 10);
         AddChild(root);
 
-        // left: type + design list
-        var left = new VBoxContainer { CustomMinimumSize = new Vector2(290, 0) };
+        // ---- left: system type, blueprint, blueprint tools
+        var left = new VBoxContainer { CustomMinimumSize = new Vector2(430, 0) };
         root.AddChild(left);
-        left.AddChild(UiTheme.Text("DEVELOPMENT", 20, UiTheme.Accent));
-        var kinds = new GridContainer { Columns = 2 };
+        var kinds = new HBoxContainer();
         var group = new ButtonGroup();
         foreach (var (label, kind) in Kinds)
         {
@@ -55,99 +60,183 @@ public partial class DevelopmentScreen : PanelContainer
             kinds.AddChild(b);
         }
         left.AddChild(kinds);
-        left.AddChild(UiTheme.Text("Designs", 13, UiTheme.Dim));
-        _designs = new ItemList { SizeFlagsVertical = SizeFlags.ExpandFill };
-        _designs.ItemSelected += i => Load(Session.Content.Designs[_designIds[(int)i]]);
-        left.AddChild(_designs);
-        var row = new HBoxContainer();
-        var variant = new Button { Text = "New variant", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        variant.Pressed += NewVariant;
-        var save = new Button { Text = "Save design", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        save.Pressed += Save;
-        row.AddChild(variant); row.AddChild(save);
-        left.AddChild(row);
-        _status = UiTheme.Text("", 12, UiTheme.Dim, wrap: true);
-        _status.CustomMinimumSize = new Vector2(280, 0);
-        left.AddChild(_status);
+        _blueprint = new Blueprint { SizeFlagsVertical = SizeFlags.ExpandFill, Design = () => _work };
+        _blueprint.Changed += Recalc;
+        _blueprint.SelectionChanged += ShowSelected;
+        left.AddChild(_blueprint);
+        _viz = new DesignVisual { SizeFlagsVertical = SizeFlags.ExpandFill, Visible = false };
+        left.AddChild(_viz);
+        var tools = new HBoxContainer();
+        var zin = new Button { Text = "+" }; zin.Pressed += () => { _blueprint.Zoom *= 1.25f; _blueprint.QueueRedraw(); };
+        var zout = new Button { Text = "−" }; zout.Pressed += () => { _blueprint.Zoom = Math.Max(0.5f, _blueprint.Zoom / 1.25f); _blueprint.QueueRedraw(); };
+        _arcs = new CheckBox { Text = "Arcs", ButtonPressed = true }; _arcs.Toggled += on => { _blueprint.ShowArcs = on; _blueprint.QueueRedraw(); };
+        _mirror = new CheckBox { Text = "Mirror", ButtonPressed = true, TooltipText = "Off-centre drops also place a twin on the other side" }; _mirror.Toggled += on => _blueprint.Mirror = on;
+        var clear = new Button { Text = "Clear parts" }; clear.Pressed += () => { _work.Parts.Clear(); _blueprint.Selected = -1; Recalc(); ShowSelected(); };
+        tools.AddChild(zout); tools.AddChild(zin); tools.AddChild(_arcs); tools.AddChild(_mirror); tools.AddChild(clear);
+        left.AddChild(tools);
+        left.AddChild(UiTheme.Text("Drag parts from the Parts tab · drag to move · Q/E rotate 15° · R or right-click 90° · Del removes · wheel zooms", 11, UiTheme.Dim, wrap: true));
 
-        // centre: name, frame, visual, fitted parts, catalogue
+        // ---- middle: design sheet
+        var ms = new ScrollContainer { CustomMinimumSize = new Vector2(470, 0), HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        root.AddChild(ms);
         var mid = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        root.AddChild(mid);
-        var top = new HBoxContainer();
+        mid.AddThemeConstantOverride("separation", 6);
+        ms.AddChild(mid);
+        var r1 = new HBoxContainer();
+        _design = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill, ClipText = true };
+        _design.ItemSelected += i => Load(Session.Content.Designs[_designIds[(int)i]]);
+        var variant = new Button { Text = "New variant" }; variant.Pressed += NewVariant;
+        var save = new Button { Text = "Save design" }; save.Pressed += Save;
+        r1.AddChild(_design); r1.AddChild(variant); r1.AddChild(save);
+        mid.AddChild(r1);
+        var r2 = new HBoxContainer();
+        r2.AddChild(Field("Class name", 90));
         _name = new LineEdit { SizeFlagsHorizontal = SizeFlags.ExpandFill, PlaceholderText = "Design name" };
         _name.TextChanged += t => _work = _work with { Name = t };
-        _frame = new OptionButton { CustomMinimumSize = new Vector2(260, 0) };
-        _frame.ItemSelected += i => { _work = _work with { Frame = _frameIds[(int)i] }; Recalc(); };
-        top.AddChild(_name); top.AddChild(_frame);
-        mid.AddChild(top);
-        _viz = new DesignVisual { CustomMinimumSize = new Vector2(0, 190) };
-        mid.AddChild(_viz);
-        mid.AddChild(UiTheme.Text("Fitted components", 13, UiTheme.Dim));
-        var fs = new ScrollContainer { SizeFlagsVertical = SizeFlags.ExpandFill, SizeFlagsStretchRatio = 1.2f };
+        r2.AddChild(_name);
+        mid.AddChild(r2);
+        var r3 = new HBoxContainer();
+        r3.AddChild(Field("Hull / frame", 90));
+        _frame = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill, ClipText = true };
+        _frame.ItemSelected += i => { _work = _work with { Frame = _frameIds[(int)i] }; _blueprint.Zoom = 1; Recalc(); };
+        r3.AddChild(_frame);
+        mid.AddChild(r3);
+        _hullInfo = UiTheme.Text("", 12, UiTheme.Dim);
+        mid.AddChild(_hullInfo);
+        mid.AddChild(UiTheme.Text("WEIGHT AND COST", 13, UiTheme.Accent));
+        mid.AddChild(_sheet = new VBoxContainer());
+        mid.AddChild(UiTheme.Text("BUDGETS", 13, UiTheme.Accent));
+        mid.AddChild(_budgets = new VBoxContainer());
+        mid.AddChild(UiTheme.Text("CAPABILITY · 0–10", 13, UiTheme.Accent));
+        mid.AddChild(_ratings = new VBoxContainer());
+        mid.AddChild(UiTheme.Text("ISSUES", 13, UiTheme.Accent));
+        mid.AddChild(_issues = new VBoxContainer());
+        _status = UiTheme.Text("", 12, UiTheme.Dim, wrap: true);
+        _status.CustomMinimumSize = new Vector2(440, 0);
+        mid.AddChild(_status);
+
+        // ---- right: Systems / Parts / Selected
+        var right = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        root.AddChild(right);
+        var tabs = new HBoxContainer();
+        right.AddChild(tabs);
+        var tg = new ButtonGroup();
+        var pages = new VBoxContainer { SizeFlagsVertical = SizeFlags.ExpandFill };
+        right.AddChild(pages);
+        Control Tab(string name, Control page)
+        {
+            page.SizeFlagsVertical = SizeFlags.ExpandFill;
+            page.Visible = name == "Parts";
+            pages.AddChild(page);
+            var b = new Button { Text = name, ToggleMode = true, ButtonGroup = tg, ButtonPressed = page.Visible, SizeFlagsHorizontal = SizeFlags.ExpandFill };
+            b.Pressed += () => { foreach (var c in pages.GetChildren()) ((Control)c).Visible = c == page; };
+            tabs.AddChild(b);
+            _tabs[name] = b;
+            return page;
+        }
+
+        // Parts palette
+        var pv = new VBoxContainer();
+        var pr = new HBoxContainer();
+        pr.AddChild(UiTheme.Text("Category", 12, UiTheme.Dim));
+        _partCat = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        _partCat.ItemSelected += _ => FillParts();
+        pr.AddChild(_partCat);
+        pv.AddChild(pr);
+        var ps = new ScrollContainer { SizeFlagsVertical = SizeFlags.ExpandFill, HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        _partGrid = new GridContainer { Columns = 4 };
+        ps.AddChild(_partGrid);
+        pv.AddChild(ps);
+        Tab("Parts", pv);
+
+        // Systems (internal components)
+        var sv = new VBoxContainer();
+        sv.AddChild(UiTheme.Text("Internal systems (machinery, electronics, payload...)", 12, UiTheme.Dim));
+        var fs = new ScrollContainer { SizeFlagsVertical = SizeFlags.ExpandFill, HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
         _fitted = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
         fs.AddChild(_fitted);
-        mid.AddChild(fs);
+        sv.AddChild(fs);
         var addRow = new HBoxContainer();
-        addRow.AddChild(UiTheme.Text("Add part", 13, UiTheme.Dim));
         _family = new OptionButton();
         _family.AddItem("All families");
         foreach (var f in Families.All) _family.AddItem(f);
         _family.ItemSelected += _ => RefreshCatalog();
-        addRow.AddChild(_family);
         var add = new Button { Text = "Fit selected ▸" };
         add.Pressed += () => { foreach (var i in _catalog.GetSelectedItems()) Fit(_catIds[i]); };
-        addRow.AddChild(add);
-        mid.AddChild(addRow);
+        addRow.AddChild(_family); addRow.AddChild(add);
+        sv.AddChild(addRow);
         _catalog = new ItemList { SizeFlagsVertical = SizeFlags.ExpandFill };
         _catalog.ItemActivated += i => Fit(_catIds[(int)i]);
-        mid.AddChild(_catalog);
+        sv.AddChild(_catalog);
+        Tab("Systems", sv);
 
-        // right: evaluation
-        var rs = new ScrollContainer { CustomMinimumSize = new Vector2(400, 0), HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
-        var right = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        right.AddThemeConstantOverride("separation", 4);
-        rs.AddChild(right);
-        root.AddChild(rs);
-        right.AddChild(UiTheme.Text("BUDGETS", 13, UiTheme.Accent));
-        right.AddChild(_budgets = new VBoxContainer());
-        right.AddChild(UiTheme.Text("CAPABILITY · 0–10", 13, UiTheme.Accent));
-        right.AddChild(_ratings = new VBoxContainer());
-        right.AddChild(UiTheme.Text("ISSUES", 13, UiTheme.Accent));
-        right.AddChild(_issues = new VBoxContainer());
-        right.AddChild(UiTheme.Text("COMPONENTS IN EFFECT", 13, UiTheme.Accent));
-        right.AddChild(_effect = new VBoxContainer());
+        // Selected part
+        var selScroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        _selected = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        selScroll.AddChild(_selected);
+        Tab("Selected", selScroll);
+
+        // Components in effect
+        var ev = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        _effect = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        ev.AddChild(_effect);
+        Tab("In effect", ev);
 
         RefreshDesigns(DevScreenshot.Arg("design"));
     }
 
+    private static Label Field(string t, float w) { var l = UiTheme.Text(t, 13, UiTheme.Dim); l.CustomMinimumSize = new Vector2(w, 0); return l; }
+
     private void RefreshDesigns(string? select)
     {
-        _designs.Clear(); _designIds.Clear();
+        _design.Clear(); _designIds.Clear();
         foreach (var d in Session.Content.Designs.Values.Where(d => Cat.Frames.TryGetValue(d.Frame, out var f) && f.Kind == _kind).OrderBy(d => d.Name))
         {
             _designIds.Add(d.Id);
-            _designs.AddItem((d.Id.StartsWith("player-") ? "★ " : "") + d.Name);
+            _design.AddItem((d.Id.StartsWith("player-") ? "★ " : "") + d.Name);
         }
-        var idx = select != null ? _designIds.IndexOf(select) : 0;
         if (_designIds.Count == 0) { Load(new DesignDef { Id = $"player-{_kind}-1", Name = "New design", Frame = Cat.Frames.Values.First(f => f.Kind == _kind).Id }); return; }
-        idx = Math.Max(0, idx);
-        _designs.Select(idx);
+        var idx = Math.Max(0, select != null ? _designIds.IndexOf(select) : 0);
+        _design.Select(idx);
         Load(Session.Content.Designs[_designIds[idx]]);
     }
 
     private void Load(DesignDef d)
     {
-        _work = d with { Components = d.Components.ToList() };
+        _work = d with { Components = d.Components.ToList(), Parts = d.Parts.ToList() };
         _name.Text = d.Name;
         _frame.Clear(); _frameIds.Clear();
         foreach (var f in Cat.Frames.Values.Where(f => f.Kind == _kind))
         {
             _frameIds.Add(f.Id);
-            _frame.AddItem(f.Name);
+            _frame.AddItem(f.Hull != null ? $"{f.Name} · {f.Hull.Length:0} m" : f.Name);
         }
         _frame.Select(Math.Max(0, _frameIds.IndexOf(d.Frame)));
+        _partCat.Clear(); _partCats.Clear();
+        _partCat.AddItem("All parts"); _partCats.Add("");
+        foreach (var c in Cat.Parts.Values.Where(p => p.FitsKinds.Contains(_kind)).Select(p => p.Category).Distinct())
+        {
+            _partCats.Add(c);
+            _partCat.AddItem(c);
+        }
+        _blueprint.Selected = -1; _blueprint.Zoom = 1;
+        FillParts();
         RefreshCatalog();
         Recalc();
+        ShowSelected();
+    }
+
+    private void FillParts()
+    {
+        foreach (var c in _partGrid.GetChildren()) { _partGrid.RemoveChild(c); c.QueueFree(); }
+        var cat = _partCat.Selected > 0 ? _partCats[_partCat.Selected] : "";
+        foreach (var p in Cat.Parts.Values.Where(p => p.FitsKinds.Contains(_kind) && (cat == "" || p.Category == cat)))
+        {
+            var tile = new PartTile { Part = p };
+            var pp = p;
+            tile.Pressed += () => { _work.Parts.Add(new Placement(pp.Id, 0, 0)); _blueprint.Selected = _work.Parts.Count - 1; Recalc(); ShowSelected(); };
+            _partGrid.AddChild(tile);
+        }
     }
 
     private void RefreshCatalog()
@@ -157,14 +246,14 @@ public partial class DevelopmentScreen : PanelContainer
         foreach (var c in Cat.Components.Values.Where(c => (c.FitsKinds.Length == 0 || c.FitsKinds.Contains(_kind)) && (fam == null || c.Family == fam)).OrderBy(c => c.Family).ThenBy(c => c.Name))
         {
             _catIds.Add(c.Id);
-            var i = _catalog.AddItem($"{c.Name}   {Adds(c)}");
+            var i = _catalog.AddItem($"{c.Name}   {Adds(c.Adds)}");
             _catalog.SetItemCustomFgColor(i, FamilyColor.GetValueOrDefault(c.Family, UiTheme.Ink));
             _catalog.SetItemTooltip(i, $"{c.Family} · uses {string.Join(", ", c.Uses.Select(u => $"{u.Key} {u.Value:0.##}"))}");
         }
     }
 
-    private static string Adds(ComponentTemplate c) =>
-        c.Adds.Count == 0 ? "" : string.Join("  ", c.Adds.Select(a => $"{(a.Value >= 0 ? "+" : "")}{a.Value:0.#} {Rating(a.Key)}"));
+    private static string Adds(Dictionary<string, double> a) =>
+        a.Count == 0 ? "" : string.Join("  ", a.Select(x => $"{(x.Value >= 0 ? "+" : "")}{x.Value:0.#} {Rating(x.Key)}"));
 
     private static string Rating(string id) => Cat.Ratings.TryGetValue(id, out var r) ? r.Name : id;
 
@@ -172,59 +261,137 @@ public partial class DevelopmentScreen : PanelContainer
 
     private void Recalc()
     {
+        var frame = Cat.Frames.GetValueOrDefault(_work.Frame);
+        var hasHull = frame?.Hull != null;
+        _blueprint.Visible = hasHull; _viz.Visible = !hasHull;
+        if (!hasHull) _viz.Show(_work);
+        _blueprint.QueueRedraw();
+        _hullInfo.Text = frame?.Hull is { } hl ? $"{hl.Length:0} × {hl.Beam:0.#} m · {_work.Parts.Count} parts placed · {_work.Components.Count} internal systems" : "No blueprint for this kind: internal systems only.";
         var ev = new Evaluator(Cat).Evaluate(_work);
-        _viz.Show(_work);
+
+        // weight/cost sheet, RTW style
+        Clear(_sheet);
+        var grid = new GridContainer { Columns = 3 };
+        grid.AddThemeConstantOverride("h_separation", 18);
+        foreach (var hd in new[] { "", "Weight (t)", "Cost" }) grid.AddChild(UiTheme.Text(hd, 11, UiTheme.Dim));
+        var rows = (ev.Breakdown ?? new Dictionary<string, (double Weight, double Cost)>()).OrderBy(k => Array.IndexOf(SheetOrder, k.Key) is var i && i < 0 ? 99 : i);
+        foreach (var (k, (w, c)) in rows)
+        {
+            var n = UiTheme.Text(k, 13); n.CustomMinimumSize = new Vector2(190, 0);
+            grid.AddChild(n);
+            grid.AddChild(Num(w)); grid.AddChild(Num(c));
+        }
+        var tw = ev.Budgets.TryGetValue("mass", out var m) ? m.Used : 0;
+        grid.AddChild(UiTheme.Text("Total", 13, UiTheme.Accent)); grid.AddChild(Num(tw, UiTheme.Accent)); grid.AddChild(Num(ev.Cost, UiTheme.Accent));
+        if (ev.Budgets.TryGetValue("mass", out var mm))
+        {
+            grid.AddChild(UiTheme.Text("Weight remaining", 13)); grid.AddChild(Num(mm.Available - mm.Used, mm.Available - mm.Used < 0 ? UiTheme.Bad : UiTheme.Good)); grid.AddChild(new Control());
+        }
+        if (ev.Budgets.TryGetValue("topside", out var ts))
+        {
+            grid.AddChild(UiTheme.Text("Topside load", 13)); grid.AddChild(Num(ts.Used, ts.Used > ts.Available ? UiTheme.Bad : UiTheme.Ink, $" of {ts.Available:0}")); grid.AddChild(new Control());
+        }
+        _sheet.AddChild(grid);
+
+        Clear(_budgets);
+        foreach (var (axis, (used, avail)) in ev.Budgets.Where(b => b.Value.Used > 0 || b.Value.Available > 0).OrderBy(b => b.Key == "topside" ? 1 : 0))
+        {
+            var row = new HBoxContainer();
+            var n = UiTheme.Text(axis == "topside" ? "topside" : axis, 13); n.CustomMinimumSize = new Vector2(80, 0);
+            var over = used > avail + 1e-9;
+            var bar = Bar(avail <= 0 ? 1 : Math.Min(1, used / avail), over ? UiTheme.Bad : used / Math.Max(avail, 1e-9) >= 0.95 ? new Color("ffb347") : UiTheme.Accent);
+            var v = UiTheme.Text($"{used:0.#} / {avail:0.#}", 12, over ? UiTheme.Bad : UiTheme.Dim); v.CustomMinimumSize = new Vector2(120, 0);
+            row.AddChild(n); row.AddChild(bar); row.AddChild(v);
+            _budgets.AddChild(row);
+        }
+
+        Clear(_ratings);
+        foreach (var (r, v) in ev.Ratings.Where(r => r.Value > 0).OrderByDescending(r => r.Value))
+        {
+            var row = new HBoxContainer();
+            var n = UiTheme.Text(Rating(r), 13); n.CustomMinimumSize = new Vector2(140, 0);
+            row.AddChild(n); row.AddChild(Bar(v / 10, UiTheme.Accent)); row.AddChild(UiTheme.Text($"{v:0}", 13));
+            _ratings.AddChild(row);
+        }
+
+        Clear(_issues);
+        if (ev.Issues.Count == 0) _issues.AddChild(UiTheme.Text("✓ No issues. Ready to prototype.", 13, UiTheme.Good));
+        foreach (var i in ev.Issues.Take(12)) _issues.AddChild(Wrap($"• {i.Text}", UiTheme.Bad));
+        if (ev.Issues.Count > 12) _issues.AddChild(UiTheme.Text($"… and {ev.Issues.Count - 12} more", 12, UiTheme.Bad));
 
         Clear(_fitted);
         for (var i = 0; i < _work.Components.Count; i++)
         {
             var idx = i;
-            var c = Cat.Components[_work.Components[i]];
+            if (!Cat.Components.TryGetValue(_work.Components[i], out var c)) continue;
             var h = new HBoxContainer();
-            h.AddChild(new ColorRect { Color = FamilyColor.GetValueOrDefault(c.Family, UiTheme.Dim), CustomMinimumSize = new Vector2(6, 22) });
-            h.AddChild(UiTheme.Text(c.Name, 14));
-            var add = UiTheme.Text(Adds(c), 12, UiTheme.Dim);
-            add.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-            h.AddChild(add);
+            h.AddChild(new ColorRect { Color = FamilyColor.GetValueOrDefault(c.Family, UiTheme.Dim), CustomMinimumSize = new Vector2(6, 20) });
+            h.AddChild(UiTheme.Text(c.Name, 13));
+            var ad = UiTheme.Text(Adds(c.Adds), 11, UiTheme.Dim); ad.SizeFlagsHorizontal = SizeFlags.ExpandFill; ad.ClipText = true;
+            h.AddChild(ad);
             var rm = new Button { Text = "✕", TooltipText = "Remove" };
             rm.Pressed += () => { _work.Components.RemoveAt(idx); Recalc(); };
             h.AddChild(rm);
             _fitted.AddChild(h);
         }
 
-        Clear(_budgets);
-        foreach (var (axis, (used, avail)) in ev.Budgets.Where(b => b.Value.Used > 0 || b.Value.Available > 0))
-        {
-            var h = new HBoxContainer();
-            var n = UiTheme.Text(axis, 13); n.CustomMinimumSize = new Vector2(70, 0);
-            var over = used > avail + 1e-9;
-            var bar = Bar(avail <= 0 ? 1 : Math.Min(1, used / avail), over ? UiTheme.Bad : used / Math.Max(avail, 1e-9) >= 0.95 ? new Color("ffb347") : UiTheme.Accent);
-            var v = UiTheme.Text($"{used:0.##} / {avail:0.##}", 12, over ? UiTheme.Bad : UiTheme.Dim); v.CustomMinimumSize = new Vector2(110, 0);
-            h.AddChild(n); h.AddChild(bar); h.AddChild(v);
-            _budgets.AddChild(h);
-        }
-
-        Clear(_ratings);
-        foreach (var (r, v) in ev.Ratings.Where(r => r.Value > 0).OrderByDescending(r => r.Value))
-        {
-            var h = new HBoxContainer();
-            var n = UiTheme.Text(Rating(r), 13); n.CustomMinimumSize = new Vector2(120, 0);
-            h.AddChild(n); h.AddChild(Bar(v / 10, UiTheme.Accent)); h.AddChild(UiTheme.Text($"{v:0}", 13));
-            _ratings.AddChild(h);
-        }
-
-        Clear(_issues);
-        if (ev.Issues.Count == 0) _issues.AddChild(UiTheme.Text("✓ No issues. Ready to prototype.", 13, UiTheme.Good));
-        foreach (var i in ev.Issues) _issues.AddChild(Wrap($"• {i.Text}", UiTheme.Bad));
-
         Clear(_effect);
         var prof = SystemProfile.Build(Cat, _work);
         foreach (var (r, v) in ev.Ratings.Where(r => r.Value > 0).OrderByDescending(r => r.Value))
         {
             var agg = Cat.Ratings.TryGetValue(r, out var rule) ? rule.Aggregate : "sum";
-            var parts = prof.For(r).Select(c => $"{c.Source} {(c.Value >= 0 ? "+" : "")}{c.Value:0.#}");
+            var fromParts = _work.Parts.Where(p => Cat.Parts.TryGetValue(p.Part, out var vp) && vp.Adds.ContainsKey(r)).GroupBy(p => Cat.Parts[p.Part].Name).Select(g => $"{g.Key} ×{g.Count()}");
+            var parts = prof.For(r).Select(c => $"{c.Source} {(c.Value >= 0 ? "+" : "")}{c.Value:0.#}").Concat(fromParts);
             _effect.AddChild(Wrap($"{Rating(r)} {v:0} ({agg}) ← {string.Join(", ", parts)}", UiTheme.Ink));
         }
+    }
+
+    private static Label Num(double v, Color? c = null, string suffix = "")
+    {
+        var l = UiTheme.Text($"{v:#,0}{suffix}", 13, c ?? UiTheme.Ink);
+        l.HorizontalAlignment = HorizontalAlignment.Right;
+        l.CustomMinimumSize = new Vector2(90, 0);
+        return l;
+    }
+
+    private void ShowSelected()
+    {
+        Clear(_selected);
+        var i = _blueprint.Selected;
+        if (i < 0 || i >= _work.Parts.Count || !Cat.Parts.TryGetValue(_work.Parts[i].Part, out var p))
+        {
+            _selected.AddChild(UiTheme.Text("Click a part on the blueprint to select it.", 12, UiTheme.Dim));
+            return;
+        }
+        if (_tabs.TryGetValue("Selected", out var tb)) ((Button)tb).EmitSignal(BaseButton.SignalName.Pressed);
+        if (_tabs.TryGetValue("Selected", out var tb2)) ((Button)tb2).ButtonPressed = true;
+        var pl = _work.Parts[i];
+        _selected.AddChild(UiTheme.Text(p.Name, 18, UiTheme.Accent));
+        _selected.AddChild(UiTheme.Text($"{p.Category}{(p.Topside ? " · counts as topside weight" : "")}{(p.Arc > 0 ? $" · firing arc ±{p.Arc:0}°" : "")}", 12, UiTheme.Dim));
+        _selected.AddChild(UiTheme.Text($"Position {pl.X:0.#} m {(pl.X >= 0 ? "starboard" : "port")} · {Math.Abs(pl.Y):0.#} m {(pl.Y >= 0 ? "forward" : "aft")} · heading {pl.Rot:0}°", 12, UiTheme.Ink));
+        var uses = new Dictionary<string, double>(p.Uses);
+        if (p.Component != null && Cat.Components.TryGetValue(p.Component, out var c))
+        {
+            foreach (var (k, v) in c.Uses) uses[k] = uses.GetValueOrDefault(k) + v;
+            _selected.AddChild(UiTheme.Text($"Includes: {c.Name} ({Adds(c.Adds)})", 12, UiTheme.Ink));
+        }
+        _selected.AddChild(UiTheme.Text("Uses: " + string.Join(" · ", uses.Select(u => $"{u.Key} {u.Value:0.#}")), 12, UiTheme.Ink));
+        if (p.Adds.Count > 0) _selected.AddChild(UiTheme.Text("Adds: " + Adds(p.Adds), 12, UiTheme.Good));
+        _selected.AddChild(UiTheme.Text($"Cost {p.Cost:0.#}", 12, UiTheme.Ink));
+        var row = new HBoxContainer();
+        foreach (var (t, a) in new[] { ("⟲ 15°", -15.0), ("⟳ 15°", 15.0), ("↻ 90°", 90.0), ("180°", 180.0) })
+        {
+            var b = new Button { Text = t };
+            b.Pressed += () => _blueprint.Rotate(a);
+            row.AddChild(b);
+        }
+        _selected.AddChild(row);
+        var row2 = new HBoxContainer();
+        var mir = new Button { Text = "Mirror copy" }; mir.Pressed += () => _blueprint.MirrorSelected();
+        var cen = new Button { Text = "Centreline" }; cen.Pressed += () => { _work.Parts[i] = _work.Parts[i] with { X = 0 }; Recalc(); ShowSelected(); };
+        var del = new Button { Text = "Remove" }; del.Pressed += () => _blueprint.Remove();
+        row2.AddChild(mir); row2.AddChild(cen); row2.AddChild(del);
+        _selected.AddChild(row2);
     }
 
     private static Control Bar(double frac, Color c)
@@ -238,7 +405,7 @@ public partial class DevelopmentScreen : PanelContainer
     private static Label Wrap(string t, Color c)
     {
         var l = UiTheme.Text(t, 12, c, wrap: true);
-        l.CustomMinimumSize = new Vector2(380, 0);
+        l.CustomMinimumSize = new Vector2(420, 0);
         return l;
     }
 
@@ -248,22 +415,21 @@ public partial class DevelopmentScreen : PanelContainer
     {
         var n = 1;
         while (Session.Content.Designs.ContainsKey($"player-{_kind}-{n}")) n++;
-        _work = _work with { Id = $"player-{_kind}-{n}", Name = _work.Name + " (variant)", Components = _work.Components.ToList(), Lineage = _work.Lineage };
+        _work = _work with { Id = $"player-{_kind}-{n}", Name = _work.Name + " (variant)", Components = _work.Components.ToList(), Parts = _work.Parts.ToList() };
         _name.Text = _work.Name;
-        _status.Text = "New variant created. Swap parts, then Save design.";
+        _status.Text = "New variant created. Change parts and systems, then Save design.";
     }
 
     private void Save()
     {
         if (!_work.Id.StartsWith("player-")) NewVariant(); // core designs are never overwritten
-        Session.SaveDesign(_work with { Components = _work.Components.ToList() });
+        Session.SaveDesign(_work with { Components = _work.Components.ToList(), Parts = _work.Parts.ToList() });
         _status.Text = $"Saved {_work.Name} to mods/player/designs.json. It is now available in Theatre Ops.";
         RefreshDesigns(_work.Id);
         DesignsChanged?.Invoke();
     }
 }
 
-/// <summary>A 2D drawing of a design built from its parts: munitions as a body split into sections, other systems as part tiles.</summary>
 public partial class DesignVisual : Control
 {
     private DesignDef? _d;

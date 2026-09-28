@@ -3,7 +3,8 @@
 // Bad Waters is a 2D strategy GAME for Steam. It is not a simulation of real life:
 //   - every weapon, platform, component and design is a game asset with abstract game stats;
 //   - stats are 1–10 style game ratings for balance and fun, not real-world performance data;
-//   - there is no physics simulation, only rules-based game mechanics;
+//   - designs obey plausible game limits (weight, space, power, topside load), but combat and performance
+//     are rules-based game mechanics, never a realistic simulation of real-world weapon characteristics;
 //   - "designing" ordnance, ships, aircraft or bases means choosing and adjusting game components;
 //   - nothing here is, or should become, a real-world tool, planner or calculator.
 //

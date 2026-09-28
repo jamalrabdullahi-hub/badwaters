@@ -41,6 +41,7 @@ public sealed class GameContent
         foreach (var x in l.Load<ComponentTemplate>("components.json")) g.Catalog.Components[x.Id] = x;
         foreach (var f in new[] { "ships", "aircraft", "munitions", "ground" })
             foreach (var x in l.Load<FrameDef>($"frames/{f}.json")) g.Catalog.Frames[x.Id] = x;
+        foreach (var x in l.Load<VisualPart>("parts.json")) g.Catalog.Parts[x.Id] = x;
         foreach (var x in l.Load<DesignDef>("designs.json")) g.Designs[x.Id] = x;
         foreach (var x in l.Load<ScenarioDef>("scenarios.json")) g.Scenarios[x.Id] = x;
         foreach (var x in l.Load<PresetDef>("presets.json")) g.Presets[x.Id] = x;
@@ -106,6 +107,8 @@ public sealed class GameContent
                 else if (!TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: script targets protected site {x.Target}");
             }
         }
+        foreach (var pt in Catalog.Parts.Values)
+            if (pt.Component != null && !Catalog.Components.ContainsKey(pt.Component)) Errors.Add($"part {pt.Id}: unknown component {pt.Component}");
         foreach (var d in Designs.Values)
         {
             if (!Catalog.Frames.ContainsKey(d.Frame)) Errors.Add($"design {d.Id}: unknown frame {d.Frame}");

@@ -5,7 +5,7 @@
 **This is a 2D strategy game for Steam, not a simulation of real life.**
 - **Real names, game stats:** real-world system names are used for identification (see `DISCLAIMER.md`), in the C:MO style. The art is 2D. Performance stays abstract 0–10 game ratings for relative feel; never real specifications.
 - **Game stats, not real data:** stats are abstract game ratings and tiers (for example range tier 1–10, a "hit rating", a cost in game credits), tuned for fun and balance. They are not derived from, calibrated to, or presented as real-world performance data.
-- **No physics simulation:** combat and movement are rules-based game mechanics (tiers, ratings, dice/probability tables), not physical or engineering models.
+- **Plausible, not real:** designs obey believable limits (weight, space, power, cooling, topside load, hull size), so a carrier deck won't fit on a corvette because it is too heavy, not because a rule forbids it. What we do NOT do is reproduce or calibrate to real weapon characteristics: combat and performance stay abstract game ratings, tiers and dice, never a realistic simulation of real-world systems.
 - **Designers are gameplay:** "missile designer", "ship designer" and similar mean choosing and adjusting game components from a list to trade off game stats. They never do real engineering or design work.
 - **Nothing usable outside the game:** don't build anything that could be interpreted or used as a real-world tool, planner, calculator or targeting aid, or anything harmful.
 - Real nations appear as playable sides of a fictional strategic contest.

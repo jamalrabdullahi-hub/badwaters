@@ -9,7 +9,8 @@
    "volume": 4,
    "power": 0,
    "cooling": 2,
-   "crew": 6
+   "crew": 6,
+   "topside": 9
   },
   "ports": {
    "mast-sensor": 1,
@@ -23,7 +24,12 @@
   },
   "cost": 2,
   "factory": "vehicle-plant",
-  "workUnits": 3
+  "workUnits": 3,
+  "hull": {
+   "length": 10,
+   "beam": 2.5,
+   "style": "vehicle"
+  }
  },
  {
   "id": "gc-truck-8x8",
@@ -35,7 +41,8 @@
    "volume": 6,
    "power": 0,
    "cooling": 3,
-   "crew": 8
+   "crew": 8,
+   "topside": 15
   },
   "ports": {
    "mast-sensor": 1,
@@ -50,7 +57,12 @@
   },
   "cost": 4,
   "factory": "vehicle-plant",
-  "workUnits": 5
+  "workUnits": 5,
+  "hull": {
+   "length": 12,
+   "beam": 2.7,
+   "style": "vehicle"
+  }
  },
  {
   "id": "gc-tracked",
@@ -62,7 +74,8 @@
    "volume": 5,
    "power": 0,
    "cooling": 2,
-   "crew": 6
+   "crew": 6,
+   "topside": 12
   },
   "ports": {
    "mast-sensor": 1,
@@ -77,7 +90,12 @@
   },
   "cost": 5,
   "factory": "vehicle-plant",
-  "workUnits": 6
+  "workUnits": 6,
+  "hull": {
+   "length": 7.5,
+   "beam": 3.4,
+   "style": "tracked"
+  }
  },
  {
   "id": "gc-radar-trailer",
@@ -89,7 +107,8 @@
    "volume": 8,
    "power": 0,
    "cooling": 4,
-   "crew": 10
+   "crew": 10,
+   "topside": 115
   },
   "ports": {
    "mast-sensor": 1
@@ -102,7 +121,12 @@
   },
   "cost": 2,
   "factory": "vehicle-plant",
-  "workUnits": 2
+  "workUnits": 2,
+  "hull": {
+   "length": 14,
+   "beam": 3,
+   "style": "vehicle"
+  }
  },
  {
   "id": "gc-fixed-site",
@@ -114,7 +138,8 @@
    "volume": 20,
    "power": 0,
    "cooling": 10,
-   "crew": 40
+   "crew": 40,
+   "topside": 200
   },
   "ports": {
    "mast-sensor": 2,
@@ -127,6 +152,11 @@
   "requires": {},
   "cost": 30,
   "factory": "vehicle-plant",
-  "workUnits": 20
+  "workUnits": 20,
+  "hull": {
+   "length": 60,
+   "beam": 60,
+   "style": "pad"
+  }
  }
 ]

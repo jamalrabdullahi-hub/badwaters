@@ -6,6 +6,7 @@ public sealed class Catalog
     public Dictionary<string, ComponentTemplate> Components { get; } = new();
     public Dictionary<string, FrameDef> Frames { get; } = new();
     public Dictionary<string, RatingRule> Ratings { get; } = new();
+    public Dictionary<string, VisualPart> Parts { get; } = new();
 }
 
 /// <summary>Evaluates any design (ship, aircraft, munition, ground system) with the same generic rules.</summary>
@@ -28,6 +29,8 @@ public sealed class Evaluator
         var offered = new HashSet<string>(frame.Ports.Keys);
         var needs = new List<(string Port, string By)>();
         var work = new Dictionary<string, double>();
+        var breakdown = new Dictionary<string, (double Weight, double Cost)>();
+        Book(breakdown, "Hull and fittings", 0, frame.Cost);
         double cost = frame.Cost;
         if (frame.Factory != null) work[frame.Factory] = frame.WorkUnits;
         CheckTech(frame.Requires, frame.Name, techLevels, issues);
@@ -49,6 +52,37 @@ public sealed class Evaluator
             foreach (var n in c.Needs) needs.Add((n, c.Name));
             cost += c.Cost;
             if (c.Factory != null) work[c.Factory] = work.GetValueOrDefault(c.Factory) + c.WorkUnits;
+            Book(breakdown, FamilyGroup(c.Family), c.Uses.GetValueOrDefault("mass"), c.Cost);
+        }
+
+        // visual parts: their own stats, plus any component they carry (ports don't apply: the part is the mount)
+        foreach (var pl in d.Parts)
+        {
+            if (!_cat.Parts.TryGetValue(pl.Part, out var p)) { issues.Add(new(IssueKind.UnknownPart, $"Unknown part {pl.Part}.")); continue; }
+            if (p.FitsKinds.Length > 0 && !p.FitsKinds.Contains(frame.Kind)) issues.Add(new(IssueKind.WrongKind, $"{p.Name} can't be fitted to a {frame.Kind}."));
+            if (frame.Hull != null && !HullGeometry.Inside(frame.Hull, pl.X, pl.Y, 1)) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
+            var uses = new Dictionary<string, double>(p.Uses);
+            double partCost = p.Cost;
+            if (p.Component != null && _cat.Components.TryGetValue(p.Component, out var pc))
+            {
+                CheckTech(pc.Requires, pc.Name, techLevels, issues);
+                foreach (var (axis, v) in pc.Uses) uses[axis] = uses.GetValueOrDefault(axis) + v;
+                foreach (var (r, v) in pc.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v);
+                foreach (var o in pc.Offers) offered.Add(o);
+                foreach (var n in pc.Needs) needs.Add((n, pc.Name));
+                partCost += pc.Cost;
+                if (pc.Factory != null) work[pc.Factory] = work.GetValueOrDefault(pc.Factory) + pc.WorkUnits;
+            }
+            foreach (var (axis, v) in uses)
+            {
+                if (v >= 0) used[axis] = used.GetValueOrDefault(axis) + v;
+                else avail[axis] = avail.GetValueOrDefault(axis) - v;
+            }
+            if (p.Topside) used["topside"] = used.GetValueOrDefault("topside") + Math.Max(0, uses.GetValueOrDefault("mass"));
+            foreach (var (r, v) in p.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v);
+            foreach (var o in p.Offers) offered.Add(o);
+            cost += partCost;
+            Book(breakdown, p.Category, Math.Max(0, uses.GetValueOrDefault("mass")), partCost);
         }
 
         foreach (var (port, n) in portsUsed)
@@ -70,8 +104,24 @@ public sealed class Evaluator
         foreach (var (r, rule) in _cat.Ratings)
             if (ratings.TryGetValue(r, out var v)) ratings[r] = Math.Clamp(v, 0, rule.Cap);
 
-        return new Evaluation(budgets, ratings, issues, cost, work);
+        return new Evaluation(budgets, ratings, issues, cost, work, breakdown);
     }
+
+    private static void Book(Dictionary<string, (double Weight, double Cost)> b, string key, double w, double c)
+    {
+        var (w0, c0) = b.GetValueOrDefault(key);
+        b[key] = (w0 + w, c0 + c);
+    }
+
+    /// <summary>Groups component families into the designer's weight/cost lines.</summary>
+    public static string FamilyGroup(string family) => family switch
+    {
+        "propulsion" or "power" or "thermal" => "Machinery",
+        "sensors" => "Sensors",
+        "payload" or "fuzing" or "interfaces" => "Weapons",
+        "computing" or "comms" or "ew" or "navigation" or "guidance" => "Combat systems",
+        _ => "Hull and fittings",
+    };
 
     private double Combine(string rating, double? cur, double v)
     {

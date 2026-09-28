@@ -39,24 +39,142 @@
    "pw-gen-turbine",
    "pw-gen-turbine",
    "th-cooling-adv",
-   "sn-radar-aesa",
    "cp-cms-integrated",
    "cm-radio",
    "cm-datalink",
-   "cm-satcom",
    "ew-decoys",
-   "ew-jammer",
-   "if-cell-block",
-   "if-cell-block",
-   "if-cell-block",
    "if-canister",
-   "wp-gun-medium",
-   "wp-point-defence",
-   "sn-sonar-hull",
-   "sy-hangar",
    "sy-crew-std",
    "rl-basic",
    "nv-fusion"
+  ],
+  "parts": [
+   {
+    "part": "sonar-bow",
+    "x": 0,
+    "y": 70,
+    "rot": 0
+   },
+   {
+    "part": "anchors",
+    "x": 0,
+    "y": 63,
+    "rot": 0
+   },
+   {
+    "part": "gun-127",
+    "x": 0,
+    "y": 52,
+    "rot": 0
+   },
+   {
+    "part": "vls-32",
+    "x": 0,
+    "y": 41,
+    "rot": 0
+   },
+   {
+    "part": "ciws-gatling",
+    "x": 0,
+    "y": 33,
+    "rot": 0
+   },
+   {
+    "part": "bridge-m",
+    "x": 0,
+    "y": 25,
+    "rot": 0
+   },
+   {
+    "part": "rad-array-4face",
+    "x": 0,
+    "y": 17,
+    "rot": 0
+   },
+   {
+    "part": "decoy-launcher",
+    "x": -6,
+    "y": 21,
+    "rot": 0
+   },
+   {
+    "part": "decoy-launcher",
+    "x": 6,
+    "y": 21,
+    "rot": 0
+   },
+   {
+    "part": "mast-enclosed",
+    "x": 0,
+    "y": 9,
+    "rot": 0
+   },
+   {
+    "part": "satcom",
+    "x": -3,
+    "y": 6,
+    "rot": 0
+   },
+   {
+    "part": "satcom",
+    "x": 3,
+    "y": 6,
+    "rot": 0
+   },
+   {
+    "part": "funnel-twin",
+    "x": 0,
+    "y": -3,
+    "rot": 0
+   },
+   {
+    "part": "rhib",
+    "x": -7,
+    "y": -6,
+    "rot": 0
+   },
+   {
+    "part": "rhib",
+    "x": 7,
+    "y": -6,
+    "rot": 0
+   },
+   {
+    "part": "house-m",
+    "x": 0,
+    "y": -14,
+    "rot": 0
+   },
+   {
+    "part": "can-8-angled",
+    "x": 0,
+    "y": -24,
+    "rot": 90
+   },
+   {
+    "part": "vls-64",
+    "x": 0,
+    "y": -35,
+    "rot": 0
+   },
+   {
+    "part": "ciws-gatling",
+    "x": 0,
+    "y": -44,
+    "rot": 180
+   },
+   {
+    "part": "hangar-2",
+    "x": 0,
+    "y": -52,
+    "rot": 0
+   },
+   {
+    "part": "helo-pad-l",
+    "x": 0,
+    "y": -66,
+    "rot": 0
+   }
   ]
  },
  {

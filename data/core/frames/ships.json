@@ -10,7 +10,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 16
   },
   "ports": {
    "mast-sensor": 1,
@@ -30,7 +31,12 @@
   },
   "cost": 24,
   "factory": "shipyard",
-  "workUnits": 1
+  "workUnits": 1,
+  "hull": {
+   "length": 40,
+   "beam": 7,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-fac",
@@ -43,7 +49,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 28
   },
   "ports": {
    "mast-sensor": 1,
@@ -63,7 +70,12 @@
   },
   "cost": 40,
   "factory": "shipyard",
-  "workUnits": 2
+  "workUnits": 2,
+  "hull": {
+   "length": 55,
+   "beam": 8.5,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-corvette",
@@ -76,7 +88,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 99
   },
   "ports": {
    "mast-sensor": 1,
@@ -96,7 +109,12 @@
   },
   "cost": 144,
   "factory": "shipyard",
-  "workUnits": 6
+  "workUnits": 6,
+  "hull": {
+   "length": 90,
+   "beam": 13,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-opv",
@@ -109,7 +127,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 110
   },
   "ports": {
    "mast-sensor": 1,
@@ -129,7 +148,12 @@
   },
   "cost": 160,
   "factory": "shipyard",
-  "workUnits": 7
+  "workUnits": 7,
+  "hull": {
+   "length": 85,
+   "beam": 13,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-frigate-asw",
@@ -142,7 +166,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 248
   },
   "ports": {
    "mast-sensor": 1,
@@ -162,7 +187,12 @@
   },
   "cost": 360,
   "factory": "shipyard",
-  "workUnits": 15
+  "workUnits": 15,
+  "hull": {
+   "length": 135,
+   "beam": 17,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-frigate-gp",
@@ -175,7 +205,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 275
   },
   "ports": {
    "mast-sensor": 1,
@@ -195,7 +226,12 @@
   },
   "cost": 400,
   "factory": "shipyard",
-  "workUnits": 17
+  "workUnits": 17,
+  "hull": {
+   "length": 140,
+   "beam": 18,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-destroyer-ad",
@@ -208,7 +244,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 468
   },
   "ports": {
    "mast-sensor": 1,
@@ -228,7 +265,12 @@
   },
   "cost": 680,
   "factory": "shipyard",
-  "workUnits": 28
+  "workUnits": 28,
+  "hull": {
+   "length": 155,
+   "beam": 20,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-destroyer-gp",
@@ -241,7 +283,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 412
   },
   "ports": {
    "mast-sensor": 1,
@@ -261,7 +304,12 @@
   },
   "cost": 600,
   "factory": "shipyard",
-  "workUnits": 25
+  "workUnits": 25,
+  "hull": {
+   "length": 150,
+   "beam": 19,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-cruiser",
@@ -274,7 +322,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 605
   },
   "ports": {
    "mast-sensor": 1,
@@ -294,7 +343,12 @@
   },
   "cost": 880,
   "factory": "shipyard",
-  "workUnits": 37
+  "workUnits": 37,
+  "hull": {
+   "length": 173,
+   "beam": 17,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-carrier-cat",
@@ -307,7 +361,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 4950
   },
   "ports": {
    "mast-sensor": 1,
@@ -327,7 +382,12 @@
   },
   "cost": 7200,
   "factory": "shipyard",
-  "workUnits": 300
+  "workUnits": 300,
+  "hull": {
+   "length": 333,
+   "beam": 41,
+   "style": "carrier"
+  }
  },
  {
   "id": "hull-carrier-stovl",
@@ -340,7 +400,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 2200
   },
   "ports": {
    "mast-sensor": 1,
@@ -360,7 +421,12 @@
   },
   "cost": 3200,
   "factory": "shipyard",
-  "workUnits": 133
+  "workUnits": 133,
+  "hull": {
+   "length": 280,
+   "beam": 39,
+   "style": "carrier"
+  }
  },
  {
   "id": "hull-amphib-assault",
@@ -373,7 +439,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 2200
   },
   "ports": {
    "mast-sensor": 1,
@@ -393,7 +460,12 @@
   },
   "cost": 3200,
   "factory": "shipyard",
-  "workUnits": 133
+  "workUnits": 133,
+  "hull": {
+   "length": 257,
+   "beam": 32,
+   "style": "carrier"
+  }
  },
  {
   "id": "hull-landing-dock",
@@ -406,7 +478,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 1100
   },
   "ports": {
    "mast-sensor": 1,
@@ -426,7 +499,12 @@
   },
   "cost": 1600,
   "factory": "shipyard",
-  "workUnits": 67
+  "workUnits": 67,
+  "hull": {
+   "length": 208,
+   "beam": 32,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-mine-warfare",
@@ -439,7 +517,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 38
   },
   "ports": {
    "mast-sensor": 1,
@@ -459,7 +538,12 @@
   },
   "cost": 56,
   "factory": "shipyard",
-  "workUnits": 2
+  "workUnits": 2,
+  "hull": {
+   "length": 60,
+   "beam": 10,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-intel-ship",
@@ -472,7 +556,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 165
   },
   "ports": {
    "mast-sensor": 1,
@@ -492,7 +577,12 @@
   },
   "cost": 240,
   "factory": "shipyard",
-  "workUnits": 10
+  "workUnits": 10,
+  "hull": {
+   "length": 90,
+   "beam": 14,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-command-ship",
@@ -505,7 +595,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 990
   },
   "ports": {
    "mast-sensor": 1,
@@ -525,7 +616,12 @@
   },
   "cost": 1440,
   "factory": "shipyard",
-  "workUnits": 60
+  "workUnits": 60,
+  "hull": {
+   "length": 190,
+   "beam": 25,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-oiler",
@@ -538,7 +634,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 2200
   },
   "ports": {
    "mast-sensor": 1,
@@ -558,7 +655,12 @@
   },
   "cost": 3200,
   "factory": "shipyard",
-  "workUnits": 133
+  "workUnits": 133,
+  "hull": {
+   "length": 230,
+   "beam": 32,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-stores-ship",
@@ -571,7 +673,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 2200
   },
   "ports": {
    "mast-sensor": 1,
@@ -591,7 +694,12 @@
   },
   "cost": 3200,
   "factory": "shipyard",
-  "workUnits": 133
+  "workUnits": 133,
+  "hull": {
+   "length": 210,
+   "beam": 32,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-hospital-ship",
@@ -604,7 +712,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 1100
   },
   "ports": {
    "mast-sensor": 1,
@@ -624,7 +733,12 @@
   },
   "cost": 1600,
   "factory": "shipyard",
-  "workUnits": 67
+  "workUnits": 67,
+  "hull": {
+   "length": 270,
+   "beam": 32,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-icebreaker",
@@ -637,7 +751,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 330
   },
   "ports": {
    "mast-sensor": 1,
@@ -657,7 +772,12 @@
   },
   "cost": 480,
   "factory": "shipyard",
-  "workUnits": 20
+  "workUnits": 20,
+  "hull": {
+   "length": 110,
+   "beam": 25,
+   "style": "merchant"
+  }
  },
  {
   "id": "hull-ssk",
@@ -670,7 +790,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 165
   },
   "ports": {
    "mast-sensor": 0,
@@ -690,7 +811,12 @@
   },
   "cost": 240,
   "factory": "shipyard",
-  "workUnits": 10
+  "workUnits": 10,
+  "hull": {
+   "length": 70,
+   "beam": 8,
+   "style": "sub"
+  }
  },
  {
   "id": "hull-ssn",
@@ -703,7 +829,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 440
   },
   "ports": {
    "mast-sensor": 0,
@@ -723,7 +850,12 @@
   },
   "cost": 640,
   "factory": "shipyard",
-  "workUnits": 27
+  "workUnits": 27,
+  "hull": {
+   "length": 115,
+   "beam": 10,
+   "style": "sub"
+  }
  },
  {
   "id": "hull-ssgn",
@@ -736,7 +868,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 935
   },
   "ports": {
    "mast-sensor": 0,
@@ -756,7 +889,12 @@
   },
   "cost": 1360,
   "factory": "shipyard",
-  "workUnits": 57
+  "workUnits": 57,
+  "hull": {
+   "length": 170,
+   "beam": 13,
+   "style": "sub"
+  }
  },
  {
   "id": "hull-ssbn",
@@ -769,7 +907,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 990
   },
   "ports": {
    "mast-sensor": 0,
@@ -789,7 +928,12 @@
   },
   "cost": 1440,
   "factory": "shipyard",
-  "workUnits": 60
+  "workUnits": 60,
+  "hull": {
+   "length": 170,
+   "beam": 13,
+   "style": "sub"
+  }
  },
  {
   "id": "hull-usv",
@@ -802,7 +946,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 28
   },
   "ports": {
    "mast-sensor": 1,
@@ -822,7 +967,12 @@
   },
   "cost": 40,
   "factory": "shipyard",
-  "workUnits": 2
+  "workUnits": 2,
+  "hull": {
+   "length": 45,
+   "beam": 7,
+   "style": "warship"
+  }
  },
  {
   "id": "hull-xluuv",
@@ -835,7 +985,8 @@
    "power": 0,
    "cooling": 4,
    "crew": 0,
-   "data": 2
+   "data": 2,
+   "topside": 4
   },
   "ports": {
    "mast-sensor": 0,
@@ -855,6 +1006,11 @@
   },
   "cost": 6,
   "factory": "shipyard",
-  "workUnits": 0
+  "workUnits": 0,
+  "hull": {
+   "length": 16,
+   "beam": 2.5,
+   "style": "sub"
+  }
  }
 ]

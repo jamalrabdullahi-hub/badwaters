@@ -158,12 +158,20 @@ ships=[("patrol-boat","Patrol boat",300,3,1),("fac","Fast attack craft",500,4,1)
  ("oiler","Fleet oiler",40000,20,1),("stores-ship","Ammunition & stores ship",40000,20,1),("hospital-ship","Hospital ship",20000,20,1),
  ("icebreaker","Icebreaking patrol ship",6000,12,1),("ssk","Diesel-electric submarine",3000,10,1),("ssn","Nuclear attack submarine",8000,16,2),
  ("ssgn","Guided-missile submarine",17000,24,4),("ssbn","Deterrent submarine",18000,24,2),("usv","Uncrewed surface vessel",500,3,1),("xluuv","Large uncrewed underwater vehicle",80,2,0)]
+# hull outline for the designer: length and beam in metres, drawing style
+HULL={"patrol-boat":(40,7,"warship"),"fac":(55,8.5,"warship"),"corvette":(90,13,"warship"),"opv":(85,13,"warship"),"frigate-asw":(135,17,"warship"),
+ "frigate-gp":(140,18,"warship"),"destroyer-ad":(155,20,"warship"),"destroyer-gp":(150,19,"warship"),"cruiser":(173,17,"warship"),"carrier-cat":(333,41,"carrier"),
+ "carrier-stovl":(280,39,"carrier"),"amphib-assault":(257,32,"carrier"),"landing-dock":(208,32,"merchant"),"mine-warfare":(60,10,"warship"),"intel-ship":(90,14,"merchant"),
+ "command-ship":(190,25,"merchant"),"oiler":(230,32,"merchant"),"stores-ship":(210,32,"merchant"),"hospital-ship":(270,32,"merchant"),"icebreaker":(110,25,"merchant"),
+ "ssk":(70,8,"sub"),"ssn":(115,10,"sub"),"ssgn":(170,13,"sub"),"ssbn":(170,13,"sub"),"usv":(45,7,"warship"),"xluuv":(16,2.5,"sub")}
 for i,n,disp,vol,cells in ships:
     usable = disp*0.22
     SH.append(fr(f"hull-{i}",n,"ship",i,{"mass":round(usable),"volume":vol,"power":0,"cooling":4,"crew":0,"data":2},
       {"mast-sensor":1 if not i.startswith(("ss","xl")) else 0,"cell-block":cells,"deck-launcher":2,"fore-gun":1 if disp>1000 and not i.startswith("ss") else 0,
        "pd-mount":2 if disp>1500 else 0,"hangar":2 if i.startswith(("carrier","amphib")) else (1 if disp>3000 and not i.startswith("ss") else 0),"bow-sonar":1},
       {"survivability":min(6,1+disp/4000),"endurance":2},{"structures":2},round(disp*0.08),"shipyard",round(disp/300)))
+    SH[-1]["budgets"]["topside"]=round(usable*0.25)
+    L,B,st=HULL[i]; SH[-1]["hull"]={"length":L,"beam":B,"style":st}
 dump("frames/ships.json", SH)
 dump("frames/aircraft.json", [
  fr("af-light-fighter","Light fighter airframe","aircraft","light-multirole",{"mass":6,"volume":6,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":3,"payload":3},{"structures":3},20,"aerospace-assembly",20),
@@ -178,12 +186,15 @@ dump("frames/munitions.json", [
  fr("mb-medium","Medium munition body","munition","medium",{"mass":0.6,"volume":6,"power":0,"cooling":0},{},{},{"structures":2},0.2,"missile-works",1),
  fr("mb-large","Large munition body","munition","large",{"mass":1.2,"volume":8,"power":0,"cooling":0},{},{},{"structures":2},0.4,"missile-works",2),
  fr("mb-heavy","Heavy munition body","munition","heavy",{"mass":4,"volume":10,"power":0,"cooling":0},{},{},{"structures":3},1,"missile-works",4)])
-dump("frames/ground.json", [
+GR=[
  fr("gc-truck-6x6","6×6 truck chassis","ground","launcher-vehicle",{"mass":18,"volume":4,"power":0,"cooling":2,"crew":6},{"mast-sensor":1,"deck-launcher":2},{"mobility":2},{"structures":1},2,"vehicle-plant",3),
  fr("gc-truck-8x8","8×8 heavy chassis","ground","launcher-vehicle",{"mass":30,"volume":6,"power":0,"cooling":3,"crew":8},{"mast-sensor":1,"deck-launcher":4,"cell-block":1},{"mobility":1},{"structures":2},4,"vehicle-plant",5),
  fr("gc-tracked","Tracked chassis","ground","launcher-vehicle",{"mass":24,"volume":5,"power":0,"cooling":2,"crew":6},{"mast-sensor":1,"deck-launcher":2},{"mobility":1,"survivability":2},{"structures":2},5,"vehicle-plant",6),
  fr("gc-radar-trailer","Radar site vehicle set","ground","radar-unit",{"mass":230,"volume":8,"power":0,"cooling":4,"crew":10},{"mast-sensor":1},{"mobility":0},{"structures":1},2,"vehicle-plant",2),
- fr("gc-fixed-site","Fixed site","ground","fixed-site",{"mass":400,"volume":20,"power":0,"cooling":10,"crew":40},{"mast-sensor":2,"cell-block":4,"pd-mount":2},{"survivability":3},{},30,"vehicle-plant",20)])
+ fr("gc-fixed-site","Fixed site","ground","fixed-site",{"mass":400,"volume":20,"power":0,"cooling":10,"crew":40},{"mast-sensor":2,"cell-block":4,"pd-mount":2},{"survivability":3},{},30,"vehicle-plant",20)]
+for g,(L,B,st) in zip(GR,[(10,2.5,"vehicle"),(12,2.7,"vehicle"),(7.5,3.4,"tracked"),(14,3,"vehicle"),(60,60,"pad")]):
+    g["hull"]={"length":L,"beam":B,"style":st}; g["budgets"]["topside"]=round(g["budgets"]["mass"]*0.5)
+dump("frames/ground.json", GR)
 
 dump("theatres.json", [{"id":i,"name":n} for i,n in [("NATL","North Atlantic"),("ARCT","Arctic"),("MED","Mediterranean"),("RED","Red Sea"),("GULF","Persian Gulf"),
  ("IND","Indian Ocean"),("SCS","South China Sea"),("ECS","East China Sea"),("WPAC","Western Pacific"),("NPAC","North Pacific"),("BLK","Black Sea"),("BALT","Baltic")]])
