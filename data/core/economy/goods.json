@@ -1,0 +1,1694 @@
+[
+ {
+  "id": "crude-oil",
+  "name": "Crude oil",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.0,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "natural-gas",
+  "name": "Natural gas",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "coal",
+  "name": "Coal",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "uranium-ore",
+  "name": "Uranium ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "thorium-ore",
+  "name": "Thorium ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "oil-shale",
+  "name": "Oil shale / bitumen",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "iron-ore",
+  "name": "Iron ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "manganese-ore",
+  "name": "Manganese ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "chromium-ore",
+  "name": "Chromite ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.7,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "nickel-ore",
+  "name": "Nickel ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cobalt-ore",
+  "name": "Cobalt ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 2.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "copper-ore",
+  "name": "Copper ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.0,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "bauxite",
+  "name": "Bauxite",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "zinc-ore",
+  "name": "Zinc ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lead-ore",
+  "name": "Lead ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tin-ore",
+  "name": "Tin ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "titanium-ore",
+  "name": "Titanium minerals (ilmenite, rutile)",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.0,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "vanadium-ore",
+  "name": "Vanadium ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "molybdenum-ore",
+  "name": "Molybdenum ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tungsten-ore",
+  "name": "Tungsten ore",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "magnesium-ore",
+  "name": "Magnesite / magnesium brine",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "silicon-ore",
+  "name": "Quartz (silicon ore)",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "limestone",
+  "name": "Limestone / calcium minerals",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.1,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "phosphate",
+  "name": "Phosphate rock",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "potash",
+  "name": "Potash",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lithium-ore",
+  "name": "Lithium (brine, spodumene)",
+  "tier": 0,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "graphite-ore",
+  "name": "Natural graphite",
+  "tier": 0,
+  "weight": "general",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "rare-earths-ore",
+  "name": "Rare-earth ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tantalum-ore",
+  "name": "Tantalum ore (coltan)",
+  "tier": 0,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "niobium-ore",
+  "name": "Niobium ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "zirconium-ore",
+  "name": "Zircon sand",
+  "tier": 0,
+  "weight": "general",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "beryllium-ore",
+  "name": "Beryl ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "antimony-ore",
+  "name": "Antimony ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pgm-ore",
+  "name": "Platinum-group metal ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 15,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "silver-ore",
+  "name": "Silver ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "gold-ore",
+  "name": "Gold ore",
+  "tier": 0,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "hafnium-crude",
+  "name": "Hafnium (from zirconium) (crude)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "gallium-crude",
+  "name": "Gallium (from alumina) (crude)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "germanium-crude",
+  "name": "Germanium (from zinc and coal ash) (crude)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "indium-crude",
+  "name": "Indium (from zinc) (crude)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tellurium-crude",
+  "name": "Tellurium (from copper) (crude)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "sulfur",
+  "name": "Sulfur",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "fluorspar",
+  "name": "Fluorspar",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "salt",
+  "name": "Salt",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.1,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "silica-sand",
+  "name": "Silica sand",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.1,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "boron",
+  "name": "Boron minerals",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.0,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "helium-raw",
+  "name": "Helium",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "industrial-carbon",
+  "name": "Industrial carbon (petroleum coke, carbon black)",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "natural-rubber",
+  "name": "Natural rubber",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "timber",
+  "name": "Industrial timber / cellulose",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "potable-water",
+  "name": "Potable water",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": false,
+  "class": ""
+ },
+ {
+  "id": "freshwater",
+  "name": "Freshwater",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": false,
+  "class": ""
+ },
+ {
+  "id": "biomass",
+  "name": "Agricultural biomass",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "grain",
+  "name": "Food and feed grains",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "veg-oil",
+  "name": "Vegetable oils",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "animal-products",
+  "name": "Animal products / hides",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "fertilizer-feedstock",
+  "name": "Fertilizer feedstocks",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "biomass-fuel",
+  "name": "Biomass fuels",
+  "tier": 0,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "electricity",
+  "name": "Electricity",
+  "tier": 5,
+  "weight": "grid",
+  "price": 0.1,
+  "storable": false,
+  "class": ""
+ },
+ {
+  "id": "diesel",
+  "name": "Diesel",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "jet-fuel",
+  "name": "Jet fuel",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "naphtha",
+  "name": "Naphtha",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "heavy-fuel",
+  "name": "Heavy fuel oil",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lng",
+  "name": "Liquefied natural gas",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "methane",
+  "name": "Pipeline gas",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.9,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "coke",
+  "name": "Coke",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "shale-oil",
+  "name": "Shale oil",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 0.9,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "uranium-concentrate",
+  "name": "Uranium concentrate",
+  "tier": 1,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "nuclear-fuel",
+  "name": "Nuclear fuel (abstract)",
+  "tier": 3,
+  "weight": "high",
+  "price": 80,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "thorium-concentrate",
+  "name": "Thorium concentrate",
+  "tier": 1,
+  "weight": "general",
+  "price": 10,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lubricants",
+  "name": "Lubricants",
+  "tier": 3,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "iron-concentrate",
+  "name": "Iron concentrate",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 0.4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pig-iron",
+  "name": "Pig iron",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "steel",
+  "name": "Crude steel",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "structural-steel",
+  "name": "Structural steel",
+  "tier": 3,
+  "weight": "bulk",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "alloy-steel",
+  "name": "Alloy steel",
+  "tier": 3,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "armour-steel",
+  "name": "Armour steel",
+  "tier": 3,
+  "weight": "general",
+  "price": 5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ferromanganese",
+  "name": "Ferromanganese",
+  "tier": 2,
+  "weight": "general",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ferrochrome",
+  "name": "Ferrochrome",
+  "tier": 2,
+  "weight": "general",
+  "price": 2.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ferrovanadium",
+  "name": "Ferrovanadium",
+  "tier": 2,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ferromolybdenum",
+  "name": "Ferromolybdenum",
+  "tier": 2,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ferroniobium",
+  "name": "Ferroniobium",
+  "tier": 2,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "nickel-matte",
+  "name": "Nickel matte",
+  "tier": 1,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "nickel-metal",
+  "name": "Nickel",
+  "tier": 2,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cobalt-hydroxide",
+  "name": "Cobalt hydroxide",
+  "tier": 1,
+  "weight": "general",
+  "price": 5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cobalt-metal",
+  "name": "Cobalt",
+  "tier": 2,
+  "weight": "general",
+  "price": 12,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "copper-concentrate",
+  "name": "Copper concentrate",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "copper-cathode",
+  "name": "Copper cathode",
+  "tier": 2,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "copper-products",
+  "name": "Copper wire and products",
+  "tier": 3,
+  "weight": "general",
+  "price": 4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "alumina",
+  "name": "Alumina",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 1,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "aluminium",
+  "name": "Aluminium",
+  "tier": 2,
+  "weight": "general",
+  "price": 2.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "aerospace-aluminium",
+  "name": "Aerospace aluminium alloys",
+  "tier": 3,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "zinc-metal",
+  "name": "Zinc",
+  "tier": 2,
+  "weight": "general",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lead-metal",
+  "name": "Lead",
+  "tier": 2,
+  "weight": "general",
+  "price": 1.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tin-metal",
+  "name": "Tin",
+  "tier": 2,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "solder",
+  "name": "Solder",
+  "tier": 3,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "titanium-tetrachloride",
+  "name": "Titanium tetrachloride",
+  "tier": 1,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "titanium-sponge",
+  "name": "Titanium sponge",
+  "tier": 2,
+  "weight": "general",
+  "price": 10,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "titanium-alloy",
+  "name": "Titanium alloys",
+  "tier": 3,
+  "weight": "general",
+  "price": 18,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "vanadium-pentoxide",
+  "name": "Vanadium pentoxide",
+  "tier": 1,
+  "weight": "general",
+  "price": 5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "mo-concentrate",
+  "name": "Molybdenum concentrate",
+  "tier": 1,
+  "weight": "general",
+  "price": 5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "molybdenum-metal",
+  "name": "Molybdenum",
+  "tier": 2,
+  "weight": "general",
+  "price": 12,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "apt",
+  "name": "Ammonium paratungstate (APT)",
+  "tier": 1,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tungsten-powder",
+  "name": "Tungsten powder",
+  "tier": 2,
+  "weight": "general",
+  "price": 15,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tungsten-carbide",
+  "name": "Tungsten carbide",
+  "tier": 3,
+  "weight": "general",
+  "price": 25,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tungsten-heavy-alloy",
+  "name": "Tungsten heavy alloy",
+  "tier": 3,
+  "weight": "general",
+  "price": 22,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "magnesium-metal",
+  "name": "Magnesium",
+  "tier": 2,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "metallurgical-silicon",
+  "name": "Metallurgical silicon",
+  "tier": 2,
+  "weight": "general",
+  "price": 2.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "polysilicon",
+  "name": "Polysilicon (high-purity silicon feedstock)",
+  "tier": 3,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "silicon-wafers",
+  "name": "Silicon wafers",
+  "tier": 3,
+  "weight": "high",
+  "price": 60,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "superalloy",
+  "name": "Nickel superalloys",
+  "tier": 3,
+  "weight": "general",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lithium-carbonate",
+  "name": "Lithium carbonate",
+  "tier": 2,
+  "weight": "general",
+  "price": 12,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lithium-hydroxide",
+  "name": "Lithium hydroxide",
+  "tier": 3,
+  "weight": "general",
+  "price": 15,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "purified-graphite",
+  "name": "Purified graphite",
+  "tier": 2,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "re-concentrate",
+  "name": "Rare-earth concentrate",
+  "tier": 1,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "re-oxides",
+  "name": "Separated rare-earth oxides",
+  "tier": 2,
+  "weight": "general",
+  "price": 25,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "re-metals",
+  "name": "Rare-earth metals",
+  "tier": 3,
+  "weight": "general",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tantalum-powder",
+  "name": "Tantalum powder",
+  "tier": 2,
+  "weight": "general",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "niobium-concentrate",
+  "name": "Niobium concentrate",
+  "tier": 1,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "zirconium-metal",
+  "name": "Zirconium",
+  "tier": 2,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "hafnium-metal",
+  "name": "Hafnium",
+  "tier": 3,
+  "weight": "high",
+  "price": 200,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "gallium-metal",
+  "name": "High-purity gallium",
+  "tier": 3,
+  "weight": "high",
+  "price": 120,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "germanium-metal",
+  "name": "Germanium",
+  "tier": 3,
+  "weight": "high",
+  "price": 150,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "indium-metal",
+  "name": "Indium",
+  "tier": 3,
+  "weight": "high",
+  "price": 90,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "tellurium-metal",
+  "name": "Tellurium",
+  "tier": 3,
+  "weight": "high",
+  "price": 70,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "beryllium-metal",
+  "name": "Beryllium",
+  "tier": 3,
+  "weight": "high",
+  "price": 150,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "antimony-metal",
+  "name": "Antimony",
+  "tier": 2,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pgm-refined",
+  "name": "Refined platinum-group metals",
+  "tier": 3,
+  "weight": "high",
+  "price": 300,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "silver-metal",
+  "name": "Silver",
+  "tier": 2,
+  "weight": "high",
+  "price": 60,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "gold-metal",
+  "name": "Gold",
+  "tier": 2,
+  "weight": "high",
+  "price": 400,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "sulfuric-acid",
+  "name": "Sulfuric acid",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "hydrofluoric-acid",
+  "name": "Hydrofluoric acid",
+  "tier": 2,
+  "weight": "general",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "fluorochemicals",
+  "name": "Fluorochemicals",
+  "tier": 3,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "chlorine",
+  "name": "Chlorine",
+  "tier": 2,
+  "weight": "general",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "caustic-soda",
+  "name": "Caustic soda",
+  "tier": 2,
+  "weight": "general",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "industrial-gases",
+  "name": "Industrial gases (oxygen, nitrogen, argon)",
+  "tier": 3,
+  "weight": "general",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "helium-gas",
+  "name": "Purified helium",
+  "tier": 3,
+  "weight": "high",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "specialty-chemicals",
+  "name": "Specialty chemical feedstocks",
+  "tier": 3,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "electronic-chemicals",
+  "name": "Semiconductor-grade materials",
+  "tier": 3,
+  "weight": "high",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "boron-compounds",
+  "name": "Boron compounds",
+  "tier": 2,
+  "weight": "general",
+  "price": 4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ceramic-feedstock",
+  "name": "Ceramic / mineral feedstocks",
+  "tier": 2,
+  "weight": "general",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "technical-ceramics",
+  "name": "Technical ceramics",
+  "tier": 3,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "glass",
+  "name": "Glass",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "optical-glass",
+  "name": "Optical glass",
+  "tier": 3,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ir-optics",
+  "name": "Infrared optics",
+  "tier": 4,
+  "weight": "high",
+  "price": 120,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "high-purity-metals",
+  "name": "High-purity metals",
+  "tier": 3,
+  "weight": "high",
+  "price": 60,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "lime",
+  "name": "Lime",
+  "tier": 1,
+  "weight": "bulk",
+  "price": 0.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cement",
+  "name": "Cement",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "fertilizer",
+  "name": "Fertilizer",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ammonia",
+  "name": "Ammonia",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "polymers",
+  "name": "Polymers and resins",
+  "tier": 3,
+  "weight": "general",
+  "price": 2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pan-precursor",
+  "name": "Carbon fibre precursor",
+  "tier": 3,
+  "weight": "general",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "carbon-fibre",
+  "name": "Carbon fibre",
+  "tier": 3,
+  "weight": "general",
+  "price": 30,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "composites",
+  "name": "Composite structures material",
+  "tier": 3,
+  "weight": "general",
+  "price": 35,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "rubber-goods",
+  "name": "Rubber goods and seals",
+  "tier": 3,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pulp",
+  "name": "Pulp and cellulose",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "sawn-timber",
+  "name": "Construction timber",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 0.5,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "energetics",
+  "name": "Energetics (abstract)",
+  "tier": 3,
+  "weight": "general",
+  "price": 15,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "biofuel",
+  "name": "Biofuel",
+  "tier": 2,
+  "weight": "bulk",
+  "price": 1.2,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "food",
+  "name": "Food",
+  "tier": 4,
+  "weight": "bulk",
+  "price": 1,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "consumer-goods",
+  "name": "Consumer goods",
+  "tier": 5,
+  "weight": "general",
+  "price": 3,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "chips",
+  "name": "Integrated circuits",
+  "tier": 4,
+  "weight": "high",
+  "price": 80,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "power-electronics",
+  "name": "Power electronics",
+  "tier": 4,
+  "weight": "high",
+  "price": 30,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "rf-modules",
+  "name": "RF modules (compound semiconductors)",
+  "tier": 4,
+  "weight": "high",
+  "price": 150,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "ir-sensors",
+  "name": "Infrared sensor elements",
+  "tier": 4,
+  "weight": "high",
+  "price": 200,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "capacitors",
+  "name": "High-reliability capacitors",
+  "tier": 4,
+  "weight": "high",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "pcbs",
+  "name": "Circuit boards",
+  "tier": 4,
+  "weight": "general",
+  "price": 10,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cable-harness",
+  "name": "Cabling and harnesses",
+  "tier": 4,
+  "weight": "general",
+  "price": 4,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "batteries",
+  "name": "Battery cells",
+  "tier": 4,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "magnets",
+  "name": "Permanent magnets",
+  "tier": 4,
+  "weight": "general",
+  "price": 30,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "electric-motors",
+  "name": "Electric motors",
+  "tier": 4,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "precision-parts",
+  "name": "Precision machined parts",
+  "tier": 4,
+  "weight": "general",
+  "price": 25,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "bearings",
+  "name": "Bearings",
+  "tier": 4,
+  "weight": "general",
+  "price": 10,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "actuators",
+  "name": "Actuators",
+  "tier": 4,
+  "weight": "general",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "hydraulics",
+  "name": "Hydraulic systems",
+  "tier": 4,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "turbine-parts",
+  "name": "Hot-section turbine parts",
+  "tier": 4,
+  "weight": "high",
+  "price": 120,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "fuel-systems",
+  "name": "Fuel systems",
+  "tier": 4,
+  "weight": "general",
+  "price": 25,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "displays",
+  "name": "Displays",
+  "tier": 4,
+  "weight": "general",
+  "price": 30,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "armour-plate",
+  "name": "Armour plate and panels",
+  "tier": 4,
+  "weight": "bulk",
+  "price": 6,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "heavy-machinery",
+  "name": "Heavy machinery",
+  "tier": 4,
+  "weight": "bulk",
+  "price": 12,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "electrical-equipment",
+  "name": "Electrical equipment",
+  "tier": 4,
+  "weight": "general",
+  "price": 10,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "machine-tools",
+  "name": "Machine tools",
+  "tier": 4,
+  "weight": "general",
+  "price": 60,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "cutting-tools",
+  "name": "Carbide cutting tools",
+  "tier": 4,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "litho-tools",
+  "name": "Lithography and fab tools",
+  "tier": 4,
+  "weight": "high",
+  "price": 400,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "spares-general",
+  "name": "General spares",
+  "tier": 5,
+  "weight": "general",
+  "price": 8,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "spares-aero",
+  "name": "Aviation spares",
+  "tier": 5,
+  "weight": "general",
+  "price": 40,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "spares-naval",
+  "name": "Naval spares",
+  "tier": 5,
+  "weight": "general",
+  "price": 20,
+  "storable": true,
+  "class": ""
+ },
+ {
+  "id": "spares-electronic",
+  "name": "Electronic spares",
+  "tier": 5,
+  "weight": "high",
+  "price": 60,
+  "storable": true,
+  "class": ""
+ }
+]

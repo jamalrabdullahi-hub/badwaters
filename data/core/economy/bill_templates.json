@@ -1,0 +1,283 @@
+{
+ "families": {
+  "propulsion": {
+   "facility": "engine-works",
+   "goods": {
+    "turbine-parts": 0.6,
+    "precision-parts": 0.8,
+    "fuel-systems": 0.4,
+    "bearings": 0.3,
+    "chips": 0.05,
+    "cable-harness": 0.2
+   }
+  },
+  "power": {
+   "facility": "heavy-engineering",
+   "goods": {
+    "electrical-equipment": 1.2,
+    "power-electronics": 0.3,
+    "copper-products": 0.8,
+    "batteries": 0.2
+   }
+  },
+  "sensors": {
+   "facility": "radar-factory",
+   "goods": {
+    "rf-modules": 0.3,
+    "chips": 0.15,
+    "power-electronics": 0.3,
+    "pcbs": 0.5,
+    "cable-harness": 0.3,
+    "technical-ceramics": 0.2,
+    "ir-sensors": 0.05
+   }
+  },
+  "computing": {
+   "facility": "avionics-factory",
+   "goods": {
+    "chips": 0.4,
+    "pcbs": 0.6,
+    "power-electronics": 0.2,
+    "displays": 0.2,
+    "cable-harness": 0.2
+   }
+  },
+  "comms": {
+   "facility": "avionics-factory",
+   "goods": {
+    "rf-modules": 0.15,
+    "chips": 0.2,
+    "pcbs": 0.5,
+    "cable-harness": 0.3
+   }
+  },
+  "navigation": {
+   "facility": "avionics-factory",
+   "goods": {
+    "chips": 0.3,
+    "precision-parts": 0.2,
+    "pcbs": 0.4,
+    "optical-glass": 0.1
+   }
+  },
+  "guidance": {
+   "facility": "avionics-factory",
+   "goods": {
+    "chips": 0.3,
+    "precision-parts": 0.3,
+    "actuators": 0.2,
+    "ir-optics": 0.05,
+    "pcbs": 0.3
+   }
+  },
+  "ew": {
+   "facility": "avionics-factory",
+   "goods": {
+    "rf-modules": 0.25,
+    "chips": 0.25,
+    "pcbs": 0.4,
+    "power-electronics": 0.3
+   }
+  },
+  "payload": {
+   "facility": "munitions-plant",
+   "goods": {
+    "energetics": 1.0,
+    "alloy-steel": 0.8,
+    "tungsten-heavy-alloy": 0.05,
+    "precision-parts": 0.2
+   }
+  },
+  "fuzing": {
+   "facility": "munitions-plant",
+   "goods": {
+    "chips": 0.1,
+    "pcbs": 0.2,
+    "precision-parts": 0.2,
+    "batteries": 0.1
+   }
+  },
+  "interfaces": {
+   "facility": "machine-works",
+   "goods": {
+    "aerospace-aluminium": 0.6,
+    "precision-parts": 0.4,
+    "actuators": 0.2,
+    "cable-harness": 0.2
+   }
+  },
+  "structure": {
+   "facility": "heavy-engineering",
+   "goods": {
+    "structural-steel": 2.0,
+    "cable-harness": 0.2,
+    "polymers": 0.3
+   }
+  },
+  "materials": {
+   "facility": "rolling-mill",
+   "goods": {
+    "composites": 0.4,
+    "technical-ceramics": 0.3,
+    "alloy-steel": 0.4
+   }
+  },
+  "thermal": {
+   "facility": "heavy-engineering",
+   "goods": {
+    "copper-products": 0.6,
+    "aluminium": 0.6,
+    "electric-motors": 0.3,
+    "fluorochemicals": 0.1
+   }
+  },
+  "reliability": {
+   "facility": "electronics-plant",
+   "goods": {
+    "spares-electronic": 0.1
+   }
+  },
+  "manufacturing": {
+   "facility": "tooling-plant",
+   "goods": {
+    "machine-tools": 0.05
+   }
+  },
+  "testing": {
+   "facility": "electronics-plant",
+   "goods": {
+    "chips": 0.02
+   }
+  },
+  "doctrine": {
+   "facility": "",
+   "goods": {}
+  }
+ },
+ "frames": {
+  "ship": {
+   "facility": "shipyard",
+   "goods": {
+    "structural-steel": 6,
+    "armour-steel": 0.4,
+    "electric-motors": 0.2,
+    "cable-harness": 0.4,
+    "hydraulics": 0.2,
+    "polymers": 0.3
+   },
+   "per": "mass",
+   "unit": 10,
+   "spares": "spares-naval"
+  },
+  "aircraft": {
+   "facility": "aerospace-assembly",
+   "goods": {
+    "aerospace-aluminium": 4,
+    "composites": 3,
+    "titanium-alloy": 1.5,
+    "actuators": 1.5,
+    "hydraulics": 0.8,
+    "fuel-systems": 0.6,
+    "cable-harness": 1.2,
+    "rubber-goods": 0.3
+   },
+   "per": "mass",
+   "unit": 1,
+   "spares": "spares-aero"
+  },
+  "munition": {
+   "facility": "missile-works",
+   "goods": {
+    "aerospace-aluminium": 1.5,
+    "composites": 0.8,
+    "precision-parts": 0.5,
+    "actuators": 0.4,
+    "cable-harness": 0.3
+   },
+   "per": "unit",
+   "unit": 1,
+   "spares": "spares-electronic"
+  },
+  "ground": {
+   "facility": "vehicle-plant",
+   "goods": {
+    "structural-steel": 3,
+    "armour-steel": 0.8,
+    "heavy-machinery": 0.5,
+    "rubber-goods": 0.6,
+    "hydraulics": 0.4,
+    "cable-harness": 0.4
+   },
+   "per": "mass",
+   "unit": 10,
+   "spares": "spares-general"
+  }
+ },
+ "parts": {
+  "Guns": {
+   "alloy-steel": 6,
+   "precision-parts": 1
+  },
+  "Launchers": {
+   "structural-steel": 5,
+   "actuators": 0.5
+  },
+  "Superstructure": {
+   "structural-steel": 6,
+   "aluminium": 2
+  },
+  "Sensors": {
+   "rf-modules": 0.2,
+   "structural-steel": 3
+  },
+  "Masts": {
+   "structural-steel": 5
+  },
+  "Aviation": {
+   "structural-steel": 5
+  },
+  "Boats": {
+   "aluminium": 4,
+   "polymers": 2
+  },
+  "Point defence": {
+   "alloy-steel": 4,
+   "rf-modules": 0.1,
+   "actuators": 0.5
+  },
+  "Airframe": {
+   "aerospace-aluminium": 5,
+   "composites": 3
+  },
+  "Engines": {
+   "turbine-parts": 1,
+   "precision-parts": 2
+  },
+  "Landing gear": {
+   "alloy-steel": 4,
+   "hydraulics": 2
+  },
+  "Stores": {
+   "aerospace-aluminium": 4
+  },
+  "Vehicle": {
+   "structural-steel": 5,
+   "rubber-goods": 1
+  },
+  "Pressure hull": {
+   "alloy-steel": 8
+  },
+  "Sub propulsion": {
+   "batteries": 1,
+   "electric-motors": 1
+  },
+  "Accommodation": {
+   "structural-steel": 3,
+   "polymers": 1
+  }
+ },
+ "defaultPart": {
+  "structural-steel": 4,
+  "cable-harness": 0.3
+ }
+}

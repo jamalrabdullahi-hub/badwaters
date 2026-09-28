@@ -1,0 +1,41 @@
+{
+ "defenceShareDefault": 0.02,
+ "depression": {
+  "windowMonths": 12,
+  "gdpDrop": -0.1,
+  "warOrEmbargoDrop": -0.25,
+  "crisisStability": 35,
+  "civilWarStability": 15,
+  "recoverStability": 50
+ },
+ "stability": {
+  "trendWeight": 60,
+  "shortageWeight": 25,
+  "unemploymentWeight": 15,
+  "warRally": 5,
+  "embargoPenalty": 5,
+  "monthlyPull": 0.15
+ },
+ "gdp": {
+  "civilianShare": 0.85,
+  "trendGrowthAnnual": 0.02,
+  "lossValueFactor": 1.0
+ },
+ "transport": {
+  "bulk": 1.0,
+  "general": 0.6,
+  "high": 0.2,
+  "grid": 0.0
+ },
+ "maintenance": {
+  "readinessFloor": 0.2,
+  "restorePerMonth": 0.08
+ },
+ "civilianBasket": {
+  "food": 1.0,
+  "consumer-goods": 0.6,
+  "electricity": 1.5,
+  "diesel": 0.4,
+  "potable-water": 1.0
+ }
+}

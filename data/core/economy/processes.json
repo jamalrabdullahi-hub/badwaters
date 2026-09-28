@@ -1,0 +1,3186 @@
+[
+ {
+  "id": "extract-crude-oil",
+  "facility": "oil-field",
+  "inputs": {},
+  "outputs": {
+   "crude-oil": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "crude-oil",
+  "substitutes": []
+ },
+ {
+  "id": "extract-natural-gas",
+  "facility": "gas-field",
+  "inputs": {},
+  "outputs": {
+   "natural-gas": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "natural-gas",
+  "substitutes": []
+ },
+ {
+  "id": "extract-coal",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "coal": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "coal",
+  "substitutes": []
+ },
+ {
+  "id": "extract-uranium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "uranium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "uranium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-thorium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "thorium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "thorium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-oil-shale",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "oil-shale": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "oil-shale",
+  "substitutes": []
+ },
+ {
+  "id": "extract-iron-ore",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "iron-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "iron-ore",
+  "substitutes": []
+ },
+ {
+  "id": "extract-manganese",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "manganese-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "manganese",
+  "substitutes": []
+ },
+ {
+  "id": "extract-chromium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "chromium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "chromium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-nickel",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "nickel-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "nickel",
+  "substitutes": []
+ },
+ {
+  "id": "extract-cobalt",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "cobalt-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "cobalt",
+  "substitutes": []
+ },
+ {
+  "id": "extract-copper",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "copper-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "copper",
+  "substitutes": []
+ },
+ {
+  "id": "extract-bauxite",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "bauxite": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "bauxite",
+  "substitutes": []
+ },
+ {
+  "id": "extract-zinc",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "zinc-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "zinc",
+  "substitutes": []
+ },
+ {
+  "id": "extract-lead",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "lead-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "lead",
+  "substitutes": []
+ },
+ {
+  "id": "extract-tin",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "tin-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "tin",
+  "substitutes": []
+ },
+ {
+  "id": "extract-titanium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "titanium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "titanium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-vanadium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "vanadium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "vanadium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-molybdenum",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "molybdenum-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "molybdenum",
+  "substitutes": []
+ },
+ {
+  "id": "extract-tungsten",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "tungsten-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "tungsten",
+  "substitutes": []
+ },
+ {
+  "id": "extract-magnesium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "magnesium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "magnesium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-silicon",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "silicon-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "silicon",
+  "substitutes": []
+ },
+ {
+  "id": "extract-limestone",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "limestone": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "limestone",
+  "substitutes": []
+ },
+ {
+  "id": "extract-phosphate",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "phosphate": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "phosphate",
+  "substitutes": []
+ },
+ {
+  "id": "extract-potash",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "potash": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "potash",
+  "substitutes": []
+ },
+ {
+  "id": "extract-lithium",
+  "facility": "brine-works",
+  "inputs": {},
+  "outputs": {
+   "lithium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "lithium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-graphite",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "graphite-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "graphite",
+  "substitutes": []
+ },
+ {
+  "id": "extract-rare-earths",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "rare-earths-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "rare-earths",
+  "substitutes": []
+ },
+ {
+  "id": "extract-tantalum",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "tantalum-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "tantalum",
+  "substitutes": []
+ },
+ {
+  "id": "extract-niobium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "niobium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "niobium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-zirconium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "zirconium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "zirconium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-beryllium",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "beryllium-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "beryllium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-antimony",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "antimony-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "antimony",
+  "substitutes": []
+ },
+ {
+  "id": "extract-pgm",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "pgm-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "pgm",
+  "substitutes": []
+ },
+ {
+  "id": "extract-silver",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "silver-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "silver",
+  "substitutes": []
+ },
+ {
+  "id": "extract-gold",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "gold-ore": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "gold",
+  "substitutes": []
+ },
+ {
+  "id": "extract-sulfur",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "sulfur": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "sulfur",
+  "substitutes": []
+ },
+ {
+  "id": "extract-fluorspar",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "fluorspar": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "fluorspar",
+  "substitutes": []
+ },
+ {
+  "id": "extract-salt",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "salt": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "salt",
+  "substitutes": []
+ },
+ {
+  "id": "extract-silica-sand",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "silica-sand": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "silica-sand",
+  "substitutes": []
+ },
+ {
+  "id": "extract-boron",
+  "facility": "mine",
+  "inputs": {},
+  "outputs": {
+   "boron": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "boron",
+  "substitutes": []
+ },
+ {
+  "id": "extract-helium",
+  "facility": "gas-field",
+  "inputs": {},
+  "outputs": {
+   "helium-raw": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "helium",
+  "substitutes": []
+ },
+ {
+  "id": "extract-natural-rubber",
+  "facility": "farm",
+  "inputs": {},
+  "outputs": {
+   "natural-rubber": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "natural-rubber",
+  "substitutes": []
+ },
+ {
+  "id": "extract-timber",
+  "facility": "forest",
+  "inputs": {},
+  "outputs": {
+   "timber": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "timber",
+  "substitutes": []
+ },
+ {
+  "id": "extract-potable-water",
+  "facility": "water-works",
+  "inputs": {},
+  "outputs": {
+   "potable-water": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "potable-water",
+  "substitutes": []
+ },
+ {
+  "id": "extract-freshwater",
+  "facility": "water-works",
+  "inputs": {},
+  "outputs": {
+   "freshwater": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "freshwater",
+  "substitutes": []
+ },
+ {
+  "id": "extract-biomass",
+  "facility": "farm",
+  "inputs": {},
+  "outputs": {
+   "biomass": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "biomass",
+  "substitutes": []
+ },
+ {
+  "id": "extract-veg-oil",
+  "facility": "farm",
+  "inputs": {},
+  "outputs": {
+   "veg-oil": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "veg-oil",
+  "substitutes": []
+ },
+ {
+  "id": "extract-animal-products",
+  "facility": "farm",
+  "inputs": {},
+  "outputs": {
+   "animal-products": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "animal-products",
+  "substitutes": []
+ },
+ {
+  "id": "extract-biomass-fuel",
+  "facility": "farm",
+  "inputs": {},
+  "outputs": {
+   "biomass-fuel": 10
+  },
+  "energy": 1.0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "biomass-fuel",
+  "substitutes": []
+ },
+ {
+  "id": "refine-crude",
+  "facility": "oil-refinery",
+  "inputs": {
+   "crude-oil": 10
+  },
+  "outputs": {
+   "diesel": 3.5,
+   "jet-fuel": 2,
+   "naphtha": 2,
+   "heavy-fuel": 1.5,
+   "industrial-carbon": 0.5,
+   "sulfur": 0.3,
+   "lubricants": 0.2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "crude-oil",
+    "alt": "shale-oil",
+    "ratio": 1.1,
+    "penalty": 0.1
+   }
+  ]
+ },
+ {
+  "id": "process-gas",
+  "facility": "gas-plant",
+  "inputs": {
+   "natural-gas": 10
+  },
+  "outputs": {
+   "methane": 8,
+   "sulfur": 0.3
+  },
+  "energy": 1.5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "liquefy-gas",
+  "facility": "gas-plant",
+  "inputs": {
+   "methane": 10
+  },
+  "outputs": {
+   "lng": 9
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "recover-helium",
+  "facility": "gas-plant",
+  "inputs": {
+   "helium-raw": 10
+  },
+  "outputs": {
+   "helium-gas": 3
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {
+   "power-systems": 2
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "retort-shale",
+  "facility": "shale-retort",
+  "inputs": {
+   "oil-shale": 10
+  },
+  "outputs": {
+   "shale-oil": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-coke",
+  "facility": "coke-plant",
+  "inputs": {
+   "coal": 10
+  },
+  "outputs": {
+   "coke": 7
+  },
+  "energy": 1,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "mill-uranium",
+  "facility": "concentrator",
+  "inputs": {
+   "uranium-ore": 10
+  },
+  "outputs": {
+   "uranium-concentrate": 1
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "mill-thorium",
+  "facility": "concentrator",
+  "inputs": {
+   "thorium-ore": 10
+  },
+  "outputs": {
+   "thorium-concentrate": 1
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-nuclear-fuel",
+  "facility": "nuclear-fuel-plant",
+  "inputs": {
+   "uranium-concentrate": 4,
+   "fluorochemicals": 1,
+   "zirconium-metal": 0.5
+  },
+  "outputs": {
+   "nuclear-fuel": 1
+  },
+  "energy": 10,
+  "labour": {},
+  "tech": {
+   "power-systems": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "uranium-concentrate",
+    "alt": "thorium-concentrate",
+    "ratio": 1.3,
+    "penalty": 0.3
+   }
+  ]
+ },
+ {
+  "id": "gen-coal",
+  "facility": "power-coal",
+  "inputs": {
+   "coal": 6
+  },
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "gen-gas",
+  "facility": "power-gas",
+  "inputs": {
+   "methane": 4
+  },
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "gen-oil",
+  "facility": "power-oil",
+  "inputs": {
+   "heavy-fuel": 4
+  },
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "gen-hydro",
+  "facility": "power-hydro",
+  "inputs": {},
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "gen-nuclear",
+  "facility": "power-nuclear",
+  "inputs": {
+   "nuclear-fuel": 0.05
+  },
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "gen-renewable",
+  "facility": "power-renewable",
+  "inputs": {},
+  "outputs": {
+   "electricity": 10
+  },
+  "energy": 0,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "concentrate-iron",
+  "facility": "concentrator",
+  "inputs": {
+   "iron-ore": 10
+  },
+  "outputs": {
+   "iron-concentrate": 6
+  },
+  "energy": 1,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-iron",
+  "facility": "blast-furnace",
+  "inputs": {
+   "iron-concentrate": 10,
+   "coke": 5,
+   "lime": 2
+  },
+  "outputs": {
+   "pig-iron": 8
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "coke",
+    "alt": "methane",
+    "ratio": 1.5,
+    "penalty": 0.1
+   }
+  ]
+ },
+ {
+  "id": "make-steel",
+  "facility": "steelworks",
+  "inputs": {
+   "pig-iron": 10,
+   "industrial-gases": 1,
+   "lime": 1
+  },
+  "outputs": {
+   "steel": 9
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "roll-structural",
+  "facility": "rolling-mill",
+  "inputs": {
+   "steel": 10
+  },
+  "outputs": {
+   "structural-steel": 9
+  },
+  "energy": 1.5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-alloy-steel",
+  "facility": "rolling-mill",
+  "inputs": {
+   "steel": 10,
+   "ferromanganese": 0.5,
+   "ferrochrome": 1,
+   "nickel-metal": 0.5,
+   "ferromolybdenum": 0.2,
+   "ferrovanadium": 0.2
+  },
+  "outputs": {
+   "alloy-steel": 9
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {
+   "materials": 2
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "ferrovanadium",
+    "alt": "ferroniobium",
+    "ratio": 1,
+    "penalty": 0.05
+   }
+  ]
+ },
+ {
+  "id": "make-armour-steel",
+  "facility": "rolling-mill",
+  "inputs": {
+   "alloy-steel": 10,
+   "nickel-metal": 0.5,
+   "ferromolybdenum": 0.3
+  },
+  "outputs": {
+   "armour-steel": 9
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-mn",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "manganese-ore": 10,
+   "coke": 3
+  },
+  "outputs": {
+   "ferromanganese": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-cr",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "chromium-ore": 10,
+   "coke": 3
+  },
+  "outputs": {
+   "ferrochrome": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-v",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "vanadium-pentoxide": 5,
+   "aluminium": 1
+  },
+  "outputs": {
+   "ferrovanadium": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-mo",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "mo-concentrate": 5
+  },
+  "outputs": {
+   "ferromolybdenum": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-nb",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "niobium-concentrate": 5,
+   "aluminium": 1
+  },
+  "outputs": {
+   "ferroniobium": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-nickel",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "nickel-ore": 10,
+   "sulfuric-acid": 1
+  },
+  "outputs": {
+   "nickel-matte": 3
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-nickel",
+  "facility": "hydromet-plant",
+  "inputs": {
+   "nickel-matte": 5,
+   "sulfuric-acid": 1
+  },
+  "outputs": {
+   "nickel-metal": 4,
+   "cobalt-hydroxide": 0.2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "leach-cobalt",
+  "facility": "hydromet-plant",
+  "inputs": {
+   "cobalt-ore": 10,
+   "sulfuric-acid": 2
+  },
+  "outputs": {
+   "cobalt-hydroxide": 2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-cobalt",
+  "facility": "hydromet-plant",
+  "inputs": {
+   "cobalt-hydroxide": 5
+  },
+  "outputs": {
+   "cobalt-metal": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "materials": 2
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "concentrate-copper",
+  "facility": "concentrator",
+  "inputs": {
+   "copper-ore": 10
+  },
+  "outputs": {
+   "copper-concentrate": 3
+  },
+  "energy": 1.5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-copper",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "copper-concentrate": 10,
+   "industrial-gases": 1
+  },
+  "outputs": {
+   "copper-cathode": 8,
+   "sulfuric-acid": 3,
+   "tellurium-crude": 0.02,
+   "silver-metal": 0.01
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "draw-copper",
+  "facility": "rolling-mill",
+  "inputs": {
+   "copper-cathode": 10
+  },
+  "outputs": {
+   "copper-products": 9
+  },
+  "energy": 1.5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-bauxite",
+  "facility": "alumina-refinery",
+  "inputs": {
+   "bauxite": 10,
+   "caustic-soda": 1
+  },
+  "outputs": {
+   "alumina": 4,
+   "gallium-crude": 0.01
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-aluminium",
+  "facility": "aluminium-smelter",
+  "inputs": {
+   "alumina": 10,
+   "industrial-carbon": 2,
+   "fluorochemicals": 0.2
+  },
+  "outputs": {
+   "aluminium": 5
+  },
+  "energy": 12,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "alloy-aero-aluminium",
+  "facility": "rolling-mill",
+  "inputs": {
+   "aluminium": 10,
+   "magnesium-metal": 0.5,
+   "copper-cathode": 0.5,
+   "lithium-carbonate": 0.1
+  },
+  "outputs": {
+   "aerospace-aluminium": 9
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-zinc",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "zinc-ore": 10,
+   "sulfuric-acid": 1
+  },
+  "outputs": {
+   "zinc-metal": 5,
+   "indium-crude": 0.02,
+   "germanium-crude": 0.01
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-lead",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "lead-ore": 10
+  },
+  "outputs": {
+   "lead-metal": 6,
+   "silver-metal": 0.02,
+   "antimony-metal": 0.05
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-tin",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "tin-ore": 10
+  },
+  "outputs": {
+   "tin-metal": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-solder",
+  "facility": "rolling-mill",
+  "inputs": {
+   "tin-metal": 6,
+   "lead-metal": 2,
+   "silver-metal": 0.1
+  },
+  "outputs": {
+   "solder": 8
+  },
+  "energy": 1,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "lead-metal",
+    "alt": "tin-metal",
+    "ratio": 1,
+    "penalty": 0.05
+   }
+  ]
+ },
+ {
+  "id": "chlorinate-titanium",
+  "facility": "titanium-plant",
+  "inputs": {
+   "titanium-ore": 10,
+   "chlorine": 4,
+   "industrial-carbon": 1
+  },
+  "outputs": {
+   "titanium-tetrachloride": 5
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "reduce-titanium",
+  "facility": "titanium-plant",
+  "inputs": {
+   "titanium-tetrachloride": 10,
+   "magnesium-metal": 3
+  },
+  "outputs": {
+   "titanium-sponge": 3
+  },
+  "energy": 10,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "alloy-titanium",
+  "facility": "superalloy-mill",
+  "inputs": {
+   "titanium-sponge": 10,
+   "aluminium": 0.6,
+   "ferrovanadium": 0.4
+  },
+  "outputs": {
+   "titanium-alloy": 9
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "roast-vanadium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "vanadium-ore": 10
+  },
+  "outputs": {
+   "vanadium-pentoxide": 2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "concentrate-mo",
+  "facility": "concentrator",
+  "inputs": {
+   "molybdenum-ore": 10
+  },
+  "outputs": {
+   "mo-concentrate": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-mo",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "mo-concentrate": 5
+  },
+  "outputs": {
+   "molybdenum-metal": 3
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-apt",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "tungsten-ore": 10,
+   "caustic-soda": 1
+  },
+  "outputs": {
+   "apt": 2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "reduce-tungsten",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "apt": 5,
+   "industrial-gases": 1
+  },
+  "outputs": {
+   "tungsten-powder": 3
+  },
+  "energy": 5,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-carbide",
+  "facility": "tooling-plant",
+  "inputs": {
+   "tungsten-powder": 8,
+   "industrial-carbon": 1,
+   "cobalt-metal": 0.8
+  },
+  "outputs": {
+   "tungsten-carbide": 8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5,
+   "manufacturing": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-heavy-alloy",
+  "facility": "superalloy-mill",
+  "inputs": {
+   "tungsten-powder": 9,
+   "nickel-metal": 0.7,
+   "ferromanganese": 0.2
+  },
+  "outputs": {
+   "tungsten-heavy-alloy": 9
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-magnesium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "magnesium-ore": 10
+  },
+  "outputs": {
+   "magnesium-metal": 2
+  },
+  "energy": 12,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-silicon",
+  "facility": "ferroalloy-plant",
+  "inputs": {
+   "silicon-ore": 10,
+   "industrial-carbon": 3
+  },
+  "outputs": {
+   "metallurgical-silicon": 4
+  },
+  "energy": 10,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "purify-silicon",
+  "facility": "polysilicon-plant",
+  "inputs": {
+   "metallurgical-silicon": 10,
+   "chlorine": 2
+  },
+  "outputs": {
+   "polysilicon": 6
+  },
+  "energy": 20,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "grow-wafers",
+  "facility": "wafer-plant",
+  "inputs": {
+   "polysilicon": 10,
+   "technical-ceramics": 0.5
+  },
+  "outputs": {
+   "silicon-wafers": 6
+  },
+  "energy": 10,
+  "labour": {},
+  "tech": {
+   "materials": 7,
+   "manufacturing": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-superalloy",
+  "facility": "superalloy-mill",
+  "inputs": {
+   "nickel-metal": 6,
+   "cobalt-metal": 1,
+   "ferrochrome": 1.5,
+   "ferroniobium": 0.3,
+   "molybdenum-metal": 0.4,
+   "tungsten-powder": 0.3,
+   "re-metals": 0.05
+  },
+  "outputs": {
+   "superalloy": 8
+  },
+  "energy": 8,
+  "labour": {},
+  "tech": {
+   "materials": 7,
+   "jet-engines": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "cobalt-metal",
+    "alt": "nickel-metal",
+    "ratio": 1.2,
+    "penalty": 0.15
+   }
+  ]
+ },
+ {
+  "id": "make-lithium-carbonate",
+  "facility": "battery-materials",
+  "inputs": {
+   "lithium-ore": 10,
+   "sulfuric-acid": 1
+  },
+  "outputs": {
+   "lithium-carbonate": 2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-lithium-hydroxide",
+  "facility": "battery-materials",
+  "inputs": {
+   "lithium-carbonate": 5,
+   "caustic-soda": 1
+  },
+  "outputs": {
+   "lithium-hydroxide": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "purify-graphite",
+  "facility": "battery-materials",
+  "inputs": {
+   "graphite-ore": 10,
+   "hydrofluoric-acid": 0.5
+  },
+  "outputs": {
+   "purified-graphite": 4
+  },
+  "energy": 5,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "graphite-ore",
+    "alt": "industrial-carbon",
+    "ratio": 1.2,
+    "penalty": 0.1
+   }
+  ]
+ },
+ {
+  "id": "concentrate-re",
+  "facility": "concentrator",
+  "inputs": {
+   "rare-earths-ore": 10
+  },
+  "outputs": {
+   "re-concentrate": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "separate-re",
+  "facility": "re-separation",
+  "inputs": {
+   "re-concentrate": 5,
+   "specialty-chemicals": 2,
+   "sulfuric-acid": 2
+  },
+  "outputs": {
+   "re-oxides": 3
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 7
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "reduce-re",
+  "facility": "re-separation",
+  "inputs": {
+   "re-oxides": 5,
+   "fluorochemicals": 1
+  },
+  "outputs": {
+   "re-metals": 4
+  },
+  "energy": 8,
+  "labour": {},
+  "tech": {
+   "materials": 7
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-tantalum",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "tantalum-ore": 10,
+   "hydrofluoric-acid": 1
+  },
+  "outputs": {
+   "tantalum-powder": 1
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "concentrate-nb",
+  "facility": "concentrator",
+  "inputs": {
+   "niobium-ore": 10
+  },
+  "outputs": {
+   "niobium-concentrate": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-zirconium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "zirconium-ore": 10,
+   "chlorine": 2
+  },
+  "outputs": {
+   "zirconium-metal": 3,
+   "hafnium-crude": 0.05
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-hafnium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "hafnium-crude": 1
+  },
+  "outputs": {
+   "hafnium-metal": 0.8
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 7
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-gallium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "gallium-crude": 1
+  },
+  "outputs": {
+   "gallium-metal": 0.8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-germanium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "germanium-crude": 1
+  },
+  "outputs": {
+   "germanium-metal": 0.8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-indium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "indium-crude": 1
+  },
+  "outputs": {
+   "indium-metal": 0.8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-tellurium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "tellurium-crude": 1
+  },
+  "outputs": {
+   "tellurium-metal": 0.8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-beryllium",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "beryllium-ore": 10,
+   "sulfuric-acid": 1
+  },
+  "outputs": {
+   "beryllium-metal": 1
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "smelt-antimony",
+  "facility": "base-metal-smelter",
+  "inputs": {
+   "antimony-ore": 10
+  },
+  "outputs": {
+   "antimony-metal": 4
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-pgm",
+  "facility": "precious-refinery",
+  "inputs": {
+   "pgm-ore": 10,
+   "chlorine": 1
+  },
+  "outputs": {
+   "pgm-refined": 0.5
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-silver",
+  "facility": "precious-refinery",
+  "inputs": {
+   "silver-ore": 10
+  },
+  "outputs": {
+   "silver-metal": 1
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "refine-gold",
+  "facility": "precious-refinery",
+  "inputs": {
+   "gold-ore": 10
+  },
+  "outputs": {
+   "gold-metal": 0.3
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "purify-metals",
+  "facility": "specialty-refinery",
+  "inputs": {
+   "copper-cathode": 2,
+   "aluminium": 2,
+   "tantalum-powder": 0.2,
+   "electronic-chemicals": 0.5
+  },
+  "outputs": {
+   "high-purity-metals": 3
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-sulfuric",
+  "facility": "chemical-plant",
+  "inputs": {
+   "sulfur": 4
+  },
+  "outputs": {
+   "sulfuric-acid": 10
+  },
+  "energy": 0.5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-hf",
+  "facility": "chemical-plant",
+  "inputs": {
+   "fluorspar": 10,
+   "sulfuric-acid": 5
+  },
+  "outputs": {
+   "hydrofluoric-acid": 5
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-fluorochem",
+  "facility": "chemical-plant",
+  "inputs": {
+   "hydrofluoric-acid": 5,
+   "chlorine": 2
+  },
+  "outputs": {
+   "fluorochemicals": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "chlor-alkali",
+  "facility": "chemical-plant",
+  "inputs": {
+   "salt": 10,
+   "freshwater": 2
+  },
+  "outputs": {
+   "chlorine": 5,
+   "caustic-soda": 5
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "separate-air",
+  "facility": "air-separation",
+  "inputs": {},
+  "outputs": {
+   "industrial-gases": 10
+  },
+  "energy": 5,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-specialty-chem",
+  "facility": "chemical-plant",
+  "inputs": {
+   "naphtha": 4,
+   "sulfuric-acid": 2,
+   "chlorine": 2
+  },
+  "outputs": {
+   "specialty-chemicals": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-electronic-chem",
+  "facility": "chemical-plant",
+  "inputs": {
+   "specialty-chemicals": 4,
+   "hydrofluoric-acid": 2,
+   "industrial-gases": 2,
+   "helium-gas": 0.2
+  },
+  "outputs": {
+   "electronic-chemicals": 2
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-boron",
+  "facility": "chemical-plant",
+  "inputs": {
+   "boron": 10,
+   "sulfuric-acid": 2
+  },
+  "outputs": {
+   "boron-compounds": 4
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-ceramic-feed",
+  "facility": "glass-works",
+  "inputs": {
+   "zirconium-ore": 2,
+   "alumina": 4,
+   "silica-sand": 4
+  },
+  "outputs": {
+   "ceramic-feedstock": 8
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-tech-ceramics",
+  "facility": "glass-works",
+  "inputs": {
+   "ceramic-feedstock": 8,
+   "boron-compounds": 1,
+   "industrial-carbon": 1
+  },
+  "outputs": {
+   "technical-ceramics": 5
+  },
+  "energy": 8,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-glass",
+  "facility": "glass-works",
+  "inputs": {
+   "silica-sand": 10,
+   "caustic-soda": 1,
+   "lime": 1
+  },
+  "outputs": {
+   "glass": 9
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-optical-glass",
+  "facility": "glass-works",
+  "inputs": {
+   "glass": 8,
+   "boron-compounds": 0.5,
+   "re-oxides": 0.2
+  },
+  "outputs": {
+   "optical-glass": 5
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "ir-systems": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "burn-lime",
+  "facility": "cement-plant",
+  "inputs": {
+   "limestone": 10
+  },
+  "outputs": {
+   "lime": 6
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-cement",
+  "facility": "cement-plant",
+  "inputs": {
+   "limestone": 10,
+   "silica-sand": 2
+  },
+  "outputs": {
+   "cement": 9
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-ammonia",
+  "facility": "fertilizer-plant",
+  "inputs": {
+   "methane": 5
+  },
+  "outputs": {
+   "ammonia": 6
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "methane",
+    "alt": "coal",
+    "ratio": 2,
+    "penalty": 0.2
+   }
+  ]
+ },
+ {
+  "id": "make-fertilizer",
+  "facility": "fertilizer-plant",
+  "inputs": {
+   "ammonia": 4,
+   "phosphate": 4,
+   "potash": 3,
+   "sulfuric-acid": 2
+  },
+  "outputs": {
+   "fertilizer": 10,
+   "fertilizer-feedstock": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-polymers",
+  "facility": "petrochemical",
+  "inputs": {
+   "naphtha": 10,
+   "industrial-gases": 1
+  },
+  "outputs": {
+   "polymers": 8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "naphtha",
+    "alt": "methane",
+    "ratio": 1.3,
+    "penalty": 0.1
+   }
+  ]
+ },
+ {
+  "id": "make-pan",
+  "facility": "petrochemical",
+  "inputs": {
+   "naphtha": 6,
+   "ammonia": 2
+  },
+  "outputs": {
+   "pan-precursor": 5
+  },
+  "energy": 5,
+  "labour": {},
+  "tech": {
+   "materials": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-carbon-fibre",
+  "facility": "carbon-fibre-plant",
+  "inputs": {
+   "pan-precursor": 10,
+   "industrial-gases": 2
+  },
+  "outputs": {
+   "carbon-fibre": 4
+  },
+  "energy": 12,
+  "labour": {},
+  "tech": {
+   "materials": 6
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-composites",
+  "facility": "carbon-fibre-plant",
+  "inputs": {
+   "carbon-fibre": 6,
+   "polymers": 4
+  },
+  "outputs": {
+   "composites": 8
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-rubber-goods",
+  "facility": "rubber-plant",
+  "inputs": {
+   "natural-rubber": 6,
+   "industrial-carbon": 2,
+   "sulfur": 0.5
+  },
+  "outputs": {
+   "rubber-goods": 8
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "natural-rubber",
+    "alt": "polymers",
+    "ratio": 1,
+    "penalty": 0.15
+   }
+  ]
+ },
+ {
+  "id": "make-pulp",
+  "facility": "pulp-mill",
+  "inputs": {
+   "timber": 10,
+   "caustic-soda": 0.5
+  },
+  "outputs": {
+   "pulp": 5,
+   "sawn-timber": 4
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-energetics",
+  "facility": "munitions-plant",
+  "inputs": {
+   "ammonia": 4,
+   "sulfuric-acid": 3,
+   "specialty-chemicals": 2,
+   "pulp": 1
+  },
+  "outputs": {
+   "energetics": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "payloads": 2
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-biofuel",
+  "facility": "food-processing",
+  "inputs": {
+   "veg-oil": 5,
+   "biomass-fuel": 5
+  },
+  "outputs": {
+   "biofuel": 6
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "process-food",
+  "facility": "food-processing",
+  "inputs": {
+   "grain": 8,
+   "animal-products": 2,
+   "veg-oil": 1,
+   "freshwater": 2
+  },
+  "outputs": {
+   "food": 10
+  },
+  "energy": 1,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "grow-crops",
+  "facility": "farm",
+  "inputs": {
+   "fertilizer": 1,
+   "diesel": 0.5
+  },
+  "outputs": {
+   "grain": 4,
+   "veg-oil": 1,
+   "biomass": 2
+  },
+  "energy": 0.2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": "grain",
+  "substitutes": []
+ },
+ {
+  "id": "make-consumer-goods",
+  "facility": "light-industry",
+  "inputs": {
+   "polymers": 3,
+   "steel": 2,
+   "chips": 0.1,
+   "pulp": 1,
+   "copper-products": 0.5
+  },
+  "outputs": {
+   "consumer-goods": 10
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-chips",
+  "facility": "semiconductor-fab",
+  "inputs": {
+   "silicon-wafers": 1,
+   "electronic-chemicals": 1,
+   "high-purity-metals": 0.3,
+   "industrial-gases": 1,
+   "helium-gas": 0.1
+  },
+  "outputs": {
+   "chips": 4
+  },
+  "energy": 20,
+  "labour": {},
+  "tech": {
+   "computing": 5,
+   "manufacturing": 6
+  },
+  "tooling": "litho-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-rf-modules",
+  "facility": "compound-semi-fab",
+  "inputs": {
+   "gallium-metal": 0.3,
+   "silicon-wafers": 0.5,
+   "electronic-chemicals": 0.5,
+   "high-purity-metals": 0.2
+  },
+  "outputs": {
+   "rf-modules": 2
+  },
+  "energy": 15,
+  "labour": {},
+  "tech": {
+   "radar": 5,
+   "manufacturing": 5
+  },
+  "tooling": "litho-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-power-electronics",
+  "facility": "electronics-plant",
+  "inputs": {
+   "chips": 0.5,
+   "copper-products": 1,
+   "capacitors": 0.5,
+   "pcbs": 1
+  },
+  "outputs": {
+   "power-electronics": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "power-systems": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-ir-sensors",
+  "facility": "optics-works",
+  "inputs": {
+   "germanium-metal": 0.2,
+   "tellurium-metal": 0.1,
+   "indium-metal": 0.1,
+   "chips": 0.3
+  },
+  "outputs": {
+   "ir-sensors": 2
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "ir-systems": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-ir-optics",
+  "facility": "optics-works",
+  "inputs": {
+   "germanium-metal": 0.5,
+   "optical-glass": 1
+  },
+  "outputs": {
+   "ir-optics": 2
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "ir-systems": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-capacitors",
+  "facility": "electronics-plant",
+  "inputs": {
+   "tantalum-powder": 0.3,
+   "silver-metal": 0.05,
+   "technical-ceramics": 0.3
+  },
+  "outputs": {
+   "capacitors": 4
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "tantalum-powder",
+    "alt": "aluminium",
+    "ratio": 3,
+    "penalty": 0.3
+   }
+  ]
+ },
+ {
+  "id": "make-pcbs",
+  "facility": "electronics-plant",
+  "inputs": {
+   "copper-products": 2,
+   "glass": 1,
+   "polymers": 1,
+   "gold-metal": 0.01
+  },
+  "outputs": {
+   "pcbs": 5
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-harness",
+  "facility": "electronics-plant",
+  "inputs": {
+   "copper-products": 4,
+   "polymers": 2,
+   "silver-metal": 0.02
+  },
+  "outputs": {
+   "cable-harness": 5
+  },
+  "energy": 1,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-displays",
+  "facility": "electronics-plant",
+  "inputs": {
+   "glass": 2,
+   "indium-metal": 0.05,
+   "chips": 0.3,
+   "re-oxides": 0.05
+  },
+  "outputs": {
+   "displays": 3
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-batteries",
+  "facility": "battery-plant",
+  "inputs": {
+   "lithium-hydroxide": 1,
+   "purified-graphite": 1,
+   "nickel-metal": 0.8,
+   "cobalt-metal": 0.3,
+   "copper-products": 0.5,
+   "aluminium": 0.5
+  },
+  "outputs": {
+   "batteries": 4
+  },
+  "energy": 6,
+  "labour": {},
+  "tech": {
+   "power-systems": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "cobalt-metal",
+    "alt": "ferromanganese",
+    "ratio": 1.5,
+    "penalty": 0.2
+   }
+  ]
+ },
+ {
+  "id": "make-magnets",
+  "facility": "magnet-works",
+  "inputs": {
+   "re-metals": 1,
+   "steel": 2,
+   "boron-compounds": 0.2
+  },
+  "outputs": {
+   "magnets": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "materials": 5
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "re-metals",
+    "alt": "cobalt-metal",
+    "ratio": 1.5,
+    "penalty": 0.35
+   }
+  ]
+ },
+ {
+  "id": "make-motors",
+  "facility": "magnet-works",
+  "inputs": {
+   "magnets": 1,
+   "copper-products": 2,
+   "alloy-steel": 2,
+   "bearings": 0.5
+  },
+  "outputs": {
+   "electric-motors": 3
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-precision-parts",
+  "facility": "machine-works",
+  "inputs": {
+   "alloy-steel": 3,
+   "titanium-alloy": 0.5,
+   "aerospace-aluminium": 1
+  },
+  "outputs": {
+   "precision-parts": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "manufacturing": 3
+  },
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-bearings",
+  "facility": "machine-works",
+  "inputs": {
+   "alloy-steel": 3,
+   "lubricants": 0.2
+  },
+  "outputs": {
+   "bearings": 4
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": "cutting-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-actuators",
+  "facility": "machine-works",
+  "inputs": {
+   "electric-motors": 1,
+   "precision-parts": 1,
+   "power-electronics": 0.5,
+   "hydraulics": 0.3
+  },
+  "outputs": {
+   "actuators": 2
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {
+   "flight-control": 3
+  },
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-hydraulics",
+  "facility": "machine-works",
+  "inputs": {
+   "alloy-steel": 2,
+   "rubber-goods": 1,
+   "lubricants": 0.5,
+   "precision-parts": 0.5
+  },
+  "outputs": {
+   "hydraulics": 3
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-turbine-parts",
+  "facility": "superalloy-mill",
+  "inputs": {
+   "superalloy": 3,
+   "technical-ceramics": 0.5,
+   "precision-parts": 0.5
+  },
+  "outputs": {
+   "turbine-parts": 2
+  },
+  "energy": 8,
+  "labour": {},
+  "tech": {
+   "jet-engines": 5
+  },
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-fuel-systems",
+  "facility": "machine-works",
+  "inputs": {
+   "aerospace-aluminium": 1,
+   "precision-parts": 1,
+   "rubber-goods": 0.5,
+   "electric-motors": 0.3
+  },
+  "outputs": {
+   "fuel-systems": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-armour-plate",
+  "facility": "rolling-mill",
+  "inputs": {
+   "armour-steel": 8,
+   "technical-ceramics": 1
+  },
+  "outputs": {
+   "armour-plate": 8
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": [
+   {
+    "good": "technical-ceramics",
+    "alt": "armour-steel",
+    "ratio": 2,
+    "penalty": 0.1
+   }
+  ]
+ },
+ {
+  "id": "make-heavy-machinery",
+  "facility": "heavy-engineering",
+  "inputs": {
+   "structural-steel": 6,
+   "alloy-steel": 2,
+   "electric-motors": 1,
+   "hydraulics": 0.5,
+   "bearings": 0.5
+  },
+  "outputs": {
+   "heavy-machinery": 4
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-electrical-equipment",
+  "facility": "heavy-engineering",
+  "inputs": {
+   "copper-products": 3,
+   "structural-steel": 2,
+   "power-electronics": 0.5,
+   "polymers": 1
+  },
+  "outputs": {
+   "electrical-equipment": 4
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-machine-tools",
+  "facility": "tooling-plant",
+  "inputs": {
+   "alloy-steel": 4,
+   "precision-parts": 1,
+   "chips": 0.2,
+   "electric-motors": 0.5
+  },
+  "outputs": {
+   "machine-tools": 1
+  },
+  "energy": 4,
+  "labour": {},
+  "tech": {
+   "manufacturing": 4
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-cutting-tools",
+  "facility": "tooling-plant",
+  "inputs": {
+   "tungsten-carbide": 2,
+   "alloy-steel": 1
+  },
+  "outputs": {
+   "cutting-tools": 3
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {
+   "manufacturing": 3
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-litho-tools",
+  "facility": "fab-tool-maker",
+  "inputs": {
+   "precision-parts": 4,
+   "optical-glass": 2,
+   "chips": 1,
+   "electric-motors": 2,
+   "machine-tools": 1
+  },
+  "outputs": {
+   "litho-tools": 0.3
+  },
+  "energy": 10,
+  "labour": {},
+  "tech": {
+   "manufacturing": 8,
+   "computing": 7
+  },
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-spares-general",
+  "facility": "heavy-engineering",
+  "inputs": {
+   "alloy-steel": 2,
+   "bearings": 0.5,
+   "rubber-goods": 0.5
+  },
+  "outputs": {
+   "spares-general": 3
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-spares-aero",
+  "facility": "machine-works",
+  "inputs": {
+   "precision-parts": 1,
+   "turbine-parts": 0.2,
+   "actuators": 0.2,
+   "chips": 0.1
+  },
+  "outputs": {
+   "spares-aero": 1
+  },
+  "energy": 3,
+  "labour": {},
+  "tech": {},
+  "tooling": "machine-tools",
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-spares-naval",
+  "facility": "heavy-engineering",
+  "inputs": {
+   "alloy-steel": 2,
+   "electric-motors": 0.3,
+   "hydraulics": 0.3,
+   "power-electronics": 0.2
+  },
+  "outputs": {
+   "spares-naval": 2
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ },
+ {
+  "id": "make-spares-electronic",
+  "facility": "electronics-plant",
+  "inputs": {
+   "chips": 0.3,
+   "pcbs": 0.5,
+   "rf-modules": 0.05,
+   "capacitors": 0.2
+  },
+  "outputs": {
+   "spares-electronic": 1
+  },
+  "energy": 2,
+  "labour": {},
+  "tech": {},
+  "tooling": null,
+  "deposit": null,
+  "substitutes": []
+ }
+]

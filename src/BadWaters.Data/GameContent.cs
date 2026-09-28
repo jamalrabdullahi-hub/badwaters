@@ -26,8 +26,38 @@ public sealed class GameContent
     public Dictionary<string, ComponentArchetype> Archetypes { get; } = new();
     public Dictionary<string, AutoRole> AutoRoles { get; } = new();
     public Dictionary<string, ChokepointDef> Chokepoints { get; } = new();
+    public BadWaters.Sim.Economy.EconomyCatalog Economy { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
+    private void ValidateEconomy()
+    {
+        var e = Economy;
+        bool Good(string g) => e.Goods.ContainsKey(g);
+        foreach (var r in e.Resources.Values) if (!Good(r.RawGood)) Errors.Add($"resource {r.Id}: unknown raw good {r.RawGood}");
+        foreach (var p in e.Processes.Values)
+        {
+            if (!e.Facilities.ContainsKey(p.Facility)) Errors.Add($"process {p.Id}: unknown facility {p.Facility}");
+            foreach (var g in p.Inputs.Keys.Concat(p.Outputs.Keys)) if (!Good(g)) Errors.Add($"process {p.Id}: unknown good {g}");
+            if (p.Tooling != null && !Good(p.Tooling)) Errors.Add($"process {p.Id}: unknown tooling {p.Tooling}");
+            if (p.Deposit != null && !e.Resources.ContainsKey(p.Deposit)) Errors.Add($"process {p.Id}: unknown deposit resource {p.Deposit}");
+            foreach (var t in p.Tech.Keys) if (!Tech.ContainsKey(t)) Errors.Add($"process {p.Id}: unknown tech field {t}");
+            foreach (var sub in p.Substitutes) if (!Good(sub.Alt) || !p.Inputs.ContainsKey(sub.Good)) Errors.Add($"process {p.Id}: bad substitute {sub.Good}->{sub.Alt}");
+        }
+        foreach (var f in e.Facilities.Values)
+        {
+            foreach (var g in f.Build.Keys.Concat(f.Spares.Keys)) if (!Good(g)) Errors.Add($"facility {f.Id}: unknown good {g}");
+            if (!BadWaters.Sim.Policy.TargetPolicy.IsKnown(f.TargetClass)) Errors.Add($"facility {f.Id}: unclassified target class {f.TargetClass}");
+        }
+        foreach (var g in e.Goods.Keys) if (e.Producers(g).Count == 0) Errors.Add($"good {g}: nothing produces it");
+        foreach (var (fam, b) in e.Bills.Families)
+        {
+            if (b.Facility != "" && !e.Facilities.ContainsKey(b.Facility)) Errors.Add($"bill family {fam}: unknown facility {b.Facility}");
+            foreach (var g in b.Goods.Keys) if (!Good(g)) Errors.Add($"bill family {fam}: unknown good {g}");
+        }
+        foreach (var c in Catalog.Components.Values) if (!e.Bills.Families.ContainsKey(c.Family)) Errors.Add($"component {c.Id}: no bill template for family {c.Family}");
+        foreach (var c in new BadWaters.Sim.Economy.BillResolver(e, Catalog).Cycles()) Errors.Add($"good {c}: its supply chain loops back on itself");
+    }
+
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
     public List<string> Errors { get; } = new();
 
@@ -40,6 +70,11 @@ public sealed class GameContent
         foreach (var x in l.Load<FactoryDef>("factories.json")) g.Factories[x.Id] = x;
         foreach (var x in l.Load<RouteDef>("trade_routes.json")) g.Routes[x.Id] = x;
         foreach (var x in l.Load<ChokepointDef>("chokepoints.json")) g.Chokepoints[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.ResourceDef>("economy/resources.json")) g.Economy.Resources[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.GoodSpec>("economy/goods.json")) g.Economy.Goods[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.ProcessDef>("economy/processes.json")) g.Economy.Processes[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.FacilityTypeDef>("economy/facility_types.json")) g.Economy.Facilities[x.Id] = x;
+        g.Economy.Bills = l.LoadObject<BadWaters.Sim.Economy.BillTemplates>("economy/bill_templates.json") ?? g.Economy.Bills;
         foreach (var x in l.Load<TheatreDef>("theatres.json")) g.Theatres[x.Id] = x;
         foreach (var x in l.Load<RatingRule>("engineering/ratings.json")) g.Catalog.Ratings[x.Id] = x;
         foreach (var x in l.Load<ComponentTemplate>("components.json")) g.Catalog.Components[x.Id] = x;
@@ -114,6 +149,7 @@ public sealed class GameContent
                 else if (!TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: script targets protected site {x.Target}");
             }
         }
+        ValidateEconomy();
         foreach (var rt in Routes.Values)
         {
             foreach (var c in rt.Chokepoints) if (!Chokepoints.ContainsKey(c)) Errors.Add($"route {rt.Id}: unknown chokepoint {c}");

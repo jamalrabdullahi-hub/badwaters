@@ -59,6 +59,27 @@ public sealed class ContentLoader
         return list;
     }
 
+    /// <summary>A single JSON object file (settings, templates): core first, each mod deep-merged over it.</summary>
+    public T? LoadObject<T>(string fileName) where T : class
+    {
+        JsonObject? merged = null;
+        foreach (var root in _roots)
+        {
+            var path = Path.Combine(root, fileName);
+            if (!File.Exists(path)) continue;
+            try
+            {
+                if (JsonNode.Parse(File.ReadAllText(path), documentOptions: new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true }) is not JsonObject obj)
+                { Errors.Add($"{path}: expected an object."); continue; }
+                if (merged == null) merged = (JsonObject)obj.DeepClone(); else DeepMerge(merged, obj);
+            }
+            catch (JsonException ex) { Errors.Add($"{path}: invalid JSON ({ex.Message})"); }
+        }
+        if (merged == null) return null;
+        try { return merged.Deserialize<T>(new JsonSerializerOptions { PropertyNameCaseInsensitive = true }); }
+        catch (JsonException ex) { Errors.Add($"{fileName}: {ex.Message}"); return null; }
+    }
+
     private static void DeepMerge(JsonObject target, JsonObject patch)
     {
         foreach (var (key, value) in patch)

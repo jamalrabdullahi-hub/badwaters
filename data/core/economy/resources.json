@@ -1,0 +1,450 @@
+[
+ {
+  "id": "crude-oil",
+  "name": "Crude oil",
+  "category": "energy",
+  "method": "well",
+  "rawGood": "crude-oil"
+ },
+ {
+  "id": "natural-gas",
+  "name": "Natural gas",
+  "category": "energy",
+  "method": "well",
+  "rawGood": "natural-gas"
+ },
+ {
+  "id": "coal",
+  "name": "Coal",
+  "category": "energy",
+  "method": "mine",
+  "rawGood": "coal"
+ },
+ {
+  "id": "uranium",
+  "name": "Uranium ore",
+  "category": "energy",
+  "method": "mine",
+  "rawGood": "uranium-ore"
+ },
+ {
+  "id": "thorium",
+  "name": "Thorium ore",
+  "category": "energy",
+  "method": "mine",
+  "rawGood": "thorium-ore"
+ },
+ {
+  "id": "oil-shale",
+  "name": "Oil shale / bitumen",
+  "category": "energy",
+  "method": "mine",
+  "rawGood": "oil-shale"
+ },
+ {
+  "id": "iron-ore",
+  "name": "Iron ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "iron-ore"
+ },
+ {
+  "id": "manganese",
+  "name": "Manganese ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "manganese-ore"
+ },
+ {
+  "id": "chromium",
+  "name": "Chromite ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "chromium-ore"
+ },
+ {
+  "id": "nickel",
+  "name": "Nickel ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "nickel-ore"
+ },
+ {
+  "id": "cobalt",
+  "name": "Cobalt ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "cobalt-ore"
+ },
+ {
+  "id": "copper",
+  "name": "Copper ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "copper-ore"
+ },
+ {
+  "id": "bauxite",
+  "name": "Bauxite",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "bauxite"
+ },
+ {
+  "id": "zinc",
+  "name": "Zinc ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "zinc-ore"
+ },
+ {
+  "id": "lead",
+  "name": "Lead ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "lead-ore"
+ },
+ {
+  "id": "tin",
+  "name": "Tin ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "tin-ore"
+ },
+ {
+  "id": "titanium",
+  "name": "Titanium minerals (ilmenite, rutile)",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "titanium-ore"
+ },
+ {
+  "id": "vanadium",
+  "name": "Vanadium ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "vanadium-ore"
+ },
+ {
+  "id": "molybdenum",
+  "name": "Molybdenum ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "molybdenum-ore"
+ },
+ {
+  "id": "tungsten",
+  "name": "Tungsten ore",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "tungsten-ore"
+ },
+ {
+  "id": "magnesium",
+  "name": "Magnesite / magnesium brine",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "magnesium-ore"
+ },
+ {
+  "id": "silicon",
+  "name": "Quartz (silicon ore)",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "silicon-ore"
+ },
+ {
+  "id": "limestone",
+  "name": "Limestone / calcium minerals",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "limestone"
+ },
+ {
+  "id": "phosphate",
+  "name": "Phosphate rock",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "phosphate"
+ },
+ {
+  "id": "potash",
+  "name": "Potash",
+  "category": "bulk",
+  "method": "mine",
+  "rawGood": "potash"
+ },
+ {
+  "id": "lithium",
+  "name": "Lithium (brine, spodumene)",
+  "category": "strategic",
+  "method": "brine",
+  "rawGood": "lithium-ore"
+ },
+ {
+  "id": "graphite",
+  "name": "Natural graphite",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "graphite-ore"
+ },
+ {
+  "id": "rare-earths",
+  "name": "Rare-earth ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "rare-earths-ore"
+ },
+ {
+  "id": "tantalum",
+  "name": "Tantalum ore (coltan)",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "tantalum-ore"
+ },
+ {
+  "id": "niobium",
+  "name": "Niobium ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "niobium-ore"
+ },
+ {
+  "id": "zirconium",
+  "name": "Zircon sand",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "zirconium-ore"
+ },
+ {
+  "id": "beryllium",
+  "name": "Beryl ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "beryllium-ore"
+ },
+ {
+  "id": "antimony",
+  "name": "Antimony ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "antimony-ore"
+ },
+ {
+  "id": "pgm",
+  "name": "Platinum-group metal ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "pgm-ore"
+ },
+ {
+  "id": "silver",
+  "name": "Silver ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "silver-ore"
+ },
+ {
+  "id": "gold",
+  "name": "Gold ore",
+  "category": "strategic",
+  "method": "mine",
+  "rawGood": "gold-ore"
+ },
+ {
+  "id": "hafnium",
+  "name": "Hafnium (from zirconium)",
+  "category": "strategic",
+  "method": "byproduct",
+  "rawGood": "hafnium-crude"
+ },
+ {
+  "id": "gallium",
+  "name": "Gallium (from alumina)",
+  "category": "strategic",
+  "method": "byproduct",
+  "rawGood": "gallium-crude"
+ },
+ {
+  "id": "germanium",
+  "name": "Germanium (from zinc and coal ash)",
+  "category": "strategic",
+  "method": "byproduct",
+  "rawGood": "germanium-crude"
+ },
+ {
+  "id": "indium",
+  "name": "Indium (from zinc)",
+  "category": "strategic",
+  "method": "byproduct",
+  "rawGood": "indium-crude"
+ },
+ {
+  "id": "tellurium",
+  "name": "Tellurium (from copper)",
+  "category": "strategic",
+  "method": "byproduct",
+  "rawGood": "tellurium-crude"
+ },
+ {
+  "id": "sulfur",
+  "name": "Sulfur",
+  "category": "feedstock",
+  "method": "mine",
+  "rawGood": "sulfur"
+ },
+ {
+  "id": "fluorspar",
+  "name": "Fluorspar",
+  "category": "feedstock",
+  "method": "mine",
+  "rawGood": "fluorspar"
+ },
+ {
+  "id": "salt",
+  "name": "Salt",
+  "category": "feedstock",
+  "method": "mine",
+  "rawGood": "salt"
+ },
+ {
+  "id": "silica-sand",
+  "name": "Silica sand",
+  "category": "feedstock",
+  "method": "mine",
+  "rawGood": "silica-sand"
+ },
+ {
+  "id": "boron",
+  "name": "Boron minerals",
+  "category": "feedstock",
+  "method": "mine",
+  "rawGood": "boron"
+ },
+ {
+  "id": "helium",
+  "name": "Helium",
+  "category": "feedstock",
+  "method": "well",
+  "rawGood": "helium-raw"
+ },
+ {
+  "id": "industrial-carbon",
+  "name": "Industrial carbon (petroleum coke, carbon black)",
+  "category": "feedstock",
+  "method": "plant",
+  "rawGood": "industrial-carbon"
+ },
+ {
+  "id": "natural-rubber",
+  "name": "Natural rubber",
+  "category": "feedstock",
+  "method": "farm",
+  "rawGood": "natural-rubber"
+ },
+ {
+  "id": "timber",
+  "name": "Industrial timber / cellulose",
+  "category": "feedstock",
+  "method": "forest",
+  "rawGood": "timber"
+ },
+ {
+  "id": "potable-water",
+  "name": "Potable water",
+  "category": "agri",
+  "method": "waterworks",
+  "rawGood": "potable-water"
+ },
+ {
+  "id": "freshwater",
+  "name": "Freshwater",
+  "category": "agri",
+  "method": "waterworks",
+  "rawGood": "freshwater"
+ },
+ {
+  "id": "biomass",
+  "name": "Agricultural biomass",
+  "category": "agri",
+  "method": "farm",
+  "rawGood": "biomass"
+ },
+ {
+  "id": "grain",
+  "name": "Food and feed grains",
+  "category": "agri",
+  "method": "farm",
+  "rawGood": "grain"
+ },
+ {
+  "id": "veg-oil",
+  "name": "Vegetable oils",
+  "category": "agri",
+  "method": "farm",
+  "rawGood": "veg-oil"
+ },
+ {
+  "id": "animal-products",
+  "name": "Animal products / hides",
+  "category": "agri",
+  "method": "farm",
+  "rawGood": "animal-products"
+ },
+ {
+  "id": "fertilizer-feedstock",
+  "name": "Fertilizer feedstocks",
+  "category": "agri",
+  "method": "plant",
+  "rawGood": "fertilizer-feedstock"
+ },
+ {
+  "id": "biomass-fuel",
+  "name": "Biomass fuels",
+  "category": "agri",
+  "method": "farm",
+  "rawGood": "biomass-fuel"
+ },
+ {
+  "id": "hp-silicon",
+  "name": "High-purity silicon feedstock",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "polysilicon"
+ },
+ {
+  "id": "industrial-gases-cat",
+  "name": "Industrial gases",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "industrial-gases"
+ },
+ {
+  "id": "specialty-chem-cat",
+  "name": "Specialty chemical feedstocks",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "specialty-chemicals"
+ },
+ {
+  "id": "ceramic-cat",
+  "name": "Ceramic / mineral feedstocks",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "ceramic-feedstock"
+ },
+ {
+  "id": "hp-metals",
+  "name": "High-purity metals",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "high-purity-metals"
+ },
+ {
+  "id": "semi-grade",
+  "name": "Semiconductor-grade materials",
+  "category": "industrial",
+  "method": "manufactured",
+  "rawGood": "electronic-chemicals"
+ }
+]

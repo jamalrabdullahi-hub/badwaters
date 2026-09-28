@@ -38,6 +38,10 @@ public static class TargetPolicy
         ["industrial"] = TargetStatus.Legitimate,         // defence industry
         ["logistics"] = TargetStatus.Legitimate,          // ports, depots, rail and border hubs
         ["strategic-reserve"] = TargetStatus.Legitimate,  // fuel, munitions, materials stockpiles
+        ["energy"] = TargetStatus.Legitimate,             // power generation sustaining the war effort
+        ["civil-economy"] = TargetStatus.Protected,       // farms, food, light industry, construction for civilians
+        ["water-infrastructure"] = TargetStatus.Protected,// water works, potable and fresh water
+        ["education-civil"] = TargetStatus.Protected,     // universities
         ["population-centre"] = TargetStatus.Protected,   // cities, towns, hamlets, settlements
         ["civil-shelter"] = TargetStatus.Protected,       // civilian bunkers, shelters, camps
     };

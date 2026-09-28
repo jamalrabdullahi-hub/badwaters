@@ -1,0 +1,2130 @@
+[
+ {
+  "id": "mine",
+  "name": "Mine",
+  "class": "extraction",
+  "targetClass": "industrial",
+  "capacity": 12,
+  "energy": 1.5,
+  "labour": {
+   "general": 60,
+   "skilled": 10,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 40,
+  "decay": 0.012,
+  "spares": {
+   "spares-general": 2,
+   "diesel": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "oil-field",
+  "name": "Oil field",
+  "class": "extraction",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 1,
+  "labour": {
+   "general": 20,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 18,
+  "buildCost": 60,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "gas-field",
+  "name": "Gas field",
+  "class": "extraction",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 1,
+  "labour": {
+   "general": 15,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 18,
+  "buildCost": 50,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "brine-works",
+  "name": "Brine and evaporation works",
+  "class": "extraction",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 1,
+  "labour": {
+   "general": 20,
+   "skilled": 6,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "farm",
+  "name": "Agricultural region",
+  "class": "extraction",
+  "targetClass": "civil-economy",
+  "capacity": 30,
+  "energy": 0.5,
+  "labour": {
+   "general": 120,
+   "skilled": 5
+  },
+  "build": {
+   "heavy-machinery": 3,
+   "sawn-timber": 5
+  },
+  "buildMonths": 12,
+  "buildCost": 10,
+  "decay": 0.008,
+  "spares": {
+   "spares-general": 1,
+   "diesel": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "forest",
+  "name": "Forestry region",
+  "class": "extraction",
+  "targetClass": "civil-economy",
+  "capacity": 20,
+  "energy": 0.3,
+  "labour": {
+   "general": 40,
+   "skilled": 3
+  },
+  "build": {
+   "heavy-machinery": 2
+  },
+  "buildMonths": 12,
+  "buildCost": 8,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "water-works",
+  "name": "Water works",
+  "class": "extraction",
+  "targetClass": "water-infrastructure",
+  "capacity": 40,
+  "energy": 1,
+  "labour": {
+   "general": 15,
+   "skilled": 5,
+   "engineer": 1
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 20,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "concentrator",
+  "name": "Ore concentrator",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 2,
+  "labour": {
+   "general": 40,
+   "skilled": 10,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 18,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "coke-plant",
+  "name": "Coking plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 1,
+  "labour": {
+   "general": 30,
+   "skilled": 6,
+   "engineer": 1
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 18,
+  "buildCost": 25,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "blast-furnace",
+  "name": "Ironworks",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 3,
+  "labour": {
+   "general": 60,
+   "skilled": 20,
+   "engineer": 4
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 80,
+  "decay": 0.012,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "steelworks",
+  "name": "Steelworks",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 3,
+  "labour": {
+   "general": 60,
+   "skilled": 25,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 80,
+  "decay": 0.012,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "rolling-mill",
+  "name": "Rolling and alloy mill",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 2,
+  "labour": {
+   "general": 40,
+   "skilled": 25,
+   "engineer": 6
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 60,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "ferroalloy-plant",
+  "name": "Ferroalloy smelter",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 4,
+  "labour": {
+   "general": 30,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "base-metal-smelter",
+  "name": "Base-metal smelter and refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 12,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 15,
+   "engineer": 4
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 60,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "hydromet-plant",
+  "name": "Hydrometallurgical refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 8,
+  "energy": 3,
+  "labour": {
+   "general": 30,
+   "skilled": 20,
+   "engineer": 6
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 70,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "alumina-refinery",
+  "name": "Alumina refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 15,
+   "engineer": 4
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 70,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "aluminium-smelter",
+  "name": "Aluminium smelter",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 12,
+  "energy": 8,
+  "labour": {
+   "general": 40,
+   "skilled": 15,
+   "engineer": 4
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 90,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "titanium-plant",
+  "name": "Titanium chlorination and sponge plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 6,
+  "labour": {
+   "general": 30,
+   "skilled": 20,
+   "engineer": 8
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.014,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "specialty-refinery",
+  "name": "Specialty metals refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 4,
+  "labour": {
+   "general": 20,
+   "skilled": 20,
+   "engineer": 10,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "re-separation",
+  "name": "Rare-earth separation plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 5,
+  "energy": 4,
+  "labour": {
+   "general": 20,
+   "skilled": 20,
+   "engineer": 10,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "precious-refinery",
+  "name": "Precious metals refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 5,
+  "energy": 2,
+  "labour": {
+   "general": 10,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 60,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "oil-refinery",
+  "name": "Oil refinery",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 25,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 30,
+   "engineer": 8
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 150,
+  "decay": 0.012,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "gas-plant",
+  "name": "Gas processing and LNG plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 3,
+  "labour": {
+   "general": 20,
+   "skilled": 20,
+   "engineer": 6
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "shale-retort",
+  "name": "Oil-shale retort",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 4,
+  "labour": {
+   "general": 30,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 50,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "chemical-plant",
+  "name": "Chemical plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 30,
+   "skilled": 25,
+   "engineer": 8,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 80,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "petrochemical",
+  "name": "Petrochemical complex",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 30,
+   "skilled": 25,
+   "engineer": 8,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "air-separation",
+  "name": "Air separation and gas plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 5,
+  "labour": {
+   "general": 10,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "fertilizer-plant",
+  "name": "Fertilizer plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 4,
+  "labour": {
+   "general": 30,
+   "skilled": 10,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 50,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "cement-plant",
+  "name": "Cement and lime works",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 25,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 8,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "glass-works",
+  "name": "Glass and ceramics works",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 30,
+   "skilled": 15,
+   "engineer": 4,
+   "scientist": 1
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 24,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "polysilicon-plant",
+  "name": "Polysilicon plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 8,
+  "labour": {
+   "general": 20,
+   "skilled": 25,
+   "engineer": 10,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 150,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "wafer-plant",
+  "name": "Crystal growth and wafer plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 5,
+  "energy": 5,
+  "labour": {
+   "general": 10,
+   "skilled": 25,
+   "engineer": 12,
+   "scientist": 4
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 200,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "carbon-fibre-plant",
+  "name": "Carbon fibre and composites plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 5,
+  "labour": {
+   "general": 20,
+   "skilled": 25,
+   "engineer": 10,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "battery-materials",
+  "name": "Battery materials plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 8,
+  "energy": 3,
+  "labour": {
+   "general": 20,
+   "skilled": 20,
+   "engineer": 8,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 90,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "nuclear-fuel-plant",
+  "name": "Nuclear fuel plant (abstract)",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 4,
+  "energy": 6,
+  "labour": {
+   "general": 20,
+   "skilled": 30,
+   "engineer": 20,
+   "scientist": 8
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 48,
+  "buildCost": 400,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "pulp-mill",
+  "name": "Pulp and sawmill",
+  "class": "processing",
+  "targetClass": "civil-economy",
+  "capacity": 20,
+  "energy": 2,
+  "labour": {
+   "general": 40,
+   "skilled": 8,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "rubber-plant",
+  "name": "Rubber and seals plant",
+  "class": "processing",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 1,
+  "labour": {
+   "general": 30,
+   "skilled": 10,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 25,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "food-processing",
+  "name": "Food processing",
+  "class": "processing",
+  "targetClass": "civil-economy",
+  "capacity": 40,
+  "energy": 1,
+  "labour": {
+   "general": 60,
+   "skilled": 10,
+   "engineer": 2
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 12,
+  "buildCost": 20,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "light-industry",
+  "name": "Light industry park",
+  "class": "processing",
+  "targetClass": "civil-economy",
+  "capacity": 40,
+  "energy": 2,
+  "labour": {
+   "general": 120,
+   "skilled": 30,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "semiconductor-fab",
+  "name": "Semiconductor fab",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 4,
+  "energy": 10,
+  "labour": {
+   "general": 20,
+   "skilled": 60,
+   "engineer": 40,
+   "scientist": 15
+  },
+  "build": {
+   "cement": 30,
+   "structural-steel": 20,
+   "electrical-equipment": 20,
+   "litho-tools": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 48,
+  "buildCost": 800,
+  "decay": 0.015,
+  "spares": {
+   "spares-electronic": 3,
+   "electronic-chemicals": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "compound-semi-fab",
+  "name": "Compound semiconductor fab",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 3,
+  "energy": 8,
+  "labour": {
+   "general": 10,
+   "skilled": 40,
+   "engineer": 30,
+   "scientist": 12
+  },
+  "build": {
+   "cement": 30,
+   "structural-steel": 20,
+   "electrical-equipment": 20,
+   "litho-tools": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 42,
+  "buildCost": 500,
+  "decay": 0.015,
+  "spares": {
+   "spares-electronic": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "electronics-plant",
+  "name": "Electronics assembly plant",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 20,
+  "energy": 3,
+  "labour": {
+   "general": 80,
+   "skilled": 60,
+   "engineer": 20,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 80,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "optics-works",
+  "name": "Optics and IR sensor works",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 5,
+  "energy": 3,
+  "labour": {
+   "general": 20,
+   "skilled": 30,
+   "engineer": 15,
+   "scientist": 6
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "magnet-works",
+  "name": "Magnet and motor works",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 30,
+   "engineer": 8,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 70,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "battery-plant",
+  "name": "Battery cell plant",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 4,
+  "labour": {
+   "general": 40,
+   "skilled": 30,
+   "engineer": 10,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "machine-works",
+  "name": "Precision machine works",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 60,
+   "skilled": 50,
+   "engineer": 15,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 80,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "tooling-plant",
+  "name": "Machine-tool and tooling plant",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 50,
+   "engineer": 20,
+   "scientist": 4
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "fab-tool-maker",
+  "name": "Fab tool maker",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 1,
+  "energy": 5,
+  "labour": {
+   "general": 20,
+   "skilled": 60,
+   "engineer": 60,
+   "scientist": 25
+  },
+  "build": {
+   "cement": 30,
+   "structural-steel": 20,
+   "electrical-equipment": 20,
+   "litho-tools": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 60,
+  "buildCost": 1500,
+  "decay": 0.01,
+  "spares": {
+   "spares-electronic": 3
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "heavy-engineering",
+  "name": "Heavy engineering works",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 15,
+  "energy": 3,
+  "labour": {
+   "general": 100,
+   "skilled": 60,
+   "engineer": 15,
+   "scientist": 1
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 80,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "superalloy-mill",
+  "name": "Superalloy and forging works",
+  "class": "high-tech",
+  "targetClass": "industrial",
+  "capacity": 5,
+  "energy": 6,
+  "labour": {
+   "general": 30,
+   "skilled": 40,
+   "engineer": 15,
+   "scientist": 4
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 200,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "munitions-plant",
+  "name": "Munitions and energetics plant (abstract)",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 10,
+  "energy": 3,
+  "labour": {
+   "general": 60,
+   "skilled": 40,
+   "engineer": 10,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 100,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "engine-works",
+  "name": "Engine works",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 4,
+  "labour": {
+   "general": 60,
+   "skilled": 80,
+   "engineer": 30,
+   "scientist": 6
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 300,
+  "decay": 0.012,
+  "spares": {
+   "spares-aero": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "avionics-factory",
+  "name": "Avionics and combat systems plant",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 8,
+  "energy": 3,
+  "labour": {
+   "general": 40,
+   "skilled": 80,
+   "engineer": 40,
+   "scientist": 8
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 200,
+  "decay": 0.012,
+  "spares": {
+   "spares-electronic": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "radar-factory",
+  "name": "Radar and sensor works",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 4,
+  "labour": {
+   "general": 40,
+   "skilled": 80,
+   "engineer": 40,
+   "scientist": 10
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 250,
+  "decay": 0.012,
+  "spares": {
+   "spares-electronic": 2
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "aerospace-assembly",
+  "name": "Aerospace assembly",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 4,
+  "energy": 4,
+  "labour": {
+   "general": 200,
+   "skilled": 250,
+   "engineer": 80,
+   "scientist": 10
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 48,
+  "buildCost": 600,
+  "decay": 0.012,
+  "spares": {
+   "spares-aero": 3
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "shipyard",
+  "name": "Shipyard",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 4,
+  "energy": 4,
+  "labour": {
+   "general": 400,
+   "skilled": 250,
+   "engineer": 60,
+   "scientist": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 60,
+  "buildCost": 800,
+  "decay": 0.01,
+  "spares": {
+   "spares-naval": 3
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "vehicle-plant",
+  "name": "Military vehicle plant",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 3,
+  "labour": {
+   "general": 200,
+   "skilled": 150,
+   "engineer": 30,
+   "scientist": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 300,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "missile-works",
+  "name": "Missile and munitions assembly (abstract)",
+  "class": "defence",
+  "targetClass": "industrial",
+  "capacity": 6,
+  "energy": 3,
+  "labour": {
+   "general": 80,
+   "skilled": 100,
+   "engineer": 40,
+   "scientist": 8
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 300,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 200,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-coal",
+  "name": "Coal power station",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 60,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 60,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-gas",
+  "name": "Gas power station",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 50,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-oil",
+  "name": "Oil power station",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 40,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 40,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-hydro",
+  "name": "Hydroelectric station",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 90,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 40,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-nuclear",
+  "name": "Nuclear power station (abstract)",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 72,
+  "buildCost": 400,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 120,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "power-renewable",
+  "name": "Wind and solar farm",
+  "class": "energy",
+  "targetClass": "energy",
+  "capacity": 1,
+  "energy": 0,
+  "labour": {
+   "general": 20,
+   "skilled": 15,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 0,
+  "suppliesEnergy": 20,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "port",
+  "name": "Seaport",
+  "class": "logistics",
+  "targetClass": "logistics",
+  "capacity": 100,
+  "energy": 1,
+  "labour": {
+   "general": 200,
+   "skilled": 40,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 150,
+  "decay": 0.008,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 5000,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "airport",
+  "name": "Cargo airport",
+  "class": "logistics",
+  "targetClass": "logistics",
+  "capacity": 20,
+  "energy": 1,
+  "labour": {
+   "general": 100,
+   "skilled": 40,
+   "engineer": 5
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 30,
+  "buildCost": 120,
+  "decay": 0.008,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 500,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "rail-yard",
+  "name": "Rail and road freight hub",
+  "class": "logistics",
+  "targetClass": "logistics",
+  "capacity": 60,
+  "energy": 1,
+  "labour": {
+   "general": 120,
+   "skilled": 20,
+   "engineer": 3
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 24,
+  "buildCost": 60,
+  "decay": 0.008,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 2000,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "depot",
+  "name": "Strategic depot",
+  "class": "logistics",
+  "targetClass": "strategic-reserve",
+  "capacity": 0,
+  "energy": 0.5,
+  "labour": {
+   "general": 40,
+   "skilled": 10,
+   "engineer": 1
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 18,
+  "buildCost": 30,
+  "decay": 0.006,
+  "spares": {
+   "spares-general": 1
+  },
+  "storage": 8000,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "university",
+  "name": "University",
+  "class": "knowledge",
+  "targetClass": "education-civil",
+  "capacity": 0,
+  "energy": 1,
+  "labour": {
+   "general": 50,
+   "skilled": 50,
+   "engineer": 30,
+   "scientist": 30
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 36,
+  "buildCost": 60,
+  "decay": 0.006,
+  "spares": {
+   "spares-general": 0.5
+  },
+  "storage": 0,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "defence-academy",
+  "name": "Defence academy",
+  "class": "knowledge",
+  "targetClass": "military-base",
+  "capacity": 0,
+  "energy": 1,
+  "labour": {
+   "general": 40,
+   "skilled": 50,
+   "engineer": 30,
+   "scientist": 10
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 36,
+  "buildCost": 60,
+  "decay": 0.006,
+  "spares": {
+   "spares-general": 0.5
+  },
+  "storage": 0,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "research-lab",
+  "name": "National research laboratory",
+  "class": "knowledge",
+  "targetClass": "industrial",
+  "capacity": 0,
+  "energy": 2,
+  "labour": {
+   "general": 20,
+   "skilled": 40,
+   "engineer": 40,
+   "scientist": 40
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 150,
+  "decay": 0.008,
+  "spares": {
+   "spares-electronic": 1
+  },
+  "storage": 0,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "data-centre",
+  "name": "Data centre",
+  "class": "knowledge",
+  "targetClass": "industrial",
+  "capacity": 0,
+  "energy": 10,
+  "labour": {
+   "general": 10,
+   "skilled": 30,
+   "engineer": 20,
+   "scientist": 2
+  },
+  "build": {
+   "cement": 25,
+   "structural-steel": 15,
+   "heavy-machinery": 8,
+   "electrical-equipment": 10,
+   "machine-tools": 5
+  },
+  "buildMonths": 18,
+  "buildCost": 120,
+  "decay": 0.012,
+  "spares": {
+   "spares-electronic": 3
+  },
+  "storage": 0,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ },
+ {
+  "id": "construction-industry",
+  "name": "Construction industry",
+  "class": "construction",
+  "targetClass": "civil-economy",
+  "capacity": 0,
+  "energy": 1,
+  "labour": {
+   "general": 400,
+   "skilled": 100,
+   "engineer": 20
+  },
+  "build": {
+   "cement": 15,
+   "structural-steel": 10,
+   "heavy-machinery": 4,
+   "electrical-equipment": 4
+  },
+  "buildMonths": 12,
+  "buildCost": 30,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 3,
+   "diesel": 3
+  },
+  "storage": 1000,
+  "suppliesEnergy": 0,
+  "constructionCapacity": 100
+ },
+ {
+  "id": "military-base",
+  "name": "Military base",
+  "class": "military",
+  "targetClass": "military-base",
+  "capacity": 0,
+  "energy": 1,
+  "labour": {
+   "general": 100,
+   "skilled": 100,
+   "engineer": 20
+  },
+  "build": {
+   "cement": 40,
+   "structural-steel": 30,
+   "heavy-machinery": 15,
+   "electrical-equipment": 5
+  },
+  "buildMonths": 36,
+  "buildCost": 120,
+  "decay": 0.01,
+  "spares": {
+   "spares-general": 2
+  },
+  "storage": 2000,
+  "suppliesEnergy": 0.0,
+  "constructionCapacity": 0.0
+ }
+]
