@@ -25,6 +25,9 @@ public sealed class NationReport
     public double ValueAdded { get; set; }
     public double ImportCost { get; set; }
     public double MaintenanceMet { get; set; } = 1;
+    /// <summary>Share of civilian and industrial demand that went unmet (value-weighted): lost output for GDP.</summary>
+    public double ShortfallLoss { get; set; }
+    public double DefenceSpent { get; set; }
     /// <summary>Planning view per good: gross requirement, stock on hand, net to make or buy.</summary>
     public Dictionary<string, (double Req, double Stock, double Net)> Plan { get; } = new();
 
@@ -258,12 +261,24 @@ public sealed class EconomySolver
             foreach (var sp in _geo.Suppliers.Values.Where(sp => sp.Exports.ContainsKey(g)).OrderByDescending(sp => ctx.SupplierReach(sp.Id, nation)).ThenBy(sp => sp.Id, StringComparer.Ordinal))
             {
                 if (got >= want) break;
-                if (st.Embargoed(sp.Id, nation)) continue;
+                if (Blocked(st, sp.Id, nation, g)) continue;
                 var reach = ctx.SupplierReach(sp.Id, nation);
                 got += Math.Min(want - got, sp.Exports[g] * reach);
             }
-            foreach (var c in ne.Contracts.Where(c => c.Active && c.Good == g && !st.Embargoed(c.From, nation)))
-                got += c.PerMonth * ctx.SupplierReach(c.From, nation);
+            // contracts with other nations draw on the seller's own stock (and only what it can spare beyond a month of its use)
+            foreach (var c in ne.Contracts.Where(c => c.Active && c.Good == g && st.Nations.ContainsKey(c.From) && !Blocked(st, c.From, nation, g)))
+            {
+                var spare = SellerSpare(st, c.From, g);
+                var q = Math.Min(Math.Min(c.PerMonth, spare), want - got) * ctx.SupplierReach(c.From, nation);
+                if (q > 0) { TakeFromNation(st, c.From, g, q); got += q; Count(rep.Imported, "contract:" + c.From, q); }
+            }
+            // automatic spot trade with other nations: any unsanctioned nation sells what it can spare
+            foreach (var other in st.Nations.Keys.Where(o => o != nation && !Blocked(st, o, nation, g)).OrderByDescending(o => ctx.SupplierReach(o, nation)).ThenBy(o => o, StringComparer.Ordinal))
+            {
+                if (got >= want) break;
+                var q = Math.Min(SellerSpare(st, other, g), want - got) * ctx.SupplierReach(other, nation);
+                if (q > 1e-6) { TakeFromNation(st, other, g, q); got += q; Count(rep.Imported, "from:" + other, q); }
+            }
             var fromSuppliers = Math.Min(got, want);
             got = Math.Min(want, got + MarketDepth(nation, g, st, ctx));
             rep.ImportCost += (got - fromSuppliers) * _cat.Goods[g].Price * (_geo.Rules.WorldMarket.PriceMarkup - 1); // open-market premium
@@ -317,7 +332,7 @@ public sealed class EconomySolver
             rep.Bottlenecks.Add($"{l.Key.Process}: {l.Sum(x => x.Actual):0.#}/{l.Sum(x => x.Planned):0.#} batches · {l.Key.Reason}");
 
         // ---- consume for the demands, by priority
-        var maintenanceNeed = 0.0; var maintenanceGot = 0.0; var basketNeed = 0.0; var basketGot = 0.0;
+        var maintenanceNeed = 0.0; var maintenanceGot = 0.0; var basketNeed = 0.0; var basketGot = 0.0; var econNeed = 0.0; var econGot = 0.0;
         foreach (var d in demands.OrderBy(d => d.Priority))
         {
             if (d.Kind == "programme")
@@ -332,7 +347,11 @@ public sealed class EconomySolver
                     var cap = sites.Where(s => s.Type == f).Sum(s => _cat.Facilities[f].Capacity * s.Level * s.Health * SiteLabour(s));
                     if (cap / Math.Max(1e-9, b) < units) { units = cap / Math.Max(1e-9, b); limit = cap <= 0 ? $"no {_cat.Facilities[f].Name}" : $"{_cat.Facilities[f].Name} capacity"; }
                 }
+                // defence funds: a unit costs its bill at market prices plus assembly
+                var unitCost = d.Goods.Sum(k => k.Value / prog.RatePerMonth * _cat.Goods[k.Key].Price) * 1.25 / 1000;
+                if (unitCost > 0 && ne.DefenceFunds < units * unitCost) { units = Math.Max(0, ne.DefenceFunds / unitCost); limit = "defence budget"; }
                 units = Math.Max(0, units);
+                ne.DefenceFunds -= units * unitCost; rep.DefenceSpent += units * unitCost;
                 foreach (var (g, q) in d.Goods) Count(rep.Consumed, g, pools.TakeAll(g, q / prog.RatePerMonth * units));
                 prog.Built += units; prog.LastMonth = units; prog.Status = units >= prog.RatePerMonth * 0.98 ? "on rate" : limit;
                 rep.Programmes.Add(new ProgrammeStatus(prog.Id, prog.Design, prog.RatePerMonth, units, units >= prog.RatePerMonth * 0.98 ? "" : limit));
@@ -354,12 +373,14 @@ public sealed class EconomySolver
                 s.Condition = Math.Clamp(s.Condition - _cat.Facilities[s.Type].Decay + _geo.Rules.Maintenance.RestorePerMonth * frac, _geo.Rules.Maintenance.ReadinessFloor, 1);
             }
             else if (d.Kind == "civilian") { basketNeed += need; basketGot += got; }
+            if (d.Kind is "civilian" or "industry") { econNeed += need; econGot += got; }
             else if (d.Kind == "construction") ProgressConstruction(st, ne, d.Owner, frac);
             if (d.Kind is "civilian" or "industry") rep.ValueAdded += got * 0.3; // final consumption carries retail and service value
         }
         foreach (var s in sites.Where(s => _cat.Facilities[s.Type].Spares.Count == 0)) s.Condition = Math.Max(_geo.Rules.Maintenance.ReadinessFloor, s.Condition - _cat.Facilities[s.Type].Decay * 0.5);
         rep.MaintenanceMet = maintenanceNeed <= 0 ? 1 : maintenanceGot / maintenanceNeed;
         rep.BasketSatisfaction = basketNeed <= 0 ? 1 : basketGot / basketNeed;
+        rep.ShortfallLoss = econNeed <= 0 ? 0 : 1 - econGot / econNeed;
 
         // non-storable goods don't carry over
         foreach (var r in regionIds) foreach (var g in _cat.Goods.Values.Where(g => !g.Storable)) st.Stock(r).Remove(g.Id);
@@ -389,17 +410,34 @@ public sealed class EconomySolver
     }
 
     public const string WorldMarket = "world";
+    private bool Blocked(EconomyState st, string seller, string buyer, string good) =>
+        st.Sanctioned(seller, buyer, good, _geo.Rules.WorldMarket.Restricted, _geo.Rules.GlobalEnforcers);
     /// <summary>What the open world market will sell a nation of one good this month (0 for restricted goods or under a general embargo).</summary>
     private double MarketDepth(string nation, string good, EconomyState st, MonthContext ctx)
     {
         var wm = _geo.Rules.WorldMarket;
-        if (wm.Restricted.Contains(good) || st.Embargoed(WorldMarket, nation) || !_cat.Goods[good].Storable) return 0;
+        if (wm.Restricted.Contains(good) || Blocked(st, WorldMarket, nation, good) || !_cat.Goods[good].Storable) return 0;
         return wm.DepthPerGdp * st.Nations[nation].BaseGdp * 1000 / Math.Max(0.1, _cat.Goods[good].Price) / 12 * ctx.SupplierReach(WorldMarket, nation);
     }
 
     private double ImportCapacity(string nation, string good, EconomyState st, MonthContext ctx) =>
-        MarketDepth(nation, good, st, ctx) + _geo.Suppliers.Values.Where(sp => sp.Exports.ContainsKey(good) && !st.Embargoed(sp.Id, nation)).Sum(sp => sp.Exports[good] * ctx.SupplierReach(sp.Id, nation))
-        + st.Nations[nation].Contracts.Where(c => c.Active && c.Good == good && !st.Embargoed(c.From, nation)).Sum(c => c.PerMonth * ctx.SupplierReach(c.From, nation));
+        MarketDepth(nation, good, st, ctx) + _geo.Suppliers.Values.Where(sp => sp.Exports.ContainsKey(good) && !Blocked(st, sp.Id, nation, good)).Sum(sp => sp.Exports[good] * ctx.SupplierReach(sp.Id, nation))
+        + st.Nations[nation].Contracts.Where(c => c.Active && c.Good == good && st.Nations.ContainsKey(c.From) && !Blocked(st, c.From, nation, good))
+            .Sum(c => Math.Min(c.PerMonth, SellerSpare(st, c.From, good)) * ctx.SupplierReach(c.From, nation))
+        + st.Nations.Keys.Where(o => o != nation && !Blocked(st, o, nation, good)).Sum(o => SellerSpare(st, o, good) * ctx.SupplierReach(o, nation));
+
+    private IEnumerable<string> RegionsOf(string nation) => _geo.Regions.Values.Where(r => r.Nation == nation).Select(r => r.Id);
+    /// <summary>What a seller nation can spare of a good: stock beyond one month of its own last consumption.</summary>
+    private double SellerSpare(EconomyState st, string seller, string good) =>
+        Math.Max(0, RegionsOf(seller).Sum(r => st.Stock(r).GetValueOrDefault(good)) - st.Nations[seller].LastConsumption.GetValueOrDefault(good));
+    private void TakeFromNation(EconomyState st, string seller, string good, double qty)
+    {
+        var regs = RegionsOf(seller).ToList();
+        var have = regs.Sum(r => st.Stock(r).GetValueOrDefault(good));
+        if (have <= 0) return;
+        var f = Math.Min(1, qty / have);
+        foreach (var r in regs) if (st.Stock(r).TryGetValue(good, out var v)) st.Stock(r)[good] = v * (1 - f);
+    }
 
     private Dictionary<(string, string), List<DepositDef>>? _depIndex;
     private List<DepositDef> Deps(string region, string resource)

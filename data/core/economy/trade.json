@@ -1,0 +1,236 @@
+[
+ {
+  "id": "1980",
+  "year": 1980,
+  "sanctions": [
+   {
+    "by": "USA",
+    "target": "IRN",
+    "good": "*",
+    "global": false
+   },
+   {
+    "by": "USA",
+    "target": "PRK",
+    "good": "*",
+    "global": false
+   },
+   {
+    "by": "KOR",
+    "target": "PRK",
+    "good": "*",
+    "global": false
+   },
+   {
+    "by": "USA",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "GBR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "FRA",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "DEU",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "JPN",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "KOR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "TUR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "ISR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "USA",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "GBR",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "FRA",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "DEU",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "JPN",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "KOR",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   }
+  ]
+ },
+ {
+  "id": "2000",
+  "year": 2000,
+  "sanctions": [
+   {
+    "by": "USA",
+    "target": "IRN",
+    "good": "*",
+    "global": true
+   },
+   {
+    "by": "USA",
+    "target": "PRK",
+    "good": "*",
+    "global": true
+   },
+   {
+    "by": "USA",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "GBR",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "FRA",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "DEU",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   }
+  ]
+ },
+ {
+  "id": "2020",
+  "year": 2020,
+  "sanctions": [
+   {
+    "by": "USA",
+    "target": "IRN",
+    "good": "*",
+    "global": true
+   },
+   {
+    "by": "USA",
+    "target": "PRK",
+    "good": "*",
+    "global": true
+   },
+   {
+    "by": "ISR",
+    "target": "IRN",
+    "good": "*",
+    "global": false
+   },
+   {
+    "by": "IRN",
+    "target": "ISR",
+    "good": "*",
+    "global": false
+   },
+   {
+    "by": "USA",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "GBR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "FRA",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "DEU",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "JPN",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "KOR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "UKR",
+    "target": "RUS",
+    "good": "strategic",
+    "global": false
+   },
+   {
+    "by": "USA",
+    "target": "CHN",
+    "good": "litho-tools",
+    "global": true
+   },
+   {
+    "by": "USA",
+    "target": "CHN",
+    "good": "strategic",
+    "global": false
+   }
+  ]
+ }
+]

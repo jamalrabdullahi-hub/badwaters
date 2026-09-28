@@ -50,7 +50,8 @@ public sealed record SectorDesign(string Design, double PerTier);
 public sealed record EconomyRules
 {
     public double DefenceShareDefault { get; init; } = 0.02;
-    public DepressionRules Depression { get; init; } = new();
+    /// <summary>Nations whose sanctions can be global (every other seller must follow them).</summary>
+    public string[] GlobalEnforcers { get; init; } = { "USA", "CHN" };
     public StabilityRules Stability { get; init; } = new();
     public GdpRules Gdp { get; init; } = new();
     public Dictionary<string, double> Transport { get; init; } = new();
@@ -59,7 +60,6 @@ public sealed record EconomyRules
     /// <summary>Civilian goods per million people per month.</summary>
     public Dictionary<string, double> CivilianBasket { get; init; } = new();
 }
-public sealed record DepressionRules { public int WindowMonths { get; init; } = 12; public double GdpDrop { get; init; } = -0.10; public double WarOrEmbargoDrop { get; init; } = -0.25; public double CrisisStability { get; init; } = 35; public double CivilWarStability { get; init; } = 15; public double RecoverStability { get; init; } = 50; }
 public sealed record StabilityRules { public double TrendWeight { get; init; } = 60; public double ShortageWeight { get; init; } = 25; public double UnemploymentWeight { get; init; } = 15; public double WarRally { get; init; } = 5; public double EmbargoPenalty { get; init; } = 5; public double MonthlyPull { get; init; } = 0.15; }
 public sealed record GdpRules { public double CivilianShare { get; init; } = 0.85; public double TrendGrowthAnnual { get; init; } = 0.02; public double LossValueFactor { get; init; } = 1; }
 public sealed record WorldMarketRules { public double DepthPerGdp { get; init; } = 0.004; public double PriceMarkup { get; init; } = 1.3; public string[] Restricted { get; init; } = Array.Empty<string>(); }
@@ -146,9 +146,10 @@ public sealed class NationEconomy
     /// <summary>Value added this month → GDP via the calibration factor set at start.</summary>
     public double GdpScale { get; set; } = 1;
     public List<double> GdpHistory { get; set; } = new();
+    public List<double> VaHistory { get; set; } = new();
+    public bool Calibrated { get; set; }
     public double Stability { get; set; } = 65;
     public double DefenceShare { get; set; } = 0.02;
-    public string Crisis { get; set; } = "";
     public bool AtWar { get; set; }
     public List<Programme> Programmes { get; set; } = new();
     public List<Contract> Contracts { get; set; } = new();
@@ -171,6 +172,14 @@ public sealed class NationEconomy
     public double DefenceFunds { get; set; }
 }
 
+/// <summary>`By` refuses to sell `Good` ("*" = everything, "strategic" = restricted strategic goods) to `Target`.
+/// Global: an enforcer's sanction that every other seller must follow too (except the other enforcer).</summary>
+public sealed record Sanction(string By, string Target, string Good = Sanction.All, bool Global = false)
+{
+    public const string All = "*", Strategic = "strategic";
+    public bool Covers(string good, ICollection<string> strategic) => Good == All || Good == good || (Good == Strategic && strategic.Contains(good));
+}
+
 public sealed class EconomyState
 {
     public int Month { get; set; }
@@ -180,15 +189,44 @@ public sealed class EconomyState
     /// <summary>Stock held in each region (at its depots and plants), good → quantity.</summary>
     public Dictionary<string, Dictionary<string, double>> RegionStock { get; set; } = new();
     public Dictionary<string, NationEconomy> Nations { get; set; } = new();
-    /// <summary>"A>B": A refuses to sell to B (sanction / embargo). "*>B": everyone.</summary>
-    public HashSet<string> Embargoes { get; set; } = new();
+    /// <summary>Who refuses to sell what to whom. See <see cref="Sanction"/>.</summary>
+    public List<Sanction> Sanctions { get; set; } = new();
+
+    /// <summary>
+    /// Can `seller` (a nation, a world-market supplier, or "world") sell `good` to `buyer`? A normal sanction stops only
+    /// the sanctioning nation selling. A global sanction by an enforcer (the USA or China, see economy_rules.json) stops
+    /// every seller except the other enforcers: enforcers ignore each other's global sanctions.
+    /// </summary>
+    public bool Sanctioned(string seller, string buyer, string good, ICollection<string> strategic, ICollection<string> enforcers)
+    {
+        foreach (var x in Sanctions)
+        {
+            if (x.Target != buyer || !x.Covers(good, strategic)) continue;
+            if (x.By == seller) return true;
+            if (x.Global && enforcers.Contains(x.By) && !enforcers.Contains(seller)) return true;
+        }
+        return false;
+    }
+
+    /// <summary>Impose a sanction (idempotent). Global only has force for an enforcer.</summary>
+    public void Sanction(string by, string target, string good = Economy.Sanction.All, bool global = false)
+    {
+        if (!Sanctions.Any(x => x.By == by && x.Target == target && x.Good == good && x.Global == global)) Sanctions.Add(new Sanction(by, target, good, global));
+    }
+    public void Lift(string by, string target, string good = Economy.Sanction.All) => Sanctions.RemoveAll(x => x.By == by && x.Target == target && x.Good == good);
+
+    /// <summary>A trade war: both sides sanction each other on the listed goods (or everything).</summary>
+    public void TradeWar(string a, string b, IEnumerable<string>? goods = null, bool global = false)
+    {
+        foreach (var g in goods ?? new[] { Economy.Sanction.All }) { Sanction(a, b, g, global); Sanction(b, a, g, global); }
+    }
+
     /// <summary>Regions cut off (occupied, blockaded, links destroyed).</summary>
     public HashSet<string> IsolatedRegions { get; set; } = new();
     public HashSet<string> CutLinks { get; set; } = new();
 
     public Dictionary<string, double> Stock(string region) => RegionStock.TryGetValue(region, out var d) ? d : RegionStock[region] = new();
 
-    public bool Embargoed(string seller, string buyer) => Embargoes.Contains($"{seller}>{buyer}") || Embargoes.Contains($"*>{buyer}");
 
     /// <summary>Damage a site (theatre strike, sabotage). Stock in its region is destroyed in proportion to the site's share of storage.</summary>
     public void ApplyDamage(string siteId, double fraction, EconomyCatalog cat)

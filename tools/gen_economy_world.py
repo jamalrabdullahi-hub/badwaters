@@ -211,6 +211,18 @@ dump("seeding.json", {
                       "land": {"design": "gs-launcher", "perTier": 0.5}, "munitions": {"design": "sam-interceptor", "perTier": 5},
                       "electronics": {"design": "gs-radar", "perTier": 0.2}},
 })
+# default sanctions per start date: a game abstraction of public sanctions regimes. good "*" = everything,
+# "strategic" = the restricted strategic goods; global = an enforcer's sanction every other seller follows.
+def X(by, target, good="*", glob=False): return {"by": by, "target": target, "good": good, "global": glob}
+WEST = ["USA", "GBR", "FRA", "DEU", "JPN", "KOR"]
+TRADE = [
+ {"id": "1980", "year": 1980, "sanctions": [X("USA", "IRN"), X("USA", "PRK"), X("KOR", "PRK")] + [X(w, "RUS", "strategic") for w in WEST + ["TUR", "ISR"]]
+                                            + [X(w, "CHN", "strategic") for w in WEST]},
+ {"id": "2000", "year": 2000, "sanctions": [X("USA", "IRN", glob=True), X("USA", "PRK", glob=True)] + [X(w, "CHN", "strategic") for w in ["USA", "GBR", "FRA", "DEU"]]},
+ {"id": "2020", "year": 2020, "sanctions": [X("USA", "IRN", glob=True), X("USA", "PRK", glob=True), X("ISR", "IRN"), X("IRN", "ISR")]
+                                            + [X(w, "RUS", "strategic") for w in WEST + ["UKR"]] + [X("USA", "CHN", "litho-tools", True), X("USA", "CHN", "strategic")]},
+]
+dump("trade.json", TRADE)
 dump("regions.json", REGIONS)
 dump("region_links.json", LINKS)
 dump("deposits.json", DEPOSITS)

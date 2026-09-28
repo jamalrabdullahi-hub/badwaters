@@ -44,8 +44,8 @@ public class EconomySolverTests
     {
         var st = Seed("JPN");
         st.Nations["JPN"].Programmes.Add(new Programme { Id = "radar", Design = "gs-radar", RatePerMonth = 2 });
-        st.Embargoes.Add("world>JPN");                            // no open-market escape hatch
-        foreach (var s in C.Geo.Suppliers.Keys) st.Embargoes.Add($"{s}>JPN");
+        st.Nations["JPN"].DefenceFunds = 1e6; // solver-only test: fund the programme directly
+        st.Sanction("CHN", "JPN", global: true); st.Sanction("USA", "JPN", global: true); // nobody left to sell to Japan
         var before = Run(st, "JPN", 6).Programmes.Single();
         foreach (var s in st.Sites.Values.Where(s => s.Nation == "JPN" && s.Type == "specialty-refinery")) s.Damage = 1;
         foreach (var r in st.RegionStock.Values) { r.Remove("gallium-metal"); r.Remove("rf-modules"); r.Remove("gallium-crude"); }
@@ -63,8 +63,7 @@ public class EconomySolverTests
         // move all crude into the North Sea region, then cut it off
         foreach (var r in st.RegionStock.Keys.ToList()) { var q = st.Stock(r).GetValueOrDefault("crude-oil"); st.Stock(r)["crude-oil"] = 0; st.Stock(nsea)["crude-oil"] = st.Stock(nsea).GetValueOrDefault("crude-oil") + q; }
         st.IsolatedRegions.Add(nsea);
-        st.Embargoes.Add("*>GBR");
-        st.Embargoes.Add("world>GBR");
+        st.Sanction("USA", "GBR", global: true); st.Sanction("CHN", "GBR", global: true);
         var r1 = Run(st, "GBR", 1);
         // refineries outside the cut-off region have no crude to work with
         Assert.True(r1.Limits.Where(l => l.Process == "refine-crude" && !l.Site.StartsWith(nsea)).Sum(l => l.Actual) < 1e-6);
@@ -76,8 +75,7 @@ public class EconomySolverTests
     {
         var st = Seed("CHN");
         st.Nations["CHN"].Programmes.Add(new Programme { Id = "sam", Design = "sam-interceptor", RatePerMonth = 200 });
-        foreach (var s in C.Geo.Suppliers.Keys) st.Embargoes.Add($"{s}>CHN");
-        st.Embargoes.Add("world>CHN");
+        st.Sanction("USA", "CHN", global: true); // everyone but China itself stops selling to China
         var with = Run(st, "CHN", 3);
         Assert.True(with.Produced.GetValueOrDefault("tungsten-heavy-alloy") > 0);
         foreach (var s in st.Sites.Values.Where(s => s.Nation == "CHN" && s.Type == "specialty-refinery")) s.Damage = 1;

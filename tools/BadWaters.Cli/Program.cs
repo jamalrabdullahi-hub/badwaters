@@ -31,6 +31,32 @@ if (cmd == "auto")
     }
     return 0;
 }
+if (cmd == "world")
+{
+    // world [months] [year] [shut-chokepoint]
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    foreach (var e in gc.Errors) Console.Error.WriteLine(e);
+    var months = args.Length > 1 ? int.Parse(args[1]) : 12;
+    var year = args.Length > 2 ? int.Parse(args[2]) : 2020;
+    var routes = gc.Routes.Keys.ToDictionary(k => k, _ => new BadWaters.Sim.Trade.RouteState());
+    if (args.Length > 3) foreach (var r in gc.Routes.Values.Where(r => r.Chokepoints.Contains(args[3]))) routes[r.Id].Disruption = 100;
+    var ew = new BadWaters.Sim.Economy.EconomyWorld(gc.Economy, gc.Geo, gc.Catalog, gc.Designs, gc.Routes);
+    var st = new BadWaters.Sim.Economy.EconomyState();
+    var sw = System.Diagnostics.Stopwatch.StartNew();
+    ew.Start(st, gc.Nations.Keys, year, gc.TradeRegimes);
+    Console.WriteLine($"Seeded {st.Nations.Count} nations, {st.Sites.Count} sites in {sw.ElapsedMilliseconds} ms; sanctions {st.Sanctions.Count}");
+    for (var m = 0; m < months; m++)
+    {
+        sw.Restart();
+        var ev = ew.RunMonth(st, routes);
+        var ms = sw.ElapsedMilliseconds;
+        foreach (var e in ev) Console.WriteLine("  EVENT " + e);
+        if ((m + 1) % Math.Max(1, months / 6) == 0 || m == months - 1)
+            Console.WriteLine($"month {m + 1} ({ms} ms): " + string.Join("  ", st.Nations.Values.OrderByDescending(n => n.Gdp).Select(n =>
+                $"{n.Nation} {n.Gdp:0} ({BadWaters.Sim.Economy.MacroRules.YearOnYear(n):+0%;-0%;0%}) s{n.Stability:0}")));
+    }
+    return 0;
+}
 if (cmd == "econ")
 {
     // econ NATION [months] [year] [design] [rate]

@@ -428,7 +428,8 @@ dump("bill_templates.json", {"families": {k: {"facility": f, "goods": g} for k, 
 # ------------------------------------------------------------------ rules (all thresholds are data)
 dump("economy_rules.json", {
     "defenceShareDefault": 0.02,
-    "depression": {"windowMonths": 12, "gdpDrop": -0.10, "warOrEmbargoDrop": -0.25, "crisisStability": 35, "civilWarStability": 15, "recoverStability": 50},
+    # only these nations can impose global sanctions (every other seller must follow; they ignore each other's)
+    "globalEnforcers": ["USA", "CHN"],
     "stability": {"trendWeight": 60, "shortageWeight": 25, "unemploymentWeight": 15, "warRally": 5, "embargoPenalty": 5, "monthlyPull": 0.15},
     "gdp": {"civilianShare": 0.85, "trendGrowthAnnual": 0.02, "lossValueFactor": 1.0},
     "transport": {"bulk": 1.0, "general": 0.6, "high": 0.2, "grid": 0.0},

@@ -29,6 +29,7 @@ public sealed class GameContent
     public BadWaters.Sim.Economy.EconomyCatalog Economy { get; } = new();
     public BadWaters.Sim.Economy.EconomyGeo Geo { get; } = new();
     public Dictionary<string, NationDef> Nations { get; } = new();
+    public List<BadWaters.Sim.Economy.TradeRegime> TradeRegimes { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     private void ValidateEconomy()
@@ -93,6 +94,7 @@ public sealed class GameContent
         foreach (var x in l.Load<BadWaters.Sim.Economy.DepositDef>("economy/deposits.json")) g.Geo.Deposits[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.NationEconomyDef>("economy/nation_economies.json")) g.Geo.Nations[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.SupplierDef>("economy/suppliers.json")) g.Geo.Suppliers[x.Id] = x;
+        g.TradeRegimes.AddRange(l.Load<BadWaters.Sim.Economy.TradeRegime>("economy/trade.json"));
         g.Geo.Seeding = l.LoadObject<BadWaters.Sim.Economy.SeedingRules>("economy/seeding.json") ?? g.Geo.Seeding;
         g.Geo.Rules = l.LoadObject<BadWaters.Sim.Economy.EconomyRules>("economy/economy_rules.json") ?? g.Geo.Rules;
         foreach (var x in l.Load<TheatreDef>("theatres.json")) g.Theatres[x.Id] = x;

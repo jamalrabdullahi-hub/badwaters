@@ -31,6 +31,8 @@ public sealed class World
     public Dictionary<string, RouteState> Routes { get; set; } = new();
     /// <summary>Chokepoints currently shut (id → who shut it).</summary>
     public Dictionary<string, string> ClosedChokepoints { get; set; } = new();
+    /// <summary>The national production economy (sites, stocks, deposits, nations).</summary>
+    public BadWaters.Sim.Economy.EconomyState Economy { get; set; } = new();
     public List<FactoryInstance> Factories { get; set; } = new();
     public Dictionary<string, double> Stock { get; set; } = new();
     public List<string> Log { get; set; } = new();

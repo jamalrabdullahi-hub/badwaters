@@ -1,13 +1,9 @@
 {
  "defenceShareDefault": 0.02,
- "depression": {
-  "windowMonths": 12,
-  "gdpDrop": -0.1,
-  "warOrEmbargoDrop": -0.25,
-  "crisisStability": 35,
-  "civilWarStability": 15,
-  "recoverStability": 50
- },
+ "globalEnforcers": [
+  "USA",
+  "CHN"
+ ],
  "stability": {
   "trendWeight": 60,
   "shortageWeight": 25,
