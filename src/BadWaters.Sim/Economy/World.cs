@@ -147,6 +147,8 @@ public sealed class FleetEntry
     public double Count { get; set; }
     /// <summary>0..1: share of the force that is mission-capable.</summary>
     public double Readiness { get; set; } = 1;
+    /// <summary>Units lost in theatres so far.</summary>
+    public double Lost { get; set; }
 }
 
 public sealed class NationEconomy

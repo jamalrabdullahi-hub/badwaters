@@ -1,0 +1,164 @@
+using BadWaters.Sim.Economy;
+using BadWaters.Sim.Theatre;
+
+namespace BadWaters.Sim.Command;
+
+/// <summary>How a theatre at war is resolved each strategic turn.</summary>
+public enum TheatreMode { Auto, Fight }
+
+/// <summary>Compact persistent state of a theatre (what survives a save): losses, damage, stocks, ships, relocations.</summary>
+public sealed class TheatreSnapshot
+{
+    public string Scenario { get; set; } = "";
+    public double Time { get; set; }
+    public List<string> DestroyedUnits { get; set; } = new();
+    public Dictionary<string, string> UnitBases { get; set; } = new();
+    public Dictionary<string, double> Components { get; set; } = new();      // "site/component" → integrity
+    public Dictionary<string, int> LauncherStock { get; set; } = new();
+    public Dictionary<string, int> BatteryStock { get; set; } = new();
+    public Dictionary<string, double[]> Ships { get; set; } = new();        // id → [hp, lon, lat]
+    public int DayWrittenBack { get; set; }
+}
+
+/// <summary>
+/// Persistent theatres for the strategic game. A theatre at war keeps one live simulation across turns, run by its
+/// two commanders. Each strategic day it is either auto-resolved headless or waits for the player to fight it, and
+/// its outcome writes back into the strategic economy: aircraft losses leave the nation's fielded force, rounds fired
+/// are gone, and launchers are resupplied from munitions the economy actually produced.
+/// </summary>
+public sealed class TheatreCampaign
+{
+    private readonly Func<string, ScenarioDef?> _scenarioFor;
+    private readonly Func<ScenarioDef, int, InterceptTrial> _build;
+    private readonly Func<string, string?> _nationOfSideName;
+    public Dictionary<string, InterceptTrial> Live { get; } = new();
+    public Dictionary<string, TheatreMode> Mode { get; } = new();
+    /// <summary>Strategic days each theatre has been at war (the theatre clock must reach Days × 86400).</summary>
+    public Dictionary<string, int> Days { get; } = new();
+    public List<string> Reports { get; } = new();
+    public const double Day = 86400;
+    /// <summary>Coarse step for headless auto-resolve when no missile is in the air.</summary>
+    public double AutoStep { get; set; } = 60;
+
+    public TheatreCampaign(Func<string, ScenarioDef?> scenarioFor, Func<ScenarioDef, int, InterceptTrial> build, Func<string, string?> nationOfSideName)
+    { _scenarioFor = scenarioFor; _build = build; _nationOfSideName = nationOfSideName; }
+
+    /// <summary>The live theatre for a strategic theatre id, created on first use (from its scenario, or a saved snapshot).</summary>
+    public InterceptTrial? Get(string theatre, TheatreSnapshot? snap = null)
+    {
+        if (Live.TryGetValue(theatre, out var t)) return t;
+        var sc = _scenarioFor(theatre);
+        if (sc == null) return null;
+        t = _build(sc, 1);
+        t.Adaptive = true;
+        if (snap != null) Restore(t, snap);
+        Live[theatre] = t;
+        Mode.TryAdd(theatre, TheatreMode.Auto);
+        return t;
+    }
+
+    /// <summary>
+    /// One strategic day for every theatre at war. Auto: the day is fought headless. Fight: returns the theatre id if the
+    /// player still has to fight it up to today (the strategic clock should stop and offer Theatre Ops or auto-resolve).
+    /// </summary>
+    public string? Daily(World w, IEnumerable<string> theatresAtWar)
+    {
+        string? waiting = null;
+        foreach (var id in theatresAtWar.OrderBy(x => x, StringComparer.Ordinal))
+        {
+            var t = Get(id);
+            if (t == null) continue;
+            Days[id] = Days.GetValueOrDefault(id) + 1;
+            var target = Days[id] * Day;
+            if (Mode.GetValueOrDefault(id) == TheatreMode.Fight && t.Time < target - 60) { waiting ??= id; continue; }
+            Resolve(t, target);
+            WriteBack(w, t);
+        }
+        return waiting;
+    }
+
+    /// <summary>Auto-resolve a theatre up to a theatre time (both commanders fight; player operations still run).</summary>
+    public void Resolve(InterceptTrial t, double until)
+    {
+        var fine = InterceptTrial.CoarseStep;
+        t.CoarseSeconds = AutoStep;
+        while (t.Time < until - 1e-6) t.Advance(Math.Min(3600, until - t.Time));
+        t.CoarseSeconds = fine;
+    }
+
+    /// <summary>Theatre → economy: losses, expended rounds, resupply from national production.</summary>
+    public void WriteBack(World w, InterceptTrial t)
+    {
+        var econ = w.Economy;
+        foreach (var side in new[] { "blue", "red" })
+        {
+            var nation = _nationOfSideName(t.Scenario.Sides.GetValueOrDefault(side, ""));
+            if (nation == null || !econ.Nations.TryGetValue(nation, out var ne)) continue;
+            // the fielded force: every aircraft type in the theatre, by preset; losses come off it
+            foreach (var g in t.Scenario.Units.Where(u => u.Side == side && u.Kind is "air" or "aew").GroupBy(u => u.Preset))
+            {
+                var key = "preset:" + g.Key;
+                var alive = g.Count(u => t.Air?.Destroyed.Contains(u.Id) != true);
+                var fe = ne.Fleet.TryGetValue(key, out var x) ? x : ne.Fleet[key] = new FleetEntry { Count = g.Count() };
+                var lost = Math.Max(0, g.Count() - alive - (int)Math.Round(fe.Lost));
+                if (lost > 0) { fe.Count = Math.Max(0, fe.Count - lost); fe.Lost += lost; Reports.Add($"{w.Now:yyyy-MM-dd} {nation}: {lost} {g.Key} lost in {t.Scenario.Name}"); }
+            }
+            // launchers: resupply from missiles the economy built (the design's fielded stock), up to the launcher's load
+            foreach (var l in t.Launchers.Where(l => l.Def.Side == side))
+            {
+                var key = l.Def.Missile;
+                if (!ne.Fleet.TryGetValue(key, out var stock) || stock.Count < 1) continue;
+                var want = Math.Max(0, l.Def.Stock - l.Stock);
+                var give = (int)Math.Min(want, Math.Floor(stock.Count));
+                if (give <= 0) continue;
+                l.Stock += give; stock.Count -= give;
+                Reports.Add($"{w.Now:yyyy-MM-dd} {nation}: {give} {key} delivered to {l.Def.Name}");
+            }
+        }
+    }
+
+    // ---------------- persistence ----------------
+
+    /// <summary>Store every live theatre in the world (call before saving).</summary>
+    public void SaveInto(World w)
+    {
+        foreach (var (id, t) in Live) { var s = Snapshot(t); s.DayWrittenBack = Days.GetValueOrDefault(id); w.TheatreWars[id] = s; }
+    }
+
+    /// <summary>Rebuild live theatres from a loaded world.</summary>
+    public void LoadFrom(World w)
+    {
+        Live.Clear();
+        foreach (var (id, s) in w.TheatreWars) { Get(id, s); Days[id] = s.DayWrittenBack; }
+    }
+
+    public static TheatreSnapshot Snapshot(InterceptTrial t) => new()
+    {
+        Scenario = t.Scenario.Id, Time = t.Time,
+        DestroyedUnits = t.Air?.Destroyed.ToList() ?? new(),
+        UnitBases = t.Scenario.Units.Where(u => t.Air != null && t.Air.BaseOf(u) != u.Base).ToDictionary(u => u.Id, u => t.Air!.BaseOf(u)),
+        Components = t.Bases.Values.SelectMany(b => b.Components.Select(c => (k: $"{b.Site.Id}/{c.Key}", v: c.Value.Integrity))).ToDictionary(x => x.k, x => x.v),
+        LauncherStock = t.Launchers.ToDictionary(l => l.Def.Id, l => l.Stock),
+        BatteryStock = t.Batteries.ToDictionary(b => b.Def.Id, b => b.Stock),
+        Ships = t.Naval?.Ships.ToDictionary(s => s.Id, s => new[] { s.Hp, s.Lon, s.Lat }) ?? new(),
+    };
+
+    public static void Restore(InterceptTrial t, TheatreSnapshot s)
+    {
+        t.SetTime(s.Time);
+        if (t.Air != null)
+        {
+            foreach (var id in s.DestroyedUnits) t.Air.Destroyed.Add(id);
+            foreach (var (u, b) in s.UnitBases) t.Air.SetBase(u, b);
+        }
+        foreach (var (k, v) in s.Components)
+        {
+            var parts = k.Split('/');
+            if (t.Bases.TryGetValue(parts[0], out var b) && b.Components.TryGetValue(parts[1], out var c)) c.Integrity = v;
+        }
+        foreach (var l in t.Launchers) if (s.LauncherStock.TryGetValue(l.Def.Id, out var n)) l.Stock = n;
+        foreach (var b in t.Batteries) if (s.BatteryStock.TryGetValue(b.Def.Id, out var n)) b.Stock = n;
+        if (t.Naval != null)
+            foreach (var sh in t.Naval.Ships) if (s.Ships.TryGetValue(sh.Id, out var v)) { sh.Hp = v[0]; sh.Lon = v[1]; sh.Lat = v[2]; }
+    }
+}

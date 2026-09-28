@@ -170,6 +170,7 @@ public sealed class AirTasking
     private readonly Dictionary<string, int> _calls = new();
     /// <summary>Aircraft that landed away from their home base (unit id → base id).</summary>
     private readonly Dictionary<string, string> _divertBase = new();
+    public void SetBase(string unit, string baseId) => _divertBase[unit] = baseId;
     public string BaseOf(UnitDef u) => _divertBase.TryGetValue(u.Id, out var b) ? b : u.Base;
     private static readonly string[] BlueCalls = { "EAGLE", "VIPER", "COBRA", "HAWK", "RAVEN", "LANCE", "SABRE", "FALCON" };
     private static readonly string[] RedCalls = { "DRAGON", "TIGER", "WOLF", "FLAME", "STORM", "ARROW", "THUNDER", "IRON" };

@@ -31,6 +31,25 @@ if (cmd == "auto")
     }
     return 0;
 }
+if (cmd == "war")
+{
+    // war [theatre] [days]: auto-resolve a theatre war day by day (as the strategic turn does)
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    var theatre = args.Length > 1 ? args[1] : "ECS";
+    var days = args.Length > 2 ? int.Parse(args[2]) : 3;
+    string? Nat(string name) => gc.Nations.Values.FirstOrDefault(x => x.Name == name || x.Id == name)?.Id;
+    var camp = new BadWaters.Sim.Command.TheatreCampaign(th => gc.Scenarios.Values.FirstOrDefault(s => s.Theatre == th),
+        (sc, seed) => BadWaters.Sim.Command.TheatreFactory.Create(sc, id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), gc.PresetInfo, gc.BaseTypes, side => gc.DoctrineFor(Nat(sc.Sides.GetValueOrDefault(side, ""))), seed), Nat);
+    var w = new BadWaters.Sim.World { Now = new DateTime(2020, 1, 1) };
+    for (var d = 0; d < days; d++)
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        camp.Daily(w, new[] { theatre });
+        var t = camp.Live[theatre];
+        Console.WriteLine($"day {d + 1}: {sw.ElapsedMilliseconds} ms · ops {t.Ops!.Ops.Count} · lost blue {t.Air!.Destroyed.Count(id => t.Scenario.Units.First(u => u.Id == id).Side == "blue")} red {t.Air.Destroyed.Count(id => t.Scenario.Units.First(u => u.Id == id).Side == "red")} · launcher stock {t.Launchers.Sum(l => l.Stock)}");
+    }
+    return 0;
+}
 if (cmd == "campaign")
 {
     // campaign [scenario] [hours] [seed]: both sides run by their theatre commanders, headless

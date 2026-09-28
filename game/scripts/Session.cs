@@ -18,6 +18,25 @@ public static class Session
     /// <summary>The national production economy (every nation), run on each strategic month.</summary>
     public static BadWaters.Sim.Economy.EconomyWorld Econ { get; private set; } = null!;
     public static List<string> EconomyEvents { get; } = new();
+    /// <summary>Persistent theatre wars: auto-resolved or fought each strategic day, written back into the economy.</summary>
+    public static BadWaters.Sim.Command.TheatreCampaign? Campaign { get; private set; }
+    /// <summary>Extra daily events (dev scenarios); the campaign runs first.</summary>
+    public static Func<World, DateTime, BadWaters.Sim.Interrupt?>? ExtraDaily { get; set; }
+
+    /// <summary>A live theatre with both commanders; its strikes write back into the strategic economy.</summary>
+    public static BadWaters.Sim.Theatre.InterceptTrial BuildTheatre(BadWaters.Sim.Theatre.ScenarioDef sc, int seed)
+    {
+        var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, Profile, Content.PresetInfo, Content.BaseTypes,
+            side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed);
+        t.SiteDamaged += (site, frac) =>
+        {
+            var nation = NationId(t.Scenario.Sides.GetValueOrDefault(site.Side, ""));
+            if (nation == null) return;
+            var hit = World.Economy.DamageNear(nation, site.Lon, site.Lat, site.Class, frac, Content.Economy);
+            if (hit != null) t.Report("industry", $"Strategic effect: {hit} damaged {frac:P0}.");
+        };
+        return t;
+    }
     /// <summary>Nation id from a scenario side name ("China" → "CHN").</summary>
     public static string? NationId(string sideName) =>
         Content.Nations.ContainsKey(sideName) ? sideName : Content.Nations.Values.FirstOrDefault(n => n.Name == sideName)?.Id;
@@ -48,6 +67,17 @@ public static class Session
         LoadLand();
         Econ = new BadWaters.Sim.Economy.EconomyWorld(Content.Economy, Content.Geo, Content.Catalog, Content.Designs, Content.Routes);
         Econ.Start(World.Economy, Content.Nations.Keys, year, Content.TradeRegimes);
+        Campaign = new BadWaters.Sim.Command.TheatreCampaign(th => Content.Scenarios.Values.FirstOrDefault(x => x.Theatre == th), BuildTheatre, NationId);
+        Scheduler.DailyHook = (w, now) =>
+        {
+            var extra = ExtraDaily?.Invoke(w, now);
+            var wars = w.Theatres.Values.Where(t => t.AtWar).Select(t => t.Id).ToList();
+            var waiting = Campaign.Daily(w, wars);
+            foreach (var r in Campaign.Reports) w.Log.Add(r);
+            Campaign.Reports.Clear();
+            if (waiting != null) return new BadWaters.Sim.Interrupt(now, "theatre-fight", $"The war in {waiting} is waiting for you: fight it in Theatre Ops or auto-resolve.", waiting);
+            return extra;
+        };
         Scheduler.MonthlyHook = w =>
         {
             foreach (var e in Econ.RunMonth(w.Economy, w.Routes)) { EconomyEvents.Add(e); w.Log.Add($"{w.Now:yyyy-MM-dd} {e}"); }

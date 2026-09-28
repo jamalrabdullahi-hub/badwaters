@@ -307,17 +307,10 @@ public partial class TheatreOps : Control
             Launchers = Scenario.Launchers.Select(l => l with { Missile = _missile }).ToList(),
         };
         var keep = Trial?.Control.ToDictionary(k => k.Key, k => k.Value);
-        // a live theatre: every system plus an autonomous commander per side (the war fights itself; the player intervenes)
-        Trial = BadWaters.Sim.Command.TheatreFactory.Create(sc, Session.Profile, Session.Content.PresetInfo, Session.Content.BaseTypes,
-            side => Session.Content.DoctrineFor(Session.NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, keep);
-        // strikes write back into the strategic economy: the hit facility loses capacity (and stock) next month
-        Trial.SiteDamaged += (site, frac) =>
-        {
-            var nation = Session.NationId(Trial.Scenario.Sides.GetValueOrDefault(site.Side, ""));
-            if (nation == null) return;
-            var hit = Session.World.Economy.DamageNear(nation, site.Lon, site.Lat, site.Class, frac, Session.Content.Economy);
-            if (hit != null) Trial.Report("industry", $"Strategic effect: {hit} damaged {frac:P0}.");
-        };
+        // a theatre at war is the campaign's persistent one (it carries across turns); otherwise a fresh sandbox
+        var live = !IsTrial && Scenario.Theatre != "" && Session.Campaign != null ? Session.Campaign.Get(Scenario.Theatre) : null;
+        Trial = live ?? Session.BuildTheatre(sc, seed);
+        if (keep != null && live == null) foreach (var (k, v) in keep) Trial.Control[k] = v;
         SelectedFlight = null; Preview.Clear();
         SelectedTrack = null;
         _logSeen = -1;

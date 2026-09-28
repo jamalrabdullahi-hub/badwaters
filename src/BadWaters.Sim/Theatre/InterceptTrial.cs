@@ -289,6 +289,10 @@ public sealed class InterceptTrial
     /// <summary>Coarse steps when nothing fast is in the air (headless auto-resolve and high time compression).</summary>
     public bool Adaptive { get; set; }
     public const double CoarseStep = 10;
+    /// <summary>Coarse step used by Adaptive (auto-resolve raises it).</summary>
+    public double CoarseSeconds { get; set; } = CoarseStep;
+    /// <summary>Restore the clock from a saved theatre.</summary>
+    public void SetTime(double t) { Time = t; _carry = 0; }
     private double _dt = Step;
     /// <summary>No missiles in flight: nothing needs half-second resolution.</summary>
     private bool Quiet => !Tracks.Any(t => t.State == TrackState.Flying);
@@ -298,7 +302,7 @@ public sealed class InterceptTrial
         _carry += seconds;
         while (_carry >= Step)
         {
-            var dt = Adaptive && Quiet && _carry >= CoarseStep ? CoarseStep : Step;
+            var dt = Adaptive && Quiet && _carry >= CoarseSeconds ? CoarseSeconds : Step;
             _carry -= dt; _dt = dt; Tick();
         }
     }

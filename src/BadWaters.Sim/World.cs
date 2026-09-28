@@ -33,6 +33,8 @@ public sealed class World
     public Dictionary<string, string> ClosedChokepoints { get; set; } = new();
     /// <summary>The national production economy (sites, stocks, deposits, nations).</summary>
     public BadWaters.Sim.Economy.EconomyState Economy { get; set; } = new();
+    /// <summary>Saved theatre wars (live theatres are snapshotted here on save).</summary>
+    public Dictionary<string, BadWaters.Sim.Command.TheatreSnapshot> TheatreWars { get; set; } = new();
     public List<FactoryInstance> Factories { get; set; } = new();
     public Dictionary<string, double> Stock { get; set; } = new();
     public List<string> Log { get; set; } = new();

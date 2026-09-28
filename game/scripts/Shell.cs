@@ -74,9 +74,21 @@ public partial class Shell : Control
         var bh = new HBoxContainer();
         _banner = UiTheme.Text("", 15);
         bh.AddChild(_banner);
-        var enter = new Button { Text = "Enter Theatre Ops ▸" };
-        enter.Pressed += () => { _bannerBox.Visible = false; Open("Theatre Ops"); };
+        var enter = new Button { Text = "Fight in Theatre Ops ▸", TooltipText = "This theatre waits for you each turn until you have fought it up to date." };
+        enter.Pressed += () =>
+        {
+            _bannerBox.Visible = false;
+            if (_bannerTheatre != null && Session.Campaign != null) Session.Campaign.Mode[_bannerTheatre] = BadWaters.Sim.Command.TheatreMode.Fight;
+            Open("Theatre Ops");
+        };
         bh.AddChild(enter);
+        var auto = new Button { Text = "Auto-resolve", TooltipText = "The commanders fight it each day; results carry into the next turn." };
+        auto.Pressed += () =>
+        {
+            _bannerBox.Visible = false;
+            if (_bannerTheatre != null && Session.Campaign != null) Session.Campaign.Mode[_bannerTheatre] = BadWaters.Sim.Command.TheatreMode.Auto;
+        };
+        bh.AddChild(auto);
         _bannerBox.AddChild(bh);
         stack.AddChild(_bannerBox);
 
@@ -191,6 +203,7 @@ public partial class Shell : Control
     }
 
     private readonly Dictionary<string, Button> _dockButtons = new();
+    private string? _bannerTheatre;
 
     private void Open(string name)
     {
@@ -258,6 +271,7 @@ public partial class Shell : Control
         if (irq != null)
         {
             _bannerBox.Visible = true;
+            _bannerTheatre = irq.Theatre;
             _banner.Text = irq.Kind == "war" ? $"WAR · {irq.Text}  " : $"{irq.Text}  ";
         }
     }
@@ -309,7 +323,7 @@ public partial class Shell : Control
             Session.World.Routes["east-asia-australia"].Disruption = 25;
         }
         if (DevScreenshot.Arg("war") is { } theatre)
-            Session.Scheduler.DailyHook = (w, now) =>
+            Session.ExtraDaily = (w, now) =>
             {
                 if ((now - new DateTime(Session.StartYear, 1, 1)).TotalDays >= 10) { w.Theatres[theatre].AtWar = true; w.Theatres[theatre].PlayerInvolved = true; w.Theatres[theatre].HostileNavalThreat = 80; }
                 return null;
