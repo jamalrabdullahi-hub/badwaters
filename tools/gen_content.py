@@ -157,13 +157,16 @@ ships=[("patrol-boat","Patrol boat",300,3,1),("fac","Fast attack craft",500,4,1)
  ("mine-warfare","Mine countermeasures vessel",700,4,1),("intel-ship","Intelligence collection ship",3000,10,1),("command-ship","Command ship",18000,30,2),
  ("oiler","Fleet oiler",40000,20,1),("stores-ship","Ammunition & stores ship",40000,20,1),("hospital-ship","Hospital ship",20000,20,1),
  ("icebreaker","Icebreaking patrol ship",6000,12,1),("ssk","Diesel-electric submarine",3000,10,1),("ssn","Nuclear attack submarine",8000,16,2),
- ("ssgn","Guided-missile submarine",17000,24,4),("ssbn","Deterrent submarine",18000,24,2),("usv","Uncrewed surface vessel",500,3,1),("xluuv","Large uncrewed underwater vehicle",80,2,0)]
+ ("ssgn","Guided-missile submarine",17000,24,4),("ssbn","Deterrent submarine",18000,24,2),("usv","Uncrewed surface vessel",500,3,1),("xluuv","Large uncrewed underwater vehicle",80,2,0),
+ ("dinghy","Rigid inflatable boat",5,1,0),("midget-sub","Midget submarine",150,3,0),("trimaran","Littoral combat ship (trimaran)",3200,14,1),
+ ("catamaran","Fast attack catamaran",250,4,1),("destroyer-stealth","Stealth destroyer (tumblehome)",15000,40,5),("frigate-stealth","Stealth frigate",4200,15,2)]
 # hull outline for the designer: length and beam in metres, drawing style
 HULL={"patrol-boat":(40,7,"warship"),"fac":(55,8.5,"warship"),"corvette":(90,13,"warship"),"opv":(85,13,"warship"),"frigate-asw":(135,17,"warship"),
  "frigate-gp":(140,18,"warship"),"destroyer-ad":(155,20,"warship"),"destroyer-gp":(150,19,"warship"),"cruiser":(173,17,"warship"),"carrier-cat":(333,41,"carrier"),
  "carrier-stovl":(280,39,"carrier"),"amphib-assault":(257,32,"carrier"),"landing-dock":(208,32,"merchant"),"mine-warfare":(60,10,"warship"),"intel-ship":(90,14,"merchant"),
  "command-ship":(190,25,"merchant"),"oiler":(230,32,"merchant"),"stores-ship":(210,32,"merchant"),"hospital-ship":(270,32,"merchant"),"icebreaker":(110,25,"merchant"),
- "ssk":(70,8,"sub"),"ssn":(115,10,"sub"),"ssgn":(170,13,"sub"),"ssbn":(170,13,"sub"),"usv":(45,7,"warship"),"xluuv":(16,2.5,"sub")}
+ "ssk":(70,8,"sub"),"ssn":(115,10,"sub"),"ssgn":(170,13,"sub"),"ssbn":(170,13,"sub"),"usv":(45,7,"warship"),"xluuv":(16,2.5,"sub"),
+ "dinghy":(8,3,"boat"),"midget-sub":(28,3.5,"sub"),"trimaran":(127,31.6,"trimaran"),"catamaran":(50,12,"catamaran"),"destroyer-stealth":(186,24.6,"tumblehome"),"frigate-stealth":(125,16,"tumblehome")}
 for i,n,disp,vol,cells in ships:
     usable = disp*0.22
     SH.append(fr(f"hull-{i}",n,"ship",i,{"mass":round(usable),"volume":vol,"power":0,"cooling":4,"crew":0,"data":2},
@@ -172,6 +175,7 @@ for i,n,disp,vol,cells in ships:
       {"survivability":min(6,1+disp/4000),"endurance":2},{"structures":2},round(disp*0.08),"shipyard",round(disp/300)))
     SH[-1]["budgets"]["topside"]=round(usable*0.25)
     L,B,st=HULL[i]; SH[-1]["hull"]={"length":L,"beam":B,"style":st}
+    if st in ("trimaran","catamaran"): SH[-1]["hull"]={"length":L,"beam":B*0.3,"span":B,"style":st}
 dump("frames/ships.json", SH)
 AF=[
  fr("af-light-fighter","Light fighter airframe","aircraft","light-multirole",{"mass":6,"volume":6,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":3,"payload":3},{"structures":3},20,"aerospace-assembly",20),
@@ -180,9 +184,16 @@ AF=[
  fr("af-flying-wing","Flying-wing bomber airframe","aircraft","stealth-bomber",{"mass":30,"volume":20,"power":0,"cooling":4,"data":2},{"nose-sensor":1},{"payload":8,"endurance":5,"signature":4},{"structures":7,"low-observables":7,"flight-control":7},300,"aerospace-assembly",200),
  fr("af-carrier-fighter","Carrier fighter airframe","aircraft","carrier-multirole",{"mass":9,"volume":8,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":2,"payload":4},{"structures":4},40,"aerospace-assembly",32),
  fr("af-large","Large support airframe","aircraft","support",{"mass":40,"volume":25,"power":0,"cooling":6,"data":4},{"nose-sensor":1},{"endurance":6,"payload":4},{"structures":3},150,"aerospace-assembly",80),
- fr("af-uav","Uncrewed airframe","aircraft","ucav",{"mass":3,"volume":4,"power":0,"cooling":1,"data":1},{"nose-sensor":1},{"endurance":6,"payload":2},{"structures":3,"autonomy":4},10,"aerospace-assembly",8)]
+ fr("af-uav","Uncrewed airframe","aircraft","ucav",{"mass":3,"volume":4,"power":0,"cooling":1,"data":1},{"nose-sensor":1},{"endurance":6,"payload":2},{"structures":3,"autonomy":4},10,"aerospace-assembly",8),
+ fr("af-hale","High-altitude long-endurance (HALE) airframe","aircraft","hale",{"mass":6,"volume":8,"power":0,"cooling":2,"data":2},{"nose-sensor":1},{"endurance":9,"payload":2},{"structures":4,"autonomy":5},40,"aerospace-assembly",30),
+ fr("af-male","Medium-altitude long-endurance (MALE) airframe","aircraft","male",{"mass":2,"volume":4,"power":0,"cooling":1,"data":1},{"nose-sensor":1},{"endurance":7,"payload":2},{"structures":3,"autonomy":4},12,"aerospace-assembly",10),
+ fr("af-ucav-wing","Low-observable UCAV (flying wing)","aircraft","ucav-lo",{"mass":5,"volume":6,"power":0,"cooling":2,"data":2},{"nose-sensor":1},{"signature":4,"payload":3,"endurance":4},{"structures":5,"low-observables":6,"autonomy":6},45,"aerospace-assembly",35),
+ fr("af-delta-heavy","Heavy delta interceptor airframe","aircraft","interceptor",{"mass":12,"volume":10,"power":0,"cooling":3,"data":1},{"nose-sensor":1},{"agility":1,"payload":4,"endurance":3},{"structures":4},45,"aerospace-assembly",35),
+ fr("af-canard-delta","Canard-delta fighter airframe","aircraft","multirole",{"mass":8,"volume":7,"power":0,"cooling":2,"data":1},{"nose-sensor":1},{"agility":3,"payload":4},{"structures":5},40,"aerospace-assembly",32),
+ fr("af-lo-heavy","Low-observable heavy fighter airframe","aircraft","stealth-air-superiority",{"mass":11,"volume":9,"power":0,"cooling":3,"data":2},{"nose-sensor":1},{"agility":3,"payload":3,"signature":3},{"structures":6,"low-observables":6},70,"aerospace-assembly",55)]
 # planform for the designer: length, fuselage width, span, style
-for f,(L,B,S,st) in zip(AF,[(15,1.8,10,"delta"),(19,2.4,13,"fighter"),(15.7,2.4,11,"stealth"),(21,4,52,"flying-wing"),(17,2.2,12.5,"fighter"),(45,3.8,40,"large"),(12,1.2,16,"uav")]):
+for f,(L,B,S,st) in zip(AF,[(15,1.8,10,"delta"),(19,2.4,13,"fighter"),(15.7,2.4,11,"stealth"),(21,4,52,"flying-wing"),(17,2.2,12.5,"fighter"),(45,3.8,40,"large"),(12,1.2,16,"uav"),
+    (14.5,1.2,40,"hale"),(11,1.0,20,"male"),(11.6,2,18.9,"flying-wing"),(22,2.6,13.5,"delta"),(15.3,2,10.9,"canard-delta"),(20.4,2.6,13.5,"stealth")]):
     f["hull"]={"length":L,"beam":B,"span":S,"style":st}
 dump("frames/aircraft.json", AF)
 MB=[

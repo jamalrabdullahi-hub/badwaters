@@ -51,61 +51,82 @@ public static class PartPalette
 public partial class Blueprint : Control
 {
     public Func<DesignDef>? Design;
-    public Action? Changed, SelectionChanged;
+    /// <summary>Changed: after an edit. BeforeChange: just before an edit (for undo). SelectionChanged: a part was (de)selected.</summary>
+    public Action? Changed, SelectionChanged, BeforeChange;
     public int Selected = -1;
     public bool ShowArcs = true, Mirror = true;
-    /// <summary>Outline edit mode: drag the white handles (mirrored automatically). Cosmetic only.</summary>
+    /// <summary>Shape edit mode: drag handles, click an edge to add a vertex, right-click a vertex to delete it.</summary>
     public bool EditOutline;
-    private int _vertex = -1;
-
-    /// <summary>The outline to draw: the design's cosmetic override, or the frame's standard outline (simplified for editing).</summary>
-    public List<(double X, double Y)> OutlinePoints()
-    {
-        var d = Design?.Invoke();
-        if (d != null && d.Outline.Count >= 6) return d.Outline.Chunk(2).Select(c => (c[0], c[1])).ToList();
-        var std = HullGeometry.Outline(Hull);
-        if (std.Count > 20) std = std.Where((_, k) => k % 4 == 0 || k == std.Count - 1).ToList(); // editable handles for sampled hulls
-        return std;
-    }
-
-    public void ResetOutline() { Design?.Invoke()?.Outline.Clear(); _vertex = -1; Changed?.Invoke(); QueueRedraw(); }
+    /// <summary>Top view (plan, parts editable) or side view (profile).</summary>
+    public bool SideView;
     public float Zoom = 1;
+    private int _vertex = -1;
     private bool _dragging;
     private Vector2 _grab;
 
     private static Catalog Cat => Session.Content.Catalog;
     private FrameDef? Frame => Design?.Invoke() is { } d && Cat.Frames.TryGetValue(d.Frame, out var f) ? f : null;
     private HullDef Hull => Frame?.Hull ?? new HullDef(20, 10, "pad");
+    private bool IsAirOrMissile => Frame?.Kind is "aircraft" or "munition";
 
     public override void _Ready() { FocusMode = FocusModeEnum.All; ClipContents = true; }
 
-    private float Scale => (float)Math.Min((Size.Y - 30) / Hull.Length, (Size.X - 30) / (Hull.Width * 1.15)) * Zoom;
+    // ---- coordinates. Top view: bow up (x = starboard, y = forward). Side view: bow right (y along length, z up).
+    private float Scale => SideView
+        ? (float)Math.Min((Size.X - 30) / Hull.Length, (Size.Y - 30) / Math.Max(1, SideHeight() * 2.4)) * Zoom
+        : (float)Math.Min((Size.Y - 30) / Hull.Length, (Size.X - 30) / (Hull.Width * 1.15)) * Zoom;
     private Vector2 Centre => Size / 2;
-    public Vector2 ToScreen(double x, double y) => Centre + new Vector2((float)x * Scale, -(float)y * Scale);
+    public Vector2 ToScreen(double x, double y) => SideView ? Centre + new Vector2((float)x * Scale, -(float)y * Scale) : Centre + new Vector2((float)x * Scale, -(float)y * Scale);
     public (double X, double Y) ToWorld(Vector2 p) => ((p.X - Centre.X) / Scale, -(p.Y - Centre.Y) / Scale);
+    private double SideHeight() => SidePoints().Select(p => Math.Abs(p.Y)).DefaultIfEmpty(1).Max();
+
+    /// <summary>Top outline (right half) to draw and edit: the design's own, or the frame's standard (simplified for editing).</summary>
+    public List<(double X, double Y)> OutlinePoints()
+    {
+        var d = Design?.Invoke();
+        if (d != null && d.Outline.Count >= 6) return d.Outline.Chunk(2).Select(c => (c[0], c[1])).ToList();
+        var std = HullGeometry.Outline(Hull);
+        if (std.Count > 20) std = std.Where((_, k) => k % 4 == 0 || k == std.Count - 1).ToList();
+        return std;
+    }
+
+    /// <summary>Side profile (full polygon) in view coordinates: x = along the length (bow right), y = height.</summary>
+    public List<(double X, double Y)> SidePoints()
+    {
+        var d = Design?.Invoke();
+        if (d != null && d.Side.Count >= 6) return d.Side.Chunk(2).Select(c => (c[0], c[1])).ToList();
+        return Frame?.Hull != null ? SideGeometry.Profile(Hull) : new();
+    }
+
+    private List<double> Store(DesignDef d) => SideView ? d.Side : d.Outline;
+    private List<(double X, double Y)> EditPoints() => SideView ? SidePoints() : OutlinePoints();
+
+    public void ResetOutline() { if (Design?.Invoke() is { } d) { BeforeChange?.Invoke(); Store(d).Clear(); _vertex = -1; Changed?.Invoke(); QueueRedraw(); } }
 
     public override void _Draw()
     {
         DrawRect(new Rect2(Vector2.Zero, Size), new Color("0a1a2a"));
+        var d = Design?.Invoke();
+        var font = ThemeDB.FallbackFont;
+        if (SideView) { DrawSide(d); DrawHandles(); DrawString(font, new Vector2(8, 16), $"{Frame?.Name} · side profile · {(IsAirOrMissile ? "nose" : "bow")} →", HorizontalAlignment.Left, -1, 12, UiTheme.Dim); return; }
+
         var s = Scale;
         for (var gy = -Hull.Length; gy <= Hull.Length; gy += Hull.Length > 60 ? 10 : Hull.Length > 8 ? 1 : 0.25)
             DrawLine(ToScreen(-Hull.Width, gy), ToScreen(Hull.Width, gy), new Color(0.3f, 0.6f, 0.85f, 0.06f), 1);
-        // hull outline from the shared profile
         var right = OutlinePoints().Select(p => ToScreen(p.X, p.Y)).ToList();
         var left = right.Select(p => new Vector2(2 * Centre.X - p.X, p.Y)).Reverse();
         var poly = right.Concat(left).ToArray();
-        try { DrawColoredPolygon(poly, new Color("56626b")); } catch { /* degenerate outline at extreme zoom */ }
+        try { DrawColoredPolygon(poly, new Color("56626b")); } catch { /* self-crossing outline while editing */ }
         DrawPolyline(poly.Append(poly[0]).ToArray(), new Color("9fb0bc"), 1.5f);
         DrawDashedLine(ToScreen(0, -Hull.Length / 2), ToScreen(0, Hull.Length / 2), new Color(0.5f, 0.85f, 1, 0.25f), 1, 6);
-
-        var d = Design?.Invoke();
         if (d == null) return;
+        var half = ShapeRules.TopHalf(Frame!, d);
         for (var i = 0; i < d.Parts.Count; i++)
         {
             var pl = d.Parts[i];
             if (!Cat.Parts.TryGetValue(pl.Part, out var p)) continue;
-            PartPalette.Draw(this, p, (x, y) => ToScreen(pl.X + x, pl.Y + y), s, pl.Rot);
-            if (ShowArcs && p.Arc > 0 && (i == Selected || Selected < 0))
+            PartPalette.Draw(this, p, (x, y) => ToScreen(pl.X + x, pl.Y + y), s, pl.Rot, EditOutline ? 0.5f : 1);
+            if (ShowArcs && !EditOutline && p.Arc > 0 && (i == Selected || Selected < 0))
             {
                 var c = ToScreen(pl.X, pl.Y);
                 var reach = (float)Math.Max(p.Extent * 4, Hull.Width * 0.8) * s;
@@ -122,36 +143,70 @@ public partial class Blueprint : Control
                 }
             }
             if (i == Selected) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 3, 0, Mathf.Tau, 32, new Color("7fe3ff"), 1.5f);
-            if (!HullGeometry.Inside(Hull, pl.X, pl.Y, Math.Max(0.1, Hull.Width * 0.05))) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
+            if (!HullGeometry.Inside(half, pl.X, pl.Y, Math.Max(0.1, Hull.Width * 0.05))) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
         }
-        if (EditOutline)
+        DrawHandles();
+        DrawString(font, new Vector2(8, 16), $"{Frame?.Name}  ·  {Hull.Length:0.#} × {Hull.Width:0.#} m  ·  {(IsAirOrMissile ? "nose" : "bow")} ↑", HorizontalAlignment.Left, -1, 12, UiTheme.Dim);
+    }
+
+    /// <summary>Side view: the profile polygon, a waterline for ships, and parts as blocks sized by their height class.</summary>
+    private void DrawSide(DesignDef? d)
+    {
+        var pts = SidePoints().Select(p => ToScreen(p.X, p.Y)).ToArray();
+        if (pts.Length >= 3)
         {
-            var pts = OutlinePoints();
-            for (var k = 0; k < pts.Count; k++)
-            {
-                var sp = ToScreen(pts[k].X, pts[k].Y);
-                DrawRect(new Rect2(sp - new Vector2(4, 4), new Vector2(8, 8)), k == _vertex ? UiTheme.Accent : Colors.White, false, 1.5f);
-                DrawRect(new Rect2(new Vector2(2 * Centre.X - sp.X, sp.Y) - new Vector2(3, 3), new Vector2(6, 6)), new Color(1, 1, 1, 0.4f), false, 1);
-            }
+            try { DrawColoredPolygon(pts, new Color("56626b")); } catch { }
+            DrawPolyline(pts.Append(pts[0]).ToArray(), new Color("9fb0bc"), 1.5f);
         }
-        var font = ThemeDB.FallbackFont;
-        DrawString(font, new Vector2(8, 16), $"{Frame?.Name}  ·  {Hull.Length:0.#} × {Hull.Width:0.#} m  ·  {(Frame?.Kind is "aircraft" or "munition" ? "nose" : "bow")} ↑", HorizontalAlignment.Left, -1, 12, UiTheme.Dim);
+        if (Frame?.Kind == "ship") DrawLine(ToScreen(-Hull.Length * 0.6, 0), ToScreen(Hull.Length * 0.6, 0), new Color(0.3f, 0.6f, 0.9f, 0.6f), 1);
+        if (d == null || Frame?.Kind != "ship" && Frame?.Kind != "ground") return;
+        var deck = SidePoints().Where(p => p.Y > 0).Select(p => p.Y).DefaultIfEmpty(0).Min() is var m && m > 0 ? SidePoints().Max(p => p.Y) * 0.8 : 0;
+        var unit = Frame.Kind == "ship" ? Math.Max(1.2, Hull.Beam * 0.12) : 0.5;
+        foreach (var pl in d.Parts.OrderBy(q => Cat.Parts.TryGetValue(q.Part, out var pp) ? ArcGeometry.Height(pp) : 0))
+        {
+            if (!Cat.Parts.TryGetValue(pl.Part, out var p)) continue;
+            var h = Math.Max(0.4, ArcGeometry.Height(p)) * unit;
+            var w = p.Extent * 1.4;
+            var a = ToScreen(pl.Y - w / 2, deck + h); var b = ToScreen(pl.Y + w / 2, deck);
+            DrawRect(new Rect2(a, b - a), PartPalette.Fill(p.Shapes.FirstOrDefault()?.Fill ?? "steel"));
+            DrawRect(new Rect2(a, b - a), new Color("2c3740"), false, 1);
+        }
+    }
+
+    private void DrawHandles()
+    {
+        if (!EditOutline) return;
+        var pts = EditPoints();
+        for (var k = 0; k < pts.Count; k++)
+        {
+            var sp = ToScreen(pts[k].X, pts[k].Y);
+            DrawRect(new Rect2(sp - new Vector2(4, 4), new Vector2(8, 8)), k == _vertex ? UiTheme.Accent : Colors.White, false, 1.5f);
+            if (!SideView) DrawRect(new Rect2(new Vector2(2 * Centre.X - sp.X, sp.Y) - new Vector2(3, 3), new Vector2(6, 6)), new Color(1, 1, 1, 0.35f), false, 1);
+        }
     }
 
     private int HitTest(Vector2 at)
     {
         var d = Design?.Invoke();
-        if (d == null) return -1;
-        for (var i = d.Parts.Count - 1; i >= 0; i--) // topmost first
+        if (d == null || SideView) return -1;
+        for (var i = d.Parts.Count - 1; i >= 0; i--)
             if (Cat.Parts.TryGetValue(d.Parts[i].Part, out var p) && ToScreen(d.Parts[i].X, d.Parts[i].Y).DistanceTo(at) <= Math.Max(6, p.Extent * Scale * 0.8)) return i;
         return -1;
     }
 
-    /// <summary>Snap to the centreline and to a grid that suits the size (0.5 m ships, 0.1 m aircraft, 0.05 m missiles).</summary>
     private (double, double) Snap(double x, double y)
     {
         var g = Hull.Length > 60 ? 0.5 : Hull.Length > 8 ? 0.1 : 0.05;
         return (Math.Abs(x) < g * 1.2 ? 0 : Math.Round(x / g) * g, Math.Round(y / g) * g);
+    }
+
+    /// <summary>Copy the shown outline into the design so it can be edited.</summary>
+    private void Materialise(DesignDef d, List<(double X, double Y)> pts)
+    {
+        var store = Store(d);
+        if (store.Count >= 6) return;
+        store.Clear();
+        foreach (var (x, y) in pts) { store.Add(x); store.Add(y); }
     }
 
     public override void _GuiInput(InputEvent e)
@@ -161,22 +216,14 @@ public partial class Blueprint : Control
         if (e is InputEventMouseButton mb && mb.Pressed)
         {
             GrabFocus();
-            if (mb.ButtonIndex == MouseButton.WheelUp) { Zoom = Math.Min(6, Zoom * 1.15f); QueueRedraw(); }
+            if (mb.ButtonIndex == MouseButton.WheelUp) { Zoom = Math.Min(8, Zoom * 1.15f); QueueRedraw(); }
             else if (mb.ButtonIndex == MouseButton.WheelDown) { Zoom = Math.Max(0.5f, Zoom / 1.15f); QueueRedraw(); }
-            else if (mb.ButtonIndex == MouseButton.Left && EditOutline)
-            {
-                var pts = OutlinePoints();
-                _vertex = -1;
-                for (var k = 0; k < pts.Count; k++) if (ToScreen(pts[k].X, pts[k].Y).DistanceTo(mb.Position) < 8) _vertex = k;
-                if (_vertex >= 0 && d.Outline.Count < 6) { d.Outline.Clear(); foreach (var (x, y) in pts) { d.Outline.Add(x); d.Outline.Add(y); } }
-                _dragging = _vertex >= 0;
-                QueueRedraw();
-            }
+            else if (EditOutline) ShapeClick(d, mb);
             else if (mb.ButtonIndex == MouseButton.Left)
             {
                 Selected = HitTest(mb.Position);
                 _dragging = Selected >= 0;
-                if (_dragging) _grab = ToScreen(d.Parts[Selected].X, d.Parts[Selected].Y) - mb.Position;
+                if (_dragging) { BeforeChange?.Invoke(); _grab = ToScreen(d.Parts[Selected].X, d.Parts[Selected].Y) - mb.Position; }
                 SelectionChanged?.Invoke(); QueueRedraw();
             }
             else if (mb.ButtonIndex == MouseButton.Right && HitTest(mb.Position) is var h && h >= 0) { Selected = h; Rotate(90); }
@@ -186,18 +233,18 @@ public partial class Blueprint : Control
         else if (e is InputEventMouseMotion mv && _dragging && EditOutline && _vertex >= 0)
         {
             var (x, y) = ToWorld(mv.Position);
-            d.Outline[_vertex * 2] = Math.Max(0, Math.Round(x, 2)); // right half; the left mirrors it
-            d.Outline[_vertex * 2 + 1] = Math.Round(y, 2);
+            var store = Store(d);
+            store[_vertex * 2] = SideView ? Math.Round(x, 2) : Math.Max(0, Math.Round(x, 2)); // top: right half only, the left mirrors it
+            store[_vertex * 2 + 1] = Math.Round(y, 2);
             QueueRedraw();
         }
         else if (e is InputEventMouseMotion mm && _dragging && Selected >= 0)
         {
-            var (x, y) = ToWorld(mm.Position + _grab);
-            (x, y) = Snap(x, y);
+            var (x, y) = Snap(ToWorld(mm.Position + _grab).X, ToWorld(mm.Position + _grab).Y);
             d.Parts[Selected] = d.Parts[Selected] with { X = x, Y = y };
             QueueRedraw();
         }
-        else if (e is InputEventKey { Pressed: true } k && Selected >= 0)
+        else if (e is InputEventKey { Pressed: true } k && Selected >= 0 && !EditOutline)
         {
             if (k.Keycode is Key.Delete or Key.Backspace) Remove();
             else if (k.Keycode == Key.Q) Rotate(-15);
@@ -207,10 +254,53 @@ public partial class Blueprint : Control
         }
     }
 
+    /// <summary>Shape editing: grab a vertex, click an edge to insert one, right-click a vertex to delete it.</summary>
+    private void ShapeClick(DesignDef d, InputEventMouseButton mb)
+    {
+        var pts = EditPoints();
+        var near = -1;
+        for (var k = 0; k < pts.Count; k++) if (ToScreen(pts[k].X, pts[k].Y).DistanceTo(mb.Position) < 8) near = k;
+        if (mb.ButtonIndex == MouseButton.Right)
+        {
+            if (near < 0 || pts.Count <= 3) return;
+            BeforeChange?.Invoke();
+            Materialise(d, pts);
+            Store(d).RemoveRange(near * 2, 2);
+            _vertex = -1; Changed?.Invoke(); QueueRedraw();
+            return;
+        }
+        if (mb.ButtonIndex != MouseButton.Left) return;
+        if (near >= 0)
+        {
+            BeforeChange?.Invoke();
+            Materialise(d, pts);
+            _vertex = near; _dragging = true; QueueRedraw();
+            return;
+        }
+        // insert on the nearest edge (top view edges run along the right half; the side profile is closed)
+        var edges = SideView ? pts.Count : pts.Count - 1;
+        var best = -1; var bestD = 7f; var at = Vector2.Zero;
+        for (var k = 0; k < edges; k++)
+        {
+            var a = ToScreen(pts[k].X, pts[k].Y); var b = ToScreen(pts[(k + 1) % pts.Count].X, pts[(k + 1) % pts.Count].Y);
+            var q = Geometry2D.GetClosestPointToSegment(mb.Position, a, b);
+            var dist = q.DistanceTo(mb.Position);
+            if (dist < bestD) { bestD = dist; best = k; at = q; }
+        }
+        if (best < 0) return;
+        BeforeChange?.Invoke();
+        Materialise(d, pts);
+        var (wx, wy) = ToWorld(at);
+        Store(d).InsertRange((best + 1) * 2, new[] { Math.Round(wx, 2), Math.Round(wy, 2) });
+        _vertex = best + 1; _dragging = true;
+        Changed?.Invoke(); QueueRedraw();
+    }
+
     public void Rotate(double deg)
     {
         var d = Design?.Invoke();
         if (d == null || Selected < 0) return;
+        BeforeChange?.Invoke();
         d.Parts[Selected] = d.Parts[Selected] with { Rot = ((d.Parts[Selected].Rot + deg) % 360 + 360) % 360 };
         Changed?.Invoke(); QueueRedraw();
     }
@@ -219,6 +309,7 @@ public partial class Blueprint : Control
     {
         var d = Design?.Invoke();
         if (d == null || Selected < 0) return;
+        BeforeChange?.Invoke();
         d.Parts.RemoveAt(Selected);
         Selected = -1;
         SelectionChanged?.Invoke(); Changed?.Invoke(); QueueRedraw();
@@ -228,21 +319,23 @@ public partial class Blueprint : Control
     {
         var d = Design?.Invoke();
         if (d == null || Selected < 0) return;
+        BeforeChange?.Invoke();
         var p = d.Parts[Selected];
         d.Parts.Add(p with { X = -p.X, Rot = (360 - p.Rot) % 360 });
         Changed?.Invoke(); QueueRedraw();
     }
 
-    public override bool _CanDropData(Vector2 at, Variant data) => data.VariantType == Variant.Type.Dictionary && data.AsGodotDictionary().ContainsKey("part");
+    public override bool _CanDropData(Vector2 at, Variant data) => !SideView && data.VariantType == Variant.Type.Dictionary && data.AsGodotDictionary().ContainsKey("part");
 
     public override void _DropData(Vector2 at, Variant data)
     {
         var d = Design?.Invoke();
         if (d == null) return;
+        BeforeChange?.Invoke();
         var id = data.AsGodotDictionary()["part"].AsString();
         var (x, y) = Snap(ToWorld(at).X, ToWorld(at).Y);
         d.Parts.Add(new Placement(id, x, y));
-        if (Mirror && Math.Abs(x) > 1) d.Parts.Add(new Placement(id, -x, y));
+        if (Mirror && Math.Abs(x) > Hull.Width * 0.03) d.Parts.Add(new Placement(id, -x, y));
         Selected = d.Parts.Count - 1;
         SelectionChanged?.Invoke(); Changed?.Invoke(); QueueRedraw();
     }

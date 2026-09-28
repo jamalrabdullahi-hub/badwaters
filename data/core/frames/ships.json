@@ -1012,5 +1012,241 @@
    "beam": 2.5,
    "style": "sub"
   }
+ },
+ {
+  "id": "hull-dinghy",
+  "name": "Rigid inflatable boat",
+  "kind": "ship",
+  "type": "dinghy",
+  "budgets": {
+   "mass": 1,
+   "volume": 1,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 0
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 0,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.00125,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 0,
+  "factory": "shipyard",
+  "workUnits": 0,
+  "hull": {
+   "length": 8,
+   "beam": 3,
+   "style": "boat"
+  }
+ },
+ {
+  "id": "hull-midget-sub",
+  "name": "Midget submarine",
+  "kind": "ship",
+  "type": "midget-sub",
+  "budgets": {
+   "mass": 33,
+   "volume": 3,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 8
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 0,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.0375,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 12,
+  "factory": "shipyard",
+  "workUnits": 0,
+  "hull": {
+   "length": 28,
+   "beam": 3.5,
+   "style": "sub"
+  }
+ },
+ {
+  "id": "hull-trimaran",
+  "name": "Littoral combat ship (trimaran)",
+  "kind": "ship",
+  "type": "trimaran",
+  "budgets": {
+   "mass": 704,
+   "volume": 14,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 176
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.8,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 256,
+  "factory": "shipyard",
+  "workUnits": 11,
+  "hull": {
+   "length": 127,
+   "beam": 9.48,
+   "span": 31.6,
+   "style": "trimaran"
+  }
+ },
+ {
+  "id": "hull-catamaran",
+  "name": "Fast attack catamaran",
+  "kind": "ship",
+  "type": "catamaran",
+  "budgets": {
+   "mass": 55,
+   "volume": 4,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 14
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 1,
+   "deck-launcher": 2,
+   "fore-gun": 0,
+   "pd-mount": 0,
+   "hangar": 0,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 1.0625,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 20,
+  "factory": "shipyard",
+  "workUnits": 1,
+  "hull": {
+   "length": 50,
+   "beam": 3.5999999999999996,
+   "span": 12,
+   "style": "catamaran"
+  }
+ },
+ {
+  "id": "hull-destroyer-stealth",
+  "name": "Stealth destroyer (tumblehome)",
+  "kind": "ship",
+  "type": "destroyer-stealth",
+  "budgets": {
+   "mass": 3300,
+   "volume": 40,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 825
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 5,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 4.75,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 1200,
+  "factory": "shipyard",
+  "workUnits": 50,
+  "hull": {
+   "length": 186,
+   "beam": 24.6,
+   "style": "tumblehome"
+  }
+ },
+ {
+  "id": "hull-frigate-stealth",
+  "name": "Stealth frigate",
+  "kind": "ship",
+  "type": "frigate-stealth",
+  "budgets": {
+   "mass": 924,
+   "volume": 15,
+   "power": 0,
+   "cooling": 4,
+   "crew": 0,
+   "data": 2,
+   "topside": 231
+  },
+  "ports": {
+   "mast-sensor": 1,
+   "cell-block": 2,
+   "deck-launcher": 2,
+   "fore-gun": 1,
+   "pd-mount": 2,
+   "hangar": 1,
+   "bow-sonar": 1
+  },
+  "base": {
+   "survivability": 2.05,
+   "endurance": 2
+  },
+  "requires": {
+   "structures": 2
+  },
+  "cost": 336,
+  "factory": "shipyard",
+  "workUnits": 14,
+  "hull": {
+   "length": 125,
+   "beam": 16,
+   "style": "tumblehome"
+  }
  }
 ]

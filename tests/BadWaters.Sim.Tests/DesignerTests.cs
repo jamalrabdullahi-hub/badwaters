@@ -79,11 +79,50 @@ public class DesignerTests
     }
 
     [Fact]
-    public void Outline_shaping_is_cosmetic()
+    public void Shape_modifiers_are_deterministic()
     {
-        var d = Content.Designs["ddg-2031"];
-        var shaped = d with { Outline = new List<double> { 0, 77, 15, 0, 12, -77 } };
-        Assert.Equal(Eval(d).Budgets["mass"], Eval(shaped).Budgets["mass"]);
-        Assert.Equal(Eval(d).Issues.Count, Eval(shaped).Issues.Count);
+        var d = Content.Designs["ddg-2031"] with { Outline = new List<double> { 0, 77, 10, 40, 10, -70, 8, -77, 0, -77 } };
+        var a = ShapeRules.Evaluate(Content.Catalog.Frames[d.Frame], d, Content.Catalog);
+        var b = ShapeRules.Evaluate(Content.Catalog.Frames[d.Frame], d, Content.Catalog);
+        Assert.Equal(a.Notes, b.Notes);
+        Assert.Equal(a.Ratings, b.Ratings);
+    }
+
+    [Fact]
+    public void Giant_drone_body_is_less_stealthy_than_a_clean_flying_wing()
+    {
+        var wing = new DesignDef { Id = "w", Name = "w", Frame = "af-ucav-wing", Outline = new List<double> { 0, 5.8, 9.45, -1.8, 8.5, -5.8, 0, -3.5 } };
+        var giant = new DesignDef { Id = "g", Name = "g", Frame = "af-ucav-wing", Outline = new List<double> { 0, 5.8, 3, 5, 14, 2, 18, -1, 16, -4, 12, -5.8, 6, -7, 3, -6, 1, -8, 0, -8 } };
+        var fw = Content.Catalog.Frames["af-ucav-wing"];
+        var sw = ShapeRules.Evaluate(fw, wing, Content.Catalog).Ratings.GetValueOrDefault("signature");
+        var sg = ShapeRules.Evaluate(fw, giant, Content.Catalog).Ratings.GetValueOrDefault("signature");
+        Assert.True(sw > sg);
+        Assert.True(ShapeRules.Evaluate(fw, giant, Content.Catalog).Mass > 0);
+    }
+
+    [Fact]
+    public void A_bare_four_point_flying_wing_pays_in_handling()
+    {
+        var wing = new DesignDef { Id = "w", Name = "w", Frame = "af-ucav-wing", Outline = new List<double> { 0, 5.8, 9.45, -1.8, 8.5, -5.8, 0, -3.5 } };
+        var r = ShapeRules.Evaluate(Content.Catalog.Frames["af-ucav-wing"], wing, Content.Catalog);
+        Assert.True(r.Ratings.GetValueOrDefault("agility") <= -2); // tailless and crude
+        var withFins = wing with { Parts = new List<Placement> { new("ac-tail-canted", 0, -4) } };
+        Assert.True(ShapeRules.Evaluate(Content.Catalog.Frames["af-ucav-wing"], withFins, Content.Catalog).Ratings.GetValueOrDefault("agility") > r.Ratings["agility"]);
+    }
+
+    [Fact]
+    public void Slender_hulls_are_faster()
+    {
+        var f = Content.Catalog.Frames["hull-destroyer-ad"];
+        var slim = new DesignDef { Id = "s", Name = "s", Frame = f.Id, Outline = new List<double> { 0, 77, 8, 30, 8, -70, 6, -77, 0, -77 } };
+        var fat = new DesignDef { Id = "f", Name = "f", Frame = f.Id, Outline = new List<double> { 0, 77, 20, 30, 20, -70, 18, -77, 0, -77 } };
+        Assert.True(ShapeRules.Evaluate(f, slim, Content.Catalog).Ratings.GetValueOrDefault("speed") > ShapeRules.Evaluate(f, fat, Content.Catalog).Ratings.GetValueOrDefault("speed"));
+    }
+
+    [Fact]
+    public void New_hull_and_airframe_types_exist()
+    {
+        foreach (var id in new[] { "hull-dinghy", "hull-midget-sub", "hull-trimaran", "hull-catamaran", "hull-destroyer-stealth", "hull-frigate-stealth", "af-hale", "af-male", "af-ucav-wing", "af-delta-heavy", "af-canard-delta", "af-lo-heavy" })
+            Assert.NotNull(Content.Catalog.Frames[id].Hull);
     }
 }

@@ -229,5 +229,205 @@
    "span": 16,
    "style": "uav"
   }
+ },
+ {
+  "id": "af-hale",
+  "name": "High-altitude long-endurance (HALE) airframe",
+  "kind": "aircraft",
+  "type": "hale",
+  "budgets": {
+   "mass": 6,
+   "volume": 8,
+   "power": 0,
+   "cooling": 2,
+   "data": 2
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "endurance": 9,
+   "payload": 2
+  },
+  "requires": {
+   "structures": 4,
+   "autonomy": 5
+  },
+  "cost": 40,
+  "factory": "aerospace-assembly",
+  "workUnits": 30,
+  "hull": {
+   "length": 14.5,
+   "beam": 1.2,
+   "span": 40,
+   "style": "hale"
+  }
+ },
+ {
+  "id": "af-male",
+  "name": "Medium-altitude long-endurance (MALE) airframe",
+  "kind": "aircraft",
+  "type": "male",
+  "budgets": {
+   "mass": 2,
+   "volume": 4,
+   "power": 0,
+   "cooling": 1,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "endurance": 7,
+   "payload": 2
+  },
+  "requires": {
+   "structures": 3,
+   "autonomy": 4
+  },
+  "cost": 12,
+  "factory": "aerospace-assembly",
+  "workUnits": 10,
+  "hull": {
+   "length": 11,
+   "beam": 1.0,
+   "span": 20,
+   "style": "male"
+  }
+ },
+ {
+  "id": "af-ucav-wing",
+  "name": "Low-observable UCAV (flying wing)",
+  "kind": "aircraft",
+  "type": "ucav-lo",
+  "budgets": {
+   "mass": 5,
+   "volume": 6,
+   "power": 0,
+   "cooling": 2,
+   "data": 2
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "signature": 4,
+   "payload": 3,
+   "endurance": 4
+  },
+  "requires": {
+   "structures": 5,
+   "low-observables": 6,
+   "autonomy": 6
+  },
+  "cost": 45,
+  "factory": "aerospace-assembly",
+  "workUnits": 35,
+  "hull": {
+   "length": 11.6,
+   "beam": 2,
+   "span": 18.9,
+   "style": "flying-wing"
+  }
+ },
+ {
+  "id": "af-delta-heavy",
+  "name": "Heavy delta interceptor airframe",
+  "kind": "aircraft",
+  "type": "interceptor",
+  "budgets": {
+   "mass": 12,
+   "volume": 10,
+   "power": 0,
+   "cooling": 3,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 1,
+   "payload": 4,
+   "endurance": 3
+  },
+  "requires": {
+   "structures": 4
+  },
+  "cost": 45,
+  "factory": "aerospace-assembly",
+  "workUnits": 35,
+  "hull": {
+   "length": 22,
+   "beam": 2.6,
+   "span": 13.5,
+   "style": "delta"
+  }
+ },
+ {
+  "id": "af-canard-delta",
+  "name": "Canard-delta fighter airframe",
+  "kind": "aircraft",
+  "type": "multirole",
+  "budgets": {
+   "mass": 8,
+   "volume": 7,
+   "power": 0,
+   "cooling": 2,
+   "data": 1
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 3,
+   "payload": 4
+  },
+  "requires": {
+   "structures": 5
+  },
+  "cost": 40,
+  "factory": "aerospace-assembly",
+  "workUnits": 32,
+  "hull": {
+   "length": 15.3,
+   "beam": 2,
+   "span": 10.9,
+   "style": "canard-delta"
+  }
+ },
+ {
+  "id": "af-lo-heavy",
+  "name": "Low-observable heavy fighter airframe",
+  "kind": "aircraft",
+  "type": "stealth-air-superiority",
+  "budgets": {
+   "mass": 11,
+   "volume": 9,
+   "power": 0,
+   "cooling": 3,
+   "data": 2
+  },
+  "ports": {
+   "nose-sensor": 1
+  },
+  "base": {
+   "agility": 3,
+   "payload": 3,
+   "signature": 3
+  },
+  "requires": {
+   "structures": 6,
+   "low-observables": 6
+  },
+  "cost": 70,
+  "factory": "aerospace-assembly",
+  "workUnits": 55,
+  "hull": {
+   "length": 20.4,
+   "beam": 2.6,
+   "span": 13.5,
+   "style": "stealth"
+  }
  }
 ]

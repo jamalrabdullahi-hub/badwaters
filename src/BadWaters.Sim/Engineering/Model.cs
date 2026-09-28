@@ -126,6 +126,8 @@ public static class HullGeometry
         {
             "sub" => Math.Pow(Math.Max(0, 1 - Math.Pow(2 * t - 1, 2)), 0.35),
             "merchant" => t < 0.12 ? 0.9 + t : t < 0.8 ? 1 : Math.Max(0.25, 1 - Math.Pow((t - 0.8) / 0.2, 2) * 0.75),
+            "tumblehome" => t < 0.15 ? 0.85 + t : t < 0.5 ? 1 : Math.Max(0, 1 - (t - 0.5) / 0.5),
+            "boat" => t < 0.1 ? 0.9 : t < 0.6 ? 1 : Math.Max(0, Math.Cos((t - 0.6) / 0.4 * Math.PI / 2)),
             "vehicle" or "tracked" or "pad" => 1,
             _ => t < 0.2 ? 0.78 + 1.1 * t : t < 0.58 ? 1 : Math.Max(0, 1 - Math.Pow((t - 0.58) / 0.42, 1.6)),
         };
@@ -148,6 +150,16 @@ public static class HullGeometry
                 return P((0, .5 * L), (S / 2, -.2 * L), (S / 2 * .92, -.5 * L), (S * .3, -.36 * L), (S * .16, -.5 * L), (0, -.38 * L));
             case "large":
                 return P((0, .5 * L), (fw, .44 * L), (fw, .12 * L), (S / 2, -.1 * L), (S / 2, -.16 * L), (fw, -.05 * L), (fw, -.36 * L), (S * .2, -.45 * L), (S * .2, -.5 * L), (fw * .4, -.5 * L));
+            case "hale":
+                return P((0, .5 * L), (fw, .42 * L), (fw, .08 * L), (S / 2, .04 * L), (S / 2, -.02 * L), (fw, -.04 * L), (fw * .6, -.42 * L), (S * .12, -.5 * L), (fw * .3, -.5 * L));
+            case "male":
+                return P((0, .5 * L), (fw, .38 * L), (fw, .12 * L), (S / 2, .06 * L), (S / 2, -.04 * L), (fw, -.06 * L), (fw * .5, -.4 * L), (S * .16, -.5 * L), (fw * .3, -.5 * L));
+            case "canard-delta":
+                return P((0, .5 * L), (fw, .3 * L), (S * .28, .12 * L), (fw, .1 * L), (fw, .02 * L), (S / 2, -.38 * L), (S / 2, -.46 * L), (fw, -.46 * L), (fw * .7, -.5 * L));
+            case "trimaran":
+                return P((0, .5 * L), (.15 * S, .2 * L), (.15 * S, .05 * L), (.5 * S, .02 * L), (.5 * S, -.45 * L), (.3 * S, -.5 * L), (0, -.5 * L));
+            case "catamaran":
+                return P((0, .3 * L), (.28 * S, .5 * L), (.5 * S, .35 * L), (.5 * S, -.5 * L), (0, -.5 * L));
             case "uav":
                 return P((0, .5 * L), (fw, .4 * L), (fw, .1 * L), (S / 2, .05 * L), (S / 2, -.05 * L), (fw, -.08 * L), (fw * .6, -.4 * L), (S * .18, -.46 * L), (S * .18, -.5 * L), (fw * .3, -.5 * L));
             case "missile":
@@ -160,9 +172,10 @@ public static class HullGeometry
     }
 
     /// <summary>Is the point on the outline (with a margin in metres)?</summary>
-    public static bool Inside(HullDef h, double x, double y, double margin = 0.5)
+    public static bool Inside(HullDef h, double x, double y, double margin = 0.5) => Inside(Outline(h), x, y, margin);
+
+    public static bool Inside(List<(double X, double Y)> half, double x, double y, double margin = 0.5)
     {
-        var half = Outline(h);
         var poly = half.Concat(half.AsEnumerable().Reverse().Select(p => (X: -p.X, p.Y))).ToList();
         bool In(double px, double py)
         {
@@ -192,6 +205,8 @@ public sealed record DesignDef
     public List<Placement> Parts { get; init; } = new();
     /// <summary>Cosmetic outline override: right-half vertices [x0, y0, x1, y1, ...] in metres. Budgets and bounds ignore it.</summary>
     public List<double> Outline { get; init; } = new();
+    /// <summary>Side profile override: full polygon [y0, z0, y1, z1, ...] in metres (y along the length to the bow, z up).</summary>
+    public List<double> Side { get; init; } = new();
 }
 
 public enum IssueKind { OverBudget, NoPort, MissingInterface, TechTooLow, WrongKind, UnknownPart }
@@ -203,7 +218,8 @@ public sealed record Evaluation(
     IReadOnlyList<Issue> Issues,
     double Cost,
     IReadOnlyDictionary<string, double> ProductionWork,
-    IReadOnlyDictionary<string, (double Weight, double Cost)>? Breakdown = null)
+    IReadOnlyDictionary<string, (double Weight, double Cost)>? Breakdown = null,
+    IReadOnlyList<string>? Notes = null)
 {
     public bool Valid => Issues.Count == 0;
 }

@@ -60,7 +60,7 @@ public sealed class Evaluator
         {
             if (!_cat.Parts.TryGetValue(pl.Part, out var p)) { issues.Add(new(IssueKind.UnknownPart, $"Unknown part {pl.Part}.")); continue; }
             if (p.FitsKinds.Length > 0 && !p.FitsKinds.Contains(frame.Kind)) issues.Add(new(IssueKind.WrongKind, $"{p.Name} can't be fitted to a {frame.Kind}."));
-            if (frame.Hull != null && !HullGeometry.Inside(frame.Hull, pl.X, pl.Y, Math.Max(0.1, frame.Hull.Width * 0.05))) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
+            if (frame.Hull != null && !HullGeometry.Inside(ShapeRules.TopHalf(frame, d), pl.X, pl.Y, Math.Max(0.1, frame.Hull.Width * 0.05))) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
             var uses = new Dictionary<string, double>(p.Uses);
             double partCost = p.Cost;
             if (p.Component != null && _cat.Components.TryGetValue(p.Component, out var pc))
@@ -101,6 +101,13 @@ public sealed class Evaluator
         foreach (var (port, by) in needs)
             if (!offered.Contains(port)) issues.Add(new(IssueKind.MissingInterface, $"{by} needs a {port} interface that nothing on this design provides."));
 
+        // outline shaping: simple deterministic modifiers (see ShapeRules)
+        var shape = frame.Hull != null ? ShapeRules.Evaluate(frame, d, _cat) : null;
+        if (shape != null)
+        {
+            foreach (var (r, v) in shape.Ratings) ratings[r] = ratings.GetValueOrDefault(r) + v;
+            if (shape.Mass > 0) { used["mass"] = used.GetValueOrDefault("mass") + shape.Mass; Book(breakdown, "Shaping", shape.Mass, 0); }
+        }
         var budgets = new Dictionary<string, (double, double)>();
         foreach (var axis in used.Keys.Union(avail.Keys))
         {
@@ -112,7 +119,7 @@ public sealed class Evaluator
         foreach (var (r, rule) in _cat.Ratings)
             if (ratings.TryGetValue(r, out var v)) ratings[r] = Math.Clamp(v, 0, rule.Cap);
 
-        return new Evaluation(budgets, ratings, issues, cost, work, breakdown);
+        return new Evaluation(budgets, ratings, issues, cost, work, breakdown, shape?.Notes);
     }
 
     private static void Book(Dictionary<string, (double Weight, double Cost)> b, string key, double w, double c)

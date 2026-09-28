@@ -1,8 +1,8 @@
 [
   {
     "id": "player-aircraft-1",
-    "name": "B-2A Spirit (variant)",
-    "frame": "af-flying-wing",
+    "name": "search plain",
+    "frame": "af-large",
     "components": [
       "mat-composite",
       "mat-ram",
@@ -18,8 +18,135 @@
       "cm-satcom",
       "ew-jammer",
       "if-bay",
-      "rl-basic"
+      "rl-basic",
+      "dc-sop"
     ],
-    "lineage": "night-heron"
+    "lineage": "night-heron",
+    "parts": [
+      {
+        "part": "ac-engine-pod",
+        "x": 6.6000000000000005,
+        "y": 0.9,
+        "rot": 0
+      },
+      {
+        "part": "ac-engine-pod",
+        "x": -6.6000000000000005,
+        "y": 0.9,
+        "rot": 0
+      },
+      {
+        "part": "ac-engine-pod",
+        "x": 12.600000000000001,
+        "y": -1.6,
+        "rot": 0
+      },
+      {
+        "part": "ac-engine-pod",
+        "x": -12.600000000000001,
+        "y": -1.6,
+        "rot": 0
+      },
+      {
+        "part": "ac-ecs",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-intake-chin",
+        "x": 1.9000000000000001,
+        "y": 8.1,
+        "rot": 0
+      },
+      {
+        "part": "ac-intake-chin",
+        "x": -1.9000000000000001,
+        "y": 8.1,
+        "rot": 0
+      },
+      {
+        "part": "ac-satcom",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-fbw",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-fusion-computer",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-mission-computer",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-datalink",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-sensor-turret",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-irst",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-rotodome",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-chaff",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "ac-canopy-flat",
+        "x": 0,
+        "y": 19.1,
+        "rot": 0
+      }
+    ],
+    "outline": [
+      0,
+      22.5,
+      1.9,
+      19.8,
+      1.9,
+      5.3999999999999995,
+      20,
+      -4.5,
+      20,
+      -7.2,
+      1.9,
+      -2.25,
+      1.9,
+      -16.2,
+      10.5,
+      -19.45,
+      10.74,
+      -23.53,
+      1.1,
+      -21.16
+    ]
   }
 ]
