@@ -30,6 +30,10 @@ public sealed class GameContent
     public BadWaters.Sim.Economy.EconomyGeo Geo { get; } = new();
     public Dictionary<string, NationDef> Nations { get; } = new();
     public List<BadWaters.Sim.Economy.TradeRegime> TradeRegimes { get; } = new();
+    public Dictionary<string, BadWaters.Sim.Command.DoctrineProfile> Doctrines { get; } = new();
+    /// <summary>A nation's theatre doctrine: its own entry merged over the default (data/core/theatre/doctrine.json).</summary>
+    public BadWaters.Sim.Command.DoctrineProfile DoctrineFor(string? nation) =>
+        nation != null && Doctrines.TryGetValue(nation, out var d) ? d : Doctrines.GetValueOrDefault("default") ?? new BadWaters.Sim.Command.DoctrineProfile();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     private void ValidateEconomy()
@@ -94,6 +98,15 @@ public sealed class GameContent
         foreach (var x in l.Load<BadWaters.Sim.Economy.DepositDef>("economy/deposits.json")) g.Geo.Deposits[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.NationEconomyDef>("economy/nation_economies.json")) g.Geo.Nations[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.SupplierDef>("economy/suppliers.json")) g.Geo.Suppliers[x.Id] = x;
+        var dl = l.LoadFile("theatre/doctrine.json");
+        var def = dl.GetValueOrDefault("default");
+        foreach (var (id, obj) in dl)
+        {
+            var merged = def != null && id != "default" ? (System.Text.Json.Nodes.JsonObject)def.DeepClone() : new System.Text.Json.Nodes.JsonObject();
+            foreach (var (k, v) in obj) merged[k] = v?.DeepClone();
+            merged["id"] = id;
+            g.Doctrines[id] = System.Text.Json.JsonSerializer.Deserialize<BadWaters.Sim.Command.DoctrineProfile>(merged, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        }
         g.TradeRegimes.AddRange(l.Load<BadWaters.Sim.Economy.TradeRegime>("economy/trade.json"));
         g.Geo.Seeding = l.LoadObject<BadWaters.Sim.Economy.SeedingRules>("economy/seeding.json") ?? g.Geo.Seeding;
         g.Geo.Rules = l.LoadObject<BadWaters.Sim.Economy.EconomyRules>("economy/economy_rules.json") ?? g.Geo.Rules;

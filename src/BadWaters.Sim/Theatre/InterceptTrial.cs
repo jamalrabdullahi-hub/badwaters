@@ -146,6 +146,10 @@ public sealed class InterceptTrial
     public Dictionary<string, BaseState> Bases { get; } = new();
     /// <summary>The operation system (both sides, AI and player). Set up after Air/Intel/Naval.</summary>
     public BadWaters.Sim.Command.OperationBoard? Ops { get; set; }
+    /// <summary>Set before creating Air: the sides are run by theatre commanders (scenario ATO lines become opening operations).</summary>
+    public bool UseCommanders { get; set; }
+    /// <summary>One autonomous commander per side (both always exist; a side under direct player control pauses its own).</summary>
+    public Dictionary<string, BadWaters.Sim.Command.Commander> Commanders { get; } = new();
     public IntelService? Intel { get; set; }
     public NavalForces? Naval { get; set; }
     private double _nextAiNaval = 300;
@@ -282,25 +286,46 @@ public sealed class InterceptTrial
 
     // ---------------- time ----------------
 
+    /// <summary>Coarse steps when nothing fast is in the air (headless auto-resolve and high time compression).</summary>
+    public bool Adaptive { get; set; }
+    public const double CoarseStep = 10;
+    private double _dt = Step;
+    /// <summary>No missiles in flight: nothing needs half-second resolution.</summary>
+    private bool Quiet => !Tracks.Any(t => t.State == TrackState.Flying);
+
     public void Advance(double seconds)
     {
         _carry += seconds;
-        while (_carry >= Step) { _carry -= Step; Tick(); }
+        while (_carry >= Step)
+        {
+            var dt = Adaptive && Quiet && _carry >= CoarseStep ? CoarseStep : Step;
+            _carry -= dt; _dt = dt; Tick();
+        }
     }
+
+    /// <summary>Developer profiling: milliseconds spent per subsystem (null = off).</summary>
+    public Dictionary<string, double>? Profile { get; set; }
+    private readonly System.Diagnostics.Stopwatch _sw = new();
+    private void Lap(string k) { if (Profile == null) return; Profile[k] = Profile.GetValueOrDefault(k) + _sw.Elapsed.TotalMilliseconds; _sw.Restart(); }
 
     private void Tick()
     {
-        Time += Step;
-        foreach (var b in Bases.Values) b.Repair(Step);
+        if (Profile != null) _sw.Restart();
+        Time += _dt;
+        foreach (var b in Bases.Values) b.Repair(_dt);
         foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor;
-        Naval?.Tick(Step, Time);
+        Lap("bases");
+        Naval?.Tick(_dt, Time);
+        Lap("naval");
         Intel?.Tick(Time);
+        Lap("intel");
         if (Naval != null && Time >= _nextAiNaval)
         {
             _nextAiNaval = Time + 600;
             foreach (var side in new[] { "blue", "red" }.Where(x => Control.GetValueOrDefault(x) == SideControl.AI)) AiAntiShip(side);
         }
         RunScript();
+        Lap("ai-naval+script");
 
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Launched <= Time))
         {
@@ -309,7 +334,7 @@ public sealed class InterceptTrial
                 {
                     var (lon, lat) = tr.Pos(Time);
                     if (Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, lon, lat) > b.RadarKm) continue;
-                    var p = Math.Clamp(0.15 + 0.06 * (b.Radar.R("detection") - m(tr).R("signature")) + (tr.Phase(Time) == "boost" ? 0.1 : 0), 0.02, 0.9) * Step;
+                    var p = Math.Clamp(0.15 + 0.06 * (b.Radar.R("detection") - m(tr).R("signature")) + (tr.Phase(Time) == "boost" ? 0.1 : 0), 0.02, 0.9) * _dt;
                     if (_rng.NextDouble() < p)
                     {
                         tr.Detected = true; tr.DetectedAt = Time;
@@ -340,10 +365,16 @@ public sealed class InterceptTrial
             Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}){effect}.");
         }
 
-        Air?.Tick(Time - Step, Time);
+        Lap("tracks+shots");
+        Air?.Tick(Time - _dt, Time);
+        Lap("air");
         Ops?.Tick(Time);
+        Lap("ops");
+        foreach (var c in Commanders.Values) if (Control.GetValueOrDefault(c.Side) == SideControl.AI) c.Tick(Time);
+        Lap("commanders");
         if (Control["blue"] == SideControl.AI) AiDefend("blue");
         if (Control["red"] == SideControl.AI) AiDefend("red");
+        Lap("ai-defend");
     }
 
     private static SystemProfile m(Track t) => t.Missile;
@@ -474,14 +505,26 @@ public sealed class InterceptTrial
     }
 
     /// <summary>Passive AI doctrine: engage every detected threat with a salvo; re-engage after a miss.</summary>
+    private readonly Dictionary<string, double> _nextDefend = new();
+
     private void AiDefend(string side)
     {
+        if (Time < _nextDefend.GetValueOrDefault(side)) return;
+        _nextDefend[side] = Time + 1; // once a second is plenty for engagement decisions
+        var threats = Tracks.Where(t => t.State == TrackState.Flying && t.Detected && t.Side != side).ToList();
+        if (threats.Count == 0) return;
+        var engaged = Shots.Where(s => s.State == ShotState.Flying).Select(s => s.Target).ToHashSet();
         foreach (var b in Batteries.Where(b => b.Def.Side == side && b.Stock > 0))
-            foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Detected && t.Side != side))
+            foreach (var tr in threats)
             {
-                if (Shots.Any(s => s.Target == tr && s.State == ShotState.Flying)) continue;
+                if (engaged.Contains(tr)) continue;
+                // cheap geometry first: a battery that can't reach the missile now or its target can't intercept it
+                var (lon, lat) = tr.Pos(Time);
+                var reach = b.ReachKm * 1.3;
+                if (Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, lon, lat) > reach && Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, tr.Target.Lon, tr.Target.Lat) > reach) continue;
                 if (PlanIntercept(b, tr) == null) continue;
                 Engage(b.Def.Id, tr.Id, AiSalvo);
+                engaged.Add(tr);
             }
     }
 

@@ -54,9 +54,15 @@ public sealed class OperationBoard
     public IEnumerable<Flight> Flights(Operation op) => _t.Air?.Flights.Where(f => op.Elements.Any(e => e.Flights.Contains(f.Id))) ?? Enumerable.Empty<Flight>();
     public IEnumerable<MissileTask> FireTasks(Operation op) => _t.Air?.Fires.Where(m => op.Elements.Any(e => e.Fires.Contains(m.Id))) ?? Enumerable.Empty<MissileTask>();
 
+    /// <summary>Rules, losses and completion are checked this often (theatre seconds); starts are exact.</summary>
+    public const double CheckEvery = 5;
+    private double _nextCheck;
+
     public void Tick(double now)
     {
-        foreach (var op in Ops.Where(o => o.Open).ToList())
+        var check = now >= _nextCheck;
+        if (check) _nextCheck = now + CheckEvery;
+        foreach (var op in Ops.Where(o => o.Open && (check || (o.Status == OpStatus.Planned && now >= o.Start))).ToList())
         {
             if (op.Status == OpStatus.Planned)
             {
@@ -66,6 +72,7 @@ public sealed class OperationBoard
                 op.Log.Add($"T+{Clock(now)} executing");
                 foreach (var e in op.Elements.Where(e => !e.Held)) Launch(op, e);
             }
+            if (!check) continue;
             Track(op);
             Rules(op, now);
             if (op.Status == OpStatus.Active && Done(op)) Release(op, "complete");
@@ -96,6 +103,11 @@ public sealed class OperationBoard
                 e.State = "firing";
                 break;
             }
+            case ElementKind.Relocate when e.Base != "" && _t.Air != null:
+                Authority.Commit(op.Id, e.Assets);
+                op.Log.Add($"{e.Id}: {_t.Air.Relocate(e.Assets, e.Base)}");
+                e.State = "ferrying";
+                break;
             case ElementKind.Naval when e.Ship != "" && _t.Naval != null:
                 op.Log.Add($"{e.Id}: {_t.Naval.MoveTo(e.Ship, e.Lon, e.Lat)}");
                 e.State = "sailing";
@@ -118,12 +130,14 @@ public sealed class OperationBoard
         op.AircraftLost = Flights(op).Sum(f => f.LostAircraft.Count);
         foreach (var e in op.Elements.Where(e => e.Kind == ElementKind.Fires && e.State == "firing"))
             if (FireTasks(op).Where(m => e.Fires.Contains(m.Id)).All(m => m.State != FireState.Planned)) { e.State = "done"; Authority.Release(FireTasks(op).Where(m => e.Fires.Contains(m.Id)).Select(m => m.Launcher.Def.Id)); }
+        foreach (var e in op.Elements.Where(e => e.Kind == ElementKind.Relocate && e.State == "ferrying"))
+            if (_t.Air != null && e.Assets.All(a => !_t.Air.Ferrying.ContainsKey(a))) { e.State = "done"; Authority.Release(e.Assets); }
         foreach (var e in op.Elements.Where(e => e.Kind == ElementKind.Naval && e.State == "sailing"))
             if (_t.Naval?.Find(e.Ship) is { } s && (!s.Moving || s.Sunk)) { e.State = s.Sunk ? "lost" : "on station"; if (s.Sunk) Authority.Release(new[] { e.Ship }); }
     }
 
     private bool Done(Operation op) =>
-        op.Elements.Where(e => !e.Held).All(e => e.State is "failed" or "done" or "on station" or "lost"
+        op.Elements.Any(e => !e.Held) && op.Elements.Where(e => !e.Held).All(e => e.State is "failed" or "done" or "on station" or "lost"
             || (e.State == "flying" && Flights(op).Where(f => e.Flights.Contains(f.Id)).All(f => f.State is FlightState.Landed or FlightState.Lost)));
 
     // ---------------- IF/THEN rules (the owner's picture only) ----------------

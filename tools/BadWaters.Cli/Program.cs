@@ -31,6 +31,36 @@ if (cmd == "auto")
     }
     return 0;
 }
+if (cmd == "campaign")
+{
+    // campaign [scenario] [hours] [seed]: both sides run by their theatre commanders, headless
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    var sc = gc.Scenarios[args.Length > 1 ? args[1] : "jpn-chn"];
+    var hours = args.Length > 2 ? double.Parse(args[2]) : 12;
+    var seed = args.Length > 3 ? int.Parse(args[3]) : 1;
+    string? Nation(string side) { var n = sc.Sides.GetValueOrDefault(side, ""); return gc.Nations.Values.FirstOrDefault(x => x.Name == n || x.Id == n)?.Id; }
+    var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), gc.PresetInfo, gc.BaseTypes, side => gc.DoctrineFor(Nation(side)), seed);
+    t.Adaptive = true;
+    if (Environment.GetEnvironmentVariable("PROFILE") != null) t.Profile = new();
+    var sw = System.Diagnostics.Stopwatch.StartNew();
+    for (var h = 0; h < hours; h++)
+    {
+        t.Advance(3600);
+        foreach (var (side, c) in t.Commanders)
+            if (c.Last != null && (h % 3 == 0 || h == hours - 1))
+                Console.WriteLine($"T+{h + 1,3}h {sc.Sides[side],-8} pool {c.Last.PoolAircraft} (F{c.Last.Fighters} S{c.Last.Strikers}) · open ops {c.Last.OpenOps} · enemy air seen {c.Last.KnownEnemyAir} · SAMs known {c.Last.KnownSams} · {string.Join("; ", c.Last.Notes)}");
+    }
+    Console.WriteLine($"{hours} h simulated in {sw.ElapsedMilliseconds} ms · tracks {t.Tracks.Count} shots {t.Shots.Count} log {t.Log.Count}");
+    if (t.Profile != null) Console.WriteLine("profile: " + string.Join(", ", t.Profile.OrderByDescending(k => k.Value).Select(k => $"{k.Key} {k.Value:0} ms")));
+    foreach (var side in new[] { "blue", "red" })
+    {
+        var ops = t.Ops!.Ops.Where(o => o.Side == side).ToList();
+        Console.WriteLine();
+        Console.WriteLine($"{sc.Sides[side]}: {ops.Count} operations ({ops.Count(o => o.Status == BadWaters.Sim.Command.OpStatus.Complete)} complete, {ops.Count(o => o.Status == BadWaters.Sim.Command.OpStatus.Aborted)} aborted, {ops.Count(o => o.Open)} open) · aircraft lost {t.Air!.Destroyed.Count(id => sc.Units.First(u => u.Id == id).Side == side)}");
+        foreach (var o in ops.Where(o => o.Rationale != "opening orders").Take(30)) Console.WriteLine($"  [{o.Status,-8}] {o.Name,-34} {string.Join("/", o.Purpose),-24} {o.Rationale}");
+    }
+    return 0;
+}
 if (cmd == "bills")
 {
     var gc = GameContent.Load(Path.Combine("data", "core"));

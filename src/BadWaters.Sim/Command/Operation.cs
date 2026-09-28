@@ -10,7 +10,7 @@ public enum Author { AI, Player }
 public enum OpStatus { Planned, Active, Complete, Aborted }
 
 /// <summary>What an element does, executed by the existing theatre systems.</summary>
-public enum ElementKind { Air, Fires, Naval, Sensor }
+public enum ElementKind { Air, Fires, Naval, Sensor, Relocate }
 
 public sealed class OpElement
 {
@@ -19,6 +19,8 @@ public sealed class OpElement
     public string Role { get; set; } = "";
     /// <summary>Air or fires: the package / fire mission spec (flights, target, TOT, launcher, count...).</summary>
     public AtoEntry? Spec { get; set; }
+    /// <summary>Relocate: destination base.</summary>
+    public string Base { get; set; } = "";
     /// <summary>Naval: ship id and destination.</summary>
     public string Ship { get; set; } = "";
     public double Lon { get; set; }

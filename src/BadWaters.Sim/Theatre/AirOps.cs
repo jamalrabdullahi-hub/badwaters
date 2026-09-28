@@ -179,7 +179,8 @@ public sealed class AirTasking
         _t = trial;
         _preset = preset;
         _rng = new Random(seed * 7919 + 3);
-        foreach (var e in trial.Scenario.Ato.Where(e => trial.Control.GetValueOrDefault(e.Side) == SideControl.AI))
+        // with theatre commanders the scenario's lines become their opening operations instead (see Commander)
+        foreach (var e in trial.Scenario.Ato.Where(e => !trial.UseCommanders && trial.Control.GetValueOrDefault(e.Side) == SideControl.AI))
         {
             var r = Commit(e);
             if (!r.Ok) trial.Report("ato", $"{Side(e.Side)} ATO line not flown ({(e.Name != "" ? e.Name : e.Launcher)}): {string.Join(" ", r.Issues)}");
@@ -413,8 +414,36 @@ public sealed class AirTasking
 
     // ---------------- execution ----------------
 
+    /// <summary>Aircraft ferrying to another base: unit id → (base, arrival time). Unavailable until they arrive.</summary>
+    public Dictionary<string, (string Base, double Arrive)> Ferrying { get; } = new();
+
+    /// <summary>Relocate aircraft to another base (dispersal). They are unavailable while ferrying, then operate from there.</summary>
+    public string Relocate(IEnumerable<string> units, string baseId)
+    {
+        var dest = _t.Site(baseId);
+        if (dest == null) return "Unknown base.";
+        var n = 0;
+        foreach (var id in units)
+        {
+            var u = _t.Scenario.Units.FirstOrDefault(x => x.Id == id);
+            if (u == null || Tasked.Contains(id) || Destroyed.Contains(id)) continue;
+            var from = _t.Site(BaseOf(u));
+            var km = from == null ? 0 : Pacing.DistanceKm(from.Lon, from.Lat, dest.Lon, dest.Lat);
+            var v = AirPacing.CruiseKmPerSec(_preset(u.Preset)?.R("speed") ?? 5);
+            Ferrying[id] = (baseId, _t.Time + AirPacing.PrepSeconds + km / v);
+            Tasked.Add(id); n++;
+        }
+        _t.Report("air", $"{Side(_t.Scenario.Units.FirstOrDefault(u => u.Id == units.FirstOrDefault())?.Side ?? "")} relocating {n} aircraft to {dest.Name}.");
+        return $"{n} aircraft ferrying to {dest.Name}.";
+    }
+
     public void Tick(double prev, double now)
     {
+        foreach (var (id, (b, at)) in Ferrying.Where(k => now >= k.Value.Arrive).ToList())
+        {
+            Ferrying.Remove(id); Tasked.Remove(id);
+            if (!Destroyed.Contains(id)) _divertBase[id] = b;
+        }
         foreach (var fire in Fires.Where(x => x.State == FireState.Planned && now >= x.LaunchAt))
         {
             var r = _t.Launch(fire.Launcher.Def.Id, fire.Target.Id, fire.Count, fire.Aimpoint);

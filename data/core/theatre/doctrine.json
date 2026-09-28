@@ -1,0 +1,10 @@
+[
+ {"id": "default"},
+ {"id": "USA", "strike": 1.2, "fires": 1.1, "riskTolerance": 0.25, "maxConcurrentStrikes": 4},
+ {"id": "CHN", "fires": 1.4, "defence": 1.2, "maxConcurrentFires": 3},
+ {"id": "JPN", "defence": 1.4, "strike": 0.8, "preserve": 1.3, "riskTolerance": 0.2},
+ {"id": "ISR", "strike": 1.3, "defence": 1.3, "riskTolerance": 0.2, "recon": 1.0},
+ {"id": "IRN", "fires": 1.6, "strike": 0.7, "riskTolerance": 0.4, "maxConcurrentFires": 4},
+ {"id": "RUS", "fires": 1.3, "riskTolerance": 0.35},
+ {"id": "PRK", "fires": 1.5, "strike": 0.6, "riskTolerance": 0.5}
+]

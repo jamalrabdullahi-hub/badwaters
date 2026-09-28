@@ -307,11 +307,9 @@ public partial class TheatreOps : Control
             Launchers = Scenario.Launchers.Select(l => l with { Missile = _missile }).ToList(),
         };
         var keep = Trial?.Control.ToDictionary(k => k.Key, k => k.Value);
-        Trial = new InterceptTrial(sc, Session.Profile, seed, Session.Content.BaseTypes);
-        if (keep != null) foreach (var (k, v) in keep) Trial.Control[k] = v;
-        Trial.Naval = new NavalForces(Trial, Session.Content.PresetInfo, seed);
-        Trial.Intel = new IntelService(Trial, Session.Content.PresetInfo, seed);
-        Trial.Air = new AirTasking(Trial, Session.Content.PresetInfo, seed);
+        // a live theatre: every system plus an autonomous commander per side (the war fights itself; the player intervenes)
+        Trial = BadWaters.Sim.Command.TheatreFactory.Create(sc, Session.Profile, Session.Content.PresetInfo, Session.Content.BaseTypes,
+            side => Session.Content.DoctrineFor(Session.NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, keep);
         // strikes write back into the strategic economy: the hit facility loses capacity (and stock) next month
         Trial.SiteDamaged += (site, frac) =>
         {
