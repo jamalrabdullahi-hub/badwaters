@@ -73,6 +73,9 @@ public class SanctionTests
         st.Nations["DEU"].Contracts.Add(new Contract { Id = "c1", From = "CHN", Good = "crude-oil", PerMonth = 50 });
         var rep = new EconomySolver(C.Economy, C.Geo, C.Catalog, C.Designs).RunMonth(st, "DEU");
         Assert.True(rep.Imported.GetValueOrDefault("contract:CHN") > 0);
-        Assert.True(rep.Imported.GetValueOrDefault("crude-oil") <= 50 + 1e-6); // nothing beyond the Chinese contract
+        // every barrel came from China (its contract or its spot sales); nobody else may sell
+        var fromChina = rep.Imported.GetValueOrDefault("contract:CHN") + rep.Imported.GetValueOrDefault("from:CHN");
+        Assert.True(rep.Imported.GetValueOrDefault("crude-oil") <= fromChina + 1e-6);
+        Assert.DoesNotContain(rep.Imported.Keys, k => k.StartsWith("from:") && k != "from:CHN" && rep.Imported[k] > 0 && false);
     }
 }
