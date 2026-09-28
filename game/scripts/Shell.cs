@@ -38,6 +38,8 @@ public partial class Shell : Control
         _map = new StrategicMap();
         if (DevScreenshot.Arg("no-map") == null) AddChild(_map);
         _map.RouteHovered += ShowRoute;
+        _map.ChokepointHovered += ShowChokepoint;
+        _map.ChokepointClicked += ToggleChokepoint;
         var ui = new CanvasLayer { Layer = 1 };
         AddChild(ui);
 
@@ -158,7 +160,7 @@ public partial class Shell : Control
         var h = new HBoxContainer();
         h.AddThemeConstantOverride("separation", 14);
         box.AddChild(h);
-        foreach (var (t, c) in new[] { ("Fully open", StrategicMap.Open), ("Contested", StrategicMap.Contested), ("Effectively closed", StrategicMap.Closed) })
+        foreach (var (t, c) in new[] { ("Sea lane open", StrategicMap.Open), ("Land corridor open", StrategicMap.LandOpen), ("Contested", StrategicMap.Contested), ("Closed", StrategicMap.Closed), ("Control point", ChokepointLayer.OpenCol) })
         {
             h.AddChild(new ColorRect { Color = c, CustomMinimumSize = new Vector2(22, 6), SizeFlagsVertical = SizeFlags.ShrinkCenter });
             h.AddChild(UiTheme.Text(t, 13));
@@ -253,7 +255,29 @@ public partial class Shell : Control
         _info.Text = $"{def.Name}\n{status} · {st.Step} (disruption {st.Disruption:0})\n" +
                      $"Throughput {def.Throughput * st.DeliveryFactor:0}/{def.Throughput:0} per month\n" +
                      $"Cost ×{st.CostMultiplier:0.00} · transit {def.TransitDays * st.DelayMultiplier:0} days\n" +
-                     $"Chokepoints: {string.Join(", ", def.Chokepoints)}";
+                     $"{(def.Mode == "land" ? "Land corridor" : "Sea lane")} · control points: " +
+                     (def.Chokepoints.Length == 0 ? "none" : string.Join(", ", def.Chokepoints.Select(c => Session.Content.Chokepoints[c].Name + (Session.World.ClosedChokepoints.ContainsKey(c) ? " (SHUT)" : ""))));
+    }
+
+    private void ShowChokepoint(string id)
+    {
+        var c = Session.Content.Chokepoints[id];
+        var shut = Session.World.ClosedChokepoints.TryGetValue(id, out var by);
+        var routes = Session.Content.Routes.Values.Where(r => r.Chokepoints.Contains(id)).ToList();
+        _info.Text = $"{c.Name}{(c.Critical ? " · critical control point" : "")}\n" +
+                     (shut ? $"SHUT{(by != "" ? $" by {by}" : "")}. Routes through it are closed.\n" : "Open.\n") +
+                     $"Routes through it ({routes.Count}): {string.Join(", ", routes.Select(r => r.Name))}\n" +
+                     $"Throughput at stake: {routes.Sum(r => r.Throughput):0} per month\n" +
+                     $"Click to {(shut ? "reopen" : "shut")} it.";
+    }
+
+    /// <summary>Shut or reopen a control point (a blockade or closure as a game action).</summary>
+    private void ToggleChokepoint(string id)
+    {
+        Session.Scheduler.SetChokepoint(id, !Session.World.ClosedChokepoints.ContainsKey(id), Session.World.Player);
+        _map.RefreshRoutes();
+        _map.Redraw();
+        ShowChokepoint(id);
     }
 
     // ---- dev helpers for automated screenshots
@@ -277,6 +301,7 @@ public partial class Shell : Control
     private void DevAfterBuild()
     {
         if (DevScreenshot.Arg("mode") is { } m) _map.SetMode(m == "topographic" ? 1 : m == "tactical" ? 2 : 0);
+        if (DevScreenshot.Arg("shut") is { } shutIds) foreach (var cid in shutIds.Split(',')) ToggleChokepoint(cid);
         if (DevScreenshot.Arg("view") == "world") _map.CenterOn(60, 20, 0.32f);
         if (DevScreenshot.Arg("center")?.Split(',') is { Length: 3 } cz) _map.CenterOn(double.Parse(cz[0]), double.Parse(cz[1]), float.Parse(cz[2]));
         if (DevScreenshot.Arg("hover") is { } r) ShowRoute(r);

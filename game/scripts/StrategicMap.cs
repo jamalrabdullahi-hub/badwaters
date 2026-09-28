@@ -15,7 +15,13 @@ public partial class StrategicMap : Node2D
     private MeshInstance2D _coarse = null!, _fine = null!;
     /// <summary>Zoom level above which the detailed 50m coastline replaces the 110m one.</summary>
     public const float DetailZoom = 0.6f;
-    private Node2D _routes = null!;
+    private Node2D _routes = null!, _landRoutes = null!;
+    private ChokepointLayer _chokes = null!;
+    public event Action<string?>? ChokepointHovered;
+    public event Action<string>? ChokepointClicked;
+    private Vector2 _pressAt;
+    /// <summary>Land corridors when open (brown); disrupted ones take the status colour like sea lanes.</summary>
+    public static readonly Color LandOpen = new("a0703f");
     private GridLayer _grid = null!;
     private bool _drag;
     // The static base (sea, land, grid, real-Earth lines and labels) renders into an off-screen buffer only when
@@ -75,8 +81,12 @@ public partial class StrategicMap : Node2D
             };
             if (n != null) { _layers[d.Id] = n; if (n is LineLayer or PointLayer) _base.AddChild(n); else AddChild(n); }
         }
+        _landRoutes = new Node2D();
+        AddChild(_landRoutes);
         _routes = new Node2D();
         AddChild(_routes);
+        _chokes = new ChokepointLayer();
+        AddChild(_chokes);
         RefreshRoutes();
         foreach (var d in _defs.Values) SetLayer(d.Id, d.On);
         if (DevScreenshot.Arg("layers") is { } extra) foreach (var id in extra.Split(',')) SetLayer(id.TrimStart('-'), !id.StartsWith('-'));
@@ -111,6 +121,8 @@ public partial class StrategicMap : Node2D
         if (id == "lakes") foreach (var m in new[] { _land, _sea }) m.SetShaderParameter("show_lakes", on);
         if (d.Kind == "grid") _grid.Visible = on;
         if (d.Kind == "routes") _routes.Visible = on;
+        if (d.Kind == "landroutes") _landRoutes.Visible = on;
+        if (d.Kind == "chokepoints") _chokes.Visible = on;
         Redraw();
     }
 
@@ -124,6 +136,8 @@ public partial class StrategicMap : Node2D
             n.Visible = _on.Contains(id) && (n is not LineLayer l || z >= l.MinZoom);
             if (n.Visible && n is not LineLayer) n.QueueRedraw();
         }
+        ScaleRouteWidths();
+        _chokes?.QueueRedraw();
         if (_cam == null || _baseVp == null) return;
         _baseCam.Position = _cam.Position;
         _baseCam.Zoom = _cam.Zoom;
@@ -152,7 +166,7 @@ public partial class StrategicMap : Node2D
 
     public void RefreshRoutes()
     {
-        foreach (var c in _routes.GetChildren()) c.QueueFree();
+        foreach (var c in _routes.GetChildren().Concat(_landRoutes.GetChildren())) c.QueueFree();
         foreach (var r in Session.Content.Routes.Values)
         {
             var st = Session.World.Routes[r.Id];
@@ -165,11 +179,15 @@ public partial class StrategicMap : Node2D
                 prevLon = lon;
                 pts.Add(Session.Project(lon, p[1]));
             }
-            var line = new Line2D { Points = pts.ToArray(), Width = 5, DefaultColor = StatusColor(st.Status), JointMode = Line2D.LineJointMode.Round, Name = r.Id };
-            if (st.Status != RouteStatus.FullyOpen) line.Width = 7;
+            var land = r.Mode == "land";
+            var open = st.Status == RouteStatus.FullyOpen;
+            var line = new Line2D { Points = pts.ToArray(), DefaultColor = land && open ? LandOpen : StatusColor(st.Status), JointMode = Line2D.LineJointMode.Round, Name = r.Id };
             line.SetMeta("route", r.Id);
-            _routes.AddChild(line);
+            line.SetMeta("px", (land ? 2.5f : 3f) + (open ? 0 : 1.5f)); // screen pixels at any zoom (see Redraw)
+            (land ? _landRoutes : _routes).AddChild(line);
         }
+        _chokes?.QueueRedraw();
+        ScaleRouteWidths();
     }
 
     public override void _UnhandledInput(InputEvent e)
@@ -184,27 +202,58 @@ public partial class StrategicMap : Node2D
                 _cam.Position += before - GetGlobalMousePosition();
                 UpdateLod();
             }
-            else if (mb.ButtonIndex == MouseButton.Left) _drag = mb.Pressed;
+            else if (mb.ButtonIndex == MouseButton.Left)
+            {
+                _drag = mb.Pressed;
+                if (mb.Pressed) _pressAt = mb.Position;
+                // a click (not a drag) on a control point selects it
+                else if (mb.Position.DistanceTo(_pressAt) < 4 && _chokes.Visible && HitChokepoint(GetGlobalMousePosition()) is { } cp) ChokepointClicked?.Invoke(cp);
+            }
         }
         else if (e is InputEventMouseMotion mm)
         {
             if (_drag) { _cam.Position -= mm.Relative / _cam.Zoom; Redraw(); }
-            if (_routes.Visible) RouteHovered?.Invoke(HitRoute(GetGlobalMousePosition()));
+            var at = GetGlobalMousePosition();
+            var cp = _chokes.Visible ? HitChokepoint(at) : null;
+            if (cp != null) ChokepointHovered?.Invoke(cp);
+            else if (_routes.Visible || _landRoutes.Visible) RouteHovered?.Invoke(HitRoute(at));
         }
     }
 
     private string? HitRoute(Vector2 p)
     {
         var tol = 8 / _cam.Zoom.X;
-        foreach (var n in _routes.GetChildren())
+        foreach (var n in (_routes.Visible ? _routes.GetChildren() : new()).Concat(_landRoutes.Visible ? _landRoutes.GetChildren() : new()))
             if (n is Line2D l)
                 for (var i = 0; i + 1 < l.Points.Length; i++)
                     if (Geometry2D.GetClosestPointToSegment(p, l.Points[i], l.Points[i + 1]).DistanceTo(p) < tol) return (string)l.GetMeta("route");
         return null;
     }
 
+    /// <summary>Route lines keep a constant on-screen width, so they read at world zoom and don't bloat close up.</summary>
+    private void ScaleRouteWidths()
+    {
+        if (_routes == null) return;
+        var z = _cam?.Zoom.X ?? 1;
+        foreach (var n in _routes.GetChildren().Concat(_landRoutes.GetChildren()))
+            if (n is Line2D l && l.HasMeta("px")) l.Width = (float)l.GetMeta("px") / z;
+    }
+
+    private string? HitChokepoint(Vector2 p)
+    {
+        var tol = 10 / _cam.Zoom.X;
+        return Session.Content.Chokepoints.Values.Where(c => c.Critical || _cam.Zoom.X >= ChokepointLayer.MinorZoom)
+            .Select(c => (c.Id, d: Session.Project(c.Lon, c.Lat).DistanceTo(p))).Where(x => x.d < tol).OrderBy(x => x.d).Select(x => x.Id).FirstOrDefault();
+    }
+
     public void AddOverlay(Node2D n) { if (n.GetParent() == null) AddChild(n); }
-    public void ShowRoutes(bool on) { _routes.Visible = on && _on.Contains("routes"); if (!on) RouteHovered?.Invoke(null); }
+    public void ShowRoutes(bool on)
+    {
+        _routes.Visible = on && _on.Contains("routes");
+        _landRoutes.Visible = on && _on.Contains("landroutes");
+        _chokes.Visible = on && _on.Contains("chokepoints");
+        if (!on) RouteHovered?.Invoke(null);
+    }
 
     /// <summary>Move the view by screen pixels (e.g. so a point sits in the middle of the uncovered map area).</summary>
     public void PanScreen(Vector2 px) { _cam.Position += px / _cam.Zoom; Redraw(); }

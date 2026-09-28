@@ -25,6 +25,7 @@ public sealed class GameContent
     public Dictionary<string, BaseTypeDef> BaseTypes { get; } = new();
     public Dictionary<string, ComponentArchetype> Archetypes { get; } = new();
     public Dictionary<string, AutoRole> AutoRoles { get; } = new();
+    public Dictionary<string, ChokepointDef> Chokepoints { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
@@ -38,6 +39,7 @@ public sealed class GameContent
         foreach (var x in l.Load<GoodDef>("goods.json")) g.Goods[x.Id] = x;
         foreach (var x in l.Load<FactoryDef>("factories.json")) g.Factories[x.Id] = x;
         foreach (var x in l.Load<RouteDef>("trade_routes.json")) g.Routes[x.Id] = x;
+        foreach (var x in l.Load<ChokepointDef>("chokepoints.json")) g.Chokepoints[x.Id] = x;
         foreach (var x in l.Load<TheatreDef>("theatres.json")) g.Theatres[x.Id] = x;
         foreach (var x in l.Load<RatingRule>("engineering/ratings.json")) g.Catalog.Ratings[x.Id] = x;
         foreach (var x in l.Load<ComponentTemplate>("components.json")) g.Catalog.Components[x.Id] = x;
@@ -111,6 +113,11 @@ public sealed class GameContent
                 if (t == null) Errors.Add($"scenario {sc.Id}: script targets unknown site {x.Target}");
                 else if (!TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: script targets protected site {x.Target}");
             }
+        }
+        foreach (var rt in Routes.Values)
+        {
+            foreach (var c in rt.Chokepoints) if (!Chokepoints.ContainsKey(c)) Errors.Add($"route {rt.Id}: unknown chokepoint {c}");
+            if (rt.Mode is not ("sea" or "land")) Errors.Add($"route {rt.Id}: mode must be sea or land");
         }
         foreach (var r in AutoRoles.Values)
         {

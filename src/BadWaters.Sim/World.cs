@@ -29,6 +29,8 @@ public sealed class World
     public string Player { get; set; } = "";
     public Dictionary<string, TheatreState> Theatres { get; set; } = new();
     public Dictionary<string, RouteState> Routes { get; set; } = new();
+    /// <summary>Chokepoints currently shut (id → who shut it).</summary>
+    public Dictionary<string, string> ClosedChokepoints { get; set; } = new();
     public List<FactoryInstance> Factories { get; set; } = new();
     public Dictionary<string, double> Stock { get; set; } = new();
     public List<string> Log { get; set; } = new();
@@ -96,10 +98,13 @@ public sealed class Scheduler
                 friendly = Math.Max(friendly, t.FriendlySeaControl);
                 if (t.AtWar) war = 100;
             }
+            var def = RouteDefs.GetValueOrDefault(id);
+            var shut = def != null && def.Chokepoints.Any(c => _w.ClosedChokepoints.ContainsKey(c));
+            if (def?.Mode == "land") hostile = 0; // land corridors: only a regional war disrupts them
             // storms along the route add a little disruption (simple weather, see Environment.Weather)
-            if (RoutePaths.TryGetValue(id, out var path)) hostile += StormDisruption * BadWaters.Sim.Environment.Weather.StormAlong(path, _w.Now);
+            if (def?.Mode != "land" && RoutePaths.TryGetValue(id, out var path)) hostile += StormDisruption * BadWaters.Sim.Environment.Weather.StormAlong(path, _w.Now);
             var wasClosed = r.Status == RouteStatus.EffectivelyClosed;
-            r.UpdateFromThreat(hostile, friendly, war);
+            r.UpdateFromThreat(hostile, friendly, war, shut);
             if (!wasClosed && r.Status == RouteStatus.EffectivelyClosed)
                 routeIrq ??= new Interrupt(_w.Now, "route-closed", $"Trade route {id} is effectively closed.", null);
         }
@@ -110,10 +115,25 @@ public sealed class Scheduler
         return routeIrq == null ? null : Record(routeIrq);
     }
 
+    /// <summary>
+    /// Shut or reopen a chokepoint (blockade, mining, political closure). Routes through it close at once;
+    /// after reopening they recover over the following days like any other disruption.
+    /// </summary>
+    public void SetChokepoint(string id, bool closed, string by = "")
+    {
+        if (closed) _w.ClosedChokepoints[id] = by; else _w.ClosedChokepoints.Remove(id);
+        foreach (var (rid, def) in RouteDefs)
+            if (def.Chokepoints.Contains(id) && _w.Routes.TryGetValue(rid, out var r))
+                r.Disruption = closed ? 100 : Math.Min(r.Disruption, 60);
+        _w.Log.Add($"{_w.Now:yyyy-MM-dd} {id} {(closed ? "closed" : "reopened")}{(by != "" ? $" by {by}" : "")}.");
+    }
+
     /// <summary>Route↔theatre membership is registered by the data layer.</summary>
     public Dictionary<string, HashSet<string>> RouteTheatres { get; } = new();
     /// <summary>Route waypoints [lon, lat] for weather; registered by the data layer (optional).</summary>
     public Dictionary<string, List<double[]>> RoutePaths { get; } = new();
+    /// <summary>Route definitions (mode and chokepoints); registered by the data layer (optional).</summary>
+    public Dictionary<string, RouteDef> RouteDefs { get; } = new();
     /// <summary>Disruption points added by a full-strength storm on the route.</summary>
     public const double StormDisruption = 12;
     private bool RouteTouches(string route, string theatre) => RouteTheatres.TryGetValue(route, out var s) && s.Contains(theatre);

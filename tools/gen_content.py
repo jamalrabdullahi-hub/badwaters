@@ -216,16 +216,54 @@ dump("frames/ground.json", GR)
 
 dump("theatres.json", [{"id":i,"name":n} for i,n in [("NATL","North Atlantic"),("ARCT","Arctic"),("MED","Mediterranean"),("RED","Red Sea"),("GULF","Persian Gulf"),
  ("IND","Indian Ocean"),("SCS","South China Sea"),("ECS","East China Sea"),("WPAC","Western Pacific"),("NPAC","North Pacific"),("BLK","Black Sea"),("BALT","Baltic")]])
-R=lambda i,n,path,th,ck,tp,days:{"id":i,"name":n,"path":path,"theatres":th,"chokepoints":ck,"throughput":tp,"transitDays":days}
+# Trade routes (game content): sea lanes, land corridors, and the control points that can shut them.
+# Real geography for the path; throughput, transit days and disruption are game values.
+R=lambda i,n,path,th,ck,tp,days,mode="sea":{"id":i,"name":n,"mode":mode,"path":path,"theatres":th,"chokepoints":ck,"throughput":tp,"transitDays":days}
+L=lambda i,n,path,th,tp,days,ck=None:R(i,n,path,th,ck or [],tp,days,"land")
+dump("chokepoints.json", [{"id":i,"name":n,"lon":lo,"lat":la,"kind":k,"critical":c} for i,n,lo,la,k,c in [
+ ("panama","Panama Canal",-79.7,9.1,"canal",True),("gibraltar","Strait of Gibraltar",-5.6,35.95,"strait",True),
+ ("turkish-straits","Turkish Straits (Bosporus, Dardanelles)",28.99,41.1,"strait",True),("suez","Suez Canal",32.35,30.6,"canal",True),
+ ("bab-el-mandeb","Bab-el-Mandeb",43.4,12.6,"strait",True),("hormuz","Strait of Hormuz",56.4,26.5,"strait",True),
+ ("malacca","Strait of Malacca",100.3,3.2,"strait",True),("tsushima","Korea (Tsushima) Strait",129.5,34.4,"strait",True),
+ ("vilkitsky","Vilkitsky Strait (Northern Sea Route)",104.5,77.9,"strait",True),("magellan","Strait of Magellan / Drake Passage",-68.5,-54.8,"strait",True),
+ ("english-channel","English Channel (Dover Strait)",1.5,51.0,"strait",False),("danish-straits","Danish Straits",12.7,55.9,"strait",False),
+ ("taiwan-strait","Taiwan Strait",119.7,24.3,"strait",False),("lombok","Lombok Strait",115.7,-8.7,"strait",False),
+ ("bering","Bering Strait",-169,65.8,"strait",False),("good-hope","Cape of Good Hope",18.5,-34.6,"passage",False)]])
 dump("trade_routes.json", [
- R("east-asia-europe","East Asia – Europe (Suez)",[[122.5,31],[123,27],[119,22],[114,17],[108,10],[104,1.3],[97,5],[80,5.5],[58,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["ECS","SCS","IND","RED","MED","NATL"],["Malacca","Bab-el-Mandeb","Suez","Gibraltar"],120,32),
- R("gulf-asia","Persian Gulf – East Asia",[[51.5,26.5],[56.3,26.5],[59,23],[70,15],[80,5.5],[97,5],[104,1.3],[108,10],[114,17],[119,20.5],[122,22],[126,29],[129,33]],["GULF","IND","SCS","ECS"],["Hormuz","Malacca"],100,22),
- R("gulf-europe","Persian Gulf – Europe",[[51.5,26.5],[56.3,26.5],[59,23],[57,17],[51,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["GULF","IND","RED","MED","NATL"],["Hormuz","Bab-el-Mandeb","Suez","Gibraltar"],80,24),
- R("north-atlantic","North Atlantic",[[-74,40.5],[-50,45],[-25,50],[-5,50],[4,51.9]],["NATL"],["English Channel"],110,12),
+ # ---- sea lanes
+ R("east-asia-europe","East Asia – Europe (Suez)",[[122.5,31],[123,27],[119,22],[114,17],[108,10],[104,1.3],[97,5],[80,5.5],[58,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["ECS","SCS","IND","RED","MED","NATL"],["malacca","bab-el-mandeb","suez","gibraltar"],120,32),
+ R("gulf-asia","Persian Gulf – East Asia",[[51.5,26.5],[56.3,26.5],[59,23],[70,15],[80,5.5],[97,5],[104,1.3],[108,10],[114,17],[119,20.5],[122,22],[126,29],[129,33]],["GULF","IND","SCS","ECS"],["hormuz","malacca"],100,22),
+ R("gulf-europe","Persian Gulf – Europe",[[51.5,26.5],[56.3,26.5],[59,23],[57,17],[51,13],[43.4,12.6],[38,21],[32.5,30],[25,34],[5,37],[-5.6,36],[-10,40],[-9,46],[-5,48.5],[-1,50.2],[4,51.9]],["GULF","IND","RED","MED","NATL"],["hormuz","bab-el-mandeb","suez","gibraltar"],80,24),
+ R("north-atlantic","North Atlantic",[[-74,40.5],[-50,45],[-25,50],[-5,50],[4,51.9]],["NATL"],["english-channel"],110,12),
  R("north-pacific","North Pacific",[[-122.4,37.8],[-150,45],[170,45],[140,35]],["NPAC","WPAC"],[],90,16),
- R("east-asia-australia","East Asia – Australia",[[122.5,31],[124,26],[122.5,20],[125,12],[119.5,4],[118.5,-3],[117,-8.5],[125,-14],[150,-24],[153,-30],[151.3,-34]],["ECS","SCS","WPAC"],["Taiwan Strait","Lombok"],50,14),
- R("black-sea","Black Sea – Mediterranean",[[30.7,46.5],[29,41.2],[26.4,40.2],[25,34]],["BLK","MED"],["Bosporus","Dardanelles"],30,4),
- R("baltic","Baltic – North Sea",[[24.7,59.6],[19,57.5],[14.5,55.5],[12.7,55.9],[11.5,57.2],[10.7,58],[8,57.9],[6.5,55],[4,51.9]],["BALT","NATL"],["Danish Straits"],40,5),
- R("arctic","Northern Sea Route",[[33,69],[60,74],[100,77],[150,72],[-169,66]],["ARCT"],["Bering Strait"],15,20),
- R("cape-route","Cape of Good Hope",[[58,13],[52,5],[42,-12],[36,-25],[20,-36],[12,-20],[3,-2],[-10,5],[-18,15],[-18,28],[-10,34],[-5.6,36]],["IND","NATL"],["Cape of Good Hope"],60,40)])
+ R("transpacific-south","East Asia – US West Coast",[[129.5,34.4],[140,33],[170,34],[-160,33],[-130,33],[-118.3,33.7]],["ECS","WPAC","NPAC"],["tsushima"],95,15),
+ R("asia-panama","East Asia – Panama",[[139.8,34.5],[160,28],[-170,22],[-140,16],[-110,11],[-79.7,9.1]],["WPAC","NPAC"],["panama"],60,24),
+ R("panama-east-coast","Panama – US East Coast",[[-79.7,9.1],[-79.9,10],[-78,15],[-75,20],[-74,24],[-76,32],[-74,40.5]],["NATL"],["panama"],70,6),
+ R("south-america","South America loop (Magellan)",[[-79.7,9.1],[-81,-2],[-77.2,-12],[-72,-33],[-75,-46],[-72,-53],[-68.5,-54.8],[-65,-52],[-58,-38],[-57.5,-35],[-46.3,-24.2],[-38.5,-13],[-34.9,-7],[-45,0],[-60,11],[-70,13],[-79.9,10]],["NATL"],["panama","magellan"],35,30),
+ R("east-asia-australia","East Asia – Australia",[[122.5,31],[124,26],[122.5,20],[125,12],[119.5,4],[118.5,-3],[117,-8.5],[125,-14],[150,-24],[153,-30],[151.3,-34]],["ECS","SCS","WPAC"],["taiwan-strait","lombok"],50,14),
+ R("tasman","Australia – New Zealand",[[151.3,-34],[160,-36],[170,-37],[174.8,-36.8]],["WPAC"],[],15,4),
+ R("black-sea","Black Sea – Mediterranean",[[30.7,46.5],[29,41.2],[26.4,40.2],[25,34]],["BLK","MED"],["turkish-straits"],30,4),
+ R("baltic","Baltic – North Sea",[[24.7,59.6],[19,57.5],[14.5,55.5],[12.7,55.9],[11.5,57.2],[10.7,58],[8,57.9],[6.5,55],[4,51.9]],["BALT","NATL"],["danish-straits"],40,5),
+ R("arctic","Northern Sea Route",[[4,58],[12,67],[33,70.5],[60,74],[104.5,77.9],[150,72],[180,67],[-169,65.8],[-172,62],[170,56],[155,48],[141,41]],["ARCT","NPAC"],["vilkitsky","bering"],15,20),
+ R("cape-route","Cape of Good Hope",[[58,13],[52,5],[42,-12],[36,-25],[18.5,-35],[12,-20],[3,-2],[-10,5],[-18,15],[-18,28],[-10,34],[-5.6,36]],["IND","NATL"],["good-hope"],60,40),
+ # ---- land corridors (road and rail; only wars in the theatres they cross disrupt them)
+ L("us-transcontinental","US transcontinental (LA – Chicago – New York)",[[-118.2,34],[-112,40.8],[-104.9,39.7],[-96,41.3],[-87.6,41.9],[-83,42.3],[-80,40.4],[-74,40.7]],[],80,5),
+ L("us-southern","US southern corridor (LA – Houston – Miami)",[[-118.2,34],[-112,33.4],[-106.5,31.8],[-97,32.8],[-95.4,29.8],[-90,30],[-84.4,33.7],[-80.2,25.8]],[],60,5),
+ L("us-west-coast","Pacific coast (Vancouver – Los Angeles)",[[-123.1,49.3],[-122.3,47.6],[-122.7,45.5],[-122.4,37.8],[-118.2,34]],[],40,3),
+ L("canada-great-lakes","Great Lakes (Montreal – Detroit)",[[-73.6,45.5],[-75.7,45.4],[-79.4,43.7],[-83,42.3],[-87.6,41.9]],[],35,2),
+ L("north-south-america","Chicago – Mexico – Panama",[[-87.6,41.9],[-94.6,39.1],[-97,32.8],[-98.5,29.4],[-100.3,25.7],[-99.1,19.4],[-96.7,17],[-92.1,15],[-90.5,14.6],[-86.3,12.1],[-84.1,9.9],[-79.5,9]],[],45,8),
+ L("scandinavia-italy","Scandinavia – Central Europe – Italy",[[10.7,59.9],[11.9,57.7],[12.6,55.7],[10,53.6],[8.7,50.1],[9.2,45.5],[12.5,41.9]],["BALT","MED"],60,4),
+ L("europe-east-west","Madrid – Paris – Berlin – Moscow",[[-3.7,40.4],[2.3,48.9],[4.4,50.8],[13.4,52.5],[21,52.2],[27.6,53.9],[37.6,55.8]],["BALT"],70,5),
+ L("baltic-black-sea","St Petersburg – Kyiv – Odesa",[[30.3,59.9],[30.5,54],[30.5,50.5],[30.7,46.5]],["BALT","BLK"],25,3),
+ L("balkans","Vienna – Belgrade – Istanbul",[[16.4,48.2],[20.5,44.8],[22.9,40.6],[28.9,41]],["MED","BLK"],30,3),
+ L("eurasian-land-bridge","China – Europe land bridge",[[37.6,55.8],[49.1,55.8],[60.6,56.8],[73.4,54.9],[76.9,52.3],[80.3,50.4],[76.9,43.2],[87.6,43.8],[95.8,40.1],[103.8,36.1],[108.9,34.3],[114.3,30.6],[121.5,31.2]],[],35,16),
+ L("central-asia-iran","Central Asia – Iran",[[76.9,43.2],[69.2,41.3],[58.4,37.9],[59.6,36.3],[51.4,35.7]],["GULF"],15,7),
+ L("china-pakistan","Kashgar – Islamabad – Gwadar",[[76,39.5],[73,33.7],[67,24.9],[62.3,25.1]],["IND"],10,6),
+ L("turkey-iraq-gulf","Turkey – Iraq – Gulf",[[32.9,39.9],[37.4,37.1],[43.1,36.3],[44.4,33.3],[47.8,30.5]],["GULF","MED"],15,5),
+ L("mongolia-beijing","Ulaanbaatar – Beijing",[[106.9,47.9],[111.9,43.7],[116.4,39.9]],[],8,3),
+ L("manchuria","Harbin – Shenyang – Beijing",[[126.6,45.8],[123.4,41.8],[116.4,39.9]],["ECS"],30,2),
+ L("china-north-south","Beijing – Wuhan – Guangzhou",[[116.4,39.9],[114.3,30.6],[113.3,23.1]],["ECS","SCS"],70,3),
+ L("china-southeast-asia","Chengdu – Kunming – Bangkok – Singapore",[[104.1,30.7],[102.7,25],[101.8,21.5],[102.6,18],[100.5,13.8],[100.6,7],[101.7,3.1],[103.8,1.3]],["SCS"],25,7),
+ L("bcim","Kolkata – Dhaka – Kunming",[[88.4,22.6],[90.4,23.8],[94,22],[96.1,21.9],[98.6,24.4],[102.7,25]],["IND"],8,6),
+ L("andes-crossing","Santiago – Buenos Aires",[[-70.7,-33.4],[-68.8,-32.9],[-64.2,-31.4],[-58.4,-34.6]],[],10,3)])
 print("content written")

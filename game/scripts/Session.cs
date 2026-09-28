@@ -38,7 +38,7 @@ public static class Session
         foreach (var t in Content.Theatres.Keys) World.Theatres[t] = new TheatreState { Id = t };
         foreach (var r in Content.Routes.Keys) World.Routes[r] = new RouteState();
         Scheduler = new Scheduler(World);
-        foreach (var r in Content.Routes.Values) { Scheduler.RouteTheatres[r.Id] = r.Theatres.ToHashSet(); Scheduler.RoutePaths[r.Id] = r.Path; }
+        foreach (var r in Content.Routes.Values) { Scheduler.RouteTheatres[r.Id] = r.Theatres.ToHashSet(); Scheduler.RoutePaths[r.Id] = r.Path; Scheduler.RouteDefs[r.Id] = r; }
         LoadLand();
     }
 

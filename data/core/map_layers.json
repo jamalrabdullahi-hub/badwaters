@@ -18,7 +18,9 @@
  {"id": "urban", "name": "Urban areas", "group": "POLITICAL / CIVILIAN", "kind": "shader", "on": false},
  {"id": "eez", "name": "EEZ / territorial waters", "group": "POLITICAL / CIVILIAN", "kind": "later"},
 
- {"id": "routes", "name": "Trade routes (simulated)", "group": "ECONOMIC", "kind": "routes", "sim": true, "on": true},
+ {"id": "routes", "name": "Sea lanes", "group": "ECONOMIC", "kind": "routes", "sim": true, "on": true},
+ {"id": "landroutes", "name": "Land corridors", "group": "ECONOMIC", "kind": "landroutes", "sim": true, "on": true},
+ {"id": "chokepoints", "name": "Control points (can be shut)", "group": "ECONOMIC", "kind": "chokepoints", "sim": true, "on": true},
  {"id": "industry", "name": "Industry and energy regions", "group": "ECONOMIC", "kind": "later", "sim": true},
 
  {"id": "infra", "name": "Power, comms, water", "group": "INFRASTRUCTURE", "kind": "later", "sim": true},

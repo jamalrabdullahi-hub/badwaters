@@ -2,6 +2,7 @@
  {
   "id": "east-asia-europe",
   "name": "East Asia – Europe (Suez)",
+  "mode": "sea",
   "path": [
    [
     122.5,
@@ -93,10 +94,10 @@
    "NATL"
   ],
   "chokepoints": [
-   "Malacca",
-   "Bab-el-Mandeb",
-   "Suez",
-   "Gibraltar"
+   "malacca",
+   "bab-el-mandeb",
+   "suez",
+   "gibraltar"
   ],
   "throughput": 120,
   "transitDays": 32
@@ -104,6 +105,7 @@
  {
   "id": "gulf-asia",
   "name": "Persian Gulf – East Asia",
+  "mode": "sea",
   "path": [
    [
     51.5,
@@ -165,8 +167,8 @@
    "ECS"
   ],
   "chokepoints": [
-   "Hormuz",
-   "Malacca"
+   "hormuz",
+   "malacca"
   ],
   "throughput": 100,
   "transitDays": 22
@@ -174,6 +176,7 @@
  {
   "id": "gulf-europe",
   "name": "Persian Gulf – Europe",
+  "mode": "sea",
   "path": [
    [
     51.5,
@@ -248,10 +251,10 @@
    "NATL"
   ],
   "chokepoints": [
-   "Hormuz",
-   "Bab-el-Mandeb",
-   "Suez",
-   "Gibraltar"
+   "hormuz",
+   "bab-el-mandeb",
+   "suez",
+   "gibraltar"
   ],
   "throughput": 80,
   "transitDays": 24
@@ -259,6 +262,7 @@
  {
   "id": "north-atlantic",
   "name": "North Atlantic",
+  "mode": "sea",
   "path": [
    [
     -74,
@@ -285,7 +289,7 @@
    "NATL"
   ],
   "chokepoints": [
-   "English Channel"
+   "english-channel"
   ],
   "throughput": 110,
   "transitDays": 12
@@ -293,6 +297,7 @@
  {
   "id": "north-pacific",
   "name": "North Pacific",
+  "mode": "sea",
   "path": [
    [
     -122.4,
@@ -320,8 +325,217 @@
   "transitDays": 16
  },
  {
+  "id": "transpacific-south",
+  "name": "East Asia – US West Coast",
+  "mode": "sea",
+  "path": [
+   [
+    129.5,
+    34.4
+   ],
+   [
+    140,
+    33
+   ],
+   [
+    170,
+    34
+   ],
+   [
+    -160,
+    33
+   ],
+   [
+    -130,
+    33
+   ],
+   [
+    -118.3,
+    33.7
+   ]
+  ],
+  "theatres": [
+   "ECS",
+   "WPAC",
+   "NPAC"
+  ],
+  "chokepoints": [
+   "tsushima"
+  ],
+  "throughput": 95,
+  "transitDays": 15
+ },
+ {
+  "id": "asia-panama",
+  "name": "East Asia – Panama",
+  "mode": "sea",
+  "path": [
+   [
+    139.8,
+    34.5
+   ],
+   [
+    160,
+    28
+   ],
+   [
+    -170,
+    22
+   ],
+   [
+    -140,
+    16
+   ],
+   [
+    -110,
+    11
+   ],
+   [
+    -79.7,
+    9.1
+   ]
+  ],
+  "theatres": [
+   "WPAC",
+   "NPAC"
+  ],
+  "chokepoints": [
+   "panama"
+  ],
+  "throughput": 60,
+  "transitDays": 24
+ },
+ {
+  "id": "panama-east-coast",
+  "name": "Panama – US East Coast",
+  "mode": "sea",
+  "path": [
+   [
+    -79.7,
+    9.1
+   ],
+   [
+    -79.9,
+    10
+   ],
+   [
+    -78,
+    15
+   ],
+   [
+    -75,
+    20
+   ],
+   [
+    -74,
+    24
+   ],
+   [
+    -76,
+    32
+   ],
+   [
+    -74,
+    40.5
+   ]
+  ],
+  "theatres": [
+   "NATL"
+  ],
+  "chokepoints": [
+   "panama"
+  ],
+  "throughput": 70,
+  "transitDays": 6
+ },
+ {
+  "id": "south-america",
+  "name": "South America loop (Magellan)",
+  "mode": "sea",
+  "path": [
+   [
+    -79.7,
+    9.1
+   ],
+   [
+    -81,
+    -2
+   ],
+   [
+    -77.2,
+    -12
+   ],
+   [
+    -72,
+    -33
+   ],
+   [
+    -75,
+    -46
+   ],
+   [
+    -72,
+    -53
+   ],
+   [
+    -68.5,
+    -54.8
+   ],
+   [
+    -65,
+    -52
+   ],
+   [
+    -58,
+    -38
+   ],
+   [
+    -57.5,
+    -35
+   ],
+   [
+    -46.3,
+    -24.2
+   ],
+   [
+    -38.5,
+    -13
+   ],
+   [
+    -34.9,
+    -7
+   ],
+   [
+    -45,
+    0
+   ],
+   [
+    -60,
+    11
+   ],
+   [
+    -70,
+    13
+   ],
+   [
+    -79.9,
+    10
+   ]
+  ],
+  "theatres": [
+   "NATL"
+  ],
+  "chokepoints": [
+   "panama",
+   "magellan"
+  ],
+  "throughput": 35,
+  "transitDays": 30
+ },
+ {
   "id": "east-asia-australia",
   "name": "East Asia – Australia",
+  "mode": "sea",
   "path": [
    [
     122.5,
@@ -374,15 +588,45 @@
    "WPAC"
   ],
   "chokepoints": [
-   "Taiwan Strait",
-   "Lombok"
+   "taiwan-strait",
+   "lombok"
   ],
   "throughput": 50,
   "transitDays": 14
  },
  {
+  "id": "tasman",
+  "name": "Australia – New Zealand",
+  "mode": "sea",
+  "path": [
+   [
+    151.3,
+    -34
+   ],
+   [
+    160,
+    -36
+   ],
+   [
+    170,
+    -37
+   ],
+   [
+    174.8,
+    -36.8
+   ]
+  ],
+  "theatres": [
+   "WPAC"
+  ],
+  "chokepoints": [],
+  "throughput": 15,
+  "transitDays": 4
+ },
+ {
   "id": "black-sea",
   "name": "Black Sea – Mediterranean",
+  "mode": "sea",
   "path": [
    [
     30.7,
@@ -406,8 +650,7 @@
    "MED"
   ],
   "chokepoints": [
-   "Bosporus",
-   "Dardanelles"
+   "turkish-straits"
   ],
   "throughput": 30,
   "transitDays": 4
@@ -415,6 +658,7 @@
  {
   "id": "baltic",
   "name": "Baltic – North Sea",
+  "mode": "sea",
   "path": [
    [
     24.7,
@@ -458,7 +702,7 @@
    "NATL"
   ],
   "chokepoints": [
-   "Danish Straits"
+   "danish-straits"
   ],
   "throughput": 40,
   "transitDays": 5
@@ -466,33 +710,64 @@
  {
   "id": "arctic",
   "name": "Northern Sea Route",
+  "mode": "sea",
   "path": [
    [
+    4,
+    58
+   ],
+   [
+    12,
+    67
+   ],
+   [
     33,
-    69
+    70.5
    ],
    [
     60,
     74
    ],
    [
-    100,
-    77
+    104.5,
+    77.9
    ],
    [
     150,
     72
    ],
    [
+    180,
+    67
+   ],
+   [
     -169,
-    66
+    65.8
+   ],
+   [
+    -172,
+    62
+   ],
+   [
+    170,
+    56
+   ],
+   [
+    155,
+    48
+   ],
+   [
+    141,
+    41
    ]
   ],
   "theatres": [
-   "ARCT"
+   "ARCT",
+   "NPAC"
   ],
   "chokepoints": [
-   "Bering Strait"
+   "vilkitsky",
+   "bering"
   ],
   "throughput": 15,
   "transitDays": 20
@@ -500,6 +775,7 @@
  {
   "id": "cape-route",
   "name": "Cape of Good Hope",
+  "mode": "sea",
   "path": [
    [
     58,
@@ -518,8 +794,8 @@
     -25
    ],
    [
-    20,
-    -36
+    18.5,
+    -35
    ],
    [
     12,
@@ -555,9 +831,701 @@
    "NATL"
   ],
   "chokepoints": [
-   "Cape of Good Hope"
+   "good-hope"
   ],
   "throughput": 60,
   "transitDays": 40
+ },
+ {
+  "id": "us-transcontinental",
+  "name": "US transcontinental (LA – Chicago – New York)",
+  "mode": "land",
+  "path": [
+   [
+    -118.2,
+    34
+   ],
+   [
+    -112,
+    40.8
+   ],
+   [
+    -104.9,
+    39.7
+   ],
+   [
+    -96,
+    41.3
+   ],
+   [
+    -87.6,
+    41.9
+   ],
+   [
+    -83,
+    42.3
+   ],
+   [
+    -80,
+    40.4
+   ],
+   [
+    -74,
+    40.7
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 80,
+  "transitDays": 5
+ },
+ {
+  "id": "us-southern",
+  "name": "US southern corridor (LA – Houston – Miami)",
+  "mode": "land",
+  "path": [
+   [
+    -118.2,
+    34
+   ],
+   [
+    -112,
+    33.4
+   ],
+   [
+    -106.5,
+    31.8
+   ],
+   [
+    -97,
+    32.8
+   ],
+   [
+    -95.4,
+    29.8
+   ],
+   [
+    -90,
+    30
+   ],
+   [
+    -84.4,
+    33.7
+   ],
+   [
+    -80.2,
+    25.8
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 60,
+  "transitDays": 5
+ },
+ {
+  "id": "us-west-coast",
+  "name": "Pacific coast (Vancouver – Los Angeles)",
+  "mode": "land",
+  "path": [
+   [
+    -123.1,
+    49.3
+   ],
+   [
+    -122.3,
+    47.6
+   ],
+   [
+    -122.7,
+    45.5
+   ],
+   [
+    -122.4,
+    37.8
+   ],
+   [
+    -118.2,
+    34
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 40,
+  "transitDays": 3
+ },
+ {
+  "id": "canada-great-lakes",
+  "name": "Great Lakes (Montreal – Detroit)",
+  "mode": "land",
+  "path": [
+   [
+    -73.6,
+    45.5
+   ],
+   [
+    -75.7,
+    45.4
+   ],
+   [
+    -79.4,
+    43.7
+   ],
+   [
+    -83,
+    42.3
+   ],
+   [
+    -87.6,
+    41.9
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 35,
+  "transitDays": 2
+ },
+ {
+  "id": "north-south-america",
+  "name": "Chicago – Mexico – Panama",
+  "mode": "land",
+  "path": [
+   [
+    -87.6,
+    41.9
+   ],
+   [
+    -94.6,
+    39.1
+   ],
+   [
+    -97,
+    32.8
+   ],
+   [
+    -98.5,
+    29.4
+   ],
+   [
+    -100.3,
+    25.7
+   ],
+   [
+    -99.1,
+    19.4
+   ],
+   [
+    -96.7,
+    17
+   ],
+   [
+    -92.1,
+    15
+   ],
+   [
+    -90.5,
+    14.6
+   ],
+   [
+    -86.3,
+    12.1
+   ],
+   [
+    -84.1,
+    9.9
+   ],
+   [
+    -79.5,
+    9
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 45,
+  "transitDays": 8
+ },
+ {
+  "id": "scandinavia-italy",
+  "name": "Scandinavia – Central Europe – Italy",
+  "mode": "land",
+  "path": [
+   [
+    10.7,
+    59.9
+   ],
+   [
+    11.9,
+    57.7
+   ],
+   [
+    12.6,
+    55.7
+   ],
+   [
+    10,
+    53.6
+   ],
+   [
+    8.7,
+    50.1
+   ],
+   [
+    9.2,
+    45.5
+   ],
+   [
+    12.5,
+    41.9
+   ]
+  ],
+  "theatres": [
+   "BALT",
+   "MED"
+  ],
+  "chokepoints": [],
+  "throughput": 60,
+  "transitDays": 4
+ },
+ {
+  "id": "europe-east-west",
+  "name": "Madrid – Paris – Berlin – Moscow",
+  "mode": "land",
+  "path": [
+   [
+    -3.7,
+    40.4
+   ],
+   [
+    2.3,
+    48.9
+   ],
+   [
+    4.4,
+    50.8
+   ],
+   [
+    13.4,
+    52.5
+   ],
+   [
+    21,
+    52.2
+   ],
+   [
+    27.6,
+    53.9
+   ],
+   [
+    37.6,
+    55.8
+   ]
+  ],
+  "theatres": [
+   "BALT"
+  ],
+  "chokepoints": [],
+  "throughput": 70,
+  "transitDays": 5
+ },
+ {
+  "id": "baltic-black-sea",
+  "name": "St Petersburg – Kyiv – Odesa",
+  "mode": "land",
+  "path": [
+   [
+    30.3,
+    59.9
+   ],
+   [
+    30.5,
+    54
+   ],
+   [
+    30.5,
+    50.5
+   ],
+   [
+    30.7,
+    46.5
+   ]
+  ],
+  "theatres": [
+   "BALT",
+   "BLK"
+  ],
+  "chokepoints": [],
+  "throughput": 25,
+  "transitDays": 3
+ },
+ {
+  "id": "balkans",
+  "name": "Vienna – Belgrade – Istanbul",
+  "mode": "land",
+  "path": [
+   [
+    16.4,
+    48.2
+   ],
+   [
+    20.5,
+    44.8
+   ],
+   [
+    22.9,
+    40.6
+   ],
+   [
+    28.9,
+    41
+   ]
+  ],
+  "theatres": [
+   "MED",
+   "BLK"
+  ],
+  "chokepoints": [],
+  "throughput": 30,
+  "transitDays": 3
+ },
+ {
+  "id": "eurasian-land-bridge",
+  "name": "China – Europe land bridge",
+  "mode": "land",
+  "path": [
+   [
+    37.6,
+    55.8
+   ],
+   [
+    49.1,
+    55.8
+   ],
+   [
+    60.6,
+    56.8
+   ],
+   [
+    73.4,
+    54.9
+   ],
+   [
+    76.9,
+    52.3
+   ],
+   [
+    80.3,
+    50.4
+   ],
+   [
+    76.9,
+    43.2
+   ],
+   [
+    87.6,
+    43.8
+   ],
+   [
+    95.8,
+    40.1
+   ],
+   [
+    103.8,
+    36.1
+   ],
+   [
+    108.9,
+    34.3
+   ],
+   [
+    114.3,
+    30.6
+   ],
+   [
+    121.5,
+    31.2
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 35,
+  "transitDays": 16
+ },
+ {
+  "id": "central-asia-iran",
+  "name": "Central Asia – Iran",
+  "mode": "land",
+  "path": [
+   [
+    76.9,
+    43.2
+   ],
+   [
+    69.2,
+    41.3
+   ],
+   [
+    58.4,
+    37.9
+   ],
+   [
+    59.6,
+    36.3
+   ],
+   [
+    51.4,
+    35.7
+   ]
+  ],
+  "theatres": [
+   "GULF"
+  ],
+  "chokepoints": [],
+  "throughput": 15,
+  "transitDays": 7
+ },
+ {
+  "id": "china-pakistan",
+  "name": "Kashgar – Islamabad – Gwadar",
+  "mode": "land",
+  "path": [
+   [
+    76,
+    39.5
+   ],
+   [
+    73,
+    33.7
+   ],
+   [
+    67,
+    24.9
+   ],
+   [
+    62.3,
+    25.1
+   ]
+  ],
+  "theatres": [
+   "IND"
+  ],
+  "chokepoints": [],
+  "throughput": 10,
+  "transitDays": 6
+ },
+ {
+  "id": "turkey-iraq-gulf",
+  "name": "Turkey – Iraq – Gulf",
+  "mode": "land",
+  "path": [
+   [
+    32.9,
+    39.9
+   ],
+   [
+    37.4,
+    37.1
+   ],
+   [
+    43.1,
+    36.3
+   ],
+   [
+    44.4,
+    33.3
+   ],
+   [
+    47.8,
+    30.5
+   ]
+  ],
+  "theatres": [
+   "GULF",
+   "MED"
+  ],
+  "chokepoints": [],
+  "throughput": 15,
+  "transitDays": 5
+ },
+ {
+  "id": "mongolia-beijing",
+  "name": "Ulaanbaatar – Beijing",
+  "mode": "land",
+  "path": [
+   [
+    106.9,
+    47.9
+   ],
+   [
+    111.9,
+    43.7
+   ],
+   [
+    116.4,
+    39.9
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 8,
+  "transitDays": 3
+ },
+ {
+  "id": "manchuria",
+  "name": "Harbin – Shenyang – Beijing",
+  "mode": "land",
+  "path": [
+   [
+    126.6,
+    45.8
+   ],
+   [
+    123.4,
+    41.8
+   ],
+   [
+    116.4,
+    39.9
+   ]
+  ],
+  "theatres": [
+   "ECS"
+  ],
+  "chokepoints": [],
+  "throughput": 30,
+  "transitDays": 2
+ },
+ {
+  "id": "china-north-south",
+  "name": "Beijing – Wuhan – Guangzhou",
+  "mode": "land",
+  "path": [
+   [
+    116.4,
+    39.9
+   ],
+   [
+    114.3,
+    30.6
+   ],
+   [
+    113.3,
+    23.1
+   ]
+  ],
+  "theatres": [
+   "ECS",
+   "SCS"
+  ],
+  "chokepoints": [],
+  "throughput": 70,
+  "transitDays": 3
+ },
+ {
+  "id": "china-southeast-asia",
+  "name": "Chengdu – Kunming – Bangkok – Singapore",
+  "mode": "land",
+  "path": [
+   [
+    104.1,
+    30.7
+   ],
+   [
+    102.7,
+    25
+   ],
+   [
+    101.8,
+    21.5
+   ],
+   [
+    102.6,
+    18
+   ],
+   [
+    100.5,
+    13.8
+   ],
+   [
+    100.6,
+    7
+   ],
+   [
+    101.7,
+    3.1
+   ],
+   [
+    103.8,
+    1.3
+   ]
+  ],
+  "theatres": [
+   "SCS"
+  ],
+  "chokepoints": [],
+  "throughput": 25,
+  "transitDays": 7
+ },
+ {
+  "id": "bcim",
+  "name": "Kolkata – Dhaka – Kunming",
+  "mode": "land",
+  "path": [
+   [
+    88.4,
+    22.6
+   ],
+   [
+    90.4,
+    23.8
+   ],
+   [
+    94,
+    22
+   ],
+   [
+    96.1,
+    21.9
+   ],
+   [
+    98.6,
+    24.4
+   ],
+   [
+    102.7,
+    25
+   ]
+  ],
+  "theatres": [
+   "IND"
+  ],
+  "chokepoints": [],
+  "throughput": 8,
+  "transitDays": 6
+ },
+ {
+  "id": "andes-crossing",
+  "name": "Santiago – Buenos Aires",
+  "mode": "land",
+  "path": [
+   [
+    -70.7,
+    -33.4
+   ],
+   [
+    -68.8,
+    -32.9
+   ],
+   [
+    -64.2,
+    -31.4
+   ],
+   [
+    -58.4,
+    -34.6
+   ]
+  ],
+  "theatres": [],
+  "chokepoints": [],
+  "throughput": 10,
+  "transitDays": 3
  }
 ]

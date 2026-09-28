@@ -1,0 +1,130 @@
+[
+ {
+  "id": "panama",
+  "name": "Panama Canal",
+  "lon": -79.7,
+  "lat": 9.1,
+  "kind": "canal",
+  "critical": true
+ },
+ {
+  "id": "gibraltar",
+  "name": "Strait of Gibraltar",
+  "lon": -5.6,
+  "lat": 35.95,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "turkish-straits",
+  "name": "Turkish Straits (Bosporus, Dardanelles)",
+  "lon": 28.99,
+  "lat": 41.1,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "suez",
+  "name": "Suez Canal",
+  "lon": 32.35,
+  "lat": 30.6,
+  "kind": "canal",
+  "critical": true
+ },
+ {
+  "id": "bab-el-mandeb",
+  "name": "Bab-el-Mandeb",
+  "lon": 43.4,
+  "lat": 12.6,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "hormuz",
+  "name": "Strait of Hormuz",
+  "lon": 56.4,
+  "lat": 26.5,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "malacca",
+  "name": "Strait of Malacca",
+  "lon": 100.3,
+  "lat": 3.2,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "tsushima",
+  "name": "Korea (Tsushima) Strait",
+  "lon": 129.5,
+  "lat": 34.4,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "vilkitsky",
+  "name": "Vilkitsky Strait (Northern Sea Route)",
+  "lon": 104.5,
+  "lat": 77.9,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "magellan",
+  "name": "Strait of Magellan / Drake Passage",
+  "lon": -68.5,
+  "lat": -54.8,
+  "kind": "strait",
+  "critical": true
+ },
+ {
+  "id": "english-channel",
+  "name": "English Channel (Dover Strait)",
+  "lon": 1.5,
+  "lat": 51.0,
+  "kind": "strait",
+  "critical": false
+ },
+ {
+  "id": "danish-straits",
+  "name": "Danish Straits",
+  "lon": 12.7,
+  "lat": 55.9,
+  "kind": "strait",
+  "critical": false
+ },
+ {
+  "id": "taiwan-strait",
+  "name": "Taiwan Strait",
+  "lon": 119.7,
+  "lat": 24.3,
+  "kind": "strait",
+  "critical": false
+ },
+ {
+  "id": "lombok",
+  "name": "Lombok Strait",
+  "lon": 115.7,
+  "lat": -8.7,
+  "kind": "strait",
+  "critical": false
+ },
+ {
+  "id": "bering",
+  "name": "Bering Strait",
+  "lon": -169,
+  "lat": 65.8,
+  "kind": "strait",
+  "critical": false
+ },
+ {
+  "id": "good-hope",
+  "name": "Cape of Good Hope",
+  "lon": 18.5,
+  "lat": -34.6,
+  "kind": "passage",
+  "critical": false
+ }
+]

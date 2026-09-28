@@ -170,3 +170,31 @@ public partial class WeatherLayer : Node2D
         }
     }
 }
+
+/// <summary>Simulated: trade control points. Green = open (critical ones larger), red = shut. Click one to shut or reopen it.</summary>
+public partial class ChokepointLayer : Node2D
+{
+    /// <summary>Minor passages (not critical) only show from this zoom.</summary>
+    public const float MinorZoom = 0.8f;
+    public static readonly Color OpenCol = new("5cf25c"), ShutCol = new("ff4d5a");
+
+    public override void _Draw()
+    {
+        var z = GetViewport().GetCamera2D()?.Zoom.X ?? 1; var s = 1 / z; var font = ThemeDB.FallbackFont;
+        foreach (var c in Session.Content.Chokepoints.Values)
+        {
+            if (!c.Critical && z < MinorZoom) continue;
+            var p = Session.Project(c.Lon, c.Lat);
+            var shut = Session.World.ClosedChokepoints.ContainsKey(c.Id);
+            var r = (c.Critical ? 7f : 4.5f) * s;
+            DrawCircle(p, r + 1.5f * s, new Color(0, 0, 0, 0.6f));
+            DrawCircle(p, r, shut ? ShutCol : new Color(OpenCol, c.Critical ? 1 : 0.7f));
+            if (shut) { DrawLine(p - new Vector2(r, r), p + new Vector2(r, r), Colors.White, 2 * s); DrawLine(p + new Vector2(-r, r), p + new Vector2(r, -r), Colors.White, 2 * s); }
+            if (z < 1.1f && !shut) continue;
+            DrawSetTransform(p + new Vector2(r + 3 * s, 4 * s), 0, Vector2.One / z);
+            DrawString(font, new Vector2(1, 1), c.Name, HorizontalAlignment.Left, -1, 11, new Color(0, 0, 0, 0.8f));
+            DrawString(font, Vector2.Zero, c.Name + (shut ? " · SHUT" : ""), HorizontalAlignment.Left, -1, 11, shut ? ShutCol : OpenCol);
+            DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        }
+    }
+}
