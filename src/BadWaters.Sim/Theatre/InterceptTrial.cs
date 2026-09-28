@@ -49,6 +49,8 @@ public sealed class Track
     public required SiteDef Target { get; init; }
     /// <summary>Base component this weapon is aimed at (runway, fuel...), if the target is a base.</summary>
     public string Aimpoint { get; init; } = "";
+    /// <summary>Ship this weapon was fired at (its Target is the aimpoint where the ship was last seen).</summary>
+    public string TargetShip { get; init; } = "";
     public double FromLon { get; init; }
     public double FromLat { get; init; }
     public double Launched { get; init; }
@@ -94,7 +96,9 @@ public sealed class Shot
 
 public sealed class BatteryState
 {
-    public required BatteryDef Def { get; init; }
+    public required BatteryDef Def { get; set; }
+    /// <summary>Ship-mounted batteries move with their ship.</summary>
+    public void MoveTo(double lon, double lat) => Def = Def with { Lon = lon, Lat = lat };
     public required SystemProfile Radar { get; init; }
     public required SystemProfile Launcher { get; init; }
     public required SystemProfile Interceptor { get; init; }
@@ -113,7 +117,8 @@ public sealed class BatteryState
 
 public sealed class LauncherState
 {
-    public required LauncherDef Def { get; init; }
+    public required LauncherDef Def { get; set; }
+    public void MoveTo(double lon, double lat) => Def = Def with { Lon = lon, Lat = lat };
     public required SystemProfile Missile { get; set; }
     public int Stock { get; set; }
     public bool IsShip => Def.Platform == "ship";
@@ -140,6 +145,8 @@ public sealed class InterceptTrial
     /// <summary>Bases with components (sites whose Type is a known base type).</summary>
     public Dictionary<string, BaseState> Bases { get; } = new();
     public IntelService? Intel { get; set; }
+    public NavalForces? Naval { get; set; }
+    private double _nextAiNaval = 300;
 
     private readonly Random _rng;
     private int _nextId = 1;
@@ -284,7 +291,13 @@ public sealed class InterceptTrial
         Time += Step;
         foreach (var b in Bases.Values) b.Repair(Step);
         foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor;
+        Naval?.Tick(Step, Time);
         Intel?.Tick(Time);
+        if (Naval != null && Time >= _nextAiNaval)
+        {
+            _nextAiNaval = Time + 600;
+            foreach (var side in new[] { "blue", "red" }.Where(x => Control.GetValueOrDefault(x) == SideControl.AI)) AiAntiShip(side);
+        }
         RunScript();
 
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Launched <= Time))
@@ -319,6 +332,7 @@ public sealed class InterceptTrial
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && Time >= t.Launched + t.FlightTime))
         {
             tr.State = TrackState.Impacted; tr.EndedAt = Time;
+            if (tr.TargetShip != "") { Note("impact", ShipImpact(tr)); continue; }
             Hits[tr.Target.Id] = Hits.GetValueOrDefault(tr.Target.Id) + 1;
             var effect = Bases.TryGetValue(tr.Target.Id, out var hb) ? " · " + ApplyHit(tr.Side, hb, tr.Aimpoint, tr.Missile.R("punch"), tr.Missile.R("accuracy"), 0.2, "impact report") : "";
             Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}){effect}.");
@@ -330,6 +344,64 @@ public sealed class InterceptTrial
     }
 
     private static SystemProfile m(Track t) => t.Missile;
+
+    /// <summary>
+    /// Fire anti-ship missiles at a ship contact. The missiles fly to where your picture last saw it;
+    /// they need a fresh contact, and only find the ship if it's still inside the seeker's search radius.
+    /// </summary>
+    public OrderResult LaunchAtShip(string launcherId, string shipId, int count = 2)
+    {
+        var l = Launchers.FirstOrDefault(x => x.Def.Id == launcherId);
+        var ship = Naval?.Find(shipId);
+        if (l == null || ship == null) return new(false, "Unknown launcher or ship.");
+        if (ship.Side == l.Def.Side) return new(false, "That ship is on your own side.");
+        if (!NavalRules.CanHitShips(l.Missile)) return new(false, $"{l.Missile.Name} has no seeker that can find a ship (needs accuracy 6+ or an anti-ship rating).");
+        var c = Intel?.Pictures[l.Def.Side].Contacts.GetValueOrDefault(shipId);
+        if (c == null || Time - c.LastSeen > IntelRules.StaleAfter) return new(false, "No fresh contact on that ship: find it first (AEW, patrol aircraft, ships or a satellite pass).");
+        if (l.Stock <= 0) return new(false, $"{l.Def.Name} has no missiles left.");
+        if (l.BaseId != "" && Bases.TryGetValue(l.BaseId, out var hb) && !hb.PadsOk) return new(false, $"{l.Def.Name} can't fire: launch pads damaged.");
+        var dist = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, c.Lon, c.Lat);
+        if (dist > l.ReachKm) return new(false, $"Contact is {dist:0} km away; reach {l.ReachKm:0} km.");
+        var n = Math.Min(count, l.Stock);
+        var flight = dist / Pacing.SpeedKmPerSec(l.Missile.R("speed"));
+        var aim = new SiteDef(shipId, $"{c.Label} (contact)", ship.Side, "military-force", c.Lon, c.Lat);
+        for (var i = 0; i < n; i++)
+            Tracks.Add(new Track { Id = _nextId++, Side = l.Def.Side, Missile = l.Missile, LauncherId = l.Def.Id, Target = aim, TargetShip = shipId,
+                FromLon = l.Def.Lon, FromLat = l.Def.Lat, Launched = Time + i * 4, FlightTime = flight });
+        l.Stock -= n;
+        Intel?.LaunchSeen(l, Time);
+        var msg = $"{l.Def.Name} fired {n} × {l.Missile.Name} at {c.Label} ({dist:0} km, {flight / 60:0.0} min flight, contact {(Time - c.LastSeen) / 60:0} min old).";
+        Note("launch", msg);
+        return new(true, msg);
+    }
+
+    private string ShipImpact(Track tr)
+    {
+        var ship = Naval?.Find(tr.TargetShip);
+        if (ship == null || ship.Sunk) return $"Track {tr.Id} found nothing: the target is gone.";
+        var off = Pacing.DistanceKm(ship.Lon, ship.Lat, tr.Target.Lon, tr.Target.Lat);
+        var search = NavalRules.SeekerKm(tr.Missile.R("accuracy"));
+        if (off > search) return $"Track {tr.Id} ({tr.Missile.Name}) found nothing: {ship.Name} had moved {off:0} km from the aimpoint (seeker searches {search:0} km).";
+        var hit = _rng.NextDouble() < DamageRules.OnAimpoint(tr.Missile.R("accuracy"));
+        if (!hit) return $"Track {tr.Id} ({tr.Missile.Name}) missed {ship.Name}.";
+        return $"Track {tr.Id}: " + Naval!.Hit(ship, NavalRules.MissileDamage(tr.Missile.R("punch")), tr.Missile.Name);
+    }
+
+    /// <summary>AI: anti-ship-capable launchers with spare rounds fire at the freshest enemy ship contact in reach.</summary>
+    private void AiAntiShip(string side)
+    {
+        var pic = Intel?.Pictures[side];
+        if (pic == null || Naval == null) return;
+        foreach (var l in Launchers.Where(l => l.Def.Side == side && l.Stock > 0 && NavalRules.CanHitShips(l.Missile)))
+        {
+            var tasked = Air?.Fires.Where(f => f.Launcher == l && f.State == FireState.Planned).Sum(f => f.Count) ?? 0;
+            if (l.Stock - tasked < 2) continue;
+            var target = pic.Contacts.Values.Where(c => c.Kind == "ship" && Time - c.LastSeen <= 120 && !Naval.IsSunk(c.Key) && Naval.Find(c.Key)?.Side != side
+                    && Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, c.Lon, c.Lat) <= l.ReachKm)
+                .OrderBy(c => Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, c.Lon, c.Lat)).FirstOrDefault();
+            if (target != null) LaunchAtShip(l.Def.Id, target.Key, 2);
+        }
+    }
 
     /// <summary>Aimpoint an attacker picks at a base: doctrine order, skipping what its own picture believes is already down.</summary>
     public string AimFor(string attacker, BaseState b)
@@ -367,6 +439,7 @@ public sealed class InterceptTrial
             var home = Site(u.Base);
             if (home != null) return (home.Lon, home.Lat); // on the ground at its base
         }
+        if (u.Kind is "ship" or "sub" && Naval?.Pos(u.Id) is { } np) return np;
         if (u.PatrolKm <= 0) return (u.Lon, u.Lat);
         var period = u.Kind is "air" or "aew" ? 900.0 : 14400.0;
         var phase = u.Id.Aggregate(17, (h, ch) => h * 31 + ch) % 360 * Math.PI / 180;

@@ -20,6 +20,7 @@ public class AirOpsTests
     {
         var t = new InterceptTrial(Content.Scenarios["jpn-chn"], id => SystemProfile.Build(Content.Catalog, Content.Designs[id]), seed, Content.BaseTypes);
         if (!ai) { t.Control["blue"] = SideControl.Player; t.Control["red"] = SideControl.Player; }
+        t.Naval = new NavalForces(t, Content.PresetInfo, seed);
         t.Intel = new IntelService(t, Content.PresetInfo, seed);
         t.Air = new AirTasking(t, Content.PresetInfo, seed);
         return (t, t.Air);

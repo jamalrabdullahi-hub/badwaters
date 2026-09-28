@@ -10,6 +10,7 @@ if (cmd == "trial")
     var gc = GameContent.Load(Path.Combine("data", "core"));
     var t = new BadWaters.Sim.Theatre.InterceptTrial(gc.Scenarios[args.Length > 2 ? args[2] : "intercept-trial"],
         id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), args.Length > 1 ? int.Parse(args[1]) : 1, gc.BaseTypes);
+    t.Naval = new BadWaters.Sim.Theatre.NavalForces(t, gc.PresetInfo, 1);
     t.Intel = new BadWaters.Sim.Theatre.IntelService(t, gc.PresetInfo, 1);
     t.Air = new BadWaters.Sim.Theatre.AirTasking(t, gc.PresetInfo, args.Length > 1 ? int.Parse(args[1]) : 1);
     t.Advance(args.Length > 3 ? double.Parse(args[3]) : 1200);

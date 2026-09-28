@@ -60,7 +60,9 @@ public partial class TheatreOps
         now.Pressed += () =>
         {
             if (_launcher.Selected < 0 || _target.Selected < 0) return;
-            var r = Trial.Launch(_launcherIds[_launcher.Selected], _targetIds[_target.Selected], (int)_count.Value, _aim.Selected > 0 ? _aimIds[_aim.Selected] : "");
+            var tid = _targetIds[_target.Selected];
+            var r = tid.StartsWith("ship:") ? Trial.LaunchAtShip(_launcherIds[_launcher.Selected], tid[5..], (int)_count.Value)
+                : Trial.Launch(_launcherIds[_launcher.Selected], tid, (int)_count.Value, _aim.Selected > 0 ? _aimIds[_aim.Selected] : "");
             Result(r.Ok, r.Message);
             FillLaunchers();
         };
@@ -84,13 +86,17 @@ public partial class TheatreOps
     }
 
     private AtoEntry? FireEntry() =>
-        _launcher.Selected < 0 || _target.Selected < 0 ? null
+        _launcher.Selected < 0 || _target.Selected < 0 || _targetIds[_target.Selected].StartsWith("ship:") ? null
         : new AtoEntry { Side = CommandSide, Launcher = _launcherIds[_launcher.Selected], Target = _targetIds[_target.Selected], Count = (int)_count.Value, Tot = _fTot.Value * 60, Aimpoint = _aim.Selected > 0 ? _aimIds[_aim.Selected] : "" };
 
     /// <summary>Live read-out: distance, flight time, launch time for the chosen TOT (or why it can't work).</summary>
     private void FireCalc()
     {
-        if (Trial?.Air == null || FireEntry() is not { } e) { _fireCalc.Text = ""; return; }
+        if (Trial?.Air == null || FireEntry() is not { } e)
+        {
+            _fireCalc.Text = _target.Selected >= 0 && _targetIds[_target.Selected].StartsWith("ship:") ? "Ship targets move: use Fire now. Missiles fly to where the ship was last seen; if it has moved beyond the seeker's search radius they find nothing." : "";
+            return;
+        }
         var r = Trial.Air.Plan(e);
         _fireCalc.Text = string.Join("\n", r.Issues);
         _fireCalc.AddThemeColorOverride("font_color", r.Ok ? UiTheme.Ink : new Color("ffb347"));

@@ -87,6 +87,13 @@ public static class Session
 
     // ---- Mercator projection in map pixels
     public const float PxPerDeg = 20f;
+    /// <summary>Map pixels back to longitude/latitude (inverse of Project).</summary>
+    public static (double Lon, double Lat) Unproject(Vector2 p)
+    {
+        var y = -p.Y / PxPerDeg * Math.PI / 180;
+        return (p.X / PxPerDeg, (2 * Math.Atan(Math.Exp(y)) - Math.PI / 2) * 180 / Math.PI);
+    }
+
     public static Vector2 Project(double lon, double lat)
     {
         lat = Math.Clamp(lat, -80, 84);

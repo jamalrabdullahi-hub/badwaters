@@ -116,9 +116,9 @@ public sealed class IntelService
                 }
             }
         // enemy ships and submarines (units and air-defence ships)
-        var ships = _t.Scenario.Units.Where(u => u.Side != side && u.Kind is "ship" or "sub")
+        var ships = _t.Scenario.Units.Where(u => u.Side != side && u.Kind is "ship" or "sub" && !(_t.Naval?.IsSunk(u.Id) ?? false))
             .Select(u => (Key: u.Id, Kind: u.Kind, Pos: _t.UnitPos(u), Name: _preset(u.Preset)?.Name ?? u.Name))
-            .Concat(_t.Batteries.Where(b => b.Def.Side != side && b.IsShip).Select(b => (Key: b.Def.Id, Kind: "ship", Pos: (b.Def.Lon, b.Def.Lat), Name: b.Def.Name)));
+            .Concat(_t.Batteries.Where(b => b.Def.Side != side && b.IsShip && !(_t.Naval?.IsSunk(b.Def.Id) ?? false)).Select(b => (Key: b.Def.Id, Kind: "ship", Pos: (b.Def.Lon, b.Def.Lat), Name: b.Def.Name)));
         foreach (var sh in ships)
             foreach (var s in sensors)
             {
@@ -149,6 +149,10 @@ public sealed class IntelService
         c.Lon = lon; c.Lat = lat; c.LastSeen = now; c.Source = source;
         if (id >= c.IdLevel) { c.IdLevel = id; c.Label = label; }
     }
+
+    /// <summary>Something gave itself away (e.g. a submarine firing torpedoes).</summary>
+    public void Reveal(string toSide, string key, string kind, double lon, double lat, double now, string source) =>
+        See(Pictures[toSide], key, kind, lon, lat, now, 1, kind == "sub" ? "submarine" : "contact", source);
 
     /// <summary>A launch seen from space reveals the launcher (for the other side).</summary>
     public void LaunchSeen(LauncherState l, double now)

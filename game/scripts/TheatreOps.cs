@@ -103,7 +103,7 @@ public partial class TheatreOps : Control
         var pages = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
         scroll.AddChild(pages);
         var tg = new ButtonGroup();
-        var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", _ => "AIR DEF" };
+        var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", "naval" => "NAVAL", _ => "AIR DEF" };
         VBoxContainer Page(string name)
         {
             var page = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = name == start };
@@ -151,6 +151,9 @@ public partial class TheatreOps : Control
         rsv.AddChild(UiTheme.Text("KILL CHANCE BREAKDOWN", 13, UiTheme.Accent));
         _terms = new VBoxContainer();
         rsv.AddChild(_terms);
+
+        // NAVAL: ships and submarines, move orders
+        BuildNaval(Page("NAVAL"));
 
         // BASES: status grid + component detail
         _basesView = Page("BASES");
@@ -236,6 +239,15 @@ public partial class TheatreOps : Control
             var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, s.Lon, s.Lat);
             _target.AddItem(!TargetPolicy.IsLegitimate(s.Class) ? $"{s.Name} (protected)" : d > l.ReachKm ? $"{s.Name} (out of reach)" : $"{s.Name} · {d:0} km");
         }
+        // ship contacts from your own picture (fire now only: they move)
+        var pic = Trial.Intel?.Pictures[l.Def.Side];
+        if (pic != null && Trial.Naval != null && NavalRules.CanHitShips(l.Missile))
+            foreach (var c in pic.Contacts.Values.Where(c => c.Kind == "ship" && !Trial.Naval.IsSunk(c.Key)).OrderBy(c => Trial.Time - c.LastSeen))
+            {
+                _targetIds.Add("ship:" + c.Key);
+                var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, c.Lon, c.Lat);
+                _target.AddItem($"⚓ {c.Label} · {d:0} km · seen {(Trial.Time - c.LastSeen) / 60:0} min ago");
+            }
         FillAim();
     }
 
@@ -297,6 +309,7 @@ public partial class TheatreOps : Control
         var keep = Trial?.Control.ToDictionary(k => k.Key, k => k.Value);
         Trial = new InterceptTrial(sc, Session.Profile, seed, Session.Content.BaseTypes);
         if (keep != null) foreach (var (k, v) in keep) Trial.Control[k] = v;
+        Trial.Naval = new NavalForces(Trial, Session.Content.PresetInfo, seed);
         Trial.Intel = new IntelService(Trial, Session.Content.PresetInfo, seed);
         Trial.Air = new AirTasking(Trial, Session.Content.PresetInfo, seed);
         SelectedFlight = null; Preview.Clear();
@@ -364,6 +377,7 @@ public partial class TheatreOps : Control
         if (_airView.Visible) UpdateAir(false);
         if (_basesView.Visible) UpdateBases();
         if (_firePanel.Visible) UpdateFires();
+        if (_navalView.Visible) UpdateNaval();
         if (_pages["PICTURE"].Visible) UpdateContacts();
         Timeline.QueueRedraw();
         Clear(_tracks);
@@ -517,7 +531,21 @@ public partial class TheatreLayer : Node2D
             DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
             if (!many || zoom > 3.5f) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
         }
-        foreach (var u in tr.Scenario.Units.Where(u => u.Kind is not ("air" or "aew")))
+        if (tr.Naval != null)
+            foreach (var sh in tr.Naval.Ships.Where(x => !Fogged(x.Side)))
+            {
+                var p0 = P(sh.Lon, sh.Lat);
+                if (sh.Sunk)
+                {
+                    DrawLine(p0 - new Vector2(6, 6) / zoom, p0 + new Vector2(6, 6) / zoom, Red, w * 1.5f);
+                    DrawLine(p0 - new Vector2(6, -6) / zoom, p0 + new Vector2(6, -6) / zoom, Red, w * 1.5f);
+                    Label(p0, $"{sh.Name} · sunk", new Color(Red, 0.7f));
+                    continue;
+                }
+                if (sh.Moving) DrawDashedLine(p0, P(sh.DestLon!.Value, sh.DestLat!.Value), new Color(SideColor(sh.Side), 0.6f), w, 6 / zoom);
+                if (Ops.SelectedShip == sh) { DrawArc(p0, 12 / zoom, 0, Mathf.Tau, 24, Colors.White, w); Label(p0, $"{sh.Name} · {sh.Hp / sh.MaxHp:P0}", SideColor(sh.Side)); }
+            }
+        foreach (var u in tr.Scenario.Units.Where(u => u.Kind is not ("air" or "aew") && !(tr.Naval?.IsSunk(u.Id) ?? false)))
         {
             var (lon, lat) = tr.UnitPos(u);
             var c = SideColor(u.Side);
