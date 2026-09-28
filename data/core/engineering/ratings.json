@@ -118,5 +118,11 @@
   "name": "Fire channels",
   "aggregate": "sum",
   "cap": 10
+ },
+ {
+  "id": "field",
+  "name": "Field performance",
+  "aggregate": "sum",
+  "cap": 10
  }
 ]

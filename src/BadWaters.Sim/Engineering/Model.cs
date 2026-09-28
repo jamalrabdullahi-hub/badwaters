@@ -102,6 +102,10 @@ public sealed record VisualPart
     public double Arc { get; init; }
     /// <summary>Height class for arc blocking; -1 = from the category (see ArcGeometry.Height).</summary>
     public double Height { get; init; } = -1;
+    /// <summary>Choices the player can pick on a placed part (gear type, engine type, radome shape...).</summary>
+    public List<PartOption> Options { get; init; } = new();
+    /// <summary>Size/ratio slider rules; null = fixed size.</summary>
+    public PartScaling? Scaling { get; init; }
 
     /// <summary>Radius of the part's drawing, metres (for picking and bounds).</summary>
     public double Extent => Shapes.Count == 0 ? 1 : Shapes.Max(s => s.T switch
@@ -113,7 +117,13 @@ public sealed record VisualPart
 }
 
 /// <summary>A part placed on a design: position in metres from the hull centre (x to starboard, y to the bow), rotation in degrees.</summary>
-public sealed record Placement(string Part, double X, double Y, double Rot = 0);
+public sealed record Placement(string Part, double X, double Y, double Rot = 0)
+{
+    /// <summary>Chosen option per option id.</summary>
+    public Dictionary<string, string> Options { get; init; } = new();
+    /// <summary>Size/ratio slider value (1 = standard).</summary>
+    public double Scale { get; init; } = 1;
+}
 
 /// <summary>Hull outline shared by the evaluator (bounds checks) and the designer (drawing).</summary>
 public static class HullGeometry

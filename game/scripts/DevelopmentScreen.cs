@@ -12,7 +12,7 @@ namespace BadWaters.Game;
 /// </summary>
 public partial class DevelopmentScreen : PanelContainer
 {
-    private static readonly (string Label, string Kind)[] Kinds = { ("Ship", "ship"), ("Ground", "ground"), ("Aircraft", "aircraft"), ("Munition", "munition") };
+    private static readonly (string Label, string Kind)[] Kinds = { ("Ship", "ship"), ("Ground", "ground"), ("Aircraft", "aircraft"), ("Munition", "munition"), ("Components", "component") };
     public static readonly Dictionary<string, Color> FamilyColor = new()
     {
         ["sensors"] = new("7fe3ff"), ["payload"] = new("ff6b6b"), ["fuzing"] = new("ff9f6b"), ["guidance"] = new("c49bff"),
@@ -31,7 +31,9 @@ public partial class DevelopmentScreen : PanelContainer
     private LineEdit _name = null!;
     private VBoxContainer _fitted = null!, _budgets = null!, _ratings = null!, _issues = null!, _sheet = null!, _selected = null!, _effect = null!;
     private GridContainer _partGrid = null!;
-    private Blueprint _blueprint = null!;
+    private Blueprint _blueprint = null!, _sideView = null!;
+    private HBoxContainer _root = null!;
+    private ComponentDesigner _compDesigner = null!;
     private DesignVisual _viz = null!;
     private Label _status = null!, _hullInfo = null!;
     private CheckBox _arcs = null!, _mirror = null!;
@@ -69,9 +71,13 @@ public partial class DevelopmentScreen : PanelContainer
         AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.008f, 0.024f, 0.048f, 0.97f), UiTheme.Line, 6));
         // open on the requested design's own system type
         if (DevScreenshot.Arg("design") is { } want && Session.Content.Designs.TryGetValue(want, out var wd) && Cat.Frames.TryGetValue(wd.Frame, out var wf)) _kind = wf.Kind;
-        var root = new HBoxContainer();
+        var outerBox = new VBoxContainer();
+        AddChild(outerBox);
+        var root = new HBoxContainer { SizeFlagsVertical = SizeFlags.ExpandFill };
         root.AddThemeConstantOverride("separation", 10);
-        AddChild(root);
+        _root = root;
+        _compDesigner = new ComponentDesigner { SizeFlagsVertical = SizeFlags.ExpandFill, Visible = false };
+        _compDesigner.Saved += () => { if (_kind != "component") { FillParts(); RefreshCatalog(); } };
 
         // ---- left: system type, blueprint, blueprint tools
         var left = new VBoxContainer { CustomMinimumSize = new Vector2(430, 0) };
@@ -81,15 +87,21 @@ public partial class DevelopmentScreen : PanelContainer
         foreach (var (label, kind) in Kinds)
         {
             var b = new Button { Text = label, ToggleMode = true, ButtonGroup = group, ButtonPressed = kind == _kind, SizeFlagsHorizontal = SizeFlags.ExpandFill };
-            b.Pressed += () => { _kind = kind; RefreshDesigns(null); };
+            b.Pressed += () => SetKind(kind);
             kinds.AddChild(b);
         }
-        left.AddChild(kinds);
-        _blueprint = new Blueprint { SizeFlagsVertical = SizeFlags.ExpandFill, Design = () => _work };
+        outerBox.AddChild(kinds);
+        outerBox.AddChild(root);
+        outerBox.AddChild(_compDesigner);
+        _blueprint = new Blueprint { SizeFlagsVertical = SizeFlags.ExpandFill, SizeFlagsStretchRatio = 3, Design = () => _work };
         _blueprint.Changed += Recalc;
         _blueprint.BeforeChange += Snapshot;
         _blueprint.SelectionChanged += ShowSelected;
         left.AddChild(_blueprint);
+        _sideView = new Blueprint { SizeFlagsVertical = SizeFlags.ExpandFill, SizeFlagsStretchRatio = 1, CustomMinimumSize = new Vector2(0, 130), Design = () => _work, SideView = true };
+        _sideView.Changed += Recalc;
+        _sideView.BeforeChange += Snapshot;
+        left.AddChild(_sideView);
         _viz = new DesignVisual { SizeFlagsVertical = SizeFlags.ExpandFill, Visible = false };
         left.AddChild(_viz);
         var tools = new HBoxContainer();
@@ -99,13 +111,11 @@ public partial class DevelopmentScreen : PanelContainer
         _mirror = new CheckBox { Text = "Mirror", ButtonPressed = true, TooltipText = "Off-centre drops also place a twin on the other side" }; _mirror.Toggled += on => _blueprint.Mirror = on;
         var clear = new Button { Text = "Clear parts" }; clear.Pressed += () => { Snapshot(); _work.Parts.Clear(); _blueprint.Selected = -1; Recalc(); ShowSelected(); };
         var shape = new CheckBox { Text = "Edit shape", TooltipText = "Drag vertices · click an edge to add one · right-click a vertex to delete it. Shape gives simple stealth, weight and handling modifiers." };
-        shape.Toggled += on => { _blueprint.EditOutline = on; _blueprint.QueueRedraw(); };
-        var resetShape = new Button { Text = "Reset shape" }; resetShape.Pressed += () => _blueprint.ResetOutline();
+        shape.Toggled += on => { _blueprint.EditOutline = on; _sideView.EditOutline = on; _blueprint.QueueRedraw(); _sideView.QueueRedraw(); };
+        var resetShape = new Button { Text = "Reset shape" }; resetShape.Pressed += () => { _blueprint.ResetOutline(); _sideView.ResetOutline(); };
         var undo = new Button { Text = "↶", TooltipText = "Undo (Ctrl+Z)" }; undo.Pressed += Undo;
         var redo = new Button { Text = "↷", TooltipText = "Redo (Ctrl+Y)" }; redo.Pressed += Redo;
-        var side = new CheckBox { Text = "Side", TooltipText = "Side profile view (shape editing works here too)" };
-        side.Toggled += on => { _blueprint.SideView = on; _blueprint.Zoom = 1; _blueprint.QueueRedraw(); };
-        tools.AddChild(undo); tools.AddChild(redo); tools.AddChild(zout); tools.AddChild(zin); tools.AddChild(side); tools.AddChild(_arcs); tools.AddChild(_mirror);
+        tools.AddChild(undo); tools.AddChild(redo); tools.AddChild(zout); tools.AddChild(zin); tools.AddChild(_arcs); tools.AddChild(_mirror);
         var tools2 = new HBoxContainer();
         tools2.AddChild(shape); tools2.AddChild(resetShape); tools2.AddChild(clear);
         left.AddChild(tools2);
@@ -222,8 +232,16 @@ public partial class DevelopmentScreen : PanelContainer
 
         RefreshDesigns(DevScreenshot.Arg("design"));
         if (int.TryParse(DevScreenshot.Arg("part"), out var sel) && sel < _work.Parts.Count) { _blueprint.Selected = sel; ShowSelected(); _blueprint.QueueRedraw(); }
-        if (DevScreenshot.Arg("shape") != null) { _blueprint.EditOutline = true; _blueprint.QueueRedraw(); }
-        if (DevScreenshot.Arg("side") != null) { _blueprint.SideView = true; _blueprint.QueueRedraw(); }
+        if (DevScreenshot.Arg("shape") != null) { _blueprint.EditOutline = true; _sideView.EditOutline = true; _blueprint.QueueRedraw(); }
+        if (DevScreenshot.Arg("comp") != null) SetKind("component");
+    }
+
+    private void SetKind(string kind)
+    {
+        _kind = kind;
+        var comp = kind == "component";
+        _root.Visible = !comp; _compDesigner.Visible = comp;
+        if (!comp) RefreshDesigns(null);
     }
 
     private static Label Field(string t, float w) { var l = UiTheme.Text(t, 13, UiTheme.Dim); l.CustomMinimumSize = new Vector2(w, 0); return l; }
@@ -305,7 +323,8 @@ public partial class DevelopmentScreen : PanelContainer
     {
         var frame = Cat.Frames.GetValueOrDefault(_work.Frame);
         var hasHull = frame?.Hull != null && frame.Kind != "munition"; // munitions keep the simple sections diagram
-        _blueprint.Visible = hasHull; _viz.Visible = !hasHull;
+        _blueprint.Visible = hasHull; _sideView.Visible = hasHull; _viz.Visible = !hasHull;
+        _sideView.QueueRedraw();
         if (!hasHull) _viz.Show(_work);
         _blueprint.QueueRedraw();
         _hullInfo.Text = frame?.Hull is { } hl ? $"{hl.Length:0.#} m long · {hl.Width:0.#} m {(hl.Span > 0 ? "span" : "beam")} · {_work.Parts.Count} parts placed · {_work.Components.Count} internal systems" : "No blueprint for this kind: internal systems only.";
@@ -430,6 +449,50 @@ public partial class DevelopmentScreen : PanelContainer
         _selected.AddChild(UiTheme.Text("Uses: " + string.Join(" · ", uses.Select(u => $"{u.Key} {u.Value:0.#}")), 12, UiTheme.Ink));
         if (p.Adds.Count > 0) _selected.AddChild(UiTheme.Text("Adds: " + Adds(p.Adds), 12, UiTheme.Good));
         _selected.AddChild(UiTheme.Text($"Cost {p.Cost:0.#}", 12, UiTheme.Ink));
+        foreach (var o in p.Options)
+        {
+            var h = new HBoxContainer();
+            var l = UiTheme.Text(o.Name, 12); l.CustomMinimumSize = new Vector2(130, 0);
+            var ob = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+            foreach (var ch in o.Choices) ob.AddItem(ch.Name);
+            var cur = PartResolver.Choice(p, pl, o);
+            ob.Select(Math.Max(0, o.Choices.FindIndex(c => c.Id == cur)));
+            for (var k = 0; k < o.Choices.Count; k++)
+            {
+                var ch = o.Choices[k];
+                ob.SetItemTooltip(k, string.Join(", ", ch.Adds.Select(a => $"{(a.Value >= 0 ? "+" : "")}{a.Value:0.#} {a.Key}").Concat(ch.UsesMul.Select(m => $"{m.Key} ×{m.Value:0.##}"))) + (ch.Note != "" ? $"\n{ch.Note}" : ""));
+            }
+            var oo = o;
+            ob.ItemSelected += k => { Snapshot(); var cp = _work.Parts[i]; _work.Parts[i] = cp with { Options = new Dictionary<string, string>(cp.Options) { [oo.Id] = oo.Choices[(int)k].Id } }; Recalc(); ShowSelected(); };
+            h.AddChild(l); h.AddChild(ob);
+            _selected.AddChild(h);
+        }
+        if (p.Scaling is { } sc)
+        {
+            var h = new HBoxContainer();
+            var l = UiTheme.Text(sc.Label, 12); l.CustomMinimumSize = new Vector2(130, 0);
+            var v = UiTheme.Text($"×{pl.Scale:0.00}", 12, UiTheme.Accent); v.CustomMinimumSize = new Vector2(50, 0);
+            var sl = new HSlider { MinValue = sc.Min, MaxValue = sc.Max, Step = 0.05, Value = pl.Scale, SizeFlagsHorizontal = SizeFlags.ExpandFill, SizeFlagsVertical = SizeFlags.ShrinkCenter };
+            sl.DragStarted += Snapshot;
+            sl.ValueChanged += x => { _work.Parts[i] = _work.Parts[i] with { Scale = x }; v.Text = $"×{x:0.00}"; _blueprint.QueueRedraw(); _sideView.QueueRedraw(); };
+            sl.DragEnded += _ => { Recalc(); ShowSelected(); };
+            h.AddChild(l); h.AddChild(sl); h.AddChild(v);
+            _selected.AddChild(h);
+        }
+        if (p.Options.Count > 0 || p.Scaling != null)
+        {
+            // pros and cons of the current options/size against the default part
+            var baseR = PartResolver.Resolve(p, new Placement(p.Id, 0, 0), Cat);
+            var curR = PartResolver.Resolve(p, pl, Cat);
+            var diffs = curR.Adds.Keys.Union(baseR.Adds.Keys).Select(k => (k, d: curR.Adds.GetValueOrDefault(k) - baseR.Adds.GetValueOrDefault(k))).Where(x => Math.Abs(x.d) > 0.01)
+                .Select(x => $"{(x.d > 0 ? "+" : "")}{x.d:0.##} {x.k}").ToList();
+            var dm = curR.Uses.GetValueOrDefault("mass") - baseR.Uses.GetValueOrDefault("mass");
+            if (Math.Abs(dm) > 0.001) diffs.Add($"{(dm > 0 ? "+" : "")}{dm:0.##} t");
+            var dc = curR.Cost - baseR.Cost;
+            if (Math.Abs(dc) > 0.01) diffs.Add($"{(dc > 0 ? "+" : "")}{dc:0.#} cost");
+            _selected.AddChild(Wrap(diffs.Count == 0 ? "Standard configuration." : "Against standard: " + string.Join(" · ", diffs), UiTheme.Ink));
+            foreach (var n in curR.Notes) _selected.AddChild(UiTheme.Text(n, 11, UiTheme.Dim, wrap: true));
+        }
         var row = new HBoxContainer();
         foreach (var (t, a) in new[] { ("⟲ 15°", -15.0), ("⟳ 15°", 15.0), ("↻ 90°", 90.0), ("180°", 180.0) })
         {

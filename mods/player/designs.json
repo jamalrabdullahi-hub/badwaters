@@ -147,6 +147,169 @@
       -23.53,
       1.1,
       -21.16
+    ],
+    "side": []
+  },
+  {
+    "id": "player-ship-1",
+    "name": "DiddyX (variant)",
+    "frame": "hull-destroyer-stealth",
+    "components": [
+      "mat-steel",
+      "pr-cogag",
+      "pw-gen-turbine",
+      "pw-gen-turbine",
+      "th-cooling-adv",
+      "sn-radar-aesa",
+      "cp-cms-integrated",
+      "cm-radio",
+      "cm-datalink",
+      "cm-satcom",
+      "ew-decoys",
+      "ew-jammer",
+      "if-cell-block",
+      "if-cell-block",
+      "if-cell-block",
+      "if-canister",
+      "wp-gun-medium",
+      "wp-point-defence",
+      "sn-sonar-hull",
+      "sy-hangar",
+      "sy-crew-std",
+      "rl-basic",
+      "nv-fusion"
+    ],
+    "lineage": "maya",
+    "parts": [
+      {
+        "part": "house-long",
+        "x": 0,
+        "y": -33.5,
+        "rot": 0
+      },
+      {
+        "part": "bridge-m",
+        "x": 0,
+        "y": -16.5,
+        "rot": 0
+      },
+      {
+        "part": "stealth-block",
+        "x": 0,
+        "y": -53.5,
+        "rot": 180
+      },
+      {
+        "part": "cic-block",
+        "x": 0,
+        "y": -24.5,
+        "rot": 0
+      },
+      {
+        "part": "rad-array-pesa",
+        "x": 0,
+        "y": -42,
+        "rot": 0
+      },
+      {
+        "part": "rad-dome",
+        "x": 0,
+        "y": -32,
+        "rot": 0
+      },
+      {
+        "part": "sonar-bow",
+        "x": 0,
+        "y": 75,
+        "rot": 0
+      },
+      {
+        "part": "eo-sight",
+        "x": 3,
+        "y": -17.5,
+        "rot": 0
+      },
+      {
+        "part": "vls-64",
+        "x": 0,
+        "y": 0,
+        "rot": 0
+      },
+      {
+        "part": "vls-64",
+        "x": 0,
+        "y": 3.5,
+        "rot": 0
+      },
+      {
+        "part": "asroc-box",
+        "x": 9,
+        "y": -51.5,
+        "rot": 0
+      },
+      {
+        "part": "asroc-box",
+        "x": -9,
+        "y": -51.5,
+        "rot": 0
+      },
+      {
+        "part": "can-2",
+        "x": 9,
+        "y": -17.5,
+        "rot": 15
+      },
+      {
+        "part": "can-2",
+        "x": -9,
+        "y": -17.5,
+        "rot": 345
+      },
+      {
+        "part": "ram-21",
+        "x": -9.5,
+        "y": -44.5,
+        "rot": 330
+      },
+      {
+        "part": "ram-21",
+        "x": 9.5,
+        "y": -44.5,
+        "rot": 30
+      },
+      {
+        "part": "funnel-stealth",
+        "x": 0,
+        "y": -55.5,
+        "rot": 0
+      },
+      {
+        "part": "launch-boat",
+        "x": 9,
+        "y": -32.5,
+        "rot": 0
+      },
+      {
+        "part": "launch-boat",
+        "x": -9,
+        "y": -32.5,
+        "rot": 0
+      }
+    ],
+    "outline": [],
+    "side": [
+      74.42,
+      8.79,
+      -93,
+      8.61,
+      -93,
+      -1.845,
+      -83.7,
+      -6.15,
+      104.48,
+      -5.93,
+      89.99,
+      2.84
     ]
   }
 ]

@@ -11,9 +11,10 @@ def P(pts, f="steel"): return {"t": "poly", "p": [c for xy in pts for c in xy], 
 def L(pts, f="dark"): return {"t": "line", "p": [c for xy in pts for c in xy], "fill": f}
 
 PARTS = []
-def part(i, name, cat, fits, shapes, uses=None, adds=None, cost=1.0, topside=False, comp=None, offers=None, arc=0):
+def part(i, name, cat, fits, shapes, uses=None, adds=None, cost=1.0, topside=False, comp=None, offers=None, arc=0, options=None, scaling=None, height=-1):
     PARTS.append({"id": i, "name": name, "category": cat, "fitsKinds": fits, "shapes": shapes, "uses": uses or {}, "adds": adds or {},
-                  "cost": cost, "topside": topside, "component": comp, "offers": offers or [], "arc": arc})
+                  "cost": cost, "topside": topside, "component": comp, "offers": offers or [], "arc": arc,
+                  "options": options or [], "scaling": scaling, "height": height})
 
 S, G, A = ["ship"], ["ground"], ["aircraft"]
 
@@ -194,6 +195,9 @@ part("ac-apu", "Auxiliary power unit", "Airframe", A, [R(0, 0, 0.5, 0.8, "steel"
 part("ac-ecs", "Cooling pack", "Airframe", A, [R(0, 0, 0.6, 0.6, "steel"), L([(-0.3, 0), (0.3, 0)], "dark")], {}, {}, 0.5, comp="th-air-ecs")
 part("ac-rotor", "Rotor disc (uncrewed)", "Engines", A, [C(0, 0, 2.2, "light"), L([(-2.2, 0), (2.2, 0)], "dark"), L([(0, -2.2), (0, 2.2)], "dark")], {"mass": 0.4}, {"endurance": 1}, 2)
 
+
+# option sets, scaling and ~220 more parts live in gen_parts_more.py
+exec(open(os.path.join(os.path.dirname(__file__), "gen_parts_more.py"), encoding="utf8").read())
 
 for p in PARTS:
     p["uses"] = {k: v for k, v in p["uses"].items() if v}

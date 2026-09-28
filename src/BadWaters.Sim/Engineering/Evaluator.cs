@@ -61,16 +61,15 @@ public sealed class Evaluator
             if (!_cat.Parts.TryGetValue(pl.Part, out var p)) { issues.Add(new(IssueKind.UnknownPart, $"Unknown part {pl.Part}.")); continue; }
             if (p.FitsKinds.Length > 0 && !p.FitsKinds.Contains(frame.Kind)) issues.Add(new(IssueKind.WrongKind, $"{p.Name} can't be fitted to a {frame.Kind}."));
             if (frame.Hull != null && !HullGeometry.Inside(ShapeRules.TopHalf(frame, d), pl.X, pl.Y, Math.Max(0.1, frame.Hull.Width * 0.05))) issues.Add(new(IssueKind.NoPort, $"{p.Name} at ({pl.X:0}, {pl.Y:0}) m hangs off the hull."));
-            var uses = new Dictionary<string, double>(p.Uses);
-            double partCost = p.Cost;
+            // the part's own stats, its component, its chosen options and its size
+            var res = PartResolver.Resolve(p, pl, _cat);
+            var uses = res.Uses;
+            double partCost = res.Cost;
             if (p.Component != null && _cat.Components.TryGetValue(p.Component, out var pc))
             {
                 CheckTech(pc.Requires, pc.Name, techLevels, issues);
-                foreach (var (axis, v) in pc.Uses) uses[axis] = uses.GetValueOrDefault(axis) + v;
-                foreach (var (r, v) in pc.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v);
                 foreach (var o in pc.Offers) offered.Add(o);
                 foreach (var n in pc.Needs) needs.Add((n, pc.Name));
-                partCost += pc.Cost;
                 if (pc.Factory != null) work[pc.Factory] = work.GetValueOrDefault(pc.Factory) + pc.WorkUnits;
             }
             foreach (var (axis, v) in uses)
@@ -87,7 +86,7 @@ public sealed class Evaluator
                 arcFactor = 0.4 + 0.6 * cov;
                 if (cov < 0.35) issues.Add(new(IssueKind.NoPort, $"{p.Name}: firing arc {cov:P0} clear, mostly blocked by taller structure."));
             }
-            foreach (var (r, v) in p.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v * (v > 0 ? arcFactor : 1));
+            foreach (var (r, v) in res.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v * (v > 0 ? arcFactor : 1));
             foreach (var o in p.Offers) offered.Add(o);
             cost += partCost;
             Book(breakdown, p.Category, Math.Max(0, uses.GetValueOrDefault("mass")), partCost);

@@ -82,6 +82,17 @@ public static class Session
             JsonSerializer.Serialize(mine, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
     }
 
+    /// <summary>A component from the component designer, plus its drawn part; both go to mods/player.</summary>
+    public static void SaveComponent(ComponentTemplate c, VisualPart part)
+    {
+        Content.Catalog.Components[c.Id] = c;
+        Content.Catalog.Parts[part.Id] = part;
+        Directory.CreateDirectory(PlayerModDir());
+        var opts = new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        File.WriteAllText(Path.Combine(PlayerModDir(), "components.json"), JsonSerializer.Serialize(Content.Catalog.Components.Values.Where(x => x.Id.StartsWith("player-")).ToList(), opts));
+        File.WriteAllText(Path.Combine(PlayerModDir(), "parts.json"), JsonSerializer.Serialize(Content.Catalog.Parts.Values.Where(x => x.Id.StartsWith("part-player-")).ToList(), opts));
+    }
+
     /// <summary>Land meshes by resolution: "110m" for zoomed-out views, "50m" for detail.</summary>
     public static Dictionary<string, ArrayMesh> LandMeshes { get; } = new();
 

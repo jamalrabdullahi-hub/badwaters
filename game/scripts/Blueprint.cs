@@ -13,11 +13,12 @@ public static class PartPalette
     };
 
     /// <summary>Draw a part's shapes onto a canvas item. toScreen maps part-local metres (already rotated) to pixels.</summary>
-    public static void Draw(CanvasItem ci, VisualPart p, Func<double, double, Vector2> toScreen, float px, double rotDeg, float alpha = 1)
+    public static void Draw(CanvasItem ci, VisualPart p, Func<double, double, Vector2> toScreen, float px, double rotDeg, float alpha = 1, double sx = 1, double sy = 1)
     {
         var a = rotDeg * Math.PI / 180;
         var (sin, cos) = (Math.Sin(a), Math.Cos(a));
-        Vector2 T(double x, double y) => toScreen(x * cos + y * sin, -x * sin + y * cos); // clockwise rotation, +y = forward
+        Vector2 T(double x, double y) { x *= sx; y *= sy; return toScreen(x * cos + y * sin, -x * sin + y * cos); } // stretch, then clockwise rotation (+y = forward)
+        px *= (float)Math.Sqrt(sx * sy);
         foreach (var s in p.Shapes)
         {
             var c = Fill(s.Fill); c.A = alpha;
@@ -125,7 +126,8 @@ public partial class Blueprint : Control
         {
             var pl = d.Parts[i];
             if (!Cat.Parts.TryGetValue(pl.Part, out var p)) continue;
-            PartPalette.Draw(this, p, (x, y) => ToScreen(pl.X + x, pl.Y + y), s, pl.Rot, EditOutline ? 0.5f : 1);
+            var rs = PartResolver.Resolve(p, pl, Cat);
+            PartPalette.Draw(this, p, (x, y) => ToScreen(pl.X + x, pl.Y + y), s, pl.Rot, EditOutline ? 0.5f : 1, rs.ShapeX, rs.ShapeY);
             if (ShowArcs && !EditOutline && p.Arc > 0 && (i == Selected || Selected < 0))
             {
                 var c = ToScreen(pl.X, pl.Y);
@@ -142,7 +144,7 @@ public partial class Blueprint : Control
                     DrawArc(c, reach, a0, a1, 8, col, 1);
                 }
             }
-            if (i == Selected) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 3, 0, Mathf.Tau, 32, new Color("7fe3ff"), 1.5f);
+            if (i == Selected) DrawArc(ToScreen(pl.X, pl.Y), (float)(p.Extent * pl.Scale) * s + 3, 0, Mathf.Tau, 32, new Color("7fe3ff"), 1.5f);
             if (!HullGeometry.Inside(half, pl.X, pl.Y, Math.Max(0.1, Hull.Width * 0.05))) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
         }
         DrawHandles();
@@ -165,8 +167,8 @@ public partial class Blueprint : Control
         foreach (var pl in d.Parts.OrderBy(q => Cat.Parts.TryGetValue(q.Part, out var pp) ? ArcGeometry.Height(pp) : 0))
         {
             if (!Cat.Parts.TryGetValue(pl.Part, out var p)) continue;
-            var h = Math.Max(0.4, ArcGeometry.Height(p)) * unit;
-            var w = p.Extent * 1.4;
+            var h = Math.Max(0.4, ArcGeometry.Height(p)) * unit * pl.Scale;
+            var w = p.Extent * 1.4 * pl.Scale;
             var a = ToScreen(pl.Y - w / 2, deck + h); var b = ToScreen(pl.Y + w / 2, deck);
             DrawRect(new Rect2(a, b - a), PartPalette.Fill(p.Shapes.FirstOrDefault()?.Fill ?? "steel"));
             DrawRect(new Rect2(a, b - a), new Color("2c3740"), false, 1);
@@ -190,7 +192,7 @@ public partial class Blueprint : Control
         var d = Design?.Invoke();
         if (d == null || SideView) return -1;
         for (var i = d.Parts.Count - 1; i >= 0; i--)
-            if (Cat.Parts.TryGetValue(d.Parts[i].Part, out var p) && ToScreen(d.Parts[i].X, d.Parts[i].Y).DistanceTo(at) <= Math.Max(6, p.Extent * Scale * 0.8)) return i;
+            if (Cat.Parts.TryGetValue(d.Parts[i].Part, out var p) && ToScreen(d.Parts[i].X, d.Parts[i].Y).DistanceTo(at) <= Math.Max(6, p.Extent * d.Parts[i].Scale * Scale * 0.8)) return i;
         return -1;
     }
 
@@ -348,7 +350,8 @@ public partial class PartTile : Button
 
     public override void _Ready()
     {
-        CustomMinimumSize = new Vector2(96, 92);
+        if (CustomMinimumSize == Vector2.Zero) CustomMinimumSize = new Vector2(96, 92);
+        if (Part == null) return; // assigned later (component designer preview)
         TooltipText = $"{Part.Name}\n{Part.Category}{(Part.Topside ? " · topside" : "")}\n" +
                       string.Join(", ", Part.Uses.Select(u => $"{u.Key} {u.Value:0.#}")) +
                       (Part.Adds.Count > 0 ? "\n" + string.Join(", ", Part.Adds.Select(a => $"+{a.Value:0.#} {a.Key}")) : "") +
@@ -358,6 +361,7 @@ public partial class PartTile : Button
 
     public override void _Draw()
     {
+        if (Part == null) return;
         var box = new Rect2(4, 4, Size.X - 8, Size.Y - 26);
         DrawRect(box, new Color("0a1a2a"));
         var ext = (float)Math.Max(1, Part.Extent);

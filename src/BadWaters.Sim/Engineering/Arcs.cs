@@ -29,7 +29,7 @@ public static class ArcGeometry
         if (!cat.Parts.TryGetValue(pl.Part, out var p) || p.Arc <= 0) return (1, new());
         var h = Height(p);
         var blockers = d.Parts.Select((q, i) => (q, i)).Where(x => x.i != index && cat.Parts.TryGetValue(x.q.Part, out var bp) && Height(bp) > h)
-            .Select(x => (x.q.X, x.q.Y, R: cat.Parts[x.q.Part].Extent * 0.75)).ToList();
+            .Select(x => (x.q.X, x.q.Y, R: cat.Parts[x.q.Part].Extent * 0.75 * x.q.Scale)).ToList();
         const double step = 3;
         var sectors = new List<Sector>();
         int free = 0, total = 0;

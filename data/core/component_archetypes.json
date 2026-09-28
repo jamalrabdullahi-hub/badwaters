@@ -1,0 +1,1485 @@
+[
+ {
+  "id": "ac-engine",
+  "name": "Aircraft engine",
+  "family": "propulsion",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "uses": {
+   "mass": 3,
+   "volume": 2,
+   "power": -6
+  },
+  "adds": {
+   "speed": 6,
+   "endurance": 5,
+   "agility": 5
+  },
+  "requires": {
+   "jet-engines": 3
+  },
+  "cost": 20,
+  "factory": "aerospace-assembly",
+  "port": null,
+  "offers": [],
+  "visual": "ac-engine",
+  "category": "Custom engines",
+  "topside": false,
+  "params": [
+   {
+    "id": "size",
+    "name": "Size",
+    "kind": "slider",
+    "min": 0.6,
+    "max": 1.6,
+    "default": 1,
+    "step": 0.05,
+    "uses": {},
+    "adds": {
+     "speed": 2,
+     "endurance": 1,
+     "agility": 1
+    },
+    "cost": 20,
+    "scaleUses": {
+     "mass": 2,
+     "volume": 2,
+     "power": 1
+    },
+    "techField": ""
+   },
+   {
+    "id": "type",
+    "name": "Type",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "turbojet",
+      "name": "Turbojet",
+      "usesMul": {
+       "mass": 0.9
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": 1,
+       "endurance": -2
+      },
+      "costMul": 0.8,
+      "note": ""
+     },
+     {
+      "id": "lbtf",
+      "name": "Low-bypass turbofan",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "hbtf",
+      "name": "High-bypass turbofan",
+      "usesMul": {
+       "mass": 1.3
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -2,
+       "endurance": 2,
+       "signature": -0.5
+      },
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "turboprop",
+      "name": "Turboprop",
+      "usesMul": {
+       "mass": 0.8
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -3,
+       "endurance": 3,
+       "agility": -1,
+       "field": 1
+      },
+      "costMul": 0.6,
+      "note": ""
+     },
+     {
+      "id": "propfan",
+      "name": "Propfan",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -2,
+       "endurance": 3
+      },
+      "costMul": 0.9,
+      "note": ""
+     },
+     {
+      "id": "ramjet",
+      "name": "Ramjet",
+      "usesMul": {
+       "mass": 0.7
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": 3,
+       "endurance": -3,
+       "agility": -2,
+       "field": -2
+      },
+      "costMul": 1.5,
+      "note": ""
+     },
+     {
+      "id": "scramjet",
+      "name": "Scramjet",
+      "usesMul": {
+       "mass": 0.8
+      },
+      "usesAdd": {
+       "cooling": 2
+      },
+      "adds": {
+       "speed": 4,
+       "endurance": -4,
+       "agility": -3,
+       "field": -3
+      },
+      "costMul": 3,
+      "note": ""
+     },
+     {
+      "id": "electric",
+      "name": "Electric",
+      "usesMul": {
+       "mass": 1.2
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -4,
+       "endurance": -1,
+       "signature": 1
+      },
+      "costMul": 0.7,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "lbtf"
+   },
+   {
+    "id": "bypass",
+    "name": "Bypass ratio",
+    "kind": "slider",
+    "min": 0,
+    "max": 8,
+    "default": 1,
+    "step": 0.5,
+    "uses": {
+     "mass": 0.15,
+     "volume": 0.2
+    },
+    "adds": {
+     "endurance": 0.4,
+     "speed": -0.3
+    },
+    "cost": 0,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "spools",
+    "name": "Spools / fan stages",
+    "kind": "slider",
+    "min": 1,
+    "max": 3,
+    "default": 2,
+    "step": 1,
+    "uses": {
+     "mass": 0.3
+    },
+    "adds": {
+     "endurance": 0.5,
+     "reliability": -0.3
+    },
+    "cost": 5,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "ab",
+    "name": "Afterburner",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "none",
+      "name": "None",
+      "usesMul": {
+       "mass": 0.9
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -1,
+       "signature": 0.5
+      },
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "std",
+      "name": "Afterburner",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "adaptive",
+      "name": "Adaptive cycle",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": 0.5,
+       "endurance": 1
+      },
+      "costMul": 1.6,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "std"
+   },
+   {
+    "id": "hot",
+    "name": "Hot-section materials",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "nickel",
+      "name": "Nickel alloys",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "cmc",
+      "name": "Ceramic matrix",
+      "usesMul": {
+       "mass": 0.85
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": 0.5,
+       "endurance": 0.5
+      },
+      "costMul": 1.5,
+      "note": ""
+     },
+     {
+      "id": "cheap",
+      "name": "Low-cost",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -0.5,
+       "reliability": -0.5
+      },
+      "costMul": 0.7,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "nickel"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "jet-engines"
+   }
+  ]
+ },
+ {
+  "id": "ship-plant",
+  "name": "Ship propulsion plant",
+  "family": "propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "uses": {
+   "mass": 400,
+   "volume": 6,
+   "crew": 20
+  },
+  "adds": {
+   "speed": 7,
+   "endurance": 3
+  },
+  "requires": {
+   "gas-turbines": 3
+  },
+  "cost": 90,
+  "factory": "shipyard",
+  "port": null,
+  "offers": [],
+  "visual": "funnel-twin",
+  "category": "Custom propulsion",
+  "topside": false,
+  "params": [
+   {
+    "id": "power",
+    "name": "Installed power",
+    "kind": "slider",
+    "min": 0.5,
+    "max": 2,
+    "default": 1,
+    "step": 0.05,
+    "uses": {},
+    "adds": {
+     "speed": 2
+    },
+    "cost": 60,
+    "scaleUses": {
+     "mass": 1,
+     "volume": 1,
+     "crew": 0.5
+    },
+    "techField": ""
+   },
+   {
+    "id": "type",
+    "name": "Plant type",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "diesel",
+      "name": "Diesel",
+      "usesMul": {
+       "mass": 0.9
+      },
+      "usesAdd": {},
+      "adds": {
+       "speed": -1,
+       "endurance": 2
+      },
+      "costMul": 0.6,
+      "note": ""
+     },
+     {
+      "id": "codag",
+      "name": "CODAG",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "endurance": 1
+      },
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "cogag",
+      "name": "COGAG",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "speed": 0.5
+      },
+      "costMul": 1.1,
+      "note": ""
+     },
+     {
+      "id": "iep",
+      "name": "Integrated electric",
+      "usesMul": {
+       "mass": 1.15
+      },
+      "usesAdd": {},
+      "adds": {
+       "endurance": 1,
+       "signature": 0.5
+      },
+      "costMul": 1.5,
+      "note": ""
+     },
+     {
+      "id": "nuclear",
+      "name": "Nuclear (abstract)",
+      "usesMul": {
+       "mass": 2.2,
+       "crew": 1.5
+      },
+      "usesAdd": {},
+      "adds": {
+       "endurance": 5,
+       "speed": 1
+      },
+      "costMul": 4,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "codag"
+   },
+   {
+    "id": "shafts",
+    "name": "Shafts",
+    "kind": "slider",
+    "min": 1,
+    "max": 4,
+    "default": 2,
+    "step": 1,
+    "uses": {
+     "mass": 30,
+     "volume": 0.5
+    },
+    "adds": {
+     "survivability": 0.5,
+     "speed": 0.2
+    },
+    "cost": 5,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "quiet",
+    "name": "Quieting",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "rafted",
+      "name": "Rafted mounts",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {},
+      "adds": {
+       "signature": 1,
+       "anti-sub": 0.5
+      },
+      "costMul": 1.3,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "std"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "gas-turbines"
+   }
+  ]
+ },
+ {
+  "id": "generator",
+  "name": "Power generator",
+  "family": "power",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "uses": {
+   "mass": 60,
+   "volume": 2,
+   "power": -12
+  },
+  "adds": {},
+  "requires": {
+   "power-systems": 2
+  },
+  "cost": 10,
+  "factory": "shipyard",
+  "port": null,
+  "offers": [],
+  "visual": "g-gen-large",
+  "category": "Custom power",
+  "topside": false,
+  "params": [
+   {
+    "id": "output",
+    "name": "Output",
+    "kind": "slider",
+    "min": 0.5,
+    "max": 3,
+    "default": 1,
+    "step": 0.1,
+    "uses": {},
+    "adds": {},
+    "cost": 10,
+    "scaleUses": {
+     "mass": 0.9,
+     "volume": 0.8,
+     "power": 1
+    },
+    "techField": ""
+   },
+   {
+    "id": "type",
+    "name": "Type",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "diesel",
+      "name": "Diesel",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "gt",
+      "name": "Gas turbine",
+      "usesMul": {
+       "mass": 0.8
+      },
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.4,
+      "note": ""
+     },
+     {
+      "id": "fuelcell",
+      "name": "Fuel cell",
+      "usesMul": {
+       "mass": 1.2
+      },
+      "usesAdd": {},
+      "adds": {
+       "signature": 0.5
+      },
+      "costMul": 2,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "diesel"
+   },
+   {
+    "id": "redundancy",
+    "name": "Redundancy",
+    "kind": "slider",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "step": 1,
+    "uses": {
+     "mass": 15,
+     "volume": 0.3
+    },
+    "adds": {
+     "reliability": 1,
+     "survivability": 0.3
+    },
+    "cost": 4,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "power-systems"
+   }
+  ]
+ },
+ {
+  "id": "radar-array",
+  "name": "Radar array",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "uses": {
+   "mass": 50,
+   "power": 16,
+   "cooling": 8
+  },
+  "adds": {
+   "detection": 7,
+   "fire-channels": 6
+  },
+  "requires": {
+   "radar": 6
+  },
+  "cost": 220,
+  "factory": "radar-factory",
+  "port": "mast-sensor",
+  "offers": [
+   "fire-control"
+  ],
+  "visual": "rad-array-4face",
+  "category": "Custom sensors",
+  "topside": true,
+  "params": [
+   {
+    "id": "faces",
+    "name": "Faces",
+    "kind": "slider",
+    "min": 1,
+    "max": 4,
+    "default": 4,
+    "step": 1,
+    "uses": {
+     "mass": 10,
+     "power": 3,
+     "cooling": 1.5
+    },
+    "adds": {
+     "fire-channels": 1.5,
+     "detection": 0.3
+    },
+    "cost": 40,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "aperture",
+    "name": "Aperture size",
+    "kind": "slider",
+    "min": 0.6,
+    "max": 2,
+    "default": 1,
+    "step": 0.05,
+    "uses": {},
+    "adds": {
+     "detection": 2
+    },
+    "cost": 80,
+    "scaleUses": {
+     "mass": 2,
+     "power": 1.5,
+     "cooling": 1.5
+    },
+    "techField": ""
+   },
+   {
+    "id": "band",
+    "name": "Band",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "s",
+      "name": "S band",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "x",
+      "name": "X band",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "fire-channels": 1,
+       "detection": -0.5
+      },
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "dual",
+      "name": "Dual band",
+      "usesMul": {
+       "mass": 1.3,
+       "power": 1.3
+      },
+      "usesAdd": {},
+      "adds": {
+       "detection": 1,
+       "fire-channels": 2
+      },
+      "costMul": 1.5,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "s"
+   },
+   {
+    "id": "cooling",
+    "name": "Cooling",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "air",
+      "name": "Air cooled",
+      "usesMul": {
+       "cooling": 0.8
+      },
+      "usesAdd": {},
+      "adds": {
+       "detection": -0.5
+      },
+      "costMul": 0.8,
+      "note": ""
+     },
+     {
+      "id": "liquid",
+      "name": "Liquid cooled",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "liquid"
+   },
+   {
+    "id": "hardening",
+    "name": "Hardening",
+    "kind": "slider",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "step": 1,
+    "uses": {
+     "mass": 8
+    },
+    "adds": {
+     "survivability": 0.5
+    },
+    "cost": 10,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "radar"
+   }
+  ]
+ },
+ {
+  "id": "radome",
+  "name": "Aircraft radar",
+  "family": "sensors",
+  "fitsKinds": [
+   "aircraft"
+  ],
+  "uses": {
+   "mass": 0.3,
+   "power": 4,
+   "cooling": 3
+  },
+  "adds": {
+   "detection": 7,
+   "fire-channels": 4
+  },
+  "requires": {
+   "radar": 5
+  },
+  "cost": 30,
+  "factory": "avionics-factory",
+  "port": null,
+  "offers": [],
+  "visual": "ac-radar-aesa",
+  "category": "Custom sensors",
+  "topside": false,
+  "params": [
+   {
+    "id": "aperture",
+    "name": "Aperture size",
+    "kind": "slider",
+    "min": 0.6,
+    "max": 1.5,
+    "default": 1,
+    "step": 0.05,
+    "uses": {},
+    "adds": {
+     "detection": 2,
+     "fire-channels": 1
+    },
+    "cost": 20,
+    "scaleUses": {
+     "mass": 2,
+     "power": 1.5,
+     "cooling": 1.5
+    },
+    "techField": ""
+   },
+   {
+    "id": "shape",
+    "name": "Radome shape",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "ogive",
+      "name": "Ogive",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "hemi",
+      "name": "Hemispherical",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "detection": 0.5,
+       "signature": -0.5,
+       "speed": -0.5
+      },
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "faceted",
+      "name": "Faceted low-signature",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "detection": -0.5,
+       "signature": 1
+      },
+      "costMul": 1.3,
+      "note": ""
+     },
+     {
+      "id": "conformal",
+      "name": "Conformal",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "detection": -1,
+       "signature": 1.5
+      },
+      "costMul": 1.5,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "ogive"
+   },
+   {
+    "id": "type",
+    "name": "Array type",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "mech",
+      "name": "Mechanically scanned",
+      "usesMul": {
+       "mass": 1.2
+      },
+      "usesAdd": {},
+      "adds": {
+       "detection": -1,
+       "fire-channels": -2
+      },
+      "costMul": 0.5,
+      "note": ""
+     },
+     {
+      "id": "pesa",
+      "name": "Passive array",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "fire-channels": -1
+      },
+      "costMul": 0.8,
+      "note": ""
+     },
+     {
+      "id": "aesa",
+      "name": "Active array",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "aesa"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "radar"
+   }
+  ]
+ },
+ {
+  "id": "launch-block",
+  "name": "Launch cell block",
+  "family": "interfaces",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "uses": {
+   "mass": 30,
+   "volume": 2
+  },
+  "adds": {},
+  "requires": {
+   "structures": 4
+  },
+  "cost": 12,
+  "factory": "shipyard",
+  "port": "cell-block",
+  "offers": [
+   "launch-cell"
+  ],
+  "visual": "vls-8",
+  "category": "Custom launchers",
+  "topside": false,
+  "params": [
+   {
+    "id": "cells",
+    "name": "Cells",
+    "kind": "slider",
+    "min": 4,
+    "max": 64,
+    "default": 8,
+    "step": 4,
+    "uses": {},
+    "adds": {
+     "strike": 0.08,
+     "air-defence": 0.08
+    },
+    "cost": 1.5,
+    "scaleUses": {
+     "mass": 1,
+     "volume": 0.7
+    },
+    "techField": ""
+   },
+   {
+    "id": "length",
+    "name": "Cell length",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "short",
+      "name": "Short (self-defence)",
+      "usesMul": {
+       "mass": 0.6,
+       "volume": 0.6
+      },
+      "usesAdd": {},
+      "adds": {
+       "strike": -0.5
+      },
+      "costMul": 0.7,
+      "note": ""
+     },
+     {
+      "id": "tactical",
+      "name": "Tactical",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "strike",
+      "name": "Strike length",
+      "usesMul": {
+       "mass": 1.4,
+       "volume": 1.4
+      },
+      "usesAdd": {},
+      "adds": {
+       "strike": 0.5
+      },
+      "costMul": 1.3,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "tactical"
+   },
+   {
+    "id": "hatch",
+    "name": "Hatches",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "lo",
+      "name": "Low-signature",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "signature": 0.5
+      },
+      "costMul": 1.2,
+      "note": ""
+     },
+     {
+      "id": "armoured",
+      "name": "Armoured",
+      "usesMul": {
+       "mass": 1.2
+      },
+      "usesAdd": {},
+      "adds": {
+       "survivability": 0.5
+      },
+      "costMul": 1.2,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "std"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "structures"
+   }
+  ]
+ },
+ {
+  "id": "cooling-plant",
+  "name": "Cooling plant",
+  "family": "thermal",
+  "fitsKinds": [
+   "ship",
+   "ground"
+  ],
+  "uses": {
+   "mass": 20,
+   "power": 2,
+   "cooling": -12
+  },
+  "adds": {},
+  "requires": {
+   "thermal": 3
+  },
+  "cost": 15,
+  "factory": "shipyard",
+  "port": null,
+  "offers": [],
+  "visual": "vent-l",
+  "category": "Custom thermal",
+  "topside": false,
+  "params": [
+   {
+    "id": "capacity",
+    "name": "Capacity",
+    "kind": "slider",
+    "min": 0.5,
+    "max": 3,
+    "default": 1,
+    "step": 0.1,
+    "uses": {},
+    "adds": {},
+    "cost": 15,
+    "scaleUses": {
+     "mass": 0.9,
+     "power": 0.9,
+     "cooling": 1
+    },
+    "techField": ""
+   },
+   {
+    "id": "type",
+    "name": "Type",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "air",
+      "name": "Forced air",
+      "usesMul": {
+       "cooling": 0.7
+      },
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 0.6,
+      "note": ""
+     },
+     {
+      "id": "liquid",
+      "name": "Chilled water",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "twophase",
+      "name": "Two-phase",
+      "usesMul": {
+       "mass": 0.9,
+       "cooling": 1.3
+      },
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.6,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "liquid"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "thermal"
+   }
+  ]
+ },
+ {
+  "id": "sonar",
+  "name": "Sonar",
+  "family": "sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "uses": {
+   "mass": 20,
+   "power": 0.5,
+   "cooling": 0.3
+  },
+  "adds": {
+   "anti-sub": 2
+  },
+  "requires": {
+   "sonar": 3
+  },
+  "cost": 12,
+  "factory": "shipyard",
+  "port": null,
+  "offers": [],
+  "visual": "sonar-bow",
+  "category": "Custom sensors",
+  "topside": false,
+  "params": [
+   {
+    "id": "aperture",
+    "name": "Array size",
+    "kind": "slider",
+    "min": 0.6,
+    "max": 2,
+    "default": 1,
+    "step": 0.05,
+    "uses": {},
+    "adds": {
+     "anti-sub": 1.5
+    },
+    "cost": 10,
+    "scaleUses": {
+     "mass": 1.8,
+     "power": 1.2
+    },
+    "techField": ""
+   },
+   {
+    "id": "mode",
+    "name": "Mode",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "passive",
+      "name": "Passive",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "signature": 0.5
+      },
+      "costMul": 0.8,
+      "note": ""
+     },
+     {
+      "id": "active",
+      "name": "Active / passive",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "lf",
+      "name": "Low-frequency active",
+      "usesMul": {
+       "mass": 1.3,
+       "power": 1.5
+      },
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 1,
+       "signature": -0.5
+      },
+      "costMul": 1.4,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "active"
+   },
+   {
+    "id": "mount",
+    "name": "Mounting",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "hull",
+      "name": "Hull",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "towed",
+      "name": "Towed",
+      "usesMul": {
+       "mass": 1.4
+      },
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 1.5
+      },
+      "costMul": 1.5,
+      "note": ""
+     },
+     {
+      "id": "vds",
+      "name": "Variable depth",
+      "usesMul": {
+       "mass": 1.6,
+       "power": 1.3
+      },
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 2
+      },
+      "costMul": 1.8,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "hull"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "sonar"
+   }
+  ]
+ },
+ {
+  "id": "datalink",
+  "name": "Datalink",
+  "family": "comms",
+  "fitsKinds": [
+   "ship",
+   "aircraft",
+   "ground"
+  ],
+  "uses": {
+   "mass": 0.1,
+   "power": 1,
+   "data": -4
+  },
+  "adds": {
+   "networking": 4
+  },
+  "requires": {
+   "datalinks": 4
+  },
+  "cost": 3,
+  "factory": null,
+  "port": null,
+  "offers": [],
+  "visual": "datalink-ant",
+  "category": "Custom comms",
+  "topside": false,
+  "params": [
+   {
+    "id": "bandwidth",
+    "name": "Bandwidth",
+    "kind": "slider",
+    "min": 1,
+    "max": 4,
+    "default": 1,
+    "step": 0.5,
+    "uses": {
+     "data": -2,
+     "power": 0.5
+    },
+    "adds": {
+     "networking": 0.8
+    },
+    "cost": 2,
+    "scaleUses": {},
+    "techField": ""
+   },
+   {
+    "id": "security",
+    "name": "Security",
+    "kind": "choice",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "note": ""
+     },
+     {
+      "id": "lpi",
+      "name": "Low probability of intercept",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "signature": 0.5
+      },
+      "costMul": 1.4,
+      "note": ""
+     },
+     {
+      "id": "ajam",
+      "name": "Anti-jam",
+      "usesMul": {
+       "power": 1.2
+      },
+      "usesAdd": {},
+      "adds": {
+       "jam-resistance": 2
+      },
+      "costMul": 1.5,
+      "note": ""
+     }
+    ],
+    "defaultChoice": "std"
+   },
+   {
+    "id": "tech",
+    "name": "Technology level",
+    "kind": "slider",
+    "min": 1,
+    "max": 10,
+    "default": 5,
+    "step": 1,
+    "uses": {},
+    "adds": {
+     "reliability": 0.2
+    },
+    "cost": 0.2,
+    "scaleUses": {},
+    "techField": "datalinks"
+   }
+  ]
+ }
+]

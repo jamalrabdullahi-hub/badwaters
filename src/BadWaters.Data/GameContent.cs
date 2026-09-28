@@ -23,6 +23,7 @@ public sealed class GameContent
     public Dictionary<string, ScenarioDef> Scenarios { get; } = new();
     public Dictionary<string, PresetDef> Presets { get; } = new();
     public Dictionary<string, BaseTypeDef> BaseTypes { get; } = new();
+    public Dictionary<string, ComponentArchetype> Archetypes { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
@@ -46,6 +47,7 @@ public sealed class GameContent
         foreach (var x in l.Load<ScenarioDef>("scenarios.json")) g.Scenarios[x.Id] = x;
         foreach (var x in l.Load<PresetDef>("presets.json")) g.Presets[x.Id] = x;
         foreach (var x in l.Load<BaseTypeDef>("base_types.json")) g.BaseTypes[x.Id] = x;
+        foreach (var x in l.Load<ComponentArchetype>("component_archetypes.json")) g.Archetypes[x.Id] = x;
         g.Errors.AddRange(l.Errors);
         g.Validate();
         return g;
@@ -107,6 +109,8 @@ public sealed class GameContent
                 else if (!TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: script targets protected site {x.Target}");
             }
         }
+        foreach (var ar in Archetypes.Values)
+            if (ar.Visual != "" && !Catalog.Parts.ContainsKey(ar.Visual)) Errors.Add($"archetype {ar.Id}: unknown visual part {ar.Visual}");
         foreach (var pt in Catalog.Parts.Values)
             if (pt.Component != null && !Catalog.Components.ContainsKey(pt.Component)) Errors.Add($"part {pt.Id}: unknown component {pt.Component}");
         foreach (var d in Designs.Values)

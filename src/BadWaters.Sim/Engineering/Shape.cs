@@ -96,6 +96,19 @@ public static class ShapeRules
         if (n > 12) Add("signature", -1, $"{n} outline vertices (cluttered)");
         if (sideDirs <= 3) Add("signature", 0.5, "clean side profile");
         else if (sideDirs >= 8) Add("signature", -0.5, $"side profile has {sideDirs} edge directions");
+        var stdSide = Area(SideGeometry.Profile(f.Hull));
+        var sideRatio = stdSide > 0 ? Area(side) / stdSide : 1;
+        if (sideRatio > 1.3) Add("signature", -0.5, $"tall side profile ({sideRatio:P0} of standard)");
+        if (f.Kind == "aircraft")
+        {
+            if (sideRatio > 1.3) Add("speed", -1, $"deep, draggy fuselage ({sideRatio:P0})");
+            else if (sideRatio < 0.75) Add("payload", -1, $"thin fuselage leaves little room ({sideRatio:P0})");
+        }
+        else if (f.Kind == "ship")
+        {
+            if (sideRatio > 1.25) Add("survivability", 0.5, $"high freeboard ({sideRatio:P0})");
+            else if (sideRatio < 0.8) Add("endurance", -0.5, $"low freeboard, wet in heavy seas ({sideRatio:P0})");
+        }
         if (ratio > 1.8) Add("signature", -2, $"outline {ratio:P0} of the standard size");
         else if (ratio > 1.3) Add("signature", -1, $"outline {ratio:P0} of the standard size");
         if (f.Kind == "aircraft" && f.Hull.Width > 30) Add("signature", -1, $"very large airframe ({f.Hull.Width:0} m span)");
