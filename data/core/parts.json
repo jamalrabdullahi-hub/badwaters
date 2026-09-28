@@ -28042,5 +28042,2799 @@
   "options": [],
   "scaling": null,
   "height": -1
+ },
+ {
+  "id": "ph-fwd",
+  "name": "Pressure hull section (forward)",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     6,
+     3,
+     3,
+     3,
+     -6,
+     -3,
+     -6,
+     -3,
+     3
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 90,
+   "volume": 1
+  },
+  "adds": {
+   "depth": 3
+  },
+  "cost": 20,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "grade",
+    "name": "Hull steel grade",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard steel",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "cheap, shallow"
+     },
+     {
+      "id": "hy",
+      "name": "High-yield steel",
+      "usesMul": {
+       "mass": 1.15
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 2
+      },
+      "costMul": 1.4,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deeper, heavier"
+     },
+     {
+      "id": "ti",
+      "name": "Titanium",
+      "usesMul": {
+       "mass": 0.85
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 4,
+       "quieting": 0.5
+      },
+      "costMul": 3.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deepest, very costly"
+     }
+    ],
+    "default": "hy"
+   },
+   {
+    "id": "layout",
+    "name": "Hull layout",
+    "choices": [
+     {
+      "id": "single",
+      "name": "Single hull",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "lighter, more room"
+     },
+     {
+      "id": "double",
+      "name": "Double hull",
+      "usesMul": {
+       "mass": 1.25
+      },
+      "usesAdd": {},
+      "adds": {
+       "survivability": 1,
+       "quieting": -0.5
+      },
+      "costMul": 1.2,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "tougher, a bit noisier"
+     }
+    ],
+    "default": "single"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "ph-mid",
+  "name": "Pressure hull section (midbody)",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 6,
+    "h": 12,
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -3,
+     0,
+     3,
+     0
+    ],
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 140
+  },
+  "adds": {
+   "depth": 3
+  },
+  "cost": 25,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "grade",
+    "name": "Hull steel grade",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard steel",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "cheap, shallow"
+     },
+     {
+      "id": "hy",
+      "name": "High-yield steel",
+      "usesMul": {
+       "mass": 1.15
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 2
+      },
+      "costMul": 1.4,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deeper, heavier"
+     },
+     {
+      "id": "ti",
+      "name": "Titanium",
+      "usesMul": {
+       "mass": 0.85
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 4,
+       "quieting": 0.5
+      },
+      "costMul": 3.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deepest, very costly"
+     }
+    ],
+    "default": "hy"
+   },
+   {
+    "id": "layout",
+    "name": "Hull layout",
+    "choices": [
+     {
+      "id": "single",
+      "name": "Single hull",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "lighter, more room"
+     },
+     {
+      "id": "double",
+      "name": "Double hull",
+      "usesMul": {
+       "mass": 1.25
+      },
+      "usesAdd": {},
+      "adds": {
+       "survivability": 1,
+       "quieting": -0.5
+      },
+      "costMul": 1.2,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "tougher, a bit noisier"
+     }
+    ],
+    "default": "single"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "ph-aft",
+  "name": "Pressure hull section (aft)",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -3,
+     6,
+     3,
+     6,
+     2,
+     -5,
+     -2,
+     -5
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 80
+  },
+  "adds": {
+   "depth": 3
+  },
+  "cost": 18,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "grade",
+    "name": "Hull steel grade",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard steel",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "cheap, shallow"
+     },
+     {
+      "id": "hy",
+      "name": "High-yield steel",
+      "usesMul": {
+       "mass": 1.15
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 2
+      },
+      "costMul": 1.4,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deeper, heavier"
+     },
+     {
+      "id": "ti",
+      "name": "Titanium",
+      "usesMul": {
+       "mass": 0.85
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 4,
+       "quieting": 0.5
+      },
+      "costMul": 3.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deepest, very costly"
+     }
+    ],
+    "default": "hy"
+   },
+   {
+    "id": "layout",
+    "name": "Hull layout",
+    "choices": [
+     {
+      "id": "single",
+      "name": "Single hull",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "lighter, more room"
+     },
+     {
+      "id": "double",
+      "name": "Double hull",
+      "usesMul": {
+       "mass": 1.25
+      },
+      "usesAdd": {},
+      "adds": {
+       "survivability": 1,
+       "quieting": -0.5
+      },
+      "costMul": 1.2,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "tougher, a bit noisier"
+     }
+    ],
+    "default": "single"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "ph-plug",
+  "name": "Hull plug (extra compartment)",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 6,
+    "h": 6,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 60,
+   "volume": -3
+  },
+  "adds": {
+   "depth": 2.5
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "grade",
+    "name": "Hull steel grade",
+    "choices": [
+     {
+      "id": "std",
+      "name": "Standard steel",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "cheap, shallow"
+     },
+     {
+      "id": "hy",
+      "name": "High-yield steel",
+      "usesMul": {
+       "mass": 1.15
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 2
+      },
+      "costMul": 1.4,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deeper, heavier"
+     },
+     {
+      "id": "ti",
+      "name": "Titanium",
+      "usesMul": {
+       "mass": 0.85
+      },
+      "usesAdd": {},
+      "adds": {
+       "depth": 4,
+       "quieting": 0.5
+      },
+      "costMul": 3.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "deepest, very costly"
+     }
+    ],
+    "default": "hy"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "anechoic",
+  "name": "Anechoic tile coating",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "line",
+    "p": [
+     -3,
+     -6,
+     3,
+     -6
+    ],
+    "fill": "black"
+   },
+   {
+    "t": "line",
+    "p": [
+     -3,
+     0,
+     3,
+     0
+    ],
+    "fill": "black"
+   },
+   {
+    "t": "line",
+    "p": [
+     -3,
+     6,
+     3,
+     6
+    ],
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 25
+  },
+  "adds": {
+   "quieting": 1.5
+  },
+  "cost": 12,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "rafted-deck",
+  "name": "Rafted machinery deck",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 6,
+    "fill": "steel"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 3,
+    "h": 5,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 35
+  },
+  "adds": {
+   "quieting": 1.5
+  },
+  "cost": 15,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "decoupling",
+  "name": "Hull decoupling layer",
+  "category": "Pressure hull",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 10,
+    "fill": "deck"
+   }
+  ],
+  "uses": {
+   "mass": 15
+  },
+  "adds": {
+   "quieting": 0.7
+  },
+  "cost": 8,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "ballast-main",
+  "name": "Main ballast tanks",
+  "category": "Ballast",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": -2.4,
+    "y": 0,
+    "w": 1.2,
+    "h": 8,
+    "fill": "black"
+   },
+   {
+    "t": "rect",
+    "x": 2.4,
+    "y": 0,
+    "w": 1.2,
+    "h": 8,
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 30
+  },
+  "adds": {
+   "survivability": 0.3
+  },
+  "cost": 4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "ballast-trim",
+  "name": "Trim and compensating tanks",
+  "category": "Ballast",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 2.4,
+    "h": 2.4,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.6,
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 8
+  },
+  "adds": {
+   "agility": 0.3
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sub-diesel-gen",
+  "name": "Diesel generator set",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 3.6,
+    "h": 4,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": -0.8,
+    "y": 0,
+    "r": 0.5,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0.8,
+    "y": 0,
+    "r": 0.5,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 45,
+   "power": -6
+  },
+  "adds": {
+   "endurance": 1,
+   "quieting": -0.5
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sub-battery",
+  "name": "Battery section",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 6,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     -3,
+     2,
+     -3
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     -2,
+     2,
+     -2
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     -1,
+     2,
+     -1
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     0,
+     2,
+     0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     1,
+     2,
+     1
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     2,
+     2,
+     2
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2,
+     3,
+     2,
+     3
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 60
+  },
+  "adds": {
+   "submerged-endurance": 2
+  },
+  "cost": 12,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "chem",
+    "name": "Battery type",
+    "choices": [
+     {
+      "id": "pb",
+      "name": "Lead-acid",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "standard"
+     },
+     {
+      "id": "li",
+      "name": "Lithium-ion",
+      "usesMul": {
+       "mass": 0.7
+      },
+      "usesAdd": {},
+      "adds": {
+       "submerged-endurance": 1.5,
+       "survivability": -0.3
+      },
+      "costMul": 2.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "more endurance, fire risk"
+     }
+    ],
+    "default": "pb"
+   }
+  ],
+  "scaling": {
+   "label": "Battery size",
+   "min": 0.6,
+   "max": 1.8,
+   "ratings": {
+    "submerged-endurance": 1
+   },
+   "visibility": 0
+  },
+  "height": -1
+ },
+ {
+  "id": "sub-aip",
+  "name": "AIP module",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 7,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 1.5,
+    "r": 1.0,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": -1.5,
+    "r": 1.0,
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 80,
+   "power": -3
+  },
+  "adds": {
+   "submerged-endurance": 3,
+   "quieting": 0.3
+  },
+  "cost": 40,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "cycle",
+    "name": "AIP type",
+    "choices": [
+     {
+      "id": "stirling",
+      "name": "Stirling engine",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "simple, some noise"
+     },
+     {
+      "id": "fuelcell",
+      "name": "Fuel cell",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "quieting": 1,
+       "submerged-endurance": 0.5
+      },
+      "costMul": 1.5,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "quiet, costly"
+     },
+     {
+      "id": "closed",
+      "name": "Closed-cycle diesel",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {},
+      "adds": {
+       "submerged-endurance": 1,
+       "quieting": -0.5
+      },
+      "costMul": 0.9,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "more power, louder"
+     }
+    ],
+    "default": "stirling"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sub-reactor",
+  "name": "Reactor compartment (abstract)",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 6,
+    "h": 9,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 2,
+    "fill": "yellow"
+   }
+  ],
+  "uses": {
+   "mass": 700,
+   "power": -60,
+   "cooling": -6
+  },
+  "adds": {
+   "submerged-endurance": 8,
+   "endurance": 4,
+   "speed": 1,
+   "quieting": -1
+  },
+  "cost": 400,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sub-motor",
+  "name": "Main propulsion motor",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 1.6,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.8,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 30,
+   "power": 4
+  },
+  "adds": {
+   "speed": 0.5
+  },
+  "cost": 8,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sub-propulsor",
+  "name": "Propulsor",
+  "category": "Sub propulsion",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 1.6,
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     1.5,
+     0.0
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     0.9352347027881004,
+     1.1727472237020446
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -0.3337814009344715,
+     1.4623918682727355
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -1.3514533018536286,
+     0.6508256086763373
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -1.3514533018536288,
+     -0.650825608676337
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -0.3337814009344719,
+     -1.4623918682727355
+    ],
+    "fill": "steel"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     0.9352347027881001,
+     -1.1727472237020449
+    ],
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 15
+  },
+  "adds": {
+   "speed": 0.5
+  },
+  "cost": 6,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "prop",
+    "name": "Propulsor",
+    "choices": [
+     {
+      "id": "skew7",
+      "name": "7-blade skewed propeller",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "standard"
+     },
+     {
+      "id": "pumpjet",
+      "name": "Shrouded pump-jet",
+      "usesMul": {
+       "mass": 1.4
+      },
+      "usesAdd": {},
+      "adds": {
+       "quieting": 1.5,
+       "speed": 0.5
+      },
+      "costMul": 1.8,
+      "shapeX": 1.0,
+      "shapeY": 1.2,
+      "note": "quiet and fast, heavy"
+     },
+     {
+      "id": "rim",
+      "name": "Rim-driven propulsor",
+      "usesMul": {
+       "mass": 1.1
+      },
+      "usesAdd": {
+       "power": 1.5
+      },
+      "adds": {
+       "quieting": 1
+      },
+      "costMul": 2.2,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": "quiet, needs power"
+     }
+    ],
+    "default": "skew7"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sonar-sphere",
+  "name": "Bow sonar sphere",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 3,
+    "fill": "glass"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 2.2,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 40,
+   "power": 3
+  },
+  "adds": {
+   "anti-sub": 2,
+   "detection": 1
+  },
+  "cost": 25,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "mode",
+    "name": "Mode",
+    "choices": [
+     {
+      "id": "passive",
+      "name": "Passive",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "signature": 0.5
+      },
+      "costMul": 0.8,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     },
+     {
+      "id": "active",
+      "name": "Active / passive",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {},
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     },
+     {
+      "id": "lf",
+      "name": "Low-frequency active",
+      "usesMul": {
+       "mass": 1.3,
+       "power": 1.5
+      },
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 1,
+       "signature": -0.5
+      },
+      "costMul": 1.4,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     }
+    ],
+    "default": "active"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sonar-chin",
+  "name": "Chin array",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     -2.5,
+     1,
+     2.5,
+     1,
+     2,
+     -1,
+     -2,
+     -1
+    ],
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 15,
+   "power": 1
+  },
+  "adds": {
+   "anti-sub": 1
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sonar-flank",
+  "name": "Flank arrays (pair)",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": -2.8,
+    "y": 0,
+    "w": 0.4,
+    "h": 14,
+    "fill": "glass"
+   },
+   {
+    "t": "rect",
+    "x": 2.8,
+    "y": 0,
+    "w": 0.4,
+    "h": 14,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 20,
+   "power": 1
+  },
+  "adds": {
+   "anti-sub": 1.5
+  },
+  "cost": 18,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sonar-wide",
+  "name": "Wide-aperture array",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": -2.9,
+    "y": 0,
+    "w": 0.3,
+    "h": 20,
+    "fill": "glass"
+   },
+   {
+    "t": "rect",
+    "x": 2.9,
+    "y": 0,
+    "w": 0.3,
+    "h": 20,
+    "fill": "glass"
+   },
+   {
+    "t": "circle",
+    "x": -2.9,
+    "y": -8,
+    "r": 0.3,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": -2.9,
+    "y": 0,
+    "r": 0.3,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": -2.9,
+    "y": 8,
+    "r": 0.3,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 2.9,
+    "y": -8,
+    "r": 0.3,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 2.9,
+    "y": 0,
+    "r": 0.3,
+    "fill": "light"
+   },
+   {
+    "t": "circle",
+    "x": 2.9,
+    "y": 8,
+    "r": 0.3,
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 28,
+   "power": 2
+  },
+  "adds": {
+   "anti-sub": 2
+  },
+  "cost": 28,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "towed-reel",
+  "name": "Towed array reel",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 1.2,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.5,
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 8,
+   "power": 0.5
+  },
+  "adds": {
+   "anti-sub": 1
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "line",
+    "name": "Array line",
+    "choices": [
+     {
+      "id": "thin",
+      "name": "Thin line",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 0.5
+      },
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     },
+     {
+      "id": "fat",
+      "name": "Fat line",
+      "usesMul": {
+       "mass": 1.5
+      },
+      "usesAdd": {},
+      "adds": {
+       "anti-sub": 1.2
+      },
+      "costMul": 1.4,
+      "shapeX": 1.6,
+      "shapeY": 1.0,
+      "note": ""
+     }
+    ],
+    "default": "thin"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "sail-array",
+  "name": "Sail sonar array",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.6,
+    "h": 2.4,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 4
+  },
+  "adds": {
+   "anti-sub": 0.5
+  },
+  "cost": 4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "mine-avoid",
+  "name": "Mine-avoidance sonar",
+  "category": "Sub sensors",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.8,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 3,
+   "power": 0.5
+  },
+  "adds": {
+   "survivability": 0.4
+  },
+  "cost": 4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "snorkel",
+  "name": "Snorkel mast",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.5,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.2,
+    "r": 0.25,
+    "fill": "steel"
+   }
+  ],
+  "uses": {
+   "mass": 3
+  },
+  "adds": {
+   "endurance": 0.5,
+   "quieting": -0.2
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "photonic-mast",
+  "name": "Optronic mast",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.6,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.25,
+    "r": 0.3,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 2,
+   "power": 0.5
+  },
+  "adds": {
+   "detection": 1
+  },
+  "cost": 5,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "role",
+    "name": "Mast role",
+    "choices": [
+     {
+      "id": "search",
+      "name": "Search",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "detection": 0.5
+      },
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     },
+     {
+      "id": "attack",
+      "name": "Attack (small head)",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "quieting": 0.3,
+       "detection": -0.3
+      },
+      "costMul": 1.0,
+      "shapeX": 0.6,
+      "shapeY": 0.6,
+      "note": ""
+     }
+    ],
+    "default": "search"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "periscope",
+  "name": "Periscope",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.4,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0.15,
+    "r": 0.2,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 1.5
+  },
+  "adds": {
+   "detection": 0.5
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [
+   {
+    "id": "role",
+    "name": "Mast role",
+    "choices": [
+     {
+      "id": "search",
+      "name": "Search",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "detection": 0.5
+      },
+      "costMul": 1.0,
+      "shapeX": 1.0,
+      "shapeY": 1.0,
+      "note": ""
+     },
+     {
+      "id": "attack",
+      "name": "Attack (small head)",
+      "usesMul": {},
+      "usesAdd": {},
+      "adds": {
+       "quieting": 0.3,
+       "detection": -0.3
+      },
+      "costMul": 1.0,
+      "shapeX": 0.6,
+      "shapeY": 0.6,
+      "note": ""
+     }
+    ],
+    "default": "search"
+   }
+  ],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "esm-mast",
+  "name": "ESM mast",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.5,
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     0.8,
+     0.0
+    ],
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     4.898587196589413e-17,
+     0.8
+    ],
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -0.8,
+     9.797174393178826e-17
+    ],
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     -1.4695761589768238e-16,
+     -0.8
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 1.5,
+   "power": 0.5
+  },
+  "adds": {
+   "ew": 1
+  },
+  "cost": 4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "comms-mast",
+  "name": "Communications mast",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.4,
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     0,
+     1
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 1,
+   "power": 0.3
+  },
+  "adds": {
+   "networking": 1
+  },
+  "cost": 3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "wire-buoy",
+  "name": "Floating wire buoy",
+  "category": "Sub masts",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.7,
+    "fill": "yellow"
+   },
+   {
+    "t": "line",
+    "p": [
+     0,
+     0,
+     0,
+     -4
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 1
+  },
+  "adds": {
+   "networking": 1,
+   "quieting": 0.2
+  },
+  "cost": 3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "tube-nest-4",
+  "name": "Bow tube nest (4)",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 3,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": -1.4,
+    "y": 0.8,
+    "r": 0.4,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": -0.46999999999999986,
+    "y": 0.8,
+    "r": 0.4,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 0.4600000000000002,
+    "y": 0.8,
+    "r": 0.4,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 1.3900000000000001,
+    "y": 0.8,
+    "r": 0.4,
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 40
+  },
+  "adds": {
+   "anti-ship": 2,
+   "anti-sub": 1
+  },
+  "cost": 15,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "tube-nest-6",
+  "name": "Bow tube nest (6)",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 3.4,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": -2.0,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": -1.2,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": -0.3999999999999999,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 0.40000000000000036,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 1.2000000000000002,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   },
+   {
+    "t": "circle",
+    "x": 2.0,
+    "y": 0.8,
+    "r": 0.35,
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 60
+  },
+  "adds": {
+   "anti-ship": 3,
+   "anti-sub": 1.5
+  },
+  "cost": 22,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "reload-room",
+  "name": "Weapons reload room",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 7,
+    "fill": "steel"
+   },
+   {
+    "t": "rect",
+    "x": -1.5,
+    "y": 0,
+    "w": 0.5,
+    "h": 6,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": -0.5,
+    "y": 0,
+    "w": 0.5,
+    "h": 6,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": 0.5,
+    "y": 0,
+    "w": 0.5,
+    "h": 6,
+    "fill": "dark"
+   },
+   {
+    "t": "rect",
+    "x": 1.5,
+    "y": 0,
+    "w": 0.5,
+    "h": 6,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 50
+  },
+  "adds": {
+   "anti-ship": 1,
+   "endurance": 0.5
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Room size",
+   "min": 0.6,
+   "max": 1.6,
+   "ratings": {
+    "anti-ship": 1
+   },
+   "visibility": 0
+  },
+  "height": -1
+ },
+ {
+  "id": "mine-rail",
+  "name": "Mine stowage rail",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.2,
+    "h": 10,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": -4,
+    "r": 0.45,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": -2,
+    "r": 0.45,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.45,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 2,
+    "r": 0.45,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 4,
+    "r": 0.45,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 20
+  },
+  "adds": {
+   "strike": 0.5
+  },
+  "cost": 6,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "cm-launcher",
+  "name": "Countermeasure launcher",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 1.6,
+    "h": 1.6,
+    "fill": "dark"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.4,
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 3
+  },
+  "adds": {
+   "survivability": 0.8
+  },
+  "cost": 5,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "uuv-bay",
+  "name": "Drone bay",
+  "category": "Torpedo room",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "poly",
+    "p": [
+     0,
+     5,
+     1.8,
+     3,
+     1.8,
+     -5,
+     -1.8,
+     -5,
+     -1.8,
+     3
+    ],
+    "fill": "light"
+   }
+  ],
+  "uses": {
+   "mass": 25,
+   "power": 1
+  },
+  "adds": {
+   "detection": 1,
+   "anti-sub": 0.5
+  },
+  "cost": 20,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "control-room",
+  "name": "Control room",
+  "category": "Sub control",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 5,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.8,
+    "fill": "glass"
+   }
+  ],
+  "uses": {
+   "mass": 20,
+   "power": 1,
+   "crew": 12
+  },
+  "adds": {
+   "fire-channels": 1,
+   "networking": 1
+  },
+  "cost": 10,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Room size",
+   "min": 0.7,
+   "max": 1.5,
+   "ratings": {
+    "fire-channels": 1
+   },
+   "visibility": 0
+  },
+  "height": -1
+ },
+ {
+  "id": "escape-trunk",
+  "name": "Escape trunk",
+  "category": "Sub control",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 1.0,
+    "fill": "yellow"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.5,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 4
+  },
+  "adds": {
+   "survivability": 0.5
+  },
+  "cost": 3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "rescue-seat",
+  "name": "Rescue seat (mating ring)",
+  "category": "Sub control",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 1.3,
+    "fill": "steel"
+   },
+   {
+    "t": "circle",
+    "x": 0,
+    "y": 0,
+    "r": 0.9,
+    "fill": "black"
+   }
+  ],
+  "uses": {
+   "mass": 3
+  },
+  "adds": {
+   "survivability": 0.3
+  },
+  "cost": 2,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "galley-mess",
+  "name": "Galley and mess",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 4,
+    "fill": "light"
+   },
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 3,
+    "h": 1,
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 10,
+   "crew": -6
+  },
+  "adds": {
+   "endurance": 0.5
+  },
+  "cost": 3,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": null,
+  "height": -1
+ },
+ {
+  "id": "berth-sub",
+  "name": "Submarine berthing module",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 5,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.0,
+     -1.25,
+     2.0,
+     -1.25
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.0,
+     0.0,
+     2.0,
+     0.0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.0,
+     1.25,
+     2.0,
+     1.25
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 12,
+   "volume": 1,
+   "crew": -20
+  },
+  "adds": {
+   "endurance": 0.2
+  },
+  "cost": 2.4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Berth count",
+   "min": 0.5,
+   "max": 2.0,
+   "ratings": {},
+   "visibility": 0.2
+  },
+  "height": -1
+ },
+ {
+  "id": "berth-small",
+  "name": "Crew berths (small)",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 5,
+    "h": 6,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.5,
+     -1.5,
+     2.5,
+     -1.5
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.5,
+     0.0,
+     2.5,
+     0.0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -2.5,
+     1.5,
+     2.5,
+     1.5
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 20,
+   "volume": 1,
+   "crew": -30
+  },
+  "adds": {
+   "endurance": 0.2
+  },
+  "cost": 4.0,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Berth count",
+   "min": 0.5,
+   "max": 2.0,
+   "ratings": {},
+   "visibility": 0.2
+  },
+  "height": -1
+ },
+ {
+  "id": "berth-large",
+  "name": "Crew berths (large)",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 8,
+    "h": 10,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     -2.5,
+     4.0,
+     -2.5
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     0.0,
+     4.0,
+     0.0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     2.5,
+     4.0,
+     2.5
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 50,
+   "volume": 1,
+   "crew": -80
+  },
+  "adds": {
+   "endurance": 0.2
+  },
+  "cost": 10.0,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Berth count",
+   "min": 0.5,
+   "max": 2.0,
+   "ratings": {},
+   "visibility": 0.2
+  },
+  "height": -1
+ },
+ {
+  "id": "berth-flag",
+  "name": "Flag and staff quarters",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ship"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 8,
+    "h": 6,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     -1.5,
+     4.0,
+     -1.5
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     0.0,
+     4.0,
+     0.0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -4.0,
+     1.5,
+     4.0,
+     1.5
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 30,
+   "volume": 1,
+   "crew": -30
+  },
+  "adds": {
+   "endurance": 0.2
+  },
+  "cost": 6.0,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Berth count",
+   "min": 0.5,
+   "max": 2.0,
+   "ratings": {},
+   "visibility": 0.2
+  },
+  "height": -1
+ },
+ {
+  "id": "g-crew-shelter",
+  "name": "Crew shelter module",
+  "category": "Accommodation",
+  "fitsKinds": [
+   "ground"
+  ],
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 0,
+    "y": 0,
+    "w": 2.4,
+    "h": 3,
+    "fill": "light"
+   },
+   {
+    "t": "line",
+    "p": [
+     -1.2,
+     -0.75,
+     1.2,
+     -0.75
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -1.2,
+     0.0,
+     1.2,
+     0.0
+    ],
+    "fill": "dark"
+   },
+   {
+    "t": "line",
+    "p": [
+     -1.2,
+     0.75,
+     1.2,
+     0.75
+    ],
+    "fill": "dark"
+   }
+  ],
+  "uses": {
+   "mass": 2,
+   "volume": 1,
+   "crew": -6
+  },
+  "adds": {
+   "endurance": 0.2
+  },
+  "cost": 0.4,
+  "topside": false,
+  "component": null,
+  "offers": [],
+  "arc": 0,
+  "options": [],
+  "scaling": {
+   "label": "Berth count",
+   "min": 0.5,
+   "max": 2.0,
+   "ratings": {},
+   "visibility": 0.2
+  },
+  "height": -1
  }
 ]

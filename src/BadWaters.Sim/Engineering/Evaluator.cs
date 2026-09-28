@@ -7,6 +7,7 @@ public sealed class Catalog
     public Dictionary<string, FrameDef> Frames { get; } = new();
     public Dictionary<string, RatingRule> Ratings { get; } = new();
     public Dictionary<string, VisualPart> Parts { get; } = new();
+    public Dictionary<string, CrewRule> Crew { get; } = new();
 }
 
 /// <summary>Evaluates any design (ship, aircraft, munition, ground system) with the same generic rules.</summary>
@@ -106,6 +107,19 @@ public sealed class Evaluator
         {
             foreach (var (r, v) in shape.Ratings) ratings[r] = ratings.GetValueOrDefault(r) + v;
             if (shape.Mass > 0) { used["mass"] = used.GetValueOrDefault("mass") + shape.Mass; Book(breakdown, "Shaping", shape.Mass, 0); }
+        }
+        SubRules.Apply(frame, d, _cat, ratings, issues);
+        // crew: the hull's own crew and built-in berths, automation trims what's needed, uncrewed frames need none
+        if (CrewRules.Uncrewed(frame, _cat)) used.Remove("crew");
+        else
+        {
+            var hullCrew = CrewRules.HullCrew(frame, _cat);
+            if (hullCrew > 0)
+            {
+                used["crew"] = used.GetValueOrDefault("crew") + hullCrew;
+                avail["crew"] = avail.GetValueOrDefault("crew") + Math.Ceiling(hullCrew * (CrewRules.HullRule(frame, _cat)?.Berths ?? 1));
+            }
+            if (used.ContainsKey("crew")) used["crew"] = Math.Ceiling(used["crew"] * CrewRules.Automation(_cat, techLevels));
         }
         var budgets = new Dictionary<string, (double, double)>();
         foreach (var axis in used.Keys.Union(avail.Keys))

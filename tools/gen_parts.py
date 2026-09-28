@@ -198,6 +198,7 @@ part("ac-rotor", "Rotor disc (uncrewed)", "Engines", A, [C(0, 0, 2.2, "light"), 
 
 # option sets, scaling and ~220 more parts live in gen_parts_more.py
 exec(open(os.path.join(os.path.dirname(__file__), "gen_parts_more.py"), encoding="utf8").read())
+exec(open(os.path.join(os.path.dirname(__file__), "gen_parts_sub.py"), encoding="utf8").read())
 
 for p in PARTS:
     p["uses"] = {k: v for k, v in p["uses"].items() if v}

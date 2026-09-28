@@ -44,7 +44,6 @@ public partial class Shell : Control
         var col = new VBoxContainer { AnchorRight = 1, AnchorBottom = 1, Theme = UiTheme.Build(), MouseFilter = MouseFilterEnum.Ignore };
         col.AddThemeConstantOverride("separation", 0);
         ui.AddChild(col);
-        col.AddChild(TopBar());
 
         var middle = new MarginContainer { SizeFlagsVertical = SizeFlags.ExpandFill, MouseFilter = MouseFilterEnum.Ignore };
         foreach (var s in new[] { "left", "right", "top", "bottom" }) middle.AddThemeConstantOverride($"margin_{s}", 8);
@@ -88,15 +87,8 @@ public partial class Shell : Control
         DevAfterBuild();
     }
 
-    private Control TopBar()
+    private void TurnControls(HBoxContainer h)
     {
-        var bar = new PanelContainer { CustomMinimumSize = new Vector2(0, 54) };
-        bar.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.006f, 0.018f, 0.038f, 0.97f), new Color(UiTheme.Accent, 0.18f), 0));
-        var h = new HBoxContainer();
-        h.AddThemeConstantOverride("separation", 16);
-        bar.AddChild(h);
-        h.AddChild(UiTheme.Text("BAD WATERS", 22, UiTheme.Accent));
-        h.AddChild(UiTheme.Text("STRATEGIC", 13, UiTheme.Dim));
         _date = UiTheme.Text("", 18);
         h.AddChild(_date);
         var group = new ButtonGroup();
@@ -106,14 +98,11 @@ public partial class Shell : Control
             b.Pressed += () => _turn = len;
             h.AddChild(b);
         }
-        h.AddChild(new Control { SizeFlagsHorizontal = SizeFlags.ExpandFill });
-        h.AddChild(UiTheme.Text($"{Session.Content.Theatres.Count} theatres · {Session.Content.Routes.Count} corridors · player {Session.World.Player}", 13, UiTheme.Dim));
         var adv = new Button { Text = "Advance ▸", CustomMinimumSize = new Vector2(150, 0) };
         adv.AddThemeStyleboxOverride("normal", UiTheme.Box(UiTheme.Accent, UiTheme.Accent));
         adv.AddThemeColorOverride("font_color", UiTheme.AccentInk);
         adv.Pressed += () => Advance(_turn);
         h.AddChild(adv);
-        return bar;
     }
 
     private Control MapModes()
@@ -159,6 +148,8 @@ public partial class Shell : Control
             _dockButtons[name] = b;
             h.AddChild(b);
         }
+        h.AddChild(new Control { CustomMinimumSize = new Vector2(24, 0) });
+        TurnControls(h);
         return bar;
     }
 

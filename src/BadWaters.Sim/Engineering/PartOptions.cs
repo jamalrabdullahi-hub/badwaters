@@ -86,6 +86,12 @@ public static class PartResolver
                 notes.Add($"{p.Scaling.Label} ×{s:0.00}");
             }
         }
+        if (uses.TryGetValue("crew", out var crew)) uses["crew"] = crew * s; // crew spaces and stations scale with size
+        else
+        {
+            var need = CrewRules.PartCrew(p, uses.GetValueOrDefault("mass"), s, cat);
+            if (need > 0) uses["crew"] = Math.Round(need, 2);
+        }
         return new(uses, adds, cost, sx * s, sy * s, s, notes);
     }
 }

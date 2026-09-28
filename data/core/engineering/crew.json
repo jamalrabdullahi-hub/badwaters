@@ -1,0 +1,23 @@
+[
+ {"id": "hull:ship", "base": 8, "perTonne": 0.02, "berths": 1.3},
+ {"id": "hull:sub", "base": 10, "perTonne": 0.012, "berths": 1.1},
+ {"id": "hull:aircraft", "base": 1, "perTonne": 0.05, "berths": 1.0},
+ {"id": "uncrewed", "types": ["usv", "xluuv", "ucav", "ucav-lo", "hale", "male"]},
+ {"id": "automation", "field": "autonomy", "from": 3, "perLevel": 0.05, "max": 0.4},
+ {"id": "cat:Guns", "perTonne": 0.12},
+ {"id": "cat:Point defence", "perTonne": 0.15},
+ {"id": "cat:Launchers", "perTonne": 0.03},
+ {"id": "cat:Sensors", "perTonne": 0.08},
+ {"id": "cat:Electronics", "perTonne": 0.1},
+ {"id": "cat:Masts", "perTonne": 0.04},
+ {"id": "cat:Aviation", "perTonne": 0.08},
+ {"id": "cat:Boats", "perTonne": 0.15},
+ {"id": "cat:Funnels", "perTonne": 0.02},
+ {"id": "cat:Superstructure", "perTonne": 0.01},
+ {"id": "cat:Deck gear", "perTonne": 0.02},
+ {"id": "cat:Sub sensors", "perTonne": 0.08},
+ {"id": "cat:Sub masts", "perTonne": 0.1},
+ {"id": "cat:Sub propulsion", "perTonne": 0.02},
+ {"id": "cat:Torpedo room", "perTonne": 0.1},
+ {"id": "cat:Vehicle", "perTonne": 0.04}
+]

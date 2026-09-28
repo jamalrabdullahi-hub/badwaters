@@ -17,6 +17,20 @@ if (cmd == "trial")
     foreach (var l in t.Log) Console.WriteLine($"T+{l.T,6:0.0}  {l.Kind,-8} {l.Text}");
     return 0;
 }
+if (cmd == "auto")
+{
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    foreach (var role in gc.AutoRoles.Values.Where(r => args.Length < 2 || r.Id == args[1]))
+    {
+        var res = new BadWaters.Sim.Engineering.AutoDesigner(gc.Catalog).Design(role, "auto-" + role.Id, role.Name, gc.Designs, seed: args.Length > 2 ? int.Parse(args[2]) : 1);
+        Console.WriteLine($"{role.Name}: {res.Design.Parts.Count} parts, score {res.Score}, cost {res.Evaluation.Cost:0}");
+        Console.WriteLine("  " + string.Join(", ", res.Design.Parts.GroupBy(p => p.Part).Select(g => g.Count() > 1 ? $"{g.Key}×{g.Count()}" : g.Key)));
+        Console.WriteLine("  " + string.Join("  ", res.Evaluation.Budgets.Select(b => $"{b.Key} {b.Value.Used:0.#}/{b.Value.Available:0.#}")));
+        Console.WriteLine("  " + string.Join("  ", res.Evaluation.Ratings.Where(r => role.Weights.ContainsKey(r.Key)).Select(r => $"{r.Key} {r.Value:0.#}")));
+        foreach (var i in res.Evaluation.Issues) Console.WriteLine("  ! " + i.Text);
+    }
+    return 0;
+}
 if (cmd != "validate")
 {
     Console.Error.WriteLine("Usage: BadWaters.Cli validate [dataDir] [modDir...]");

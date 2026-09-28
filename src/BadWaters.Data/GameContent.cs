@@ -24,6 +24,7 @@ public sealed class GameContent
     public Dictionary<string, PresetDef> Presets { get; } = new();
     public Dictionary<string, BaseTypeDef> BaseTypes { get; } = new();
     public Dictionary<string, ComponentArchetype> Archetypes { get; } = new();
+    public Dictionary<string, AutoRole> AutoRoles { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
@@ -43,11 +44,13 @@ public sealed class GameContent
         foreach (var f in new[] { "ships", "aircraft", "munitions", "ground" })
             foreach (var x in l.Load<FrameDef>($"frames/{f}.json")) g.Catalog.Frames[x.Id] = x;
         foreach (var x in l.Load<VisualPart>("parts.json")) g.Catalog.Parts[x.Id] = x;
+        foreach (var x in l.Load<CrewRule>("engineering/crew.json")) g.Catalog.Crew[x.Id] = x;
         foreach (var x in l.Load<DesignDef>("designs.json")) g.Designs[x.Id] = x;
         foreach (var x in l.Load<ScenarioDef>("scenarios.json")) g.Scenarios[x.Id] = x;
         foreach (var x in l.Load<PresetDef>("presets.json")) g.Presets[x.Id] = x;
         foreach (var x in l.Load<BaseTypeDef>("base_types.json")) g.BaseTypes[x.Id] = x;
         foreach (var x in l.Load<ComponentArchetype>("component_archetypes.json")) g.Archetypes[x.Id] = x;
+        foreach (var x in l.Load<AutoRole>("auto_roles.json")) g.AutoRoles[x.Id] = x;
         g.Errors.AddRange(l.Errors);
         g.Validate();
         return g;
@@ -108,6 +111,14 @@ public sealed class GameContent
                 if (t == null) Errors.Add($"scenario {sc.Id}: script targets unknown site {x.Target}");
                 else if (!TargetPolicy.IsLegitimate(t.Class)) Errors.Add($"scenario {sc.Id}: script targets protected site {x.Target}");
             }
+        }
+        foreach (var r in AutoRoles.Values)
+        {
+            if (!Catalog.Frames.ContainsKey(r.Frame)) Errors.Add($"auto role {r.Id}: unknown frame {r.Frame}");
+            if (r.BaseDesign != null && !Designs.ContainsKey(r.BaseDesign)) Errors.Add($"auto role {r.Id}: unknown base design {r.BaseDesign}");
+            foreach (var c in r.Components) if (!Catalog.Components.ContainsKey(c)) Errors.Add($"auto role {r.Id}: unknown component {c}");
+            foreach (var m in r.Must.Where(m => m.StartsWith("part:"))) if (!Catalog.Parts.ContainsKey(m[5..])) Errors.Add($"auto role {r.Id}: unknown part {m[5..]}");
+            foreach (var w in r.Weights.Keys) if (!Catalog.Ratings.ContainsKey(w)) Errors.Add($"auto role {r.Id}: unknown rating {w}");
         }
         foreach (var ar in Archetypes.Values)
             if (ar.Visual != "" && !Catalog.Parts.ContainsKey(ar.Visual)) Errors.Add($"archetype {ar.Id}: unknown visual part {ar.Visual}");

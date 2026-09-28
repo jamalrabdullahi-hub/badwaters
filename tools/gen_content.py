@@ -16,7 +16,7 @@ dump("engineering/ratings.json", [{"id":i,"name":n,"aggregate":a,"cap":10} for i
  ("endurance","Endurance","sum"),("accuracy","Accuracy","max"),("reach","Reach","max"),("punch","Punch","max"),
  ("jam-resistance","Jam resistance","sum"),("ew","Electronic warfare","sum"),("networking","Networking","max"),
  ("agility","Agility","max"),("payload","Payload","sum"),("reliability","Reliability","min"),("mobility","Mobility","max"),
- ("fire-channels","Fire channels","sum"),("field","Field performance","sum")]])
+ ("fire-channels","Fire channels","sum"),("field","Field performance","sum"),("depth","Depth rating","max"),("quieting","Quieting","sum"),("submerged-endurance","Submerged endurance","sum")]])
 
 fields = [("materials",10),("structures",10),("power-systems",10),("gas-turbines",10),("jet-engines",10),("rocket-motors",10),
  ("navigation",10),("flight-control",10),("radar",10),("ir-systems",10),("sonar",10),("computing",10),("datalinks",10),

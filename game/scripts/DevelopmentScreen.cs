@@ -25,7 +25,9 @@ public partial class DevelopmentScreen : PanelContainer
 
     private string _kind = "ship";
     private DesignDef _work = null!;
-    private OptionButton _design = null!, _frame = null!, _family = null!, _partCat = null!;
+    private OptionButton _design = null!, _frame = null!, _family = null!, _partCat = null!, _role = null!;
+    private readonly List<string> _roleIds = new();
+    private int _autoSeed = 1;
     private readonly List<string> _designIds = new(), _frameIds = new(), _catIds = new(), _partCats = new();
     private ItemList _catalog = null!;
     private LineEdit _name = null!;
@@ -47,6 +49,24 @@ public partial class DevelopmentScreen : PanelContainer
     private void Snapshot() { _undo.Push(Copy(_work)); _redo.Clear(); if (_undo.Count > 200) { var keep = _undo.Take(150).Reverse().ToList(); _undo.Clear(); foreach (var k in keep) _undo.Push(k); } }
     private void Undo() { if (_undo.Count == 0) return; _redo.Push(Copy(_work)); _work = _undo.Pop(); AfterRestore("Undone."); }
     private void Redo() { if (_redo.Count == 0) return; _undo.Push(Copy(_work)); _work = _redo.Pop(); AfterRestore("Redone."); }
+    /// <summary>Auto-design: fill the current design for the chosen role (keeps the hull if it suits the role).</summary>
+    private void AutoDesign(bool reroll)
+    {
+        if (_roleIds.Count == 0) return;
+        var role = Session.Content.AutoRoles[_roleIds[Math.Max(0, _role.Selected)]];
+        _autoSeed = reroll ? _autoSeed + 1 : 1;
+        var cur = Cat.Frames.GetValueOrDefault(_work.Frame);
+        var frame = cur != null && cur.Kind == role.Kind && SubRules.IsSub(cur) == role.Sub ? cur.Id : role.Frame;
+        // presets are never overwritten: an auto-design of one becomes a new player design
+        var id = _work.Id;
+        if (!id.StartsWith("player-")) { var n = 1; while (Session.Content.Designs.ContainsKey($"player-{_kind}-{n}")) n++; id = $"player-{_kind}-{n}"; }
+        var name = id != _work.Id || _work.Name is "" or "New design" || _work.Name.StartsWith("Auto ") ? $"Auto {role.Name.ToLowerInvariant()}" : _work.Name;
+        var res = new AutoDesigner(Cat).Design(role, id, name, Session.Content.Designs, frame, _autoSeed);
+        Snapshot();
+        _work = res.Design;
+        AfterRestore($"Auto-designed as {role.Name} · {res.Design.Parts.Count} parts · {(res.Evaluation.Valid ? "no issues" : $"{res.Evaluation.Issues.Count} issues")}");
+    }
+
     private void AfterRestore(string msg)
     {
         _name.Text = _work.Name;
@@ -135,6 +155,13 @@ public partial class DevelopmentScreen : PanelContainer
         var save = new Button { Text = "Save design" }; save.Pressed += Save;
         r1.AddChild(_design); r1.AddChild(variant); r1.AddChild(save);
         mid.AddChild(r1);
+        var ra = new HBoxContainer();
+        ra.AddChild(Field("Auto-design", 90));
+        _role = new OptionButton { SizeFlagsHorizontal = SizeFlags.ExpandFill, ClipText = true, TooltipText = "Pick a role; Generate fills the design with parts that suit it and fit the budgets. Ctrl+Z undoes." };
+        var gen = new Button { Text = "Generate" }; gen.Pressed += () => AutoDesign(false);
+        var reroll = new Button { Text = "Reroll", TooltipText = "Another variation of the same role" }; reroll.Pressed += () => AutoDesign(true);
+        ra.AddChild(_role); ra.AddChild(gen); ra.AddChild(reroll);
+        mid.AddChild(ra);
         var r2 = new HBoxContainer();
         r2.AddChild(Field("Class name", 90));
         _name = new LineEdit { SizeFlagsHorizontal = SizeFlags.ExpandFill, PlaceholderText = "Design name" };
@@ -234,6 +261,12 @@ public partial class DevelopmentScreen : PanelContainer
         if (int.TryParse(DevScreenshot.Arg("part"), out var sel) && sel < _work.Parts.Count) { _blueprint.Selected = sel; ShowSelected(); _blueprint.QueueRedraw(); }
         if (DevScreenshot.Arg("shape") != null) { _blueprint.EditOutline = true; _sideView.EditOutline = true; _blueprint.QueueRedraw(); }
         if (DevScreenshot.Arg("comp") != null) SetKind("component");
+        if (DevScreenshot.Arg("auto") is { } auto && Session.Content.AutoRoles.TryGetValue(auto, out var ar))
+        {
+            if (ar.Kind != _kind) SetKind(ar.Kind);
+            _role.Select(Math.Max(0, _roleIds.IndexOf(auto)));
+            AutoDesign(false);
+        }
     }
 
     private void SetKind(string kind)
@@ -262,6 +295,9 @@ public partial class DevelopmentScreen : PanelContainer
 
     private void Load(DesignDef d)
     {
+        _roleIds.Clear(); _role.Clear();
+        foreach (var r in Session.Content.AutoRoles.Values.Where(r => r.Kind == _kind)) { _roleIds.Add(r.Id); _role.AddItem(r.Name); }
+        _role.Disabled = _roleIds.Count == 0;
         _work = Copy(d);
         _undo.Clear(); _redo.Clear();
         _name.Text = d.Name;

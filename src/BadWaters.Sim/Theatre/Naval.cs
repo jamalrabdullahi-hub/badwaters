@@ -22,6 +22,8 @@ public sealed class ShipState
     public double AntiShip { get; init; }
     public double AntiSub { get; init; }
     public double Survivability { get; init; }
+    /// <summary>Submarine quieting rating: harder to find and to hit.</summary>
+    public double Quieting { get; init; }
     public List<BatteryState> Batteries { get; } = new();
     public List<LauncherState> Launchers { get; } = new();
     public UnitDef? Unit { get; init; }
@@ -61,7 +63,7 @@ public sealed class NavalForces
             {
                 Id = u.Id, Name = u.Name, Side = u.Side, Kind = u.Kind, Lon = u.Lon, Lat = u.Lat, Unit = u,
                 MaxHp = NavalRules.MaxHp(surv, end), Hp = NavalRules.MaxHp(surv, end), Survivability = surv,
-                AntiShip = p?.R("anti-ship") ?? 0, AntiSub = p?.R("anti-sub") ?? 0,
+                AntiShip = p?.R("anti-ship") ?? 0, AntiSub = p?.R("anti-sub") ?? 0, Quieting = p?.R("quieting") ?? 0,
             });
         }
         // air-defence ships (batteries) and their strike cells (launchers at the same spot) are one ship
@@ -147,7 +149,7 @@ public sealed class NavalForces
         {
             var prey = Ships.Where(t => t.Side != sub.Side && t.Kind == "ship" && !t.Sunk && Pacing.DistanceKm(sub.Lon, sub.Lat, t.Lon, t.Lat) <= NavalRules.TorpedoKm)
                 .OrderBy(t => Pacing.DistanceKm(sub.Lon, sub.Lat, t.Lon, t.Lat)).FirstOrDefault();
-            if (prey == null || _rng.NextDouble() > 0.5) continue; // the sub has to find and set up the shot
+            if (prey == null || _rng.NextDouble() > 0.5 + 0.02 * sub.Quieting) continue; // the sub has to find and set up the shot
             var p = Math.Clamp(0.3 + 0.05 * sub.AntiShip - 0.03 * prey.AntiSub, 0.1, 0.8);
             _t.Intel?.Reveal(prey.Side, sub.Id, "sub", sub.Lon, sub.Lat, now, "torpedo attack");
             if (_rng.NextDouble() < p) Hit(prey, NavalRules.TorpedoDamage, $"{sub.Name} (torpedo, {p:P0})");
@@ -170,7 +172,7 @@ public sealed class NavalForces
                     Pacing.DistanceKm(f.Pos(now).Lon, f.Pos(now).Lat, sub.Lon, sub.Lat) <= NavalRules.AswKm);
                 if (ship == null && air == null) continue;
                 var asw = Math.Max(ship?.AntiSub ?? 0, air != null ? 6 : 0);
-                var p = Math.Clamp(0.15 + 0.05 * asw - 0.03 * sub.Survivability, 0.05, 0.6);
+                var p = Math.Clamp(0.15 + 0.05 * asw - 0.03 * sub.Survivability - 0.03 * sub.Quieting, 0.05, 0.6);
                 var who = ship?.Name ?? air!.Callsign;
                 if (_rng.NextDouble() < p) Hit(sub, NavalRules.DepthChargeDamage, $"{who} (anti-submarine attack, {p:P0})");
                 else _t.Report("naval", $"{who} attacked a submarine contact and missed ({p:P0}).");

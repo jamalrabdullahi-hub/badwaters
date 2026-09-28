@@ -9,7 +9,7 @@ public static class PartPalette
     public static Color Fill(string f) => f switch
     {
         "dark" => new Color("2c3740"), "light" => new Color("aab8c2"), "deck" => new Color("7c8578"), "glass" => new Color("4fa8d8"),
-        "black" => new Color("0d1216"), "red" => new Color("b03a2e"), _ => new Color("6f7f8b"),
+        "black" => new Color("0d1216"), "red" => new Color("b03a2e"), "yellow" => new Color("c9a23a"), _ => new Color("6f7f8b"),
     };
 
     /// <summary>Draw a part's shapes onto a canvas item. toScreen maps part-local metres (already rotated) to pixels.</summary>

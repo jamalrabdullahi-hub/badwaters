@@ -124,5 +124,23 @@
   "name": "Field performance",
   "aggregate": "sum",
   "cap": 10
+ },
+ {
+  "id": "depth",
+  "name": "Depth rating",
+  "aggregate": "max",
+  "cap": 10
+ },
+ {
+  "id": "quieting",
+  "name": "Quieting",
+  "aggregate": "sum",
+  "cap": 10
+ },
+ {
+  "id": "submerged-endurance",
+  "name": "Submerged endurance",
+  "aggregate": "sum",
+  "cap": 10
  }
 ]

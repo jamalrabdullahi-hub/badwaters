@@ -23,8 +23,8 @@ public static class UiTheme
         var s = new StyleBoxFlat { BgColor = bg, BorderColor = border };
         s.SetBorderWidthAll(borderWidth);
         s.SetCornerRadiusAll(radius);
-        s.ContentMarginLeft = s.ContentMarginRight = 12;
-        s.ContentMarginTop = s.ContentMarginBottom = 8;
+        s.ContentMarginLeft = s.ContentMarginRight = 8;
+        s.ContentMarginTop = s.ContentMarginBottom = 4;
         return s;
     }
 
@@ -42,15 +42,20 @@ public static class UiTheme
         t.SetStylebox("disabled", "Button", Box(new Color(Panel2, 0.5f), new Color(Line, 0.1f)));
         t.SetStylebox("focus", "Button", Box(new Color(0, 0, 0, 0), Accent, 6, 2));
         t.SetStylebox("panel", "PanelContainer", Box(Panel, Line));
-        t.SetFontSize("font_size", "Label", 15);
-        t.SetFontSize("font_size", "Button", 15);
+        t.SetFontSize("font_size", "Label", Base);
+        foreach (var type in new[] { "Button", "LineEdit", "OptionButton", "CheckBox", "PopupMenu", "TabBar", "ItemList", "TextEdit", "SpinBox", "TooltipLabel" }) t.SetFontSize("font_size", type, Base);
         return t;
     }
+
+    /// <summary>Base UI font size (was 15; reduced on user feedback).</summary>
+    public const int Base = 12;
+    /// <summary>Scale a legacy size (authored for the old 15 px base) to the current base.</summary>
+    public static int Size(int size) => Math.Max(10, (int)Math.Round(size * 0.8));
 
     public static Label Text(string text, int size = 15, Color? color = null, bool wrap = false)
     {
         var l = new Label { Text = text };
-        l.AddThemeFontSizeOverride("font_size", size);
+        l.AddThemeFontSizeOverride("font_size", Size(size));
         l.AddThemeColorOverride("font_color", color ?? Ink);
         if (wrap) l.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         return l;
