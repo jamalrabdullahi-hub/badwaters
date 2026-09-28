@@ -379,7 +379,7 @@ public sealed class Commander
             op.Start = Math.Max(op.Start, now);
             if (Board.Add(op).Count > 0) continue;
             _opFor[score.Key] = op.Id;
-            if (score.Family == "strike") foreach (var t in op.Targets) _followUps.Remove(t);
+            if (score.Family is "strike" or "recon") foreach (var t in op.Targets) _followUps.Remove(t); // one look per request
             made++;
         }
     }
