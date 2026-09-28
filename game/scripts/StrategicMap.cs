@@ -5,7 +5,7 @@ namespace BadWaters.Game;
 
 /// <summary>
 /// The Strategic Map: land, terrain shading, sector grid, theatres and trade corridors, all drawn from the
-/// shared World. It lives inside a SubViewport so the shell UI stays independent of camera zoom.
+/// shared World. The static base is cached in an off-screen buffer and only re-rendered when the view changes.
 /// </summary>
 public partial class StrategicMap : Node2D
 {
@@ -18,6 +18,11 @@ public partial class StrategicMap : Node2D
     private Node2D _routes = null!;
     private GridLayer _grid = null!;
     private bool _drag;
+    // The static base (sea, land, grid, real-Earth lines and labels) renders into an off-screen buffer only when
+    // the view or a layer changes; idle frames just show the cached image. Game overlays stay live on top.
+    private SubViewport _baseVp = null!;
+    private Camera2D _baseCam = null!;
+    private Node2D _base = null!;
     public event Action<string?>? RouteHovered;
 
     public static readonly Color Open = new("5cf2b0"), Contested = new("ffb347"), Closed = new("ff4d5a");
@@ -33,14 +38,28 @@ public partial class StrategicMap : Node2D
         _land.SetShaderParameter("is_land", 1.0f);
         _sea.SetShaderParameter("is_land", 0.0f);
 
+        _baseVp = new SubViewport { Disable3D = true, TransparentBg = false, RenderTargetUpdateMode = SubViewport.UpdateMode.Once, Size = (Vector2I)GetViewportRect().Size };
+        AddChild(_baseVp);
+        _base = new Node2D();
+        _baseVp.AddChild(_base);
+        _baseCam = new Camera2D();
+        _baseVp.AddChild(_baseCam);
+        var under = new CanvasLayer { Layer = -1 };
+        AddChild(under);
+        under.AddChild(new TextureRect { Texture = _baseVp.GetTexture(), AnchorRight = 1, AnchorBottom = 1, MouseFilter = Control.MouseFilterEnum.Ignore });
+        GetViewport().SizeChanged += () => { _baseVp.Size = (Vector2I)GetViewportRect().Size; Redraw(); };
+
+        // plain deep-ocean backdrop beyond the date line (the textured sea covers -180..180)
+        var bt = Session.Project(-540, 84); var bb = Session.Project(540, -80);
+        _base.AddChild(new Polygon2D { Polygon = new[] { bt, new Vector2(bb.X, bt.Y), bb, new Vector2(bt.X, bb.Y) }, Color = new Color(0.006f, 0.022f, 0.055f) });
         var tl = Session.Project(-180, 84); var br = Session.Project(180, -80);
-        AddChild(new Polygon2D { Polygon = new[] { tl, new Vector2(br.X, tl.Y), br, new Vector2(tl.X, br.Y) }, Material = _sea });
+        _base.AddChild(new Polygon2D { Polygon = new[] { tl, new Vector2(br.X, tl.Y), br, new Vector2(tl.X, br.Y) }, Material = _sea });
         _coarse = new MeshInstance2D { Mesh = Session.LandMeshes["110m"], Material = _land };
         _fine = new MeshInstance2D { Mesh = Session.LandMeshes["50m"], Material = _land };
-        if (DevScreenshot.Arg("no-land") == null) { AddChild(_coarse); AddChild(_fine); }
+        if (DevScreenshot.Arg("no-land") == null) { _base.AddChild(_coarse); _base.AddChild(_fine); }
 
         _grid = new GridLayer { Visible = DevScreenshot.Arg("no-grid") == null };
-        AddChild(_grid);
+        _base.AddChild(_grid);
         foreach (var d in MapLayerDef.Load())
         {
             _defs[d.Id] = d;
@@ -53,7 +72,7 @@ public partial class StrategicMap : Node2D
                 "weather" => new WeatherLayer(),
                 _ => null,
             };
-            if (n != null) { _layers[d.Id] = n; AddChild(n); }
+            if (n != null) { _layers[d.Id] = n; if (n is LineLayer or PointLayer) _base.AddChild(n); else AddChild(n); }
         }
         _routes = new Node2D();
         AddChild(_routes);
@@ -104,12 +123,18 @@ public partial class StrategicMap : Node2D
             n.Visible = _on.Contains(id) && (n is not LineLayer l || z >= l.MinZoom);
             if (n.Visible && n is not LineLayer) n.QueueRedraw();
         }
+        if (_cam == null || _baseVp == null) return;
+        _baseCam.Position = _cam.Position;
+        _baseCam.Zoom = _cam.Zoom;
+        _baseVp.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
     }
 
     private static Image LoadEarth()
     {
         var img = Image.LoadFromFile(Path.Combine(Session.DataDir(), "geo", "earth.png"));
         img.GenerateMipmaps();
+        // block-compressed in VRAM: a quarter of the memory traffic per lookup (matters on integrated GPUs)
+        img.Compress(Image.CompressMode.S3Tc, Image.CompressSource.Generic);
         return img;
     }
 
@@ -118,7 +143,7 @@ public partial class StrategicMap : Node2D
         _land.SetShaderParameter("mode", mode);
         _sea.SetShaderParameter("mode", mode);
         _grid.Dark = mode != Topographic;
-        _grid.QueueRedraw();
+        Redraw();
     }
 
     public static Color StatusColor(RouteStatus s) => s switch { RouteStatus.FullyOpen => Open, RouteStatus.Contested => Contested, _ => Closed };

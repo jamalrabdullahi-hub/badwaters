@@ -1,7 +1,7 @@
-// Real-Earth base for the Strategic Map. earth_tex is equirectangular (Natural Earth, public domain):
+// Real-Earth base for the Strategic Map. earth_tex is Mercator (Natural Earth, public domain):
 // R = shaded relief, G = ocean depth band at sea / urban area on land, B = lake.
 // mode: 0 = satellite, 1 = topographic, 2 = tactical. is_land: 1 for land polygons, 0 for the sea plane.
-// One texture lookup per pixel: cheap on integrated GPUs.
+// One linear texture lookup per pixel: cheap on integrated GPUs.
 shader_type canvas_item;
 
 uniform int mode = 0;
@@ -11,13 +11,16 @@ uniform bool show_relief = true;
 uniform bool show_depth = true;
 uniform bool show_urban = false;
 uniform bool show_lakes = true;
-uniform sampler2D earth_tex : filter_linear_mipmap;
+uniform float y_max = 168.948; // Mercator y (degrees) of the texture's top (84 N) and bottom (80 S) rows
+uniform float y_min = -139.587;
+uniform sampler2D earth_tex : filter_linear_mipmap, repeat_enable; // wraps past the date line
 varying vec2 world;
+varying float lat;
 
 void fragment() {
-	float lon = world.x / px_per_deg;
-	float lat = degrees(2.0 * atan(exp(radians(-world.y / px_per_deg))) - PI / 2.0); // inverse Mercator
-	vec4 e = texture(earth_tex, vec2((lon + 180.0) / 360.0, (90.0 - lat) / 180.0));
+	// earth.png is already in Mercator: a straight linear lookup, no per-pixel trigonometry
+	vec2 uv = vec2((world.x / px_per_deg + 180.0) / 360.0, (y_max + world.y / px_per_deg) / (y_max - y_min));
+	vec4 e = texture(earth_tex, uv);
 	float shade = show_relief ? clamp(e.r / 0.78, 0.45, 1.25) : 1.0; // 0.78 ~ flat ground in the relief raster
 	vec3 c;
 	if (is_land < 0.5) {
@@ -42,4 +45,5 @@ void fragment() {
 
 void vertex() {
 	world = VERTEX;
+	lat = degrees(2.0 * atan(exp(radians(-VERTEX.y / px_per_deg))) - PI / 2.0); // per vertex: only the land tint needs it
 }

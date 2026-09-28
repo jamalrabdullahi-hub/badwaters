@@ -55,7 +55,7 @@ public static class Session
             {
                 var baseIndex = verts.Count;
                 var v = poly.GetProperty("v").EnumerateArray().Select(x => x.GetDouble()).ToArray();
-                for (var i = 0; i < v.Length; i += 2) verts.Add(Project(v[i], v[i + 1]));
+                for (var i = 0; i < v.Length; i += 2) verts.Add(Project(v[i], v[i + 1])); // date-line polygons are pre-shifted by geo-convert.mjs
                 foreach (var t in poly.GetProperty("t").EnumerateArray()) idx.Add(baseIndex + t.GetInt32());
             }
             var arrays = new Godot.Collections.Array();

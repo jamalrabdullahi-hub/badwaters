@@ -6,7 +6,7 @@ data/core/geo/*.json plus data/core/geo/earth.png.
 POLICY: only general atlas cartography is read. The allow-list below is the complete set of inputs. No power, energy,
 pipeline, water, telecom or military facility data is imported, and military / dual-use airports are dropped.
 
-earth.png (equirectangular, 4096 x 2048): R = shaded relief, G = ocean depth band at sea / urban area on land,
+earth.png (Mercator, lat 84..-80, 4096 wide): R = shaded relief, G = ocean depth band at sea / urban area on land,
 B = lake.
 """
 import json, math, os
@@ -133,6 +133,18 @@ paint(depth, load("ne_10m_bathymetry_G_4000"), 255, 170)
 paint(depth, load("ne_50m_urban_areas"), 255, 0)  # G is unused on land: urban areas go there
 mask = Image.new("L", (W, H), 0)
 paint(mask, load("ne_50m_lakes"), 255, 0)
-Image.merge("RGB", (relief, depth, mask)).save(os.path.join(OUT, "earth.png"), optimize=True)
+eq = Image.merge("RGB", (relief, depth, mask))
+# reproject to Mercator (lat 84..-80, the map's range) so the game shader samples it with a straight linear lookup
+def merc(lat): return math.degrees(math.log(math.tan(math.pi / 4 + math.radians(lat) / 2)))
+YMAX, YMIN = merc(84), merc(-80)
+H2 = round(W * (YMAX - YMIN) / 360)
+out = Image.new("RGB", (W, H2))
+for row in range(H2):
+    y = YMAX - (row + 0.5) / H2 * (YMAX - YMIN)
+    lat = math.degrees(2 * math.atan(math.exp(math.radians(y))) - math.pi / 2)
+    src = min(H - 1, max(0, int((90 - lat) / 180 * H)))
+    out.paste(eq.crop((0, src, W, src + 1)), (0, row))
+out.save(os.path.join(OUT, "earth.png"), optimize=True)
+print(f"earth.png Mercator {W}x{H2}, y range {YMIN:.3f}..{YMAX:.3f}")
 sizes["earth.png"] = os.path.getsize(os.path.join(OUT, "earth.png"))
 print("sizes:", {k: f"{v / 1e6:.2f} MB" for k, v in sizes.items()}, f"total {sum(sizes.values()) / 1e6:.1f} MB")

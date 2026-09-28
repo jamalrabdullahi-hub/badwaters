@@ -16,7 +16,15 @@ public static class DevScreenshot
         if (Arg("fps") != null)
         {
             DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
-            for (var i = 0; i < 240; i++) await node.ToSignal(node.GetTree(), SceneTree.SignalName.ProcessFrame);
+            // warm up (loading, texture upload, shader compile), then time a fixed window of frames
+            for (var i = 0; i < 180; i++) await node.ToSignal(node.GetTree(), SceneTree.SignalName.ProcessFrame);
+            var t0 = Time.GetTicksUsec(); var prev = t0; ulong worst = 0;
+            for (var i = 0; i < 300; i++)
+            {
+                await node.ToSignal(node.GetTree(), SceneTree.SignalName.ProcessFrame);
+                var now = Time.GetTicksUsec(); worst = Math.Max(worst, now - prev); prev = now;
+            }
+            GD.Print($"AVG FPS {300e6 / (Time.GetTicksUsec() - t0):0.0} · worst frame {worst / 1000.0:0.0} ms");
             GD.Print($"FPS {Engine.GetFramesPerSecond()} · process {Performance.GetMonitor(Performance.Monitor.TimeProcess) * 1000:0.0} ms · draw calls {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)} · primitives {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)} · objects {Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame)} · video mem {Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed) / 1e6:0} MB");
             if (Arg("screenshot") == null) { node.GetTree().Quit(); return; }
         }

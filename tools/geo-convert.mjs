@@ -15,9 +15,14 @@ let tris = 0;
 for (const f of land.features ?? [land]) {
   const g = f.geometry;
   for (const p of g.type === "Polygon" ? [g.coordinates] : g.coordinates) {
-    const outer = p[0].map(([x, y]) => [r3(x), r3(Math.max(-80, Math.min(84, y)))]);
+    // polygons sitting on the date line (Russia's Chukotka, Fiji) mix -180 and +180: shift their far-west vertices
+    // east by 360 BEFORE triangulating so the triangles tile the real shape (Antarctica spans every longitude: skip)
+    const xs = p[0].map(([x]) => x), ys = p[0].map(([, y]) => y);
+    const wrap = Math.max(...xs) > 170 && Math.min(...xs) < -170 && Math.min(...ys) > -60;
+    const sx = (x) => (wrap && x < -150 ? x + 360 : x);
+    const outer = p[0].map(([x, y]) => [r3(sx(x)), r3(Math.max(-80, Math.min(84, y)))]);
     if (outer.length < 4) continue;
-    const holes = p.slice(1).map((h) => h.map(([x, y]) => [r3(x), r3(y)]));
+    const holes = p.slice(1).map((h) => h.map(([x, y]) => [r3(sx(x)), r3(y)]));
     const flat = [], holeIdx = [];
     for (const [x, y] of outer) flat.push(x, y);
     for (const h of holes) { holeIdx.push(flat.length / 2); for (const [x, y] of h) flat.push(x, y); }
