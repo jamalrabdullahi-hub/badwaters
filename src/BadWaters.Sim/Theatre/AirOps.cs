@@ -106,6 +106,8 @@ public sealed class Flight
     public List<Waypoint> Route { get; } = new();
     public FlightState State { get; set; } = FlightState.Planned;
     public bool Released { get; set; }
+    /// <summary>Weapons held (an operation rule): the flight flies the route but does not release.</summary>
+    public bool HoldFire { get; set; }
 
     public double Takeoff => Route[0].T;
     public double LandAt => Route[^1].T;
@@ -198,6 +200,20 @@ public sealed class AirTasking
 
     public PlanResult Commit(AtoEntry e) => Plan(e, commit: true);
 
+    /// <summary>Command authority: when set, planning only uses assets free in the pool or owned by the operation being planned.</summary>
+    public BadWaters.Sim.Command.Authority? Authority { get; set; }
+    private string _forOp = "";
+    private IReadOnlyCollection<string>? _only;
+    private bool Usable(string asset) =>
+        (Authority == null || Authority.IsFreeFor(asset, _forOp)) && (_only == null || _only.Count == 0 || _only.Contains(asset));
+
+    /// <summary>Plan (and optionally commit) for an operation, using its picked assets if it named any.</summary>
+    public PlanResult PlanFor(AtoEntry e, string op, IReadOnlyCollection<string>? only, bool commit)
+    {
+        _forOp = op; _only = only;
+        try { return Plan(e, commit); } finally { _forOp = ""; _only = null; }
+    }
+
     public PlanResult Plan(AtoEntry e, bool commit = false)
     {
         if (e.Launcher != "") return PlanFire(e, commit);
@@ -225,7 +241,7 @@ public sealed class AirTasking
             var info = _preset(req.Preset);
             if (info == null) { issues.Add($"Unknown aircraft type {req.Preset}."); continue; }
             // the base with enough idle aircraft of this type that is closest to the objective
-            var pool = Idle(e.Side).Where(u => u.Preset == req.Preset && !reserved.Contains(u.Id)).GroupBy(u => u.Base)
+            var pool = Idle(e.Side).Where(u => u.Preset == req.Preset && !reserved.Contains(u.Id) && Usable(u.Id)).GroupBy(u => u.Base)
                 .Select(g => (Base: _t.Site(g.Key), Units: g.ToList())).Where(x => x.Base != null && x.Units.Count >= req.Count && BaseCanLaunch(x.Base.Id, req.Mission))
                 .OrderBy(x => Pacing.DistanceKm(x.Base!.Lon, x.Base.Lat, aim.Item1, aim.Item2)).FirstOrDefault();
             if (pool.Base == null) { issues.Add($"Not enough idle {info.Name} at any single working base for {req.Count} aircraft (runway closed or munitions store destroyed counts as not working)."); continue; }
@@ -327,6 +343,7 @@ public sealed class AirTasking
         if (l == null || target == null) return new(false, new[] { "Unknown launcher or target." }, null, Array.Empty<Flight>());
         var issues = new List<string>();
         if (l.Def.Side != e.Side) issues.Add("That launcher belongs to the other side.");
+        if (!Usable(l.Def.Id)) issues.Add($"{l.Def.Name} is committed to another operation.");
         if (!TargetPolicy.IsLegitimate(target.Class)) issues.Add(TargetPolicy.IsKnown(target.Class) ? TargetPolicy.ProtectedMessage : "Unclassified target class: refused.");
         if (target.Side == e.Side) issues.Add("That target is on your own side.");
         var dist = Km((l.Def.Lon, l.Def.Lat), (target.Lon, target.Lat));
@@ -546,6 +563,11 @@ public sealed class AirTasking
                 if (_rng.NextDouble() < pLoss) lost++;
             }
         Remove(f, lost);
+        if (f.HoldFire)
+        {
+            _t.Report("air", $"{f.Callsign}: weapons held over {tgt.Name} (operation rule); {lost} lost to covering SAM batteries.");
+            return;
+        }
         var pHit = Math.Clamp(0.25 + 0.06 * f.Type.R("strike") + 0.02 * f.Type.R("payload") + form.Strike, 0.05, 0.95);
         var hits = f.Aircraft.Count(_ => _rng.NextDouble() < pHit);
         if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;

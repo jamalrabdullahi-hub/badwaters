@@ -16,6 +16,8 @@ public sealed class Contact
     public int IdLevel { get; set; }
     public string Label { get; set; } = "";
     public string Source { get; set; } = "";
+    /// <summary>Recognised role when identified (e.g. "AEW", "Tanker", "CAP"): what a commander can react to.</summary>
+    public string Role { get; set; } = "";
 }
 
 public sealed class BdaBelief
@@ -112,6 +114,8 @@ public sealed class IntelService
                     if (Pacing.DistanceKm(s.Lon, s.Lat, lon, lat) > s.AirKm || _rng.NextDouble() > IntelRules.DetectChance(s.Rating, sig)) continue;
                     var id = IntelRules.IdLevel(s.Rating, sig);
                     See(pic, f.Id, "air", lon, lat, now, id, id == 2 ? $"{f.Aircraft.Count}× {f.Type.Name}" : id == 1 ? $"hostile air ×{f.Aircraft.Count}" : "unknown air", s.Name);
+                    if (id >= 1 && f.Mission is Mission.AEW or Mission.Tanker) pic.Contacts[f.Id].Role = f.Mission.ToString(); // big, distinctive tracks
+                    else if (id == 2) pic.Contacts[f.Id].Role = f.Mission.ToString();
                     break;
                 }
             }

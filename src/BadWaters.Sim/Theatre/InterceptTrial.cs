@@ -144,6 +144,8 @@ public sealed class InterceptTrial
     public Dictionary<string, int> Hits { get; } = new();
     /// <summary>Bases with components (sites whose Type is a known base type).</summary>
     public Dictionary<string, BaseState> Bases { get; } = new();
+    /// <summary>The operation system (both sides, AI and player). Set up after Air/Intel/Naval.</summary>
+    public BadWaters.Sim.Command.OperationBoard? Ops { get; set; }
     public IntelService? Intel { get; set; }
     public NavalForces? Naval { get; set; }
     private double _nextAiNaval = 300;
@@ -339,6 +341,7 @@ public sealed class InterceptTrial
         }
 
         Air?.Tick(Time - Step, Time);
+        Ops?.Tick(Time);
         if (Control["blue"] == SideControl.AI) AiDefend("blue");
         if (Control["red"] == SideControl.AI) AiDefend("red");
     }
