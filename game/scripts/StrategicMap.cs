@@ -27,13 +27,9 @@ public partial class StrategicMap : Node2D
         var shader = GD.Load<Shader>("res://shaders/terrain.gdshader");
         _land.Shader = shader;
         _sea.Shader = shader;
-        var noise = new NoiseTexture2D
-        {
-            Width = 512, Height = 512, Seamless = true, GenerateMipmaps = true, Normalize = true,
-            Noise = new FastNoiseLite { NoiseType = FastNoiseLite.NoiseTypeEnum.Perlin, Frequency = 0.012f, FractalOctaves = 5, Seed = 7 },
-        };
-        _land.SetShaderParameter("noise_tex", noise);
-        _sea.SetShaderParameter("noise_tex", noise);
+        // real Earth: relief, ocean depth, lakes and urban areas (Natural Earth, tools/geo-build.py)
+        var earth = ImageTexture.CreateFromImage(LoadEarth());
+        foreach (var m in new[] { _land, _sea }) { m.SetShaderParameter("earth_tex", earth); m.SetShaderParameter("px_per_deg", Session.PxPerDeg); }
         _land.SetShaderParameter("is_land", 1.0f);
         _sea.SetShaderParameter("is_land", 0.0f);
 
@@ -45,9 +41,25 @@ public partial class StrategicMap : Node2D
 
         _grid = new GridLayer { Visible = DevScreenshot.Arg("no-grid") == null };
         AddChild(_grid);
+        foreach (var d in MapLayerDef.Load())
+        {
+            _defs[d.Id] = d;
+            Node2D? n = d.Kind switch
+            {
+                "lines" => new LineLayer(d),
+                "points" => new PointLayer(d),
+                "military" => new MilitaryLayer(),
+                "theatres" => new TheatreRings(),
+                "weather" => new WeatherLayer(),
+                _ => null,
+            };
+            if (n != null) { _layers[d.Id] = n; AddChild(n); }
+        }
         _routes = new Node2D();
         AddChild(_routes);
         RefreshRoutes();
+        foreach (var d in _defs.Values) SetLayer(d.Id, d.On);
+        if (DevScreenshot.Arg("layers") is { } extra) foreach (var id in extra.Split(',')) SetLayer(id.TrimStart('-'), !id.StartsWith('-'));
 
         _cam = new Camera2D { Position = Session.Project(125, 28), Zoom = new Vector2(0.9f, 0.9f) };
         AddChild(_cam);
@@ -61,7 +73,44 @@ public partial class StrategicMap : Node2D
         var fine = _cam.Zoom.X >= DetailZoom;
         _fine.Visible = fine;
         _coarse.Visible = !fine;
+        Redraw();
+    }
+
+    private readonly Dictionary<string, MapLayerDef> _defs = new();
+    private readonly Dictionary<string, Node2D> _layers = new();
+    private readonly HashSet<string> _on = new();
+    public IReadOnlyCollection<MapLayerDef> LayerDefs => _defs.Values;
+    public bool LayerOn(string id) => _on.Contains(id);
+
+    /// <summary>Turn a map layer on or off (see data/core/map_layers.json).</summary>
+    public void SetLayer(string id, bool on)
+    {
+        if (!_defs.TryGetValue(id, out var d) || d.Kind == "later") return;
+        if (on) _on.Add(id); else _on.Remove(id);
+        if (d.Kind == "shader") foreach (var m in new[] { _land, _sea }) m.SetShaderParameter("show_" + (id == "lakes" ? "lakes" : id), on);
+        if (id == "lakes") foreach (var m in new[] { _land, _sea }) m.SetShaderParameter("show_lakes", on);
+        if (d.Kind == "grid") _grid.Visible = on;
+        if (d.Kind == "routes") _routes.Visible = on;
+        Redraw();
+    }
+
+    /// <summary>Redraw the view-dependent layers (after a pan, zoom or date change).</summary>
+    public void Redraw()
+    {
         _grid.QueueRedraw();
+        var z = _cam?.Zoom.X ?? 1;
+        foreach (var (id, n) in _layers)
+        {
+            n.Visible = _on.Contains(id) && (n is not LineLayer l || z >= l.MinZoom);
+            if (n.Visible && n is not LineLayer) n.QueueRedraw();
+        }
+    }
+
+    private static Image LoadEarth()
+    {
+        var img = Image.LoadFromFile(Path.Combine(Session.DataDir(), "geo", "earth.png"));
+        img.GenerateMipmaps();
+        return img;
     }
 
     public void SetMode(int mode)
@@ -112,7 +161,7 @@ public partial class StrategicMap : Node2D
         }
         else if (e is InputEventMouseMotion mm)
         {
-            if (_drag) { _cam.Position -= mm.Relative / _cam.Zoom; _grid.QueueRedraw(); }
+            if (_drag) { _cam.Position -= mm.Relative / _cam.Zoom; Redraw(); }
             if (_routes.Visible) RouteHovered?.Invoke(HitRoute(GetGlobalMousePosition()));
         }
     }
@@ -128,10 +177,10 @@ public partial class StrategicMap : Node2D
     }
 
     public void AddOverlay(Node2D n) { if (n.GetParent() == null) AddChild(n); }
-    public void ShowRoutes(bool on) { _routes.Visible = on; if (!on) RouteHovered?.Invoke(null); }
+    public void ShowRoutes(bool on) { _routes.Visible = on && _on.Contains("routes"); if (!on) RouteHovered?.Invoke(null); }
 
     /// <summary>Move the view by screen pixels (e.g. so a point sits in the middle of the uncovered map area).</summary>
-    public void PanScreen(Vector2 px) { _cam.Position += px / _cam.Zoom; _grid.QueueRedraw(); }
+    public void PanScreen(Vector2 px) { _cam.Position += px / _cam.Zoom; Redraw(); }
 
     public void CenterOn(double lon, double lat, float zoom) { _cam.Position = Session.Project(lon, lat); _cam.Zoom = new Vector2(zoom, zoom); UpdateLod(); }
 }

@@ -96,6 +96,8 @@ public sealed class Scheduler
                 friendly = Math.Max(friendly, t.FriendlySeaControl);
                 if (t.AtWar) war = 100;
             }
+            // storms along the route add a little disruption (simple weather, see Environment.Weather)
+            if (RoutePaths.TryGetValue(id, out var path)) hostile += StormDisruption * BadWaters.Sim.Environment.Weather.StormAlong(path, _w.Now);
             var wasClosed = r.Status == RouteStatus.EffectivelyClosed;
             r.UpdateFromThreat(hostile, friendly, war);
             if (!wasClosed && r.Status == RouteStatus.EffectivelyClosed)
@@ -110,6 +112,10 @@ public sealed class Scheduler
 
     /// <summary>Route↔theatre membership is registered by the data layer.</summary>
     public Dictionary<string, HashSet<string>> RouteTheatres { get; } = new();
+    /// <summary>Route waypoints [lon, lat] for weather; registered by the data layer (optional).</summary>
+    public Dictionary<string, List<double[]>> RoutePaths { get; } = new();
+    /// <summary>Disruption points added by a full-strength storm on the route.</summary>
+    public const double StormDisruption = 12;
     private bool RouteTouches(string route, string theatre) => RouteTheatres.TryGetValue(route, out var s) && s.Contains(theatre);
 
     private Interrupt Record(Interrupt i) { _w.Log.Add($"{i.At:yyyy-MM-dd} {i.Text}"); return i; }

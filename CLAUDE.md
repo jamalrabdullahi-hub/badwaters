@@ -22,6 +22,7 @@ When you add a new target type, site type or mission type, classify it in `Targe
 
 - UI direction (chosen by the user): **Ops Floor · War Room colours**. It's a monitor-wall layout with slim glass bezels in deep navy and ice-cyan, with no CRT or scanline effects. `game/scripts/UiTheme.cs` is the single palette source.
 - One simulation, two views. The **Strategic Map** is turn-based (1 day to 1 year) and is for running the country when you are NOT fighting: economy, industry, research, development, trade, deployments. **Theatre Ops** is where you fight when you ARE at war: you engage on the theatre map in real time at 1×–100×, with tasking and the C2 & comms network inside it. The rest of the world keeps running while a theatre is live.
+- **Real Earth map:** the Strategic Map base is Natural Earth civil cartography built by `tools/geo-build.py` from an allow-list (relief, water, borders, major roads/rail, capitals and major cities, major civil ports/airports). Never import real power, energy, pipeline, water, telecom, military or intelligence locations; those layers stay game-simulated abstractions. Cities are protected, never targets. Layers are data in `data/core/map_layers.json`.
 - Hardcode rules, not units. Components, frames, techs, factories and routes are JSON; the C# code only evaluates them.
 
 - C# / .NET 8 solution: `BadWaters.sln`. The engine-free game systems are in `src/BadWaters.Sim`, JSON loading in `src/BadWaters.Data`, and the Godot 4 .NET UI in `game/`.

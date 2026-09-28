@@ -42,6 +42,11 @@ public static class UiTheme
         t.SetStylebox("disabled", "Button", Box(new Color(Panel2, 0.5f), new Color(Line, 0.1f)));
         t.SetStylebox("focus", "Button", Box(new Color(0, 0, 0, 0), Accent, 6, 2));
         t.SetStylebox("panel", "PanelContainer", Box(Panel, Line));
+        // checkboxes: no button fill, just the tick
+        foreach (var st in new[] { "normal", "hover", "pressed", "hover_pressed", "disabled", "focus" })
+            t.SetStylebox(st, "CheckBox", new StyleBoxFlat { BgColor = st.StartsWith("hover") ? new Color(Accent, 0.08f) : new Color(0, 0, 0, 0), ContentMarginLeft = 2, ContentMarginTop = 1, ContentMarginBottom = 1 });
+        t.SetColor("font_pressed_color", "CheckBox", Ink);
+        t.SetColor("font_hover_pressed_color", "CheckBox", Accent);
         t.SetFontSize("font_size", "Label", Base);
         foreach (var type in new[] { "Button", "LineEdit", "OptionButton", "CheckBox", "PopupMenu", "TabBar", "ItemList", "TextEdit", "SpinBox", "TooltipLabel" }) t.SetFontSize("font_size", type, Base);
         return t;

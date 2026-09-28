@@ -116,7 +116,40 @@ public partial class Shell : Control
             b.Pressed += () => _map.SetMode(mode);
             h.AddChild(b);
         }
-        return h;
+        var layersBtn = new Button { Text = "Layers ▾", ToggleMode = true };
+        h.AddChild(layersBtn);
+        var panel = LayerPanel();
+        panel.Visible = DevScreenshot.Arg("layers-open") != null;
+        layersBtn.ButtonPressed = panel.Visible;
+        layersBtn.Toggled += on => panel.Visible = on;
+        var col = new VBoxContainer { OffsetLeft = 10, OffsetTop = 10 };
+        col.AddChild(h);
+        col.AddChild(panel);
+        return col;
+    }
+
+    /// <summary>Map layers by group. Real Earth layers are facts; (sim) layers come from the game and its fog of war.</summary>
+    private Control LayerPanel()
+    {
+        var box = new PanelContainer { CustomMinimumSize = new Vector2(250, 0) };
+        var sc = new ScrollContainer { CustomMinimumSize = new Vector2(250, 520), HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        var v = new VBoxContainer();
+        v.AddThemeConstantOverride("separation", 0);
+        sc.AddChild(v); box.AddChild(sc);
+        foreach (var g in _map.LayerDefs.GroupBy(d => d.Group))
+        {
+            v.AddChild(UiTheme.Text(g.Key, 12, UiTheme.Accent));
+            foreach (var d in g)
+            {
+                var later = d.Kind == "later";
+                var cb = new CheckBox { Text = d.Name + (d.Sim ? "  (sim)" : "") + (later ? "  · later" : ""), ButtonPressed = _map.LayerOn(d.Id), Disabled = later };
+                var id = d.Id;
+                cb.Toggled += on => _map.SetLayer(id, on);
+                v.AddChild(cb);
+            }
+        }
+        v.AddChild(UiTheme.Text("Map data: Natural Earth (public domain). Civil geography only.", 10, UiTheme.Dim, wrap: true));
+        return box;
     }
 
     private Control Legend()
@@ -201,7 +234,7 @@ public partial class Shell : Control
     {
         var irq = Session.Scheduler.AdvanceStrategic(len);
         UpdateDate();
-        _map.RefreshRoutes();
+        _map.RefreshRoutes(); _map.Redraw();
         if (irq != null)
         {
             _bannerBox.Visible = true;
@@ -245,6 +278,7 @@ public partial class Shell : Control
     {
         if (DevScreenshot.Arg("mode") is { } m) _map.SetMode(m == "topographic" ? 1 : m == "tactical" ? 2 : 0);
         if (DevScreenshot.Arg("view") == "world") _map.CenterOn(60, 20, 0.32f);
+        if (DevScreenshot.Arg("center")?.Split(',') is { Length: 3 } cz) _map.CenterOn(double.Parse(cz[0]), double.Parse(cz[1]), float.Parse(cz[2]));
         if (DevScreenshot.Arg("hover") is { } r) ShowRoute(r);
         if (DevScreenshot.Arg("advance") is { } a) Advance(a == "year" ? TurnLength.Year : TurnLength.Month);
         if (DevScreenshot.Arg("screen") is { } screen) Open(screen == "dev" ? "Development" : screen == "theatre" ? "Theatre Ops" : "Map");
