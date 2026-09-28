@@ -31,6 +31,45 @@ if (cmd == "auto")
     }
     return 0;
 }
+if (cmd == "econ")
+{
+    // econ NATION [months] [year] [design] [rate]
+    var gc = GameContent.Load(Path.Combine("data", "core"));
+    foreach (var e in gc.Errors) Console.Error.WriteLine(e);
+    var nat = args.Length > 1 ? args[1] : "JPN";
+    var months = args.Length > 2 ? int.Parse(args[2]) : 3;
+    var year = args.Length > 3 ? int.Parse(args[3]) : 2020;
+    var st = new BadWaters.Sim.Economy.EconomyState();
+    var sw = System.Diagnostics.Stopwatch.StartNew();
+    new BadWaters.Sim.Economy.EconomySeeder(gc.Economy, gc.Geo, gc.Catalog, gc.Designs).Seed(st, nat, year);
+    Console.WriteLine($"Seeded {nat} {year}: {st.Sites.Count} sites, {st.Sites.Values.Sum(s => s.Level)} levels in {sw.ElapsedMilliseconds} ms");
+    foreach (var g in st.Sites.Values.GroupBy(s => s.Type).OrderByDescending(g => g.Sum(s => s.Level)).Take(25)) Console.Write($"{g.Key}×{g.Sum(s => s.Level)}  ");
+    Console.WriteLine();
+    if (args.Length > 4) st.Nations[nat].Programmes.Add(new BadWaters.Sim.Economy.Programme { Id = "p1", Design = args[4], RatePerMonth = args.Length > 5 ? double.Parse(args[5]) : 1 });
+    var solver = new BadWaters.Sim.Economy.EconomySolver(gc.Economy, gc.Geo, gc.Catalog, gc.Designs);
+    BadWaters.Sim.Economy.NationReport? rep = null;
+    for (var m = 0; m < months; m++)
+    {
+        sw.Restart();
+        rep = solver.RunMonth(st, nat);
+        st.Month++;
+        Console.WriteLine($"month {m + 1}: {sw.ElapsedMilliseconds} ms · value added {rep.ValueAdded:0} · energy {rep.EnergySupply:0}/{rep.EnergyDemand:0} · basket {rep.BasketSatisfaction:P0} · maintenance {rep.MaintenanceMet:P0} · imports {rep.ImportCost:0} · shortages {rep.Shortages.Count}");
+    }
+    if (rep != null)
+    {
+        Console.WriteLine("Bottlenecks:"); foreach (var b in rep.Bottlenecks) Console.WriteLine("  " + b);
+        Console.WriteLine("Top shortages:"); foreach (var (g, q) in rep.Shortages.OrderByDescending(x => x.Value * gc.Economy.Goods[x.Key].Price).Take(10)) Console.WriteLine($"  {g} {q:0.#}");
+        Console.WriteLine("Imports: " + string.Join(", ", rep.Imported.OrderByDescending(x => x.Value).Take(12).Select(x => $"{x.Key} {x.Value:0}")));
+        Console.WriteLine("Produced: " + string.Join(", ", new[] { "coal", "copper-ore", "crude-oil", "iron-ore", "electricity", "steel", "spares-general" }.Select(g => $"{g} {rep.Produced.GetValueOrDefault(g):0}")));
+        Console.WriteLine("Labour: " + string.Join(", ", rep.LabourFactor.Select(k => $"{k.Key} {k.Value:P0}")));
+        foreach (var p in rep.Programmes) { Console.WriteLine($"Programme {p.Design}: {p.Built:0.##}/{p.Wanted} · {p.Limit}"); }
+        var explain = Environment.GetEnvironmentVariable("EXPLAIN")?.Split(',') ?? rep.Shortages.Keys.Take(3).ToArray();
+        foreach (var g in explain) foreach (var l in rep.Explain(g, gc.Economy)) Console.WriteLine(l);
+        foreach (var g in explain) Console.WriteLine($"  plan {g}: " + (rep.Plan.TryGetValue(g, out var pv) ? $"req {pv.Req:0.#} stock {pv.Stock:0.#} net {pv.Net:0.#}" : "not reached"));
+        foreach (var g in explain) Console.WriteLine($"  limits for {g}: " + string.Join("; ", rep.Limits.Where(l => gc.Economy.Processes[l.Process].Outputs.ContainsKey(g)).GroupBy(l => l.Process).Select(x => $"{x.Key} {x.Sum(y => y.Actual):0.#}/{x.Sum(y => y.Planned):0.#} {x.First().Reason}")));
+    }
+    return 0;
+}
 if (cmd != "validate")
 {
     Console.Error.WriteLine("Usage: BadWaters.Cli validate [dataDir] [modDir...]");

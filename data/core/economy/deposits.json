@@ -1,0 +1,7674 @@
+[
+ {
+  "id": "USA-ne-potable-water",
+  "region": "USA-ne",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-freshwater",
+  "region": "USA-ne",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-limestone",
+  "region": "USA-ne",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-silica-sand",
+  "region": "USA-ne",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-salt",
+  "region": "USA-ne",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-biomass",
+  "region": "USA-ne",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-biomass-fuel",
+  "region": "USA-ne",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-animal-products",
+  "region": "USA-ne",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-veg-oil",
+  "region": "USA-ne",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-coal",
+  "region": "USA-ne",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-natural-gas",
+  "region": "USA-ne",
+  "resource": "natural-gas",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ne-timber",
+  "region": "USA-ne",
+  "resource": "timber",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-potable-water",
+  "region": "USA-mw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-freshwater",
+  "region": "USA-mw",
+  "resource": "freshwater",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-limestone",
+  "region": "USA-mw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-silica-sand",
+  "region": "USA-mw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-salt",
+  "region": "USA-mw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-biomass",
+  "region": "USA-mw",
+  "resource": "biomass",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-biomass-fuel",
+  "region": "USA-mw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-animal-products",
+  "region": "USA-mw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-veg-oil",
+  "region": "USA-mw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-iron-ore",
+  "region": "USA-mw",
+  "resource": "iron-ore",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-coal",
+  "region": "USA-mw",
+  "resource": "coal",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mw-grain",
+  "region": "USA-mw",
+  "resource": "grain",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-potable-water",
+  "region": "USA-tx",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-freshwater",
+  "region": "USA-tx",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-limestone",
+  "region": "USA-tx",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-silica-sand",
+  "region": "USA-tx",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-salt",
+  "region": "USA-tx",
+  "resource": "salt",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-biomass",
+  "region": "USA-tx",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-biomass-fuel",
+  "region": "USA-tx",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-animal-products",
+  "region": "USA-tx",
+  "resource": "animal-products",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-veg-oil",
+  "region": "USA-tx",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-crude-oil",
+  "region": "USA-tx",
+  "resource": "crude-oil",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-natural-gas",
+  "region": "USA-tx",
+  "resource": "natural-gas",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-helium",
+  "region": "USA-tx",
+  "resource": "helium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-sulfur",
+  "region": "USA-tx",
+  "resource": "sulfur",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-tx-grain",
+  "region": "USA-tx",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-potable-water",
+  "region": "USA-se",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-freshwater",
+  "region": "USA-se",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-limestone",
+  "region": "USA-se",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-silica-sand",
+  "region": "USA-se",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-salt",
+  "region": "USA-se",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-biomass",
+  "region": "USA-se",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-biomass-fuel",
+  "region": "USA-se",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-animal-products",
+  "region": "USA-se",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-veg-oil",
+  "region": "USA-se",
+  "resource": "veg-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-phosphate",
+  "region": "USA-se",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-timber",
+  "region": "USA-se",
+  "resource": "timber",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-titanium",
+  "region": "USA-se",
+  "resource": "titanium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-zirconium",
+  "region": "USA-se",
+  "resource": "zirconium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-se-grain",
+  "region": "USA-se",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-potable-water",
+  "region": "USA-mt",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-freshwater",
+  "region": "USA-mt",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-limestone",
+  "region": "USA-mt",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-silica-sand",
+  "region": "USA-mt",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-salt",
+  "region": "USA-mt",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-biomass",
+  "region": "USA-mt",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-biomass-fuel",
+  "region": "USA-mt",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-animal-products",
+  "region": "USA-mt",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-veg-oil",
+  "region": "USA-mt",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-copper",
+  "region": "USA-mt",
+  "resource": "copper",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-molybdenum",
+  "region": "USA-mt",
+  "resource": "molybdenum",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-uranium",
+  "region": "USA-mt",
+  "resource": "uranium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-coal",
+  "region": "USA-mt",
+  "resource": "coal",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-gold",
+  "region": "USA-mt",
+  "resource": "gold",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-silver",
+  "region": "USA-mt",
+  "resource": "silver",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-lithium",
+  "region": "USA-mt",
+  "resource": "lithium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-beryllium",
+  "region": "USA-mt",
+  "resource": "beryllium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-potash",
+  "region": "USA-mt",
+  "resource": "potash",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-mt-vanadium",
+  "region": "USA-mt",
+  "resource": "vanadium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-potable-water",
+  "region": "USA-wc",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-freshwater",
+  "region": "USA-wc",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-limestone",
+  "region": "USA-wc",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-silica-sand",
+  "region": "USA-wc",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-salt",
+  "region": "USA-wc",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-biomass",
+  "region": "USA-wc",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-biomass-fuel",
+  "region": "USA-wc",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-animal-products",
+  "region": "USA-wc",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-veg-oil",
+  "region": "USA-wc",
+  "resource": "veg-oil",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-crude-oil",
+  "region": "USA-wc",
+  "resource": "crude-oil",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-rare-earths",
+  "region": "USA-wc",
+  "resource": "rare-earths",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-boron",
+  "region": "USA-wc",
+  "resource": "boron",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-grain",
+  "region": "USA-wc",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-wc-timber",
+  "region": "USA-wc",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-potable-water",
+  "region": "USA-ak",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-freshwater",
+  "region": "USA-ak",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-limestone",
+  "region": "USA-ak",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-silica-sand",
+  "region": "USA-ak",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-salt",
+  "region": "USA-ak",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-biomass",
+  "region": "USA-ak",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-biomass-fuel",
+  "region": "USA-ak",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-animal-products",
+  "region": "USA-ak",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-veg-oil",
+  "region": "USA-ak",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-crude-oil",
+  "region": "USA-ak",
+  "resource": "crude-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-natural-gas",
+  "region": "USA-ak",
+  "resource": "natural-gas",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-zinc",
+  "region": "USA-ak",
+  "resource": "zinc",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-lead",
+  "region": "USA-ak",
+  "resource": "lead",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-gold",
+  "region": "USA-ak",
+  "resource": "gold",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "USA-ak-timber",
+  "region": "USA-ak",
+  "resource": "timber",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-potable-water",
+  "region": "RUS-cen",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-freshwater",
+  "region": "RUS-cen",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-limestone",
+  "region": "RUS-cen",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-silica-sand",
+  "region": "RUS-cen",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-salt",
+  "region": "RUS-cen",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-biomass",
+  "region": "RUS-cen",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-biomass-fuel",
+  "region": "RUS-cen",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-animal-products",
+  "region": "RUS-cen",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-veg-oil",
+  "region": "RUS-cen",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-iron-ore",
+  "region": "RUS-cen",
+  "resource": "iron-ore",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-cen-grain",
+  "region": "RUS-cen",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-potable-water",
+  "region": "RUS-vol",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-freshwater",
+  "region": "RUS-vol",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-limestone",
+  "region": "RUS-vol",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-silica-sand",
+  "region": "RUS-vol",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-salt",
+  "region": "RUS-vol",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-biomass",
+  "region": "RUS-vol",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-biomass-fuel",
+  "region": "RUS-vol",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-animal-products",
+  "region": "RUS-vol",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-veg-oil",
+  "region": "RUS-vol",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-crude-oil",
+  "region": "RUS-vol",
+  "resource": "crude-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-iron-ore",
+  "region": "RUS-vol",
+  "resource": "iron-ore",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-chromium",
+  "region": "RUS-vol",
+  "resource": "chromium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-titanium",
+  "region": "RUS-vol",
+  "resource": "titanium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-vanadium",
+  "region": "RUS-vol",
+  "resource": "vanadium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-copper",
+  "region": "RUS-vol",
+  "resource": "copper",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-potash",
+  "region": "RUS-vol",
+  "resource": "potash",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-bauxite",
+  "region": "RUS-vol",
+  "resource": "bauxite",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-vol-magnesium",
+  "region": "RUS-vol",
+  "resource": "magnesium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-potable-water",
+  "region": "RUS-wsb",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-freshwater",
+  "region": "RUS-wsb",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-limestone",
+  "region": "RUS-wsb",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-silica-sand",
+  "region": "RUS-wsb",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-salt",
+  "region": "RUS-wsb",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-biomass",
+  "region": "RUS-wsb",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-biomass-fuel",
+  "region": "RUS-wsb",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-animal-products",
+  "region": "RUS-wsb",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-veg-oil",
+  "region": "RUS-wsb",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-crude-oil",
+  "region": "RUS-wsb",
+  "resource": "crude-oil",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-natural-gas",
+  "region": "RUS-wsb",
+  "resource": "natural-gas",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-wsb-helium",
+  "region": "RUS-wsb",
+  "resource": "helium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-potable-water",
+  "region": "RUS-esb",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-freshwater",
+  "region": "RUS-esb",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-limestone",
+  "region": "RUS-esb",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-silica-sand",
+  "region": "RUS-esb",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-salt",
+  "region": "RUS-esb",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-biomass",
+  "region": "RUS-esb",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-biomass-fuel",
+  "region": "RUS-esb",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-animal-products",
+  "region": "RUS-esb",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-veg-oil",
+  "region": "RUS-esb",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-nickel",
+  "region": "RUS-esb",
+  "resource": "nickel",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-cobalt",
+  "region": "RUS-esb",
+  "resource": "cobalt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-pgm",
+  "region": "RUS-esb",
+  "resource": "pgm",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-copper",
+  "region": "RUS-esb",
+  "resource": "copper",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-gold",
+  "region": "RUS-esb",
+  "resource": "gold",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-coal",
+  "region": "RUS-esb",
+  "resource": "coal",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-uranium",
+  "region": "RUS-esb",
+  "resource": "uranium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-timber",
+  "region": "RUS-esb",
+  "resource": "timber",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-esb-helium",
+  "region": "RUS-esb",
+  "resource": "helium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-potable-water",
+  "region": "RUS-fe",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-freshwater",
+  "region": "RUS-fe",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-limestone",
+  "region": "RUS-fe",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-silica-sand",
+  "region": "RUS-fe",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-salt",
+  "region": "RUS-fe",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-biomass",
+  "region": "RUS-fe",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-biomass-fuel",
+  "region": "RUS-fe",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-animal-products",
+  "region": "RUS-fe",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-veg-oil",
+  "region": "RUS-fe",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-gold",
+  "region": "RUS-fe",
+  "resource": "gold",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-tin",
+  "region": "RUS-fe",
+  "resource": "tin",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-tungsten",
+  "region": "RUS-fe",
+  "resource": "tungsten",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-coal",
+  "region": "RUS-fe",
+  "resource": "coal",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-timber",
+  "region": "RUS-fe",
+  "resource": "timber",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-fe-natural-gas",
+  "region": "RUS-fe",
+  "resource": "natural-gas",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-potable-water",
+  "region": "RUS-nw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-freshwater",
+  "region": "RUS-nw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-limestone",
+  "region": "RUS-nw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-silica-sand",
+  "region": "RUS-nw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-salt",
+  "region": "RUS-nw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-biomass",
+  "region": "RUS-nw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-biomass-fuel",
+  "region": "RUS-nw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-animal-products",
+  "region": "RUS-nw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-veg-oil",
+  "region": "RUS-nw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-phosphate",
+  "region": "RUS-nw",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-rare-earths",
+  "region": "RUS-nw",
+  "resource": "rare-earths",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-nickel",
+  "region": "RUS-nw",
+  "resource": "nickel",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-iron-ore",
+  "region": "RUS-nw",
+  "resource": "iron-ore",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-timber",
+  "region": "RUS-nw",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-tantalum",
+  "region": "RUS-nw",
+  "resource": "tantalum",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-nw-niobium",
+  "region": "RUS-nw",
+  "resource": "niobium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-potable-water",
+  "region": "RUS-sth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-freshwater",
+  "region": "RUS-sth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-limestone",
+  "region": "RUS-sth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-silica-sand",
+  "region": "RUS-sth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-salt",
+  "region": "RUS-sth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-biomass",
+  "region": "RUS-sth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-biomass-fuel",
+  "region": "RUS-sth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-animal-products",
+  "region": "RUS-sth",
+  "resource": "animal-products",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-veg-oil",
+  "region": "RUS-sth",
+  "resource": "veg-oil",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-grain",
+  "region": "RUS-sth",
+  "resource": "grain",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "RUS-sth-coal",
+  "region": "RUS-sth",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-potable-water",
+  "region": "CHN-nth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-freshwater",
+  "region": "CHN-nth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-limestone",
+  "region": "CHN-nth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-silica-sand",
+  "region": "CHN-nth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-salt",
+  "region": "CHN-nth",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-biomass",
+  "region": "CHN-nth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-biomass-fuel",
+  "region": "CHN-nth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-animal-products",
+  "region": "CHN-nth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-veg-oil",
+  "region": "CHN-nth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-coal",
+  "region": "CHN-nth",
+  "resource": "coal",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-iron-ore",
+  "region": "CHN-nth",
+  "resource": "iron-ore",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-magnesium",
+  "region": "CHN-nth",
+  "resource": "magnesium",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-fluorspar",
+  "region": "CHN-nth",
+  "resource": "fluorspar",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-molybdenum",
+  "region": "CHN-nth",
+  "resource": "molybdenum",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nth-grain",
+  "region": "CHN-nth",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-potable-water",
+  "region": "CHN-ne",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-freshwater",
+  "region": "CHN-ne",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-limestone",
+  "region": "CHN-ne",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-silica-sand",
+  "region": "CHN-ne",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-salt",
+  "region": "CHN-ne",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-biomass",
+  "region": "CHN-ne",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-biomass-fuel",
+  "region": "CHN-ne",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-animal-products",
+  "region": "CHN-ne",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-veg-oil",
+  "region": "CHN-ne",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-crude-oil",
+  "region": "CHN-ne",
+  "resource": "crude-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-grain",
+  "region": "CHN-ne",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-graphite",
+  "region": "CHN-ne",
+  "resource": "graphite",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-molybdenum",
+  "region": "CHN-ne",
+  "resource": "molybdenum",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-timber",
+  "region": "CHN-ne",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-ne-iron-ore",
+  "region": "CHN-ne",
+  "resource": "iron-ore",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-potable-water",
+  "region": "CHN-est",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-freshwater",
+  "region": "CHN-est",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-limestone",
+  "region": "CHN-est",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-silica-sand",
+  "region": "CHN-est",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-salt",
+  "region": "CHN-est",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-biomass",
+  "region": "CHN-est",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-biomass-fuel",
+  "region": "CHN-est",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-animal-products",
+  "region": "CHN-est",
+  "resource": "animal-products",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-veg-oil",
+  "region": "CHN-est",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-grain",
+  "region": "CHN-est",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-est-fluorspar",
+  "region": "CHN-est",
+  "resource": "fluorspar",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-potable-water",
+  "region": "CHN-sth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-freshwater",
+  "region": "CHN-sth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-limestone",
+  "region": "CHN-sth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-silica-sand",
+  "region": "CHN-sth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-salt",
+  "region": "CHN-sth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-biomass",
+  "region": "CHN-sth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-biomass-fuel",
+  "region": "CHN-sth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-animal-products",
+  "region": "CHN-sth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-veg-oil",
+  "region": "CHN-sth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-tin",
+  "region": "CHN-sth",
+  "resource": "tin",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-zinc",
+  "region": "CHN-sth",
+  "resource": "zinc",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-rare-earths",
+  "region": "CHN-sth",
+  "resource": "rare-earths",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-lead",
+  "region": "CHN-sth",
+  "resource": "lead",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-grain",
+  "region": "CHN-sth",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sth-natural-rubber",
+  "region": "CHN-sth",
+  "resource": "natural-rubber",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-potable-water",
+  "region": "CHN-cen",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-freshwater",
+  "region": "CHN-cen",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-limestone",
+  "region": "CHN-cen",
+  "resource": "limestone",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-silica-sand",
+  "region": "CHN-cen",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-salt",
+  "region": "CHN-cen",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-biomass",
+  "region": "CHN-cen",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-biomass-fuel",
+  "region": "CHN-cen",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-animal-products",
+  "region": "CHN-cen",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-veg-oil",
+  "region": "CHN-cen",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-tungsten",
+  "region": "CHN-cen",
+  "resource": "tungsten",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-antimony",
+  "region": "CHN-cen",
+  "resource": "antimony",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-graphite",
+  "region": "CHN-cen",
+  "resource": "graphite",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-rare-earths",
+  "region": "CHN-cen",
+  "resource": "rare-earths",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-lithium",
+  "region": "CHN-cen",
+  "resource": "lithium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-cen-grain",
+  "region": "CHN-cen",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-potable-water",
+  "region": "CHN-sw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-freshwater",
+  "region": "CHN-sw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-limestone",
+  "region": "CHN-sw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-silica-sand",
+  "region": "CHN-sw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-salt",
+  "region": "CHN-sw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-biomass",
+  "region": "CHN-sw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-biomass-fuel",
+  "region": "CHN-sw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-animal-products",
+  "region": "CHN-sw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-veg-oil",
+  "region": "CHN-sw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-natural-gas",
+  "region": "CHN-sw",
+  "resource": "natural-gas",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-titanium",
+  "region": "CHN-sw",
+  "resource": "titanium",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-vanadium",
+  "region": "CHN-sw",
+  "resource": "vanadium",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-phosphate",
+  "region": "CHN-sw",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-lithium",
+  "region": "CHN-sw",
+  "resource": "lithium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-silicon",
+  "region": "CHN-sw",
+  "resource": "silicon",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-sw-tin",
+  "region": "CHN-sw",
+  "resource": "tin",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-potable-water",
+  "region": "CHN-nwc",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-freshwater",
+  "region": "CHN-nwc",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-limestone",
+  "region": "CHN-nwc",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-silica-sand",
+  "region": "CHN-nwc",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-salt",
+  "region": "CHN-nwc",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-biomass",
+  "region": "CHN-nwc",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-biomass-fuel",
+  "region": "CHN-nwc",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-animal-products",
+  "region": "CHN-nwc",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-veg-oil",
+  "region": "CHN-nwc",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-crude-oil",
+  "region": "CHN-nwc",
+  "resource": "crude-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-natural-gas",
+  "region": "CHN-nwc",
+  "resource": "natural-gas",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-coal",
+  "region": "CHN-nwc",
+  "resource": "coal",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-nickel",
+  "region": "CHN-nwc",
+  "resource": "nickel",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-beryllium",
+  "region": "CHN-nwc",
+  "resource": "beryllium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-nwc-silicon",
+  "region": "CHN-nwc",
+  "resource": "silicon",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-potable-water",
+  "region": "CHN-imn",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-freshwater",
+  "region": "CHN-imn",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-limestone",
+  "region": "CHN-imn",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-silica-sand",
+  "region": "CHN-imn",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-salt",
+  "region": "CHN-imn",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-biomass",
+  "region": "CHN-imn",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-biomass-fuel",
+  "region": "CHN-imn",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-animal-products",
+  "region": "CHN-imn",
+  "resource": "animal-products",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-veg-oil",
+  "region": "CHN-imn",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-rare-earths",
+  "region": "CHN-imn",
+  "resource": "rare-earths",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-coal",
+  "region": "CHN-imn",
+  "resource": "coal",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-iron-ore",
+  "region": "CHN-imn",
+  "resource": "iron-ore",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-niobium",
+  "region": "CHN-imn",
+  "resource": "niobium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "CHN-imn-graphite",
+  "region": "CHN-imn",
+  "resource": "graphite",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-potable-water",
+  "region": "GBR-se",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-freshwater",
+  "region": "GBR-se",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-limestone",
+  "region": "GBR-se",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-silica-sand",
+  "region": "GBR-se",
+  "resource": "silica-sand",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-salt",
+  "region": "GBR-se",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-biomass",
+  "region": "GBR-se",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-biomass-fuel",
+  "region": "GBR-se",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-animal-products",
+  "region": "GBR-se",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-veg-oil",
+  "region": "GBR-se",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-se-grain",
+  "region": "GBR-se",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-potable-water",
+  "region": "GBR-mid",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-freshwater",
+  "region": "GBR-mid",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-limestone",
+  "region": "GBR-mid",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-silica-sand",
+  "region": "GBR-mid",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-salt",
+  "region": "GBR-mid",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-biomass",
+  "region": "GBR-mid",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-biomass-fuel",
+  "region": "GBR-mid",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-animal-products",
+  "region": "GBR-mid",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-veg-oil",
+  "region": "GBR-mid",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-coal",
+  "region": "GBR-mid",
+  "resource": "coal",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-potash",
+  "region": "GBR-mid",
+  "resource": "potash",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-mid-grain",
+  "region": "GBR-mid",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-potable-water",
+  "region": "GBR-sco",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-freshwater",
+  "region": "GBR-sco",
+  "resource": "freshwater",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-limestone",
+  "region": "GBR-sco",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-silica-sand",
+  "region": "GBR-sco",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-salt",
+  "region": "GBR-sco",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-biomass",
+  "region": "GBR-sco",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-biomass-fuel",
+  "region": "GBR-sco",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-animal-products",
+  "region": "GBR-sco",
+  "resource": "animal-products",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-veg-oil",
+  "region": "GBR-sco",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-sco-timber",
+  "region": "GBR-sco",
+  "resource": "timber",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-potable-water",
+  "region": "GBR-nsea",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-freshwater",
+  "region": "GBR-nsea",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-limestone",
+  "region": "GBR-nsea",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-silica-sand",
+  "region": "GBR-nsea",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-salt",
+  "region": "GBR-nsea",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-biomass",
+  "region": "GBR-nsea",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-biomass-fuel",
+  "region": "GBR-nsea",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-animal-products",
+  "region": "GBR-nsea",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-veg-oil",
+  "region": "GBR-nsea",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-crude-oil",
+  "region": "GBR-nsea",
+  "resource": "crude-oil",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-nsea-natural-gas",
+  "region": "GBR-nsea",
+  "resource": "natural-gas",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-potable-water",
+  "region": "GBR-wal",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-freshwater",
+  "region": "GBR-wal",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-limestone",
+  "region": "GBR-wal",
+  "resource": "limestone",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-silica-sand",
+  "region": "GBR-wal",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-salt",
+  "region": "GBR-wal",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-biomass",
+  "region": "GBR-wal",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-biomass-fuel",
+  "region": "GBR-wal",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-animal-products",
+  "region": "GBR-wal",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-veg-oil",
+  "region": "GBR-wal",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "GBR-wal-coal",
+  "region": "GBR-wal",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-potable-water",
+  "region": "FRA-idf",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-freshwater",
+  "region": "FRA-idf",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-limestone",
+  "region": "FRA-idf",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-silica-sand",
+  "region": "FRA-idf",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-salt",
+  "region": "FRA-idf",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-biomass",
+  "region": "FRA-idf",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-biomass-fuel",
+  "region": "FRA-idf",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-animal-products",
+  "region": "FRA-idf",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-veg-oil",
+  "region": "FRA-idf",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-idf-grain",
+  "region": "FRA-idf",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-potable-water",
+  "region": "FRA-ne",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-freshwater",
+  "region": "FRA-ne",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-limestone",
+  "region": "FRA-ne",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-silica-sand",
+  "region": "FRA-ne",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-salt",
+  "region": "FRA-ne",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-biomass",
+  "region": "FRA-ne",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-biomass-fuel",
+  "region": "FRA-ne",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-animal-products",
+  "region": "FRA-ne",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-veg-oil",
+  "region": "FRA-ne",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-iron-ore",
+  "region": "FRA-ne",
+  "resource": "iron-ore",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-coal",
+  "region": "FRA-ne",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-potash",
+  "region": "FRA-ne",
+  "resource": "potash",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ne-grain",
+  "region": "FRA-ne",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-potable-water",
+  "region": "FRA-ra",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-freshwater",
+  "region": "FRA-ra",
+  "resource": "freshwater",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-limestone",
+  "region": "FRA-ra",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-silica-sand",
+  "region": "FRA-ra",
+  "resource": "silica-sand",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-salt",
+  "region": "FRA-ra",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-biomass",
+  "region": "FRA-ra",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-biomass-fuel",
+  "region": "FRA-ra",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-animal-products",
+  "region": "FRA-ra",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-ra-veg-oil",
+  "region": "FRA-ra",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-potable-water",
+  "region": "FRA-sw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-freshwater",
+  "region": "FRA-sw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-limestone",
+  "region": "FRA-sw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-silica-sand",
+  "region": "FRA-sw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-salt",
+  "region": "FRA-sw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-biomass",
+  "region": "FRA-sw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-biomass-fuel",
+  "region": "FRA-sw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-animal-products",
+  "region": "FRA-sw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-veg-oil",
+  "region": "FRA-sw",
+  "resource": "veg-oil",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-natural-gas",
+  "region": "FRA-sw",
+  "resource": "natural-gas",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-sulfur",
+  "region": "FRA-sw",
+  "resource": "sulfur",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-grain",
+  "region": "FRA-sw",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-sw-timber",
+  "region": "FRA-sw",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-potable-water",
+  "region": "FRA-nw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-freshwater",
+  "region": "FRA-nw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-limestone",
+  "region": "FRA-nw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-silica-sand",
+  "region": "FRA-nw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-salt",
+  "region": "FRA-nw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-biomass",
+  "region": "FRA-nw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-biomass-fuel",
+  "region": "FRA-nw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-animal-products",
+  "region": "FRA-nw",
+  "resource": "animal-products",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-veg-oil",
+  "region": "FRA-nw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-nw-grain",
+  "region": "FRA-nw",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-potable-water",
+  "region": "FRA-med",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-freshwater",
+  "region": "FRA-med",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-limestone",
+  "region": "FRA-med",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-silica-sand",
+  "region": "FRA-med",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-salt",
+  "region": "FRA-med",
+  "resource": "salt",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-biomass",
+  "region": "FRA-med",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-biomass-fuel",
+  "region": "FRA-med",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-animal-products",
+  "region": "FRA-med",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-veg-oil",
+  "region": "FRA-med",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "FRA-med-bauxite",
+  "region": "FRA-med",
+  "resource": "bauxite",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-potable-water",
+  "region": "ISR-cen",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-freshwater",
+  "region": "ISR-cen",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-limestone",
+  "region": "ISR-cen",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-silica-sand",
+  "region": "ISR-cen",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-salt",
+  "region": "ISR-cen",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-biomass",
+  "region": "ISR-cen",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-biomass-fuel",
+  "region": "ISR-cen",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-animal-products",
+  "region": "ISR-cen",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-veg-oil",
+  "region": "ISR-cen",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-cen-natural-gas",
+  "region": "ISR-cen",
+  "resource": "natural-gas",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-potable-water",
+  "region": "ISR-nth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-freshwater",
+  "region": "ISR-nth",
+  "resource": "freshwater",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-limestone",
+  "region": "ISR-nth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-silica-sand",
+  "region": "ISR-nth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-salt",
+  "region": "ISR-nth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-biomass",
+  "region": "ISR-nth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-biomass-fuel",
+  "region": "ISR-nth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-animal-products",
+  "region": "ISR-nth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-veg-oil",
+  "region": "ISR-nth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-nth-grain",
+  "region": "ISR-nth",
+  "resource": "grain",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-potable-water",
+  "region": "ISR-neg",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-freshwater",
+  "region": "ISR-neg",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-limestone",
+  "region": "ISR-neg",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-silica-sand",
+  "region": "ISR-neg",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-salt",
+  "region": "ISR-neg",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-biomass",
+  "region": "ISR-neg",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-biomass-fuel",
+  "region": "ISR-neg",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-animal-products",
+  "region": "ISR-neg",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-veg-oil",
+  "region": "ISR-neg",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-phosphate",
+  "region": "ISR-neg",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-potash",
+  "region": "ISR-neg",
+  "resource": "potash",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "ISR-neg-magnesium",
+  "region": "ISR-neg",
+  "resource": "magnesium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-potable-water",
+  "region": "IRN-teh",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-freshwater",
+  "region": "IRN-teh",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-limestone",
+  "region": "IRN-teh",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-silica-sand",
+  "region": "IRN-teh",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-salt",
+  "region": "IRN-teh",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-biomass",
+  "region": "IRN-teh",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-biomass-fuel",
+  "region": "IRN-teh",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-animal-products",
+  "region": "IRN-teh",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-veg-oil",
+  "region": "IRN-teh",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-teh-grain",
+  "region": "IRN-teh",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-potable-water",
+  "region": "IRN-khz",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-freshwater",
+  "region": "IRN-khz",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-limestone",
+  "region": "IRN-khz",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-silica-sand",
+  "region": "IRN-khz",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-salt",
+  "region": "IRN-khz",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-biomass",
+  "region": "IRN-khz",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-biomass-fuel",
+  "region": "IRN-khz",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-animal-products",
+  "region": "IRN-khz",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-veg-oil",
+  "region": "IRN-khz",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-crude-oil",
+  "region": "IRN-khz",
+  "resource": "crude-oil",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-natural-gas",
+  "region": "IRN-khz",
+  "resource": "natural-gas",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-khz-sulfur",
+  "region": "IRN-khz",
+  "resource": "sulfur",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-potable-water",
+  "region": "IRN-isf",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-freshwater",
+  "region": "IRN-isf",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-limestone",
+  "region": "IRN-isf",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-silica-sand",
+  "region": "IRN-isf",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-salt",
+  "region": "IRN-isf",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-biomass",
+  "region": "IRN-isf",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-biomass-fuel",
+  "region": "IRN-isf",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-animal-products",
+  "region": "IRN-isf",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-veg-oil",
+  "region": "IRN-isf",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-copper",
+  "region": "IRN-isf",
+  "resource": "copper",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-zinc",
+  "region": "IRN-isf",
+  "resource": "zinc",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-lead",
+  "region": "IRN-isf",
+  "resource": "lead",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-iron-ore",
+  "region": "IRN-isf",
+  "resource": "iron-ore",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-chromium",
+  "region": "IRN-isf",
+  "resource": "chromium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-uranium",
+  "region": "IRN-isf",
+  "resource": "uranium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-isf-molybdenum",
+  "region": "IRN-isf",
+  "resource": "molybdenum",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-potable-water",
+  "region": "IRN-sth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-freshwater",
+  "region": "IRN-sth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-limestone",
+  "region": "IRN-sth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-silica-sand",
+  "region": "IRN-sth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-salt",
+  "region": "IRN-sth",
+  "resource": "salt",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-biomass",
+  "region": "IRN-sth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-biomass-fuel",
+  "region": "IRN-sth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-animal-products",
+  "region": "IRN-sth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-veg-oil",
+  "region": "IRN-sth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-natural-gas",
+  "region": "IRN-sth",
+  "resource": "natural-gas",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-crude-oil",
+  "region": "IRN-sth",
+  "resource": "crude-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-sth-sulfur",
+  "region": "IRN-sth",
+  "resource": "sulfur",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-potable-water",
+  "region": "IRN-nw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-freshwater",
+  "region": "IRN-nw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-limestone",
+  "region": "IRN-nw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-silica-sand",
+  "region": "IRN-nw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-salt",
+  "region": "IRN-nw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-biomass",
+  "region": "IRN-nw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-biomass-fuel",
+  "region": "IRN-nw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-animal-products",
+  "region": "IRN-nw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-veg-oil",
+  "region": "IRN-nw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-grain",
+  "region": "IRN-nw",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-nw-copper",
+  "region": "IRN-nw",
+  "resource": "copper",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-potable-water",
+  "region": "IRN-est",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-freshwater",
+  "region": "IRN-est",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-limestone",
+  "region": "IRN-est",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-silica-sand",
+  "region": "IRN-est",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-salt",
+  "region": "IRN-est",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-biomass",
+  "region": "IRN-est",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-biomass-fuel",
+  "region": "IRN-est",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-animal-products",
+  "region": "IRN-est",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-veg-oil",
+  "region": "IRN-est",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-coal",
+  "region": "IRN-est",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-iron-ore",
+  "region": "IRN-est",
+  "resource": "iron-ore",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "IRN-est-gold",
+  "region": "IRN-est",
+  "resource": "gold",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-potable-water",
+  "region": "EGY-cai",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-freshwater",
+  "region": "EGY-cai",
+  "resource": "freshwater",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-limestone",
+  "region": "EGY-cai",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-silica-sand",
+  "region": "EGY-cai",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-salt",
+  "region": "EGY-cai",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-biomass",
+  "region": "EGY-cai",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-biomass-fuel",
+  "region": "EGY-cai",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-animal-products",
+  "region": "EGY-cai",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-veg-oil",
+  "region": "EGY-cai",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-cai-grain",
+  "region": "EGY-cai",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-potable-water",
+  "region": "EGY-alx",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-freshwater",
+  "region": "EGY-alx",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-limestone",
+  "region": "EGY-alx",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-silica-sand",
+  "region": "EGY-alx",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-salt",
+  "region": "EGY-alx",
+  "resource": "salt",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-biomass",
+  "region": "EGY-alx",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-biomass-fuel",
+  "region": "EGY-alx",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-animal-products",
+  "region": "EGY-alx",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-veg-oil",
+  "region": "EGY-alx",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-natural-gas",
+  "region": "EGY-alx",
+  "resource": "natural-gas",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-alx-crude-oil",
+  "region": "EGY-alx",
+  "resource": "crude-oil",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-potable-water",
+  "region": "EGY-suz",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-freshwater",
+  "region": "EGY-suz",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-limestone",
+  "region": "EGY-suz",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-silica-sand",
+  "region": "EGY-suz",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-salt",
+  "region": "EGY-suz",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-biomass",
+  "region": "EGY-suz",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-biomass-fuel",
+  "region": "EGY-suz",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-animal-products",
+  "region": "EGY-suz",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-veg-oil",
+  "region": "EGY-suz",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-crude-oil",
+  "region": "EGY-suz",
+  "resource": "crude-oil",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-suz-manganese",
+  "region": "EGY-suz",
+  "resource": "manganese",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-potable-water",
+  "region": "EGY-upp",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-freshwater",
+  "region": "EGY-upp",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-limestone",
+  "region": "EGY-upp",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-silica-sand",
+  "region": "EGY-upp",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-salt",
+  "region": "EGY-upp",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-biomass",
+  "region": "EGY-upp",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-biomass-fuel",
+  "region": "EGY-upp",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-animal-products",
+  "region": "EGY-upp",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-veg-oil",
+  "region": "EGY-upp",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-phosphate",
+  "region": "EGY-upp",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-iron-ore",
+  "region": "EGY-upp",
+  "resource": "iron-ore",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-gold",
+  "region": "EGY-upp",
+  "resource": "gold",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "EGY-upp-grain",
+  "region": "EGY-upp",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-potable-water",
+  "region": "TUR-mar",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-freshwater",
+  "region": "TUR-mar",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-limestone",
+  "region": "TUR-mar",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-silica-sand",
+  "region": "TUR-mar",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-salt",
+  "region": "TUR-mar",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-biomass",
+  "region": "TUR-mar",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-biomass-fuel",
+  "region": "TUR-mar",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-animal-products",
+  "region": "TUR-mar",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-veg-oil",
+  "region": "TUR-mar",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-mar-grain",
+  "region": "TUR-mar",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-potable-water",
+  "region": "TUR-ank",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-freshwater",
+  "region": "TUR-ank",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-limestone",
+  "region": "TUR-ank",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-silica-sand",
+  "region": "TUR-ank",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-salt",
+  "region": "TUR-ank",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-biomass",
+  "region": "TUR-ank",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-biomass-fuel",
+  "region": "TUR-ank",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-animal-products",
+  "region": "TUR-ank",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-veg-oil",
+  "region": "TUR-ank",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-boron",
+  "region": "TUR-ank",
+  "resource": "boron",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-ank-grain",
+  "region": "TUR-ank",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-potable-water",
+  "region": "TUR-aeg",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-freshwater",
+  "region": "TUR-aeg",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-limestone",
+  "region": "TUR-aeg",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-silica-sand",
+  "region": "TUR-aeg",
+  "resource": "silica-sand",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-salt",
+  "region": "TUR-aeg",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-biomass",
+  "region": "TUR-aeg",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-biomass-fuel",
+  "region": "TUR-aeg",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-animal-products",
+  "region": "TUR-aeg",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-veg-oil",
+  "region": "TUR-aeg",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-boron",
+  "region": "TUR-aeg",
+  "resource": "boron",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-antimony",
+  "region": "TUR-aeg",
+  "resource": "antimony",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-aeg-coal",
+  "region": "TUR-aeg",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-potable-water",
+  "region": "TUR-bls",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-freshwater",
+  "region": "TUR-bls",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-limestone",
+  "region": "TUR-bls",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-silica-sand",
+  "region": "TUR-bls",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-salt",
+  "region": "TUR-bls",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-biomass",
+  "region": "TUR-bls",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-biomass-fuel",
+  "region": "TUR-bls",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-animal-products",
+  "region": "TUR-bls",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-veg-oil",
+  "region": "TUR-bls",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-copper",
+  "region": "TUR-bls",
+  "resource": "copper",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-coal",
+  "region": "TUR-bls",
+  "resource": "coal",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-timber",
+  "region": "TUR-bls",
+  "resource": "timber",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-bls-zinc",
+  "region": "TUR-bls",
+  "resource": "zinc",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-potable-water",
+  "region": "TUR-se",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-freshwater",
+  "region": "TUR-se",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-limestone",
+  "region": "TUR-se",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-silica-sand",
+  "region": "TUR-se",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-salt",
+  "region": "TUR-se",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-biomass",
+  "region": "TUR-se",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-biomass-fuel",
+  "region": "TUR-se",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-animal-products",
+  "region": "TUR-se",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-veg-oil",
+  "region": "TUR-se",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-chromium",
+  "region": "TUR-se",
+  "resource": "chromium",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-crude-oil",
+  "region": "TUR-se",
+  "resource": "crude-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-se-phosphate",
+  "region": "TUR-se",
+  "resource": "phosphate",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-potable-water",
+  "region": "TUR-med",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-freshwater",
+  "region": "TUR-med",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-limestone",
+  "region": "TUR-med",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-silica-sand",
+  "region": "TUR-med",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-salt",
+  "region": "TUR-med",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-biomass",
+  "region": "TUR-med",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-biomass-fuel",
+  "region": "TUR-med",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-animal-products",
+  "region": "TUR-med",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-veg-oil",
+  "region": "TUR-med",
+  "resource": "veg-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-chromium",
+  "region": "TUR-med",
+  "resource": "chromium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "TUR-med-grain",
+  "region": "TUR-med",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-potable-water",
+  "region": "SAU-riy",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-freshwater",
+  "region": "SAU-riy",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-limestone",
+  "region": "SAU-riy",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-silica-sand",
+  "region": "SAU-riy",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-salt",
+  "region": "SAU-riy",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-biomass",
+  "region": "SAU-riy",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-biomass-fuel",
+  "region": "SAU-riy",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-animal-products",
+  "region": "SAU-riy",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-riy-veg-oil",
+  "region": "SAU-riy",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-potable-water",
+  "region": "SAU-est",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-freshwater",
+  "region": "SAU-est",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-limestone",
+  "region": "SAU-est",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-silica-sand",
+  "region": "SAU-est",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-salt",
+  "region": "SAU-est",
+  "resource": "salt",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-biomass",
+  "region": "SAU-est",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-biomass-fuel",
+  "region": "SAU-est",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-animal-products",
+  "region": "SAU-est",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-veg-oil",
+  "region": "SAU-est",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-crude-oil",
+  "region": "SAU-est",
+  "resource": "crude-oil",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-natural-gas",
+  "region": "SAU-est",
+  "resource": "natural-gas",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-est-sulfur",
+  "region": "SAU-est",
+  "resource": "sulfur",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-potable-water",
+  "region": "SAU-wst",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-freshwater",
+  "region": "SAU-wst",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-limestone",
+  "region": "SAU-wst",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-silica-sand",
+  "region": "SAU-wst",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-salt",
+  "region": "SAU-wst",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-biomass",
+  "region": "SAU-wst",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-biomass-fuel",
+  "region": "SAU-wst",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-animal-products",
+  "region": "SAU-wst",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-veg-oil",
+  "region": "SAU-wst",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-gold",
+  "region": "SAU-wst",
+  "resource": "gold",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-copper",
+  "region": "SAU-wst",
+  "resource": "copper",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-wst-zinc",
+  "region": "SAU-wst",
+  "resource": "zinc",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-potable-water",
+  "region": "SAU-nth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-freshwater",
+  "region": "SAU-nth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-limestone",
+  "region": "SAU-nth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-silica-sand",
+  "region": "SAU-nth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-salt",
+  "region": "SAU-nth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-biomass",
+  "region": "SAU-nth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-biomass-fuel",
+  "region": "SAU-nth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-animal-products",
+  "region": "SAU-nth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-veg-oil",
+  "region": "SAU-nth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-phosphate",
+  "region": "SAU-nth",
+  "resource": "phosphate",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "SAU-nth-bauxite",
+  "region": "SAU-nth",
+  "resource": "bauxite",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-potable-water",
+  "region": "PRK-pyo",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-freshwater",
+  "region": "PRK-pyo",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-limestone",
+  "region": "PRK-pyo",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-silica-sand",
+  "region": "PRK-pyo",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-salt",
+  "region": "PRK-pyo",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-biomass",
+  "region": "PRK-pyo",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-biomass-fuel",
+  "region": "PRK-pyo",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-animal-products",
+  "region": "PRK-pyo",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-veg-oil",
+  "region": "PRK-pyo",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-coal",
+  "region": "PRK-pyo",
+  "resource": "coal",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-pyo-grain",
+  "region": "PRK-pyo",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-potable-water",
+  "region": "PRK-nth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-freshwater",
+  "region": "PRK-nth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-limestone",
+  "region": "PRK-nth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-silica-sand",
+  "region": "PRK-nth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-salt",
+  "region": "PRK-nth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-biomass",
+  "region": "PRK-nth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-biomass-fuel",
+  "region": "PRK-nth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-animal-products",
+  "region": "PRK-nth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-veg-oil",
+  "region": "PRK-nth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-iron-ore",
+  "region": "PRK-nth",
+  "resource": "iron-ore",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-magnesium",
+  "region": "PRK-nth",
+  "resource": "magnesium",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-coal",
+  "region": "PRK-nth",
+  "resource": "coal",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-graphite",
+  "region": "PRK-nth",
+  "resource": "graphite",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-nth-rare-earths",
+  "region": "PRK-nth",
+  "resource": "rare-earths",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-potable-water",
+  "region": "PRK-est",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-freshwater",
+  "region": "PRK-est",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-limestone",
+  "region": "PRK-est",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-silica-sand",
+  "region": "PRK-est",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-salt",
+  "region": "PRK-est",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-biomass",
+  "region": "PRK-est",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-biomass-fuel",
+  "region": "PRK-est",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-animal-products",
+  "region": "PRK-est",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-veg-oil",
+  "region": "PRK-est",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-zinc",
+  "region": "PRK-est",
+  "resource": "zinc",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-lead",
+  "region": "PRK-est",
+  "resource": "lead",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-tungsten",
+  "region": "PRK-est",
+  "resource": "tungsten",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-gold",
+  "region": "PRK-est",
+  "resource": "gold",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "PRK-est-molybdenum",
+  "region": "PRK-est",
+  "resource": "molybdenum",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-potable-water",
+  "region": "KOR-cap",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-freshwater",
+  "region": "KOR-cap",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-limestone",
+  "region": "KOR-cap",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-silica-sand",
+  "region": "KOR-cap",
+  "resource": "silica-sand",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-salt",
+  "region": "KOR-cap",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-biomass",
+  "region": "KOR-cap",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-biomass-fuel",
+  "region": "KOR-cap",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-animal-products",
+  "region": "KOR-cap",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cap-veg-oil",
+  "region": "KOR-cap",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-potable-water",
+  "region": "KOR-se",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-freshwater",
+  "region": "KOR-se",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-limestone",
+  "region": "KOR-se",
+  "resource": "limestone",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-silica-sand",
+  "region": "KOR-se",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-salt",
+  "region": "KOR-se",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-biomass",
+  "region": "KOR-se",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-biomass-fuel",
+  "region": "KOR-se",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-animal-products",
+  "region": "KOR-se",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-veg-oil",
+  "region": "KOR-se",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-se-grain",
+  "region": "KOR-se",
+  "resource": "grain",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-potable-water",
+  "region": "KOR-cc",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-freshwater",
+  "region": "KOR-cc",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-limestone",
+  "region": "KOR-cc",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-silica-sand",
+  "region": "KOR-cc",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-salt",
+  "region": "KOR-cc",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-biomass",
+  "region": "KOR-cc",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-biomass-fuel",
+  "region": "KOR-cc",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-animal-products",
+  "region": "KOR-cc",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-veg-oil",
+  "region": "KOR-cc",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-cc-grain",
+  "region": "KOR-cc",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-potable-water",
+  "region": "KOR-jl",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-freshwater",
+  "region": "KOR-jl",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-limestone",
+  "region": "KOR-jl",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-silica-sand",
+  "region": "KOR-jl",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-salt",
+  "region": "KOR-jl",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-biomass",
+  "region": "KOR-jl",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-biomass-fuel",
+  "region": "KOR-jl",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-animal-products",
+  "region": "KOR-jl",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-veg-oil",
+  "region": "KOR-jl",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "KOR-jl-grain",
+  "region": "KOR-jl",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-potable-water",
+  "region": "JPN-kan",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-freshwater",
+  "region": "JPN-kan",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-limestone",
+  "region": "JPN-kan",
+  "resource": "limestone",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-silica-sand",
+  "region": "JPN-kan",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-salt",
+  "region": "JPN-kan",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-biomass",
+  "region": "JPN-kan",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-biomass-fuel",
+  "region": "JPN-kan",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-animal-products",
+  "region": "JPN-kan",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kan-veg-oil",
+  "region": "JPN-kan",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-potable-water",
+  "region": "JPN-ksi",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-freshwater",
+  "region": "JPN-ksi",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-limestone",
+  "region": "JPN-ksi",
+  "resource": "limestone",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-silica-sand",
+  "region": "JPN-ksi",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-salt",
+  "region": "JPN-ksi",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-biomass",
+  "region": "JPN-ksi",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-biomass-fuel",
+  "region": "JPN-ksi",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-animal-products",
+  "region": "JPN-ksi",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-ksi-veg-oil",
+  "region": "JPN-ksi",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-potable-water",
+  "region": "JPN-chb",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-freshwater",
+  "region": "JPN-chb",
+  "resource": "freshwater",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-limestone",
+  "region": "JPN-chb",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-silica-sand",
+  "region": "JPN-chb",
+  "resource": "silica-sand",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-salt",
+  "region": "JPN-chb",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-biomass",
+  "region": "JPN-chb",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-biomass-fuel",
+  "region": "JPN-chb",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-animal-products",
+  "region": "JPN-chb",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chb-veg-oil",
+  "region": "JPN-chb",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-potable-water",
+  "region": "JPN-kyu",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-freshwater",
+  "region": "JPN-kyu",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-limestone",
+  "region": "JPN-kyu",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-silica-sand",
+  "region": "JPN-kyu",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-salt",
+  "region": "JPN-kyu",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-biomass",
+  "region": "JPN-kyu",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-biomass-fuel",
+  "region": "JPN-kyu",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-animal-products",
+  "region": "JPN-kyu",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-veg-oil",
+  "region": "JPN-kyu",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-gold",
+  "region": "JPN-kyu",
+  "resource": "gold",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-sulfur",
+  "region": "JPN-kyu",
+  "resource": "sulfur",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-kyu-grain",
+  "region": "JPN-kyu",
+  "resource": "grain",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-potable-water",
+  "region": "JPN-toh",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-freshwater",
+  "region": "JPN-toh",
+  "resource": "freshwater",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-limestone",
+  "region": "JPN-toh",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-silica-sand",
+  "region": "JPN-toh",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-salt",
+  "region": "JPN-toh",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-biomass",
+  "region": "JPN-toh",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-biomass-fuel",
+  "region": "JPN-toh",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-animal-products",
+  "region": "JPN-toh",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-veg-oil",
+  "region": "JPN-toh",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-timber",
+  "region": "JPN-toh",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-toh-grain",
+  "region": "JPN-toh",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-potable-water",
+  "region": "JPN-hok",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-freshwater",
+  "region": "JPN-hok",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-limestone",
+  "region": "JPN-hok",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-silica-sand",
+  "region": "JPN-hok",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-salt",
+  "region": "JPN-hok",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-biomass",
+  "region": "JPN-hok",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-biomass-fuel",
+  "region": "JPN-hok",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-animal-products",
+  "region": "JPN-hok",
+  "resource": "animal-products",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-veg-oil",
+  "region": "JPN-hok",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-timber",
+  "region": "JPN-hok",
+  "resource": "timber",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-grain",
+  "region": "JPN-hok",
+  "resource": "grain",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-hok-coal",
+  "region": "JPN-hok",
+  "resource": "coal",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-potable-water",
+  "region": "JPN-chg",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-freshwater",
+  "region": "JPN-chg",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-limestone",
+  "region": "JPN-chg",
+  "resource": "limestone",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-silica-sand",
+  "region": "JPN-chg",
+  "resource": "silica-sand",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-salt",
+  "region": "JPN-chg",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-biomass",
+  "region": "JPN-chg",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-biomass-fuel",
+  "region": "JPN-chg",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-animal-products",
+  "region": "JPN-chg",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "JPN-chg-veg-oil",
+  "region": "JPN-chg",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-potable-water",
+  "region": "DEU-nth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-freshwater",
+  "region": "DEU-nth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-limestone",
+  "region": "DEU-nth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-silica-sand",
+  "region": "DEU-nth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-salt",
+  "region": "DEU-nth",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-biomass",
+  "region": "DEU-nth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-biomass-fuel",
+  "region": "DEU-nth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-animal-products",
+  "region": "DEU-nth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-veg-oil",
+  "region": "DEU-nth",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-natural-gas",
+  "region": "DEU-nth",
+  "resource": "natural-gas",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-potash",
+  "region": "DEU-nth",
+  "resource": "potash",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nth-grain",
+  "region": "DEU-nth",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-potable-water",
+  "region": "DEU-nrw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-freshwater",
+  "region": "DEU-nrw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-limestone",
+  "region": "DEU-nrw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-silica-sand",
+  "region": "DEU-nrw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-salt",
+  "region": "DEU-nrw",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-biomass",
+  "region": "DEU-nrw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-biomass-fuel",
+  "region": "DEU-nrw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-animal-products",
+  "region": "DEU-nrw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-veg-oil",
+  "region": "DEU-nrw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-nrw-coal",
+  "region": "DEU-nrw",
+  "resource": "coal",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-potable-water",
+  "region": "DEU-bav",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-freshwater",
+  "region": "DEU-bav",
+  "resource": "freshwater",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-limestone",
+  "region": "DEU-bav",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-silica-sand",
+  "region": "DEU-bav",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-salt",
+  "region": "DEU-bav",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-biomass",
+  "region": "DEU-bav",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-biomass-fuel",
+  "region": "DEU-bav",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-animal-products",
+  "region": "DEU-bav",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-veg-oil",
+  "region": "DEU-bav",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-graphite",
+  "region": "DEU-bav",
+  "resource": "graphite",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bav-grain",
+  "region": "DEU-bav",
+  "resource": "grain",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-potable-water",
+  "region": "DEU-est",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-freshwater",
+  "region": "DEU-est",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-limestone",
+  "region": "DEU-est",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-silica-sand",
+  "region": "DEU-est",
+  "resource": "silica-sand",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-salt",
+  "region": "DEU-est",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-biomass",
+  "region": "DEU-est",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-biomass-fuel",
+  "region": "DEU-est",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-animal-products",
+  "region": "DEU-est",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-veg-oil",
+  "region": "DEU-est",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-coal",
+  "region": "DEU-est",
+  "resource": "coal",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-est-potash",
+  "region": "DEU-est",
+  "resource": "potash",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-potable-water",
+  "region": "DEU-bw",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-freshwater",
+  "region": "DEU-bw",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-limestone",
+  "region": "DEU-bw",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-silica-sand",
+  "region": "DEU-bw",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-salt",
+  "region": "DEU-bw",
+  "resource": "salt",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-biomass",
+  "region": "DEU-bw",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-biomass-fuel",
+  "region": "DEU-bw",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-animal-products",
+  "region": "DEU-bw",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "DEU-bw-veg-oil",
+  "region": "DEU-bw",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-potable-water",
+  "region": "UKR-kyv",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-freshwater",
+  "region": "UKR-kyv",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-limestone",
+  "region": "UKR-kyv",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-silica-sand",
+  "region": "UKR-kyv",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-salt",
+  "region": "UKR-kyv",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-biomass",
+  "region": "UKR-kyv",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-biomass-fuel",
+  "region": "UKR-kyv",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-animal-products",
+  "region": "UKR-kyv",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-veg-oil",
+  "region": "UKR-kyv",
+  "resource": "veg-oil",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-grain",
+  "region": "UKR-kyv",
+  "resource": "grain",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-kyv-uranium",
+  "region": "UKR-kyv",
+  "resource": "uranium",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-potable-water",
+  "region": "UKR-don",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-freshwater",
+  "region": "UKR-don",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-limestone",
+  "region": "UKR-don",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-silica-sand",
+  "region": "UKR-don",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-salt",
+  "region": "UKR-don",
+  "resource": "salt",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-biomass",
+  "region": "UKR-don",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-biomass-fuel",
+  "region": "UKR-don",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-animal-products",
+  "region": "UKR-don",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-veg-oil",
+  "region": "UKR-don",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-coal",
+  "region": "UKR-don",
+  "resource": "coal",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-don-natural-gas",
+  "region": "UKR-don",
+  "resource": "natural-gas",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-potable-water",
+  "region": "UKR-dni",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-freshwater",
+  "region": "UKR-dni",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-limestone",
+  "region": "UKR-dni",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-silica-sand",
+  "region": "UKR-dni",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-salt",
+  "region": "UKR-dni",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-biomass",
+  "region": "UKR-dni",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-biomass-fuel",
+  "region": "UKR-dni",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-animal-products",
+  "region": "UKR-dni",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-veg-oil",
+  "region": "UKR-dni",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-iron-ore",
+  "region": "UKR-dni",
+  "resource": "iron-ore",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-manganese",
+  "region": "UKR-dni",
+  "resource": "manganese",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-titanium",
+  "region": "UKR-dni",
+  "resource": "titanium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-zirconium",
+  "region": "UKR-dni",
+  "resource": "zirconium",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-uranium",
+  "region": "UKR-dni",
+  "resource": "uranium",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-dni-grain",
+  "region": "UKR-dni",
+  "resource": "grain",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-potable-water",
+  "region": "UKR-sth",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-freshwater",
+  "region": "UKR-sth",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-limestone",
+  "region": "UKR-sth",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-silica-sand",
+  "region": "UKR-sth",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-salt",
+  "region": "UKR-sth",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-biomass",
+  "region": "UKR-sth",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-biomass-fuel",
+  "region": "UKR-sth",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-animal-products",
+  "region": "UKR-sth",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-veg-oil",
+  "region": "UKR-sth",
+  "resource": "veg-oil",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-sth-grain",
+  "region": "UKR-sth",
+  "resource": "grain",
+  "size": 5,
+  "reserve": 1250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-potable-water",
+  "region": "UKR-wst",
+  "resource": "potable-water",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-freshwater",
+  "region": "UKR-wst",
+  "resource": "freshwater",
+  "size": 4,
+  "reserve": 1000000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-limestone",
+  "region": "UKR-wst",
+  "resource": "limestone",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-silica-sand",
+  "region": "UKR-wst",
+  "resource": "silica-sand",
+  "size": 3,
+  "reserve": 750000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-salt",
+  "region": "UKR-wst",
+  "resource": "salt",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-biomass",
+  "region": "UKR-wst",
+  "resource": "biomass",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-biomass-fuel",
+  "region": "UKR-wst",
+  "resource": "biomass-fuel",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-animal-products",
+  "region": "UKR-wst",
+  "resource": "animal-products",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-veg-oil",
+  "region": "UKR-wst",
+  "resource": "veg-oil",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-natural-gas",
+  "region": "UKR-wst",
+  "resource": "natural-gas",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-timber",
+  "region": "UKR-wst",
+  "resource": "timber",
+  "size": 2,
+  "reserve": 500000,
+  "grade": 1.0
+ },
+ {
+  "id": "UKR-wst-potash",
+  "region": "UKR-wst",
+  "resource": "potash",
+  "size": 1,
+  "reserve": 250000,
+  "grade": 1.0
+ }
+]

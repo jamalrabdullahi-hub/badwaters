@@ -20,10 +20,12 @@ def G(i, name, tier, weight="general", price=1.0, storable=True, cls=""):
 
 # ------------------------------------------------------------------ facility types
 FAC = {}
+SPARES_SCALE = 0.3
 def F(i, name, cls, policy, cap=10, energy=1.0, labour=None, build=None, months=12, cost=10, decay=0.01, spares=None, storage=200, supplies_energy=0.0, construction=0.0, protected_note=""):
     FAC[i] = {"id": i, "name": name, "class": cls, "targetClass": policy, "capacity": cap, "energy": energy,
               "labour": labour or {"general": 20}, "build": build or {"cement": 20, "structural-steel": 10, "heavy-machinery": 5},
-              "buildMonths": months, "buildCost": cost, "decay": decay, "spares": spares or {"spares-general": 1},
+              # spares per level per month to hold condition: kept to a few percent of output (SPARES_SCALE)
+              "buildMonths": months, "buildCost": cost, "decay": decay, "spares": {k: round(v * SPARES_SCALE, 3) for k, v in (spares or {"spares-general": 1}).items()},
               "storage": storage, "suppliesEnergy": supplies_energy, "constructionCapacity": construction}
 
 # ------------------------------------------------------------------ processes
@@ -211,7 +213,7 @@ F("missile-works", "Missile and munitions assembly (abstract)", "defence", "indu
 # energy
 for i, n, fuel, e_out, cost in [("power-coal", "Coal power station", "coal", 60, 60), ("power-gas", "Gas power station", "methane", 50, 40), ("power-oil", "Oil power station", "heavy-fuel", 40, 40),
                                 ("power-hydro", "Hydroelectric station", None, 40, 90), ("power-nuclear", "Nuclear power station (abstract)", "nuclear-fuel", 120, 400), ("power-renewable", "Wind and solar farm", None, 20, 30)]:
-    F(i, n, "energy", "energy", 1, 0, L_(20, 15, 5), HB, 36 if i != "power-nuclear" else 72, cost, 0.01, {"spares-general": 2}, 0, e_out)
+    F(i, n, "energy", "energy", e_out / 10, 0, L_(20, 15, 5), HB, 36 if i != "power-nuclear" else 72, cost, 0.01, {"spares-general": 2}, 0, e_out)
 # logistics, knowledge, construction, military
 F("port", "Seaport", "logistics", "logistics", 100, 1, L_(200, 40, 5), HB, 36, 150, 0.008, {"spares-general": 2}, 5000)
 F("airport", "Cargo airport", "logistics", "logistics", 20, 1, L_(100, 40, 5), HB, 30, 120, 0.008, {"spares-general": 1}, 500)
@@ -253,7 +255,7 @@ P("make-nuclear-fuel", "nuclear-fuel-plant", {"uranium-concentrate": 4, "fluoroc
   subs=[S("uranium-concentrate", "thorium-concentrate", 1.3, 0.3)])
 for pid, fac, fuel, q in [("gen-coal", "power-coal", "coal", 6), ("gen-gas", "power-gas", "methane", 4), ("gen-oil", "power-oil", "heavy-fuel", 4),
                           ("gen-hydro", "power-hydro", None, 0), ("gen-nuclear", "power-nuclear", "nuclear-fuel", 0.05), ("gen-renewable", "power-renewable", None, 0)]:
-    P(pid, fac, {fuel: q} if fuel else {}, {"electricity": 10}, 0)
+    P(pid, fac, {fuel: q} if fuel else {}, {"electricity": 10}, 0, subs=[S("methane", "lng", 1.05, 0.0)] if fuel == "methane" else None)
 # ferrous
 P("concentrate-iron", "concentrator", {"iron-ore": 10}, {"iron-concentrate": 6}, 1)
 P("smelt-iron", "blast-furnace", {"iron-concentrate": 10, "coke": 5, "lime": 2}, {"pig-iron": 8}, 2, subs=[S("coke", "methane", 1.5, 0.1)])
@@ -431,7 +433,14 @@ dump("economy_rules.json", {
     "gdp": {"civilianShare": 0.85, "trendGrowthAnnual": 0.02, "lossValueFactor": 1.0},
     "transport": {"bulk": 1.0, "general": 0.6, "high": 0.2, "grid": 0.0},
     "maintenance": {"readinessFloor": 0.2, "restorePerMonth": 0.08},
-    "civilianBasket": {"food": 1.0, "consumer-goods": 0.6, "electricity": 1.5, "diesel": 0.4, "potable-water": 1.0},
+    # the rest of the world: any ordinary good can be bought up to this value per good per month (game units, scaled by
+    # the buyer's GDP), subject to embargoes and sea-lane reach. Restricted goods only come from named suppliers or allies.
+    "worldMarket": {"depthPerGdp": 0.004, "priceMarkup": 1.3,
+                    "restricted": ["rf-modules", "litho-tools", "ir-sensors", "ir-optics", "turbine-parts", "superalloy", "energetics", "nuclear-fuel",
+                                   "uranium-concentrate", "hafnium-metal", "gallium-metal", "germanium-metal", "beryllium-metal", "re-metals", "magnets",
+                                   "titanium-alloy", "carbon-fibre", "composites", "machine-tools", "tungsten-heavy-alloy", "armour-steel", "armour-plate",
+                                   "spares-aero", "spares-naval", "spares-electronic", "chips", "silicon-wafers", "electronic-chemicals", "helium-gas"]},
+    "civilianBasket": {"food": 10, "consumer-goods": 4, "electricity": 30, "diesel": 3, "potable-water": 20},
 })
 # industrial-material categories (#59-64): made, not mined; listed so the resource screen shows them
 for i, n, g in [("hp-silicon", "High-purity silicon feedstock", "polysilicon"), ("industrial-gases-cat", "Industrial gases", "industrial-gases"),

@@ -21,8 +21,8 @@
   "buildCost": 40,
   "decay": 0.012,
   "spares": {
-   "spares-general": 2,
-   "diesel": 2
+   "spares-general": 0.6,
+   "diesel": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -50,7 +50,7 @@
   "buildCost": 60,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -78,7 +78,7 @@
   "buildCost": 50,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -106,7 +106,7 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -131,8 +131,8 @@
   "buildCost": 10,
   "decay": 0.008,
   "spares": {
-   "spares-general": 1,
-   "diesel": 1
+   "spares-general": 0.3,
+   "diesel": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -156,7 +156,7 @@
   "buildCost": 8,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -184,7 +184,7 @@
   "buildCost": 20,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -212,7 +212,7 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -240,7 +240,7 @@
   "buildCost": 25,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -268,7 +268,7 @@
   "buildCost": 80,
   "decay": 0.012,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -296,7 +296,7 @@
   "buildCost": 80,
   "decay": 0.012,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -324,7 +324,7 @@
   "buildCost": 60,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -352,7 +352,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -380,7 +380,7 @@
   "buildCost": 60,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -408,7 +408,7 @@
   "buildCost": 70,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -436,7 +436,7 @@
   "buildCost": 70,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -464,7 +464,7 @@
   "buildCost": 90,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -492,7 +492,7 @@
   "buildCost": 120,
   "decay": 0.014,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -522,7 +522,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -552,7 +552,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -581,7 +581,7 @@
   "buildCost": 60,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -609,7 +609,7 @@
   "buildCost": 150,
   "decay": 0.012,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -637,7 +637,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -665,7 +665,7 @@
   "buildCost": 50,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -694,7 +694,7 @@
   "buildCost": 80,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -723,7 +723,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -751,7 +751,7 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -779,7 +779,7 @@
   "buildCost": 50,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -807,7 +807,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -836,7 +836,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -866,7 +866,7 @@
   "buildCost": 150,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -896,7 +896,7 @@
   "buildCost": 200,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -926,7 +926,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -956,7 +956,7 @@
   "buildCost": 90,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -986,7 +986,7 @@
   "buildCost": 400,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1014,7 +1014,7 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1042,7 +1042,7 @@
   "buildCost": 25,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1070,7 +1070,7 @@
   "buildCost": 20,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1098,7 +1098,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1128,8 +1128,8 @@
   "buildCost": 800,
   "decay": 0.015,
   "spares": {
-   "spares-electronic": 3,
-   "electronic-chemicals": 1
+   "spares-electronic": 0.9,
+   "electronic-chemicals": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1159,7 +1159,7 @@
   "buildCost": 500,
   "decay": 0.015,
   "spares": {
-   "spares-electronic": 2
+   "spares-electronic": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1189,7 +1189,7 @@
   "buildCost": 80,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1219,7 +1219,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1249,7 +1249,7 @@
   "buildCost": 70,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1279,7 +1279,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1309,7 +1309,7 @@
   "buildCost": 80,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1339,7 +1339,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1369,7 +1369,7 @@
   "buildCost": 1500,
   "decay": 0.01,
   "spares": {
-   "spares-electronic": 3
+   "spares-electronic": 0.9
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1398,7 +1398,7 @@
   "buildCost": 80,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1428,7 +1428,7 @@
   "buildCost": 200,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1458,7 +1458,7 @@
   "buildCost": 100,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1488,7 +1488,7 @@
   "buildCost": 300,
   "decay": 0.012,
   "spares": {
-   "spares-aero": 2
+   "spares-aero": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1518,7 +1518,7 @@
   "buildCost": 200,
   "decay": 0.012,
   "spares": {
-   "spares-electronic": 2
+   "spares-electronic": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1548,7 +1548,7 @@
   "buildCost": 250,
   "decay": 0.012,
   "spares": {
-   "spares-electronic": 2
+   "spares-electronic": 0.6
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1578,7 +1578,7 @@
   "buildCost": 600,
   "decay": 0.012,
   "spares": {
-   "spares-aero": 3
+   "spares-aero": 0.9
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1607,7 +1607,7 @@
   "buildCost": 800,
   "decay": 0.01,
   "spares": {
-   "spares-naval": 3
+   "spares-naval": 0.9
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1636,7 +1636,7 @@
   "buildCost": 300,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1666,7 +1666,7 @@
   "buildCost": 300,
   "decay": 0.01,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 200,
   "suppliesEnergy": 0.0,
@@ -1677,7 +1677,7 @@
   "name": "Coal power station",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 6.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1694,7 +1694,7 @@
   "buildCost": 60,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 60,
@@ -1705,7 +1705,7 @@
   "name": "Gas power station",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 5.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1722,7 +1722,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 50,
@@ -1733,7 +1733,7 @@
   "name": "Oil power station",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 4.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1750,7 +1750,7 @@
   "buildCost": 40,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 40,
@@ -1761,7 +1761,7 @@
   "name": "Hydroelectric station",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 4.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1778,7 +1778,7 @@
   "buildCost": 90,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 40,
@@ -1789,7 +1789,7 @@
   "name": "Nuclear power station (abstract)",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 12.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1806,7 +1806,7 @@
   "buildCost": 400,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 120,
@@ -1817,7 +1817,7 @@
   "name": "Wind and solar farm",
   "class": "energy",
   "targetClass": "energy",
-  "capacity": 1,
+  "capacity": 2.0,
   "energy": 0,
   "labour": {
    "general": 20,
@@ -1834,7 +1834,7 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 0,
   "suppliesEnergy": 20,
@@ -1862,7 +1862,7 @@
   "buildCost": 150,
   "decay": 0.008,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 5000,
   "suppliesEnergy": 0.0,
@@ -1890,7 +1890,7 @@
   "buildCost": 120,
   "decay": 0.008,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 500,
   "suppliesEnergy": 0.0,
@@ -1918,7 +1918,7 @@
   "buildCost": 60,
   "decay": 0.008,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 2000,
   "suppliesEnergy": 0.0,
@@ -1946,7 +1946,7 @@
   "buildCost": 30,
   "decay": 0.006,
   "spares": {
-   "spares-general": 1
+   "spares-general": 0.3
   },
   "storage": 8000,
   "suppliesEnergy": 0.0,
@@ -1975,7 +1975,7 @@
   "buildCost": 60,
   "decay": 0.006,
   "spares": {
-   "spares-general": 0.5
+   "spares-general": 0.15
   },
   "storage": 0,
   "suppliesEnergy": 0.0,
@@ -2004,7 +2004,7 @@
   "buildCost": 60,
   "decay": 0.006,
   "spares": {
-   "spares-general": 0.5
+   "spares-general": 0.15
   },
   "storage": 0,
   "suppliesEnergy": 0.0,
@@ -2034,7 +2034,7 @@
   "buildCost": 150,
   "decay": 0.008,
   "spares": {
-   "spares-electronic": 1
+   "spares-electronic": 0.3
   },
   "storage": 0,
   "suppliesEnergy": 0.0,
@@ -2064,7 +2064,7 @@
   "buildCost": 120,
   "decay": 0.012,
   "spares": {
-   "spares-electronic": 3
+   "spares-electronic": 0.9
   },
   "storage": 0,
   "suppliesEnergy": 0.0,
@@ -2092,8 +2092,8 @@
   "buildCost": 30,
   "decay": 0.01,
   "spares": {
-   "spares-general": 3,
-   "diesel": 3
+   "spares-general": 0.9,
+   "diesel": 0.9
   },
   "storage": 1000,
   "suppliesEnergy": 0,
@@ -2121,7 +2121,7 @@
   "buildCost": 120,
   "decay": 0.01,
   "spares": {
-   "spares-general": 2
+   "spares-general": 0.6
   },
   "storage": 2000,
   "suppliesEnergy": 0.0,

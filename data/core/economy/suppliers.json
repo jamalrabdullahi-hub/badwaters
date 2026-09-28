@@ -1,0 +1,208 @@
+[
+ {
+  "id": "chile",
+  "name": "Chile",
+  "lon": -71.6,
+  "lat": -33,
+  "exports": {
+   "copper-concentrate": 800,
+   "copper-cathode": 300,
+   "lithium-carbonate": 60,
+   "mo-concentrate": 20
+  }
+ },
+ {
+  "id": "peru",
+  "name": "Peru",
+  "lon": -77,
+  "lat": -12,
+  "exports": {
+   "copper-concentrate": 400,
+   "zinc-metal": 100,
+   "silver-metal": 3,
+   "gold-metal": 1
+  }
+ },
+ {
+  "id": "drc",
+  "name": "DR Congo",
+  "lon": 12.3,
+  "lat": -6,
+  "exports": {
+   "cobalt-hydroxide": 80,
+   "copper-cathode": 150,
+   "tantalum-powder": 2
+  }
+ },
+ {
+  "id": "australia",
+  "name": "Australia",
+  "lon": 115.8,
+  "lat": -32,
+  "exports": {
+   "iron-ore": 5000,
+   "bauxite": 1500,
+   "alumina": 300,
+   "lithium-ore": 400,
+   "coal": 2000,
+   "natural-gas": 400,
+   "rare-earths-ore": 40,
+   "zirconium-ore": 40,
+   "gold-metal": 2
+  }
+ },
+ {
+  "id": "brazil",
+  "name": "Brazil",
+  "lon": -46.3,
+  "lat": -24,
+  "exports": {
+   "iron-ore": 3000,
+   "ferroniobium": 40,
+   "niobium-concentrate": 60,
+   "bauxite": 500,
+   "grain": 800,
+   "veg-oil": 300,
+   "graphite-ore": 60
+  }
+ },
+ {
+  "id": "south-africa",
+  "name": "South Africa",
+  "lon": 31,
+  "lat": -29.9,
+  "exports": {
+   "pgm-refined": 1,
+   "ferrochrome": 200,
+   "manganese-ore": 800,
+   "ferromanganese": 60,
+   "vanadium-pentoxide": 20,
+   "coal": 800,
+   "gold-metal": 1
+  }
+ },
+ {
+  "id": "indonesia",
+  "name": "Indonesia",
+  "lon": 106.8,
+  "lat": -6.1,
+  "exports": {
+   "nickel-ore": 1500,
+   "nickel-matte": 60,
+   "tin-metal": 40,
+   "coal": 2000,
+   "natural-rubber": 300,
+   "veg-oil": 600,
+   "bauxite": 300
+  }
+ },
+ {
+  "id": "guinea",
+  "name": "Guinea",
+  "lon": -13.7,
+  "lat": 9.5,
+  "exports": {
+   "bauxite": 1500
+  }
+ },
+ {
+  "id": "kazakhstan",
+  "name": "Kazakhstan",
+  "lon": 71.4,
+  "lat": 51.2,
+  "exports": {
+   "uranium-concentrate": 20,
+   "chromium-ore": 200,
+   "crude-oil": 800,
+   "ferrochrome": 60
+  }
+ },
+ {
+  "id": "canada",
+  "name": "Canada",
+  "lon": -79.4,
+  "lat": 43.7,
+  "exports": {
+   "potash": 1500,
+   "uranium-concentrate": 10,
+   "nickel-metal": 40,
+   "aluminium": 200,
+   "crude-oil": 2000,
+   "timber": 1500,
+   "grain": 800
+  }
+ },
+ {
+  "id": "gulf-states",
+  "name": "Gulf states",
+  "lon": 54.4,
+  "lat": 24.5,
+  "exports": {
+   "crude-oil": 4000,
+   "lng": 600,
+   "aluminium": 200,
+   "sulfur": 300,
+   "fertilizer": 300
+  }
+ },
+ {
+  "id": "norway",
+  "name": "Norway",
+  "lon": 5.3,
+  "lat": 60.4,
+  "exports": {
+   "crude-oil": 800,
+   "natural-gas": 800,
+   "aluminium": 100,
+   "magnesium-metal": 10
+  }
+ },
+ {
+  "id": "taiwan",
+  "name": "Taiwan",
+  "lon": 121.5,
+  "lat": 25,
+  "exports": {
+   "chips": 400,
+   "silicon-wafers": 40,
+   "pcbs": 200,
+   "displays": 60
+  }
+ },
+ {
+  "id": "malaysia",
+  "name": "Malaysia",
+  "lon": 101.7,
+  "lat": 3.1,
+  "exports": {
+   "natural-rubber": 200,
+   "chips": 40,
+   "tin-metal": 20,
+   "re-oxides": 4
+  }
+ },
+ {
+  "id": "india",
+  "name": "India",
+  "lon": 72.8,
+  "lat": 19,
+  "exports": {
+   "iron-ore": 800,
+   "grain": 600,
+   "specialty-chemicals": 40,
+   "consumer-goods": 300
+  }
+ },
+ {
+  "id": "mexico",
+  "name": "Mexico",
+  "lon": -99.1,
+  "lat": 19.4,
+  "exports": {
+   "silver-metal": 5,
+   "fluorspar": 300,
+   "crude-oil": 600,
+   "consumer-goods": 200
+  }
+ }
+]

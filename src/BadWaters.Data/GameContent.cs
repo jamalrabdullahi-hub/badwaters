@@ -27,6 +27,8 @@ public sealed class GameContent
     public Dictionary<string, AutoRole> AutoRoles { get; } = new();
     public Dictionary<string, ChokepointDef> Chokepoints { get; } = new();
     public BadWaters.Sim.Economy.EconomyCatalog Economy { get; } = new();
+    public BadWaters.Sim.Economy.EconomyGeo Geo { get; } = new();
+    public Dictionary<string, NationDef> Nations { get; } = new();
 
     /// <summary>A preset as the theatre sees it (name + 0–10 ratings).</summary>
     private void ValidateEconomy()
@@ -56,6 +58,16 @@ public sealed class GameContent
         }
         foreach (var c in Catalog.Components.Values) if (!e.Bills.Families.ContainsKey(c.Family)) Errors.Add($"component {c.Id}: no bill template for family {c.Family}");
         foreach (var c in new BadWaters.Sim.Economy.BillResolver(e, Catalog).Cycles()) Errors.Add($"good {c}: its supply chain loops back on itself");
+        var geo = Geo;
+        foreach (var r in geo.Regions.Values) if (!Nations.ContainsKey(r.Nation)) Errors.Add($"region {r.Id}: unknown nation {r.Nation}");
+        foreach (var k in geo.Links) if (!geo.Regions.ContainsKey(k.A) || !geo.Regions.ContainsKey(k.B)) Errors.Add($"region link {k.Id}: unknown region");
+        foreach (var d in geo.Deposits.Values) { if (!geo.Regions.ContainsKey(d.Region)) Errors.Add($"deposit {d.Id}: unknown region"); if (!e.Resources.ContainsKey(d.Resource)) Errors.Add($"deposit {d.Id}: unknown resource {d.Resource}"); }
+        foreach (var sp in geo.Suppliers.Values) foreach (var g in sp.Exports.Keys) if (!Good(g)) Errors.Add($"supplier {sp.Id}: unknown good {g}");
+        foreach (var n in geo.Nations.Values) if (!Nations.ContainsKey(n.Nation)) Errors.Add($"nation economy {n.Id}: unknown nation");
+        foreach (var t in geo.Seeding.SectorFacilities.Values.SelectMany(x => x).Concat(geo.Seeding.Always.Keys).Concat(geo.Seeding.Capital.Keys).Concat(geo.Seeding.Coastal.Keys).Concat(geo.Seeding.EnergyMix.Values))
+            if (!e.Facilities.ContainsKey(t)) Errors.Add($"seeding: unknown facility type {t}");
+        foreach (var (sec, sd) in geo.Seeding.SectorDesigns) if (!Designs.ContainsKey(sd.Design)) Errors.Add($"seeding sector {sec}: unknown design {sd.Design}");
+        foreach (var g in geo.Seeding.IndustrialBasket.Keys.Concat(geo.Rules.CivilianBasket.Keys)) if (!Good(g)) Errors.Add($"basket: unknown good {g}");
     }
 
     public PresetInfo? PresetInfo(string id) => Presets.TryGetValue(id, out var p) ? new PresetInfo(p.Id, p.Name, p.Ratings) : null;
@@ -75,6 +87,14 @@ public sealed class GameContent
         foreach (var x in l.Load<BadWaters.Sim.Economy.ProcessDef>("economy/processes.json")) g.Economy.Processes[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.FacilityTypeDef>("economy/facility_types.json")) g.Economy.Facilities[x.Id] = x;
         g.Economy.Bills = l.LoadObject<BadWaters.Sim.Economy.BillTemplates>("economy/bill_templates.json") ?? g.Economy.Bills;
+        foreach (var x in l.Load<NationDef>("nations.json")) g.Nations[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.RegionDef>("economy/regions.json")) g.Geo.Regions[x.Id] = x;
+        g.Geo.Links.AddRange(l.Load<BadWaters.Sim.Economy.RegionLink>("economy/region_links.json"));
+        foreach (var x in l.Load<BadWaters.Sim.Economy.DepositDef>("economy/deposits.json")) g.Geo.Deposits[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.NationEconomyDef>("economy/nation_economies.json")) g.Geo.Nations[x.Id] = x;
+        foreach (var x in l.Load<BadWaters.Sim.Economy.SupplierDef>("economy/suppliers.json")) g.Geo.Suppliers[x.Id] = x;
+        g.Geo.Seeding = l.LoadObject<BadWaters.Sim.Economy.SeedingRules>("economy/seeding.json") ?? g.Geo.Seeding;
+        g.Geo.Rules = l.LoadObject<BadWaters.Sim.Economy.EconomyRules>("economy/economy_rules.json") ?? g.Geo.Rules;
         foreach (var x in l.Load<TheatreDef>("theatres.json")) g.Theatres[x.Id] = x;
         foreach (var x in l.Load<RatingRule>("engineering/ratings.json")) g.Catalog.Ratings[x.Id] = x;
         foreach (var x in l.Load<ComponentTemplate>("components.json")) g.Catalog.Components[x.Id] = x;

@@ -900,7 +900,14 @@
   "tech": {},
   "tooling": null,
   "deposit": null,
-  "substitutes": []
+  "substitutes": [
+   {
+    "good": "methane",
+    "alt": "lng",
+    "ratio": 1.05,
+    "penalty": 0.0
+   }
+  ]
  },
  {
   "id": "gen-oil",

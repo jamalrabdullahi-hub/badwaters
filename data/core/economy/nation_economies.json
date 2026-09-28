@@ -1,0 +1,1199 @@
+[
+ {
+  "id": "USA-1980",
+  "nation": "USA",
+  "year": 1980,
+  "gdp": 2860,
+  "population": 227,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 3,
+   "electronics": 3,
+   "semis": 4,
+   "aero": 5,
+   "naval": 4,
+   "land": 4,
+   "munitions": 5
+  },
+  "energyMix": {
+   "coal": 0.2,
+   "gas": 0.4,
+   "nuclear": 0.19,
+   "hydro": 0.07,
+   "renewable": 0.12,
+   "oil": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "USA-2000",
+  "nation": "USA",
+  "year": 2000,
+  "gdp": 10250,
+  "population": 282,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 3,
+   "electronics": 3,
+   "semis": 4,
+   "aero": 5,
+   "naval": 4,
+   "land": 4,
+   "munitions": 5
+  },
+  "energyMix": {
+   "coal": 0.2,
+   "gas": 0.4,
+   "nuclear": 0.19,
+   "hydro": 0.07,
+   "renewable": 0.12,
+   "oil": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "USA-2020",
+  "nation": "USA",
+  "year": 2020,
+  "gdp": 21060,
+  "population": 331,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 3,
+   "electronics": 4,
+   "semis": 5,
+   "aero": 5,
+   "naval": 4,
+   "land": 4,
+   "munitions": 5
+  },
+  "energyMix": {
+   "coal": 0.2,
+   "gas": 0.4,
+   "nuclear": 0.19,
+   "hydro": 0.07,
+   "renewable": 0.12,
+   "oil": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "RUS-1980",
+  "nation": "RUS",
+  "year": 1980,
+  "gdp": 940,
+  "population": 139,
+  "sectors": {
+   "heavy": 5,
+   "metals": 4,
+   "specialty": 4,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 5,
+   "naval": 4,
+   "land": 5,
+   "munitions": 5
+  },
+  "energyMix": {
+   "gas": 0.45,
+   "coal": 0.15,
+   "nuclear": 0.2,
+   "hydro": 0.18,
+   "oil": 0.01,
+   "renewable": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "RUS-2000",
+  "nation": "RUS",
+  "year": 2000,
+  "gdp": 260,
+  "population": 146,
+  "sectors": {
+   "heavy": 4,
+   "metals": 4,
+   "specialty": 4,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 3,
+   "naval": 2,
+   "land": 4,
+   "munitions": 4
+  },
+  "energyMix": {
+   "gas": 0.45,
+   "coal": 0.15,
+   "nuclear": 0.2,
+   "hydro": 0.18,
+   "oil": 0.01,
+   "renewable": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "RUS-2020",
+  "nation": "RUS",
+  "year": 2020,
+  "gdp": 1490,
+  "population": 144,
+  "sectors": {
+   "heavy": 4,
+   "metals": 4,
+   "specialty": 4,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 4,
+   "naval": 3,
+   "land": 4,
+   "munitions": 4
+  },
+  "energyMix": {
+   "gas": 0.45,
+   "coal": 0.15,
+   "nuclear": 0.2,
+   "hydro": 0.18,
+   "oil": 0.01,
+   "renewable": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "CHN-1980",
+  "nation": "CHN",
+  "year": 1980,
+  "gdp": 190,
+  "population": 981,
+  "sectors": {
+   "heavy": 3,
+   "metals": 2,
+   "specialty": 2,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 2,
+   "naval": 2,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.6,
+   "gas": 0.03,
+   "hydro": 0.17,
+   "nuclear": 0.05,
+   "renewable": 0.14,
+   "oil": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "CHN-2000",
+  "nation": "CHN",
+  "year": 2000,
+  "gdp": 1210,
+  "population": 1263,
+  "sectors": {
+   "heavy": 5,
+   "metals": 5,
+   "specialty": 5,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 2,
+   "naval": 2,
+   "land": 4,
+   "munitions": 4
+  },
+  "energyMix": {
+   "coal": 0.6,
+   "gas": 0.03,
+   "hydro": 0.17,
+   "nuclear": 0.05,
+   "renewable": 0.14,
+   "oil": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "CHN-2020",
+  "nation": "CHN",
+  "year": 2020,
+  "gdp": 14690,
+  "population": 1411,
+  "sectors": {
+   "heavy": 5,
+   "metals": 5,
+   "specialty": 5,
+   "electronics": 5,
+   "semis": 3,
+   "aero": 3,
+   "naval": 5,
+   "land": 4,
+   "munitions": 4
+  },
+  "energyMix": {
+   "coal": 0.6,
+   "gas": 0.03,
+   "hydro": 0.17,
+   "nuclear": 0.05,
+   "renewable": 0.14,
+   "oil": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "GBR-1980",
+  "nation": "GBR",
+  "year": 1980,
+  "gdp": 600,
+  "population": 56,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 4,
+   "naval": 2,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.4,
+   "nuclear": 0.16,
+   "renewable": 0.36,
+   "coal": 0.02,
+   "oil": 0.01,
+   "hydro": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "GBR-2000",
+  "nation": "GBR",
+  "year": 2000,
+  "gdp": 1660,
+  "population": 59,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 2,
+   "aero": 4,
+   "naval": 2,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.4,
+   "nuclear": 0.16,
+   "renewable": 0.36,
+   "coal": 0.02,
+   "oil": 0.01,
+   "hydro": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "GBR-2020",
+  "nation": "GBR",
+  "year": 2020,
+  "gdp": 2700,
+  "population": 67,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 3,
+   "semis": 2,
+   "aero": 4,
+   "naval": 2,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.4,
+   "nuclear": 0.16,
+   "renewable": 0.36,
+   "coal": 0.02,
+   "oil": 0.01,
+   "hydro": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "FRA-1980",
+  "nation": "FRA",
+  "year": 1980,
+  "gdp": 700,
+  "population": 54,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 2,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 4,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "nuclear": 0.7,
+   "hydro": 0.12,
+   "gas": 0.07,
+   "renewable": 0.1,
+   "coal": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "FRA-2000",
+  "nation": "FRA",
+  "year": 2000,
+  "gdp": 1360,
+  "population": 59,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 2,
+   "electronics": 2,
+   "semis": 2,
+   "aero": 4,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "nuclear": 0.7,
+   "hydro": 0.12,
+   "gas": 0.07,
+   "renewable": 0.1,
+   "coal": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "FRA-2020",
+  "nation": "FRA",
+  "year": 2020,
+  "gdp": 2630,
+  "population": 67,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 2,
+   "electronics": 3,
+   "semis": 2,
+   "aero": 4,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "nuclear": 0.7,
+   "hydro": 0.12,
+   "gas": 0.07,
+   "renewable": 0.1,
+   "coal": 0.01
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "ISR-1980",
+  "nation": "ISR",
+  "year": 1980,
+  "gdp": 23,
+  "population": 3.9,
+  "sectors": {
+   "heavy": 1,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 3,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.7,
+   "coal": 0.2,
+   "renewable": 0.07,
+   "oil": 0.03
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "ISR-2000",
+  "nation": "ISR",
+  "year": 2000,
+  "gdp": 130,
+  "population": 6.3,
+  "sectors": {
+   "heavy": 1,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 2,
+   "aero": 3,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.7,
+   "coal": 0.2,
+   "renewable": 0.07,
+   "oil": 0.03
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "ISR-2020",
+  "nation": "ISR",
+  "year": 2020,
+  "gdp": 410,
+  "population": 9.2,
+  "sectors": {
+   "heavy": 1,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 3,
+   "semis": 3,
+   "aero": 3,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.7,
+   "coal": 0.2,
+   "renewable": 0.07,
+   "oil": 0.03
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "IRN-1980",
+  "nation": "IRN",
+  "year": 1980,
+  "gdp": 95,
+  "population": 39,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.8,
+   "oil": 0.1,
+   "hydro": 0.06,
+   "nuclear": 0.02,
+   "coal": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "IRN-2000",
+  "nation": "IRN",
+  "year": 2000,
+  "gdp": 110,
+  "population": 66,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.8,
+   "oil": 0.1,
+   "hydro": 0.06,
+   "nuclear": 0.02,
+   "coal": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "IRN-2020",
+  "nation": "IRN",
+  "year": 2020,
+  "gdp": 240,
+  "population": 84,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "gas": 0.8,
+   "oil": 0.1,
+   "hydro": 0.06,
+   "nuclear": 0.02,
+   "coal": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "EGY-1980",
+  "nation": "EGY",
+  "year": 1980,
+  "gdp": 22,
+  "population": 43,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 0,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 0,
+   "naval": 1,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "gas": 0.75,
+   "oil": 0.15,
+   "hydro": 0.08,
+   "renewable": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "EGY-2000",
+  "nation": "EGY",
+  "year": 2000,
+  "gdp": 100,
+  "population": 68,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 0,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 0,
+   "naval": 1,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "gas": 0.75,
+   "oil": 0.15,
+   "hydro": 0.08,
+   "renewable": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "EGY-2020",
+  "nation": "EGY",
+  "year": 2020,
+  "gdp": 380,
+  "population": 102,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 0,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 0,
+   "naval": 1,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "gas": 0.75,
+   "oil": 0.15,
+   "hydro": 0.08,
+   "renewable": 0.02
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "TUR-1980",
+  "nation": "TUR",
+  "year": 1980,
+  "gdp": 68,
+  "population": 44,
+  "sectors": {
+   "heavy": 3,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 2,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.35,
+   "gas": 0.3,
+   "hydro": 0.25,
+   "renewable": 0.1
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "TUR-2000",
+  "nation": "TUR",
+  "year": 2000,
+  "gdp": 270,
+  "population": 64,
+  "sectors": {
+   "heavy": 3,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 0,
+   "aero": 2,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.35,
+   "gas": 0.3,
+   "hydro": 0.25,
+   "renewable": 0.1
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "TUR-2020",
+  "nation": "TUR",
+  "year": 2020,
+  "gdp": 720,
+  "population": 84,
+  "sectors": {
+   "heavy": 3,
+   "metals": 2,
+   "specialty": 1,
+   "electronics": 2,
+   "semis": 0,
+   "aero": 2,
+   "naval": 3,
+   "land": 3,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.35,
+   "gas": 0.3,
+   "hydro": 0.25,
+   "renewable": 0.1
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "SAU-1980",
+  "nation": "SAU",
+  "year": 1980,
+  "gdp": 165,
+  "population": 10,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 0,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 0,
+   "naval": 0,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "oil": 0.4,
+   "gas": 0.6
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "SAU-2000",
+  "nation": "SAU",
+  "year": 2000,
+  "gdp": 190,
+  "population": 21,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 0,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 0,
+   "naval": 0,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "oil": 0.4,
+   "gas": 0.6
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "SAU-2020",
+  "nation": "SAU",
+  "year": 2020,
+  "gdp": 700,
+  "population": 35,
+  "sectors": {
+   "heavy": 2,
+   "metals": 2,
+   "specialty": 0,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 0,
+   "naval": 0,
+   "land": 1,
+   "munitions": 1
+  },
+  "energyMix": {
+   "oil": 0.4,
+   "gas": 0.6
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "PRK-1980",
+  "nation": "PRK",
+  "year": 1980,
+  "gdp": 13,
+  "population": 17,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.5,
+   "hydro": 0.5
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "PRK-2000",
+  "nation": "PRK",
+  "year": 2000,
+  "gdp": 11,
+  "population": 23,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.5,
+   "hydro": 0.5
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "PRK-2020",
+  "nation": "PRK",
+  "year": 2020,
+  "gdp": 18,
+  "population": 26,
+  "sectors": {
+   "heavy": 2,
+   "metals": 1,
+   "specialty": 1,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 1,
+   "naval": 1,
+   "land": 2,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.5,
+   "hydro": 0.5
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "KOR-1980",
+  "nation": "KOR",
+  "year": 1980,
+  "gdp": 65,
+  "population": 38,
+  "sectors": {
+   "heavy": 2,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 2,
+   "semis": 0,
+   "aero": 3,
+   "naval": 2,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.4,
+   "nuclear": 0.27,
+   "gas": 0.28,
+   "renewable": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "KOR-2000",
+  "nation": "KOR",
+  "year": 2000,
+  "gdp": 560,
+  "population": 47,
+  "sectors": {
+   "heavy": 4,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 4,
+   "semis": 4,
+   "aero": 3,
+   "naval": 5,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.4,
+   "nuclear": 0.27,
+   "gas": 0.28,
+   "renewable": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "KOR-2020",
+  "nation": "KOR",
+  "year": 2020,
+  "gdp": 1640,
+  "population": 52,
+  "sectors": {
+   "heavy": 4,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 5,
+   "semis": 5,
+   "aero": 3,
+   "naval": 5,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.4,
+   "nuclear": 0.27,
+   "gas": 0.28,
+   "renewable": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "JPN-1980",
+  "nation": "JPN",
+  "year": 1980,
+  "gdp": 1100,
+  "population": 117,
+  "sectors": {
+   "heavy": 4,
+   "metals": 4,
+   "specialty": 3,
+   "electronics": 4,
+   "semis": 3,
+   "aero": 3,
+   "naval": 5,
+   "land": 3,
+   "munitions": 2
+  },
+  "energyMix": {
+   "gas": 0.37,
+   "coal": 0.3,
+   "nuclear": 0.05,
+   "hydro": 0.08,
+   "renewable": 0.15,
+   "oil": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "JPN-2000",
+  "nation": "JPN",
+  "year": 2000,
+  "gdp": 4970,
+  "population": 127,
+  "sectors": {
+   "heavy": 4,
+   "metals": 4,
+   "specialty": 3,
+   "electronics": 4,
+   "semis": 3,
+   "aero": 3,
+   "naval": 5,
+   "land": 3,
+   "munitions": 2
+  },
+  "energyMix": {
+   "gas": 0.37,
+   "coal": 0.3,
+   "nuclear": 0.05,
+   "hydro": 0.08,
+   "renewable": 0.15,
+   "oil": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "JPN-2020",
+  "nation": "JPN",
+  "year": 2020,
+  "gdp": 5040,
+  "population": 126,
+  "sectors": {
+   "heavy": 4,
+   "metals": 4,
+   "specialty": 3,
+   "electronics": 5,
+   "semis": 4,
+   "aero": 3,
+   "naval": 5,
+   "land": 3,
+   "munitions": 2
+  },
+  "energyMix": {
+   "gas": 0.37,
+   "coal": 0.3,
+   "nuclear": 0.05,
+   "hydro": 0.08,
+   "renewable": 0.15,
+   "oil": 0.05
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "DEU-1980",
+  "nation": "DEU",
+  "year": 1980,
+  "gdp": 950,
+  "population": 78,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 2,
+   "semis": 1,
+   "aero": 3,
+   "naval": 2,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.3,
+   "renewable": 0.43,
+   "gas": 0.15,
+   "nuclear": 0.12
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "DEU-2000",
+  "nation": "DEU",
+  "year": 2000,
+  "gdp": 1950,
+  "population": 82,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 3,
+   "semis": 2,
+   "aero": 3,
+   "naval": 2,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.3,
+   "renewable": 0.43,
+   "gas": 0.15,
+   "nuclear": 0.12
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "DEU-2020",
+  "nation": "DEU",
+  "year": 2020,
+  "gdp": 3890,
+  "population": 83,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 4,
+   "semis": 3,
+   "aero": 3,
+   "naval": 2,
+   "land": 4,
+   "munitions": 3
+  },
+  "energyMix": {
+   "coal": 0.3,
+   "renewable": 0.43,
+   "gas": 0.15,
+   "nuclear": 0.12
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "UKR-1980",
+  "nation": "UKR",
+  "year": 1980,
+  "gdp": 150,
+  "population": 50,
+  "sectors": {
+   "heavy": 4,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 0,
+   "semis": 0,
+   "aero": 3,
+   "naval": 2,
+   "land": 3,
+   "munitions": 2
+  },
+  "energyMix": {
+   "nuclear": 0.5,
+   "coal": 0.3,
+   "gas": 0.08,
+   "hydro": 0.06,
+   "renewable": 0.06
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "UKR-2000",
+  "nation": "UKR",
+  "year": 2000,
+  "gdp": 32,
+  "population": 49,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 2,
+   "naval": 2,
+   "land": 2,
+   "munitions": 2
+  },
+  "energyMix": {
+   "nuclear": 0.5,
+   "coal": 0.3,
+   "gas": 0.08,
+   "hydro": 0.06,
+   "renewable": 0.06
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ },
+ {
+  "id": "UKR-2020",
+  "nation": "UKR",
+  "year": 2020,
+  "gdp": 156,
+  "population": 44,
+  "sectors": {
+   "heavy": 3,
+   "metals": 3,
+   "specialty": 2,
+   "electronics": 1,
+   "semis": 0,
+   "aero": 2,
+   "naval": 1,
+   "land": 2,
+   "munitions": 2
+  },
+  "energyMix": {
+   "nuclear": 0.5,
+   "coal": 0.3,
+   "gas": 0.08,
+   "hydro": 0.06,
+   "renewable": 0.06
+  },
+  "defenceShare": 0.02,
+  "stockpileMonths": 3
+ }
+]

@@ -1,0 +1,793 @@
+[
+ {
+  "id": "USA-ne~USA-mw",
+  "a": "USA-ne",
+  "b": "USA-mw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-mw~USA-tx",
+  "a": "USA-mw",
+  "b": "USA-tx",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-tx~USA-se",
+  "a": "USA-tx",
+  "b": "USA-se",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-se~USA-mt",
+  "a": "USA-se",
+  "b": "USA-mt",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-mt~USA-wc",
+  "a": "USA-mt",
+  "b": "USA-wc",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-wc~USA-ak",
+  "a": "USA-wc",
+  "b": "USA-ak",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "USA-ne~USA-tx",
+  "a": "USA-ne",
+  "b": "USA-tx",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "USA-ne~USA-se",
+  "a": "USA-ne",
+  "b": "USA-se",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "USA-ne~USA-mt",
+  "a": "USA-ne",
+  "b": "USA-mt",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "USA-ne~USA-wc",
+  "a": "USA-ne",
+  "b": "USA-wc",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "USA-ne~USA-ak",
+  "a": "USA-ne",
+  "b": "USA-ak",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "RUS-cen~RUS-vol",
+  "a": "RUS-cen",
+  "b": "RUS-vol",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-vol~RUS-wsb",
+  "a": "RUS-vol",
+  "b": "RUS-wsb",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-wsb~RUS-esb",
+  "a": "RUS-wsb",
+  "b": "RUS-esb",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-esb~RUS-fe",
+  "a": "RUS-esb",
+  "b": "RUS-fe",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-fe~RUS-nw",
+  "a": "RUS-fe",
+  "b": "RUS-nw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-nw~RUS-sth",
+  "a": "RUS-nw",
+  "b": "RUS-sth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "RUS-cen~RUS-wsb",
+  "a": "RUS-cen",
+  "b": "RUS-wsb",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "RUS-cen~RUS-esb",
+  "a": "RUS-cen",
+  "b": "RUS-esb",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "RUS-cen~RUS-fe",
+  "a": "RUS-cen",
+  "b": "RUS-fe",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "RUS-cen~RUS-nw",
+  "a": "RUS-cen",
+  "b": "RUS-nw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "RUS-cen~RUS-sth",
+  "a": "RUS-cen",
+  "b": "RUS-sth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-ne",
+  "a": "CHN-nth",
+  "b": "CHN-ne",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-ne~CHN-est",
+  "a": "CHN-ne",
+  "b": "CHN-est",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-est~CHN-sth",
+  "a": "CHN-est",
+  "b": "CHN-sth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-sth~CHN-cen",
+  "a": "CHN-sth",
+  "b": "CHN-cen",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-cen~CHN-sw",
+  "a": "CHN-cen",
+  "b": "CHN-sw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-sw~CHN-nwc",
+  "a": "CHN-sw",
+  "b": "CHN-nwc",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-nwc~CHN-imn",
+  "a": "CHN-nwc",
+  "b": "CHN-imn",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "CHN-nth~CHN-est",
+  "a": "CHN-nth",
+  "b": "CHN-est",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-sth",
+  "a": "CHN-nth",
+  "b": "CHN-sth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-cen",
+  "a": "CHN-nth",
+  "b": "CHN-cen",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-sw",
+  "a": "CHN-nth",
+  "b": "CHN-sw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-nwc",
+  "a": "CHN-nth",
+  "b": "CHN-nwc",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "CHN-nth~CHN-imn",
+  "a": "CHN-nth",
+  "b": "CHN-imn",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "GBR-se~GBR-mid",
+  "a": "GBR-se",
+  "b": "GBR-mid",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "GBR-mid~GBR-sco",
+  "a": "GBR-mid",
+  "b": "GBR-sco",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "GBR-sco~GBR-nsea",
+  "a": "GBR-sco",
+  "b": "GBR-nsea",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "GBR-nsea~GBR-wal",
+  "a": "GBR-nsea",
+  "b": "GBR-wal",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "GBR-se~GBR-sco",
+  "a": "GBR-se",
+  "b": "GBR-sco",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "GBR-se~GBR-nsea",
+  "a": "GBR-se",
+  "b": "GBR-nsea",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "GBR-se~GBR-wal",
+  "a": "GBR-se",
+  "b": "GBR-wal",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "FRA-idf~FRA-ne",
+  "a": "FRA-idf",
+  "b": "FRA-ne",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "FRA-ne~FRA-ra",
+  "a": "FRA-ne",
+  "b": "FRA-ra",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "FRA-ra~FRA-sw",
+  "a": "FRA-ra",
+  "b": "FRA-sw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "FRA-sw~FRA-nw",
+  "a": "FRA-sw",
+  "b": "FRA-nw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "FRA-nw~FRA-med",
+  "a": "FRA-nw",
+  "b": "FRA-med",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "FRA-idf~FRA-ra",
+  "a": "FRA-idf",
+  "b": "FRA-ra",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "FRA-idf~FRA-sw",
+  "a": "FRA-idf",
+  "b": "FRA-sw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "FRA-idf~FRA-nw",
+  "a": "FRA-idf",
+  "b": "FRA-nw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "FRA-idf~FRA-med",
+  "a": "FRA-idf",
+  "b": "FRA-med",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "ISR-cen~ISR-nth",
+  "a": "ISR-cen",
+  "b": "ISR-nth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "ISR-nth~ISR-neg",
+  "a": "ISR-nth",
+  "b": "ISR-neg",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "ISR-cen~ISR-neg",
+  "a": "ISR-cen",
+  "b": "ISR-neg",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "IRN-teh~IRN-khz",
+  "a": "IRN-teh",
+  "b": "IRN-khz",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "IRN-khz~IRN-isf",
+  "a": "IRN-khz",
+  "b": "IRN-isf",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "IRN-isf~IRN-sth",
+  "a": "IRN-isf",
+  "b": "IRN-sth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "IRN-sth~IRN-nw",
+  "a": "IRN-sth",
+  "b": "IRN-nw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "IRN-nw~IRN-est",
+  "a": "IRN-nw",
+  "b": "IRN-est",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "IRN-teh~IRN-isf",
+  "a": "IRN-teh",
+  "b": "IRN-isf",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "IRN-teh~IRN-sth",
+  "a": "IRN-teh",
+  "b": "IRN-sth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "IRN-teh~IRN-nw",
+  "a": "IRN-teh",
+  "b": "IRN-nw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "IRN-teh~IRN-est",
+  "a": "IRN-teh",
+  "b": "IRN-est",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "EGY-cai~EGY-alx",
+  "a": "EGY-cai",
+  "b": "EGY-alx",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "EGY-alx~EGY-suz",
+  "a": "EGY-alx",
+  "b": "EGY-suz",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "EGY-suz~EGY-upp",
+  "a": "EGY-suz",
+  "b": "EGY-upp",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "EGY-cai~EGY-suz",
+  "a": "EGY-cai",
+  "b": "EGY-suz",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "EGY-cai~EGY-upp",
+  "a": "EGY-cai",
+  "b": "EGY-upp",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "TUR-mar~TUR-ank",
+  "a": "TUR-mar",
+  "b": "TUR-ank",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "TUR-ank~TUR-aeg",
+  "a": "TUR-ank",
+  "b": "TUR-aeg",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "TUR-aeg~TUR-bls",
+  "a": "TUR-aeg",
+  "b": "TUR-bls",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "TUR-bls~TUR-se",
+  "a": "TUR-bls",
+  "b": "TUR-se",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "TUR-se~TUR-med",
+  "a": "TUR-se",
+  "b": "TUR-med",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "TUR-ank~TUR-bls",
+  "a": "TUR-ank",
+  "b": "TUR-bls",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "TUR-ank~TUR-se",
+  "a": "TUR-ank",
+  "b": "TUR-se",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "TUR-ank~TUR-med",
+  "a": "TUR-ank",
+  "b": "TUR-med",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "SAU-riy~SAU-est",
+  "a": "SAU-riy",
+  "b": "SAU-est",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "SAU-est~SAU-wst",
+  "a": "SAU-est",
+  "b": "SAU-wst",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "SAU-wst~SAU-nth",
+  "a": "SAU-wst",
+  "b": "SAU-nth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "SAU-riy~SAU-wst",
+  "a": "SAU-riy",
+  "b": "SAU-wst",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "SAU-riy~SAU-nth",
+  "a": "SAU-riy",
+  "b": "SAU-nth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "PRK-pyo~PRK-nth",
+  "a": "PRK-pyo",
+  "b": "PRK-nth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "PRK-nth~PRK-est",
+  "a": "PRK-nth",
+  "b": "PRK-est",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "PRK-pyo~PRK-est",
+  "a": "PRK-pyo",
+  "b": "PRK-est",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "KOR-cap~KOR-se",
+  "a": "KOR-cap",
+  "b": "KOR-se",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "KOR-se~KOR-cc",
+  "a": "KOR-se",
+  "b": "KOR-cc",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "KOR-cc~KOR-jl",
+  "a": "KOR-cc",
+  "b": "KOR-jl",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "KOR-cap~KOR-cc",
+  "a": "KOR-cap",
+  "b": "KOR-cc",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "KOR-cap~KOR-jl",
+  "a": "KOR-cap",
+  "b": "KOR-jl",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "JPN-kan~JPN-ksi",
+  "a": "JPN-kan",
+  "b": "JPN-ksi",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-ksi~JPN-chb",
+  "a": "JPN-ksi",
+  "b": "JPN-chb",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-chb~JPN-kyu",
+  "a": "JPN-chb",
+  "b": "JPN-kyu",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-kyu~JPN-toh",
+  "a": "JPN-kyu",
+  "b": "JPN-toh",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-toh~JPN-hok",
+  "a": "JPN-toh",
+  "b": "JPN-hok",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-hok~JPN-chg",
+  "a": "JPN-hok",
+  "b": "JPN-chg",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "JPN-kan~JPN-chb",
+  "a": "JPN-kan",
+  "b": "JPN-chb",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "JPN-kan~JPN-kyu",
+  "a": "JPN-kan",
+  "b": "JPN-kyu",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "JPN-kan~JPN-toh",
+  "a": "JPN-kan",
+  "b": "JPN-toh",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "JPN-kan~JPN-hok",
+  "a": "JPN-kan",
+  "b": "JPN-hok",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "JPN-kan~JPN-chg",
+  "a": "JPN-kan",
+  "b": "JPN-chg",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "DEU-nth~DEU-nrw",
+  "a": "DEU-nth",
+  "b": "DEU-nrw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "DEU-nrw~DEU-bav",
+  "a": "DEU-nrw",
+  "b": "DEU-bav",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "DEU-bav~DEU-est",
+  "a": "DEU-bav",
+  "b": "DEU-est",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "DEU-est~DEU-bw",
+  "a": "DEU-est",
+  "b": "DEU-bw",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "DEU-est~DEU-nth",
+  "a": "DEU-est",
+  "b": "DEU-nth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "DEU-est~DEU-nrw",
+  "a": "DEU-est",
+  "b": "DEU-nrw",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "UKR-kyv~UKR-don",
+  "a": "UKR-kyv",
+  "b": "UKR-don",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "UKR-don~UKR-dni",
+  "a": "UKR-don",
+  "b": "UKR-dni",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "UKR-dni~UKR-sth",
+  "a": "UKR-dni",
+  "b": "UKR-sth",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "UKR-sth~UKR-wst",
+  "a": "UKR-sth",
+  "b": "UKR-wst",
+  "mode": "land",
+  "capacity": 400
+ },
+ {
+  "id": "UKR-kyv~UKR-dni",
+  "a": "UKR-kyv",
+  "b": "UKR-dni",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "UKR-kyv~UKR-sth",
+  "a": "UKR-kyv",
+  "b": "UKR-sth",
+  "mode": "land",
+  "capacity": 300
+ },
+ {
+  "id": "UKR-kyv~UKR-wst",
+  "a": "UKR-kyv",
+  "b": "UKR-wst",
+  "mode": "land",
+  "capacity": 300
+ }
+]

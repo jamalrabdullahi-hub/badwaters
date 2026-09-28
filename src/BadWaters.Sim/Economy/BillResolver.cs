@@ -76,13 +76,14 @@ public sealed class BillResolver
     }
 
     /// <summary>Total requirements for a basket of goods (e.g. a design's bill), flattened.</summary>
-    public Requirements Flatten(IReadOnlyDictionary<string, double> basket, IReadOnlyDictionary<string, double>? assembly = null)
+    public Requirements Flatten(IReadOnlyDictionary<string, double> basket, IReadOnlyDictionary<string, double>? assembly = null, bool electricityLeaf = false)
     {
         var res = new Dictionary<string, double>(); var fac = new Dictionary<string, double>(); var goods = new Dictionary<string, double>();
         var lab = new Dictionary<string, double>(); var tools = new HashSet<string>(); double energy = 0;
         void Walk(string good, double qty, HashSet<string> path)
         {
             goods[good] = goods.GetValueOrDefault(good) + qty;
+            if (electricityLeaf && good == "electricity") return; // sized by the energy mix instead
             var p = _econ.Producers(good).FirstOrDefault(x => !x.Inputs.Keys.Any(path.Contains));
             if (p == null || !path.Add(good)) return;
             var b = qty / p.Outputs[good];
@@ -92,6 +93,7 @@ public sealed class BillResolver
             if (p.Tooling != null) tools.Add(p.Tooling);
             if (p.Deposit != null) res[p.Deposit] = res.GetValueOrDefault(p.Deposit) + qty;
             foreach (var (g, q) in p.Inputs) Walk(g, q * b, path);
+            if (p.Energy > 0 && !path.Contains("electricity")) Walk("electricity", p.Energy * b, path);
             path.Remove(good);
         }
         foreach (var (g, q) in basket) Walk(g, q, new HashSet<string>());

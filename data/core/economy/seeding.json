@@ -1,0 +1,185 @@
+{
+ "sectorFacilities": {
+  "heavy": [
+   "coke-plant",
+   "blast-furnace",
+   "steelworks",
+   "rolling-mill",
+   "cement-plant",
+   "chemical-plant",
+   "air-separation",
+   "fertilizer-plant",
+   "glass-works",
+   "heavy-engineering",
+   "petrochemical",
+   "pulp-mill",
+   "rubber-plant",
+   "concentrator"
+  ],
+  "metals": [
+   "ferroalloy-plant",
+   "base-metal-smelter",
+   "hydromet-plant",
+   "alumina-refinery",
+   "aluminium-smelter",
+   "precious-refinery"
+  ],
+  "specialty": [
+   "specialty-refinery",
+   "re-separation",
+   "titanium-plant",
+   "superalloy-mill",
+   "battery-materials",
+   "carbon-fibre-plant"
+  ],
+  "electronics": [
+   "electronics-plant",
+   "magnet-works",
+   "battery-plant",
+   "optics-works",
+   "machine-works",
+   "tooling-plant"
+  ],
+  "semis": [
+   "semiconductor-fab",
+   "compound-semi-fab",
+   "wafer-plant",
+   "polysilicon-plant"
+  ],
+  "aero": [
+   "aerospace-assembly",
+   "engine-works",
+   "avionics-factory",
+   "radar-factory"
+  ],
+  "naval": [
+   "shipyard"
+  ],
+  "land": [
+   "vehicle-plant"
+  ],
+  "munitions": [
+   "munitions-plant",
+   "missile-works"
+  ]
+ },
+ "requiresCoast": [
+  "shipyard",
+  "port"
+ ],
+ "basic": [
+  "gas-plant",
+  "oil-refinery",
+  "coke-plant",
+  "concentrator",
+  "cement-plant",
+  "food-processing",
+  "light-industry",
+  "pulp-mill",
+  "water-works",
+  "fertilizer-plant",
+  "farm",
+  "forest",
+  "air-separation",
+  "heavy-engineering",
+  "rubber-plant",
+  "glass-works",
+  "chemical-plant",
+  "shale-retort",
+  "brine-works"
+ ],
+ "minTier": {
+  "fab-tool-maker": 5,
+  "nuclear-fuel-plant": 1,
+  "compound-semi-fab": 2,
+  "titanium-plant": 2,
+  "re-separation": 2
+ },
+ "topTierExtras": {
+  "semis": [
+   "fab-tool-maker"
+  ]
+ },
+ "always": {
+  "construction-industry": 1,
+  "rail-yard": 1,
+  "military-base": 1,
+  "food-processing": 1,
+  "light-industry": 1,
+  "water-works": 1
+ },
+ "capital": {
+  "airport": 1,
+  "depot": 2,
+  "defence-academy": 1,
+  "research-lab": 1,
+  "data-centre": 1
+ },
+ "coastal": {
+  "port": 1
+ },
+ "universityMinIndustry": 3,
+ "extraction": {
+  "mine": "mine",
+  "well": "oil-field",
+  "gas": "gas-field",
+  "brine": "brine-works",
+  "farm": "farm",
+  "forest": "forest",
+  "waterworks": "water-works"
+ },
+ "energyMix": {
+  "coal": "power-coal",
+  "gas": "power-gas",
+  "oil": "power-oil",
+  "hydro": "power-hydro",
+  "nuclear": "power-nuclear",
+  "renewable": "power-renewable"
+ },
+ "energyPerGdp": 0.06,
+ "jitterDeg": 1.2,
+ "industrialBasket": {
+  "structural-steel": 3,
+  "cement": 5,
+  "polymers": 1.5,
+  "chips": 0.02,
+  "electrical-equipment": 0.3,
+  "heavy-machinery": 0.2,
+  "aluminium": 0.4,
+  "copper-products": 0.2,
+  "fertilizer": 0.5,
+  "glass": 0.5,
+  "diesel": 1,
+  "jet-fuel": 0.2,
+  "sulfuric-acid": 0.2,
+  "spares-general": 0.1,
+  "batteries": 0.02,
+  "machine-tools": 0.005,
+  "pulp": 0.3,
+  "rubber-goods": 0.1,
+  "pcbs": 0.05,
+  "lubricants": 0.05
+ },
+ "sectorDesigns": {
+  "aero": {
+   "design": "bomber-lo",
+   "perTier": 0.1
+  },
+  "naval": {
+   "design": "ddg-1998",
+   "perTier": 0.02
+  },
+  "land": {
+   "design": "gs-launcher",
+   "perTier": 0.5
+  },
+  "munitions": {
+   "design": "sam-interceptor",
+   "perTier": 5
+  },
+  "electronics": {
+   "design": "gs-radar",
+   "perTier": 0.2
+  }
+ }
+}

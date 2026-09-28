@@ -1,0 +1,802 @@
+[
+ {
+  "id": "USA-ne",
+  "nation": "USA",
+  "name": "Northeast",
+  "lon": -75,
+  "lat": 41,
+  "coastal": true,
+  "industry": 4,
+  "capital": true
+ },
+ {
+  "id": "USA-mw",
+  "nation": "USA",
+  "name": "Midwest",
+  "lon": -88,
+  "lat": 41.5,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "USA-tx",
+  "nation": "USA",
+  "name": "Texas and Gulf Coast",
+  "lon": -96,
+  "lat": 30,
+  "coastal": true,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "USA-se",
+  "nation": "USA",
+  "name": "Southeast",
+  "lon": -83,
+  "lat": 33,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "USA-mt",
+  "nation": "USA",
+  "name": "Mountain West",
+  "lon": -110,
+  "lat": 40,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "USA-wc",
+  "nation": "USA",
+  "name": "West Coast",
+  "lon": -120,
+  "lat": 37,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "USA-ak",
+  "nation": "USA",
+  "name": "Alaska",
+  "lon": -150,
+  "lat": 63,
+  "coastal": true,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "RUS-cen",
+  "nation": "RUS",
+  "name": "Central Russia",
+  "lon": 37.6,
+  "lat": 55.7,
+  "coastal": false,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "RUS-vol",
+  "nation": "RUS",
+  "name": "Volga and Urals",
+  "lon": 56,
+  "lat": 56,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "RUS-wsb",
+  "nation": "RUS",
+  "name": "West Siberia",
+  "lon": 73,
+  "lat": 61,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "RUS-esb",
+  "nation": "RUS",
+  "name": "East Siberia",
+  "lon": 100,
+  "lat": 62,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "RUS-fe",
+  "nation": "RUS",
+  "name": "Far East",
+  "lon": 135,
+  "lat": 50,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "RUS-nw",
+  "nation": "RUS",
+  "name": "Northwest and Kola",
+  "lon": 33,
+  "lat": 67,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "RUS-sth",
+  "nation": "RUS",
+  "name": "South Russia",
+  "lon": 40,
+  "lat": 46,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "CHN-nth",
+  "nation": "CHN",
+  "name": "North China",
+  "lon": 116,
+  "lat": 39,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "CHN-ne",
+  "nation": "CHN",
+  "name": "Northeast China",
+  "lon": 125,
+  "lat": 44,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "CHN-est",
+  "nation": "CHN",
+  "name": "East China",
+  "lon": 120,
+  "lat": 31,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "CHN-sth",
+  "nation": "CHN",
+  "name": "South China",
+  "lon": 113,
+  "lat": 23,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "CHN-cen",
+  "nation": "CHN",
+  "name": "Central China",
+  "lon": 113,
+  "lat": 29,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "CHN-sw",
+  "nation": "CHN",
+  "name": "Southwest China",
+  "lon": 104,
+  "lat": 29,
+  "coastal": false,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "CHN-nwc",
+  "nation": "CHN",
+  "name": "Northwest China",
+  "lon": 87,
+  "lat": 43,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "CHN-imn",
+  "nation": "CHN",
+  "name": "Inner Mongolia",
+  "lon": 111,
+  "lat": 41,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "GBR-se",
+  "nation": "GBR",
+  "name": "South East England",
+  "lon": 0,
+  "lat": 51.5,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "GBR-mid",
+  "nation": "GBR",
+  "name": "Midlands and North",
+  "lon": -2,
+  "lat": 53.5,
+  "coastal": true,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "GBR-sco",
+  "nation": "GBR",
+  "name": "Scotland",
+  "lon": -4,
+  "lat": 56.5,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "GBR-nsea",
+  "nation": "GBR",
+  "name": "North Sea",
+  "lon": 1.5,
+  "lat": 57.5,
+  "coastal": true,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "GBR-wal",
+  "nation": "GBR",
+  "name": "Wales",
+  "lon": -3.8,
+  "lat": 52.3,
+  "coastal": true,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "FRA-idf",
+  "nation": "FRA",
+  "name": "Île-de-France",
+  "lon": 2.3,
+  "lat": 48.8,
+  "coastal": false,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "FRA-ne",
+  "nation": "FRA",
+  "name": "North-East France",
+  "lon": 6,
+  "lat": 48.5,
+  "coastal": false,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "FRA-ra",
+  "nation": "FRA",
+  "name": "Rhône-Alpes",
+  "lon": 5,
+  "lat": 45.5,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "FRA-sw",
+  "nation": "FRA",
+  "name": "South-West France",
+  "lon": 0,
+  "lat": 44,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "FRA-nw",
+  "nation": "FRA",
+  "name": "North-West France",
+  "lon": -1.5,
+  "lat": 48,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "FRA-med",
+  "nation": "FRA",
+  "name": "Mediterranean France",
+  "lon": 5,
+  "lat": 43.5,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "ISR-cen",
+  "nation": "ISR",
+  "name": "Central Israel",
+  "lon": 34.8,
+  "lat": 32.1,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "ISR-nth",
+  "nation": "ISR",
+  "name": "Northern Israel",
+  "lon": 35.2,
+  "lat": 32.8,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "ISR-neg",
+  "nation": "ISR",
+  "name": "Negev",
+  "lon": 34.9,
+  "lat": 30.8,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "IRN-teh",
+  "nation": "IRN",
+  "name": "Tehran",
+  "lon": 51.4,
+  "lat": 35.7,
+  "coastal": false,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "IRN-khz",
+  "nation": "IRN",
+  "name": "Khuzestan",
+  "lon": 49,
+  "lat": 31,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "IRN-isf",
+  "nation": "IRN",
+  "name": "Isfahan and Kerman",
+  "lon": 53,
+  "lat": 31,
+  "coastal": false,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "IRN-sth",
+  "nation": "IRN",
+  "name": "Bushehr and South",
+  "lon": 52,
+  "lat": 28,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "IRN-nw",
+  "nation": "IRN",
+  "name": "Azerbaijan provinces",
+  "lon": 46.3,
+  "lat": 38,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "IRN-est",
+  "nation": "IRN",
+  "name": "Khorasan",
+  "lon": 59.6,
+  "lat": 36.3,
+  "coastal": false,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "EGY-cai",
+  "nation": "EGY",
+  "name": "Cairo and Delta",
+  "lon": 31.2,
+  "lat": 30.5,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "EGY-alx",
+  "nation": "EGY",
+  "name": "Alexandria and West",
+  "lon": 29.9,
+  "lat": 31,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "EGY-suz",
+  "nation": "EGY",
+  "name": "Suez and Sinai",
+  "lon": 32.5,
+  "lat": 29.5,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "EGY-upp",
+  "nation": "EGY",
+  "name": "Upper Egypt",
+  "lon": 32.8,
+  "lat": 25.7,
+  "coastal": false,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "TUR-mar",
+  "nation": "TUR",
+  "name": "Marmara",
+  "lon": 29,
+  "lat": 41,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "TUR-ank",
+  "nation": "TUR",
+  "name": "Central Anatolia",
+  "lon": 32.9,
+  "lat": 39.9,
+  "coastal": false,
+  "industry": 3,
+  "capital": true
+ },
+ {
+  "id": "TUR-aeg",
+  "nation": "TUR",
+  "name": "Aegean",
+  "lon": 27.1,
+  "lat": 38.4,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "TUR-bls",
+  "nation": "TUR",
+  "name": "Black Sea",
+  "lon": 37,
+  "lat": 41,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "TUR-se",
+  "nation": "TUR",
+  "name": "Southeast Anatolia",
+  "lon": 39,
+  "lat": 37.5,
+  "coastal": false,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "TUR-med",
+  "nation": "TUR",
+  "name": "Mediterranean Turkey",
+  "lon": 33,
+  "lat": 36.9,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "SAU-riy",
+  "nation": "SAU",
+  "name": "Riyadh and Central",
+  "lon": 46.7,
+  "lat": 24.7,
+  "coastal": false,
+  "industry": 4,
+  "capital": true
+ },
+ {
+  "id": "SAU-est",
+  "nation": "SAU",
+  "name": "Eastern Province",
+  "lon": 50,
+  "lat": 26.3,
+  "coastal": true,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "SAU-wst",
+  "nation": "SAU",
+  "name": "Western Province",
+  "lon": 39.2,
+  "lat": 21.5,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "SAU-nth",
+  "nation": "SAU",
+  "name": "Northern Province",
+  "lon": 41,
+  "lat": 29,
+  "coastal": false,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "PRK-pyo",
+  "nation": "PRK",
+  "name": "Pyongyang",
+  "lon": 125.8,
+  "lat": 39,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "PRK-nth",
+  "nation": "PRK",
+  "name": "North Hamgyong",
+  "lon": 129.5,
+  "lat": 41.5,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "PRK-est",
+  "nation": "PRK",
+  "name": "South Hamgyong and Kangwon",
+  "lon": 127.5,
+  "lat": 39.8,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "KOR-cap",
+  "nation": "KOR",
+  "name": "Seoul Capital Area",
+  "lon": 127,
+  "lat": 37.5,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "KOR-se",
+  "nation": "KOR",
+  "name": "Gyeongsang",
+  "lon": 129,
+  "lat": 35.5,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "KOR-cc",
+  "nation": "KOR",
+  "name": "Chungcheong",
+  "lon": 127.4,
+  "lat": 36.5,
+  "coastal": false,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "KOR-jl",
+  "nation": "KOR",
+  "name": "Jeolla",
+  "lon": 126.9,
+  "lat": 35,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "JPN-kan",
+  "nation": "JPN",
+  "name": "Kanto",
+  "lon": 139.7,
+  "lat": 35.7,
+  "coastal": true,
+  "industry": 5,
+  "capital": true
+ },
+ {
+  "id": "JPN-ksi",
+  "nation": "JPN",
+  "name": "Kansai",
+  "lon": 135.5,
+  "lat": 34.7,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "JPN-chb",
+  "nation": "JPN",
+  "name": "Chubu",
+  "lon": 137,
+  "lat": 35.2,
+  "coastal": true,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "JPN-kyu",
+  "nation": "JPN",
+  "name": "Kyushu",
+  "lon": 130.5,
+  "lat": 32.8,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "JPN-toh",
+  "nation": "JPN",
+  "name": "Tohoku",
+  "lon": 140.8,
+  "lat": 38.5,
+  "coastal": true,
+  "industry": 2,
+  "capital": false
+ },
+ {
+  "id": "JPN-hok",
+  "nation": "JPN",
+  "name": "Hokkaido",
+  "lon": 142.5,
+  "lat": 43.2,
+  "coastal": true,
+  "industry": 1,
+  "capital": false
+ },
+ {
+  "id": "JPN-chg",
+  "nation": "JPN",
+  "name": "Chugoku",
+  "lon": 133,
+  "lat": 34.5,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "DEU-nth",
+  "nation": "DEU",
+  "name": "Northern Germany",
+  "lon": 10,
+  "lat": 53.5,
+  "coastal": true,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "DEU-nrw",
+  "nation": "DEU",
+  "name": "Rhine-Ruhr",
+  "lon": 7.5,
+  "lat": 51.4,
+  "coastal": false,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "DEU-bav",
+  "nation": "DEU",
+  "name": "Bavaria",
+  "lon": 11.5,
+  "lat": 48.6,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "DEU-est",
+  "nation": "DEU",
+  "name": "Eastern Germany",
+  "lon": 13,
+  "lat": 51.5,
+  "coastal": false,
+  "industry": 3,
+  "capital": true
+ },
+ {
+  "id": "DEU-bw",
+  "nation": "DEU",
+  "name": "Baden-Württemberg",
+  "lon": 9,
+  "lat": 48.7,
+  "coastal": false,
+  "industry": 5,
+  "capital": false
+ },
+ {
+  "id": "UKR-kyv",
+  "nation": "UKR",
+  "name": "Kyiv and Centre",
+  "lon": 30.5,
+  "lat": 50.4,
+  "coastal": false,
+  "industry": 4,
+  "capital": true
+ },
+ {
+  "id": "UKR-don",
+  "nation": "UKR",
+  "name": "Donbas",
+  "lon": 38,
+  "lat": 48,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "UKR-dni",
+  "nation": "UKR",
+  "name": "Dnipro",
+  "lon": 35,
+  "lat": 48,
+  "coastal": false,
+  "industry": 4,
+  "capital": false
+ },
+ {
+  "id": "UKR-sth",
+  "nation": "UKR",
+  "name": "South and Odesa",
+  "lon": 30.7,
+  "lat": 46.5,
+  "coastal": true,
+  "industry": 3,
+  "capital": false
+ },
+ {
+  "id": "UKR-wst",
+  "nation": "UKR",
+  "name": "Western Ukraine",
+  "lon": 24,
+  "lat": 49.8,
+  "coastal": false,
+  "industry": 2,
+  "capital": false
+ }
+]
