@@ -508,6 +508,10 @@ public partial class TheatreLayer : Node2D
     public readonly List<(Vector2 At, string Text, Color Color)> Labels = new();
     public static readonly Color Blue = new("4fbfee"), Red = new("ff4d5a"), Green = new("5cf2b0");
     private static Color SideColor(string side) => side == "blue" ? Blue : Red;
+    /// <summary>Hostile to the viewer (hostile symbols: diamond tiles, corner ticks); with the "all" view, red is hostile.</summary>
+    private bool Hostile(string side) => Ops.ViewSide == "all" ? side == "red" : side != Ops.ViewSide;
+    private void Sym(string code, Vector2 p, Color c, string side, float zoom, Vector2 head = default, float px = 22) =>
+        Symbols.Draw(this, code, p, c, Hostile(side), zoom, head, px);
     /// <summary>True when this side's things are enemy to the viewer and must come from the viewer's picture.</summary>
     private bool Fogged(string side) => Ops.ViewSide != "all" && side != Ops.ViewSide;
     private Picture? Pic => Ops.ViewSide == "all" ? null : Ops.Trial.Intel?.Pictures[Ops.ViewSide];
@@ -558,8 +562,7 @@ public partial class TheatreLayer : Node2D
             DrawCircle(p, (float)b.ReachKm * k, new Color(c, 0.06f));
             DrawArc(p, (float)b.ReachKm * k, 0, Mathf.Tau, 64, new Color(c, many ? 0.45f : 0.7f), w);
             var ship = Session.Content.Designs.TryGetValue(b.Def.Radar, out var rd) && Session.Content.Catalog.Frames.TryGetValue(rd.Frame, out var fr) && fr.Kind == "ship";
-            if (ship) Ship(p, c, zoom, 1.3f);
-            else DrawColoredPolygon(new[] { p + new Vector2(0, -9) / zoom, p + new Vector2(8, 6) / zoom, p + new Vector2(-8, 6) / zoom }, c);
+            Sym(ship ? Symbols.For(b.Def.Radar, "ship") : "SAMB", p, c, b.Def.Side, zoom, Vector2.Up, ship ? 24 : 20);
             if (!many || zoom > 3.5f) Label(p, many ? $"{b.Def.Name} · {b.Stock}" : $"{b.Def.Name} · radar {b.RadarKm:0} km · reach {b.ReachKm:0} km", c);
         }
         foreach (var l in tr.Launchers)
@@ -567,7 +570,7 @@ public partial class TheatreLayer : Node2D
             if (Fogged(l.Def.Side) && Seen(l.Def.Id) == null) continue; // mobile launchers hide until seen
             var p = P(l.Def.Lon, l.Def.Lat);
             var c = SideColor(l.Def.Side);
-            DrawColoredPolygon(new[] { p + new Vector2(0, -8) / zoom, p + new Vector2(8, 0) / zoom, p + new Vector2(0, 8) / zoom, p + new Vector2(-8, 0) / zoom }, c);
+            Sym(l.Def.Platform == "ground" ? "TEL" : Symbols.For(null, l.Def.Platform), p, c, l.Def.Side, zoom, Vector2.Up, 20);
             DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
             if (!many || zoom > 3.5f) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
         }
@@ -598,23 +601,10 @@ public partial class TheatreLayer : Node2D
                 if (zoom > 2.5f || seen.IdLevel == 2) Label(P(lon, lat), seen.Label + (tr.Time - seen.LastSeen > IntelRules.StaleAfter ? $" · {(tr.Time - seen.LastSeen) / 60:0} min old" : ""), c);
             }
             var p = P(lon, lat);
-            switch (u.Kind)
-            {
-                case "air":
-                    DrawColoredPolygon(new[] { p + new Vector2(0, -6) / zoom, p + new Vector2(5, 5) / zoom, p + new Vector2(0, 2) / zoom, p + new Vector2(-5, 5) / zoom }, c);
-                    break;
-                case "aew":
-                    DrawArc(p, 7 / zoom, 0, Mathf.Tau, 16, c, w * 1.4f);
-                    DrawLine(p - new Vector2(7, 0) / zoom, p + new Vector2(7, 0) / zoom, c, w * 1.4f);
-                    break;
-                case "sub":
-                    DrawArc(p, 6 / zoom, Mathf.Pi, Mathf.Tau, 12, c, w * 1.6f);
-                    DrawLine(p - new Vector2(6, 0) / zoom, p + new Vector2(6, 0) / zoom, c, w * 1.6f);
-                    break;
-                default:
-                    Ship(p, c, zoom, u.Preset.Contains("CV") || u.Preset.Contains("DDH") ? 1.6f : 1f);
-                    break;
-            }
+            var code = Symbols.For(u.Preset, u.Kind);
+            var st = tr.Naval?.Find(u.Id);
+            var uh = st is { Moving: true } ? (P(st.DestLon!.Value, st.DestLat!.Value) - p).Normalized() : Vector2.Up;
+            Sym(code, p, c, u.Side, zoom, uh, code is "CV" or "LHD" ? 30 : u.Kind == "sub" ? 20 : 24);
             if (zoom > 3.5f && (u.Preset.Contains("CV") || u.Preset.Contains("DDH"))) Label(p, u.Name.Split(" #")[0], c);
         }
         foreach (var s in tr.Scenario.Sites)
@@ -622,8 +612,7 @@ public partial class TheatreLayer : Node2D
             var p = P(s.Lon, s.Lat);
             var prot = !TargetPolicy.IsLegitimate(s.Class);
             var c = prot ? Green : SideColor(s.Side);
-            if (prot) { DrawArc(p, 8 / zoom, 0, Mathf.Tau, 24, c, w); DrawCircle(p, 2.5f / zoom, c); }
-            else DrawRect(new Rect2(p - new Vector2(6, 6) / zoom, new Vector2(12, 12) / zoom), c, false, w * 1.4f);
+            Sym(prot ? "CITY" : Symbols.ForSite(s.Type, s.Class), p, c, s.Side, zoom, default, prot ? 18 : 20);
             var status = "";
             if (tr.Bases.TryGetValue(s.Id, out var bs))
             {
@@ -656,7 +645,8 @@ public partial class TheatreLayer : Node2D
             var head = Arc(t, end);
             if (t.State == TrackState.Flying)
             {
-                DrawCircle(head, 4 / zoom, c);
+                var dir = (head - Arc(t, Math.Max(t.Launched, end - Math.Max(1, t.FlightTime / 50)))).Normalized();
+                Sym(Symbols.For(t.Missile.DesignId, "missile"), head, c, t.Side, zoom, dir == Vector2.Zero ? Vector2.Up : dir, 18);
                 if (sel) { DrawArc(head, 11 / zoom, 0, Mathf.Tau, 24, Colors.White, w); Label(head, $"T{t.Id}", c); }
             }
             Burst(t.State == TrackState.Intercepted ? head : z, t.EndedAt, t.State == TrackState.Intercepted ? Green : t.State == TrackState.Impacted ? Red : default, zoom);
@@ -722,11 +712,11 @@ public partial class TheatreLayer : Node2D
             if (head == Vector2.Zero) head = Vector2.Up;
             var right = new Vector2(-head.Y, head.X);
             var slots = FormationRules.Slots(f.Formation);
-            var sp = 7 / zoom;
+            var sp = 12 / zoom;
             for (var i = 0; i < f.Aircraft.Count && i < slots.Length; i++)
             {
                 var q = at + right * slots[i].X * sp - head * slots[i].Y * sp;
-                Chevron(q, head, right, c, zoom);
+                Sym(Symbols.For(f.Type.Id, "air"), q, c, f.Side, zoom, head, 20);
             }
             if (sel) DrawArc(at, 14 / zoom, 0, Mathf.Tau, 24, Colors.White, w);
             if (sel || f.Mission is Mission.Strike or Mission.Escort or Mission.SEAD || zoom > 3f) Tag(at, f.Callsign, c);
@@ -743,23 +733,11 @@ public partial class TheatreLayer : Node2D
         {
             var col = new Color(SideColor(Ops.ViewSide == "blue" ? "red" : "blue"), Fade(c));
             var p = P(c.Lon, c.Lat);
-            Chevron(p, Vector2.Up, Vector2.Right, col, zoom);
+            Sym(c.Role switch { "AEW" => "AEW", "Tanker" => "TKR", "Strike" or "SEAD" => "STK", _ => "FTR" }, p, col, Ops.ViewSide == "blue" ? "red" : "blue", zoom, Vector2.Up, 20);
             DrawArc(p, 9 / zoom, 0, Mathf.Tau, 16, col, w);
             var age = Ops.Trial.Time - c.LastSeen;
             Tag(p, c.Label + (c.IdLevel < 2 ? " ?" : "") + (age > 60 ? $" · {age / 60:0} min" : ""), col);
         }
-    }
-
-    private void Chevron(Vector2 p, Vector2 head, Vector2 right, Color c, float zoom)
-    {
-        var s = 1 / zoom;
-        DrawColoredPolygon(new[] { p + head * 6 * s, p - head * 5 * s + right * 5 * s, p - head * 2 * s, p - head * 5 * s - right * 5 * s }, c);
-    }
-
-    private void Ship(Vector2 p, Color c, float zoom, float scale)
-    {
-        var s = scale / zoom;
-        DrawColoredPolygon(new[] { p + new Vector2(-9, -3) * s, p + new Vector2(6, -3) * s, p + new Vector2(10, 0) * s, p + new Vector2(6, 3) * s, p + new Vector2(-9, 3) * s }, c);
     }
 
     private void Burst(Vector2 p, double endedAt, Color c, float zoom)

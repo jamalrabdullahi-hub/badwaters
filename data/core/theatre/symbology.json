@@ -1,0 +1,34 @@
+{
+  "_comment": "Theatre Ops symbols (Option B, silhouettes). Icons are data/core/theatre/symbols/<code>.svg (own) and <code>_h.svg (hostile), built by tools/symbols-build.py. Lookups go preset/design id, then site type, then site class, then unit kind.",
+  "rotate": ["FTR", "5GEN", "STK", "BMR", "SB", "AEW", "TKR", "MPA", "EW", "TPT", "MALE", "HALE", "UCAV", "HEL", "SRBM", "MRBM", "HGV", "CM", "ASM", "SAM", "AAM", "LM", "CV", "DDG", "FFG", "PC", "LHD", "AOR", "USV", "SSK", "SSN"],
+  "presets": {
+    "USF4E": "STK", "USF14D": "FTR", "USF15C": "FTR", "USF15E": "STK", "USF16C": "FTR", "USFA18C": "STK", "USFA18E": "STK",
+    "USF22A": "5GEN", "USF35A": "5GEN", "USF35B": "5GEN", "USF35C": "5GEN",
+    "RUSU24M": "STK", "RUSU27S": "FTR", "RUSU30SM": "STK", "RUSU33": "FTR", "RUSU34": "STK", "RUSU35S": "FTR", "RUSU57": "5GEN",
+    "RUMIG29": "FTR", "RUMIG31BM": "FTR",
+    "CNJ8II": "FTR", "CNJ10C": "FTR", "CNJ11B": "FTR", "CNJ15": "FTR", "CNJ16": "STK", "CNJ20": "5GEN",
+    "FRM2000-5": "FTR", "FRRFL-M": "STK", "UKEF2000": "FTR",
+    "USCVN-NMZ": "CV", "USCVN-FRD": "CV", "USCG-47": "DDG", "USDDG-51IIA": "DDG", "USDDG-51III": "DDG", "USSSN-774": "SSN", "USLHA-6": "LHD",
+    "RUCG-1164": "DDG", "RUFFG-22350": "FFG", "RUSSGN-885": "SSN",
+    "CNDDG-055": "DDG", "CNDDG-052D": "DDG", "CNCV-003": "CV", "CNFFG-054A": "FFG", "CNSSK-039A": "SSK", "CNCV-001": "CV",
+    "UKDDG-T45": "DDG", "UKCV-QE": "CV", "FRCVN-CDG": "CV", "JPDDH-183": "LHD", "KRDDG-KDX3": "DDG",
+    "JPF15J": "FTR", "JPF2A": "STK", "JPE2D": "AEW", "JPP1": "MPA", "CNKJ500": "AEW", "CNH6K": "BMR",
+    "JPDDG-MAYA": "DDG", "JPDDG-KONGO": "DDG", "JPDD-AKIZUKI": "DDG", "JPSS-TAIGEI": "SSK",
+    "JPKC46A": "TKR", "CNY20U": "TKR",
+    "ILF35I": "5GEN", "ILF15I": "STK", "ILF16I": "STK", "ILKC707": "TKR", "ILG550": "AEW", "ILSAAR6": "PC", "ILDOLPHIN": "SSK",
+    "IRF14AM": "FTR", "IRMIG29": "FTR", "IRF4E": "STK", "IRSU24": "STK", "IRJAMARAN": "FFG", "IRKILO": "SSK"
+  },
+  "designs": {
+    "bomber-lo": "SB", "cm-cruise": "CM", "cj-10": "CM", "paveh": "CM", "type-12": "ASM", "shahed-136": "LM",
+    "bm-tactical": "SRBM", "bm-tactical-b": "SRBM", "df-15b": "SRBM", "df-17": "HGV", "emad": "MRBM", "ghadr": "MRBM", "kheibar-shekan": "MRBM",
+    "sam-interceptor": "SAM", "sam-hit": "SAM", "hq-9b": "SAM", "sm-2": "SAM", "hhq-9": "SAM", "arrow-3": "SAM", "arrow-2": "SAM",
+    "davids-sling": "SAM", "iron-dome": "SAM", "bavar-373": "SAM", "s-300pmu2": "SAM", "khordad-15": "SAM",
+    "ddg-1998": "DDG", "ddg-2031": "DDG", "maya-ddg": "DDG", "type-055": "DDG", "type-052d": "DDG"
+  },
+  "siteTypes": { "airbase": "AB", "navalbase": "NB", "garrison": "C2" },
+  "siteClasses": {
+    "population-centre": "CITY", "military-base": "AB", "logistics": "PRT", "defence": "IND", "high-tech": "IND",
+    "energy": "PWR", "processing": "IND", "extraction": "IND", "knowledge": "GS", "construction": "IND", "military": "C2"
+  },
+  "kinds": { "air": "FTR", "aew": "AEW", "sub": "SSK", "ship": "FFG", "launcher": "TEL", "battery": "SAMB", "missile": "CM", "interceptor": "SAM" }
+}
