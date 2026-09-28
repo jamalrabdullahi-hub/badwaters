@@ -54,6 +54,21 @@ public partial class Blueprint : Control
     public Action? Changed, SelectionChanged;
     public int Selected = -1;
     public bool ShowArcs = true, Mirror = true;
+    /// <summary>Outline edit mode: drag the white handles (mirrored automatically). Cosmetic only.</summary>
+    public bool EditOutline;
+    private int _vertex = -1;
+
+    /// <summary>The outline to draw: the design's cosmetic override, or the frame's standard outline (simplified for editing).</summary>
+    public List<(double X, double Y)> OutlinePoints()
+    {
+        var d = Design?.Invoke();
+        if (d != null && d.Outline.Count >= 6) return d.Outline.Chunk(2).Select(c => (c[0], c[1])).ToList();
+        var std = HullGeometry.Outline(Hull);
+        if (std.Count > 20) std = std.Where((_, k) => k % 4 == 0 || k == std.Count - 1).ToList(); // editable handles for sampled hulls
+        return std;
+    }
+
+    public void ResetOutline() { Design?.Invoke()?.Outline.Clear(); _vertex = -1; Changed?.Invoke(); QueueRedraw(); }
     public float Zoom = 1;
     private bool _dragging;
     private Vector2 _grab;
@@ -76,7 +91,7 @@ public partial class Blueprint : Control
         for (var gy = -Hull.Length; gy <= Hull.Length; gy += Hull.Length > 60 ? 10 : Hull.Length > 8 ? 1 : 0.25)
             DrawLine(ToScreen(-Hull.Width, gy), ToScreen(Hull.Width, gy), new Color(0.3f, 0.6f, 0.85f, 0.06f), 1);
         // hull outline from the shared profile
-        var right = HullGeometry.Outline(Hull).Select(p => ToScreen(p.X, p.Y)).ToList();
+        var right = OutlinePoints().Select(p => ToScreen(p.X, p.Y)).ToList();
         var left = right.Select(p => new Vector2(2 * Centre.X - p.X, p.Y)).Reverse();
         var poly = right.Concat(left).ToArray();
         try { DrawColoredPolygon(poly, new Color("56626b")); } catch { /* degenerate outline at extreme zoom */ }
@@ -93,14 +108,31 @@ public partial class Blueprint : Control
             if (ShowArcs && p.Arc > 0 && (i == Selected || Selected < 0))
             {
                 var c = ToScreen(pl.X, pl.Y);
-                var reach = (float)Math.Max(p.Extent * 4, Hull.Beam * 0.8) * s;
-                var a0 = (float)((pl.Rot - p.Arc - 90) * Math.PI / 180); var a1 = (float)((pl.Rot + p.Arc - 90) * Math.PI / 180);
-                DrawArc(c, reach, a0, a1, 24, new Color(1, 0.85f, 0.3f, i == Selected ? 0.7f : 0.2f), 1);
-                DrawLine(c, c + new Vector2(Mathf.Cos(a0), Mathf.Sin(a0)) * reach, new Color(1, 0.85f, 0.3f, i == Selected ? 0.5f : 0.15f), 1);
-                DrawLine(c, c + new Vector2(Mathf.Cos(a1), Mathf.Sin(a1)) * reach, new Color(1, 0.85f, 0.3f, i == Selected ? 0.5f : 0.15f), 1);
+                var reach = (float)Math.Max(p.Extent * 4, Hull.Width * 0.8) * s;
+                var (_, sectors) = ArcGeometry.Coverage(d, i, Cat, Hull.Width * 3);
+                var alpha = i == Selected ? 0.75f : 0.22f;
+                foreach (var sec in sectors)
+                {
+                    var a0 = (float)((sec.From - 90) * Math.PI / 180); var a1 = (float)((sec.To - 90) * Math.PI / 180);
+                    var col = sec.Blocked ? new Color(1, 0.3f, 0.3f, alpha) : new Color(1, 0.85f, 0.3f, alpha);
+                    var pts = new List<Vector2> { c };
+                    for (var k = 0; k <= 6; k++) { var a = a0 + (a1 - a0) * k / 6; pts.Add(c + new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * reach); }
+                    DrawColoredPolygon(pts.ToArray(), new Color(col, col.A * 0.25f));
+                    DrawArc(c, reach, a0, a1, 8, col, 1);
+                }
             }
             if (i == Selected) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 3, 0, Mathf.Tau, 32, new Color("7fe3ff"), 1.5f);
             if (!HullGeometry.Inside(Hull, pl.X, pl.Y, Math.Max(0.1, Hull.Width * 0.05))) DrawArc(ToScreen(pl.X, pl.Y), (float)p.Extent * s + 5, 0, Mathf.Tau, 32, UiTheme.Bad, 2);
+        }
+        if (EditOutline)
+        {
+            var pts = OutlinePoints();
+            for (var k = 0; k < pts.Count; k++)
+            {
+                var sp = ToScreen(pts[k].X, pts[k].Y);
+                DrawRect(new Rect2(sp - new Vector2(4, 4), new Vector2(8, 8)), k == _vertex ? UiTheme.Accent : Colors.White, false, 1.5f);
+                DrawRect(new Rect2(new Vector2(2 * Centre.X - sp.X, sp.Y) - new Vector2(3, 3), new Vector2(6, 6)), new Color(1, 1, 1, 0.4f), false, 1);
+            }
         }
         var font = ThemeDB.FallbackFont;
         DrawString(font, new Vector2(8, 16), $"{Frame?.Name}  ·  {Hull.Length:0.#} × {Hull.Width:0.#} m  ·  {(Frame?.Kind is "aircraft" or "munition" ? "nose" : "bow")} ↑", HorizontalAlignment.Left, -1, 12, UiTheme.Dim);
@@ -131,6 +163,15 @@ public partial class Blueprint : Control
             GrabFocus();
             if (mb.ButtonIndex == MouseButton.WheelUp) { Zoom = Math.Min(6, Zoom * 1.15f); QueueRedraw(); }
             else if (mb.ButtonIndex == MouseButton.WheelDown) { Zoom = Math.Max(0.5f, Zoom / 1.15f); QueueRedraw(); }
+            else if (mb.ButtonIndex == MouseButton.Left && EditOutline)
+            {
+                var pts = OutlinePoints();
+                _vertex = -1;
+                for (var k = 0; k < pts.Count; k++) if (ToScreen(pts[k].X, pts[k].Y).DistanceTo(mb.Position) < 8) _vertex = k;
+                if (_vertex >= 0 && d.Outline.Count < 6) { d.Outline.Clear(); foreach (var (x, y) in pts) { d.Outline.Add(x); d.Outline.Add(y); } }
+                _dragging = _vertex >= 0;
+                QueueRedraw();
+            }
             else if (mb.ButtonIndex == MouseButton.Left)
             {
                 Selected = HitTest(mb.Position);
@@ -142,6 +183,13 @@ public partial class Blueprint : Control
             AcceptEvent();
         }
         else if (e is InputEventMouseButton { Pressed: false, ButtonIndex: MouseButton.Left } && _dragging) { _dragging = false; Changed?.Invoke(); }
+        else if (e is InputEventMouseMotion mv && _dragging && EditOutline && _vertex >= 0)
+        {
+            var (x, y) = ToWorld(mv.Position);
+            d.Outline[_vertex * 2] = Math.Max(0, Math.Round(x, 2)); // right half; the left mirrors it
+            d.Outline[_vertex * 2 + 1] = Math.Round(y, 2);
+            QueueRedraw();
+        }
         else if (e is InputEventMouseMotion mm && _dragging && Selected >= 0)
         {
             var (x, y) = ToWorld(mm.Position + _grab);

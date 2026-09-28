@@ -74,7 +74,10 @@ public partial class DevelopmentScreen : PanelContainer
         _arcs = new CheckBox { Text = "Arcs", ButtonPressed = true }; _arcs.Toggled += on => { _blueprint.ShowArcs = on; _blueprint.QueueRedraw(); };
         _mirror = new CheckBox { Text = "Mirror", ButtonPressed = true, TooltipText = "Off-centre drops also place a twin on the other side" }; _mirror.Toggled += on => _blueprint.Mirror = on;
         var clear = new Button { Text = "Clear parts" }; clear.Pressed += () => { _work.Parts.Clear(); _blueprint.Selected = -1; Recalc(); ShowSelected(); };
-        tools.AddChild(zout); tools.AddChild(zin); tools.AddChild(_arcs); tools.AddChild(_mirror); tools.AddChild(clear);
+        var shape = new CheckBox { Text = "Edit shape", TooltipText = "Drag outline vertices (mirrored). Cosmetic only: budgets use the standard hull." };
+        shape.Toggled += on => { _blueprint.EditOutline = on; _blueprint.QueueRedraw(); };
+        var resetShape = new Button { Text = "Reset shape" }; resetShape.Pressed += () => _blueprint.ResetOutline();
+        tools.AddChild(zout); tools.AddChild(zin); tools.AddChild(_arcs); tools.AddChild(_mirror); tools.AddChild(shape); tools.AddChild(resetShape); tools.AddChild(clear);
         left.AddChild(tools);
         left.AddChild(UiTheme.Text("Drag parts from the Parts tab · drag to move · Q/E rotate 15° · R or right-click 90° · Del removes · wheel zooms", 11, UiTheme.Dim, wrap: true));
 
@@ -185,6 +188,8 @@ public partial class DevelopmentScreen : PanelContainer
         Tab("In effect", ev);
 
         RefreshDesigns(DevScreenshot.Arg("design"));
+        if (int.TryParse(DevScreenshot.Arg("part"), out var sel) && sel < _work.Parts.Count) { _blueprint.Selected = sel; ShowSelected(); _blueprint.QueueRedraw(); }
+        if (DevScreenshot.Arg("shape") != null) { _blueprint.EditOutline = true; _blueprint.QueueRedraw(); }
     }
 
     private static Label Field(string t, float w) { var l = UiTheme.Text(t, 13, UiTheme.Dim); l.CustomMinimumSize = new Vector2(w, 0); return l; }
@@ -205,7 +210,7 @@ public partial class DevelopmentScreen : PanelContainer
 
     private void Load(DesignDef d)
     {
-        _work = d with { Components = d.Components.ToList(), Parts = d.Parts.ToList() };
+        _work = d with { Components = d.Components.ToList(), Parts = d.Parts.ToList(), Outline = d.Outline.ToList() };
         _name.Text = d.Name;
         _frame.Clear(); _frameIds.Clear();
         foreach (var f in Cat.Frames.Values.Where(f => f.Kind == _kind))
@@ -370,6 +375,12 @@ public partial class DevelopmentScreen : PanelContainer
         var pl = _work.Parts[i];
         _selected.AddChild(UiTheme.Text(p.Name, 18, UiTheme.Accent));
         _selected.AddChild(UiTheme.Text($"{p.Category}{(p.Topside ? " · counts as topside weight" : "")}{(p.Arc > 0 ? $" · firing arc ±{p.Arc:0}°" : "")}", 12, UiTheme.Dim));
+        if (p.Arc > 0 && Cat.Frames.GetValueOrDefault(_work.Frame)?.Hull is { } hh)
+        {
+            var (cov, _) = ArcGeometry.Coverage(_work, i, Cat, hh.Width * 3);
+            _selected.AddChild(UiTheme.Text($"Arc clear: {cov:P0} of ±{p.Arc:0}° · effectiveness {0.4 + 0.6 * cov:P0}", 12, cov < 0.35 ? UiTheme.Bad : cov < 0.8 ? new Color("ffb347") : UiTheme.Good));
+        }
+        _selected.AddChild(UiTheme.Text($"Height class {ArcGeometry.Height(p):0} (taller parts block lower mounts' arcs)", 12, UiTheme.Dim));
         _selected.AddChild(UiTheme.Text($"Position {pl.X:0.#} m {(pl.X >= 0 ? "starboard" : "port")} · {Math.Abs(pl.Y):0.#} m {(pl.Y >= 0 ? "forward" : "aft")} · heading {pl.Rot:0}°", 12, UiTheme.Ink));
         var uses = new Dictionary<string, double>(p.Uses);
         if (p.Component != null && Cat.Components.TryGetValue(p.Component, out var c))
@@ -417,7 +428,7 @@ public partial class DevelopmentScreen : PanelContainer
     {
         var n = 1;
         while (Session.Content.Designs.ContainsKey($"player-{_kind}-{n}")) n++;
-        _work = _work with { Id = $"player-{_kind}-{n}", Name = _work.Name + " (variant)", Components = _work.Components.ToList(), Parts = _work.Parts.ToList() };
+        _work = _work with { Id = $"player-{_kind}-{n}", Name = _work.Name + " (variant)", Components = _work.Components.ToList(), Parts = _work.Parts.ToList(), Outline = _work.Outline.ToList() };
         _name.Text = _work.Name;
         _status.Text = "New variant created. Change parts and systems, then Save design.";
     }
@@ -425,7 +436,7 @@ public partial class DevelopmentScreen : PanelContainer
     private void Save()
     {
         if (!_work.Id.StartsWith("player-")) NewVariant(); // core designs are never overwritten
-        Session.SaveDesign(_work with { Components = _work.Components.ToList(), Parts = _work.Parts.ToList() });
+        Session.SaveDesign(_work with { Components = _work.Components.ToList(), Parts = _work.Parts.ToList(), Outline = _work.Outline.ToList() });
         _status.Text = $"Saved {_work.Name} to mods/player/designs.json. It is now available in Theatre Ops.";
         RefreshDesigns(_work.Id);
         DesignsChanged?.Invoke();

@@ -100,6 +100,8 @@ public sealed record VisualPart
     public string[] Offers { get; init; } = Array.Empty<string>();
     /// <summary>Firing arc either side of the direction the part faces, degrees (0 = no arc).</summary>
     public double Arc { get; init; }
+    /// <summary>Height class for arc blocking; -1 = from the category (see ArcGeometry.Height).</summary>
+    public double Height { get; init; } = -1;
 
     /// <summary>Radius of the part's drawing, metres (for picking and bounds).</summary>
     public double Extent => Shapes.Count == 0 ? 1 : Shapes.Max(s => s.T switch
@@ -188,6 +190,8 @@ public sealed record DesignDef
     public string Lineage { get; init; } = "";
     /// <summary>Visual parts placed on the blueprint.</summary>
     public List<Placement> Parts { get; init; } = new();
+    /// <summary>Cosmetic outline override: right-half vertices [x0, y0, x1, y1, ...] in metres. Budgets and bounds ignore it.</summary>
+    public List<double> Outline { get; init; } = new();
 }
 
 public enum IssueKind { OverBudget, NoPort, MissingInterface, TechTooLow, WrongKind, UnknownPart }

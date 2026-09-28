@@ -54,4 +54,36 @@ public class DesignerTests
         Assert.True(ev.Valid, string.Join("; ", ev.Issues.Select(i => i.Text)));
         Assert.True(Content.Designs["ddg-2031"].Parts.Count > 15);
     }
+
+    [Fact]
+    public void Taller_structure_blocks_a_gun_arc_but_lower_parts_do_not()
+    {
+        var clear = new DesignDef { Id = "t", Name = "t", Frame = "hull-destroyer-ad", Parts = { new Placement("gun-127", 0, 40) } };
+        Assert.Equal(1, ArcGeometry.Coverage(clear, 0, Content.Catalog, 60).Coverage, 3);
+        var behindBridge = new DesignDef { Id = "t", Name = "t", Frame = "hull-destroyer-ad", Parts = { new Placement("gun-127", 0, 40), new Placement("bridge-l", 0, 30) } };
+        var (cov, sectors) = ArcGeometry.Coverage(behindBridge, 0, Content.Catalog, 60);
+        Assert.True(cov < 1);
+        Assert.Contains(sectors, x => x.Blocked);
+        var besideBoat = new DesignDef { Id = "t", Name = "t", Frame = "hull-destroyer-ad", Parts = { new Placement("gun-127", 0, 40), new Placement("rhib", 0, 30) } };
+        Assert.Equal(1, ArcGeometry.Coverage(besideBoat, 0, Content.Catalog, 60).Coverage, 3);
+    }
+
+    [Fact]
+    public void A_boxed_in_gun_is_less_effective_and_flagged()
+    {
+        var open = new DesignDef { Id = "t", Name = "t", Frame = "hull-destroyer-ad", Parts = { new Placement("gun-155", 0, 0) } };
+        var boxed = new DesignDef { Id = "t", Name = "t", Frame = "hull-destroyer-ad", Parts = { new Placement("gun-155", 0, 0),
+            new Placement("house-l", 0, 12), new Placement("house-l", 0, -12), new Placement("house-m", 6, 0), new Placement("house-m", -6, 0) } };
+        Assert.True(Eval(boxed).Ratings["strike"] < Eval(open).Ratings["strike"]);
+        Assert.Contains(Eval(boxed).Issues, i => i.Text.Contains("firing arc"));
+    }
+
+    [Fact]
+    public void Outline_shaping_is_cosmetic()
+    {
+        var d = Content.Designs["ddg-2031"];
+        var shaped = d with { Outline = new List<double> { 0, 77, 15, 0, 12, -77 } };
+        Assert.Equal(Eval(d).Budgets["mass"], Eval(shaped).Budgets["mass"]);
+        Assert.Equal(Eval(d).Issues.Count, Eval(shaped).Issues.Count);
+    }
 }

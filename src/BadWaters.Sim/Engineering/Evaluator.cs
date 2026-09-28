@@ -79,7 +79,15 @@ public sealed class Evaluator
                 else avail[axis] = avail.GetValueOrDefault(axis) - v;
             }
             if (p.Topside) used["topside"] = used.GetValueOrDefault("topside") + Math.Max(0, uses.GetValueOrDefault("mass"));
-            foreach (var (r, v) in p.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v);
+            // a weapon whose arc is mostly blocked by taller parts contributes less
+            var arcFactor = 1.0;
+            if (p.Arc > 0 && frame.Hull != null)
+            {
+                var (cov, _) = ArcGeometry.Coverage(d, d.Parts.IndexOf(pl), _cat, frame.Hull.Width * 3);
+                arcFactor = 0.4 + 0.6 * cov;
+                if (cov < 0.35) issues.Add(new(IssueKind.NoPort, $"{p.Name}: firing arc {cov:P0} clear, mostly blocked by taller structure."));
+            }
+            foreach (var (r, v) in p.Adds) ratings[r] = Combine(r, ratings.TryGetValue(r, out var cur) ? cur : (double?)null, v * (v > 0 ? arcFactor : 1));
             foreach (var o in p.Offers) offered.Add(o);
             cost += partCost;
             Book(breakdown, p.Category, Math.Max(0, uses.GetValueOrDefault("mass")), partCost);
