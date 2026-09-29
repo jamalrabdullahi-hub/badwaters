@@ -61,7 +61,8 @@ public partial class Shell : Control
         _mapUi = new Control { AnchorRight = 1, AnchorBottom = 1, MouseFilter = MouseFilterEnum.Ignore };
         stack.AddChild(_mapUi);
 
-        stack.AddChild(MapModes());
+        _mapModes = MapModes();
+        stack.AddChild(_mapModes);
         _info = UiTheme.Text("Hover a trade corridor for details.", 13, UiTheme.Dim, wrap: true);
         _info.CustomMinimumSize = new Vector2(330, 0); // fixed width: autowrap labels without one re-layout every frame
         var infoBox = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, OffsetLeft = -360, OffsetRight = -10, OffsetTop = 10 };
@@ -207,6 +208,8 @@ public partial class Shell : Control
     private string? _bannerTheatre;
     private Control _dock = null!;
 
+    private Control _mapModes = null!;
+
     private void Open(string name)
     {
         if (_dockButtons.TryGetValue(name, out var btn)) btn.ButtonPressed = true;
@@ -219,6 +222,7 @@ public partial class Shell : Control
         _mapUi.Visible = name == "Map";
         // Theatre Ops is its own game: no strategic dock, no strategy/design/economy screens while you're in it
         _dock.Visible = !theatre;
+        _mapModes.Visible = !theatre; // strategic map modes and layers belong to the strategic game
         _map.ShowRoutes(!theatre);
         if (name == "Map") return;
         if (name == "Development")
@@ -258,10 +262,13 @@ public partial class Shell : Control
                 };
             }
             _theatre.Visible = true; _theatre.Layer.Visible = true;
-            // a theatre at war with the player opens its own scenario; otherwise the proving-ground trial
+            // a theatre at war with the player opens its own scenario; before a war, your own nation's theatre in
+            // "not at war" mode (track only); the proving-ground trial only for nations with no theatre
             var war = Session.World.Theatres.Values.Where(t => t.AtWar && t.PlayerInvolved).Select(t => t.Id).ToHashSet();
-            var id = DevScreenshot.Arg("scenario") ?? Session.Content.Scenarios.Values.FirstOrDefault(x => war.Contains(x.Theatre))?.Id ?? "intercept-trial";
-            if (_theatre.Scenario.Id != id) _theatre.Load(id);
+            var mine = Session.Content.Scenarios.Values.FirstOrDefault(x => x.Theatre != "" && x.Sides.Values.Any(n => Session.NationId(n) == Session.World.Player));
+            var id = DevScreenshot.Arg("scenario") ?? Session.Content.Scenarios.Values.FirstOrDefault(x => war.Contains(x.Theatre))?.Id ?? mine?.Id ?? "intercept-trial";
+            var nowAtWar = Session.Content.Scenarios.TryGetValue(id, out var target) && war.Contains(target.Theatre);
+            if (_theatre.Scenario.Id != id || (target?.Theatre is { Length: > 0 } && _theatre.Trial.AtWar != nowAtWar)) _theatre.Load(id); // the war started: switch to the live campaign theatre
             var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
             _map.PanScreen(new Vector2(0, -TheatreOps.TopH / 2f)); // map-first: only the command bar covers it
