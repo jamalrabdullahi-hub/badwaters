@@ -1319,5 +1319,100 @@
    "survivability": 6,
    "endurance": 6
   }
+ },
+ {
+  "id": "JPEC1",
+  "designer": "aircraft",
+  "name": "Kawasaki EC-1",
+  "archetype": "Electronic warfare / stand-off jamming",
+  "nation": "JPN",
+  "fromYear": 1986,
+  "ratings": {
+   "detection": 4,
+   "speed": 4,
+   "agility": 2,
+   "reach": 4,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0,
+   "jamming": 7
+  }
+ },
+ {
+  "id": "USEC130H",
+  "designer": "aircraft",
+  "name": "EC-130H Compass Call",
+  "archetype": "Electronic warfare / stand-off jamming",
+  "nation": "USA",
+  "fromYear": 1982,
+  "ratings": {
+   "detection": 5,
+   "speed": 3,
+   "agility": 1,
+   "reach": 6,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0,
+   "jamming": 8
+  }
+ },
+ {
+  "id": "CNY8G",
+  "designer": "aircraft",
+  "name": "Shaanxi Y-8G",
+  "archetype": "Electronic warfare / stand-off jamming",
+  "nation": "CHN",
+  "fromYear": 2004,
+  "ratings": {
+   "detection": 4,
+   "speed": 3,
+   "agility": 1,
+   "reach": 6,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0,
+   "jamming": 7
+  }
+ },
+ {
+  "id": "JPUH60J",
+  "designer": "aircraft",
+  "name": "UH-60J",
+  "archetype": "Search and rescue helicopter",
+  "nation": "JPN",
+  "fromYear": 1991,
+  "ratings": {
+   "detection": 2,
+   "speed": 2,
+   "agility": 3,
+   "reach": 3,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0,
+   "rescue": 7
+  }
+ },
+ {
+  "id": "CNZ8",
+  "designer": "aircraft",
+  "name": "Changhe Z-8",
+  "archetype": "Search and rescue helicopter",
+  "nation": "CHN",
+  "fromYear": 1994,
+  "ratings": {
+   "detection": 2,
+   "speed": 2,
+   "agility": 2,
+   "reach": 3,
+   "signature": 0,
+   "payload": 0,
+   "air-defence": 0,
+   "strike": 0,
+   "rescue": 6
+  }
  }
 ]

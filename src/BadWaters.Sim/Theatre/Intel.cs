@@ -75,7 +75,8 @@ public sealed class IntelService
     {
         foreach (var b in _t.Batteries.Where(b => b.Def.Side == side))
         {
-            if (_t.Emitting(b.Def.Id)) yield return new Sensor(b.Def.Lon, b.Def.Lat, b.RadarKm, b.IsShip ? 150 : 40, b.IsShip ? 20 : 0, b.Radar.R("detection") * b.Degrade, b.Def.Name);
+            var jam = _t.JamFactor(side, b.Def.Lon, b.Def.Lat);
+            if (_t.Emitting(b.Def.Id)) yield return new Sensor(b.Def.Lon, b.Def.Lat, b.RadarKm * jam, b.IsShip ? 150 : 40, b.IsShip ? 20 : 0, b.Radar.R("detection") * b.Degrade * jam, b.Def.Name + (jam < 1 ? " (jammed)" : ""));
             else if (b.IsShip) yield return new Sensor(b.Def.Lon, b.Def.Lat, 0, 40, 20, b.Radar.R("detection") * b.Degrade * 0.6, $"{b.Def.Name} (silent)"); // lookouts and sonar only
         }
         foreach (var u in _t.Scenario.Units.Where(u => u.Side == side && u.Kind == "ship"))
@@ -170,7 +171,7 @@ public sealed class IntelService
             yield return (u.Id, "ship", lon, lat);
         }
         if (_t.Air == null) yield break;
-        foreach (var f in _t.Air.Flights.Where(f => f.Side == side && f.Mission == Mission.AEW && f.Airborne(now) && _t.Emitting(f.Id)))
+        foreach (var f in _t.Air.Flights.Where(f => f.Side == side && f.Mission is Mission.AEW or Mission.Jamming && f.Airborne(now) && _t.Emitting(f.Id)))
         {
             var (lon, lat) = f.Pos(now);
             yield return (f.Id, "air", lon, lat);

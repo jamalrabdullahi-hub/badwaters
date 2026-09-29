@@ -1879,6 +1879,72 @@
     "lat": 26.455,
     "patrolKm": 10,
     "base": "ningbo-nb"
+   },
+   {
+    "id": "blue-jpec1-01",
+    "name": "EC-1 #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPEC1",
+    "lon": 125.313,
+    "lat": 26.889,
+    "patrolKm": 0,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpuh60j-01",
+    "name": "UH-60J #01",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPUH60J",
+    "lon": 125.313,
+    "lat": 26.889,
+    "patrolKm": 0,
+    "base": "naha-ab"
+   },
+   {
+    "id": "blue-jpuh60j-02",
+    "name": "UH-60J #02",
+    "side": "blue",
+    "kind": "air",
+    "preset": "JPUH60J",
+    "lon": 125.313,
+    "lat": 26.889,
+    "patrolKm": 0,
+    "base": "naha-ab"
+   },
+   {
+    "id": "red-cny8g-01",
+    "name": "Y-8G #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNY8G",
+    "lon": 120.719,
+    "lat": 24.785,
+    "patrolKm": 0,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnz8-01",
+    "name": "Z-8 #01",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNZ8",
+    "lon": 120.719,
+    "lat": 24.785,
+    "patrolKm": 0,
+    "base": "longtian-ab"
+   },
+   {
+    "id": "red-cnz8-02",
+    "name": "Z-8 #02",
+    "side": "red",
+    "kind": "air",
+    "preset": "CNZ8",
+    "lon": 120.719,
+    "lat": 24.785,
+    "patrolKm": 0,
+    "base": "longtian-ab"
    }
   ],
   "ato": [
@@ -2409,6 +2475,50 @@
     "count": 4,
     "tot": 807
    }
+  ],
+  "neutral": [
+   [
+    [
+     122.9,
+     30.9
+    ],
+    [
+     125.5,
+     29.0
+    ],
+    [
+     129.6,
+     26.3
+    ]
+   ],
+   [
+    [
+     122.6,
+     26.2
+    ],
+    [
+     126.0,
+     28.6
+    ],
+    [
+     128.4,
+     31.4
+    ]
+   ],
+   [
+    [
+     123.2,
+     23.9
+    ],
+    [
+     127.3,
+     25.2
+    ],
+    [
+     131.0,
+     24.2
+    ]
+   ]
   ]
  },
  {
@@ -4473,6 +4583,40 @@
     "tot": 5460,
     "aimpoint": ""
    }
+  ],
+  "neutral": [
+   [
+    [
+     56.3,
+     26.6
+    ],
+    [
+     54.0,
+     26.4
+    ],
+    [
+     52.0,
+     27.0
+    ],
+    [
+     50.4,
+     28.6
+    ]
+   ],
+   [
+    [
+     33.6,
+     31.6
+    ],
+    [
+     34.2,
+     32.9
+    ],
+    [
+     34.8,
+     34.0
+    ]
+   ]
   ]
  }
 ]

@@ -25,6 +25,8 @@ public sealed record ScenarioDef
     public List<SiteDef> Sites { get; init; } = new();
     public List<BatteryDef> Batteries { get; init; } = new();
     public List<LauncherDef> Launchers { get; init; } = new();
+    /// <summary>Sea lanes for neutral merchant traffic: each a list of [lon, lat] points at sea.</summary>
+    public List<List<double[]>> Neutral { get; init; } = new();
     public List<ScriptedLaunch> Script { get; init; } = new();
     public List<UnitDef> Units { get; init; } = new();
     /// <summary>Air tasking the AI flies for each side (player sides plan their own).</summary>
@@ -127,6 +129,39 @@ public sealed class LauncherState
 }
 
 public sealed record LogEntry(double T, string Kind, string Text);
+
+/// <summary>A neutral merchant ship moving back and forth along a scenario sea lane (game traffic, not real shipping data).</summary>
+public sealed class NeutralShip
+{
+    public required string Id { get; init; }
+    public required string Name { get; init; }
+    public string Flag { get; init; } = "";
+    public required List<double[]> Lane { get; init; }
+    /// <summary>Position along the lane in segments (0..Lane.Count-1).</summary>
+    public double Pos { get; set; }
+    public bool Forward { get; set; } = true;
+    public const double KmPerSec = 0.0075; // ~15 knots
+    public (double Lon, double Lat) At
+    {
+        get
+        {
+            var i = Math.Min((int)Pos, Lane.Count - 2); var f = Pos - i;
+            return (Lane[i][0] + (Lane[i + 1][0] - Lane[i][0]) * f, Lane[i][1] + (Lane[i + 1][1] - Lane[i][1]) * f);
+        }
+    }
+    public (double Lon, double Lat) Heading
+    {
+        get { var i = Math.Min((int)Pos, Lane.Count - 2); var (a, b) = Forward ? (Lane[i], Lane[i + 1]) : (Lane[i + 1], Lane[i]); return (b[0] - a[0], b[1] - a[1]); }
+    }
+    public void Move(double dt)
+    {
+        var i = Math.Min((int)Pos, Lane.Count - 2);
+        var seg = Math.Max(1, Pacing.DistanceKm(Lane[i][0], Lane[i][1], Lane[i + 1][0], Lane[i + 1][1]));
+        Pos += (Forward ? 1 : -1) * KmPerSec * dt / seg;
+        if (Pos >= Lane.Count - 1) { Pos = Lane.Count - 1 - 1e-6; Forward = false; }
+        if (Pos <= 0) { Pos = 0; Forward = true; }
+    }
+}
 public sealed record OrderResult(bool Ok, string Message);
 
 public sealed class InterceptTrial
@@ -137,6 +172,13 @@ public sealed class InterceptTrial
     /// <summary>Interceptors the AI fires per engagement (doctrine). Re-engages if the salvo misses and time allows.</summary>
     public int AiSalvo { get; set; } = 2;
     public List<BatteryState> Batteries { get; } = new();
+    /// <summary>At war: weapons may be used. Not at war the other side is "hostile, not at war": tracked, never attacked.</summary>
+    public bool AtWar { get; set; } = true;
+    public const string NotAtWar = "Not at war: hostile forces can be tracked but not attacked.";
+    /// <summary>Neutral merchant traffic on the scenario's sea lanes: visible to everyone, never a target.</summary>
+    public List<NeutralShip> Neutrals { get; } = new();
+    /// <summary>Radar effectiveness at a point for the victim side: 0.6 under an enemy stand-off jammer, else 1.</summary>
+    public double JamFactor(string victimSide, double lon, double lat) => Air?.Jammer(victimSide == "blue" ? "red" : "blue", lon, lat) != null ? 0.6 : 1;
     /// <summary>EMCON: ids of batteries, ships and AEW flights whose radar is switched off. Silent emitters don't
     /// detect with radar, but can't be found by the enemy's passive listening either (game rule, see IntelRules.EsmKm).</summary>
     public HashSet<string> Silent { get; } = new();
@@ -191,6 +233,13 @@ public sealed class InterceptTrial
         foreach (var b in Batteries.Where(b => !b.IsShip)) b.BaseId = Host(b.Def.Side, b.Def.Lon, b.Def.Lat);
         foreach (var l in Launchers.Where(l => !l.IsShip)) l.BaseId = Host(l.Def.Side, l.Def.Lon, l.Def.Lat);
         Note("info", s.Brief);
+        var nr = new Random(seed * 17 + 5);
+        var flags = new[] { "Panama", "Liberia", "Marshall Is.", "Singapore", "Malta", "Greece", "Hong Kong", "Bahamas" };
+        var k = 0;
+        foreach (var lane in s.Neutral.Where(l => l.Count >= 2))
+            for (var i = 0; i < 3; i++)
+                Neutrals.Add(new NeutralShip { Id = $"mer-{++k}", Name = $"MV {(char)('A' + nr.Next(26))}{(char)('a' + nr.Next(26))}{(char)('a' + nr.Next(26))}ia", Flag = flags[nr.Next(flags.Length)],
+                    Lane = lane, Pos = nr.NextDouble() * (lane.Count - 1), Forward = nr.Next(2) == 0 });
     }
 
     public SiteDef? Site(string id) => Scenario.Sites.FirstOrDefault(x => x.Id == id);
@@ -203,6 +252,7 @@ public sealed class InterceptTrial
 
     public OrderResult Launch(string launcherId, string targetId, int count = 1, string aimpoint = "")
     {
+        if (!AtWar) return new(false, NotAtWar);
         var l = Launchers.FirstOrDefault(x => x.Def.Id == launcherId);
         var site = Site(targetId);
         if (l == null || site == null) return Refuse("Unknown launcher or target.");
@@ -331,6 +381,7 @@ public sealed class InterceptTrial
         foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor;
         Lap("bases");
         Naval?.Tick(_dt, Time);
+        foreach (var n in Neutrals) n.Move(_dt);
         Lap("naval");
         Intel?.Tick(Time);
         Lap("intel");
@@ -348,8 +399,9 @@ public sealed class InterceptTrial
                 foreach (var b in Batteries.Where(b => b.Def.Side != tr.Side && Emitting(b.Def.Id)))
                 {
                     var (lon, lat) = tr.Pos(Time);
-                    if (Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, lon, lat) > b.RadarKm) continue;
-                    var p = Math.Clamp(0.15 + 0.06 * (b.Radar.R("detection") - m(tr).R("signature")) + (tr.Phase(Time) == "boost" ? 0.1 : 0), 0.02, 0.9) * _dt;
+                    var jam = JamFactor(b.Def.Side, b.Def.Lon, b.Def.Lat);
+                    if (Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, lon, lat) > b.RadarKm * jam) continue;
+                    var p = jam * Math.Clamp(0.15 + 0.06 * (b.Radar.R("detection") - m(tr).R("signature")) + (tr.Phase(Time) == "boost" ? 0.1 : 0), 0.02, 0.9) * _dt;
                     if (_rng.NextDouble() < p)
                     {
                         tr.Detected = true; tr.DetectedAt = Time;
@@ -404,6 +456,7 @@ public sealed class InterceptTrial
         var ship = Naval?.Find(shipId);
         if (l == null || ship == null) return new(false, "Unknown launcher or ship.");
         if (ship.Side == l.Def.Side) return new(false, "That ship is on your own side.");
+        if (!AtWar) return new(false, NotAtWar);
         if (!NavalRules.CanHitShips(l.Missile)) return new(false, $"{l.Missile.Name} has no seeker that can find a ship (needs accuracy 6+ or an anti-ship rating).");
         var c = Intel?.Pictures[l.Def.Side].Contacts.GetValueOrDefault(shipId);
         if (c == null || Time - c.LastSeen > IntelRules.StaleAfter) return new(false, "No fresh contact on that ship: find it first (AEW, patrol aircraft, ships or a satellite pass).");
