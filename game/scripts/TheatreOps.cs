@@ -555,6 +555,8 @@ public partial class TheatreLayer : Node2D
         foreach (var b in tr.Batteries)
         {
             if (Fogged(b.Def.Side) && b.IsShip && Seen(b.Def.Id) == null) continue; // enemy ships only when detected
+            var bship = Session.Content.Designs.TryGetValue(b.Def.Radar, out var brd) && Session.Content.Catalog.Frames.TryGetValue(brd.Frame, out var bfr) && bfr.Kind == "ship";
+            if (!Ops.ShowEntity(bship ? Symbols.For(b.Def.Radar, "ship") : "SAMB", b.Def.Side, b.Def.Id)) continue;
             var p = P(b.Def.Lon, b.Def.Lat);
             var k = PxPerKm(b.Def.Lat);
             var c = SideColor(b.Def.Side);
@@ -578,16 +580,17 @@ public partial class TheatreLayer : Node2D
             if (silent) Label(p + new Vector2(0, 12 / zoom), "SILENT", new Color(UiTheme.TacDim, 0.9f));
             var ship = Session.Content.Designs.TryGetValue(b.Def.Radar, out var rd) && Session.Content.Catalog.Frames.TryGetValue(rd.Frame, out var fr) && fr.Kind == "ship";
             Sym(ship ? Symbols.For(b.Def.Radar, "ship") : "SAMB", p, c, b.Def.Side, zoom, Vector2.Up, ship ? 24 : 20);
-            if (!many || zoom > 3.5f) Label(p, many ? $"{b.Def.Name} · {b.Stock}" : $"{b.Def.Name} · radar {b.RadarKm:0} km · reach {b.ReachKm:0} km", c);
+            if (Ops.Show("names") && (!many || zoom > 3.5f)) Label(p, many ? $"{b.Def.Name} · {b.Stock}" : $"{b.Def.Name} · radar {b.RadarKm:0} km · reach {b.ReachKm:0} km", c);
         }
         foreach (var l in tr.Launchers)
         {
             if (Fogged(l.Def.Side) && Seen(l.Def.Id) == null) continue; // mobile launchers hide until seen
+            if (!Ops.ShowEntity(l.Def.Platform == "ground" ? "TEL" : Symbols.For(null, l.Def.Platform), l.Def.Side, l.Def.Id)) continue;
             var p = P(l.Def.Lon, l.Def.Lat);
             var c = SideColor(l.Def.Side);
             Sym(l.Def.Platform == "ground" ? "TEL" : Symbols.For(null, l.Def.Platform), p, c, l.Def.Side, zoom, Vector2.Up, 20);
             if (Ops.Show("strike")) DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
-            if (!many || zoom > 3.5f) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
+            if (Ops.Show("names") && (!many || zoom > 3.5f)) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
         }
         if (tr.Naval != null)
             foreach (var sh in tr.Naval.Ships.Where(x => !Fogged(x.Side)))
@@ -600,11 +603,12 @@ public partial class TheatreLayer : Node2D
                     Label(p0, $"{sh.Name} · sunk", new Color(Red, 0.7f));
                     continue;
                 }
-                if (sh.Moving) DrawDashedLine(p0, P(sh.DestLon!.Value, sh.DestLat!.Value), new Color(SideColor(sh.Side), 0.6f), w, 6 / zoom);
+                if (sh.Moving && Ops.Show("ship-courses")) DrawDashedLine(p0, P(sh.DestLon!.Value, sh.DestLat!.Value), new Color(SideColor(sh.Side), 0.6f), w, 6 / zoom);
                 if (Ops.SelectedShip == sh) { DrawArc(p0, 12 / zoom, 0, Mathf.Tau, 24, Colors.White, w); Label(p0, $"{sh.Name} · {sh.Hp / sh.MaxHp:P0}", SideColor(sh.Side)); }
             }
         foreach (var u in tr.Scenario.Units.Where(u => u.Kind is not ("air" or "aew") && !(tr.Naval?.IsSunk(u.Id) ?? false)))
         {
+            if (!Ops.ShowEntity(Symbols.For(u.Preset, u.Kind), u.Side, u.Id)) continue;
             var (lon, lat) = tr.UnitPos(u);
             var c = SideColor(u.Side);
             if (Fogged(u.Side))
@@ -620,12 +624,13 @@ public partial class TheatreLayer : Node2D
             var st = tr.Naval?.Find(u.Id);
             var uh = st is { Moving: true } ? (P(st.DestLon!.Value, st.DestLat!.Value) - p).Normalized() : Vector2.Up;
             Sym(code, p, c, u.Side, zoom, uh, code is "CV" or "LHD" ? 30 : u.Kind == "sub" ? 20 : 24);
-            if (zoom > 3.5f && (u.Preset.Contains("CV") || u.Preset.Contains("DDH"))) Label(p, u.Name.Split(" #")[0], c);
+            if (Ops.Show("names") && zoom > 3.5f && (u.Preset.Contains("CV") || u.Preset.Contains("DDH"))) Label(p, u.Name.Split(" #")[0], c);
         }
         foreach (var s in tr.Scenario.Sites)
         {
             var p = P(s.Lon, s.Lat);
             var prot = !TargetPolicy.IsLegitimate(s.Class);
+            if (!Ops.ShowEntity(prot ? "CITY" : Symbols.ForSite(s.Type, s.Class), s.Side, s.Id)) continue;
             var c = prot ? Green : SideColor(s.Side);
             Sym(prot ? "CITY" : Symbols.ForSite(s.Type, s.Class), p, c, s.Side, zoom, default, prot ? 18 : 20);
             var status = "";
@@ -642,10 +647,10 @@ public partial class TheatreLayer : Node2D
                     status = (ready > 0 ? $"{ready} ready" : "") + (bs.Type.Components.Any(x => x.Effect == "sorties") && !bs.RunwayOpen ? " · RUNWAY CLOSED" : "") + (bs.Type.Components.Any(x => x.Effect == "launch-pads") && !bs.PadsOk ? " · PADS DOWN" : "");
                 }
             }
-            if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (status.Trim(' ', '·') != "" ? $" · {status.Trim(' ', '·')}" : ""), c);
+            if (Ops.Show("base-names") && (!prot || !many || zoom > 3.5f)) Label(p, prot ? $"{s.Name} · protected" : s.Name + (status.Trim(' ', '·') != "" ? $" · {status.Trim(' ', '·')}" : ""), c);
         }
 
-        foreach (var t in tr.Tracks.Where(t => Ops.Show("tracks") && t.Launched <= tr.Time && (!Fogged(t.Side) || t.Detected)))
+        foreach (var t in tr.Tracks.Where(t => Ops.Show("tracks") && Ops.ShowEntity(Symbols.For(t.Missile.DesignId, "missile"), t.Side, "") && t.Launched <= tr.Time && (!Fogged(t.Side) || t.Detected)))
         {
             var end = t.State == TrackState.Flying ? tr.Time : t.EndedAt;
             var c = SideColor(t.Side);
@@ -718,6 +723,7 @@ public partial class TheatreLayer : Node2D
             var preview = Ops.Preview.Contains(f);
             if (!preview && f.State is FlightState.Landed || f.State == FlightState.Lost && !preview) continue;
             if (Fogged(f.Side)) continue; // enemy flights are drawn from contacts below
+            if (!preview && !Ops.ShowEntity(Symbols.For(f.Type.Id, "air"), f.Side, f.Id)) continue;
             var c = preview ? Colors.White : SideColor(f.Side);
             var sel = Ops.SelectedFlight == f || preview;
             var pts = f.Route.Select(x => P(x.Lon, x.Lat)).ToArray();
@@ -759,7 +765,7 @@ public partial class TheatreLayer : Node2D
                 Sym(Symbols.For(f.Type.Id, "air"), q, c, f.Side, zoom, head, 20);
             }
             if (sel) DrawArc(at, 14 / zoom, 0, Mathf.Tau, 24, Colors.White, w);
-            if (sel || f.Mission is Mission.Strike or Mission.Escort or Mission.SEAD || zoom > 3f) Tag(at, f.Callsign, c);
+            if (Ops.Show("callsigns") && (sel || f.Mission is Mission.Strike or Mission.Escort or Mission.SEAD || zoom > 3f)) Tag(at, f.Callsign, c);
         }
     }
 
@@ -769,8 +775,9 @@ public partial class TheatreLayer : Node2D
     private void DrawAirContacts(float zoom, float w)
     {
         if (Pic == null) return;
-        foreach (var c in Pic.Contacts.Values.Where(c => c.Kind == "air"))
+        foreach (var c in Pic.Contacts.Values.Where(c => c.Kind == "air" && Ops.Show("enemy-air")))
         {
+            if (!Ops.ShowEntity(c.Role switch { "AEW" => "AEW", "Tanker" => "TKR", "Strike" or "SEAD" => "STK", _ => "FTR" }, Ops.ViewSide == "blue" ? "red" : "blue", c.Key)) continue;
             var col = new Color(SideColor(Ops.ViewSide == "blue" ? "red" : "blue"), Fade(c));
             var p = P(c.Lon, c.Lat);
             Sym(c.Role switch { "AEW" => "AEW", "Tanker" => "TKR", "Strike" or "SEAD" => "STK", _ => "FTR" }, p, col, Ops.ViewSide == "blue" ? "red" : "blue", zoom, Vector2.Up, 20);

@@ -17,6 +17,7 @@ public partial class TheatreOps
     public readonly Dictionary<string, bool> Overlay = new()
     {
         ["radar"] = true, ["reach"] = true, ["strike"] = true, ["routes"] = true, ["tracks"] = true, ["labels"] = true, ["reports"] = true,
+        ["ship-courses"] = true, ["enemy-air"] = true, ["names"] = true, ["callsigns"] = true, ["base-names"] = true, ["side-blue"] = true, ["side-red"] = true,
     };
     private static readonly (string Key, string Name)[] OverlayNames =
     {
@@ -30,6 +31,10 @@ public partial class TheatreOps
 
     private void BuildMapMenu(HBoxContainer bar)
     {
+        var fb = new Button { Text = "FILTER", TooltipText = "Map filter: sides, unit classes and overlays (F9 in the dock)" };
+        fb.Pressed += () => Toggle("FILTER");
+        bar.AddChild(fb);
+        return;
         var mb = new MenuButton { Text = "MAP ▾", TooltipText = "Map overlays: switch radar coverage, reach rings, routes... on or off" };
         var pop = mb.GetPopup();
         for (var i = 0; i < OverlayNames.Length; i++) { pop.AddCheckItem(OverlayNames[i].Name, i); pop.SetItemChecked(i, true); }
@@ -189,6 +194,8 @@ public partial class TheatreOps
     /// <summary>Open the planner filled for a mission: target (site id) or a station point, plus a flight template.</summary>
     private void PlanAt(string? siteId, string template, (double Lon, double Lat)? station = null)
     {
+        NewMission(siteId, template, station);
+        return;
         _planStation = station;
         FillPlanner();
         _planTarget.Select(Math.Max(0, _planTargets.IndexOf(siteId ?? "@pt")));

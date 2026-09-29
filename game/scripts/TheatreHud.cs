@@ -20,7 +20,7 @@ public partial class TheatreOps
         ("BDA", "Damage assessment", new Color("e8b04a")), ("RECON", "Recon request", new Color("4fbfee")), ("NAV", "Waypoint / rally", new Color("5cf2b0")),
         ("LOG", "Logistics request", new Color("b89cff")),
     };
-    private static readonly string[] DockOrder = { "FRAG", "OPERATION", "OOB", "INTEL", "REPORTS", "PRIORITIES", "COMMANDER", "LOG", "ATO", "FIRES", "NAVAL", "AIR DEF", "PICTURE", "BASES", "SYNC", "ALERTS", "UNIT" };
+    private static readonly string[] DockOrder = { "MISSION", "FRAG", "OPERATION", "OOB", "INTEL", "REPORTS", "PRIORITIES", "COMMANDER", "FILTER", "LOG", "FIRES", "NAVAL", "AIR DEF", "ATO", "PICTURE", "BASES", "SYNC", "ALERTS", "UNIT" };
     /// <summary>Reports per theatre scenario (kept for the session).</summary>
     private static readonly Dictionary<string, List<MapReport>> AllReports = new();
     public List<MapReport> Reports => AllReports.TryGetValue(Scenario.Id, out var l) ? l : AllReports[Scenario.Id] = new List<MapReport>();

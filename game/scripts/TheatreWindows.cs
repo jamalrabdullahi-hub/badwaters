@@ -82,6 +82,11 @@ public partial class TheatreOps
         Win("REPORTS", "Reports · map notes and SITREP", new Vector2(80, TopH + 60), new Vector2(560, 420), FillReports);
         Win("ALERTS", "Alerts", new Vector2(0, TopH + 12), new Vector2(380, 230), FillAlerts);
         Win("UNIT", "Unit · status and orders", new Vector2(0, TopH + 260), new Vector2(380, 260), FillUnit);
+        Win("MISSION", "Mission creation · air, ground, naval and support to one ToT", new Vector2(360, TopH + 12), new Vector2(940, 700), FillMission);
+        var filter = new TacWindow("Map filter · sides, classes, overlays", new Vector2(14, TopH + 12), new Vector2(330, 720)) { Visible = false };
+        AddChild(filter);
+        _windows["FILTER"] = filter;
+        FillFilter(filter);
         BuildDock();
         Open("ALERTS");
         _windows["ALERTS"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 12);
@@ -89,6 +94,7 @@ public partial class TheatreOps
         // dev aids for screenshots: --silent=id,id  --pick=kind:id  --planat=cap:lon,lat
         foreach (var id in (DevScreenshot.Arg("silent") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries)) Trial.SetEmitting(id, false, id);
         if (DevScreenshot.Arg("pick")?.Split(':') is [var pk, var pid]) { Picked = (pk, pid); Open("UNIT"); }
+        if (DevScreenshot.Arg("mission")?.Split(',') is [var ms, var mp]) { NewMission(ms, "strike"); _mPage = int.Parse(mp); _md.EditRow = 0; RefreshMission(); }
         if (DevScreenshot.Arg("planat")?.Split(':') is [var tpl, var ll] && ll.Split(',') is [var lo, var la]) PlanAt(null, tpl, (double.Parse(lo), double.Parse(la)));
         foreach (var k in (DevScreenshot.Arg("windows") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
             if (_windows.TryGetValue(k.ToUpperInvariant(), out var w)) { w.Visible = true; w.Refresh?.Invoke(); }
@@ -106,7 +112,7 @@ public partial class TheatreOps
             _replay.Add((Trial.Time, Trial.Intel.Pictures[CommandSide].Contacts.Values.Select(c => (c.Lon, c.Lat, c.Kind)).ToList()));
             if (_replay.Count > 600) _replay.RemoveAt(0);
         }
-        foreach (var w in _windows.Values.Where(w => w.Visible && (force || !w.GetGlobalRect().HasPoint(GetGlobalMousePosition())))) w.Refresh?.Invoke();
+        foreach (var (k, w) in _windows.Where(x => x.Value.Visible && x.Key is not "MISSION" && (force || !x.Value.GetGlobalRect().HasPoint(GetGlobalMousePosition())))) w.Refresh?.Invoke();
     }
 
     private static string T(double s) => AirTasking.Clock(s);

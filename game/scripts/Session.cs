@@ -27,7 +27,7 @@ public static class Session
     public static BadWaters.Sim.Theatre.InterceptTrial BuildTheatre(BadWaters.Sim.Theatre.ScenarioDef sc, int seed)
     {
         var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, Profile, Content.PresetInfo, Content.BaseTypes,
-            side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed);
+            side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, stores: Content.Stores);
         t.SiteDamaged += (site, frac) =>
         {
             var nation = NationId(t.Scenario.Sides.GetValueOrDefault(site.Side, ""));
