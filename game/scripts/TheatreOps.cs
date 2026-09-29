@@ -714,6 +714,8 @@ public partial class TheatreLayer : Node2D
             "battery" => tr.Batteries.FirstOrDefault(b => b.Def.Id == pk.Id) is { } b ? (b.Def.Lon, b.Def.Lat) : null,
             "launcher" => tr.Launchers.FirstOrDefault(l => l.Def.Id == pk.Id) is { } l ? (l.Def.Lon, l.Def.Lat) : null,
             "unit" => tr.Scenario.Units.FirstOrDefault(u => u.Id == pk.Id) is { } u ? tr.UnitPos(u) : null,
+            "site" => tr.Site(pk.Id) is { } st ? (st.Lon, st.Lat) : null,
+            "contact" => Ops.Trial.Intel?.Pictures[Ops.CommandSide].Contacts.GetValueOrDefault(pk.Id) is { } ct ? (ct.Lon, ct.Lat) : null,
             _ => tr.Air?.Flights.FirstOrDefault(f => f.Id == pk.Id) is { } f && f.Airborne(tr.Time) ? f.Pos(tr.Time) : null,
         };
         if (at is not { } a) return;

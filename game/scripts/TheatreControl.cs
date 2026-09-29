@@ -65,6 +65,14 @@ public partial class TheatreOps
         if (Trial.Air != null)
             foreach (var f in Trial.Air.Flights.Where(f => f.Side == CommandSide && f.Airborne(Trial.Time)))
             { var (lon, lat) = f.Pos(Trial.Time); Try("flight", f.Id, lon, lat); }
+        // enemy contacts your sensors hold, then any base or site (yours, the enemy's, protected)
+        if (Trial.Intel?.Pictures[CommandSide] is { } pic)
+            foreach (var c in pic.Contacts.Values) Try("contact", c.Key, c.Lon, c.Lat);
+        if (best.Kind == "")
+        {
+            best.D = 14 / zoom;
+            foreach (var s in Scenario.Sites) Try("site", s.Id, s.Lon, s.Lat);
+        }
         if (best.Kind == "") return false;
         Picked = (best.Kind, best.Id);
         if (best.Kind == "unit") SelectedShip = Trial.Naval?.Find(best.Id);
@@ -84,7 +92,9 @@ public partial class TheatreOps
     // ---------------- UNIT window: status and orders for the picked entity ----------------
     private void FillUnit(TacWindow w)
     {
-        if (Picked is not { } p) { w.Line("Left-click one of your units on the map.", UiTheme.TacDim); return; }
+        if (Picked is not { } p) { w.Line("Left-click anything on the map: your units, flights and bases, enemy bases and contacts.", UiTheme.TacDim); return; }
+        if (p.Kind == "site") { InspectSite(w, p.Id); return; }
+        if (p.Kind == "contact") { InspectContact(w, p.Id); return; }
         var (kind, id) = p;
         var row = new HBoxContainer();
         Button Btn(string text, Action a, string tip = "", bool on = false)
@@ -154,6 +164,7 @@ public partial class TheatreOps
             }
         }
         w.Body.AddChild(row);
+        InspectOwn(w, kind, id);
     }
 
     // ---------------- map-driven mission making (added to the right-click menu) ----------------

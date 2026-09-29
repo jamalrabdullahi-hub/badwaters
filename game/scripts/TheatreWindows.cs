@@ -81,7 +81,7 @@ public partial class TheatreOps
         Win("COMMANDER", "Commander · why is my general doing this", new Vector2(580, TopH + 40), new Vector2(480, 420), FillCommander);
         Win("REPORTS", "Reports · map notes and SITREP", new Vector2(80, TopH + 60), new Vector2(560, 420), FillReports);
         Win("ALERTS", "Alerts", new Vector2(0, TopH + 12), new Vector2(380, 230), FillAlerts);
-        Win("UNIT", "Unit · status and orders", new Vector2(0, TopH + 260), new Vector2(380, 260), FillUnit);
+        Win("UNIT", "Inspect · status, BDA, armament, fuel · orders", new Vector2(0, TopH + 260), new Vector2(470, 560), FillUnit);
         Win("LOGISTICS", "Logistics · supplies, routes, orders", new Vector2(360, TopH + 40), new Vector2(900, 640), FillLogistics);
         Win("MISSION", "Mission creation · air, ground, naval and support to one ToT", new Vector2(360, TopH + 12), new Vector2(940, 700), FillMission);
         var filter = new TacWindow("Map filter · sides, classes, overlays", new Vector2(14, TopH + 12), new Vector2(330, 720)) { Visible = false };
@@ -91,7 +91,7 @@ public partial class TheatreOps
         BuildDock();
         Open("ALERTS");
         _windows["ALERTS"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 12);
-        _windows["UNIT"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 256);
+        _windows["UNIT"].Position = new Vector2(GetViewportRect().Size.X - 484, TopH + 256);
         if (DevScreenshot.Arg("lgtab") is { } lt) _lgTab = lt.ToUpperInvariant();
         // dev aids for screenshots: --silent=id,id  --pick=kind:id  --planat=cap:lon,lat
         foreach (var id in (DevScreenshot.Arg("silent") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries)) Trial.SetEmitting(id, false, id);
