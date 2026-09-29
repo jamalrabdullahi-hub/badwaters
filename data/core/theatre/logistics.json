@@ -57,8 +57,8 @@
  ],
  "start": {
   "depot": {
-   "avfuel": 1000,
-   "diesel": 600,
+   "avfuel": 4000,
+   "diesel": 1500,
    "propellant": 120,
    "spares": 12000
   },
@@ -109,7 +109,7 @@
    "name": "Sealift",
    "vehicle": "vessels",
    "cap": 12000,
-   "kmh": 28
+   "kmh": 35
   },
   "air": {
    "name": "Airlift",

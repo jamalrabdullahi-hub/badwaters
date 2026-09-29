@@ -50,6 +50,7 @@ if (cmd == "war")
     }
     return 0;
 }
+if (cmd == "fullwar") return FullWar.Run(args);
 if (cmd == "campaign")
 {
     // campaign [scenario] [hours] [seed]: both sides run by their theatre commanders, headless

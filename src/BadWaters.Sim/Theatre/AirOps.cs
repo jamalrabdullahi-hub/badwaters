@@ -283,34 +283,37 @@ public sealed class AirTasking
             var info = _preset(req.Preset);
             if (info == null) { issues.Add($"Unknown aircraft type {req.Preset}."); continue; }
             // the base with enough idle aircraft of this type that is closest to the objective
-            var pool = Idle(e.Side).Where(u => u.Preset == req.Preset && !reserved.Contains(u.Id) && Usable(u.Id)).GroupBy(u => u.Base)
+            // bases with enough idle aircraft of the type, closest first; the first that can arm and fuel them flies
+            var cands = Idle(e.Side).Where(u => u.Preset == req.Preset && !reserved.Contains(u.Id) && Usable(u.Id)).GroupBy(u => u.Base)
                 .Select(g => (Base: _t.Site(g.Key), Units: g.ToList())).Where(x => x.Base != null && x.Units.Count >= req.Count && BaseCanLaunch(x.Base.Id, req.Mission))
-                .OrderBy(x => Pacing.DistanceKm(x.Base!.Lon, x.Base.Lat, aim.Item1, aim.Item2)).FirstOrDefault();
-            if (pool.Base == null) { issues.Add($"Not enough idle {info.Name} at any single working base for {req.Count} aircraft (runway closed or munitions store destroyed counts as not working)."); continue; }
-            // arm from the base's munition stocks
+                .OrderBy(x => Pacing.DistanceKm(x.Base!.Lon, x.Base.Lat, aim.Item1, aim.Item2)).ToList();
+            if (cands.Count == 0) { issues.Add($"Not enough idle {info.Name} at any single working base for {req.Count} aircraft (runway closed or munitions store destroyed counts as not working)."); continue; }
             var load = new Dictionary<string, StoreLoad>();
             if (Stores != null)
             {
                 load = req.Loadout != null ? req.Loadout.ToDictionary(k => k.Key, k => k.Value) : Stores.Default(req.Preset, req.Mission);
                 var bad = Stores.Validate(req.Preset, load);
                 if (bad.Count > 0) { issues.Add($"{info.Name} loadout: {string.Join("; ", bad)}."); continue; }
-                var shortOf = load.Values.Where(l => l.Qty > 0).GroupBy(l => l.Store).Select(x => (Store: x.Key, Need: x.Sum(y => y.Qty) * req.Count))
-                    .Where(x => Munitions.At(pool.Base.Id, x.Store) - drawn.GetValueOrDefault((pool.Base.Id, x.Store)) < x.Need).ToList();
-                if (shortOf.Count > 0)
-                {
-                    issues.AddRange(shortOf.Select(x => $"Not enough {Stores.Stores.GetValueOrDefault(x.Store)?.Name ?? x.Store} at {pool.Base.Name} for {req.Count}× {info.Name}: need {x.Need}, base has {Munitions.At(pool.Base.Id, x.Store) - drawn.GetValueOrDefault((pool.Base.Id, x.Store))} (theatre {Munitions.Theatre(BasesOf(e.Side), x.Store)})."));
-                    continue;
-                }
-                foreach (var x in load.Values.Where(l => l.Qty > 0)) drawn[(pool.Base.Id, x.Store)] = drawn.GetValueOrDefault((pool.Base.Id, x.Store)) + x.Qty * req.Count;
             }
-            // av fuel for the sortie from the base's tanks (logistics)
-            if (_t.Logistics is { } lg && lg.Node(pool.Base.Id) is { } fuelNode)
+            List<string> Supply(SiteDef b)
             {
-                var fuel = lg.SortieFuel(SortieClass(req.Preset, req.Mission), req.Count);
-                var left = lg.Get(fuelNode, "avfuel") - drawn.GetValueOrDefault((pool.Base.Id, "~avfuel"));
-                if (left < fuel) { issues.Add($"Not enough av fuel at {pool.Base.Name} for {req.Count}× {info.Name}: need {lg.Amount("avfuel", fuel)}, base has {lg.Amount("avfuel", Math.Max(0, left))}. Resupply it (Logistics)."); continue; }
-                drawn[(pool.Base.Id, "~avfuel")] = drawn.GetValueOrDefault((pool.Base.Id, "~avfuel")) + (int)Math.Ceiling(fuel);
+                var why = new List<string>();
+                if (Stores != null)
+                    why.AddRange(load.Values.Where(l => l.Qty > 0).GroupBy(l => l.Store).Select(x => (Store: x.Key, Need: x.Sum(y => y.Qty) * req.Count))
+                        .Where(x => Munitions.At(b.Id, x.Store) - drawn.GetValueOrDefault((b.Id, x.Store)) < x.Need)
+                        .Select(x => $"Not enough {Stores.Stores.GetValueOrDefault(x.Store)?.Name ?? x.Store} at {b.Name} for {req.Count}× {info.Name}: need {x.Need}, base has {Munitions.At(b.Id, x.Store) - drawn.GetValueOrDefault((b.Id, x.Store))} (theatre {Munitions.Theatre(BasesOf(e.Side), x.Store)})."));
+                if (_t.Logistics is { } lg0 && lg0.Node(b.Id) is { } fn0)
+                {
+                    var fuel0 = lg0.SortieFuel(SortieClass(req.Preset, req.Mission), req.Count);
+                    var left0 = lg0.Get(fn0, "avfuel") - drawn.GetValueOrDefault((b.Id, "~avfuel"));
+                    if (left0 < fuel0) why.Add($"Not enough av fuel at {b.Name} for {req.Count}× {info.Name}: need {lg0.Amount("avfuel", fuel0)}, base has {lg0.Amount("avfuel", Math.Max(0, left0))}. Resupply it (Logistics).");
+                }
+                return why;
             }
+            var pool = cands.FirstOrDefault(c => Supply(c.Base!).Count == 0);
+            if (pool.Base == null) { issues.AddRange(Supply(cands[0].Base!)); continue; }
+            foreach (var x in load.Values.Where(l => l.Qty > 0)) drawn[(pool.Base.Id, x.Store)] = drawn.GetValueOrDefault((pool.Base.Id, x.Store)) + x.Qty * req.Count;
+            if (_t.Logistics is { } lg) drawn[(pool.Base.Id, "~avfuel")] = drawn.GetValueOrDefault((pool.Base.Id, "~avfuel")) + (int)Math.Ceiling(lg.SortieFuel(SortieClass(req.Preset, req.Mission), req.Count));
             var prep = AirPacing.PrepSeconds * (_t.Bases.TryGetValue(pool.Base.Id, out var hb) ? hb.PrepFactor : 1);
             var home = pool.Base;
             var dist = Pacing.DistanceKm(home.Lon, home.Lat, aim.Item1, aim.Item2);

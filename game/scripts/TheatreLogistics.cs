@@ -77,7 +77,7 @@ public partial class TheatreOps
             w.Line($"  {c.Def.Name} · {veh} {m.Vehicle} · {m.Cap:0,0} t avg capacity · {tons:0,0} t moving{(c.Damage > 0 ? $" · route {c.Damage:P0} damaged" : "")}");
         }
         w.Head("Transport pool");
-        w.Line("  " + string.Join(" · ", lg.Def.Modes.Select(kv => $"{kv.Value.Vehicle}: {lg.Pool.GetValueOrDefault((CommandSide, kv.Key)) - lg.InUse.GetValueOrDefault((CommandSide, kv.Key))}/{lg.Pool.GetValueOrDefault((CommandSide, kv.Key))} free")));
+        w.Line("  " + string.Join(" · ", lg.Def.Modes.Select(kv => $"{kv.Value.Vehicle}: {lg.Pool.GetValueOrDefault((CommandSide, kv.Key)) - lg.VehiclesOut(CommandSide, kv.Key)}/{lg.Pool.GetValueOrDefault((CommandSide, kv.Key))} free")));
     }
 
     private void LgNodes(TacWindow w)

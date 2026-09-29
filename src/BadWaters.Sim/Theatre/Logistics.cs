@@ -120,6 +120,7 @@ public sealed class Shipment
     public List<string> Path { get; } = new();
     public string Mode { get; set; } = "road";
     public int Vehicles { get; set; }
+    public double Tons { get; set; }
     public double Depart { get; set; }
     public double Arrive { get; set; }
     public double VehiclesBack { get; set; }
@@ -138,7 +139,10 @@ public sealed class LogisticsService
     public List<Shipment> Shipments { get; } = new();
     /// <summary>Transport vehicles per side and mode, and how many are out.</summary>
     public Dictionary<(string Side, string Mode), int> Pool { get; } = new();
-    public Dictionary<(string Side, string Mode), int> InUse { get; } = new();
+    /// <summary>Tonnes of capacity out on the road (a vessel or train carries several loads).</summary>
+    public Dictionary<(string Side, string Mode), double> InUse { get; } = new();
+    public double FreeTons(string side, string mode) => Pool.GetValueOrDefault((side, mode)) * Def.Modes[mode].Cap - InUse.GetValueOrDefault((side, mode));
+    public int VehiclesOut(string side, string mode) => (int)Math.Ceiling(InUse.GetValueOrDefault((side, mode)) / Def.Modes[mode].Cap - 1e-9);
     /// <summary>AI logistics officer per side (on unless the player switches it off).</summary>
     public Dictionary<string, bool> Auto { get; } = new() { ["blue"] = true, ["red"] = true };
     private int _next = 1;
@@ -175,6 +179,15 @@ public sealed class LogisticsService
             if (b.BaseId != "" && Nodes.TryGetValue(b.BaseId, out var hb)) Seed(hb, key, b.Def.Stock);
             foreach (var d in Nodes.Values.Where(n => n.Kind == "depot" && n.Side == b.Def.Side)) Seed(d, key, 2 * b.Def.Stock);
         }
+        // air bases hold av fuel for the aircraft they operate (about five sorties each on top of the standing stock)
+        foreach (var n in Nodes.Values.Where(Magazine))
+        {
+            var ac = t.Scenario.Units.Count(u => u.Kind is "air" or "aew" && u.Base == n.Id);
+            if (ac > 0) { n.Stock["avfuel"] = n.Stock.GetValueOrDefault("avfuel") + ac * 60; n.Baseline["avfuel"] = n.Baseline.GetValueOrDefault("avfuel") + ac * 60; }
+        }
+        // bases are meant to hold the stores they start with (the officer keeps them topped up)
+        foreach (var n in Nodes.Values.Where(Magazine))
+            foreach (var (st, q) in t.Air!.Munitions.ByBase.GetValueOrDefault(n.Id) ?? new()) n.Baseline["store:" + st] = q;
         // depots also hold aircraft stores: twice what the side's bases start with
         if (t.Air is { Stores: not null } air)
             foreach (var d in Nodes.Values.Where(n => n.Kind == "depot"))
@@ -183,6 +196,12 @@ public sealed class LogisticsService
         // routes: from the scenario (built from map data), else a simple road net between each node and its two nearest friends
         var defs = t.Scenario.Logistics?.Corridors ?? new();
         foreach (var c in defs) Corridors[c.Id] = new Corridor { Def = c };
+        foreach (var ship in Nodes.Values.Where(n => n.Kind == "ship"))
+            foreach (var nb in Nodes.Values.Where(m => m.Side == ship.Side && m.Kind is "navalbase" or "depot").OrderBy(m => Km(ship, m)).Take(2))
+            {
+                var id = $"sea-{nb.Id}-{ship.Id}";
+                Corridors[id] = new Corridor { Def = new CorridorDef(id, $"Replenishment {nb.Name[..Math.Min(14, nb.Name.Length)]} – {ship.Name[..Math.Min(14, ship.Name.Length)]}", "sea", ship.Side, nb.Id, ship.Id, Km(nb, ship) * 1.2) };
+            }
         foreach (var n in Nodes.Values.Where(n => !Corridors.Values.Any(c => c.Def.A == n.Id || c.Def.B == n.Id)))
             foreach (var m in Nodes.Values.Where(m => m.Side == n.Side && m != n && m.Kind != "ship").OrderBy(m => Km(n, m)).Take(2))
             {
@@ -200,6 +219,9 @@ public sealed class LogisticsService
 
     // ---------------- stock access (launcher and battery magazines, base store magazines are the existing fields) ----------------
 
+    /// <summary>Bases whose aircraft stores live in the air arm's magazine (AirTasking.Munitions).</summary>
+    private bool Magazine(SupplyNode n) => _t.Air != null && n.Kind is "airbase" or "navalbase" or "garrison";
+
     public double Get(SupplyNode n, string item)
     {
         if (item.StartsWith("design:"))
@@ -207,7 +229,7 @@ public sealed class LogisticsService
             if (n.Kind == "launcher" && _t.Launchers.FirstOrDefault(l => l.Def.Id == n.Id) is { } l && "design:" + l.Def.Missile == item) return l.Stock;
             if (n.Kind == "battery" && _t.Batteries.FirstOrDefault(b => b.Def.Id == n.Id) is { } b && "design:" + b.Def.Interceptor == item) return b.Stock;
         }
-        if (item.StartsWith("store:") && n.Kind is "airbase" && _t.Air != null) return _t.Air.Munitions.At(n.Id, item[6..]);
+        if (item.StartsWith("store:") && Magazine(n)) return _t.Air!.Munitions.At(n.Id, item[6..]);
         return n.Stock.GetValueOrDefault(item);
     }
 
@@ -218,7 +240,7 @@ public sealed class LogisticsService
             if (n.Kind == "launcher" && _t.Launchers.FirstOrDefault(l => l.Def.Id == n.Id) is { } l && "design:" + l.Def.Missile == item) { l.Stock = Math.Max(0, l.Stock + (int)Math.Round(qty)); return; }
             if (n.Kind == "battery" && _t.Batteries.FirstOrDefault(b => b.Def.Id == n.Id) is { } b && "design:" + b.Def.Interceptor == item) { b.Stock = Math.Max(0, b.Stock + (int)Math.Round(qty)); return; }
         }
-        if (item.StartsWith("store:") && n.Kind is "airbase" && _t.Air != null) { _t.Air.Munitions.Add(n.Id, item[6..], (int)Math.Round(qty)); return; }
+        if (item.StartsWith("store:") && Magazine(n)) { _t.Air!.Munitions.Add(n.Id, item[6..], (int)Math.Round(qty)); return; }
         n.Stock[item] = Math.Max(0, n.Stock.GetValueOrDefault(item) + qty);
     }
 
@@ -230,15 +252,39 @@ public sealed class LogisticsService
             if (n.Kind == "launcher" && _t.Launchers.FirstOrDefault(l => l.Def.Id == n.Id) is { } l && "design:" + l.Def.Missile == item) return l.Def.Stock;
             if (n.Kind == "battery" && _t.Batteries.FirstOrDefault(b => b.Def.Id == n.Id) is { } b && "design:" + b.Def.Interceptor == item) return b.Def.Stock;
         }
+        if (item.StartsWith("store:") && Magazine(n)) return Math.Max(n.Baseline.GetValueOrDefault(item), StoreNeed(n).GetValueOrDefault(item));
+        if (item == "avfuel" && Magazine(n)) // aircraft move between bases (dispersal, diverts): fuel follows them
+            return Math.Max(n.Baseline.GetValueOrDefault(item), 60.0 * _t.Scenario.Units.Count(u => u.Kind is "air" or "aew" && !(_t.Air?.Destroyed.Contains(u.Id) ?? false) && (_t.Air?.BaseOf(u) ?? u.Base) == n.Id));
         return n.Baseline.GetValueOrDefault(item);
+    }
+
+    /// <summary>
+    /// Stores a base needs for the aircraft sitting there now (they move: dispersal and diverts): three sorties of the
+    /// most each store appears in any of their default loadouts.
+    /// </summary>
+    public Dictionary<string, double> StoreNeed(SupplyNode n)
+    {
+        var need = new Dictionary<string, double>();
+        if (!Magazine(n) || _t.Air?.Stores is not { } cat) return need;
+        foreach (var u in _t.Scenario.Units.Where(u => u.Kind == "air" && !_t.Air.Destroyed.Contains(u.Id) && _t.Air.BaseOf(u) == n.Id))
+        {
+            if (cat.Template(u.Preset) is not { } tpl) continue;
+            var per = new Dictionary<string, double>();
+            foreach (var name in tpl.Loadouts.Keys)
+                foreach (var g in cat.Default(u.Preset, name).Values.GroupBy(x => x.Store)) per[g.Key] = Math.Max(per.GetValueOrDefault(g.Key), g.Sum(x => x.Qty));
+            foreach (var (k, q) in per) need["store:" + k] = need.GetValueOrDefault("store:" + k) + q * 3;
+        }
+        return need;
     }
 
     public IEnumerable<string> ItemsAt(SupplyNode n)
     {
         var items = new HashSet<string>(n.Stock.Keys.Concat(n.Baseline.Keys));
+        foreach (var k in StoreNeed(n).Keys) items.Add(k);
+        if (Magazine(n)) items.Add("avfuel");
         if (n.Kind == "launcher" && _t.Launchers.FirstOrDefault(l => l.Def.Id == n.Id) is { } l) items.Add("design:" + l.Def.Missile);
         if (n.Kind == "battery" && _t.Batteries.FirstOrDefault(b => b.Def.Id == n.Id) is { } b) items.Add("design:" + b.Def.Interceptor);
-        if (n.Kind == "airbase" && _t.Air?.Munitions.ByBase.GetValueOrDefault(n.Id) is { } st) foreach (var k in st.Keys) items.Add("store:" + k);
+        if (Magazine(n) && _t.Air!.Munitions.ByBase.GetValueOrDefault(n.Id) is { } st) foreach (var k in st.Keys) items.Add("store:" + k);
         return items;
     }
 
@@ -355,12 +401,12 @@ public sealed class LogisticsService
         var m = Def.Modes[mode];
         var tons = Tons(item, qty);
         var need = Math.Max(1, (int)Math.Ceiling(tons / m.Cap));
-        var free = Pool.GetValueOrDefault((side, mode)) - InUse.GetValueOrDefault((side, mode));
         var s = new Shipment { Id = _next++, Side = side, Item = item, Qty = qty, From = from, To = to, Mode = mode, Vehicles = need, Player = player };
         s.Path.AddRange(path.Select(c => c.Def.Id));
         Add(a, item, -qty); // loaded and leaving
         Shipments.Add(s);
-        if (free >= need) Dispatch(s); else s.Note = $"waiting for {need} {m.Vehicle} ({free} free)";
+        s.Tons = tons;
+        if (FreeTons(side, mode) >= tons) Dispatch(s); else s.Note = $"waiting for {m.Vehicle} ({FreeTons(side, mode):0} t free)";
         var eta = s.State == ShipmentState.Moving ? $"arrives in {(s.Arrive - _t.Time) / 3600:0.0} h" : s.Note;
         var msg = $"{Amount(item, qty)} {ItemName(item)} {a.Name} → {b.Name} by {m.Name.ToLowerInvariant()} ({need} {m.Vehicle}, {tons:0} t), {eta}.";
         _t.Report("logistics", msg);
@@ -370,9 +416,11 @@ public sealed class LogisticsService
     private string ChooseMode(string side, SupplyNode a, SupplyNode b, string item, double qty)
     {
         var tons = Tons(item, qty);
-        var urgent = b.Short.Contains(item) || DaysLeft(b, item) < 0.5;
-        bool Free(string mode, int need) => Pool.GetValueOrDefault((side, mode)) - InUse.GetValueOrDefault((side, mode)) >= need;
+        var urgent = b.Short.Contains(item) || DaysLeft(b, item) < 0.5 || Get(b, item) < 1;
+        bool Free(string mode, int need) => FreeTons(side, mode) >= tons;
+        if (urgent && tons <= 200 && Free("air", 1)) return "air"; // empty or about to run out: fly it in
         if (Route(side, a.Id, b.Id, "road") == null && Route(side, a.Id, b.Id, "sea") is { } sp && sp.Any(c => c.Def.Mode == "sea")) return "sea"; // islands
+        if (b.Kind == "ship" && tons <= 20 && Free("heli", 1) && Route(side, a.Id, b.Id, "heli") != null) return "heli"; // vertical replenishment
         if (b.Kind == "ship" || Route(side, a.Id, b.Id, "sea") is { } sr && sr.Any(c => c.Def.Mode == "sea") && tons > 500) return "sea";
         if (tons > 300 && Route(side, a.Id, b.Id, "rail") is { } rr && rr.Any(c => c.Def.Mode == "rail") && Free("rail", 1)) return "rail";
         if (Route(side, a.Id, b.Id, "road") == null) return "air";
@@ -388,7 +436,7 @@ public sealed class LogisticsService
         hours /= Math.Max(Def.Efficiency.Min, Nodes[s.To].Factor); // last leg: off-route and altitude penalties
         s.Depart = _t.Time; s.Arrive = _t.Time + hours * 3600; s.VehiclesBack = s.Arrive + hours * 3600;
         s.State = ShipmentState.Moving; s.Note = "";
-        InUse[(s.Side, s.Mode)] = InUse.GetValueOrDefault((s.Side, s.Mode)) + s.Vehicles;
+        InUse[(s.Side, s.Mode)] = InUse.GetValueOrDefault((s.Side, s.Mode)) + s.Tons;
     }
 
     /// <summary>Active vehicles per corridor (outbound loads only), for route readouts.</summary>
@@ -446,7 +494,7 @@ public sealed class LogisticsService
     private void Lose(Shipment s, string why)
     {
         s.State = ShipmentState.Lost; s.Note = why;
-        InUse[(s.Side, s.Mode)] = Math.Max(0, InUse.GetValueOrDefault((s.Side, s.Mode)) - s.Vehicles);
+        if (s.Depart > 0 || s.State != ShipmentState.Queued) InUse[(s.Side, s.Mode)] = Math.Max(0, InUse.GetValueOrDefault((s.Side, s.Mode)) - s.Tons);
         Pool[(s.Side, s.Mode)] = Math.Max(0, Pool.GetValueOrDefault((s.Side, s.Mode)) - (int)Math.Ceiling(s.Vehicles * 0.5)); // some vehicles don't come back
         _t.Report("logistics", $"{Amount(s.Item, s.Qty)} {ItemName(s.Item)} for {Nodes[s.To].Name} {why}.");
     }
@@ -520,11 +568,11 @@ public sealed class LogisticsService
         }
         foreach (var s in Shipments.Where(s => s.State == ShipmentState.Delivered && s.VehiclesBack > 0 && now >= s.VehiclesBack))
         {
-            InUse[(s.Side, s.Mode)] = Math.Max(0, InUse.GetValueOrDefault((s.Side, s.Mode)) - s.Vehicles);
+            InUse[(s.Side, s.Mode)] = Math.Max(0, InUse.GetValueOrDefault((s.Side, s.Mode)) - s.Tons);
             s.VehiclesBack = 0;
         }
         foreach (var s in Shipments.Where(s => s.State == ShipmentState.Queued).ToList())
-            if (Pool.GetValueOrDefault((s.Side, s.Mode)) - InUse.GetValueOrDefault((s.Side, s.Mode)) >= s.Vehicles) Dispatch(s);
+            if (FreeTons(s.Side, s.Mode) >= s.Tons) Dispatch(s);
         if (now < _nextHour) return;
         var hours = Math.Max(1, (now - (_nextHour - 3600)) / 3600);
         _nextHour = now + 3600;
@@ -587,7 +635,7 @@ public sealed class LogisticsService
                 var baseQty = BaselineOf(n, item);
                 if (baseQty <= 0) continue;
                 var have = Get(n, item) + inbound.Where(s => s.To == n.Id && s.Item == item).Sum(s => s.Qty);
-                if (have >= baseQty * Def.RequestShare && !n.Short.Contains(item)) continue;
+                if (have >= baseQty * Def.RequestShare && !n.Short.Contains(item) && DaysLeft(n, item) >= 2) continue;
                 var want = baseQty - have;
                 if (want <= 0) continue;
                 // launchers and batteries reload from their host base first (same site, no transport)
@@ -604,6 +652,16 @@ public sealed class LogisticsService
                 var avail = source.Reserve ? Get(source, item) : Get(source, item) - BaselineOf(source, item) * Def.KeepShare;
                 var qty = Math.Floor(Math.Min(want, avail));
                 if (qty < 1) continue;
+                // an empty or nearly-dry point gets a first slice by air while the bulk follows by surface
+                var urgent = n.Short.Contains(item) || Get(n, item) < 1 || DaysLeft(n, item) < 0.5;
+                var airCap = 150 / Math.Max(1e-6, Tons(item, 1));
+                if (urgent && Tons(item, qty) > 200 && FreeTons(side, "air") >= 150 && Route(side, source.Id, n.Id, "air") != null)
+                {
+                    var first = Math.Floor(Math.Min(qty, airCap));
+                    Order(side, item, first, source.Id, n.Id, "air");
+                    qty -= first;
+                    if (qty < 1) continue;
+                }
                 Order(side, item, qty, source.Id, n.Id);
             }
         }
