@@ -1,6 +1,8 @@
 [
  {"id": "relief", "name": "Relief / elevation", "group": "GEOGRAPHY", "kind": "shader", "on": true},
  {"id": "lakes", "name": "Rivers and lakes", "group": "GEOGRAPHY", "kind": "lines", "file": "rivers.json", "color": "6fb4e0", "alpha": 0.55, "minZoom": 0.4, "on": true},
+ {"id": "contours-major", "name": "Contours (1000 m)", "group": "GEOGRAPHY", "kind": "lines", "file": "contours-major.json", "color": "e2cf9e", "alpha": 0.38, "minZoom": 0.8, "on": true},
+ {"id": "contours", "name": "Contours (detail)", "group": "GEOGRAPHY", "kind": "lines", "file": "contours.json", "color": "e2cf9e", "alpha": 0.22, "minZoom": 2.0, "on": true},
  {"id": "depth", "name": "Bathymetry", "group": "GEOGRAPHY", "kind": "shader", "on": true},
  {"id": "marine", "name": "Sea and strait names", "group": "GEOGRAPHY", "kind": "points", "file": "marine.json", "color": "7fb7d8", "minZoom": 0.5, "maxRank": 4, "on": false},
  {"id": "grid", "name": "Sector grid", "group": "GEOGRAPHY", "kind": "grid", "on": true},

@@ -38,7 +38,9 @@ public partial class LineLayer : MeshInstance2D
     {
         MinZoom = d.MinZoom;
         Modulate = new Color(d.Color) { A = d.Alpha };
-        using var doc = JsonDocument.Parse(System.IO.File.ReadAllText(Path.Combine(Session.DataDir(), "geo", d.File!)));
+        var file = Path.Combine(Session.DataDir(), "geo", d.File!);
+        if (!System.IO.File.Exists(file)) { Mesh = new ArrayMesh(); return; } // optional data (e.g. contours not built yet)
+        using var doc = JsonDocument.Parse(System.IO.File.ReadAllText(file));
         var verts = new List<Vector2>();
         foreach (var ln in doc.RootElement.GetProperty("lines").EnumerateArray())
         {

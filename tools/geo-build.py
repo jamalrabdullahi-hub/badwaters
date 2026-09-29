@@ -172,4 +172,29 @@ if os.path.exists(bm):
     sat.save(os.path.join(OUT, "satellite.jpg"), quality=88, optimize=True)
     sizes["satellite.jpg"] = os.path.getsize(os.path.join(OUT, "satellite.jpg"))
     print(f"satellite.jpg Mercator {sat.size[0]}x{sat.size[1]}")
+# ---- detail satellite tiles: the same Blue Marble at full resolution (21600 wide), Mercator, cut into 1024 px tiles
+# (sat/<col>_<row>.jpg) that the game streams in only for the visible area when zoomed in. Built strip by strip to save memory.
+if os.path.exists(bm):
+    TW, T = 21600, 1024
+    src = Image.open(bm).convert("RGB")
+    sw, sh = src.size
+    H2 = round(TW * (YMAX - YMIN) / 360)
+    tdir = os.path.join(OUT, "sat"); os.makedirs(tdir, exist_ok=True)
+    cols, rows = math.ceil(TW / T), math.ceil(H2 / T)
+    total = 0
+    for tr in range(rows):
+        h = min(T, H2 - tr * T)
+        strip = Image.new("RGB", (TW, h))
+        for r in range(h):
+            y = YMAX - (tr * T + r + 0.5) / H2 * (YMAX - YMIN)
+            lat = math.degrees(2 * math.atan(math.exp(math.radians(y))) - math.pi / 2)
+            s = min(sh - 1, max(0, int((90 - lat) / 180 * sh)))
+            strip.paste(src.crop((0, s, sw, s + 1)).resize((TW, 1)), (0, r))
+        for tc in range(cols):
+            f = os.path.join(tdir, f"{tc}_{tr}.jpg")
+            strip.crop((tc * T, 0, min(TW, tc * T + T), h)).save(f, quality=80, optimize=True)
+            total += os.path.getsize(f)
+    write("sat/tiles.json", {"source": "NASA Blue Marble Next Generation (public domain)", "width": TW, "height": H2, "tile": T, "cols": cols, "rows": rows, "yMax": YMAX, "yMin": YMIN})
+    sizes["sat/ tiles"] = total
+    print(f"sat tiles {cols}x{rows} of {T}px, {total / 1e6:.1f} MB")
 print("sizes:", {k: f"{v / 1e6:.2f} MB" for k, v in sizes.items()}, f"total {sum(sizes.values()) / 1e6:.1f} MB")

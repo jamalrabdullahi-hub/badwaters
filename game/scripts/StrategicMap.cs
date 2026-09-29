@@ -65,6 +65,8 @@ public partial class StrategicMap : Node2D
         _fine = new MeshInstance2D { Mesh = Session.LandMeshes["50m"], Material = _land };
         if (DevScreenshot.Arg("no-land") == null) { _base.AddChild(_coarse); _base.AddChild(_fine); }
 
+        _sat = new SatTiles { OnLoaded = Redraw };
+        _base.AddChild(_sat);
         _grid = new GridLayer { Visible = DevScreenshot.Arg("no-grid") == null };
         _base.AddChild(_grid);
         foreach (var d in MapLayerDef.Load())
@@ -102,6 +104,9 @@ public partial class StrategicMap : Node2D
         UpdateLod();
     }
 
+    private SatTiles _sat = null!;
+    private int _mode;
+
     private void UpdateLod()
     {
         var fine = _cam.Zoom.X >= DetailZoom;
@@ -135,6 +140,7 @@ public partial class StrategicMap : Node2D
     {
         _grid.QueueRedraw();
         var z = _cam?.Zoom.X ?? 1;
+        if (_sat != null) { _sat.Visible = _mode == Satellite && z >= SatTiles.FromZoom; _sat.QueueRedraw(); }
         foreach (var (id, n) in _layers)
         {
             n.Visible = _on.Contains(id) && (n is not LineLayer l || z >= l.MinZoom);
@@ -160,6 +166,7 @@ public partial class StrategicMap : Node2D
 
     public void SetMode(int mode)
     {
+        _mode = mode;
         _land.SetShaderParameter("mode", mode);
         _sea.SetShaderParameter("mode", mode);
         _grid.Dark = mode != Topographic;
