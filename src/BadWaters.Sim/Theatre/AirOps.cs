@@ -303,6 +303,14 @@ public sealed class AirTasking
                 }
                 foreach (var x in load.Values.Where(l => l.Qty > 0)) drawn[(pool.Base.Id, x.Store)] = drawn.GetValueOrDefault((pool.Base.Id, x.Store)) + x.Qty * req.Count;
             }
+            // av fuel for the sortie from the base's tanks (logistics)
+            if (_t.Logistics is { } lg && lg.Node(pool.Base.Id) is { } fuelNode)
+            {
+                var fuel = lg.SortieFuel(SortieClass(req.Preset, req.Mission), req.Count);
+                var left = lg.Get(fuelNode, "avfuel") - drawn.GetValueOrDefault((pool.Base.Id, "~avfuel"));
+                if (left < fuel) { issues.Add($"Not enough av fuel at {pool.Base.Name} for {req.Count}× {info.Name}: need {lg.Amount("avfuel", fuel)}, base has {lg.Amount("avfuel", Math.Max(0, left))}. Resupply it (Logistics)."); continue; }
+                drawn[(pool.Base.Id, "~avfuel")] = drawn.GetValueOrDefault((pool.Base.Id, "~avfuel")) + (int)Math.Ceiling(fuel);
+            }
             var prep = AirPacing.PrepSeconds * (_t.Bases.TryGetValue(pool.Base.Id, out var hb) ? hb.PrepFactor : 1);
             var home = pool.Base;
             var dist = Pacing.DistanceKm(home.Lon, home.Lat, aim.Item1, aim.Item2);
@@ -381,7 +389,9 @@ public sealed class AirTasking
             _next++;
             _calls[e.Side] = _calls.GetValueOrDefault(e.Side) + flights.Count;
             foreach (var f in flights) { Flights.Add(f); foreach (var a in f.Aircraft) Tasked.Add(a); }
-            foreach (var ((b, s), n) in drawn) Munitions.Add(b, s, -n);
+            foreach (var ((b, s), n) in drawn)
+                if (s == "~avfuel") { if (_t.Logistics?.Node(b) is { } fn) _t.Logistics.Consume(fn, "avfuel", n); }
+                else Munitions.Add(b, s, -n);
             if (pkg != null) Packages.Add(pkg);
             _t.Report("ato", pkg != null
                 ? $"{Side(e.Side)} ATO: {pkg.Name} → {target!.Name}, TOT T+{Clock(e.Tot)}, {flights.Count} flights ({string.Join(", ", flights.Select(f => $"{f.Callsign} {f.Aircraft.Count}× {f.Type.Name} {f.Mission}"))})."
@@ -595,6 +605,10 @@ public sealed class AirTasking
         _t.Report("air", $"{f.Callsign}: {w.Name} moved; take-off T+{Clock(f.Takeoff)}, lands T+{Clock(f.LandAt)}.");
         return "";
     }
+
+    /// <summary>Airframe class for av-fuel use per sortie (logistics data keys).</summary>
+    public string SortieClass(string preset, Mission m) =>
+        m switch { Mission.Tanker => "tanker", Mission.AEW => "aew", Mission.Jamming => "jamming", _ => Stores?.Template(preset)?.Id ?? "default" };
 
     /// <summary>A ship contact from the side's own picture as a strike aimpoint (fresh contacts only).</summary>
     private SiteDef? ShipTarget(string side, string key, out string? why)

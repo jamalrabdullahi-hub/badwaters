@@ -28,7 +28,9 @@ public sealed class ShipState
     public List<LauncherState> Launchers { get; } = new();
     public UnitDef? Unit { get; init; }
     public bool Moving => DestLon != null && !Sunk;
-    public double SpeedKmPerSec => Kind == "sub" ? NavalRules.SubKmPerSec : NavalRules.ShipKmPerSec * (Hp < MaxHp / 2 ? 0.5 : 1);
+    public double SpeedKmPerSec => (Kind == "sub" ? NavalRules.SubKmPerSec : NavalRules.ShipKmPerSec * (Hp < MaxHp / 2 ? 0.5 : 1)) * (OutOfFuel ? 0.3 : 1);
+    /// <summary>Out of diesel (logistics): crawls at 30% speed until resupplied.</summary>
+    public bool OutOfFuel { get; set; }
 }
 
 public static class NavalRules

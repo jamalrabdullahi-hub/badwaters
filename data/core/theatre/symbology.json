@@ -150,7 +150,8 @@
  "siteTypes": {
   "airbase": "AB",
   "navalbase": "NB",
-  "garrison": "C2"
+  "garrison": "C2",
+  "depot": "AMO"
  },
  "siteClasses": {
   "population-centre": "CITY",

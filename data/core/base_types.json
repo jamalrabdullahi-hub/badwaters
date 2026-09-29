@@ -169,5 +169,47 @@
     "capacity": 0
    }
   ]
+ },
+ {
+  "id": "depot",
+  "name": "Theatre supply depot",
+  "components": [
+   {
+    "id": "fuel",
+    "name": "Fuel tank farm",
+    "hardness": 2,
+    "repairPerHour": 4,
+    "effect": "fuel",
+    "priority": 1,
+    "capacity": 0
+   },
+   {
+    "id": "munitions",
+    "name": "Munitions bunkers",
+    "hardness": 6,
+    "repairPerHour": 3,
+    "effect": "munitions",
+    "priority": 2,
+    "capacity": 0
+   },
+   {
+    "id": "stores",
+    "name": "Warehouses (spares)",
+    "hardness": 1,
+    "repairPerHour": 6,
+    "effect": "stores",
+    "priority": 3,
+    "capacity": 0
+   },
+   {
+    "id": "transfer",
+    "name": "Rail sidings & loading yards",
+    "hardness": 2,
+    "repairPerHour": 8,
+    "effect": "transfer",
+    "priority": 4,
+    "capacity": 0
+   }
+  ]
  }
 ]

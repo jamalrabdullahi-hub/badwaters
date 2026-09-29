@@ -33,6 +33,8 @@ public sealed class GameContent
     public Dictionary<string, BadWaters.Sim.Command.DoctrineProfile> Doctrines { get; } = new();
     /// <summary>Aircraft stores, stations and default loadouts (data/core/theatre/stores.json).</summary>
     public BadWaters.Sim.Theatre.StoresCatalog? Stores { get; set; }
+    /// <summary>Theatre logistics rules (data/core/theatre/logistics.json).</summary>
+    public BadWaters.Sim.Theatre.LogisticsDef? Logistics { get; set; }
     public Dictionary<string, BadWaters.Sim.Economy.Disposition> Dispositions { get; } = new();
     public BadWaters.Sim.Economy.Disposition DispositionFor(string nation) =>
         Dispositions.TryGetValue(nation, out var d) ? d : Dispositions.GetValueOrDefault("default") ?? new BadWaters.Sim.Economy.Disposition();
@@ -119,6 +121,7 @@ public sealed class GameContent
         foreach (var x in l.Load<BadWaters.Sim.Economy.NationEconomyDef>("economy/nation_economies.json")) g.Geo.Nations[x.Id] = x;
         foreach (var x in l.Load<BadWaters.Sim.Economy.SupplierDef>("economy/suppliers.json")) g.Geo.Suppliers[x.Id] = x;
         g.Stores = l.LoadObject<BadWaters.Sim.Theatre.StoresCatalog>("theatre/stores.json");
+        g.Logistics = l.LoadObject<BadWaters.Sim.Theatre.LogisticsDef>("theatre/logistics.json");
         var dl = l.LoadFile("theatre/doctrine.json");
         var def = dl.GetValueOrDefault("default");
         foreach (var (id, obj) in dl)

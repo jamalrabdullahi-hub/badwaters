@@ -25,6 +25,8 @@ public sealed record ScenarioDef
     public List<SiteDef> Sites { get; init; } = new();
     public List<BatteryDef> Batteries { get; init; } = new();
     public List<LauncherDef> Launchers { get; init; } = new();
+    /// <summary>Logistics terrain and corridors (tools/logistics-build.py).</summary>
+    public ScenarioLogistics? Logistics { get; init; }
     /// <summary>Sea lanes for neutral merchant traffic: each a list of [lon, lat] points at sea.</summary>
     public List<List<double[]>> Neutral { get; init; } = new();
     public List<ScriptedLaunch> Script { get; init; } = new();
@@ -204,6 +206,8 @@ public sealed class InterceptTrial
     /// <summary>One autonomous commander per side (both always exist; a side under direct player control pauses its own).</summary>
     public Dictionary<string, BadWaters.Sim.Command.Commander> Commanders { get; } = new();
     public IntelService? Intel { get; set; }
+    /// <summary>Theatre logistics (supplies in nodes, transport, the AI logistics officer). Optional.</summary>
+    public LogisticsService? Logistics { get; set; }
     public NavalForces? Naval { get; set; }
     private double _nextAiNaval = 300;
 
@@ -242,7 +246,15 @@ public sealed class InterceptTrial
                     Lane = lane, Pos = nr.NextDouble() * (lane.Count - 1), Forward = nr.Next(2) == 0 });
     }
 
-    public SiteDef? Site(string id) => Scenario.Sites.FirstOrDefault(x => x.Id == id);
+    public SiteDef? Site(string id) => id.StartsWith("corridor:") ? CorridorSite(id[9..]) : Scenario.Sites.FirstOrDefault(x => x.Id == id);
+
+    /// <summary>A supply route as a strike aimpoint (its midpoint); logistics routes are legitimate military targets.</summary>
+    public SiteDef? CorridorSite(string id)
+    {
+        if (Logistics?.Corridors.GetValueOrDefault(id) is not { } c) return null;
+        var a = Logistics.Nodes[c.Def.A]; var b = Logistics.Nodes[c.Def.B];
+        return new SiteDef("corridor:" + id, c.Def.Name, c.Def.Side, "logistics", (a.Lon + b.Lon) / 2, (a.Lat + b.Lat) / 2, "corridor");
+    }
     private void Note(string kind, string text) => Log.Add(new LogEntry(Time, kind, text));
     public void Report(string kind, string text) => Note(kind, text);
     /// <summary>Air tasking layer (packages, flights). Optional; set by the host after construction.</summary>
@@ -262,6 +274,7 @@ public sealed class InterceptTrial
         if (dist > l.ReachKm) return Refuse($"{site.Name} is out of reach ({dist:0} km, reach {l.ReachKm:0} km from {l.Missile.Sources("reach")}).");
         if (l.Stock <= 0) return Refuse($"{l.Def.Name} has no missiles left.");
         if (l.BaseId != "" && Bases.TryGetValue(l.BaseId, out var hostBase) && !hostBase.PadsOk) return Refuse($"{l.Def.Name} can't fire: launch pads at {hostBase.Site.Name} are damaged.");
+        if (Logistics != null && !Logistics.Fuel(l, Math.Min(count, l.Stock), out var dry)) return Refuse(dry);
         if (Bases.TryGetValue(site.Id, out var tb))
         {
             if (aimpoint == "" || !tb.Components.ContainsKey(aimpoint)) aimpoint = AimFor(l.Def.Side, tb);
@@ -378,7 +391,8 @@ public sealed class InterceptTrial
         if (Profile != null) _sw.Restart();
         Time += _dt;
         foreach (var b in Bases.Values) b.Repair(_dt);
-        foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor;
+        foreach (var b in Batteries.Where(b => b.BaseId != "")) b.Degrade = Bases[b.BaseId].SensorFactor * (Logistics?.Readiness(b.Def.Id) ?? 1);
+        if (Logistics != null) { foreach (var b in Bases.Values) b.Supply = Logistics.Readiness(b.Site.Id); Logistics.Tick(Time); }
         Lap("bases");
         Naval?.Tick(_dt, Time);
         foreach (var n in Neutrals) n.Move(_dt);
@@ -428,6 +442,7 @@ public sealed class InterceptTrial
             tr.State = TrackState.Impacted; tr.EndedAt = Time;
             if (tr.TargetShip != "") { Note("impact", ShipImpact(tr)); continue; }
             Hits[tr.Target.Id] = Hits.GetValueOrDefault(tr.Target.Id) + 1;
+            if (tr.Target.Id.StartsWith("corridor:")) { Logistics?.HitCorridor(tr.Target.Id[9..], tr.Missile.R("punch"), $"track {tr.Id}"); continue; }
             var effect = Bases.TryGetValue(tr.Target.Id, out var hb) ? " · " + ApplyHit(tr.Side, hb, tr.Aimpoint, tr.Missile.R("punch"), tr.Missile.R("accuracy"), 0.2, "impact report") : "";
             Note("impact", $"Track {tr.Id} hit {tr.Target.Name} (punch {tr.Missile.R("punch"):0} from {tr.Missile.Sources("punch")}){effect}.");
         }
@@ -530,6 +545,7 @@ public sealed class InterceptTrial
         var comp = b.Components[hitId];
         var dmg = DamageRules.Damage(punch, comp.Def.Hardness, direct);
         comp.Integrity = Math.Max(0, comp.Integrity - dmg);
+        Logistics?.OnComponentHit(b, comp, dmg);
         SiteDamaged?.Invoke(b.Site, dmg / 100.0 / Math.Max(1, b.Components.Count));
         var extra = Air?.GroundLosses(b, comp.Def.Effect) ?? "";
         Intel?.Report(attacker, b, hitId, reportConfidence, reportSource, Time);

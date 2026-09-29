@@ -330,6 +330,42 @@
     "lon": 121.55,
     "lat": 29.87,
     "type": ""
+   },
+   {
+    "id": "blue-depot-1",
+    "name": "Blue Theatre Depot 1",
+    "side": "blue",
+    "class": "logistics",
+    "lon": 131.16,
+    "lat": 33.6,
+    "type": "depot"
+   },
+   {
+    "id": "blue-depot-2",
+    "name": "Blue Theatre Depot 2",
+    "side": "blue",
+    "class": "logistics",
+    "lon": 131.33,
+    "lat": 32.0,
+    "type": "depot"
+   },
+   {
+    "id": "red-depot-1",
+    "name": "Red Theatre Depot 1",
+    "side": "red",
+    "class": "logistics",
+    "lon": 118.12,
+    "lat": 27.62,
+    "type": "depot"
+   },
+   {
+    "id": "red-depot-2",
+    "name": "Red Theatre Depot 2",
+    "side": "red",
+    "class": "logistics",
+    "lon": 122.32,
+    "lat": 30.43,
+    "type": "depot"
    }
   ],
   "batteries": [
@@ -2519,7 +2555,707 @@
      24.2
     ]
    ]
-  ]
+  ],
+  "logistics": {
+   "nodes": {
+    "naha-ab": {
+     "elev": 20,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "nyutabaru-ab": {
+     "elev": 58,
+     "offRouteKm": 24.4,
+     "factor": 0.951
+    },
+    "tsuiki-ab": {
+     "elev": 11,
+     "offRouteKm": 18.3,
+     "factor": 0.963
+    },
+    "kanoya-ab": {
+     "elev": 58,
+     "offRouteKm": 41.0,
+     "factor": 0.918
+    },
+    "sasebo-nb": {
+     "elev": 8,
+     "offRouteKm": 1.8,
+     "factor": 0.996
+    },
+    "amami-gs": {
+     "elev": 48,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "miyako-gs": {
+     "elev": 54,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "ishigaki-gs": {
+     "elev": 74,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "longtian-ab": {
+     "elev": 29,
+     "offRouteKm": 36.5,
+     "factor": 0.927
+    },
+    "shuimen-ab": {
+     "elev": 443,
+     "offRouteKm": 7.5,
+     "factor": 0.985
+    },
+    "luqiao-ab": {
+     "elev": 3,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "jinjiang-ab": {
+     "elev": 6,
+     "offRouteKm": 2.2,
+     "factor": 0.996
+    },
+    "zhangzhou-ab": {
+     "elev": 21,
+     "offRouteKm": 3.3,
+     "factor": 0.993
+    },
+    "wuyishan-ab": {
+     "elev": 217,
+     "offRouteKm": 12.5,
+     "factor": 0.975
+    },
+    "ningbo-nb": {
+     "elev": -74,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "daishan-ab": {
+     "elev": 17,
+     "offRouteKm": 5.0,
+     "factor": 0.99
+    },
+    "blue-depot-1": {
+     "elev": 22,
+     "offRouteKm": 32.0,
+     "factor": 0.936
+    },
+    "blue-depot-2": {
+     "elev": 29,
+     "offRouteKm": 18.1,
+     "factor": 0.964
+    },
+    "red-depot-1": {
+     "elev": 544,
+     "offRouteKm": 7.3,
+     "factor": 0.985
+    },
+    "red-depot-2": {
+     "elev": 36,
+     "offRouteKm": 72.9,
+     "factor": 0.854
+    },
+    "pac3-naha-ab": {
+     "elev": 56,
+     "offRouteKm": 6.7,
+     "factor": 0.987
+    },
+    "pac3-nyutabaru-ab": {
+     "elev": -3,
+     "offRouteKm": 20.7,
+     "factor": 0.959
+    },
+    "pac3-tsuiki-ab": {
+     "elev": -3,
+     "offRouteKm": 24.5,
+     "factor": 0.951
+    },
+    "pac3-kanoya-ab": {
+     "elev": 33,
+     "offRouteKm": 47.5,
+     "factor": 0.905
+    },
+    "pac3-sasebo-nb": {
+     "elev": 59,
+     "offRouteKm": 3.8,
+     "factor": 0.992
+    },
+    "pac3-miyako-gs": {
+     "elev": 65,
+     "offRouteKm": 6.7,
+     "factor": 0.987
+    },
+    "hq9-longtian-ab": {
+     "elev": 10,
+     "offRouteKm": 30.4,
+     "factor": 0.939
+    },
+    "hq9-shuimen-ab": {
+     "elev": 639,
+     "offRouteKm": 13.7,
+     "factor": 0.973
+    },
+    "hq9-luqiao-ab": {
+     "elev": 4,
+     "offRouteKm": 6.6,
+     "factor": 0.987
+    },
+    "hq9-jinjiang-ab": {
+     "elev": 4,
+     "offRouteKm": 2.8,
+     "factor": 0.994
+    },
+    "hq9-zhangzhou-ab": {
+     "elev": 11,
+     "offRouteKm": 1.8,
+     "factor": 0.996
+    },
+    "hq9-ningbo-nb": {
+     "elev": -34,
+     "offRouteKm": 6.6,
+     "factor": 0.987
+    },
+    "rf-ningde": {
+     "elev": 731,
+     "offRouteKm": 15.6,
+     "factor": 0.969
+    },
+    "rf-putian": {
+     "elev": 3,
+     "offRouteKm": 7.6,
+     "factor": 0.985
+    },
+    "rf-wenzhou": {
+     "elev": 131,
+     "offRouteKm": 21.4,
+     "factor": 0.957
+    },
+    "ssm-ishigaki": {
+     "elev": -32,
+     "offRouteKm": 11.2,
+     "factor": 0.978
+    },
+    "ssm-miyako": {
+     "elev": 1,
+     "offRouteKm": 9.8,
+     "factor": 0.98
+    },
+    "ssm-amami": {
+     "elev": 307,
+     "offRouteKm": 11.0,
+     "factor": 0.978
+    }
+   },
+   "corridors": [
+    {
+     "id": "b-sea-01",
+     "name": "Sealift Sasebo Naval Bas – Naha Air Base",
+     "mode": "sea",
+     "side": "blue",
+     "a": "sasebo-nb",
+     "b": "naha-ab",
+     "km": 1039
+    },
+    {
+     "id": "b-road-01",
+     "name": "Highway X01",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "sasebo-nb",
+     "km": 248
+    },
+    {
+     "id": "b-air-01",
+     "name": "Air bridge A1",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "naha-ab",
+     "km": 737
+    },
+    {
+     "id": "b-road-02",
+     "name": "Highway X02",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "nyutabaru-ab",
+     "km": 18
+    },
+    {
+     "id": "b-air-02",
+     "name": "Air bridge A2",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "nyutabaru-ab",
+     "km": 14
+    },
+    {
+     "id": "b-road-03",
+     "name": "Highway X03",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "tsuiki-ab",
+     "km": 18
+    },
+    {
+     "id": "b-air-03",
+     "name": "Air bridge A3",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "tsuiki-ab",
+     "km": 14
+    },
+    {
+     "id": "b-road-04",
+     "name": "Highway X04",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "kanoya-ab",
+     "km": 105
+    },
+    {
+     "id": "b-air-04",
+     "name": "Air bridge A4",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "kanoya-ab",
+     "km": 84
+    },
+    {
+     "id": "b-road-05",
+     "name": "Highway X05",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "sasebo-nb",
+     "km": 178
+    },
+    {
+     "id": "b-air-05",
+     "name": "Air bridge A5",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "sasebo-nb",
+     "km": 142
+    },
+    {
+     "id": "b-sea-02",
+     "name": "Sealift Sasebo Naval Bas – Amami garrison",
+     "mode": "sea",
+     "side": "blue",
+     "a": "sasebo-nb",
+     "b": "amami-gs",
+     "km": 690
+    },
+    {
+     "id": "b-road-06",
+     "name": "Highway X06",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "sasebo-nb",
+     "km": 248
+    },
+    {
+     "id": "b-air-06",
+     "name": "Air bridge A6",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "amami-gs",
+     "km": 439
+    },
+    {
+     "id": "b-sea-03",
+     "name": "Sealift Sasebo Naval Bas – Miyako garrison",
+     "mode": "sea",
+     "side": "blue",
+     "a": "sasebo-nb",
+     "b": "miyako-gs",
+     "km": 1334
+    },
+    {
+     "id": "b-road-07",
+     "name": "Highway X07",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "sasebo-nb",
+     "km": 248
+    },
+    {
+     "id": "b-air-07",
+     "name": "Air bridge A7",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "miyako-gs",
+     "km": 996
+    },
+    {
+     "id": "b-sea-04",
+     "name": "Sealift Sasebo Naval Bas – Ishigaki garriso",
+     "mode": "sea",
+     "side": "blue",
+     "a": "sasebo-nb",
+     "b": "ishigaki-gs",
+     "km": 1447
+    },
+    {
+     "id": "b-road-08",
+     "name": "Highway X08",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "sasebo-nb",
+     "km": 248
+    },
+    {
+     "id": "b-air-08",
+     "name": "Air bridge A8",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "ishigaki-gs",
+     "km": 1097
+    },
+    {
+     "id": "b-road-09",
+     "name": "Supply road Naha Air Base – PAC-3 battery (N",
+     "mode": "road",
+     "side": "blue",
+     "a": "naha-ab",
+     "b": "pac3-naha-ab",
+     "km": 614
+    },
+    {
+     "id": "b-road-10",
+     "name": "Supply road Nyutabaru Air Ba – PAC-3 battery (N",
+     "mode": "road",
+     "side": "blue",
+     "a": "nyutabaru-ab",
+     "b": "pac3-nyutabaru-ab",
+     "km": 29
+    },
+    {
+     "id": "b-road-11",
+     "name": "Supply road Tsuiki Air Base – PAC-3 battery (T",
+     "mode": "road",
+     "side": "blue",
+     "a": "tsuiki-ab",
+     "b": "pac3-tsuiki-ab",
+     "km": 33
+    },
+    {
+     "id": "b-road-12",
+     "name": "Supply road Kanoya Air Base – PAC-3 battery (K",
+     "mode": "road",
+     "side": "blue",
+     "a": "kanoya-ab",
+     "b": "pac3-kanoya-ab",
+     "km": 56
+    },
+    {
+     "id": "b-road-13",
+     "name": "Supply road Sasebo Naval Bas – PAC-3 battery (S",
+     "mode": "road",
+     "side": "blue",
+     "a": "sasebo-nb",
+     "b": "pac3-sasebo-nb",
+     "km": 12
+    },
+    {
+     "id": "b-road-14",
+     "name": "Supply road Miyako garrison – PAC-3 battery (M",
+     "mode": "road",
+     "side": "blue",
+     "a": "miyako-gs",
+     "b": "pac3-miyako-gs",
+     "km": 376
+    },
+    {
+     "id": "b-road-15",
+     "name": "Supply road Ishigaki garriso – Type 12 regiment",
+     "mode": "road",
+     "side": "blue",
+     "a": "ishigaki-gs",
+     "b": "ssm-ishigaki",
+     "km": 265
+    },
+    {
+     "id": "b-road-16",
+     "name": "Supply road Miyako garrison – Type 12 regiment",
+     "mode": "road",
+     "side": "blue",
+     "a": "miyako-gs",
+     "b": "ssm-miyako",
+     "km": 365
+    },
+    {
+     "id": "b-road-17",
+     "name": "Supply road Amami garrison – Type 12 regiment",
+     "mode": "road",
+     "side": "blue",
+     "a": "amami-gs",
+     "b": "ssm-amami",
+     "km": 398
+    },
+    {
+     "id": "r-road-18",
+     "name": "Highway X18",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "longtian-ab",
+     "km": 331
+    },
+    {
+     "id": "r-air-09",
+     "name": "Air bridge A9",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "longtian-ab",
+     "km": 264
+    },
+    {
+     "id": "r-road-19",
+     "name": "Highway X19",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "shuimen-ab",
+     "km": 257
+    },
+    {
+     "id": "r-air-10",
+     "name": "Air bridge A10",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "shuimen-ab",
+     "km": 206
+    },
+    {
+     "id": "r-sea-05",
+     "name": "Sealift Ningbo naval bas – Luqiao Air Base",
+     "mode": "sea",
+     "side": "red",
+     "a": "ningbo-nb",
+     "b": "luqiao-ab",
+     "km": 208
+    },
+    {
+     "id": "r-road-20",
+     "name": "Highway X20",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "ningbo-nb",
+     "km": 71
+    },
+    {
+     "id": "r-air-11",
+     "name": "Air bridge A11",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "luqiao-ab",
+     "km": 212
+    },
+    {
+     "id": "r-road-21",
+     "name": "Highway X21",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "jinjiang-ab",
+     "km": 396
+    },
+    {
+     "id": "r-air-12",
+     "name": "Air bridge A12",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "jinjiang-ab",
+     "km": 317
+    },
+    {
+     "id": "r-road-22",
+     "name": "Highway X22",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "zhangzhou-ab",
+     "km": 432
+    },
+    {
+     "id": "r-air-13",
+     "name": "Air bridge A13",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "zhangzhou-ab",
+     "km": 345
+    },
+    {
+     "id": "r-road-23",
+     "name": "Highway X23",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "wuyishan-ab",
+     "km": 18
+    },
+    {
+     "id": "r-air-14",
+     "name": "Air bridge A14",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "wuyishan-ab",
+     "km": 15
+    },
+    {
+     "id": "r-sea-06",
+     "name": "Sealift Red Theatre Depo – Ningbo naval bas",
+     "mode": "sea",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "ningbo-nb",
+     "km": 74
+    },
+    {
+     "id": "r-air-15",
+     "name": "Air bridge A15",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "ningbo-nb",
+     "km": 57
+    },
+    {
+     "id": "r-sea-07",
+     "name": "Sealift Ningbo naval bas – Daishan Air Base",
+     "mode": "sea",
+     "side": "red",
+     "a": "ningbo-nb",
+     "b": "daishan-ab",
+     "km": 65
+    },
+    {
+     "id": "r-road-24",
+     "name": "Highway X24",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "ningbo-nb",
+     "km": 71
+    },
+    {
+     "id": "r-air-16",
+     "name": "Air bridge A16",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "daishan-ab",
+     "km": 7
+    },
+    {
+     "id": "r-road-25",
+     "name": "Supply road Longtian Air Bas – HQ-9B battery (L",
+     "mode": "road",
+     "side": "red",
+     "a": "longtian-ab",
+     "b": "hq9-longtian-ab",
+     "km": 39
+    },
+    {
+     "id": "r-road-26",
+     "name": "Supply road Shuimen Air Base – HQ-9B battery (S",
+     "mode": "road",
+     "side": "red",
+     "a": "shuimen-ab",
+     "b": "hq9-shuimen-ab",
+     "km": 22
+    },
+    {
+     "id": "r-road-27",
+     "name": "Supply road Luqiao Air Base – HQ-9B battery (L",
+     "mode": "road",
+     "side": "red",
+     "a": "luqiao-ab",
+     "b": "hq9-luqiao-ab",
+     "km": 22
+    },
+    {
+     "id": "r-road-28",
+     "name": "Supply road Jinjiang Air Bas – HQ-9B battery (J",
+     "mode": "road",
+     "side": "red",
+     "a": "jinjiang-ab",
+     "b": "hq9-jinjiang-ab",
+     "km": 12
+    },
+    {
+     "id": "r-road-29",
+     "name": "Supply road Zhangzhou Air Ba – HQ-9B battery (Z",
+     "mode": "road",
+     "side": "red",
+     "a": "zhangzhou-ab",
+     "b": "hq9-zhangzhou-ab",
+     "km": 11
+    },
+    {
+     "id": "r-road-30",
+     "name": "Supply road Ningbo naval bas – HQ-9B battery (N",
+     "mode": "road",
+     "side": "red",
+     "a": "ningbo-nb",
+     "b": "hq9-ningbo-nb",
+     "km": 32
+    },
+    {
+     "id": "r-road-31",
+     "name": "Supply road Shuimen Air Base – Rocket Force bri",
+     "mode": "road",
+     "side": "red",
+     "a": "shuimen-ab",
+     "b": "rf-ningde",
+     "km": 91
+    },
+    {
+     "id": "r-road-32",
+     "name": "Supply road Longtian Air Bas – Rocket Force bri",
+     "mode": "road",
+     "side": "red",
+     "a": "longtian-ab",
+     "b": "rf-putian",
+     "km": 80
+    },
+    {
+     "id": "r-road-33",
+     "name": "Supply road Shuimen Air Base – Rocket Force bri",
+     "mode": "road",
+     "side": "red",
+     "a": "shuimen-ab",
+     "b": "rf-wenzhou",
+     "km": 159
+    }
+   ]
+  }
  },
  {
   "id": "isr-irn",
@@ -2760,6 +3496,42 @@
     "lon": 52.53,
     "lat": 29.59,
     "type": ""
+   },
+   {
+    "id": "blue-depot-1",
+    "name": "Blue Theatre Depot 1",
+    "side": "blue",
+    "class": "logistics",
+    "lon": 34.79,
+    "lat": 30.7,
+    "type": "depot"
+   },
+   {
+    "id": "blue-depot-2",
+    "name": "Blue Theatre Depot 2",
+    "side": "blue",
+    "class": "logistics",
+    "lon": 35.12,
+    "lat": 32.75,
+    "type": "depot"
+   },
+   {
+    "id": "red-depot-1",
+    "name": "Red Theatre Depot 1",
+    "side": "red",
+    "class": "logistics",
+    "lon": 56.45,
+    "lat": 27.07,
+    "type": "depot"
+   },
+   {
+    "id": "red-depot-2",
+    "name": "Red Theatre Depot 2",
+    "side": "red",
+    "class": "logistics",
+    "lon": 52.71,
+    "lat": 29.46,
+    "type": "depot"
    }
   ],
   "batteries": [
@@ -4617,6 +5389,750 @@
      34.0
     ]
    ]
-  ]
+  ],
+  "logistics": {
+   "nodes": {
+    "nevatim-ab": {
+     "elev": 388,
+     "offRouteKm": 15.5,
+     "factor": 0.969
+    },
+    "ramon-ab": {
+     "elev": 637,
+     "offRouteKm": 26.6,
+     "factor": 0.947
+    },
+    "hatzerim-ab": {
+     "elev": 211,
+     "offRouteKm": 12.7,
+     "factor": 0.975
+    },
+    "telnof-ab": {
+     "elev": 52,
+     "offRouteKm": 2.4,
+     "factor": 0.995
+    },
+    "ramatdavid-ab": {
+     "elev": 48,
+     "offRouteKm": 19.3,
+     "factor": 0.961
+    },
+    "palmachim-ab": {
+     "elev": 19,
+     "offRouteKm": 10.9,
+     "factor": 0.978
+    },
+    "hatzor-ab": {
+     "elev": 38,
+     "offRouteKm": 3.6,
+     "factor": 0.993
+    },
+    "haifa-nb": {
+     "elev": -6,
+     "offRouteKm": 1.6,
+     "factor": 0.997
+    },
+    "tabriz-ab": {
+     "elev": 1349,
+     "offRouteKm": 1.2,
+     "factor": 0.998
+    },
+    "hamadan-ab": {
+     "elev": 1692,
+     "offRouteKm": 16.7,
+     "factor": 0.951
+    },
+    "dezful-ab": {
+     "elev": 145,
+     "offRouteKm": 4.7,
+     "factor": 0.991
+    },
+    "isfahan-ab": {
+     "elev": 1539,
+     "offRouteKm": 19.0,
+     "factor": 0.959
+    },
+    "shiraz-ab": {
+     "elev": 1487,
+     "offRouteKm": 9.1,
+     "factor": 0.982
+    },
+    "bandarabbas-nb": {
+     "elev": -8,
+     "offRouteKm": 8.1,
+     "factor": 0.984
+    },
+    "kermanshah-gs": {
+     "elev": 1403,
+     "offRouteKm": 3.3,
+     "factor": 0.993
+    },
+    "khorramabad-gs": {
+     "elev": 1534,
+     "offRouteKm": 18.9,
+     "factor": 0.959
+    },
+    "blue-depot-1": {
+     "elev": 740,
+     "offRouteKm": 39.2,
+     "factor": 0.922
+    },
+    "blue-depot-2": {
+     "elev": 155,
+     "offRouteKm": 13.8,
+     "factor": 0.972
+    },
+    "red-depot-1": {
+     "elev": 99,
+     "offRouteKm": 21.2,
+     "factor": 0.958
+    },
+    "red-depot-2": {
+     "elev": 1500,
+     "offRouteKm": 11.7,
+     "factor": 0.977
+    },
+    "arrow3-palmachim": {
+     "elev": 13,
+     "offRouteKm": 7.4,
+     "factor": 0.985
+    },
+    "arrow3-negev": {
+     "elev": 530,
+     "offRouteKm": 19.7,
+     "factor": 0.961
+    },
+    "arrow2-hatzerim": {
+     "elev": 213,
+     "offRouteKm": 8.7,
+     "factor": 0.983
+    },
+    "arrow2-ramatdavid": {
+     "elev": 54,
+     "offRouteKm": 15.0,
+     "factor": 0.97
+    },
+    "ds-telnof": {
+     "elev": 69,
+     "offRouteKm": 4.3,
+     "factor": 0.991
+    },
+    "ds-haifa": {
+     "elev": 2,
+     "offRouteKm": 4.6,
+     "factor": 0.991
+    },
+    "idome-nevatim-ab": {
+     "elev": 430,
+     "offRouteKm": 16.2,
+     "factor": 0.968
+    },
+    "idome-ramon-ab": {
+     "elev": 393,
+     "offRouteKm": 22.5,
+     "factor": 0.955
+    },
+    "idome-hatzerim-ab": {
+     "elev": 164,
+     "offRouteKm": 16.2,
+     "factor": 0.968
+    },
+    "idome-telnof-ab": {
+     "elev": 27,
+     "offRouteKm": 2.6,
+     "factor": 0.995
+    },
+    "idome-ramatdavid-ab": {
+     "elev": 87,
+     "offRouteKm": 18.4,
+     "factor": 0.963
+    },
+    "idome-haifa-nb": {
+     "elev": -26,
+     "offRouteKm": 4.3,
+     "factor": 0.991
+    },
+    "bavar-isfahan": {
+     "elev": 1536,
+     "offRouteKm": 21.7,
+     "factor": 0.954
+    },
+    "s300-hamadan": {
+     "elev": 1721,
+     "offRouteKm": 21.6,
+     "factor": 0.939
+    },
+    "s300-bandarabbas": {
+     "elev": 5,
+     "offRouteKm": 4.7,
+     "factor": 0.991
+    },
+    "khordad-kermanshah-gs": {
+     "elev": 1661,
+     "offRouteKm": 0.3,
+     "factor": 0.986
+    },
+    "khordad-khorramabad-gs": {
+     "elev": 1421,
+     "offRouteKm": 13.9,
+     "factor": 0.972
+    },
+    "khordad-dezful-ab": {
+     "elev": 142,
+     "offRouteKm": 10.5,
+     "factor": 0.979
+    },
+    "khordad-tabriz-ab": {
+     "elev": 1389,
+     "offRouteKm": 2.7,
+     "factor": 0.995
+    },
+    "khordad-shiraz-ab": {
+     "elev": 1471,
+     "offRouteKm": 10.8,
+     "factor": 0.978
+    },
+    "irgc-kermanshah": {
+     "elev": 1460,
+     "offRouteKm": 7.8,
+     "factor": 0.984
+    },
+    "irgc-khorramabad": {
+     "elev": 1367,
+     "offRouteKm": 23.3,
+     "factor": 0.953
+    },
+    "irgc-tabriz": {
+     "elev": 1439,
+     "offRouteKm": 3.4,
+     "factor": 0.993
+    },
+    "irgc-drones": {
+     "elev": 1685,
+     "offRouteKm": 16.6,
+     "factor": 0.952
+    },
+    "irgc-cruise": {
+     "elev": 142,
+     "offRouteKm": 10.5,
+     "factor": 0.979
+    }
+   },
+   "corridors": [
+    {
+     "id": "b-road-01",
+     "name": "Highway X01",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "nevatim-ab",
+     "km": 76
+    },
+    {
+     "id": "b-air-01",
+     "name": "Air bridge A1",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "nevatim-ab",
+     "km": 60
+    },
+    {
+     "id": "b-road-02",
+     "name": "Highway X02",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "ramon-ab",
+     "km": 18
+    },
+    {
+     "id": "b-air-02",
+     "name": "Air bridge A2",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "ramon-ab",
+     "km": 15
+    },
+    {
+     "id": "b-road-03",
+     "name": "Highway X03",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "hatzerim-ab",
+     "km": 75
+    },
+    {
+     "id": "b-air-03",
+     "name": "Air bridge A3",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-1",
+     "b": "hatzerim-ab",
+     "km": 60
+    },
+    {
+     "id": "b-road-04",
+     "name": "Highway X04",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "telnof-ab",
+     "km": 131
+    },
+    {
+     "id": "b-air-04",
+     "name": "Air bridge A4",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "telnof-ab",
+     "km": 105
+    },
+    {
+     "id": "b-road-05",
+     "name": "Highway X05",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "ramatdavid-ab",
+     "km": 13
+    },
+    {
+     "id": "b-air-05",
+     "name": "Air bridge A5",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "ramatdavid-ab",
+     "km": 11
+    },
+    {
+     "id": "b-road-06",
+     "name": "Highway X06",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "palmachim-ab",
+     "km": 128
+    },
+    {
+     "id": "b-air-06",
+     "name": "Air bridge A6",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "palmachim-ab",
+     "km": 103
+    },
+    {
+     "id": "b-road-07",
+     "name": "Highway X07",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "hatzor-ab",
+     "km": 145
+    },
+    {
+     "id": "b-air-07",
+     "name": "Air bridge A7",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "hatzor-ab",
+     "km": 116
+    },
+    {
+     "id": "b-road-08",
+     "name": "Highway X08",
+     "mode": "road",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "haifa-nb",
+     "km": 18
+    },
+    {
+     "id": "b-air-08",
+     "name": "Air bridge A8",
+     "mode": "air",
+     "side": "blue",
+     "a": "blue-depot-2",
+     "b": "haifa-nb",
+     "km": 14
+    },
+    {
+     "id": "b-road-09",
+     "name": "Supply road Palmachim Air Ba – Arrow 3 battery ",
+     "mode": "road",
+     "side": "blue",
+     "a": "palmachim-ab",
+     "b": "arrow3-palmachim",
+     "km": 14
+    },
+    {
+     "id": "b-road-10",
+     "name": "Supply road Nevatim Air Base – Arrow 3 battery ",
+     "mode": "road",
+     "side": "blue",
+     "a": "nevatim-ab",
+     "b": "arrow3-negev",
+     "km": 51
+    },
+    {
+     "id": "b-road-11",
+     "name": "Supply road Hatzerim Air Bas – Arrow 2 battery ",
+     "mode": "road",
+     "side": "blue",
+     "a": "hatzerim-ab",
+     "b": "arrow2-hatzerim",
+     "km": 15
+    },
+    {
+     "id": "b-road-12",
+     "name": "Supply road Ramat David Air  – Arrow 2 battery ",
+     "mode": "road",
+     "side": "blue",
+     "a": "ramatdavid-ab",
+     "b": "arrow2-ramatdavid",
+     "km": 22
+    },
+    {
+     "id": "b-road-13",
+     "name": "Supply road Tel Nof Air Base – David's Sling ba",
+     "mode": "road",
+     "side": "blue",
+     "a": "telnof-ab",
+     "b": "ds-telnof",
+     "km": 10
+    },
+    {
+     "id": "b-road-14",
+     "name": "Supply road Haifa naval base – David's Sling ba",
+     "mode": "road",
+     "side": "blue",
+     "a": "haifa-nb",
+     "b": "ds-haifa",
+     "km": 11
+    },
+    {
+     "id": "b-road-15",
+     "name": "Supply road Nevatim Air Base – Iron Dome (Nevat",
+     "mode": "road",
+     "side": "blue",
+     "a": "nevatim-ab",
+     "b": "idome-nevatim-ab",
+     "km": 23
+    },
+    {
+     "id": "b-road-16",
+     "name": "Supply road Ramon Air Base – Iron Dome (Ramon",
+     "mode": "road",
+     "side": "blue",
+     "a": "ramon-ab",
+     "b": "idome-ramon-ab",
+     "km": 29
+    },
+    {
+     "id": "b-road-17",
+     "name": "Supply road Hatzerim Air Bas – Iron Dome (Hatze",
+     "mode": "road",
+     "side": "blue",
+     "a": "hatzerim-ab",
+     "b": "idome-hatzerim-ab",
+     "km": 23
+    },
+    {
+     "id": "b-road-18",
+     "name": "Supply road Tel Nof Air Base – Iron Dome (Tel N",
+     "mode": "road",
+     "side": "blue",
+     "a": "telnof-ab",
+     "b": "idome-telnof-ab",
+     "km": 9
+    },
+    {
+     "id": "b-road-19",
+     "name": "Supply road Ramat David Air  – Iron Dome (Ramat",
+     "mode": "road",
+     "side": "blue",
+     "a": "ramatdavid-ab",
+     "b": "idome-ramatdavid-ab",
+     "km": 25
+    },
+    {
+     "id": "b-road-20",
+     "name": "Supply road Haifa naval base – Iron Dome (Haifa",
+     "mode": "road",
+     "side": "blue",
+     "a": "haifa-nb",
+     "b": "idome-haifa-nb",
+     "km": 11
+    },
+    {
+     "id": "r-road-21",
+     "name": "Highway X21",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "tabriz-ab",
+     "km": 1417
+    },
+    {
+     "id": "r-air-09",
+     "name": "Air bridge A9",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "tabriz-ab",
+     "km": 1134
+    },
+    {
+     "id": "r-road-22",
+     "name": "Highway X22",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "hamadan-ab",
+     "km": 930
+    },
+    {
+     "id": "r-air-10",
+     "name": "Air bridge A10",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "hamadan-ab",
+     "km": 744
+    },
+    {
+     "id": "r-road-23",
+     "name": "Highway X23",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "dezful-ab",
+     "km": 659
+    },
+    {
+     "id": "r-air-11",
+     "name": "Air bridge A11",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "dezful-ab",
+     "km": 527
+    },
+    {
+     "id": "r-road-24",
+     "name": "Highway X24",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "isfahan-ab",
+     "km": 468
+    },
+    {
+     "id": "r-air-12",
+     "name": "Air bridge A12",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "isfahan-ab",
+     "km": 374
+    },
+    {
+     "id": "r-road-25",
+     "name": "Highway X25",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "shiraz-ab",
+     "km": 18
+    },
+    {
+     "id": "r-air-13",
+     "name": "Air bridge A13",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "shiraz-ab",
+     "km": 15
+    },
+    {
+     "id": "r-road-26",
+     "name": "Highway X26",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "bandarabbas-nb",
+     "km": 19
+    },
+    {
+     "id": "r-air-14",
+     "name": "Air bridge A14",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-1",
+     "b": "bandarabbas-nb",
+     "km": 15
+    },
+    {
+     "id": "r-road-27",
+     "name": "Highway X27",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "kermanshah-gs",
+     "km": 949
+    },
+    {
+     "id": "r-air-15",
+     "name": "Air bridge A15",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "kermanshah-gs",
+     "km": 759
+    },
+    {
+     "id": "r-road-28",
+     "name": "Highway X28",
+     "mode": "road",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "khorramabad-gs",
+     "km": 764
+    },
+    {
+     "id": "r-air-16",
+     "name": "Air bridge A16",
+     "mode": "air",
+     "side": "red",
+     "a": "red-depot-2",
+     "b": "khorramabad-gs",
+     "km": 611
+    },
+    {
+     "id": "r-road-29",
+     "name": "Supply road Isfahan Air Base – Bavar-373 batter",
+     "mode": "road",
+     "side": "red",
+     "a": "isfahan-ab",
+     "b": "bavar-isfahan",
+     "km": 29
+    },
+    {
+     "id": "r-road-30",
+     "name": "Supply road Hamadan Air Base – S-300PMU-2 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "hamadan-ab",
+     "b": "s300-hamadan",
+     "km": 28
+    },
+    {
+     "id": "r-road-31",
+     "name": "Supply road Bandar Abbas nav – S-300PMU-2 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "bandarabbas-nb",
+     "b": "s300-bandarabbas",
+     "km": 14
+    },
+    {
+     "id": "r-road-32",
+     "name": "Supply road Kermanshah missi – Khordad-15 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "kermanshah-gs",
+     "b": "khordad-kermanshah-gs",
+     "km": 8
+    },
+    {
+     "id": "r-road-33",
+     "name": "Supply road Khorramabad miss – Khordad-15 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "khorramabad-gs",
+     "b": "khordad-khorramabad-gs",
+     "km": 21
+    },
+    {
+     "id": "r-road-34",
+     "name": "Supply road Dezful Air Base – Khordad-15 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "dezful-ab",
+     "b": "khordad-dezful-ab",
+     "km": 18
+    },
+    {
+     "id": "r-road-35",
+     "name": "Supply road Tabriz Air Base – Khordad-15 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "tabriz-ab",
+     "b": "khordad-tabriz-ab",
+     "km": 10
+    },
+    {
+     "id": "r-road-36",
+     "name": "Supply road Shiraz Air Base – Khordad-15 batte",
+     "mode": "road",
+     "side": "red",
+     "a": "shiraz-ab",
+     "b": "khordad-shiraz-ab",
+     "km": 18
+    },
+    {
+     "id": "r-road-37",
+     "name": "Supply road Kermanshah missi – IRGC missile bri",
+     "mode": "road",
+     "side": "red",
+     "a": "kermanshah-gs",
+     "b": "irgc-kermanshah",
+     "km": 15
+    },
+    {
+     "id": "r-road-38",
+     "name": "Supply road Khorramabad miss – IRGC missile bri",
+     "mode": "road",
+     "side": "red",
+     "a": "khorramabad-gs",
+     "b": "irgc-khorramabad",
+     "km": 30
+    },
+    {
+     "id": "r-road-39",
+     "name": "Supply road Tabriz Air Base – IRGC missile bri",
+     "mode": "road",
+     "side": "red",
+     "a": "tabriz-ab",
+     "b": "irgc-tabriz",
+     "km": 11
+    },
+    {
+     "id": "r-road-40",
+     "name": "Supply road Hamadan Air Base – Drone launch sit",
+     "mode": "road",
+     "side": "red",
+     "a": "hamadan-ab",
+     "b": "irgc-drones",
+     "km": 24
+    },
+    {
+     "id": "r-road-41",
+     "name": "Supply road Dezful Air Base – Cruise missile u",
+     "mode": "road",
+     "side": "red",
+     "a": "dezful-ab",
+     "b": "irgc-cruise",
+     "km": 18
+    }
+   ]
+  }
  }
 ]

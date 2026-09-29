@@ -49,7 +49,9 @@ public sealed class BaseState
     /// <summary>Strike and SEAD flights need munitions storage at 30% or better to arm.</summary>
     public bool CanArm => Level("munitions") >= 30;
     /// <summary>Low fuel stocks and wrecked maintenance make each sortie slower to prepare.</summary>
-    public double PrepFactor => (Level("fuel") < 30 ? 3 : 1) * (Level("readiness") < 50 ? 1.5 : 1);
+    public double PrepFactor => (Level("fuel") < 30 ? 3 : 1) * (Level("readiness") < 50 ? 1.5 : 1) * (Supply < 1 ? 1.6 : 1);
+    /// <summary>Logistics readiness (spares and diesel on hand), 0.3..1; below 1 turnaround is slower.</summary>
+    public double Supply { get; set; } = 1;
     /// <summary>Sensor/C2 effectiveness of the base (and batteries sited at it): 0.2–1.</summary>
     public double SensorFactor => Math.Max(0.2, Level("sensors") / 100);
     /// <summary>Launchers sited here can fire only with pads at 40% or better.</summary>

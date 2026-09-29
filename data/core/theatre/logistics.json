@@ -1,0 +1,142 @@
+{
+ "_comment": "Theatre logistics: game tuning, not real consumption or logistics data. m3 is shown as litres.",
+ "items": {
+  "avfuel": {
+   "name": "Av fuel",
+   "unit": "m3",
+   "tonPerUnit": 0.8
+  },
+  "diesel": {
+   "name": "Diesel",
+   "unit": "m3",
+   "tonPerUnit": 0.85
+  },
+  "propellant": {
+   "name": "Liquid propellant",
+   "unit": "m3",
+   "tonPerUnit": 1.1
+  },
+  "spares": {
+   "name": "Spare parts",
+   "unit": "parts",
+   "tonPerUnit": 0.05
+  }
+ },
+ "munitionMass": {
+  "store1": 0.2,
+  "store2": 0.6,
+  "store3": 1.2,
+  "design": 3
+ },
+ "use": {
+  "sortie": {
+   "fighter": 8,
+   "strike": 11,
+   "stealth": 10,
+   "bomber": 60,
+   "patrol": 30,
+   "tanker": 90,
+   "aew": 25,
+   "jamming": 25,
+   "default": 10
+  },
+  "shipDieselDay": 40,
+  "groundDieselDay": 2,
+  "baseDieselDay": 6,
+  "aircraftSparesDay": 2,
+  "batterySparesDay": 21,
+  "launcherSparesDay": 8,
+  "shipSparesDay": 15,
+  "propellantPerRound": 1.5
+ },
+ "liquid": [
+  "ghadr",
+  "emad",
+  "df-15b",
+  "khordad-15"
+ ],
+ "start": {
+  "depot": {
+   "avfuel": 1000,
+   "diesel": 600,
+   "propellant": 120,
+   "spares": 12000
+  },
+  "airbase": {
+   "avfuel": 900,
+   "diesel": 60,
+   "spares": 900
+  },
+  "navalbase": {
+   "avfuel": 60,
+   "diesel": 800,
+   "spares": 1200
+  },
+  "garrison": {
+   "avfuel": 20,
+   "diesel": 80,
+   "propellant": 30,
+   "spares": 400
+  },
+  "battery": {
+   "diesel": 10,
+   "spares": 147
+  },
+  "launcher": {
+   "diesel": 8,
+   "propellant": 12,
+   "spares": 56
+  },
+  "ship": {
+   "diesel": 240,
+   "spares": 105
+  }
+ },
+ "modes": {
+  "road": {
+   "name": "Highway",
+   "vehicle": "trucks",
+   "cap": 25,
+   "kmh": 55
+  },
+  "rail": {
+   "name": "Rail",
+   "vehicle": "trains",
+   "cap": 1300,
+   "kmh": 60
+  },
+  "sea": {
+   "name": "Sealift",
+   "vehicle": "vessels",
+   "cap": 12000,
+   "kmh": 28
+  },
+  "air": {
+   "name": "Airlift",
+   "vehicle": "cargo aircraft",
+   "cap": 40,
+   "kmh": 650
+  },
+  "heli": {
+   "name": "Helicopter lift",
+   "vehicle": "helicopters",
+   "cap": 5,
+   "kmh": 220
+  }
+ },
+ "pool": {
+  "road": 1200,
+  "rail": 30,
+  "sea": 18,
+  "air": 16,
+  "heli": 12
+ },
+ "efficiency": {
+  "offRoutePer50Km": 0.1,
+  "altStartM": 1500,
+  "perKmAbove": 0.08,
+  "min": 0.4
+ },
+ "requestShare": 0.4,
+ "keepShare": 0.7
+}
