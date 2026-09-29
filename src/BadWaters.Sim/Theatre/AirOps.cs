@@ -840,6 +840,7 @@ public sealed class AirTasking
             how = $"{pHit:P0} each: strike {f.Type.R("strike"):0}, payload {f.Type.R("payload"):0}";
         }
         if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;
+        if (hits > 0 && tgt.Id.StartsWith("corridor:")) effects.Add(_t.Logistics?.HitCorridor(tgt.Id[9..], weapons.Count > 0 ? weapons.Average(x => x.Punch) + hits : 4 + hits, f.Callsign) ?? "");
         effects = effects.Distinct().Take(6).ToList();
         var text = $"{f.Callsign}: {f.Aircraft.Count}× {f.Type.Name} released on {tgt.Name} at TOT · {hits} hits ({how}) · " +
                    $"{lost} lost to {covering.Count} covering SAM batteries ({pLoss:P0} each{(sead ? ", SEAD suppressing" : "")}, stealth {f.Type.R("signature"):0})" +

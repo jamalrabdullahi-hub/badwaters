@@ -127,7 +127,9 @@ public partial class TheatreOps
         add.Pressed += () => { _editing = NewDraft(); _edTab = "OVERVIEW"; Open("OPERATION"); };
         var closed = new CheckBox { Text = "show closed", ButtonPressed = _showClosed };
         closed.Toggled += on => { _showClosed = on; w.Refresh?.Invoke(); };
-        h.AddChild(add); h.AddChild(closed);
+        var gen = new Button { Text = "GENERATE DAY'S FRAG", TooltipText = "Commit a full coordinated set of operations from the template library: AEW, CAPs, shipping protection, SEAD, airfield and naval strikes, depot and route interdiction, anti-ship, recon, missile barrage, tanker and jamming support." };
+        gen.Pressed += () => { var m = GenerateDayFrag(); w.Refresh?.Invoke(); Trial.Report("ato", m); };
+        h.AddChild(add); h.AddChild(gen); h.AddChild(closed);
         w.Body.AddChild(h);
         w.Line($"{"START",-8}{"BY",-4}{"",-2}{"PURPOSE",-18}{"OPERATION",-30}{"STATUS",-9}AC", UiTheme.TacDim);
         foreach (var op in Board.Ops.Where(o => o.Side == CommandSide && (_showClosed || o.Open)).OrderBy(o => o.Status is OpStatus.Complete or OpStatus.Aborted).ThenBy(o => o.Start).Take(120))

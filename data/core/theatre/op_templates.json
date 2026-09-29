@@ -1,0 +1,675 @@
+{
+ "_comment": "Operation templates for the Mission wizard and 'Generate day's FRAG'. Game abstractions: roles, counts and ratings, not real procedures. target: airbase | navalbase | sam | depot | corridor | ship | garrison | station-front | station-own | station-sea. Classes: fighter, strike, stealth, bomber, aew, tanker, jamming, patrol.",
+ "templates": [
+  {
+   "id": "oca-airfield",
+   "name": "Airfield attack (OCA)",
+   "group": "Offensive counter-air",
+   "purpose": "strike",
+   "target": "airbase",
+   "aim": "sorties",
+   "tot": 90,
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Box"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "fires": {
+    "ground": 1,
+    "naval": 0
+   },
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "oca-shelters",
+   "name": "Hardened shelter strike",
+   "group": "Offensive counter-air",
+   "purpose": "strike",
+   "target": "airbase",
+   "aim": "shelter",
+   "tot": 120,
+   "air": [
+    {
+     "class": "stealth",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Trail"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "emcon": "silent",
+   "roe": "tight"
+  },
+  {
+   "id": "sweep",
+   "name": "Fighter sweep",
+   "group": "Offensive counter-air",
+   "purpose": "counter-air",
+   "target": "station-front",
+   "tot": 60,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 4,
+     "role": "CAP",
+     "formation": "LineAbreast"
+    }
+   ],
+   "support": [
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    }
+   ],
+   "emcon": "active",
+   "roe": "free"
+  },
+  {
+   "id": "sead",
+   "name": "SEAD: suppress air defences",
+   "group": "Air-defence suppression",
+   "purpose": "sead",
+   "target": "sam",
+   "aim": "sensors",
+   "tot": 90,
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "SEAD",
+     "formation": "LineAbreast"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "jamming",
+     "count": 1,
+     "role": "Jamming"
+    },
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "dead",
+   "name": "DEAD: destroy air defences",
+   "group": "Air-defence suppression",
+   "purpose": "sead",
+   "target": "sam",
+   "aim": "sensors",
+   "tot": 100,
+   "air": [
+    {
+     "class": "strike",
+     "count": 2,
+     "role": "SEAD",
+     "formation": "LineAbreast"
+    },
+    {
+     "class": "stealth",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Trail"
+    }
+   ],
+   "support": [
+    {
+     "class": "jamming",
+     "count": 1,
+     "role": "Jamming"
+    }
+   ],
+   "fires": {
+    "ground": 2,
+    "naval": 1
+   },
+   "emcon": "silent",
+   "roe": "tight"
+  },
+  {
+   "id": "deep-strike",
+   "name": "Deep strike (bombers)",
+   "group": "Strike",
+   "purpose": "strike",
+   "target": "airbase",
+   "aim": "fuel",
+   "tot": 180,
+   "air": [
+    {
+     "class": "bomber",
+     "count": 2,
+     "role": "Strike",
+     "formation": "Trail"
+    },
+    {
+     "class": "fighter",
+     "count": 4,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 2,
+     "role": "Tanker"
+    },
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    },
+    {
+     "class": "jamming",
+     "count": 1,
+     "role": "Jamming"
+    }
+   ],
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "command-strike",
+   "name": "Command & radar strike",
+   "group": "Strike",
+   "purpose": "strike",
+   "target": "garrison",
+   "aim": "command",
+   "tot": 90,
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Box"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "fires": {
+    "ground": 2,
+    "naval": 1
+   },
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "missile-barrage",
+   "name": "Missile barrage (no aircraft)",
+   "group": "Strike",
+   "purpose": "fires",
+   "target": "airbase",
+   "aim": "sorties",
+   "tot": 45,
+   "fires": {
+    "ground": 3,
+    "naval": 2
+   },
+   "emcon": "silent",
+   "roe": "tight"
+  },
+  {
+   "id": "naval-base-strike",
+   "name": "Naval base strike",
+   "group": "Maritime",
+   "purpose": "strike",
+   "target": "navalbase",
+   "aim": "piers",
+   "tot": 120,
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Box"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "fires": {
+    "ground": 1,
+    "naval": 1
+   },
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "anti-ship",
+   "name": "Anti-ship strike",
+   "group": "Maritime",
+   "purpose": "sea-denial",
+   "target": "ship",
+   "tot": 60,
+   "loadout": "Anti-ship",
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "LineAbreast"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    }
+   ],
+   "fires": {
+    "ground": 1,
+    "naval": 1
+   },
+   "emcon": "silent",
+   "roe": "tight"
+  },
+  {
+   "id": "sea-patrol",
+   "name": "Maritime patrol / ship hunt",
+   "group": "Maritime",
+   "purpose": "recon",
+   "target": "station-sea",
+   "tot": 30,
+   "air": [
+    {
+     "class": "patrol",
+     "count": 1,
+     "role": "Recon",
+     "formation": "Trail"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP"
+    }
+   ],
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "shipping-protection",
+   "name": "Shipping protection CAP",
+   "group": "Maritime",
+   "purpose": "counter-air",
+   "target": "station-sea",
+   "tot": 30,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "LineAbreast"
+    }
+   ],
+   "support": [
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "barrier-cap",
+   "name": "Barrier CAP (front)",
+   "group": "Defensive counter-air",
+   "purpose": "counter-air",
+   "target": "station-front",
+   "tot": 30,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 4,
+     "role": "CAP",
+     "formation": "LineAbreast"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "base-defence",
+   "name": "Base defence CAP",
+   "group": "Defensive counter-air",
+   "purpose": "area-defence",
+   "target": "station-own",
+   "tot": 20,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "LineAbreast"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "hvaa",
+   "name": "High-value asset protection (AEW orbit)",
+   "group": "Defensive counter-air",
+   "purpose": "area-defence",
+   "target": "station-own",
+   "tot": 20,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "Wedge"
+    }
+   ],
+   "support": [
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "depot-strike",
+   "name": "Supply depot strike",
+   "group": "Logistics interdiction",
+   "purpose": "strike",
+   "target": "depot",
+   "aim": "fuel",
+   "tot": 150,
+   "air": [
+    {
+     "class": "stealth",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Trail"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "fires": {
+    "ground": 2,
+    "naval": 0
+   },
+   "emcon": "silent",
+   "roe": "tight"
+  },
+  {
+   "id": "route-interdiction",
+   "name": "Supply route interdiction",
+   "group": "Logistics interdiction",
+   "purpose": "strike",
+   "target": "corridor",
+   "tot": 90,
+   "air": [
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "LineAbreast"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "fires": {
+    "ground": 1,
+    "naval": 0
+   },
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "recon-bda",
+   "name": "Recon / BDA over a base",
+   "group": "ISR",
+   "purpose": "recon",
+   "target": "airbase",
+   "tot": 60,
+   "air": [
+    {
+     "class": "fighter",
+     "count": 1,
+     "role": "Recon",
+     "formation": "Trail"
+    },
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "Escort"
+    }
+   ],
+   "emcon": "silent",
+   "roe": "hold"
+  },
+  {
+   "id": "aew-orbit",
+   "name": "AEW orbit (theatre picture)",
+   "group": "ISR",
+   "purpose": "counter-air",
+   "target": "station-front",
+   "tot": 20,
+   "support": [
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    }
+   ],
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "Wedge"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "standoff-jamming",
+   "name": "Stand-off jamming support",
+   "group": "Electronic warfare",
+   "purpose": "counter-air",
+   "target": "station-front",
+   "tot": 30,
+   "support": [
+    {
+     "class": "jamming",
+     "count": 1,
+     "role": "Jamming"
+    }
+   ],
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "Wedge"
+    }
+   ],
+   "emcon": "active",
+   "roe": "tight"
+  },
+  {
+   "id": "tanker-track",
+   "name": "Tanker track (keep the CAPs up)",
+   "group": "Support",
+   "purpose": "counter-air",
+   "target": "station-front",
+   "tot": 20,
+   "support": [
+    {
+     "class": "tanker",
+     "count": 1,
+     "role": "Tanker"
+    }
+   ],
+   "air": [
+    {
+     "class": "fighter",
+     "count": 2,
+     "role": "CAP",
+     "formation": "Wedge"
+    }
+   ],
+   "emcon": "limited",
+   "roe": "tight"
+  },
+  {
+   "id": "alpha-strike",
+   "name": "Alpha strike (everything at one ToT)",
+   "group": "Major operations",
+   "purpose": "strike",
+   "target": "airbase",
+   "aim": "sorties",
+   "tot": 180,
+   "air": [
+    {
+     "class": "stealth",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Trail"
+    },
+    {
+     "class": "strike",
+     "count": 4,
+     "role": "Strike",
+     "formation": "Box"
+    },
+    {
+     "class": "strike",
+     "count": 2,
+     "role": "SEAD",
+     "formation": "LineAbreast"
+    },
+    {
+     "class": "fighter",
+     "count": 4,
+     "role": "Escort"
+    }
+   ],
+   "support": [
+    {
+     "class": "tanker",
+     "count": 2,
+     "role": "Tanker"
+    },
+    {
+     "class": "aew",
+     "count": 1,
+     "role": "AEW"
+    },
+    {
+     "class": "jamming",
+     "count": 1,
+     "role": "Jamming"
+    }
+   ],
+   "spares": [
+    {
+     "class": "strike",
+     "count": 2,
+     "role": "Strike"
+    }
+   ],
+   "fires": {
+    "ground": 3,
+    "naval": 2
+   },
+   "emcon": "silent",
+   "roe": "tight"
+  }
+ ],
+ "dayFrag": [
+  "sead",
+  "oca-airfield",
+  "naval-base-strike",
+  "depot-strike",
+  "route-interdiction",
+  "anti-ship",
+  "missile-barrage",
+  "recon-bda",
+  "aew-orbit",
+  "base-defence",
+  "hvaa",
+  "shipping-protection",
+  "sea-patrol",
+  "barrier-cap",
+  "standoff-jamming",
+  "tanker-track"
+ ]
+}

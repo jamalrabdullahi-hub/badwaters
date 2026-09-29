@@ -373,6 +373,7 @@ public partial class Shell : Control
             pws.AtWar = true; pws.PlayerInvolved = true;
             if (Session.Campaign != null) Session.Campaign.Mode[pw] = BadWaters.Sim.Command.TheatreMode.Fight;
             Open("Theatre Ops");
+            if (DevScreenshot.Arg("genfrag") != null && _theatre != null) GD.Print(_theatre.GenerateDayFrag());
         }
         if (DevScreenshot.Arg("screen") is { } screen) Open(screen switch { "dev" => "Development", "theatre" => "Theatre Ops", "industry" => "Industry", "trade" => "Trade & Logistics", _ => "Map" });
         if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))

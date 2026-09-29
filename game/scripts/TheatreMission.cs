@@ -178,6 +178,7 @@ public partial class TheatreOps
         var name = new LineEdit { Text = _md.Name, CustomMinimumSize = new Vector2(320, 0) };
         name.TextChanged += t => _md.Name = t;
         v.AddChild(name);
+        TemplatePicker(v);
         v.AddChild(Seg("Purpose", Purposes.Select(p => p.Name).ToArray(), Purposes.First(p => p.Key == _md.Purpose).Name, n => _md.Purpose = Purposes.First(p => p.Name == n).Key));
         var targets = new List<(string, string)>();
         if (_md.Point is { } pt) targets.Add(("@pt", $"Map point {pt.Lat:0.00}, {pt.Lon:0.00} (station)"));
