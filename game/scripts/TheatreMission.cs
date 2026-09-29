@@ -28,6 +28,8 @@ public partial class TheatreOps
         public (double Lon, double Lat)? Point;
         public List<AirRow> Air = new();
         public List<AirRow> Support = new();
+        /// <summary>Spare aircraft on ground alert: launched against the same target if the package takes losses.</summary>
+        public List<AirRow> Spares = new();
         public List<FireRow> Fires = new();
         public double TotMin = 90; // minutes from now
         public double IpKm = 60;
@@ -39,7 +41,7 @@ public partial class TheatreOps
     }
 
     private static readonly string[] Pages = { "1 Objective", "2 Forces", "3 Support", "4 Timing", "5 EMCON", "6 Routes & patterns", "7 ROE", "8 Review" };
-    private static readonly (string Key, string Name)[] Purposes = { ("strike", "Strike"), ("sead", "SEAD / DEAD"), ("counter-air", "Counter-air (CAP)"), ("recon", "Recon / ISR"), ("area-defence", "Area defence") };
+    private static readonly (string Key, string Name)[] Purposes = { ("strike", "Strike"), ("sead", "SEAD / DEAD"), ("counter-air", "Counter-air (CAP)"), ("recon", "Recon / ISR"), ("area-defence", "Area defence"), ("sea-denial", "Sea denial (anti-ship)") };
     private static readonly Mission[] PackageRoles = { Mission.Strike, Mission.SEAD, Mission.Escort, Mission.CAP, Mission.Recon };
     private MissionDraft _md = new();
     private int _mPage;
@@ -124,7 +126,11 @@ public partial class TheatreOps
 
     private string PresetName(string p) => Session.Content.PresetInfo(p)?.Name ?? p;
     private StoresCatalog? Cat => Trial.Air?.Stores;
-    private (double Lon, double Lat) Aim() => _md.Target == "@pt" && _md.Point is { } pt ? pt : Trial.Site(_md.Target) is { } s ? (s.Lon, s.Lat) : (0, 0);
+    private bool ShipTarget => _md.Target.StartsWith("ship:");
+    private (double Lon, double Lat) Aim() =>
+        _md.Target == "@pt" && _md.Point is { } pt ? pt
+        : ShipTarget && Trial.Intel?.Pictures[CommandSide].Contacts.GetValueOrDefault(_md.Target[5..]) is { } c ? (c.Lon, c.Lat)
+        : Trial.Site(_md.Target) is { } s ? (s.Lon, s.Lat) : (0, 0);
 
     /// <summary>Base the planner will most likely fly this row from: closest base with enough idle aircraft of the type.</summary>
     private string LikelyBase(AirRow r)
@@ -175,6 +181,10 @@ public partial class TheatreOps
         v.AddChild(Seg("Purpose", Purposes.Select(p => p.Name).ToArray(), Purposes.First(p => p.Key == _md.Purpose).Name, n => _md.Purpose = Purposes.First(p => p.Name == n).Key));
         var targets = new List<(string, string)>();
         if (_md.Point is { } pt) targets.Add(("@pt", $"Map point {pt.Lat:0.00}, {pt.Lon:0.00} (station)"));
+        var pic0 = Trial.Intel?.Pictures[CommandSide];
+        if (pic0 != null)
+            foreach (var c in pic0.Contacts.Values.Where(c => c.Kind == "ship" && Trial.Time - c.LastSeen < IntelRules.StaleAfter && !(Trial.Naval?.IsSunk(c.Key) ?? true)))
+                targets.Add(("ship:" + c.Key, $"⚓ {c.Label} (ship contact · seen {(Trial.Time - c.LastSeen) / 60:0} min ago)"));
         foreach (var s in Scenario.Sites.Where(s => TargetPolicy.IsLegitimate(s.Class)).OrderBy(s => s.Side == CommandSide).ThenBy(s => s.Name))
             targets.Add((s.Id, s.Side == CommandSide ? $"{s.Name} (own · station over it)" : s.Name));
         var h = new HBoxContainer(); h.AddChild(L("Target", UiTheme.TacDim)); h.AddChild(Opt(targets, _md.Target, t => { _md.Target = t; _md.Aimpoint = ""; }, 360)); v.AddChild(h);
@@ -185,7 +195,8 @@ public partial class TheatreOps
             aims.AddRange(b.Components.Values.Select(c => (c.Def.Id, $"{c.Def.Name} · est. {pic?.Belief(b.Site.Id, c.Def.Id).Integrity:0}%")));
             var a = new HBoxContainer(); a.AddChild(L("Aimpoint", UiTheme.TacDim)); a.AddChild(Opt(aims, _md.Aimpoint, x => _md.Aimpoint = x, 360)); v.AddChild(a);
         }
-        v.AddChild(Para("Only military targets are listed. Population centres and civil shelters are never targets.", UiTheme.Good));
+        v.AddChild(Para("Only military targets are listed: bases and sites, and ship contacts your side currently holds. Population centres, civil shelters and neutral shipping are never targets.", UiTheme.Good));
+        if (ShipTarget) v.AddChild(Para("Ship target: weapons fly to where your picture last saw it. If it moves out of the seeker's search basket they miss, so strike soon after a fresh contact. Use anti-ship loadouts (page 2 → LOADOUT → Anti-ship).", UiTheme.TacDim));
         v.AddChild(Para("Start from a template:", UiTheme.TacDim));
         var t = new HBoxContainer();
         foreach (var (k, n) in new[] { ("strike", "Strike package"), ("sead", "SEAD strike"), ("cap", "CAP"), ("aew", "AEW + CAP"), ("recon", "Recon") }) t.AddChild(B(n, () => { TemplateRows(k); RefreshMission(); }));
@@ -298,11 +309,25 @@ public partial class TheatreOps
     private void PageSupport(VBoxContainer v)
     {
         v.AddChild(Hd("Rear support (tankers, AEW)"));
-        AirTable(v, _md.Support, new[] { Mission.Tanker, Mission.AEW }, allowLoadout: false);
+        AirTable(v, _md.Support, new[] { Mission.Tanker, Mission.AEW, Mission.Jamming }, allowLoadout: false);
         var hasT = _md.Support.Any(r => r.Role == Mission.Tanker);
         v.AddChild(Para(hasT ? "✓ Tanker: +300 km combat radius for the package; orbits 45% of the way to the objective." : "No tanker: aircraft fly on internal fuel (combat radius only).", hasT ? UiTheme.Good : UiTheme.TacDim));
         v.AddChild(Para(_md.Support.Any(r => r.Role == Mission.AEW) ? "✓ AEW orbit on the way in: better detection and +5% air combat for flights within 400 km." : "No AEW of our own in this mission (theatre AEW may still cover it).", UiTheme.TacDim));
-        v.AddChild(Para("Electronic-warfare aircraft, rescue and spares aren't modelled yet.", UiTheme.TacDim));
+        v.AddChild(Para(_md.Support.Any(r => r.Role == Mission.Jamming)
+            ? $"✓ Stand-off jamming: orbits 65% of the way in; enemy radars within {AirPacing.JamKm:0} km work at 60% (range and detection) and SAM losses drop. It is heard by enemy passive sensors and is a target: escort it."
+            : "No jamming support: add an EW aircraft (role Jamming) to blunt enemy radars around the target.", UiTheme.TacDim));
+        v.AddChild(Hd("Spare aircraft (ground alert)"));
+        AirTable(v, _md.Spares, new[] { Mission.Strike, Mission.SEAD, Mission.Escort }, allowLoadout: true);
+        v.AddChild(Para("Spares stay on the ground, out of the AI pool. IF the package takes any losses THEN they launch against the same target, 15 minutes behind the main ToT.", UiTheme.TacDim));
+        v.AddChild(Hd("Rescue (combat search and rescue)"));
+        var aim = Aim();
+        var helis = Trial.Air!.Idle(CommandSide).Where(u => (Session.Content.PresetInfo(u.Preset)?.R("rescue") ?? 0) > 0)
+            .Select(u => (u, b: Trial.Site(u.Base))).Where(x => x.b != null).Select(x => (x.u, x.b, d: Pacing.DistanceKm(x.b!.Lon, x.b.Lat, aim.Lon, aim.Lat))).OrderBy(x => x.d).ToList();
+        var cover = helis.Where(x => x.d <= AirPacing.RescueKm).ToList();
+        v.AddChild(Para(cover.Count > 0
+            ? $"✓ {cover.Count} rescue helicopter(s) on alert within {AirPacing.RescueKm:0} km of the target ({string.Join(", ", cover.Take(3).Select(x => $"{x.u.Name} at {x.b!.Name}, {x.d:0} km"))}). They launch by themselves to recover downed crews."
+            : helis.Count > 0 ? $"⚠ Nearest rescue helicopter is {helis[0].d:0} km away ({helis[0].u.Name} at {helis[0].b!.Name}): crews downed near the target won't be recovered." : "⚠ No rescue helicopters in theatre.",
+            cover.Count > 0 ? UiTheme.Good : new Color("ff9a3c")));
     }
 
     private void PageTiming(VBoxContainer v)
@@ -360,9 +385,10 @@ public partial class TheatreOps
     {
         v.AddChild(Hd("Review"));
         var r = Validate(preview: false);
-        v.AddChild(Para($"{_md.Name} · {Purposes.First(p => p.Key == _md.Purpose).Name} → {(StationMission ? "station" : Trial.Site(_md.Target)?.Name)} · ToT T+{T(Trial.Time + _md.TotMin * 60)}"));
+        v.AddChild(Para($"{_md.Name} · {Purposes.First(p => p.Key == _md.Purpose).Name} → {(StationMission ? "station" : ShipTarget ? "ship contact" : Trial.Site(_md.Target)?.Name)} · ToT T+{T(Trial.Time + _md.TotMin * 60)}"));
         foreach (var a in _md.Air) v.AddChild(Para($"  {a.Count}× {PresetName(a.Preset)} · {a.Role} · {a.Formation} · {Cat?.Describe(LoadOf(a)) ?? ""}"));
         foreach (var a in _md.Support) v.AddChild(Para($"  {a.Count}× {PresetName(a.Preset)} · {a.Role}"));
+        foreach (var a in _md.Spares) v.AddChild(Para($"  spare: {a.Count}× {PresetName(a.Preset)} · {a.Role} (launch on losses)"));
         foreach (var f in _md.Fires) { var l = Trial.Launchers.First(x => x.Def.Id == f.Launcher); v.AddChild(Para($"  {l.Def.Name} · {f.Rounds}× {l.Missile.Name}")); }
         v.AddChild(Para($"EMCON package {_md.EmconPackage}, support {_md.EmconSupport} · ROE {_md.Roe}"));
         v.AddChild(Para(r.Issues.Count == 0 ? "✓ Plan valid: every element has a route and a time." : "• " + string.Join("\n• ", r.Issues), r.Issues.Count == 0 ? UiTheme.Good : UiTheme.Bad));
@@ -386,20 +412,36 @@ public partial class TheatreOps
         if (_md.Support.Count > 0)
         {
             var aew = _md.Support.Where(r => r.Role == Mission.AEW).Select(Req).ToList();
-            var tank = _md.Support.Where(r => r.Role == Mission.Tanker).Select(Req).ToList();
+            var tank = _md.Support.Where(r => r.Role is Mission.Tanker or Mission.Jamming).Select(Req).ToList();
             // tankers ride with the strike timing; AEW orbits on the way in
             sup = station || tank.Count == 0
                 ? new AtoEntry { Side = CommandSide, Name = _md.Name + " support", StationLon = aim.Lon, StationLat = aim.Lat, Start = Trial.Time, Duration = 5400, Flights = aew.Concat(tank).ToList() }
                 : new AtoEntry { Side = CommandSide, Name = _md.Name + " support", Target = _md.Target, Tot = tot, Tanker = true, Flights = tank.Concat(aew).ToList() };
         }
-        var fires = _md.Fires.Select(f => new AtoEntry { Side = CommandSide, Launcher = f.Launcher, Target = _md.Target, Tot = tot, Count = f.Rounds, Aimpoint = _md.Aimpoint }).ToList();
+        var fires = _md.Fires.Select(f => new AtoEntry { Side = CommandSide, Launcher = f.Launcher, Target = _md.Target, Tot = tot, Count = f.Rounds, Aimpoint = ShipTarget ? "" : _md.Aimpoint }).ToList();
         return (pkg, sup, station ? new List<AtoEntry>() : fires);
+    }
+
+    private AtoEntry? SpareSpec()
+    {
+        if (_md.Spares.Count == 0 || StationMission) return null;
+        return new AtoEntry { Side = CommandSide, Name = _md.Name + " spares", Target = _md.Target, Tot = Trial.Time + _md.TotMin * 60 + 900, IpKm = _md.IpKm, Aimpoint = _md.Aimpoint,
+            Tanker = _md.Support.Any(r => r.Role == Mission.Tanker), Flights = _md.Spares.Select(r => new FlightRequest(r.Preset, r.Count, r.Role, r.Formation) { Loadout = r.Loadout }).ToList() };
+    }
+
+    /// <summary>Launch time for a fire mission on a ship contact so the rounds arrive at the ToT.</summary>
+    private double ShipLaunchAt(AtoEntry f)
+    {
+        var l = Trial.Launchers.First(x => x.Def.Id == f.Launcher);
+        var aim = Aim();
+        return Math.Max(Trial.Time, f.Tot - Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, aim.Lon, aim.Lat) / Pacing.SpeedKmPerSec(l.Missile.R("speed")));
     }
 
     private MissionCheck Validate(bool preview)
     {
         var issues = new List<string>(); var tl = new List<(string, double, double)>();
         if (_md.Air.Count + _md.Fires.Count == 0) issues.Add("Add aircraft or fires on page 2.");
+        if (!Trial.AtWar && !StationMission) issues.Add(InterceptTrial.NotAtWar);
         if (!StationMission && Trial.Site(_md.Target) is { } s && !TargetPolicy.IsLegitimate(s.Class)) issues.Add(TargetPolicy.ProtectedMessage);
         if (StationMission && _md.Fires.Count > 0) issues.Add("Fires need a target: station missions carry no fire missions.");
         var (pkg, sup, fires) = Specs();
@@ -411,7 +453,22 @@ public partial class TheatreOps
             foreach (var f in r.Flights) tl.Add(($"{f.Callsign} {f.Aircraft.Count}× {f.Type.Name} {f.Mission}", f.Takeoff, f.LandAt));
             if (preview) Preview.AddRange(r.Flights);
         }
-        foreach (var f in fires)
+        if (SpareSpec() is { } sp)
+        {
+            var r = Trial.Air!.Plan(sp);
+            issues.AddRange(r.Issues.Select(i => $"spares: {i}"));
+            foreach (var f in r.Flights) tl.Add(($"(spare, on losses) {f.Callsign} {f.Aircraft.Count}× {f.Type.Name}", f.Takeoff, f.LandAt));
+        }
+        foreach (var f in fires.Where(_ => ShipTarget))
+        {
+            var l = Trial.Launchers.First(x => x.Def.Id == f.Launcher);
+            var aim = Aim(); var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, aim.Lon, aim.Lat);
+            if (!NavalRules.CanHitShips(l.Missile)) issues.Add($"fires: {l.Missile.Name} can't find a ship.");
+            else if (d > l.ReachKm) issues.Add($"fires: {l.Def.Name} is {d:0} km from the ship, reach {l.ReachKm:0} km.");
+            else if (l.Stock < f.Count) issues.Add($"fires: {l.Def.Name} has {l.Stock} rounds.");
+            else tl.Add(($"{l.Def.Name} {f.Count}× {l.Missile.Name} (anti-ship)", ShipLaunchAt(f), f.Tot));
+        }
+        foreach (var f in fires.Where(_ => !ShipTarget))
         {
             var r = Trial.Air!.Plan(f);
             issues.AddRange(r.Issues.Select(i => $"fires: {i}"));
@@ -437,7 +494,18 @@ public partial class TheatreOps
         var n = 0;
         if (pkg != null) op.Elements.Add(new OpElement { Id = $"e{++n}", Kind = ElementKind.Air, Role = "package", Spec = pkg, Emcon = _md.EmconPackage });
         if (sup != null) op.Elements.Add(new OpElement { Id = $"e{++n}", Kind = ElementKind.Air, Role = "support", Spec = sup, Emcon = _md.EmconSupport });
-        foreach (var f in fires) op.Elements.Add(new OpElement { Id = $"e{++n}", Kind = ElementKind.Fires, Role = "fires", Spec = f });
+        foreach (var f in fires)
+        {
+            var el = new OpElement { Id = $"e{++n}", Kind = ElementKind.Fires, Role = "fires", Spec = f };
+            if (ShipTarget) { el.Held = true; op.Rules.Add(new OpRule(new OpCondition("time-after", Value: ShipLaunchAt(f)), new OpAction("activate", el.Id))); }
+            op.Elements.Add(el);
+        }
+        if (SpareSpec() is { } spare)
+        {
+            var el = new OpElement { Id = $"e{++n}", Kind = ElementKind.Air, Role = "spares", Spec = spare, Held = true, Emcon = _md.EmconPackage };
+            op.Elements.Add(el);
+            op.Rules.Add(new OpRule(new OpCondition("losses-above", Value: 0.001), new OpAction("activate", el.Id)));
+        }
         if (_md.AbortOnLosses) op.Rules.Add(new OpRule(new OpCondition("losses-above", Value: _md.AbortAt), new OpAction("abort")));
         if (_md.HoldIfUnsure && !StationMission) op.Rules.Add(new OpRule(new OpCondition("target-confidence-below", Value: 0.5), new OpAction("hold-weapons")));
         if (_md.RecallIfTankerLost) op.Rules.Add(new OpRule(new OpCondition("tanker-unavailable"), new OpAction("abort")));

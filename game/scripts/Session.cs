@@ -28,6 +28,8 @@ public static class Session
     {
         var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, Profile, Content.PresetInfo, Content.BaseTypes,
             side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, stores: Content.Stores);
+        // a campaign theatre that isn't at war shows the other side as "hostile, not at war": track only
+        if (sc.Theatre != "" && World.Theatres.TryGetValue(sc.Theatre, out var ts) && !ts.AtWar && DevScreenshot.Arg("war") == null) t.AtWar = false;
         t.SiteDamaged += (site, frac) =>
         {
             var nation = NationId(t.Scenario.Sides.GetValueOrDefault(site.Side, ""));

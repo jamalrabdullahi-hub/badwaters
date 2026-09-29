@@ -334,6 +334,8 @@ public partial class TheatreOps : Control
         var live = !IsTrial && Scenario.Theatre != "" && Session.Campaign != null ? Session.Campaign.Get(Scenario.Theatre) : null;
         Trial = live ?? Session.BuildTheatre(sc, seed);
         if (keep != null && live == null) foreach (var (k, v) in keep) Trial.Control[k] = v;
+        _title.Text = Trial.AtWar ? "THEATRE OPS" : "THEATRE OPS · NOT AT WAR (track only)";
+        if (!Trial.AtWar) _title.AddThemeColorOverride("font_color", TheatreLayer.Orange);
         SelectedFlight = null; Preview.Clear();
         SelectedTrack = null;
         _logSeen = -1;
@@ -506,8 +508,9 @@ public partial class TheatreLayer : Node2D
     public TheatreOps Ops = null!;
     /// <summary>Label anchors in map space; drawn crisp in screen space by <see cref="MapLabels"/>.</summary>
     public readonly List<(Vector2 At, string Text, Color Color)> Labels = new();
-    public static readonly Color Blue = new("4fbfee"), Red = new("ff4d5a"), Green = new("5cf2b0");
-    private static Color SideColor(string side) => side == "blue" ? Blue : Red;
+    public static readonly Color Blue = new("4fbfee"), Red = new("ff4d5a"), Green = new("5cf2b0"), Orange = new("ff9a3c"), Ivory = new("e9e4cf");
+    /// <summary>Relation colours: blue you (or blue in the umpire view), red enemy at war, orange hostile not at war.</summary>
+    private Color SideColor(string side) => side == "blue" ? (Ops.ViewSide == "red" && !Ops.Trial.AtWar ? Orange : Blue) : !Ops.Trial.AtWar && Ops.ViewSide != "red" ? Orange : Red;
     /// <summary>Hostile to the viewer (hostile symbols: diamond tiles, corner ticks); with the "all" view, red is hostile.</summary>
     private bool Hostile(string side) => Ops.ViewSide == "all" ? side == "red" : side != Ops.ViewSide;
     private void Sym(string code, Vector2 p, Color c, string side, float zoom, Vector2 head = default, float px = 22) =>
@@ -674,7 +677,18 @@ public partial class TheatreLayer : Node2D
 
         if (Ops.Show("reports")) Ops.DrawReports(this, zoom);
         if (Ops.Picked is { } pk) DrawPicked(tr, pk, zoom, w);
+        // neutral merchant traffic (AIS: everyone sees it; never a target)
+        foreach (var n in tr.Neutrals)
+        {
+            if (!Ops.ShowEntity("MER", "neutral", n.Id)) continue;
+            var (nl, nt) = n.At; var (hx, hy) = n.Heading;
+            var np = P(nl, nt);
+            var nh = (P(nl + hx * 0.01, nt + hy * 0.01) - np).Normalized();
+            Symbols.Draw(this, "AOR", np, Green, false, zoom, nh, 18);
+            if (Ops.Show("names") && zoom > 3f) Label(np, $"{n.Name} · {n.Flag} · merchant", new Color(Green, 0.85f));
+        }
         DrawAir(tr, zoom, w);
+        Ops.DrawWaypointHandles(this, zoom, w);
         DrawAirContacts(zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))
         {

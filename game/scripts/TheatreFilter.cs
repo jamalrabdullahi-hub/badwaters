@@ -22,12 +22,13 @@ public partial class TheatreOps
         ("Facilities", new[] { ("Air bases", new[] { "AB" }), ("Naval bases & ports", new[] { "NB", "PRT" }), ("Missile & AD sites", new[] { "MB" }),
             ("Sensors, C2 & space", new[] { "GS" }), ("Logistics", new[] { "AMO", "POL" }), ("Industry & energy", new[] { "IND", "PWR", "YD" }) }),
         ("Protected (civil)", new[] { ("Cities & towns", new[] { "CITY" }) }),
+        ("Neutral / civil traffic", new[] { ("Merchant shipping", new[] { "MER" }) }),
     };
     private static readonly (string Group, (string Key, string Name)[] Items)[] OverlayTree =
     {
         ("Courses & routes", new[] { ("routes", "Flight routes"), ("ship-courses", "Ship courses"), ("tracks", "Missile tracks") }),
         ("Air traffic", new[] { ("enemy-air", "Enemy air contacts") }),
-        ("Sensors & weapons", new[] { ("radar", "Radar coverage"), ("reach", "Air-defence reach"), ("strike", "Strike reach") }),
+        ("Sensors & weapons", new[] { ("radar", "Radar coverage"), ("reach", "Air-defence reach"), ("strike", "Strike reach"), ("jamming", "Jamming cover") }),
         ("Labels & naming", new[] { ("labels", "All labels"), ("names", "Unit names"), ("callsigns", "Callsigns"), ("base-names", "Base & site names") }),
         ("Planning", new[] { ("reports", "Report pins") }),
     };
@@ -95,7 +96,8 @@ public partial class TheatreOps
         _filterTree.Clear();
         var root = _filterTree.CreateItem();
         var sides = _filterTree.CreateItem(root); sides.SetText(0, "SIDES"); sides.SetSelectable(0, false);
-        foreach (var s in new[] { "blue", "red" }) Check(sides, s == CommandSide ? $"{SideName(s)} (you)" : $"{SideName(s)} (enemy · at war)", Show("side-" + s), "side-" + s);
+        foreach (var s in new[] { "blue", "red" }) Check(sides, s == CommandSide ? $"{SideName(s)} (you · blue)" : Trial.AtWar ? $"{SideName(s)} (enemy · at war · red)" : $"{SideName(s)} (hostile · not at war · orange)", Show("side-" + s), "side-" + s);
+        Check(sides, $"Neutral shipping (green) · {Trial.Neutrals.Count}", Show("side-neutral"), "side-neutral");
         var ent = _filterTree.CreateItem(root); ent.SetText(0, "ENTITIES"); ent.SetSelectable(0, false);
         foreach (var (dom, classes) in Taxonomy)
         {

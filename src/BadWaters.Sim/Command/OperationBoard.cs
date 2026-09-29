@@ -94,6 +94,14 @@ public sealed class OperationBoard
                 e.State = "flying";
                 break;
             }
+            case ElementKind.Fires when e.Spec != null && e.Spec.Target.StartsWith("ship:"):
+            {
+                var r = _t.LaunchAtShip(e.Spec.Launcher, e.Spec.Target[5..], e.Spec.Count);
+                op.Log.Add($"{e.Id}: {r.Message}");
+                e.State = r.Ok ? "done" : "failed";
+                if (r.Ok) return;
+                break;
+            }
             case ElementKind.Fires when e.Spec != null && _t.Air != null:
             {
                 var before = _t.Air.Fires.Count;

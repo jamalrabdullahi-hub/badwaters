@@ -64,6 +64,7 @@ public partial class TheatreOps
     /// <summary>Hotkeys and the right-click menu (called from _UnhandledInput when no move order is pending).</summary>
     private void HudInput(InputEvent e)
     {
+        if (RouteInput(e)) return;
         if (e is InputEventKey { Pressed: true, Echo: false } k)
         {
             if (k.Keycode >= Key.F1 && k.Keycode <= Key.F12)

@@ -17,7 +17,7 @@ public partial class TheatreOps
     public readonly Dictionary<string, bool> Overlay = new()
     {
         ["radar"] = true, ["reach"] = true, ["strike"] = true, ["routes"] = true, ["tracks"] = true, ["labels"] = true, ["reports"] = true,
-        ["ship-courses"] = true, ["enemy-air"] = true, ["names"] = true, ["callsigns"] = true, ["base-names"] = true, ["side-blue"] = true, ["side-red"] = true,
+        ["ship-courses"] = true, ["enemy-air"] = true, ["names"] = true, ["callsigns"] = true, ["base-names"] = true, ["side-blue"] = true, ["side-red"] = true, ["side-neutral"] = true, ["jamming"] = true,
     };
     private static readonly (string Key, string Name)[] OverlayNames =
     {
