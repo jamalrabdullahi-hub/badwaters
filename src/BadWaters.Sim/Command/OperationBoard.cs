@@ -90,7 +90,7 @@ public sealed class OperationBoard
                 var before = _t.Air.Flights.Count;
                 var r = _t.Air.PlanFor(e.Spec with { Side = op.Side }, op.Id, e.Assets, commit: true);
                 if (!r.Ok) { e.State = "failed"; op.Log.Add($"{e.Id}: not flown ({string.Join(" ", r.Issues)})"); return; }
-                foreach (var f in _t.Air.Flights.Skip(before)) { e.Flights.Add(f.Id); Authority.Commit(op.Id, f.Aircraft); op.AircraftCommitted += f.Aircraft.Count; f.HoldFire = op.WeaponsHeld; }
+                foreach (var f in _t.Air.Flights.Skip(before)) { e.Flights.Add(f.Id); Authority.Commit(op.Id, f.Aircraft); op.AircraftCommitted += f.Aircraft.Count; f.HoldFire = op.WeaponsHeld; if ((e.Emcon == "" ? op.Doctrine.Emcon : e.Emcon) == "silent") _t.Silent.Add(f.Id); }
                 e.State = "flying";
                 break;
             }

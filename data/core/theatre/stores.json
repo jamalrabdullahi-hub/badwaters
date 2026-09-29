@@ -1,0 +1,1549 @@
+{
+ "_comment": "Built by tools/stores-build.py. Abstract game ratings (0-10), not real characteristics. store alternatives 'a|b' resolve by the aircraft's nation.",
+ "stores": {
+  "aim-120": {
+   "id": "aim-120",
+   "name": "AIM-120 AMRAAM",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 8,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR",
+    "GBR"
+   ]
+  },
+  "aim-9x": {
+   "id": "aim-9x",
+   "name": "AIM-9X Sidewinder",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 7,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR",
+    "GBR"
+   ]
+  },
+  "aam-4b": {
+   "id": "aam-4b",
+   "name": "AAM-4B",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 8,
+   "nations": [
+    "JPN"
+   ]
+  },
+  "meteor": {
+   "id": "meteor",
+   "name": "Meteor",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 8,
+   "nations": [
+    "GBR",
+    "FRA"
+   ]
+  },
+  "mica": {
+   "id": "mica",
+   "name": "MICA",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 7,
+   "nations": [
+    "FRA"
+   ]
+  },
+  "python-5": {
+   "id": "python-5",
+   "name": "Python-5",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 7,
+   "nations": [
+    "ISR"
+   ]
+  },
+  "pl-15": {
+   "id": "pl-15",
+   "name": "PL-15",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 8,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "pl-10": {
+   "id": "pl-10",
+   "name": "PL-10",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 7,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "r-77": {
+   "id": "r-77",
+   "name": "R-77",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 7,
+   "nations": [
+    "RUS"
+   ]
+  },
+  "r-73": {
+   "id": "r-73",
+   "name": "R-73",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 6,
+   "nations": [
+    "RUS",
+    "IRN"
+   ]
+  },
+  "fakour-90": {
+   "id": "fakour-90",
+   "name": "Fakour-90",
+   "kind": "aam",
+   "cls": 1,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 5,
+   "nations": [
+    "IRN"
+   ]
+  },
+  "gbu-31": {
+   "id": "gbu-31",
+   "name": "GBU-31 JDAM (heavy)",
+   "kind": "bomb",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR"
+   ]
+  },
+  "gbu-32": {
+   "id": "gbu-32",
+   "name": "GBU-32 JDAM (medium)",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR"
+   ]
+  },
+  "gbu-38": {
+   "id": "gbu-38",
+   "name": "GBU-38 JDAM (light)",
+   "kind": "bomb",
+   "cls": 1,
+   "punch": 5,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR"
+   ]
+  },
+  "gbu-39": {
+   "id": "gbu-39",
+   "name": "GBU-39 SDB",
+   "kind": "bomb",
+   "cls": 1,
+   "punch": 3,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "USA",
+    "ISR"
+   ]
+  },
+  "spice-2000": {
+   "id": "spice-2000",
+   "name": "SPICE 2000",
+   "kind": "bomb",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "ISR"
+   ]
+  },
+  "paveway-iv": {
+   "id": "paveway-iv",
+   "name": "Paveway IV",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "GBR"
+   ]
+  },
+  "aasm": {
+   "id": "aasm",
+   "name": "AASM Hammer",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "FRA"
+   ]
+  },
+  "ls-6": {
+   "id": "ls-6",
+   "name": "LS-6 glide bomb",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "kab-500": {
+   "id": "kab-500",
+   "name": "KAB-500",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "RUS"
+   ]
+  },
+  "qased": {
+   "id": "qased",
+   "name": "Qased glide bomb",
+   "kind": "bomb",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 5,
+   "air": 0,
+   "nations": [
+    "IRN"
+   ]
+  },
+  "jassm": {
+   "id": "jassm",
+   "name": "AGM-158 JASSM",
+   "kind": "agm",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "USA"
+   ]
+  },
+  "storm-shadow": {
+   "id": "storm-shadow",
+   "name": "Storm Shadow",
+   "kind": "agm",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "GBR",
+    "FRA"
+   ]
+  },
+  "delilah": {
+   "id": "delilah",
+   "name": "Delilah",
+   "kind": "agm",
+   "cls": 2,
+   "punch": 5,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "ISR"
+   ]
+  },
+  "kd-88": {
+   "id": "kd-88",
+   "name": "KD-88",
+   "kind": "agm",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "kd-20": {
+   "id": "kd-20",
+   "name": "KD-20",
+   "kind": "agm",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "kh-59": {
+   "id": "kh-59",
+   "name": "Kh-59",
+   "kind": "agm",
+   "cls": 3,
+   "punch": 7,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "RUS"
+   ]
+  },
+  "agm-88": {
+   "id": "agm-88",
+   "name": "AGM-88 HARM",
+   "kind": "arm",
+   "cls": 2,
+   "punch": 4,
+   "accuracy": 7,
+   "air": 0,
+   "nations": [
+    "USA",
+    "JPN",
+    "ISR",
+    "KOR"
+   ]
+  },
+  "ld-10": {
+   "id": "ld-10",
+   "name": "LD-10",
+   "kind": "arm",
+   "cls": 2,
+   "punch": 4,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "kh-31p": {
+   "id": "kh-31p",
+   "name": "Kh-31P",
+   "kind": "arm",
+   "cls": 2,
+   "punch": 4,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "RUS"
+   ]
+  },
+  "agm-84": {
+   "id": "agm-84",
+   "name": "AGM-84 Harpoon",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "USA",
+    "JPN",
+    "KOR"
+   ]
+  },
+  "lrasm": {
+   "id": "lrasm",
+   "name": "AGM-158C LRASM",
+   "kind": "asm",
+   "cls": 3,
+   "punch": 8,
+   "accuracy": 8,
+   "air": 0,
+   "nations": [
+    "USA"
+   ]
+  },
+  "asm-2": {
+   "id": "asm-2",
+   "name": "ASM-2",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "JPN"
+   ]
+  },
+  "yj-83k": {
+   "id": "yj-83k",
+   "name": "YJ-83K",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "CHN"
+   ]
+  },
+  "kh-31a": {
+   "id": "kh-31a",
+   "name": "Kh-31A",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 5,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "RUS"
+   ]
+  },
+  "exocet": {
+   "id": "exocet",
+   "name": "AM39 Exocet",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 6,
+   "accuracy": 6,
+   "air": 0,
+   "nations": [
+    "FRA"
+   ]
+  },
+  "nasr": {
+   "id": "nasr",
+   "name": "Nasr",
+   "kind": "asm",
+   "cls": 2,
+   "punch": 4,
+   "accuracy": 5,
+   "air": 0,
+   "nations": [
+    "IRN"
+   ]
+  },
+  "tgp": {
+   "id": "tgp",
+   "name": "Targeting pod",
+   "kind": "pod",
+   "cls": 2,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 0,
+   "nations": []
+  },
+  "ecm": {
+   "id": "ecm",
+   "name": "ECM pod",
+   "kind": "pod",
+   "cls": 2,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 0,
+   "nations": []
+  },
+  "tank": {
+   "id": "tank",
+   "name": "Drop tank",
+   "kind": "tank",
+   "cls": 3,
+   "punch": 0,
+   "accuracy": 0,
+   "air": 0,
+   "nations": []
+  }
+ },
+ "templates": {
+  "fighter": {
+   "id": "fighter",
+   "name": "Fighter",
+   "stations": [
+    {
+     "id": "1",
+     "name": "L wingtip",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "2",
+     "name": "L outer",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "3",
+     "name": "L inner",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "4",
+     "name": "L fuselage",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "5",
+     "name": "Centreline",
+     "maxCls": 3,
+     "kinds": [
+      "tank",
+      "bomb",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "6",
+     "name": "R fuselage",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "7",
+     "name": "R inner",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "8",
+     "name": "R outer",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "9",
+     "name": "R wingtip",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    }
+   ],
+   "loadouts": {
+    "Air-to-air": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ],
+    "Strike": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "gbu-31|spice-2000|kab-500|ls-6|qased|aasm|paveway-iv",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "gbu-31|spice-2000|kab-500|ls-6|qased|aasm|paveway-iv",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ],
+    "SEAD": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "ecm",
+      "qty": 1
+     }
+    ],
+    "Anti-ship": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ],
+    "Recon": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tgp",
+      "qty": 1
+     }
+    ]
+   }
+  },
+  "strike": {
+   "id": "strike",
+   "name": "Strike fighter",
+   "stations": [
+    {
+     "id": "1",
+     "name": "L wingtip / rail",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "2",
+     "name": "L outer",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "3",
+     "name": "L inner (heavy)",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "4",
+     "name": "L conformal",
+     "maxCls": 2,
+     "kinds": [
+      "bomb",
+      "aam"
+     ],
+     "maxQty": 3
+    },
+    {
+     "id": "5",
+     "name": "Centreline",
+     "maxCls": 3,
+     "kinds": [
+      "tank",
+      "bomb",
+      "pod",
+      "agm"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "6",
+     "name": "R conformal",
+     "maxCls": 2,
+     "kinds": [
+      "bomb",
+      "aam"
+     ],
+     "maxQty": 3
+    },
+    {
+     "id": "7",
+     "name": "R inner (heavy)",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "8",
+     "name": "R outer",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "9",
+     "name": "R wingtip / rail",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "10",
+     "name": "Pod station L",
+     "maxCls": 2,
+     "kinds": [
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "11",
+     "name": "Pod station R",
+     "maxCls": 2,
+     "kinds": [
+      "pod"
+     ],
+     "maxQty": 1
+    }
+   ],
+   "loadouts": {
+    "Air-to-air": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     },
+     {
+      "station": "6",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ],
+    "Strike": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "gbu-39|gbu-38|ls-6|kab-500|qased|paveway-iv|aasm",
+      "qty": 3
+     },
+     {
+      "station": "6",
+      "store": "gbu-39|gbu-38|ls-6|kab-500|qased|paveway-iv|aasm",
+      "qty": 3
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     },
+     {
+      "station": "10",
+      "store": "tgp",
+      "qty": 1
+     }
+    ],
+    "SEAD": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "4",
+      "store": "gbu-39|gbu-38|ls-6|kab-500|qased|paveway-iv|aasm",
+      "qty": 3
+     },
+     {
+      "station": "6",
+      "store": "gbu-39|gbu-38|ls-6|kab-500|qased|paveway-iv|aasm",
+      "qty": 3
+     },
+     {
+      "station": "11",
+      "store": "ecm",
+      "qty": 1
+     }
+    ],
+    "Anti-ship": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "3",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "7",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ],
+    "Recon": [
+     {
+      "station": "1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "9",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "8",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "10",
+      "store": "tgp",
+      "qty": 1
+     },
+     {
+      "station": "5",
+      "store": "tank",
+      "qty": 1
+     }
+    ]
+   }
+  },
+  "stealth": {
+   "id": "stealth",
+   "name": "Stealth fighter (internal bays)",
+   "stations": [
+    {
+     "id": "B1",
+     "name": "Main bay L",
+     "maxCls": 2,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm"
+     ],
+     "maxQty": 2
+    },
+    {
+     "id": "B2",
+     "name": "Main bay R",
+     "maxCls": 2,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm"
+     ],
+     "maxQty": 2
+    },
+    {
+     "id": "S1",
+     "name": "Side bay L",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "S2",
+     "name": "Side bay R",
+     "maxCls": 1,
+     "kinds": [
+      "aam"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "W1",
+     "name": "L wing (not stealthy)",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    },
+    {
+     "id": "W2",
+     "name": "R wing (not stealthy)",
+     "maxCls": 3,
+     "kinds": [
+      "aam",
+      "bomb",
+      "agm",
+      "arm",
+      "asm",
+      "tank",
+      "pod"
+     ],
+     "maxQty": 1
+    }
+   ],
+   "loadouts": {
+    "Air-to-air": [
+     {
+      "station": "B1",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     },
+     {
+      "station": "B2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     },
+     {
+      "station": "S1",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     },
+     {
+      "station": "S2",
+      "store": "aim-9x|pl-10|r-73|python-5|mica",
+      "qty": 1
+     }
+    ],
+    "Strike": [
+     {
+      "station": "B1",
+      "store": "gbu-32|ls-6|kab-500|qased|aasm|paveway-iv",
+      "qty": 1
+     },
+     {
+      "station": "B2",
+      "store": "gbu-32|ls-6|kab-500|qased|aasm|paveway-iv",
+      "qty": 1
+     },
+     {
+      "station": "S1",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "S2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     }
+    ],
+    "SEAD": [
+     {
+      "station": "B1",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "B2",
+      "store": "agm-88|ld-10|kh-31p",
+      "qty": 1
+     },
+     {
+      "station": "S1",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "S2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     }
+    ],
+    "Anti-ship": [
+     {
+      "station": "B1",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "B2",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "S1",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     },
+     {
+      "station": "S2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 1
+     }
+    ],
+    "Recon": [
+     {
+      "station": "B1",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     },
+     {
+      "station": "B2",
+      "store": "aim-120|pl-15|r-77|aam-4b|meteor|mica|fakour-90",
+      "qty": 2
+     }
+    ]
+   }
+  },
+  "bomber": {
+   "id": "bomber",
+   "name": "Bomber",
+   "stations": [
+    {
+     "id": "1",
+     "name": "Bay / pylon 1",
+     "maxCls": 3,
+     "kinds": [
+      "bomb",
+      "agm",
+      "asm"
+     ],
+     "maxQty": 4
+    },
+    {
+     "id": "2",
+     "name": "Bay / pylon 2",
+     "maxCls": 3,
+     "kinds": [
+      "bomb",
+      "agm",
+      "asm"
+     ],
+     "maxQty": 4
+    },
+    {
+     "id": "3",
+     "name": "Bay / pylon 3",
+     "maxCls": 3,
+     "kinds": [
+      "bomb",
+      "agm",
+      "asm"
+     ],
+     "maxQty": 4
+    }
+   ],
+   "loadouts": {
+    "Strike": [
+     {
+      "station": "1",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 2
+     },
+     {
+      "station": "2",
+      "store": "gbu-31|spice-2000|kab-500|ls-6|qased|aasm|paveway-iv",
+      "qty": 4
+     },
+     {
+      "station": "3",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 2
+     }
+    ],
+    "Anti-ship": [
+     {
+      "station": "1",
+      "store": "lrasm|agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     },
+     {
+      "station": "2",
+      "store": "lrasm|agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     },
+     {
+      "station": "3",
+      "store": "lrasm|agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     }
+    ],
+    "SEAD": [
+     {
+      "station": "1",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 2
+     },
+     {
+      "station": "2",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 2
+     },
+     {
+      "station": "3",
+      "store": "jassm|storm-shadow|kd-20|kh-59|delilah|kd-88",
+      "qty": 2
+     }
+    ]
+   }
+  },
+  "patrol": {
+   "id": "patrol",
+   "name": "Maritime patrol",
+   "stations": [
+    {
+     "id": "W1",
+     "name": "L wing",
+     "maxCls": 2,
+     "kinds": [
+      "asm"
+     ],
+     "maxQty": 2
+    },
+    {
+     "id": "W2",
+     "name": "R wing",
+     "maxCls": 2,
+     "kinds": [
+      "asm"
+     ],
+     "maxQty": 2
+    },
+    {
+     "id": "BAY",
+     "name": "Weapons bay",
+     "maxCls": 2,
+     "kinds": [
+      "asm",
+      "bomb"
+     ],
+     "maxQty": 4
+    }
+   ],
+   "loadouts": {
+    "Recon": [
+     {
+      "station": "W1",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     },
+     {
+      "station": "W2",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 1
+     }
+    ],
+    "Anti-ship": [
+     {
+      "station": "W1",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     },
+     {
+      "station": "W2",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     },
+     {
+      "station": "BAY",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     }
+    ],
+    "Strike": [
+     {
+      "station": "W1",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     },
+     {
+      "station": "W2",
+      "store": "agm-84|asm-2|yj-83k|kh-31a|exocet|nasr",
+      "qty": 2
+     }
+    ]
+   }
+  }
+ },
+ "presets": {
+  "USF4E": "strike",
+  "USF14D": "fighter",
+  "USF15C": "fighter",
+  "USF15E": "strike",
+  "USF16C": "fighter",
+  "USFA18C": "strike",
+  "USFA18E": "strike",
+  "USF22A": "stealth",
+  "USF35A": "stealth",
+  "USF35B": "stealth",
+  "USF35C": "stealth",
+  "RUSU24M": "strike",
+  "RUSU27S": "fighter",
+  "RUSU30SM": "strike",
+  "RUSU33": "fighter",
+  "RUSU34": "strike",
+  "RUSU35S": "fighter",
+  "RUSU57": "stealth",
+  "RUMIG29": "fighter",
+  "RUMIG31BM": "fighter",
+  "CNJ8II": "fighter",
+  "CNJ10C": "fighter",
+  "CNJ11B": "fighter",
+  "CNJ15": "fighter",
+  "CNJ16": "strike",
+  "CNJ20": "stealth",
+  "FRM2000-5": "fighter",
+  "FRRFL-M": "strike",
+  "UKEF2000": "fighter",
+  "JPF15J": "fighter",
+  "JPF2A": "strike",
+  "JPP1": "patrol",
+  "CNH6K": "bomber",
+  "ILF35I": "stealth",
+  "ILF15I": "strike",
+  "ILF16I": "strike",
+  "IRF14AM": "fighter",
+  "IRMIG29": "fighter",
+  "IRF4E": "strike",
+  "IRSU24": "strike"
+ },
+ "nations": {
+  "USF4E": "USA",
+  "USF14D": "USA",
+  "USF15C": "USA",
+  "USF15E": "USA",
+  "USF16C": "USA",
+  "USFA18C": "USA",
+  "USFA18E": "USA",
+  "USF22A": "USA",
+  "USF35A": "USA",
+  "USF35B": "USA",
+  "USF35C": "USA",
+  "RUSU24M": "RUS",
+  "RUSU27S": "RUS",
+  "RUSU30SM": "RUS",
+  "RUSU33": "RUS",
+  "RUSU34": "RUS",
+  "RUSU35S": "RUS",
+  "RUSU57": "RUS",
+  "RUMIG29": "RUS",
+  "RUMIG31BM": "RUS",
+  "CNJ8II": "CHN",
+  "CNJ10C": "CHN",
+  "CNJ11B": "CHN",
+  "CNJ15": "CHN",
+  "CNJ16": "CHN",
+  "CNJ20": "CHN",
+  "FRM2000-5": "FRA",
+  "FRRFL-M": "FRA",
+  "UKEF2000": "GBR",
+  "JPF15J": "JPN",
+  "JPF2A": "JPN",
+  "JPP1": "JPN",
+  "CNH6K": "CHN",
+  "ILF35I": "ISR",
+  "ILF15I": "ISR",
+  "ILF16I": "ISR",
+  "IRF14AM": "IRN",
+  "IRMIG29": "IRN",
+  "IRF4E": "IRN",
+  "IRSU24": "IRN"
+ }
+}

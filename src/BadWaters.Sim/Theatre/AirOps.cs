@@ -15,7 +15,11 @@ public sealed record PresetInfo(string Id, string Name, IReadOnlyDictionary<stri
 {
     public double R(string k) => Ratings.TryGetValue(k, out var v) ? v : 0;
 }
-public sealed record FlightRequest(string Preset, int Count, Mission Mission, Formation Formation = Formation.Wedge);
+public sealed record FlightRequest(string Preset, int Count, Mission Mission, Formation Formation = Formation.Wedge)
+{
+    /// <summary>Per-aircraft stores (station → store × qty). Null: the mission's default loadout.</summary>
+    public IReadOnlyDictionary<string, StoreLoad>? Loadout { get; init; }
+}
 
 /// <summary>One AI or player tasking line: a strike package (Target + Tot) or a CAP/AEW/tanker station.</summary>
 public sealed record AtoEntry
@@ -108,6 +112,8 @@ public sealed class Flight
     public bool Released { get; set; }
     /// <summary>Weapons held (an operation rule): the flight flies the route but does not release.</summary>
     public bool HoldFire { get; set; }
+    /// <summary>Stores per aircraft (station → store × qty), drawn from the base's munition stocks when armed.</summary>
+    public Dictionary<string, StoreLoad> Loadout { get; } = new();
 
     public double Takeoff => Route[0].T;
     public double LandAt => Route[^1].T;
@@ -175,6 +181,30 @@ public sealed class AirTasking
     private static readonly string[] BlueCalls = { "EAGLE", "VIPER", "COBRA", "HAWK", "RAVEN", "LANCE", "SABRE", "FALCON" };
     private static readonly string[] RedCalls = { "DRAGON", "TIGER", "WOLF", "FLAME", "STORM", "ARROW", "THUNDER", "IRON" };
 
+    /// <summary>Stores catalog (null: aircraft fly on their ratings alone, no loadouts or munition stocks).</summary>
+    public StoresCatalog? Stores { get; set; }
+    public MunitionStocks Munitions { get; } = new();
+
+    /// <summary>Starting stocks: each air base holds three sorties' worth of every store its own aircraft use in their default loadouts.</summary>
+    public void SeedMunitions()
+    {
+        if (Stores == null) return;
+        foreach (var g in _t.Scenario.Units.Where(u => u.Kind == "air").GroupBy(u => u.Base))
+            foreach (var u in g)
+            {
+                var t = Stores.Template(u.Preset);
+                if (t == null) continue;
+                var need = new Dictionary<string, int>();
+                foreach (var name in t.Loadouts.Keys)
+                    foreach (var l in Stores.Default(u.Preset, name).Values.GroupBy(x => x.Store))
+                        need[l.Key] = Math.Max(need.GetValueOrDefault(l.Key), l.Sum(x => x.Qty));
+                foreach (var (store, n) in need) Munitions.Add(g.Key, store, n * 3);
+            }
+    }
+
+    /// <summary>Bases of a side (for theatre-wide munition totals).</summary>
+    public IEnumerable<string> BasesOf(string side) => _t.Scenario.Sites.Where(s => s.Side == side).Select(s => s.Id);
+
     public AirTasking(InterceptTrial trial, Func<string, PresetInfo?> preset, int seed = 1)
     {
         _t = trial;
@@ -238,6 +268,7 @@ public sealed class AirTasking
         var side = _next % 2 == 0 ? 1 : -1; // which side of the direct line the route bends to
 
         var hasTanker = e.Tanker || e.Flights.Any(r => r.Mission == Mission.Tanker);
+        var drawn = new Dictionary<(string Base, string Store), int>(); // stores this plan takes, per base
         foreach (var (req, idx) in e.Flights.Select((r, i) => (r, i)).OrderBy(x => x.r.Mission == Mission.Tanker))
         {
             var info = _preset(req.Preset);
@@ -247,6 +278,22 @@ public sealed class AirTasking
                 .Select(g => (Base: _t.Site(g.Key), Units: g.ToList())).Where(x => x.Base != null && x.Units.Count >= req.Count && BaseCanLaunch(x.Base.Id, req.Mission))
                 .OrderBy(x => Pacing.DistanceKm(x.Base!.Lon, x.Base.Lat, aim.Item1, aim.Item2)).FirstOrDefault();
             if (pool.Base == null) { issues.Add($"Not enough idle {info.Name} at any single working base for {req.Count} aircraft (runway closed or munitions store destroyed counts as not working)."); continue; }
+            // arm from the base's munition stocks
+            var load = new Dictionary<string, StoreLoad>();
+            if (Stores != null)
+            {
+                load = req.Loadout != null ? req.Loadout.ToDictionary(k => k.Key, k => k.Value) : Stores.Default(req.Preset, req.Mission);
+                var bad = Stores.Validate(req.Preset, load);
+                if (bad.Count > 0) { issues.Add($"{info.Name} loadout: {string.Join("; ", bad)}."); continue; }
+                var shortOf = load.Values.Where(l => l.Qty > 0).GroupBy(l => l.Store).Select(x => (Store: x.Key, Need: x.Sum(y => y.Qty) * req.Count))
+                    .Where(x => Munitions.At(pool.Base.Id, x.Store) - drawn.GetValueOrDefault((pool.Base.Id, x.Store)) < x.Need).ToList();
+                if (shortOf.Count > 0)
+                {
+                    issues.AddRange(shortOf.Select(x => $"Not enough {Stores.Stores.GetValueOrDefault(x.Store)?.Name ?? x.Store} at {pool.Base.Name} for {req.Count}× {info.Name}: need {x.Need}, base has {Munitions.At(pool.Base.Id, x.Store) - drawn.GetValueOrDefault((pool.Base.Id, x.Store))} (theatre {Munitions.Theatre(BasesOf(e.Side), x.Store)})."));
+                    continue;
+                }
+                foreach (var x in load.Values.Where(l => l.Qty > 0)) drawn[(pool.Base.Id, x.Store)] = drawn.GetValueOrDefault((pool.Base.Id, x.Store)) + x.Qty * req.Count;
+            }
             var prep = AirPacing.PrepSeconds * (_t.Bases.TryGetValue(pool.Base.Id, out var hb) ? hb.PrepFactor : 1);
             var home = pool.Base;
             var dist = Pacing.DistanceKm(home.Lon, home.Lat, aim.Item1, aim.Item2);
@@ -263,6 +310,7 @@ public sealed class AirTasking
                 BaseId = home.Id, Mission = req.Mission, Formation = req.Formation, PackageId = pkgId,
             };
             f.Aircraft.AddRange(pool.Units.Take(req.Count).Select(u => u.Id));
+            foreach (var (k, sl) in load) f.Loadout[k] = sl;
             foreach (var a in f.Aircraft) reserved.Add(a);
 
             if (req.Mission == Mission.Tanker)
@@ -324,6 +372,7 @@ public sealed class AirTasking
             _next++;
             _calls[e.Side] = _calls.GetValueOrDefault(e.Side) + flights.Count;
             foreach (var f in flights) { Flights.Add(f); foreach (var a in f.Aircraft) Tasked.Add(a); }
+            foreach (var ((b, s), n) in drawn) Munitions.Add(b, s, -n);
             if (pkg != null) Packages.Add(pkg);
             _t.Report("ato", pkg != null
                 ? $"{Side(e.Side)} ATO: {pkg.Name} → {target!.Name}, TOT T+{Clock(e.Tot)}, {flights.Count} flights ({string.Join(", ", flights.Select(f => $"{f.Callsign} {f.Aircraft.Count}× {f.Type.Name} {f.Mission}"))})."
@@ -533,8 +582,15 @@ public sealed class AirTasking
     {
         var s = shooter.Type; var t = target.Type;
         var (lon, lat) = shooter.Pos(now);
-        return Math.Clamp(0.15 + 0.05 * (s.R("air-defence") - t.R("air-defence")) + 0.03 * (s.R("detection") - t.R("signature"))
-            + 0.02 * (s.R("agility") - t.R("agility")) + FormationRules.Mod(shooter.Formation).AirToAir + (AewNear(shooter.Side, lon, lat, now) ? 0.05 : 0), 0.03, 0.75);
+        var p = 0.15 + 0.05 * (s.R("air-defence") - t.R("air-defence")) + 0.03 * (s.R("detection") - t.R("signature"))
+            + 0.02 * (s.R("agility") - t.R("agility")) + FormationRules.Mod(shooter.Formation).AirToAir + (AewNear(shooter.Side, lon, lat, now) ? 0.05 : 0);
+        // loadout: the best air-to-air missile carried adds to the chance; none carried leaves guns only
+        if (Stores != null && shooter.Loadout.Count > 0)
+        {
+            var aam = shooter.Loadout.Values.Select(l => Stores.Stores.GetValueOrDefault(l.Store)).Where(x => x is { Kind: "aam" }).Select(x => x!.Air).DefaultIfEmpty(-1).Max();
+            p = aam < 0 ? p * 0.3 : p + 0.02 * (aam - 5);
+        }
+        return Math.Clamp(p, 0.03, 0.75);
     }
 
     private void Fight(Flight a, Flight b, double now)
@@ -599,12 +655,34 @@ public sealed class AirTasking
             return;
         }
         var pHit = Math.Clamp(0.25 + 0.06 * f.Type.R("strike") + 0.02 * f.Type.R("payload") + form.Strike, 0.05, 0.95);
-        var hits = f.Aircraft.Count(_ => _rng.NextDouble() < pHit);
-        if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;
         var effects = new List<string>();
-        if (_t.Bases.TryGetValue(tgt.Id, out var tb))
-            for (var i = 0; i < hits; i++) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", 3 + 0.5 * f.Type.R("payload"), f.Type.R("strike"), 0.4, "pilot report"));
-        var text = $"{f.Callsign}: {f.Aircraft.Count}× {f.Type.Name} released on {tgt.Name} at TOT · {hits} hits ({pHit:P0} each: strike {f.Type.R("strike"):0}, payload {f.Type.R("payload"):0}) · " +
+        _t.Bases.TryGetValue(tgt.Id, out var tb);
+        int hits;
+        // with a loadout, every air-to-ground store is a weapon: its own accuracy and punch (game ratings)
+        var weapons = Stores == null ? new List<StoreDef>() : f.Loadout.Values.Where(l => Stores.Stores.TryGetValue(l.Store, out var s) && s.AirToGround)
+            .SelectMany(l => Enumerable.Repeat(Stores.Stores[l.Store], l.Qty * f.Aircraft.Count)).ToList();
+        string how;
+        if (weapons.Count > 0)
+        {
+            hits = 0;
+            foreach (var w in weapons)
+            {
+                var p = Math.Clamp(0.2 + 0.06 * w.Accuracy + 0.02 * f.Type.R("strike") + form.Strike, 0.05, 0.95);
+                if (_rng.NextDouble() >= p) continue;
+                hits++;
+                if (tb != null) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", w.Punch, w.Accuracy, 0.4, "pilot report"));
+            }
+            how = $"{weapons.Count} weapons ({string.Join(", ", weapons.GroupBy(w => w.Name).Select(g => $"{g.Count()}× {g.Key}"))})";
+        }
+        else
+        {
+            hits = f.Aircraft.Count(_ => _rng.NextDouble() < pHit);
+            if (tb != null) for (var i = 0; i < hits; i++) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", 3 + 0.5 * f.Type.R("payload"), f.Type.R("strike"), 0.4, "pilot report"));
+            how = $"{pHit:P0} each: strike {f.Type.R("strike"):0}, payload {f.Type.R("payload"):0}";
+        }
+        if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;
+        effects = effects.Distinct().Take(6).ToList();
+        var text = $"{f.Callsign}: {f.Aircraft.Count}× {f.Type.Name} released on {tgt.Name} at TOT · {hits} hits ({how}) · " +
                    $"{lost} lost to {covering.Count} covering SAM batteries ({pLoss:P0} each{(sead ? ", SEAD suppressing" : "")}, stealth {f.Type.R("signature"):0})" +
                    (effects.Count > 0 ? " · " + string.Join("; ", effects) : "") + ".";
         if (pkg != null) pkg.Result = text;

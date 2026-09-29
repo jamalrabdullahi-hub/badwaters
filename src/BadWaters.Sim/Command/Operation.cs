@@ -29,6 +29,8 @@ public sealed class OpElement
     public List<string> Assets { get; set; } = new();
     /// <summary>Held elements start only when a rule activates them (e.g. an EW escort if enemy AEW shows up).</summary>
     public bool Held { get; set; }
+    /// <summary>active | limited | silent for this element's aircraft ("" = the operation's doctrine).</summary>
+    public string Emcon { get; set; } = "";
     /// <summary>Alternative spec used when a rule switches to the contingency (e.g. a route without the tanker).</summary>
     public AtoEntry? Contingency { get; set; }
     // runtime
