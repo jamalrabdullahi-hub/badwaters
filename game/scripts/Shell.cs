@@ -264,8 +264,7 @@ public partial class Shell : Control
             if (_theatre.Scenario.Id != id) _theatre.Load(id);
             var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
-            // the console covers the left and the ATO strip the bottom: put the theatre in the open area
-            _map.PanScreen(new Vector2(-TheatreOps.ConsoleW / 2f, TheatreOps.TimelineH / 2f - TheatreOps.TopH / 2f));
+            _map.PanScreen(new Vector2(0, -TheatreOps.TopH / 2f)); // map-first: only the command bar covers it
             return;
         }
         ShowPlaceholder(name);

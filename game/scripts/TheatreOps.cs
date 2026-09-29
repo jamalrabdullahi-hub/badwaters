@@ -34,7 +34,6 @@ public partial class TheatreOps : Control
     private VBoxContainer _firePanel = null!;
     private Button _blueAi = null!, _bluePlayer = null!, _redAi = null!, _redPlayer = null!;
     private double _uiTimer, _winTimer;
-    private PanelContainer? _console;
     private OptionButton _cmd = null!, _view = null!;
     private int _logSeen = -1;
     public const int TopH = 44, ConsoleW = 640, TimelineH = 210;
@@ -42,7 +41,7 @@ public partial class TheatreOps : Control
     private VBoxContainer _contacts = null!;
     public AtoTimeline Timeline { get; private set; } = null!;
     /// <summary>Switch the console to a tab (used by the timeline when a row is clicked).</summary>
-    public void ShowTab(string name) { foreach (var (k, v) in _pages) v.Visible = k == name; UpdateUi(); }
+    public void ShowTab(string name) { Open(name); UpdateUi(); }
 
     /// <summary>The single-battery trial gets design pickers; big scenarios use their own order of battle.</summary>
     private bool IsTrial => Scenario.Batteries.Count == 1 && Scenario.Launchers.Count == 1;
@@ -71,7 +70,7 @@ public partial class TheatreOps : Control
         Theme = UiTheme.BuildTactical();
         Layer.Ops = this;
 
-        // ---- layout: top bar · console (left) · map (right) · ATO sync timeline (bottom) ----
+        // ---- layout (T3 · map-first HUD): command bar on top, full-bleed map, floating windows, bottom dock ----
         var top = new PanelContainer { AnchorRight = 1, OffsetBottom = TopH };
         AddChild(top);
         var th = new HBoxContainer();
@@ -89,7 +88,8 @@ public partial class TheatreOps : Control
         foreach (var s in Speeds)
         {
             var sb = new Button { Text = s == 0 ? "❚❚" : $"{s}×", ToggleMode = true, ButtonGroup = sg, ButtonPressed = s == Speed };
-            sb.Pressed += () => Speed = s;
+            sb.Pressed += () => SetSpeed(s);
+            _speedButtons.Add((s, sb));
             th.AddChild(sb);
         }
         th.AddChild(new Control { SizeFlagsHorizontal = SizeFlags.ExpandFill });
@@ -114,29 +114,19 @@ public partial class TheatreOps : Control
         _view.ItemSelected += i => { ViewSide = i switch { 0 => "blue", 1 => "red", _ => "all" }; UpdateUi(); };
         th.AddChild(_view);
 
-        var console = new PanelContainer { AnchorBottom = 1, OffsetTop = TopH + 4, OffsetRight = ConsoleW, OffsetBottom = -(TimelineH + 4), ClipContents = true };
-        _console = console;
-        AddChild(console);
-        var cv = new VBoxContainer();
-        console.AddChild(cv);
-        var tabs = new HBoxContainer();
-        tabs.AddThemeConstantOverride("separation", 4);
-        cv.AddChild(tabs);
-        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled, SizeFlagsVertical = SizeFlags.ExpandFill };
-        cv.AddChild(scroll);
-        var pages = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        scroll.AddChild(pages);
-        var tg = new ButtonGroup();
-        var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", "naval" => "NAVAL", _ => "AIR DEF" };
+        // the old console pages are now floating windows (opened from the dock); only the start one is open
+        var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", "naval" => "NAVAL", "airdef" => "AIR DEF", _ => "" };
+        var at = new Vector2(14, TopH + 12);
         VBoxContainer Page(string name)
         {
-            var page = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill, Visible = name == start };
+            var page = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
             page.AddThemeConstantOverride("separation", 6);
-            pages.AddChild(page);
-            var b = new Button { Text = name, ToggleMode = true, ButtonGroup = tg, ButtonPressed = name == start, SizeFlagsHorizontal = SizeFlags.ExpandFill };
-            b.Pressed += () => { foreach (var c in pages.GetChildren()) ((Control)c).Visible = c == page; UpdateUi(); };
-            tabs.AddChild(b);
             _pages[name] = page;
+            var w = new TacWindow(PageTitle(name), at, new Vector2(ConsoleW, 560)) { Visible = name == start };
+            at += new Vector2(24, 24);
+            w.Body.AddChild(page);
+            AddChild(w);
+            _windows[name] = w;
             return page;
         }
 
@@ -188,8 +178,11 @@ public partial class TheatreOps : Control
         var labels = new MapLabels { Layer = Layer };
         AddChild(labels);
         MoveChild(labels, 0); // under every panel
-        Timeline = new AtoTimeline { Ops = this, AnchorTop = 1, AnchorRight = 1, AnchorBottom = 1, OffsetTop = -TimelineH };
-        AddChild(Timeline);
+        Timeline = new AtoTimeline { Ops = this, CustomMinimumSize = new Vector2(1100, TimelineH) };
+        var sync = new TacWindow("ATO sync matrix · operations over time", new Vector2(260, 560), new Vector2(1120, TimelineH + 40)) { Visible = false };
+        sync.Body.AddChild(Timeline);
+        AddChild(sync);
+        _windows["SYNC"] = sync;
 
         Load(DevScreenshot.Arg("scenario") ?? "intercept-trial");
         if (DevScreenshot.Arg("blue") == "player") SetMode("blue", SideControl.Player);
@@ -404,11 +397,11 @@ public partial class TheatreOps : Control
         var hits = Trial.Hits.OrderByDescending(h => h.Value).Take(6).Select(h => $"{Trial.Site(h.Key)!.Name} ×{h.Value}");
         _oob.Text = text + $"Most hit: {(Trial.Hits.Count == 0 ? "none" : string.Join(", ", hits))}";
 
-        if (_airView.Visible) UpdateAir(false);
-        if (_basesView.Visible) UpdateBases();
-        if (_firePanel.Visible) UpdateFires();
-        if (_navalView.Visible) UpdateNaval();
-        if (_pages["PICTURE"].Visible) UpdateContacts();
+        if (_airView.IsVisibleInTree()) UpdateAir(false);
+        if (_basesView.IsVisibleInTree()) UpdateBases();
+        if (_firePanel.IsVisibleInTree()) UpdateFires();
+        if (_navalView.IsVisibleInTree()) UpdateNaval();
+        if (_pages["PICTURE"].IsVisibleInTree()) UpdateContacts();
         Timeline.QueueRedraw();
         Clear(_tracks);
         var shown = Trial.Tracks.Where(x => x.Launched <= Trial.Time && (ViewSide == "all" || x.Side == ViewSide || x.Detected))
@@ -496,6 +489,12 @@ public partial class TheatreOps : Control
             }
         }
     }
+
+    private static string PageTitle(string key) => key switch
+    {
+        "PICTURE" => "Picture · order of battle and contacts", "ATO" => "Air tasking · flights and packages", "FIRES" => "Fires · surface-to-surface",
+        "AIR DEF" => "Air defence · tracks and kill chance", "NAVAL" => "Naval · ships and submarines", "BASES" => "Bases · status", "LOG" => "Log", _ => key,
+    };
 
     private static void Clear(Node n) { foreach (var c in n.GetChildren()) { n.RemoveChild(c); c.QueueFree(); } }
 }
@@ -652,6 +651,7 @@ public partial class TheatreLayer : Node2D
             Burst(t.State == TrackState.Intercepted ? head : z, t.EndedAt, t.State == TrackState.Intercepted ? Green : t.State == TrackState.Impacted ? Red : default, zoom);
         }
 
+        Ops.DrawReports(this, zoom);
         DrawAir(tr, zoom, w);
         DrawAirContacts(zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))

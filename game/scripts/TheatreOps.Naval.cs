@@ -64,7 +64,8 @@ public partial class TheatreOps
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (AwaitingMove == null || e is not InputEventMouseButton { Pressed: true } mb) return;
+        if (AwaitingMove == null) { HudInput(e); return; }
+        if (e is not InputEventMouseButton { Pressed: true } mb) return;
         if (mb.ButtonIndex == MouseButton.Right) { AwaitingMove = null; UpdateNaval(); GetViewport().SetInputAsHandled(); return; }
         if (mb.ButtonIndex != MouseButton.Left) return;
         var world = GetViewport().GetCanvasTransform().AffineInverse() * mb.Position;

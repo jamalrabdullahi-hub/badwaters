@@ -66,39 +66,31 @@ public partial class TheatreOps
 
     private void BuildWindows()
     {
-        var bar = new PanelContainer { AnchorLeft = 1, AnchorRight = 1, OffsetLeft = -96, OffsetTop = TopH + 4, OffsetBottom = TopH + 4 + 8 * 34 };
-        var v = new VBoxContainer();
-        v.AddThemeConstantOverride("separation", 3);
-        bar.AddChild(v);
-        AddChild(bar);
         void Win(string key, string title, Vector2 at, Vector2 size, Action<TacWindow> fill)
         {
             var w = new TacWindow(title, at, size) { Visible = false };
             w.Refresh = () => { w.Clear(); fill(w); };
             AddChild(w);
             _windows[key] = w;
-            var b = new Button { Text = key, SizeFlagsHorizontal = SizeFlags.ExpandFill };
-            b.Pressed += () => { w.Visible = !w.Visible; if (w.Visible) { MoveChild(w, -1); w.Refresh(); } };
-            v.AddChild(b);
         }
-        Win("FRAG", "Frag order · operations", new Vector2(ConsoleW + 12, TopH + 8), new Vector2(620, 340), FillFrag);
-        Win("OPERATION", "Operation editor", new Vector2(ConsoleW + 12, TopH + 360), new Vector2(620, 420), FillEditor);
-        Win("OOB", "Order of battle", new Vector2(ConsoleW + 640, TopH + 8), new Vector2(420, 460), FillOob);
-        Win("PRIORITIES", "Priorities · directives to the commander", new Vector2(ConsoleW + 640, TopH + 480), new Vector2(420, 320), FillPriorities);
-        Win("INTEL", "Intelligence picture", new Vector2(ConsoleW + 12, TopH + 8), new Vector2(520, 460), FillIntel);
-        Win("COMMANDER", "Commander · why is my general doing this", new Vector2(ConsoleW + 540, TopH + 8), new Vector2(480, 420), FillCommander);
-        var console = new Button { Text = "CONSOLE", ToggleMode = true, ButtonPressed = true, SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        console.Toggled += on => { if (_console != null) _console.Visible = on; };
-        v.AddChild(console);
-        var tl = new Button { Text = "ATO SYNC", ToggleMode = true, ButtonPressed = true, SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        tl.Toggled += on => Timeline.Visible = on;
-        v.AddChild(tl);
+        Win("FRAG", "Frag order · operations", new Vector2(14, TopH + 12), new Vector2(620, 340), FillFrag);
+        Win("OPERATION", "Operation editor", new Vector2(14, TopH + 364), new Vector2(620, 420), FillEditor);
+        Win("OOB", "Order of battle", new Vector2(650, TopH + 12), new Vector2(420, 460), FillOob);
+        Win("PRIORITIES", "Priorities · directives to the commander", new Vector2(650, TopH + 480), new Vector2(420, 320), FillPriorities);
+        Win("INTEL", "Intelligence picture", new Vector2(40, TopH + 40), new Vector2(520, 460), FillIntel);
+        Win("COMMANDER", "Commander · why is my general doing this", new Vector2(580, TopH + 40), new Vector2(480, 420), FillCommander);
+        Win("REPORTS", "Reports · map notes and SITREP", new Vector2(80, TopH + 60), new Vector2(560, 420), FillReports);
+        Win("ALERTS", "Alerts", new Vector2(0, TopH + 12), new Vector2(380, 230), FillAlerts);
+        BuildDock();
+        Open("ALERTS");
+        _windows["ALERTS"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 12);
         foreach (var k in (DevScreenshot.Arg("windows") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
             if (_windows.TryGetValue(k.ToUpperInvariant(), out var w)) { w.Visible = true; w.Refresh?.Invoke(); }
     }
 
     public void RefreshWindows(bool force = false)
     {
+        SyncDock();
         if (_editing == null && DevScreenshot.Arg("editop") is { } want)
             _editing = Board.Ops.FirstOrDefault(o => o.Side == CommandSide && o.Author == Author.AI && o.Purpose.Contains(want) && o.Rationale != "opening orders");
         // record the side's picture every 5 theatre-minutes for the replay
