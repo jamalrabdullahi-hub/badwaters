@@ -367,6 +367,13 @@ public partial class Shell : Control
         if (DevScreenshot.Arg("sanction")?.Split(':') is { Length: >= 3 } sc)
             Session.World.Economy.Sanction(sc[0], sc[1], sc[2], sc.Length > 3 && sc[3] == "global");
         if (DevScreenshot.Arg("advance") is { } a) Advance(a == "year" ? TurnLength.Year : TurnLength.Month);
+        // --playwar=ECS: start the game already at war in that theatre and drop straight into Theatre Ops to fight it
+        if (DevScreenshot.Arg("playwar") is { } pw && Session.World.Theatres.TryGetValue(pw, out var pws))
+        {
+            pws.AtWar = true; pws.PlayerInvolved = true;
+            if (Session.Campaign != null) Session.Campaign.Mode[pw] = BadWaters.Sim.Command.TheatreMode.Fight;
+            Open("Theatre Ops");
+        }
         if (DevScreenshot.Arg("screen") is { } screen) Open(screen switch { "dev" => "Development", "theatre" => "Theatre Ops", "industry" => "Industry", "trade" => "Trade & Logistics", _ => "Map" });
         if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))
         {
