@@ -84,7 +84,7 @@ public partial class PointLayer : Node2D
         var half = GetViewportRect().Size / (2 * z);
         var view = new Rect2(c - half, half * 2);
         // more (smaller) places as you zoom in
-        var maxRank = Math.Min(_d.MaxRank, z < 0.6f ? 1 : z < 1.2f ? 2 : z < 2.5f ? 3 : 9);
+        var maxRank = Math.Min(_d.MaxRank, z < 0.6f ? 1 : z < 1.2f ? 2 : z < 2.5f ? 3 : z < 4f ? 6 : z < 7f ? 8 : 10);
         var font = ThemeDB.FallbackFont;
         var fs = 11;
         var placed = new List<Rect2>();
@@ -97,6 +97,7 @@ public partial class PointLayer : Node2D
             {
                 case "capital": DrawRect(new Rect2(p.P - new Vector2(3.5f, 3.5f) * s, new Vector2(7, 7) * s), _c, false, 1.5f * s); DrawCircle(p.P, 1.6f * s, _c); break;
                 case "city": DrawCircle(p.P, 2.4f * s, new Color(_c, 0.9f)); break;
+                case "town": DrawCircle(p.P, 1.6f * s, new Color(_c, 0.75f)); break;
                 case "port": DrawColoredPolygon(new[] { p.P + new Vector2(0, -4) * s, p.P + new Vector2(4, 0) * s, p.P + new Vector2(0, 4) * s, p.P + new Vector2(-4, 0) * s }, new Color(_c, 0.85f)); break;
                 case "airport": DrawLine(p.P - new Vector2(4, 0) * s, p.P + new Vector2(4, 0) * s, _c, 1.5f * s); DrawLine(p.P - new Vector2(0, 4) * s, p.P + new Vector2(0, 4) * s, _c, 1.5f * s); break;
             }

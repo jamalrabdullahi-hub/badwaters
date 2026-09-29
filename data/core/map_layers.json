@@ -6,6 +6,7 @@
  {"id": "grid", "name": "Sector grid", "group": "GEOGRAPHY", "kind": "grid", "on": true},
 
  {"id": "roads", "name": "Major highways", "group": "TRANSPORT", "kind": "lines", "file": "roads.json", "color": "e0b060", "alpha": 0.55, "minZoom": 0.7, "on": true},
+ {"id": "roads-minor", "name": "Roads (detailed)", "group": "TRANSPORT", "kind": "lines", "file": "roads-minor.json", "color": "c9a868", "alpha": 0.4, "minZoom": 2.2, "on": true},
  {"id": "rail", "name": "Major rail", "group": "TRANSPORT", "kind": "lines", "file": "rail.json", "color": "c8c8d0", "alpha": 0.45, "minZoom": 0.7, "on": true},
  {"id": "airports", "name": "Airports (civil)", "group": "TRANSPORT", "kind": "points", "file": "airports.json", "color": "a8d8ff", "minZoom": 1.0, "maxRank": 9, "on": false},
  {"id": "ports", "name": "Ports (civil)", "group": "TRANSPORT", "kind": "points", "file": "ports.json", "color": "7ff0d0", "minZoom": 1.0, "maxRank": 9, "on": false},
@@ -15,6 +16,7 @@
  {"id": "disputed", "name": "Disputed areas", "group": "POLITICAL / CIVILIAN", "kind": "lines", "file": "disputed.json", "color": "ff9f70", "alpha": 0.7, "minZoom": 0.4, "on": false},
  {"id": "admin1", "name": "Administrative regions", "group": "POLITICAL / CIVILIAN", "kind": "lines", "file": "admin1.json", "color": "f0e6c8", "alpha": 0.25, "minZoom": 1.2, "on": false},
  {"id": "cities", "name": "Capitals and major cities", "group": "POLITICAL / CIVILIAN", "kind": "points", "file": "places.json", "color": "ffffff", "minZoom": 0.3, "maxRank": 4, "on": true},
+ {"id": "towns", "name": "Towns and places", "group": "POLITICAL / CIVILIAN", "kind": "points", "file": "towns.json", "color": "e8e4d0", "minZoom": 2.5, "maxRank": 10, "on": true},
  {"id": "urban", "name": "Urban areas", "group": "POLITICAL / CIVILIAN", "kind": "shader", "on": false},
  {"id": "eez", "name": "EEZ / territorial waters", "group": "POLITICAL / CIVILIAN", "kind": "later"},
 

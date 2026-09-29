@@ -81,6 +81,8 @@ line_layer("borders.json", load("ne_10m_admin_0_boundary_lines_land"), 0.02)
 line_layer("disputed.json", load("ne_10m_admin_0_disputed_areas"), 0.02)
 line_layer("admin1.json", load("ne_50m_admin_1_states_provinces_lines"), 0.03)
 line_layer("roads.json", load("ne_10m_roads"), 0.03, lambda p: p["type"] in ("Major Highway", "Beltway") and p["scalerank"] <= 5)
+# finer road net for zoomed-in theatre views: the remaining highways, secondary highways and roads (still civil atlas data)
+line_layer("roads-minor.json", load("ne_10m_roads"), 0.01, lambda p: (p["type"] == "Major Highway" and p["scalerank"] > 5) or p["type"] in ("Secondary Highway", "Road"))
 line_layer("rail.json", load("ne_10m_railroads"), 0.03, lambda p: p["scalerank"] <= 5)
 line_layer("rivers.json", load("ne_50m_rivers_lake_centerlines"), 0.03, lambda p: (p.get("scalerank") or 9) <= 6)
 
@@ -98,6 +100,9 @@ def points(out, feats, keep, kind, rank_key="scalerank", name_key="name"):
 points("places.json", load("ne_10m_populated_places_simple"),
        lambda p: p["featurecla"] in ("Admin-0 capital", "Admin-0 capital alt") or (p["featurecla"] in ("Populated place", "Admin-1 capital", "Admin-1 region capital", "Admin-0 region capital") and p["scalerank"] <= 4),
        lambda p: "capital" if p["featurecla"].startswith("Admin-0 capital") else "city")
+points("towns.json", load("ne_10m_populated_places_simple"),
+       lambda p: p["featurecla"] in ("Populated place", "Admin-1 capital", "Admin-1 region capital", "Admin-0 region capital") and p["scalerank"] > 4,
+       lambda p: "town")
 points("ports.json", load("ne_10m_ports"), lambda p: p["scalerank"] <= 5, lambda p: "port")
 points("airports.json", load("ne_10m_airports"), lambda p: p["type"] == "major", lambda p: "airport")  # drops every military / dual-use / spaceport entry
 
