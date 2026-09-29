@@ -18,13 +18,15 @@ public partial class TheatreOps
         /// <summary>Per aircraft; null = the role's default loadout.</summary>
         public Dictionary<string, StoreLoad>? Loadout;
     }
-    private sealed class FireRow { public string Launcher = ""; public int Rounds = 2; }
+    private sealed class FireRow { public string Launcher = ""; public int Rounds = 2; public string Aimpoint = ""; }
     private sealed class MissionDraft
     {
         public string Name = "Operation";
         public string Purpose = "strike";
         public string Target = "";
         public string Aimpoint = "";
+        /// <summary>Components picked on the target base, in order (weapons are spread over them).</summary>
+        public List<string> Aimpoints = new();
         public (double Lon, double Lat)? Point;
         public List<AirRow> Air = new();
         public List<AirRow> Support = new();
@@ -188,13 +190,10 @@ public partial class TheatreOps
                 targets.Add(("ship:" + c.Key, $"⚓ {c.Label} (ship contact · seen {(Trial.Time - c.LastSeen) / 60:0} min ago)"));
         foreach (var s in Scenario.Sites.Where(s => TargetPolicy.IsLegitimate(s.Class)).OrderBy(s => s.Side == CommandSide).ThenBy(s => s.Name))
             targets.Add((s.Id, s.Side == CommandSide ? $"{s.Name} (own · station over it)" : s.Name));
-        var h = new HBoxContainer(); h.AddChild(L("Target", UiTheme.TacDim)); h.AddChild(Opt(targets, _md.Target, t => { _md.Target = t; _md.Aimpoint = ""; }, 360)); v.AddChild(h);
+        var h = new HBoxContainer(); h.AddChild(L("Target", UiTheme.TacDim)); h.AddChild(Opt(targets, _md.Target, t => { _md.Target = t; _md.Aimpoint = ""; _md.Aimpoints.Clear(); }, 360)); v.AddChild(h);
         if (Trial.Bases.TryGetValue(_md.Target, out var b) && b.Site.Side != CommandSide)
         {
-            var pic = Trial.Intel?.Pictures[CommandSide];
-            var aims = new List<(string, string)> { ("", "Aimpoint: doctrine (auto)") };
-            aims.AddRange(b.Components.Values.Select(c => (c.Def.Id, $"{c.Def.Name} · est. {pic?.Belief(b.Site.Id, c.Def.Id).Integrity:0}%")));
-            var a = new HBoxContainer(); a.AddChild(L("Aimpoint", UiTheme.TacDim)); a.AddChild(Opt(aims, _md.Aimpoint, x => _md.Aimpoint = x, 360)); v.AddChild(a);
+            AimpointPicker(v, b);
         }
         v.AddChild(Para("Only military targets are listed: bases and sites, and ship contacts your side currently holds. Population centres, civil shelters and neutral shipping are never targets.", UiTheme.Good));
         if (ShipTarget) v.AddChild(Para("Ship target: weapons fly to where your picture last saw it. If it moves out of the seeker's search basket they miss, so strike soon after a fresh contact. Use anti-ship loadouts (page 2 → LOADOUT → Anti-ship).", UiTheme.TacDim));
@@ -203,6 +202,36 @@ public partial class TheatreOps
         foreach (var (k, n) in new[] { ("strike", "Strike package"), ("sead", "SEAD strike"), ("cap", "CAP"), ("aew", "AEW + CAP"), ("recon", "Recon") }) t.AddChild(B(n, () => { TemplateRows(k); RefreshMission(); }));
         v.AddChild(t);
     }
+
+    /// <summary>Pick base components to hit (several allowed, in order); weapons are spread over them. None: doctrine picks.</summary>
+    private void AimpointPicker(VBoxContainer v, BaseState b)
+    {
+        var pic = Trial.Intel?.Pictures[CommandSide];
+        v.AddChild(Hd($"Aimpoints on {b.Site.Name} (none ticked: doctrine picks the most valuable working one)"));
+        foreach (var c in b.Components.Values.OrderBy(c => c.Def.Priority))
+        {
+            var bel = pic?.Belief(b.Site.Id, c.Def.Id);
+            var h = new HBoxContainer();
+            var on = _md.Aimpoints.Contains(c.Def.Id);
+            var cb = new CheckBox { Text = $"{(on ? $"{_md.Aimpoints.IndexOf(c.Def.Id) + 1}. " : "")}{c.Def.Name}", ButtonPressed = on, CustomMinimumSize = new Vector2(260, 0) };
+            cb.AddThemeFontSizeOverride("font_size", 11);
+            var id = c.Def.Id;
+            cb.Toggled += x => { if (x) { if (!_md.Aimpoints.Contains(id)) _md.Aimpoints.Add(id); } else _md.Aimpoints.Remove(id); _md.Aimpoint = _md.Aimpoints.FirstOrDefault() ?? ""; RefreshMission(); };
+            h.AddChild(cb);
+            var est = bel?.Integrity ?? 100;
+            h.AddChild(L($"est. {est:0}% ({bel?.Source ?? "no data"}) · hardness {c.Def.Hardness:0} · {EffectText(c.Def.Effect)}", est < 50 ? new Color("ff9a3c") : UiTheme.TacDim, 10));
+            v.AddChild(h);
+        }
+        if (_md.Aimpoints.Count > 1) v.AddChild(Para($"Weapons are spread in turn over {_md.Aimpoints.Count} components: {string.Join(" → ", _md.Aimpoints.Select(a => b.Components[a].Def.Name))}.", UiTheme.TacDim));
+    }
+
+    public static string EffectText(string effect) => effect switch
+    {
+        "sorties" => "closes flying under 50%", "fuel" => "slows turnaround, destroys stored fuel", "munitions" => "stops arming under 30%, destroys stored weapons",
+        "sensors" => "blinds radars and batteries", "shelter" => "exposes aircraft on the ground", "apron" => "aircraft parked in the open", "readiness" => "slows maintenance",
+        "piers" => "ships can't rearm", "launch-pads" => "launchers can't fire under 40%", "command" => "command and control", "stores" => "destroys stored spare parts",
+        "transfer" => "slows loading at the depot", _ => effect,
+    };
 
     private void PageForces(VBoxContainer v)
     {
@@ -301,6 +330,8 @@ public partial class TheatreOps
             var h = new HBoxContainer();
             h.AddChild(Opt(launchers.Select(x => (x.Def.Id, $"{(x.IsShip ? "⚓ " : "")}{x.Def.Name} · {x.Missile.Name}")), fr.Launcher, id => fr.Launcher = id, 300));
             h.AddChild(Spin(1, 16, fr.Rounds, x => fr.Rounds = (int)x, " rds"));
+            if (Trial.Bases.TryGetValue(_md.Target, out var fb) && fb.Site.Side != CommandSide)
+                h.AddChild(Opt(new[] { ("", "aim: as the package") }.Concat(fb.Components.Values.Select(c => (c.Def.Id, $"aim: {c.Def.Name}"))), fr.Aimpoint, a => fr.Aimpoint = a, 170));
             var theatre = Trial.Launchers.Where(x => x.Def.Side == CommandSide && x.Missile.DesignId == l.Missile.DesignId).Sum(x => x.Stock);
             var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, aim.Lon, aim.Lat);
             var prop = "";
@@ -425,7 +456,7 @@ public partial class TheatreOps
         var hasTanker = _md.Support.Any(r => r.Role == Mission.Tanker);
         AtoEntry? pkg = _md.Air.Count == 0 ? null : station
             ? new AtoEntry { Side = CommandSide, Name = _md.Name, StationLon = aim.Lon, StationLat = aim.Lat, Start = Trial.Time, Duration = 5400, Flights = _md.Air.Select(Req).ToList() }
-            : new AtoEntry { Side = CommandSide, Name = _md.Name, Target = _md.Target, Tot = tot, IpKm = _md.IpKm, Aimpoint = _md.Aimpoint, Tanker = hasTanker, Flights = _md.Air.Select(Req).ToList() };
+            : new AtoEntry { Side = CommandSide, Name = _md.Name, Target = _md.Target, Tot = tot, IpKm = _md.IpKm, Aimpoint = _md.Aimpoint, Aimpoints = _md.Aimpoints.ToList(), Tanker = hasTanker, Flights = _md.Air.Select(Req).ToList() };
         AtoEntry? sup = null;
         if (_md.Support.Count > 0)
         {
@@ -436,14 +467,14 @@ public partial class TheatreOps
                 ? new AtoEntry { Side = CommandSide, Name = _md.Name + " support", StationLon = aim.Lon, StationLat = aim.Lat, Start = Trial.Time, Duration = 5400, Flights = aew.Concat(tank).ToList() }
                 : new AtoEntry { Side = CommandSide, Name = _md.Name + " support", Target = _md.Target, Tot = tot, Tanker = true, Flights = tank.Concat(aew).ToList() };
         }
-        var fires = _md.Fires.Select(f => new AtoEntry { Side = CommandSide, Launcher = f.Launcher, Target = _md.Target, Tot = tot, Count = f.Rounds, Aimpoint = ShipTarget ? "" : _md.Aimpoint }).ToList();
+        var fires = _md.Fires.Select(f => new AtoEntry { Side = CommandSide, Launcher = f.Launcher, Target = _md.Target, Tot = tot, Count = f.Rounds, Aimpoint = ShipTarget ? "" : f.Aimpoint != "" ? f.Aimpoint : _md.Aimpoint }).ToList();
         return (pkg, sup, station ? new List<AtoEntry>() : fires);
     }
 
     private AtoEntry? SpareSpec()
     {
         if (_md.Spares.Count == 0 || StationMission) return null;
-        return new AtoEntry { Side = CommandSide, Name = _md.Name + " spares", Target = _md.Target, Tot = Trial.Time + _md.TotMin * 60 + 900, IpKm = _md.IpKm, Aimpoint = _md.Aimpoint,
+        return new AtoEntry { Side = CommandSide, Name = _md.Name + " spares", Target = _md.Target, Tot = Trial.Time + _md.TotMin * 60 + 900, IpKm = _md.IpKm, Aimpoint = _md.Aimpoint, Aimpoints = _md.Aimpoints.ToList(),
             Tanker = _md.Support.Any(r => r.Role == Mission.Tanker), Flights = _md.Spares.Select(r => new FlightRequest(r.Preset, r.Count, r.Role, r.Formation) { Loadout = r.Loadout }).ToList() };
     }
 

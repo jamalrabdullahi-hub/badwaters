@@ -64,6 +64,25 @@ public partial class TheatreOps
                 var bel = pic?.Belief(b.Site.Id, c.Def.Id);
                 var conf = bel == null ? "" : bel.Confidence >= 0.85 ? "high" : bel.Confidence >= 0.5 ? "medium" : "low";
                 w.Line($"  {c.Def.Name,-28} {Bar(bel?.Integrity ?? 100)} ~{bel?.Integrity ?? 100,3:0}% · {bel?.Source ?? "no data"}, {(bel == null ? "" : Ago(bel.AsOf))} · {conf} confidence", Health(bel?.Integrity ?? 100));
+                if (!TargetPolicy.IsLegitimate(b.Site.Class) || !Trial.AtWar) continue;
+                var row = new HBoxContainer();
+                row.AddChild(new Control { CustomMinimumSize = new Vector2(24, 0) });
+                row.AddChild(L(EffectText(c.Def.Effect), UiTheme.TacDim, 10));
+                var cid = c.Def.Id; var sid = b.Site.Id;
+                var st = new Button { Text = "STRIKE" }; st.AddThemeFontSizeOverride("font_size", 10);
+                st.Pressed += () => { PlanAt(sid, "strike"); _md.Aimpoints = new() { cid }; _md.Aimpoint = cid; _mPage = 0; RefreshMission(); };
+                row.AddChild(st);
+                var add = new Button { Text = "+ AIM", TooltipText = "Add this component to the open mission's aimpoints" }; add.AddThemeFontSizeOverride("font_size", 10);
+                add.Pressed += () => { if (_md.Target != sid) { PlanAt(sid, "strike"); _md.Aimpoints.Clear(); } if (!_md.Aimpoints.Contains(cid)) _md.Aimpoints.Add(cid); _md.Aimpoint = _md.Aimpoints[0]; _mPage = 0; RefreshMission(); };
+                row.AddChild(add);
+                var fl = Trial.Launchers.Where(l => l.Def.Side == CommandSide && l.Stock > 0 && Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, b.Site.Lon, b.Site.Lat) <= l.ReachKm).OrderByDescending(l => l.Missile.R("accuracy")).FirstOrDefault();
+                if (fl != null)
+                {
+                    var fb = new Button { Text = "FIRE 2", TooltipText = $"2× {fl.Missile.Name} from {fl.Def.Name} now" }; fb.AddThemeFontSizeOverride("font_size", 10);
+                    fb.Pressed += () => { var r = Trial.Launch(fl.Def.Id, sid, 2, cid); Trial.Report("fires", r.Message); };
+                    row.AddChild(fb);
+                }
+                w.Body.AddChild(row);
             }
         }
         if (!own) w.Line(pic != null ? $"Next satellite pass T+{AirTasking.Clock(pic.NextSatellite)}. Recon flights give exact damage; strike and impact reports are rough." : "", UiTheme.TacDim);

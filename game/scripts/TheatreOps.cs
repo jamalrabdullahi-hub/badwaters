@@ -334,6 +334,7 @@ public partial class TheatreOps : Control
         var live = !IsTrial && Scenario.Theatre != "" && Session.Campaign != null ? Session.Campaign.Get(Scenario.Theatre) : null;
         Trial = live ?? Session.BuildTheatre(sc, seed);
         if (keep != null && live == null) foreach (var (k, v) in keep) Trial.Control[k] = v;
+        _md = new MissionDraft(); Picked = null; // drafts and picks belong to the theatre they were made in
         _title.Text = Trial.AtWar ? "THEATRE OPS" : "THEATRE OPS · NOT AT WAR (track only)";
         if (!Trial.AtWar) _title.AddThemeColorOverride("font_color", TheatreLayer.Orange);
         SelectedFlight = null; Preview.Clear();

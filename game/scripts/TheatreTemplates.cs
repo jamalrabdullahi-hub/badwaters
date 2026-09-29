@@ -64,7 +64,10 @@ public partial class TheatreOps
         _md = new MissionDraft { Name = $"{t.Name} {Board.Ops.Count(o => o.Author == BadWaters.Sim.Command.Author.Player) + 1}", Purpose = t.Purpose == "fires" ? "strike" : t.Purpose, TotMin = t.Tot + totOffsetMin, EmconPackage = t.Emcon, EmconSupport = t.Emcon == "silent" ? "limited" : t.Emcon, Roe = t.Roe };
         if (!PickTarget(t, variant)) return false;
         if (Trial.Bases.TryGetValue(_md.Target, out var b) && t.Aim != "")
+        {
             _md.Aimpoint = b.Components.Values.FirstOrDefault(c => c.Def.Effect == t.Aim)?.Def.Id ?? "";
+            if (_md.Aimpoint != "") _md.Aimpoints.Add(_md.Aimpoint);
+        }
         var taken = new Dictionary<string, int>();
         // range only counts on a tanker the template asks for AND one is actually free
         var tanker = t.Support.Any(x => x.Class == "tanker") && PickPreset("tanker", 1, taken) != null;

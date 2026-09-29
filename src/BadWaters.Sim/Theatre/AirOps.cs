@@ -36,6 +36,8 @@ public sealed record AtoEntry
     public double Duration { get; init; } = 5400;
     public List<FlightRequest> Flights { get; init; } = new();
     /// <summary>Base component to aim at (runway, fuel...). Empty: doctrine picks from the side's own picture.</summary>
+    /// <summary>Several base components to spread a package's weapons over (in order); empty: Aimpoint only.</summary>
+    public List<string> Aimpoints { get; init; } = new();
     public string Aimpoint { get; init; } = "";
     /// <summary>Missile fire mission: this launcher (ground or ship) fires Count rounds to arrive at Tot.</summary>
     public string Launcher { get; init; } = "";
@@ -158,6 +160,7 @@ public sealed class Package
     public double Tot { get; init; }
     public bool Tanker { get; init; }
     public double IpKm { get; init; }
+    public List<string> Aimpoints { get; init; } = new();
     public string Aimpoint { get; init; } = "";
     public (double Lon, double Lat) Ip { get; init; }
     public List<Flight> Flights { get; } = new();
@@ -384,7 +387,7 @@ public sealed class AirTasking
             flights.Add(f);
         }
         if (flights.Count == 0 && issues.Count == 0) issues.Add("Add at least one flight.");
-        var pkg = strike ? new Package { Id = pkgId, Name = e.Name != "" ? e.Name : $"Package {(char)('A' + (_next - 1) % 26)}", Side = e.Side, Target = target!, Tot = e.Tot, Tanker = hasTanker, IpKm = e.IpKm, Ip = ip, Aimpoint = e.Aimpoint } : null;
+        var pkg = strike ? new Package { Id = pkgId, Name = e.Name != "" ? e.Name : $"Package {(char)('A' + (_next - 1) % 26)}", Side = e.Side, Target = target!, Tot = e.Tot, Tanker = hasTanker, IpKm = e.IpKm, Ip = ip, Aimpoint = e.Aimpoints.FirstOrDefault() ?? e.Aimpoint, Aimpoints = e.Aimpoints.ToList() } : null;
         if (pkg != null) pkg.Flights.AddRange(flights);
         var ok = issues.Count == 0;
         if (ok && commit)
@@ -824,19 +827,22 @@ public sealed class AirTasking
         if (weapons.Count > 0)
         {
             hits = 0;
+            var wi = 0;
             foreach (var w in weapons)
             {
+                // weapons are spread over the package's chosen components in turn
+                var aimHere = pkg is { Aimpoints.Count: > 0 } ? pkg.Aimpoints[wi++ % pkg.Aimpoints.Count] : pkg?.Aimpoint ?? "";
                 var p = Math.Clamp(0.2 + 0.06 * w.Accuracy + 0.02 * f.Type.R("strike") + form.Strike, 0.05, 0.95);
                 if (_rng.NextDouble() >= p) continue;
                 hits++;
-                if (tb != null) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", w.Punch, w.Accuracy, 0.4, "pilot report"));
+                if (tb != null) effects.Add(_t.ApplyHit(f.Side, tb, aimHere, w.Punch, w.Accuracy, 0.4, "pilot report"));
             }
             how = $"{weapons.Count} weapons ({string.Join(", ", weapons.GroupBy(w => w.Name).Select(g => $"{g.Count()}× {g.Key}"))})";
         }
         else
         {
             hits = f.Aircraft.Count(_ => _rng.NextDouble() < pHit);
-            if (tb != null) for (var i = 0; i < hits; i++) effects.Add(_t.ApplyHit(f.Side, tb, pkg?.Aimpoint ?? "", 3 + 0.5 * f.Type.R("payload"), f.Type.R("strike"), 0.4, "pilot report"));
+            if (tb != null) for (var i = 0; i < hits; i++) effects.Add(_t.ApplyHit(f.Side, tb, pkg is { Aimpoints.Count: > 0 } ? pkg.Aimpoints[i % pkg.Aimpoints.Count] : pkg?.Aimpoint ?? "", 3 + 0.5 * f.Type.R("payload"), f.Type.R("strike"), 0.4, "pilot report"));
             how = $"{pHit:P0} each: strike {f.Type.R("strike"):0}, payload {f.Type.R("payload"):0}";
         }
         if (hits > 0) _t.Hits[tgt.Id] = _t.Hits.GetValueOrDefault(tgt.Id) + hits;

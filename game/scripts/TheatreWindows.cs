@@ -96,7 +96,14 @@ public partial class TheatreOps
         // dev aids for screenshots: --silent=id,id  --pick=kind:id  --planat=cap:lon,lat
         foreach (var id in (DevScreenshot.Arg("silent") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries)) Trial.SetEmitting(id, false, id);
         if (DevScreenshot.Arg("pick")?.Split(':') is [var pk, var pid]) { Picked = (pk, pid); Open("UNIT"); }
-        if (DevScreenshot.Arg("mission")?.Split(',') is [var ms, var mp]) { NewMission(ms, "strike"); _mPage = int.Parse(mp); _md.EditRow = 0; RefreshMission(); }
+        DevPicks();
+    }
+
+    /// <summary>Dev aids for screenshots that need the live theatre (re-run after --playwar loads it).</summary>
+    public void DevPicks()
+    {
+        if (DevScreenshot.Arg("pick")?.Split(':') is [var pk2, var pid2]) { Picked = (pk2, pid2); Open("UNIT"); }
+        if (DevScreenshot.Arg("mission")?.Split(',') is [var ms, var mp]) { NewMission(ms, "strike"); _mPage = int.Parse(mp); _md.EditRow = 0; if (DevScreenshot.Arg("aims") is { } am) _md.Aimpoints = am.Split('+').ToList(); RefreshMission(); }
         if (DevScreenshot.Arg("planat")?.Split(':') is [var tpl, var ll] && ll.Split(',') is [var lo, var la]) PlanAt(null, tpl, (double.Parse(lo), double.Parse(la)));
         foreach (var k in (DevScreenshot.Arg("windows") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
             if (_windows.TryGetValue(k.ToUpperInvariant(), out var w)) { w.Visible = true; w.Refresh?.Invoke(); }

@@ -180,6 +180,17 @@ public partial class TheatreOps
             else
             {
                 Item($"Plan strike package → {site.Name}", () => PlanAt(site.Id, "strike"));
+                if (Trial.Bases.TryGetValue(site.Id, out var cb))
+                {
+                    var bpic = Trial.Intel?.Pictures[CommandSide];
+                    foreach (var c in cb.Components.Values.OrderBy(c => c.Def.Priority))
+                    {
+                        var cid = c.Def.Id;
+                        Item($"   Strike component: {c.Def.Name} (est. {bpic?.Belief(site.Id, cid).Integrity ?? 100:0}%)", () => { PlanAt(site.Id, "strike"); _md.Aimpoints = new() { cid }; _md.Aimpoint = cid; _mPage = 0; RefreshMission(); });
+                        var fl = Trial.Launchers.Where(l => l.Def.Side == CommandSide && l.Stock > 0 && Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, site.Lon, site.Lat) <= l.ReachKm).OrderByDescending(l => l.Missile.R("accuracy")).FirstOrDefault();
+                        if (fl != null) Item($"   Fire at component: {c.Def.Name} · 2× {fl.Missile.Name} from {fl.Def.Name}", () => { var r = Trial.Launch(fl.Def.Id, site.Id, 2, cid); Trial.Report("fires", r.Message); });
+                    }
+                }
                 Item($"Plan SEAD strike → {site.Name}", () => PlanAt(site.Id, "sead"));
                 foreach (var l in Trial.Launchers.Where(l => l.Def.Side == CommandSide && l.Stock > 0 && Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, site.Lon, site.Lat) <= l.ReachKm).Take(8))
                 {
