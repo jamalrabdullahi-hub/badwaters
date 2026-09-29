@@ -264,7 +264,7 @@ public sealed class LogisticsService
         : item;
 
     public string Amount(string item, double q) =>
-        Def.Items.TryGetValue(item, out var d) ? (d.Unit == "m3" ? (q * 1000 >= 1e6 ? $"{q / 1000:0.##} M L" : $"{q * 1000:0,0} L") : $"{q:0,0} {d.Unit}") : $"{q:0}";
+        Def.Items.TryGetValue(item, out var d) ? (d.Unit == "m3" ? (q * 1000 >= 1e6 ? $"{q / 1000:0.##} M L" : $"{q * 1000:#,0} L") : $"{q:#,0} {d.Unit}") : $"{q:0}";
 
     public double Tons(string item, double q)
     {
@@ -309,7 +309,7 @@ public sealed class LogisticsService
             var u = open.OrderBy(x => dist[x]).First();
             open.Remove(u);
             if (u == to) break;
-            foreach (var c in Corridors.Values.Where(c => c.Def.Side == side && (c.Def.A == u || c.Def.B == u) && (mode == null || c.Def.Mode == mode || mode == "air")))
+            foreach (var c in Corridors.Values.Where(c => c.Def.Side == side && (c.Def.A == u || c.Def.B == u) && Allowed(c.Def.Mode, mode)))
             {
                 var v = c.Def.A == u ? c.Def.B : c.Def.A;
                 var h = Hours(c, mode == "air" ? "air" : c.Def.Mode);
@@ -322,6 +322,16 @@ public sealed class LogisticsService
         for (var n = to; n != from; n = prev[n].Def.A == n ? prev[n].Def.B : prev[n].Def.A) path.Insert(0, prev[n]);
         return path;
     }
+
+    /// <summary>Which corridors a transport mode may use: aircraft fly any leg; ships need sea legs (plus road to reach a quay);
+    /// trains need rail (plus road for the last leg); trucks stay on roads.</summary>
+    private static bool Allowed(string corridor, string? mode) => mode switch
+    {
+        "air" or "heli" => true,
+        "sea" => corridor is "sea" or "road",
+        "rail" => corridor is "rail" or "road",
+        _ => corridor == "road",
+    };
 
     private double Hours(Corridor c, string mode)
     {
@@ -339,7 +349,8 @@ public sealed class LogisticsService
         qty = Math.Min(qty, Get(a, item));
         if (qty <= 0) return (false, $"{a.Name} holds no {ItemName(item)}.", null);
         mode ??= ChooseMode(side, a, b, item, qty);
-        var path = Route(side, from, to, mode == "air" || mode == "heli" ? "air" : null);
+        var path = Route(side, from, to, mode) ?? (mode != "road" ? Route(side, from, to, "air") : null);
+        if (path != null && mode is "road" or "rail" or "sea" && path.Any(c => c.Def.Mode == "air")) path = null;
         if (path == null) return (false, $"No {mode} route from {a.Name} to {b.Name}.", null);
         var m = Def.Modes[mode];
         var tons = Tons(item, qty);
@@ -350,7 +361,7 @@ public sealed class LogisticsService
         Add(a, item, -qty); // loaded and leaving
         Shipments.Add(s);
         if (free >= need) Dispatch(s); else s.Note = $"waiting for {need} {m.Vehicle} ({free} free)";
-        var eta = s.State == ShipmentState.Moving ? $"arrives T+{AirTasking.Clock(s.Arrive)}" : s.Note;
+        var eta = s.State == ShipmentState.Moving ? $"arrives in {(s.Arrive - _t.Time) / 3600:0.0} h" : s.Note;
         var msg = $"{Amount(item, qty)} {ItemName(item)} {a.Name} → {b.Name} by {m.Name.ToLowerInvariant()} ({need} {m.Vehicle}, {tons:0} t), {eta}.";
         _t.Report("logistics", msg);
         return (true, msg, s);
@@ -361,8 +372,10 @@ public sealed class LogisticsService
         var tons = Tons(item, qty);
         var urgent = b.Short.Contains(item) || DaysLeft(b, item) < 0.5;
         bool Free(string mode, int need) => Pool.GetValueOrDefault((side, mode)) - InUse.GetValueOrDefault((side, mode)) >= need;
-        if (b.Kind == "ship" || Route(side, a.Id, b.Id, "sea") is { Count: > 0 } && tons > 500) return "sea";
-        if (tons > 300 && Route(side, a.Id, b.Id, "rail") is { Count: > 0 } && Free("rail", 1)) return "rail";
+        if (Route(side, a.Id, b.Id, "road") == null && Route(side, a.Id, b.Id, "sea") is { } sp && sp.Any(c => c.Def.Mode == "sea")) return "sea"; // islands
+        if (b.Kind == "ship" || Route(side, a.Id, b.Id, "sea") is { } sr && sr.Any(c => c.Def.Mode == "sea") && tons > 500) return "sea";
+        if (tons > 300 && Route(side, a.Id, b.Id, "rail") is { } rr && rr.Any(c => c.Def.Mode == "rail") && Free("rail", 1)) return "rail";
+        if (Route(side, a.Id, b.Id, "road") == null) return "air";
         if (urgent && tons <= 200 && Free("air", (int)Math.Ceiling(tons / Def.Modes["air"].Cap))) return "air";
         if (b.Factor < 0.6 && tons <= 30 && Free("heli", (int)Math.Ceiling(tons / Def.Modes["heli"].Cap))) return "heli";
         return "road";
@@ -371,7 +384,7 @@ public sealed class LogisticsService
     private void Dispatch(Shipment s)
     {
         var m = Def.Modes[s.Mode];
-        var hours = s.Path.Sum(id => Hours(Corridors[id], s.Mode is "air" or "heli" ? "air" : Corridors[id].Def.Mode) * (s.Mode == "heli" ? Def.Modes["air"].Kmh / m.Kmh : 1));
+        var hours = s.Path.Sum(id => Hours(Corridors[id], s.Mode is "air" or "heli" ? "air" : Corridors[id].Def.Mode == "road" && s.Mode != "road" ? "road" : s.Mode) * (s.Mode == "heli" ? Def.Modes["air"].Kmh / m.Kmh : 1));
         hours /= Math.Max(Def.Efficiency.Min, Nodes[s.To].Factor); // last leg: off-route and altitude penalties
         s.Depart = _t.Time; s.Arrive = _t.Time + hours * 3600; s.VehiclesBack = s.Arrive + hours * 3600;
         s.State = ShipmentState.Moving; s.Note = "";
@@ -382,6 +395,15 @@ public sealed class LogisticsService
     public IEnumerable<(Corridor C, string Mode, int Vehicles, double Tons)> ActiveRoutes() =>
         Shipments.Where(s => s.State == ShipmentState.Moving).SelectMany(s => s.Path.Select(p => (C: Corridors[p], s.Mode, s.Vehicles, T: Tons(s.Item, s.Qty))))
             .GroupBy(x => (x.C.Def.Id, x.Mode)).Select(g => (g.First().C, g.Key.Mode, g.Sum(x => x.Vehicles), g.Sum(x => x.T)));
+
+    /// <summary>Cancel a shipment still waiting for vehicles: the load goes back to its source.</summary>
+    public bool Cancel(Shipment s)
+    {
+        if (s.State != ShipmentState.Queued) return false;
+        Add(Nodes[s.From], s.Item, s.Qty);
+        s.State = ShipmentState.Lost; s.Note = "cancelled"; s.VehiclesBack = 0; s.Arrive = _t.Time;
+        return true;
+    }
 
     // ---------------- interception and damage ----------------
 

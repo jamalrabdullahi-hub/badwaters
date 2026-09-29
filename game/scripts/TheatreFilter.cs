@@ -26,7 +26,7 @@ public partial class TheatreOps
     };
     private static readonly (string Group, (string Key, string Name)[] Items)[] OverlayTree =
     {
-        ("Courses & routes", new[] { ("routes", "Flight routes"), ("ship-courses", "Ship courses"), ("tracks", "Missile tracks") }),
+        ("Courses & routes", new[] { ("routes", "Flight routes"), ("ship-courses", "Ship courses"), ("tracks", "Missile tracks"), ("logistics", "Supply routes & dry points") }),
         ("Air traffic", new[] { ("enemy-air", "Enemy air contacts") }),
         ("Sensors & weapons", new[] { ("radar", "Radar coverage"), ("reach", "Air-defence reach"), ("strike", "Strike reach"), ("jamming", "Jamming cover") }),
         ("Labels & naming", new[] { ("labels", "All labels"), ("names", "Unit names"), ("callsigns", "Callsigns"), ("base-names", "Base & site names") }),

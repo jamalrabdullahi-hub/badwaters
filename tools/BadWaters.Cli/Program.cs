@@ -58,7 +58,7 @@ if (cmd == "campaign")
     var hours = args.Length > 2 ? double.Parse(args[2]) : 12;
     var seed = args.Length > 3 ? int.Parse(args[3]) : 1;
     string? Nation(string side) { var n = sc.Sides.GetValueOrDefault(side, ""); return gc.Nations.Values.FirstOrDefault(x => x.Name == n || x.Id == n)?.Id; }
-    var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), gc.PresetInfo, gc.BaseTypes, side => gc.DoctrineFor(Nation(side)), seed);
+    var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, id => BadWaters.Sim.Theatre.SystemProfile.Build(gc.Catalog, gc.Designs[id]), gc.PresetInfo, gc.BaseTypes, side => gc.DoctrineFor(Nation(side)), seed, stores: gc.Stores, logistics: gc.Logistics);
     t.Adaptive = true;
     if (Environment.GetEnvironmentVariable("PROFILE") != null) t.Profile = new();
     var sw = System.Diagnostics.Stopwatch.StartNew();
@@ -68,6 +68,14 @@ if (cmd == "campaign")
         foreach (var (side, c) in t.Commanders)
             if (c.Last != null && (h % 3 == 0 || h == hours - 1))
                 Console.WriteLine($"T+{h + 1,3}h {sc.Sides[side],-8} pool {c.Last.PoolAircraft} (F{c.Last.Fighters} S{c.Last.Strikers}) · open ops {c.Last.OpenOps} · enemy air seen {c.Last.KnownEnemyAir} · SAMs known {c.Last.KnownSams} · {string.Join("; ", c.Last.Notes)}");
+        if (t.Logistics is { } lg && ((h + 1) % 24 == 0 || h == hours - 1))
+            foreach (var side in new[] { "blue", "red" })
+            {
+                var nodes = lg.Nodes.Values.Where(n => n.Side == side).ToList();
+                var stock = string.Join(" · ", new[] { "avfuel", "diesel", "propellant", "spares" }.Select(i => $"{lg.ItemName(i)} {lg.Amount(i, nodes.Sum(n => lg.Get(n, i)))}"));
+                var sh = lg.Shipments.Where(x => x.Side == side).ToList();
+                Console.WriteLine($"  LOGISTICS T+{h + 1}h {sc.Sides[side]}: {stock} · shipments moving {sh.Count(x => x.State == BadWaters.Sim.Theatre.ShipmentState.Moving)}, delivered {t.Log.Count(x => x.Kind == "logistics" && x.Text.Contains("delivered") && nodes.Any(n => x.Text.EndsWith(n.Name + ".")))}, lost {t.Log.Count(x => x.Kind == "logistics" && x.Text.Contains("in transit"))} · dry points {nodes.Count(n => n.Short.Count > 0)}");
+            }
     }
     Console.WriteLine($"{hours} h simulated in {sw.ElapsedMilliseconds} ms · tracks {t.Tracks.Count} shots {t.Shots.Count} log {t.Log.Count}");
     if (t.Profile != null) Console.WriteLine("profile: " + string.Join(", ", t.Profile.OrderByDescending(k => k.Value).Select(k => $"{k.Key} {k.Value:0} ms")));

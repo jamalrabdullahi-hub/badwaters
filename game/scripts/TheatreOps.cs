@@ -689,6 +689,7 @@ public partial class TheatreLayer : Node2D
         }
         DrawAir(tr, zoom, w);
         Ops.DrawWaypointHandles(this, zoom, w);
+        Ops.DrawLogistics(this, zoom, w);
         DrawAirContacts(zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))
         {

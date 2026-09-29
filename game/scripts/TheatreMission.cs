@@ -233,7 +233,15 @@ public partial class TheatreOps
                 var load = LoadOf(r);
                 var bse = LikelyBase(r);
                 var short_ = load.Values.Where(l => l.Qty > 0).GroupBy(l => l.Store).Where(g => Trial.Air.Munitions.At(bse, g.Key) < g.Sum(x => x.Qty) * r.Count).Select(g => Cat.Stores[g.Key].Name).ToList();
-                v.AddChild(Para($"    carries (each): {Cat.Describe(load)} · from {Trial.Site(bse)?.Name ?? "no base with enough idle aircraft"}" + (short_.Count > 0 ? $" · SHORT: {string.Join(", ", short_)}" : ""), short_.Count > 0 ? UiTheme.Bad : UiTheme.TacDim));
+                var fuelTxt = "";
+                if (Trial.Logistics is { } lgx && lgx.Node(bse) is { } fn)
+                {
+                    var need = lgx.SortieFuel(Trial.Air.SortieClass(r.Preset, r.Role), r.Count);
+                    var have = lgx.Get(fn, "avfuel");
+                    fuelTxt = $" · av fuel {lgx.Amount("avfuel", need)} of {lgx.Amount("avfuel", have)} at base · spares {lgx.Get(fn, "spares"):0}";
+                    if (have < need) short_.Add("av fuel");
+                }
+                v.AddChild(Para($"    carries (each): {Cat.Describe(load)} · from {Trial.Site(bse)?.Name ?? "no base with enough idle aircraft"}{fuelTxt}" + (short_.Count > 0 ? $" · SHORT: {string.Join(", ", short_)}" : ""), short_.Count > 0 ? UiTheme.Bad : UiTheme.TacDim));
             }
         }
         if (idle.Count > 0) v.AddChild(B("+ add aircraft", () => { rows.Add(new AirRow { Preset = idle[0].Preset, Role = roles[0] }); RefreshMission(); }));
@@ -294,7 +302,16 @@ public partial class TheatreOps
             h.AddChild(Spin(1, 16, fr.Rounds, x => fr.Rounds = (int)x, " rds"));
             var theatre = Trial.Launchers.Where(x => x.Def.Side == CommandSide && x.Missile.DesignId == l.Missile.DesignId).Sum(x => x.Stock);
             var d = Pacing.DistanceKm(l.Def.Lon, l.Def.Lat, aim.Lon, aim.Lat);
-            h.AddChild(L($"launcher {l.Stock} · theatre {theatre}{(d > l.ReachKm ? $" · OUT OF REACH ({d:0}/{l.ReachKm:0} km)" : "")}", l.Stock < fr.Rounds || d > l.ReachKm ? UiTheme.Bad : UiTheme.TacDim));
+            var prop = "";
+            var dry = false;
+            if (Trial.Logistics is { } lgf && lgf.IsLiquid(l.Def.Missile) && lgf.Node(l.Def.Id) is { } ln)
+            {
+                var needP = fr.Rounds * lgf.Def.Use.PropellantPerRound;
+                prop = $" · propellant {lgf.Amount("propellant", lgf.Get(ln, "propellant"))} (needs {lgf.Amount("propellant", needP)})";
+                dry = lgf.Get(ln, "propellant") < needP;
+            }
+            var reserve = Trial.Logistics is { } lgr ? lgr.Nodes.Values.Where(n => n.Side == CommandSide).Sum(n => n.Id == l.Def.Id ? 0 : lgr.Get(n, "design:" + l.Def.Missile)) : 0;
+            h.AddChild(L($"launcher {l.Stock} · reserve in depots/bases {reserve:0} · theatre {theatre + reserve:0}{prop}{(d > l.ReachKm ? $" · OUT OF REACH ({d:0}/{l.ReachKm:0} km)" : "")}", l.Stock < fr.Rounds || d > l.ReachKm || dry ? UiTheme.Bad : UiTheme.TacDim));
             h.AddChild(B("✕", () => { _md.Fires.Remove(fr); RefreshMission(); }));
             v.AddChild(h);
         }
