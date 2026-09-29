@@ -20,7 +20,7 @@ public partial class TheatreOps
         ("BDA", "Damage assessment", new Color("e8b04a")), ("RECON", "Recon request", new Color("4fbfee")), ("NAV", "Waypoint / rally", new Color("5cf2b0")),
         ("LOG", "Logistics request", new Color("b89cff")),
     };
-    private static readonly string[] DockOrder = { "FRAG", "OPERATION", "OOB", "INTEL", "REPORTS", "PRIORITIES", "COMMANDER", "LOG", "ATO", "FIRES", "NAVAL", "AIR DEF", "PICTURE", "BASES", "SYNC", "ALERTS" };
+    private static readonly string[] DockOrder = { "FRAG", "OPERATION", "OOB", "INTEL", "REPORTS", "PRIORITIES", "COMMANDER", "LOG", "ATO", "FIRES", "NAVAL", "AIR DEF", "PICTURE", "BASES", "SYNC", "ALERTS", "UNIT" };
     /// <summary>Reports per theatre scenario (kept for the session).</summary>
     private static readonly Dictionary<string, List<MapReport>> AllReports = new();
     public List<MapReport> Reports => AllReports.TryGetValue(Scenario.Id, out var l) ? l : AllReports[Scenario.Id] = new List<MapReport>();
@@ -77,14 +77,22 @@ public partial class TheatreOps
             else if (k.Keycode == Key.R) { _contextAt = Session.Unproject(GetViewport().GetCanvasTransform().AffineInverse() * GetViewport().GetMousePosition()); NewReport("NOTE"); GetViewport().SetInputAsHandled(); }
             return;
         }
+        if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } lc)
+        {
+            var wz = GetViewport().GetCamera2D()?.Zoom.X ?? 1;
+            if (TryPick(GetViewport().GetCanvasTransform().AffineInverse() * lc.Position, wz)) { Layer.QueueRedraw(); GetViewport().SetInputAsHandled(); }
+            return;
+        }
         if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right } mb || _context == null) return;
         var world = GetViewport().GetCanvasTransform().AffineInverse() * mb.Position;
+        var zoom = GetViewport().GetCamera2D()?.Zoom.X ?? 1;
         _contextAt = Session.Unproject(world);
         _context.Clear();
         _context.AddSeparator($"{Fmt(_contextAt.Lat, "N", "S")} {Fmt(_contextAt.Lon, "E", "W")}");
         for (var i = 0; i < ReportTypes.Length; i++) _context.AddItem($"{ReportTypes[i].Name}   {i + 1}", i);
         if (SelectedShip is { Sunk: false } s && s.Side == CommandSide) { _context.AddSeparator(); _context.AddItem($"Move {s.Name} here", 100); }
         if (Reports.FirstOrDefault(r => Near(r, world)) is { } hit) { _context.AddSeparator(); _context.AddItem($"Delete report R-{hit.Id:000}", 200 + hit.Id); }
+        AddMissionItems(_context, world, zoom);
         _context.Position = (Vector2I)(GetViewport().GetScreenTransform() * mb.Position);
         _context.Popup();
         GetViewport().SetInputAsHandled();
@@ -106,6 +114,8 @@ public partial class TheatreOps
     {
         if (id < ReportTypes.Length) NewReport(ReportTypes[id].Key);
         else if (id == 100 && SelectedShip != null) { Trial.Naval!.MoveTo(SelectedShip.Id, _contextAt.Lon, _contextAt.Lat); UpdateNaval(); }
+        else if (id >= 1000) { _contextActions[(int)id - 1000](); UpdateUi(); }
+        else if (id == 999) { }
         else if (id >= 200) { Reports.RemoveAll(r => r.Id == id - 200); _windows["REPORTS"].Refresh?.Invoke(); }
     }
 

@@ -47,6 +47,8 @@ public static class IntelRules
 {
     public const double ScanSeconds = 10, DropAfter = 1200, StaleAfter = 300, SatellitePeriod = 5400;
     public static double DetectChance(double sensor, double stealth) => Math.Clamp(0.35 + 0.06 * (sensor - stealth), 0.04, 0.95);
+    /// <summary>Range at which an emitting radar is heard by the other side's sensors (passive, bearing-quality contact).</summary>
+    public const double EsmKm = 350;
     public static int IdLevel(double sensor, double stealth) => sensor - stealth >= 4 ? 2 : sensor - stealth >= 1 ? 1 : 0;
 }
 
@@ -72,17 +74,23 @@ public sealed class IntelService
     private IEnumerable<Sensor> Sensors(string side, double now)
     {
         foreach (var b in _t.Batteries.Where(b => b.Def.Side == side))
-            yield return new Sensor(b.Def.Lon, b.Def.Lat, b.RadarKm, b.IsShip ? 150 : 40, b.IsShip ? 20 : 0, b.Radar.R("detection") * b.Degrade, b.Def.Name);
+        {
+            if (_t.Emitting(b.Def.Id)) yield return new Sensor(b.Def.Lon, b.Def.Lat, b.RadarKm, b.IsShip ? 150 : 40, b.IsShip ? 20 : 0, b.Radar.R("detection") * b.Degrade, b.Def.Name);
+            else if (b.IsShip) yield return new Sensor(b.Def.Lon, b.Def.Lat, 0, 40, 20, b.Radar.R("detection") * b.Degrade * 0.6, $"{b.Def.Name} (silent)"); // lookouts and sonar only
+        }
         foreach (var u in _t.Scenario.Units.Where(u => u.Side == side && u.Kind == "ship"))
         {
             var p = _preset(u.Preset); var (lon, lat) = _t.UnitPos(u);
-            yield return new Sensor(lon, lat, 150, 120, (p?.R("anti-sub") ?? 0) >= 6 ? 30 : 10, p?.R("detection") ?? 5, u.Name);
+            var sub = (p?.R("anti-sub") ?? 0) >= 6 ? 30 : 10;
+            yield return _t.Emitting(u.Id) ? new Sensor(lon, lat, 150, 120, sub, p?.R("detection") ?? 5, u.Name)
+                : new Sensor(lon, lat, 0, 40, sub, (p?.R("detection") ?? 5) * 0.6, $"{u.Name} (silent)");
         }
         if (_t.Air == null) yield break;
         foreach (var f in _t.Air.Flights.Where(f => f.Side == side && f.Airborne(now) && f.Aircraft.Count > 0))
         {
             var (lon, lat) = f.Pos(now);
             var det = f.Type.R("detection");
+            if (!_t.Emitting(f.Id)) continue; // a silent flight sees nothing beyond the pilots' eyes (not modelled)
             yield return f.Mission switch
             {
                 Mission.AEW => new Sensor(lon, lat, 400, 300, 0, det, $"{f.Callsign} (AEW)"),
@@ -133,6 +141,10 @@ public sealed class IntelService
                 See(pic, sh.Key, sh.Kind, sh.Pos.Item1, sh.Pos.Item2, now, id, id == 2 ? sh.Name : id == 1 ? (sh.Kind == "sub" ? "submarine" : "surface combatant") : "unknown surface", s.Name);
                 break;
             }
+        // passive listening: enemy radars that are switched on give themselves away at long range (bearing-quality, id 1)
+        foreach (var e in Emitters(side == "blue" ? "red" : "blue", now))
+            if (sensors.Any(s => Pacing.DistanceKm(s.Lon, s.Lat, e.Lon, e.Lat) <= IntelRules.EsmKm))
+                See(pic, e.Key, e.Kind, e.Lon, e.Lat, now, 1, e.Kind == "air" ? "radar emitter (air)" : e.Kind == "ship" ? "radar emitter (ship)" : "radar emitter", "passive (ESM)");
         // satellite pass: imagery of every enemy base (BDA), ships at sea and launch areas
         if (now >= pic.NextSatellite)
         {
@@ -145,6 +157,24 @@ public sealed class IntelService
             _t.Report("isr", $"{_t.Scenario.Sides.GetValueOrDefault(side, side)} satellite pass: imagery of enemy bases updated.");
         }
         foreach (var k in pic.Contacts.Where(c => now - c.Value.LastSeen > IntelRules.DropAfter).Select(c => c.Key).ToList()) pic.Contacts.Remove(k);
+    }
+
+    /// <summary>A side's radars that are switched on: ships, ship batteries, AEW flights (ground radar sites are already known).</summary>
+    private IEnumerable<(string Key, string Kind, double Lon, double Lat)> Emitters(string side, double now)
+    {
+        foreach (var b in _t.Batteries.Where(b => b.Def.Side == side && b.IsShip && _t.Emitting(b.Def.Id) && !(_t.Naval?.IsSunk(b.Def.Id) ?? false)))
+            yield return (b.Def.Id, "ship", b.Def.Lon, b.Def.Lat);
+        foreach (var u in _t.Scenario.Units.Where(u => u.Side == side && u.Kind == "ship" && _t.Emitting(u.Id) && !(_t.Naval?.IsSunk(u.Id) ?? false)))
+        {
+            var (lon, lat) = _t.UnitPos(u);
+            yield return (u.Id, "ship", lon, lat);
+        }
+        if (_t.Air == null) yield break;
+        foreach (var f in _t.Air.Flights.Where(f => f.Side == side && f.Mission == Mission.AEW && f.Airborne(now) && _t.Emitting(f.Id)))
+        {
+            var (lon, lat) = f.Pos(now);
+            yield return (f.Id, "air", lon, lat);
+        }
     }
 
     private static void See(Picture pic, string key, string kind, double lon, double lat, double now, int id, string label, string source)

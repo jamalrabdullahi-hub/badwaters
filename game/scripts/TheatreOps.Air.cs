@@ -31,7 +31,8 @@ public partial class TheatreOps
     {
         _planner = new VBoxContainer();
         _airView.AddChild(_planner);
-        _planner.AddChild(UiTheme.Text("PLAN A PACKAGE", 13, UiTheme.Accent));
+        _planner.AddChild(UiTheme.Text("PLAN A PACKAGE · or right-click the map", 13, UiTheme.Accent));
+        _planner.AddChild(TemplateBar());
         var r1 = new HBoxContainer();
         _planSide = new OptionButton { CustomMinimumSize = new Vector2(90, 0) };
         _planSide.ItemSelected += _ => FillPlanTypes();
@@ -112,6 +113,7 @@ public partial class TheatreOps
     {
         var side = _planSides[_planSide.Selected];
         _planTarget.Clear(); _planTargets.Clear();
+        if (_planStation is { } st) { _planTargets.Add("@pt"); _planTarget.AddItem($"Map point {Math.Abs(st.Lat):0.00}{(st.Lat >= 0 ? "N" : "S")} {Math.Abs(st.Lon):0.00}{(st.Lon >= 0 ? "E" : "W")} (station)"); }
         foreach (var s in Scenario.Sites.OrderBy(s => s.Side == side).ThenBy(s => s.Name))
         {
             _planTargets.Add(s.Id);
@@ -154,7 +156,8 @@ public partial class TheatreOps
     {
         if (_planSides.Count == 0) return;
         var side = _planSides[_planSide.Selected];
-        var target = Scenario.Sites.First(s => s.Id == _planTargets[_planTarget.Selected]);
+        var tid = _planTargets[_planTarget.Selected];
+        var target = tid == "@pt" && _planStation is { } pt ? new SiteDef("@pt", "map point", side, "", pt.Lon, pt.Lat) : Scenario.Sites.First(s => s.Id == tid);
         var reqs = _rows.Select((r, i) => (r, i)).Where(x => x.r.Type.Selected > 0)
             .Select(x => new FlightRequest(_rowTypes[x.i][x.r.Type.Selected], (int)x.r.Count.Value, Missions[x.r.Mission.Selected], Formations[x.r.Formation.Selected])).ToList();
         var aim = _planAim.Selected > 0 ? _planAims[_planAim.Selected] : "";

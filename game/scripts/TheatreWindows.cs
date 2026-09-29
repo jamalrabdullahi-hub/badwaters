@@ -81,9 +81,15 @@ public partial class TheatreOps
         Win("COMMANDER", "Commander · why is my general doing this", new Vector2(580, TopH + 40), new Vector2(480, 420), FillCommander);
         Win("REPORTS", "Reports · map notes and SITREP", new Vector2(80, TopH + 60), new Vector2(560, 420), FillReports);
         Win("ALERTS", "Alerts", new Vector2(0, TopH + 12), new Vector2(380, 230), FillAlerts);
+        Win("UNIT", "Unit · status and orders", new Vector2(0, TopH + 260), new Vector2(380, 260), FillUnit);
         BuildDock();
         Open("ALERTS");
         _windows["ALERTS"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 12);
+        _windows["UNIT"].Position = new Vector2(GetViewportRect().Size.X - 394, TopH + 256);
+        // dev aids for screenshots: --silent=id,id  --pick=kind:id  --planat=cap:lon,lat
+        foreach (var id in (DevScreenshot.Arg("silent") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries)) Trial.SetEmitting(id, false, id);
+        if (DevScreenshot.Arg("pick")?.Split(':') is [var pk, var pid]) { Picked = (pk, pid); Open("UNIT"); }
+        if (DevScreenshot.Arg("planat")?.Split(':') is [var tpl, var ll] && ll.Split(',') is [var lo, var la]) PlanAt(null, tpl, (double.Parse(lo), double.Parse(la)));
         foreach (var k in (DevScreenshot.Arg("windows") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
             if (_windows.TryGetValue(k.ToUpperInvariant(), out var w)) { w.Visible = true; w.Refresh?.Invoke(); }
     }

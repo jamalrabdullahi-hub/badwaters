@@ -113,6 +113,7 @@ public partial class TheatreOps : Control
         _view = new OptionButton();
         _view.ItemSelected += i => { ViewSide = i switch { 0 => "blue", 1 => "red", _ => "all" }; UpdateUi(); };
         th.AddChild(_view);
+        BuildMapMenu(th);
 
         // the old console pages are now floating windows (opened from the dock); only the start one is open
         var start = DevScreenshot.Arg("tab") switch { "air" or "ato" => "ATO", "fires" => "FIRES", "bases" => "BASES", "picture" => "PICTURE", "log" => "LOG", "naval" => "NAVAL", "airdef" => "AIR DEF", _ => "" };
@@ -557,9 +558,24 @@ public partial class TheatreLayer : Node2D
             var p = P(b.Def.Lon, b.Def.Lat);
             var k = PxPerKm(b.Def.Lat);
             var c = SideColor(b.Def.Side);
-            DrawArc(p, (float)b.RadarKm * k, 0, Mathf.Tau, 96, new Color(c, many ? 0.10f : 0.35f), w);
-            DrawCircle(p, (float)b.ReachKm * k, new Color(c, 0.06f));
-            DrawArc(p, (float)b.ReachKm * k, 0, Mathf.Tau, 64, new Color(c, many ? 0.45f : 0.7f), w);
+            var silent = !Fogged(b.Def.Side) && !tr.Emitting(b.Def.Id);
+            if (Ops.Show("radar"))
+            {
+                if (!silent) // a silent radar covers nothing: no ring
+                {
+                    // strength falloff: a faint fill that fades toward the edge, plus the detection ring
+                    var rk = (float)b.RadarKm * k;
+                    DrawCircle(p, rk * 0.5f, new Color(c, many ? 0.025f : 0.05f));
+                    DrawCircle(p, rk, new Color(c, many ? 0.015f : 0.03f));
+                    DrawArc(p, rk, 0, Mathf.Tau, 96, new Color(c, many ? 0.10f : 0.35f), w);
+                }
+            }
+            if (Ops.Show("reach"))
+            {
+                DrawCircle(p, (float)b.ReachKm * k, new Color(c, 0.06f));
+                DrawArc(p, (float)b.ReachKm * k, 0, Mathf.Tau, 64, new Color(c, many ? 0.45f : 0.7f), w);
+            }
+            if (silent) Label(p + new Vector2(0, 12 / zoom), "SILENT", new Color(UiTheme.TacDim, 0.9f));
             var ship = Session.Content.Designs.TryGetValue(b.Def.Radar, out var rd) && Session.Content.Catalog.Frames.TryGetValue(rd.Frame, out var fr) && fr.Kind == "ship";
             Sym(ship ? Symbols.For(b.Def.Radar, "ship") : "SAMB", p, c, b.Def.Side, zoom, Vector2.Up, ship ? 24 : 20);
             if (!many || zoom > 3.5f) Label(p, many ? $"{b.Def.Name} · {b.Stock}" : $"{b.Def.Name} · radar {b.RadarKm:0} km · reach {b.ReachKm:0} km", c);
@@ -570,7 +586,7 @@ public partial class TheatreLayer : Node2D
             var p = P(l.Def.Lon, l.Def.Lat);
             var c = SideColor(l.Def.Side);
             Sym(l.Def.Platform == "ground" ? "TEL" : Symbols.For(null, l.Def.Platform), p, c, l.Def.Side, zoom, Vector2.Up, 20);
-            DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
+            if (Ops.Show("strike")) DrawArc(p, (float)l.ReachKm * PxPerKm(l.Def.Lat), 0, Mathf.Tau, 96, new Color(c, many ? 0.12f : 0.25f), w);
             if (!many || zoom > 3.5f) Label(p, $"{l.Def.Name} · {l.Stock} left", c);
         }
         if (tr.Naval != null)
@@ -629,7 +645,7 @@ public partial class TheatreLayer : Node2D
             if (!prot || !many || zoom > 3.5f) Label(p, prot ? $"{s.Name} · protected" : s.Name + (status.Trim(' ', '·') != "" ? $" · {status.Trim(' ', '·')}" : ""), c);
         }
 
-        foreach (var t in tr.Tracks.Where(t => t.Launched <= tr.Time && (!Fogged(t.Side) || t.Detected)))
+        foreach (var t in tr.Tracks.Where(t => Ops.Show("tracks") && t.Launched <= tr.Time && (!Fogged(t.Side) || t.Detected)))
         {
             var end = t.State == TrackState.Flying ? tr.Time : t.EndedAt;
             var c = SideColor(t.Side);
@@ -651,7 +667,8 @@ public partial class TheatreLayer : Node2D
             Burst(t.State == TrackState.Intercepted ? head : z, t.EndedAt, t.State == TrackState.Intercepted ? Green : t.State == TrackState.Impacted ? Red : default, zoom);
         }
 
-        Ops.DrawReports(this, zoom);
+        if (Ops.Show("reports")) Ops.DrawReports(this, zoom);
+        if (Ops.Picked is { } pk) DrawPicked(tr, pk, zoom, w);
         DrawAir(tr, zoom, w);
         DrawAirContacts(zoom, w);
         foreach (var s in tr.Shots.Where(s => s.Launched <= tr.Time && s.State == ShotState.Flying))
@@ -668,6 +685,29 @@ public partial class TheatreLayer : Node2D
 
     private static string Enemy(string side) => side == "blue" ? "red" : "blue";
 
+
+    /// <summary>Selection brackets around the picked unit.</summary>
+    private void DrawPicked(InterceptTrial tr, (string Kind, string Id) pk, float zoom, float w)
+    {
+        (double, double)? at = pk.Kind switch
+        {
+            "battery" => tr.Batteries.FirstOrDefault(b => b.Def.Id == pk.Id) is { } b ? (b.Def.Lon, b.Def.Lat) : null,
+            "launcher" => tr.Launchers.FirstOrDefault(l => l.Def.Id == pk.Id) is { } l ? (l.Def.Lon, l.Def.Lat) : null,
+            "unit" => tr.Scenario.Units.FirstOrDefault(u => u.Id == pk.Id) is { } u ? tr.UnitPos(u) : null,
+            _ => tr.Air?.Flights.FirstOrDefault(f => f.Id == pk.Id) is { } f && f.Airborne(tr.Time) ? f.Pos(tr.Time) : null,
+        };
+        if (at is not { } a) return;
+        var p = P(a.Item1, a.Item2);
+        var r = 16 / zoom; var e = 6 / zoom;
+        var col = UiTheme.TacAccent;
+        foreach (var (sx, sy) in new[] { (-1, -1), (1, -1), (1, 1), (-1, 1) })
+        {
+            var q = p + new Vector2(sx * r, sy * r);
+            DrawLine(q, q - new Vector2(sx * e, 0), col, w * 1.4f);
+            DrawLine(q, q - new Vector2(0, sy * e), col, w * 1.4f);
+        }
+    }
+
     /// <summary>Flight routes (take-off → ingress → IP → target → egress → land), CAP orbits and formations.</summary>
     private void DrawAir(InterceptTrial tr, float zoom, float w)
     {
@@ -681,7 +721,7 @@ public partial class TheatreLayer : Node2D
             var c = preview ? Colors.White : SideColor(f.Side);
             var sel = Ops.SelectedFlight == f || preview;
             var pts = f.Route.Select(x => P(x.Lon, x.Lat)).ToArray();
-            var routeCol = new Color(c, sel ? 0.9f : 0.28f);
+            var routeCol = new Color(c, sel ? 0.9f : Ops.Show("routes") ? 0.28f : 0f);
             for (var i = 0; i + 1 < pts.Length; i++)
             {
                 if (pts[i] == pts[i + 1]) continue;
@@ -760,7 +800,7 @@ public partial class MapLabels : Control
     public override void _Process(double delta) => QueueRedraw();
     public override void _Draw()
     {
-        if (!Layer.Visible) return;
+        if (!Layer.Visible || !Layer.Ops.Show("labels")) return;
         var toScreen = GetViewport().GetCanvasTransform();
         var toLocal = GetGlobalTransformWithCanvas().AffineInverse();
         var font = ThemeDB.FallbackFont;

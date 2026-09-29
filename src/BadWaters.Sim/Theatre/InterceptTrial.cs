@@ -137,6 +137,17 @@ public sealed class InterceptTrial
     /// <summary>Interceptors the AI fires per engagement (doctrine). Re-engages if the salvo misses and time allows.</summary>
     public int AiSalvo { get; set; } = 2;
     public List<BatteryState> Batteries { get; } = new();
+    /// <summary>EMCON: ids of batteries, ships and AEW flights whose radar is switched off. Silent emitters don't
+    /// detect with radar, but can't be found by the enemy's passive listening either (game rule, see IntelRules.EsmKm).</summary>
+    public HashSet<string> Silent { get; } = new();
+    public bool Emitting(string id) => !Silent.Contains(id);
+    public string SetEmitting(string id, bool on, string name)
+    {
+        if (on) Silent.Remove(id); else Silent.Add(id);
+        var msg = on ? $"{name}: radar ON (emitting; can be heard by enemy passive sensors)." : $"{name}: radar OFF (silent; no radar detection).";
+        Note("emcon", msg);
+        return msg;
+    }
     public List<LauncherState> Launchers { get; } = new();
     public List<Track> Tracks { get; } = new();
     public List<Shot> Shots { get; } = new();
@@ -334,7 +345,7 @@ public sealed class InterceptTrial
         foreach (var tr in Tracks.Where(t => t.State == TrackState.Flying && t.Launched <= Time))
         {
             if (!tr.Detected)
-                foreach (var b in Batteries.Where(b => b.Def.Side != tr.Side))
+                foreach (var b in Batteries.Where(b => b.Def.Side != tr.Side && Emitting(b.Def.Id)))
                 {
                     var (lon, lat) = tr.Pos(Time);
                     if (Pacing.DistanceKm(b.Def.Lon, b.Def.Lat, lon, lat) > b.RadarKm) continue;
