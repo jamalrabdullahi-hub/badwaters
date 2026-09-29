@@ -87,6 +87,9 @@ def chain(segs):
 
 def simplify(pts, tol):
     if len(pts) < 3: return pts
+    if pts[0] == pts[-1] and len(pts) > 4:  # closed ring: the chord is zero, so simplify the two halves
+        h = len(pts) // 2
+        return simplify(pts[:h + 1], tol)[:-1] + simplify(pts[h:], tol)
     keep = [False] * len(pts); keep[0] = keep[-1] = True
     stack = [(0, len(pts) - 1)]
     while stack:
