@@ -62,6 +62,8 @@ public sealed record LogisticsDef
     public Dictionary<string, int> Pool { get; init; } = new();
     public EfficiencyDef Efficiency { get; init; } = new();
     /// <summary>Request resupply below this share of a node's baseline; sources never give below KeepShare.</summary>
+    /// <summary>Economy units of the matching good per theatre unit (fuel m3, spare parts): converts national stocks.</summary>
+    public Dictionary<string, double> EconPerUnit { get; init; } = new();
     public double RequestShare { get; init; } = 0.4;
     public double KeepShare { get; init; } = 0.7;
 }
@@ -425,6 +427,62 @@ public sealed class LogisticsService
         InUse[(s.Side, s.Mode)] = Math.Max(0, InUse.GetValueOrDefault((s.Side, s.Mode)) - s.Vehicles);
         Pool[(s.Side, s.Mode)] = Math.Max(0, Pool.GetValueOrDefault((s.Side, s.Mode)) - (int)Math.Ceiling(s.Vehicles * 0.5)); // some vehicles don't come back
         _t.Report("logistics", $"{Amount(s.Item, s.Qty)} {ItemName(s.Item)} for {Nodes[s.To].Name} {why}.");
+    }
+
+    // ---------------- national stockpiles (strategic link) ----------------
+
+    /// <summary>
+    /// A theatre at war can only hold what its nation has: munitions are drawn from the national Fleet stockpile (scaled
+    /// down if short), fuel and spares from regional stocks. Whatever the theatre takes leaves the national stock.
+    /// </summary>
+    public List<string> DrawFromNation(string side, BadWaters.Sim.Economy.NationEconomy ne, BadWaters.Sim.Economy.EconomyState st, BadWaters.Sim.Economy.EconomyGeo geo)
+    {
+        var notes = new List<string>();
+        var mine = Nodes.Values.Where(n => n.Side == side).ToList();
+        foreach (var item in mine.SelectMany(ItemsAt).Distinct().ToList())
+        {
+            var total = mine.Sum(n => Get(n, item));
+            if (total <= 0) continue;
+            double avail;
+            if (BadWaters.Sim.Economy.NationalMunitions.FleetKey(item) is { Length: > 0 } key) avail = BadWaters.Sim.Economy.NationalMunitions.Held(ne, key);
+            else if (BadWaters.Sim.Economy.NationalMunitions.Goods.TryGetValue(item, out var good)) avail = BadWaters.Sim.Economy.NationalMunitions.GoodHeld(st, geo, ne.Nation, good) / Def.EconPerUnit.GetValueOrDefault(item, 1);
+            else continue;
+            var take = Math.Min(total, avail);
+            if (take < total)
+            {
+                var k = take / total;
+                foreach (var n in mine) { var q = Get(n, item); Add(n, item, Math.Floor(q * k) - q); }
+                notes.Add($"{ItemName(item)}: nation holds {Amount(item, avail)}, theatre gets {Amount(item, take)} of {Amount(item, total)}");
+            }
+            Withdraw(ne, st, geo, item, take);
+        }
+        return notes;
+    }
+
+    private void Withdraw(BadWaters.Sim.Economy.NationEconomy ne, BadWaters.Sim.Economy.EconomyState st, BadWaters.Sim.Economy.EconomyGeo geo, string item, double qty)
+    {
+        if (BadWaters.Sim.Economy.NationalMunitions.FleetKey(item) is { Length: > 0 } key) BadWaters.Sim.Economy.NationalMunitions.Take(ne, key, qty);
+        else if (BadWaters.Sim.Economy.NationalMunitions.Goods.TryGetValue(item, out var good)) BadWaters.Sim.Economy.NationalMunitions.TakeGood(st, geo, ne.Nation, good, qty * Def.EconPerUnit.GetValueOrDefault(item, 1));
+    }
+
+    /// <summary>Daily strategic pipeline: rear depots are topped back toward their baseline from national stocks.</summary>
+    public List<string> Replenish(string side, BadWaters.Sim.Economy.NationEconomy ne, BadWaters.Sim.Economy.EconomyState st, BadWaters.Sim.Economy.EconomyGeo geo)
+    {
+        var notes = new List<string>();
+        foreach (var d in Nodes.Values.Where(n => n.Side == side && n.Reserve))
+            foreach (var item in d.Baseline.Keys.ToList())
+            {
+                var want = d.Baseline[item] - Get(d, item);
+                if (want < 1) continue;
+                double avail = BadWaters.Sim.Economy.NationalMunitions.FleetKey(item) is { Length: > 0 } key ? BadWaters.Sim.Economy.NationalMunitions.Held(ne, key)
+                    : BadWaters.Sim.Economy.NationalMunitions.Goods.TryGetValue(item, out var good) ? BadWaters.Sim.Economy.NationalMunitions.GoodHeld(st, geo, ne.Nation, good) / Def.EconPerUnit.GetValueOrDefault(item, 1) : 0;
+                var q = Math.Floor(Math.Min(want, avail));
+                if (q < 1) continue;
+                Add(d, item, q);
+                Withdraw(ne, st, geo, item, q);
+                notes.Add($"{Amount(item, q)} {ItemName(item)} → {d.Name}");
+            }
+        return notes;
     }
 
     // ---------------- tick ----------------

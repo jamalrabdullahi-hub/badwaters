@@ -138,5 +138,11 @@
   "min": 0.4
  },
  "requestShare": 0.4,
- "keepShare": 0.7
+ "keepShare": 0.7,
+ "econPerUnit": {
+  "avfuel": 0.1,
+  "diesel": 0.1,
+  "spares": 0.01,
+  "propellant": 0.01
+ }
 }

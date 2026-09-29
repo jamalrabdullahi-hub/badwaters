@@ -122,6 +122,10 @@ public sealed class GameContent
         foreach (var x in l.Load<BadWaters.Sim.Economy.SupplierDef>("economy/suppliers.json")) g.Geo.Suppliers[x.Id] = x;
         g.Stores = l.LoadObject<BadWaters.Sim.Theatre.StoresCatalog>("theatre/stores.json");
         g.Logistics = l.LoadObject<BadWaters.Sim.Theatre.LogisticsDef>("theatre/logistics.json");
+        // aircraft stores are producible munitions: one programme-able design per store ("store:<id>", munition frames)
+        if (g.Stores != null)
+            foreach (var s in g.Stores.Stores.Values)
+                g.Designs["store:" + s.Id] = new BadWaters.Sim.Engineering.DesignDef { Id = "store:" + s.Id, Name = $"{s.Name} (aircraft store)", Frame = s.Cls >= 3 ? "mb-large" : s.Cls == 2 ? "mb-medium" : "mb-small", Lineage = "store" };
         var dl = l.LoadFile("theatre/doctrine.json");
         var def = dl.GetValueOrDefault("default");
         foreach (var (id, obj) in dl)

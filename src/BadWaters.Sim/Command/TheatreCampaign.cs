@@ -18,6 +18,10 @@ public sealed class TheatreSnapshot
     public Dictionary<string, int> BatteryStock { get; set; } = new();
     public Dictionary<string, double[]> Ships { get; set; } = new();        // id → [hp, lon, lat]
     public int DayWrittenBack { get; set; }
+    /// <summary>Logistics: node stocks (loads in transit are counted as delivered), aircraft store magazines, route damage.</summary>
+    public Dictionary<string, Dictionary<string, double>> Supply { get; set; } = new();
+    public Dictionary<string, Dictionary<string, int>> StoreMagazines { get; set; } = new();
+    public Dictionary<string, double> RouteDamage { get; set; } = new();
 }
 
 /// <summary>
@@ -39,6 +43,8 @@ public sealed class TheatreCampaign
     public const double Day = 86400;
     /// <summary>Coarse step for headless auto-resolve when no missile is in the air.</summary>
     public double AutoStep { get; set; } = 60;
+    /// <summary>Economy regions (national fuel and spares stocks for theatre logistics).</summary>
+    public EconomyGeo? Geo { get; set; }
 
     public TheatreCampaign(Func<string, ScenarioDef?> scenarioFor, Func<ScenarioDef, int, InterceptTrial> build, Func<string, string?> nationOfSideName)
     { _scenarioFor = scenarioFor; _build = build; _nationOfSideName = nationOfSideName; }
@@ -103,7 +109,14 @@ public sealed class TheatreCampaign
                 var lost = Math.Max(0, g.Count() - alive - (int)Math.Round(fe.Lost));
                 if (lost > 0) { fe.Count = Math.Max(0, fe.Count - lost); fe.Lost += lost; Reports.Add($"{w.Now:yyyy-MM-dd} {nation}: {lost} {g.Key} lost in {t.Scenario.Name}"); }
             }
-            // launchers: resupply from missiles the economy built (the design's fielded stock), up to the launcher's load
+            // with theatre logistics, rear depots are topped up from national stockpiles (the logistics officer moves it forward)
+            if (t.Logistics != null && Geo != null)
+            {
+                var got = t.Logistics.Replenish(side, ne, econ, Geo);
+                if (got.Count > 0) Reports.Add($"{w.Now:yyyy-MM-dd} {nation}: national stocks to {t.Scenario.Name} depots: {string.Join(", ", got.Take(4))}{(got.Count > 4 ? "…" : "")}");
+                continue;
+            }
+            // without logistics: launchers are resupplied straight from missiles the economy built
             foreach (var l in t.Launchers.Where(l => l.Def.Side == side))
             {
                 var key = l.Def.Missile;
@@ -141,6 +154,15 @@ public sealed class TheatreCampaign
         LauncherStock = t.Launchers.ToDictionary(l => l.Def.Id, l => l.Stock),
         BatteryStock = t.Batteries.ToDictionary(b => b.Def.Id, b => b.Stock),
         Ships = t.Naval?.Ships.ToDictionary(s => s.Id, s => new[] { s.Hp, s.Lon, s.Lat }) ?? new(),
+        Supply = t.Logistics?.Nodes.Values.ToDictionary(n => n.Id, n =>
+        {
+            var d = new Dictionary<string, double>(n.Stock);
+            foreach (var sh in t.Logistics.Shipments.Where(x => x.To == n.Id && x.State is ShipmentState.Moving or ShipmentState.Queued && !x.Item.StartsWith("store:")))
+                if (!sh.Item.StartsWith("design:") || n.Kind is not ("launcher" or "battery")) d[sh.Item] = d.GetValueOrDefault(sh.Item) + sh.Qty;
+            return d;
+        }) ?? new(),
+        StoreMagazines = t.Air?.Munitions.ByBase.ToDictionary(k => k.Key, k => new Dictionary<string, int>(k.Value)) ?? new(),
+        RouteDamage = t.Logistics?.Corridors.Values.Where(c => c.Damage > 0).ToDictionary(c => c.Def.Id, c => c.Damage) ?? new(),
     };
 
     public static void Restore(InterceptTrial t, TheatreSnapshot s)
@@ -160,5 +182,16 @@ public sealed class TheatreCampaign
         foreach (var b in t.Batteries) if (s.BatteryStock.TryGetValue(b.Def.Id, out var n)) b.Stock = n;
         if (t.Naval != null)
             foreach (var sh in t.Naval.Ships) if (s.Ships.TryGetValue(sh.Id, out var v)) { sh.Hp = v[0]; sh.Lon = v[1]; sh.Lat = v[2]; }
+        if (t.Logistics != null)
+        {
+            foreach (var (id, stock) in s.Supply)
+                if (t.Logistics.Nodes.TryGetValue(id, out var n)) { n.Stock.Clear(); foreach (var (k, q) in stock) n.Stock[k] = q; }
+            foreach (var (id, dmg) in s.RouteDamage) if (t.Logistics.Corridors.TryGetValue(id, out var c)) c.Damage = dmg;
+        }
+        if (t.Air != null && s.StoreMagazines.Count > 0)
+        {
+            t.Air.Munitions.ByBase.Clear();
+            foreach (var (b, m) in s.StoreMagazines) foreach (var (k, q) in m) t.Air.Munitions.Add(b, k, q);
+        }
     }
 }

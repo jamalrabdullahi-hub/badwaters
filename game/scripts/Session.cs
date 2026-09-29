@@ -26,8 +26,18 @@ public static class Session
     /// <summary>A live theatre with both commanders; its strikes write back into the strategic economy.</summary>
     public static BadWaters.Sim.Theatre.InterceptTrial BuildTheatre(BadWaters.Sim.Theatre.ScenarioDef sc, int seed)
     {
+        // the transport each side can put into the theatre comes from its economy
+        var transport = new Dictionary<(string, string), int>();
+        foreach (var side in new[] { "blue", "red" })
+            if (NationId(sc.Sides.GetValueOrDefault(side, "")) is { } nid && World.Economy.Nations.TryGetValue(nid, out var tne))
+                foreach (var (mode, n) in BadWaters.Sim.Economy.NationalMunitions.Transport(tne)) transport[(side, mode)] = n;
         var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, Profile, Content.PresetInfo, Content.BaseTypes,
-            side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, stores: Content.Stores);
+            side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, stores: Content.Stores, logistics: Content.Logistics, transport: transport);
+        // a theatre at war holds only what the nations have: its stocks are drawn from national stockpiles
+        if (t.Logistics != null && sc.Theatre != "" && World.Theatres.TryGetValue(sc.Theatre, out var wts) && wts.AtWar)
+            foreach (var side in new[] { "blue", "red" })
+                if (NationId(sc.Sides.GetValueOrDefault(side, "")) is { } nid && World.Economy.Nations.TryGetValue(nid, out var dne))
+                    foreach (var note in t.Logistics.DrawFromNation(side, dne, World.Economy, Content.Geo)) t.Report("logistics", $"{SideNameOf(sc, side)}: {note}.");
         // a campaign theatre that isn't at war shows the other side as "hostile, not at war": track only
         if (sc.Theatre != "" && World.Theatres.TryGetValue(sc.Theatre, out var ts) && !ts.AtWar && DevScreenshot.Arg("war") == null) t.AtWar = false;
         t.SiteDamaged += (site, frac) =>
@@ -39,6 +49,7 @@ public static class Session
         };
         return t;
     }
+    private static string SideNameOf(BadWaters.Sim.Theatre.ScenarioDef sc, string side) => sc.Sides.GetValueOrDefault(side, side);
     /// <summary>Nation id from a scenario side name ("China" → "CHN").</summary>
     public static string? NationId(string sideName) =>
         Content.Nations.ContainsKey(sideName) ? sideName : Content.Nations.Values.FirstOrDefault(n => n.Name == sideName)?.Id;
@@ -69,11 +80,13 @@ public static class Session
         LoadLand();
         Econ = new BadWaters.Sim.Economy.EconomyWorld(Content.Economy, Content.Geo, Content.Catalog, Content.Designs, Content.Routes);
         Econ.Start(World.Economy, Content.Nations.Keys, year, Content.TradeRegimes);
+        // national stockpiles of aircraft stores and missile rounds: what theatres can draw on
+        BadWaters.Sim.Economy.NationalMunitions.Seed(World.Economy, Content.Stores, Content.Scenarios.Values, NationId);
         // every other nation is run by its strategic AI; the player can delegate their own too
         Econ.Strategy = new BadWaters.Sim.Economy.StrategicCommander(Econ, Content.DispositionFor);
         foreach (var n in World.Economy.Nations.Keys.Where(n => n != nation)) Econ.AiNations.Add(n);
         Econ.AtWar = n => World.Theatres.Values.Any(t => t.AtWar && Content.Scenarios.Values.Any(sc => sc.Theatre == t.Id && sc.Sides.Values.Any(v => NationId(v) == n)));
-        Campaign = new BadWaters.Sim.Command.TheatreCampaign(th => Content.Scenarios.Values.FirstOrDefault(x => x.Theatre == th), BuildTheatre, NationId);
+        Campaign = new BadWaters.Sim.Command.TheatreCampaign(th => Content.Scenarios.Values.FirstOrDefault(x => x.Theatre == th), BuildTheatre, NationId) { Geo = Content.Geo };
         Scheduler.DailyHook = (w, now) =>
         {
             var extra = ExtraDaily?.Invoke(w, now);
