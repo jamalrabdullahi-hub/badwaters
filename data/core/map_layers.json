@@ -34,8 +34,6 @@
 
  {"id": "military", "name": "Bases and sites (known)", "group": "MILITARY", "kind": "military", "sim": true, "on": false},
 
- {"id": "theatres", "name": "War zones (active fights)", "group": "OPERATIONS", "kind": "theatres", "sim": true, "on": true},
-
  {"id": "weather", "name": "Weather (storms)", "group": "ENVIRONMENT", "kind": "weather", "sim": true, "on": false},
  {"id": "seastate", "name": "Sea state, visibility, ice", "group": "ENVIRONMENT", "kind": "later", "sim": true}
 ]

@@ -265,6 +265,7 @@ public partial class Shell : Control
                         Session.Campaign.Mode[th] = BadWaters.Sim.Command.TheatreMode.Auto;
                         Session.Campaign.Resolve(live, Session.Campaign.Days.GetValueOrDefault(th) * BadWaters.Sim.Command.TheatreCampaign.Day);
                         Session.Campaign.WriteBack(Session.World, live);
+                        Session.Campaign.Live.Remove(th); Session.Zones.Remove(th); // disengaged: free the zone, the world keeps its state
                     }
                     Open("Map");
                 };
@@ -275,8 +276,9 @@ public partial class Shell : Control
             // trial only when your nation has no forces in the world yet
             var myWars = Session.World.Wars.Where(w => w.Involves(Session.World.Player)).ToList();
             var key = myWars.FirstOrDefault(w => w.Key == _bannerTheatre)?.Key ?? myWars.FirstOrDefault()?.Key;
+            if (key != null && Session.Campaign != null) Session.Campaign.Mode[key] = BadWaters.Sim.Command.TheatreMode.Fight; // engaged: build and simulate it now
             var id = DevScreenshot.Arg("scenario") ?? (key != null ? Session.Zone(key)?.Id : null) ?? Session.Home()?.Id ?? "intercept-trial";
-            if (_theatre.Scenario.Id != id) _theatre.Load(id);
+            if (_theatre.Scenario.Id != id || (key != null && Session.Campaign?.Live.ContainsKey(key) == false)) _theatre.Load(id);
             var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
             _map.PanScreen(new Vector2(0, -TheatreOps.TopH / 2f)); // map-first: only the command bar covers it

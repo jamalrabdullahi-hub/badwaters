@@ -70,4 +70,24 @@ public class WorldForcesTests
         // a different war doesn't see Japan's losses, but a new JPN-CHN zone does
         Assert.Contains("naha-ab/runway", w.Forces.Components.Keys);
     }
+
+    [Fact]
+    public void Unwatched_wars_resolve_off_screen_without_building_a_zone()
+    {
+        var w = new World { Now = new DateTime(2020, 1, 1), Player = "JPN" };
+        var built = 0;
+        InterceptTrial Build(ScenarioDef sc, int seed) { built++; return TheatreFactory.Create(sc, id => SystemProfile.Build(C.Catalog, C.Designs[id]), C.PresetInfo, C.BaseTypes, _ => C.DoctrineFor(null), seed, null, C.Stores, C.Logistics); }
+        var camp = new TheatreCampaign(k => { var (a, b) = FightZone.Parse(k); return FightZone.Build(W, a, b, "JPN", Name); }, Build, _ => null) { WorldForces = () => w.Forces };
+        var war = new War("JPN", "CHN", w.Now);
+        camp.Abstract = (world, key) => FightZone.AbstractDay(W, world.Forces, war, world.Now, Name);
+        for (var d = 0; d < 30; d++) { camp.Daily(w, new[] { war.Key }); w.Now = w.Now.AddDays(1); }
+        Assert.Equal(0, built); // nothing simulated while nobody watches
+        Assert.NotEmpty(w.Forces.DestroyedUnits); // but the war still costs something
+        Assert.True(FightZone.InReach(W, "JPN", "CHN"));
+        Assert.False(FightZone.InReach(W, "JPN", "ISR"));
+        camp.Mode[war.Key] = TheatreMode.Fight; // engaged in Theatre Ops: now the zone is built, starting from the world
+        camp.Daily(w, new[] { war.Key });
+        Assert.Equal(1, built);
+        Assert.Contains(camp.Live[war.Key].Air!.Destroyed, id => w.Forces.DestroyedUnits.Contains(id));
+    }
 }

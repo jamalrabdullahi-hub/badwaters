@@ -77,7 +77,6 @@ public partial class StrategicMap : Node2D
                 "lines" => new LineLayer(d),
                 "points" => new PointLayer(d),
                 "military" => new MilitaryLayer(),
-                "theatres" => new TheatreRings(),
                 "weather" => new WeatherLayer(),
                 "facilities" => new FacilityLayer { MinZoom = d.MinZoom },
                 "deposits" => new DepositLayer(),

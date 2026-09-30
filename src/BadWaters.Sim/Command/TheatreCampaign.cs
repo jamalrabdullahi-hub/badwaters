@@ -47,6 +47,9 @@ public sealed class TheatreCampaign
     public EconomyGeo? Geo { get; set; }
     /// <summary>The persistent world state (World.Forces): a zone built fresh starts from it, and writes back into it.</summary>
     public Func<TheatreSnapshot>? WorldForces { get; set; }
+    /// <summary>Cheap daily result for a war nobody is watching (no zone is built). When set, only wars in Fight mode
+    /// (engaged in Theatre Ops) get a live simulation; everything else is resolved by this.</summary>
+    public Action<World, string>? Abstract { get; set; }
 
     public TheatreCampaign(Func<string, ScenarioDef?> scenarioFor, Func<ScenarioDef, int, InterceptTrial> build, Func<string, string?> nationOfSideName)
     { _scenarioFor = scenarioFor; _build = build; _nationOfSideName = nationOfSideName; }
@@ -61,6 +64,8 @@ public sealed class TheatreCampaign
         t.Adaptive = true;
         if (snap != null) Restore(t, snap);
         else if (WorldForces?.Invoke() is { } wf) Restore(t, wf, time: false); // semi-persistent: the world remembers
+        // a zone built mid-war (engaged after days resolved off-screen) starts on today's day
+        if (snap == null && Days.GetValueOrDefault(theatre) > 1) t.SetTime((Days[theatre] - 1) * Day);
         Live[theatre] = t;
         Mode.TryAdd(theatre, TheatreMode.Auto);
         return t;
@@ -75,9 +80,15 @@ public sealed class TheatreCampaign
         string? waiting = null;
         foreach (var id in theatresAtWar.OrderBy(x => x, StringComparer.Ordinal))
         {
+            Days[id] = Days.GetValueOrDefault(id) + 1;
+            if (Abstract != null && Mode.GetValueOrDefault(id) != TheatreMode.Fight)
+            {
+                if (Live.Remove(id, out var old)) WriteBack(w, old); // disengaged: the world keeps it, the zone is dropped
+                Abstract(w, id);
+                continue;
+            }
             var t = Get(id);
             if (t == null) continue;
-            Days[id] = Days.GetValueOrDefault(id) + 1;
             var target = Days[id] * Day;
             if (Mode.GetValueOrDefault(id) == TheatreMode.Fight && t.Time < target - 60) { waiting ??= id; continue; }
             Resolve(t, target);

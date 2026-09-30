@@ -64,6 +64,15 @@ public static class Session
     }
 
     /// <summary>The player's peacetime view: own forces and the nearest foreign forces within reach (track only).</summary>
+    private static readonly Dictionary<string, bool> _reach = new();
+    /// <summary>Can the two nations' forces reach each other (cached contact test; no zone is built).</summary>
+    public static bool InReach(string a, string b)
+    {
+        var k = BadWaters.Sim.Command.FightZone.Key(a, b);
+        if (_reach.TryGetValue(k, out var r)) return r;
+        return _reach[k] = Content.WorldOob != null && BadWaters.Sim.Command.FightZone.InReach(Content.WorldOob, a, b);
+    }
+
     public static BadWaters.Sim.Theatre.ScenarioDef? Home() => Content.WorldOob == null ? null : BadWaters.Sim.Command.FightZone.Home(Content.WorldOob, World.Player, NationName);
 
     /// <summary>Any playable scenario: a sandbox from the content, a war's fight zone, or the home view.</summary>
@@ -84,6 +93,7 @@ public static class Session
         if (Campaign != null && Campaign.Live.TryGetValue(w.Key, out var t)) { Campaign.WriteBack(World, t); Campaign.Live.Remove(w.Key); Campaign.Days.Remove(w.Key); }
         World.Wars.Remove(w);
         Zones.Remove(w.Key);
+        Campaign?.Mode.Remove(w.Key);
         World.Log.Add($"{World.Now:yyyy-MM-dd} {NationName(a)} and {NationName(b)} made peace; the fighting stops, the damage stays.");
     }
 
@@ -113,13 +123,15 @@ public static class Session
         foreach (var r in Content.Routes.Keys) World.Routes[r] = new RouteState();
         Scheduler = new Scheduler(World);
         foreach (var r in Content.Routes.Values) { Scheduler.RoutePaths[r.Id] = r.Path; Scheduler.RouteDefs[r.Id] = r; }
-        // shipping is threatened where a war's fight zone lies across the route
+        // shipping is threatened where it passes close to the forces of both nations at war (cheap: no zone is built)
+        var warSites = new Dictionary<string, (double, double)[]>();
+        (double, double)[] SitesOf(string n) => warSites.TryGetValue(n, out var v) ? v : warSites[n] = Content.WorldOob?.Sites.Where(s => s.Side == n && s.Class != "population-centre").Select(s => (s.Lon, s.Lat)).ToArray() ?? Array.Empty<(double, double)>();
+        bool Near(List<double[]> path, string n) => SitesOf(n).Any(s => path.Any(p => BadWaters.Sim.Theatre.Pacing.DistanceKm(s.Item1, s.Item2, p[0], p[1]) <= 600));
         Scheduler.RouteThreat = id =>
         {
-            if (!Scheduler.RoutePaths.TryGetValue(id, out var path)) return (0, 0);
+            if (World.Wars.Count == 0 || !Scheduler.RoutePaths.TryGetValue(id, out var path)) return (0, 0);
             foreach (var w in World.Wars)
-                if (Zone(w.Key) is { } z && BadWaters.Sim.Command.FightZone.Footprint(z) is var (lon, lat, km) && path.Any(p => BadWaters.Sim.Theatre.Pacing.DistanceKm(lon, lat, p[0], p[1]) <= km))
-                    return (80, 100);
+                if (InReach(w.A, w.B) && Near(path, w.A) && Near(path, w.B)) return (80, 100);
             return (0, 0);
         };
         LoadLand();
@@ -132,8 +144,23 @@ public static class Session
         Econ.Strategy = new BadWaters.Sim.Economy.StrategicCommander(Econ, Content.DispositionFor);
         foreach (var n in World.Economy.Nations.Keys.Where(n => n != nation)) Econ.AiNations.Add(n);
         Econ.AtWar = n => World.Wars.Any(w => w.Involves(n));
-        Zones.Clear();
-        Campaign = new BadWaters.Sim.Command.TheatreCampaign(Zone, BuildTheatre, NationId) { Geo = Content.Geo, WorldForces = () => World.Forces };
+        Zones.Clear(); _reach.Clear();
+        // fight zones are built and simulated only for a war engaged in Theatre Ops; the rest resolve off-screen
+        Campaign = new BadWaters.Sim.Command.TheatreCampaign(Zone, BuildTheatre, NationId)
+        {
+            Geo = Content.Geo, WorldForces = () => World.Forces,
+            Abstract = (w, key) =>
+            {
+                var war = w.Wars.FirstOrDefault(x => x.Key == key);
+                if (war == null || Content.WorldOob == null || !InReach(war.A, war.B)) return;
+                var before = w.Forces.DestroyedUnits.Count;
+                foreach (var r in BadWaters.Sim.Command.FightZone.AbstractDay(Content.WorldOob, w.Forces, war, w.Now, NationName)) Campaign!.Reports.Add(r);
+                // losses come off the nations' fielded forces
+                foreach (var id in w.Forces.DestroyedUnits.Skip(before))
+                    if (Content.WorldOob.Units.FirstOrDefault(u => u.Id == id) is { } u && w.Economy.Nations.TryGetValue(u.Side, out var ne) && ne.Fleet.TryGetValue("preset:" + u.Preset, out var fe))
+                    { fe.Count = Math.Max(0, fe.Count - 1); fe.Lost += 1; }
+            },
+        };
         Scheduler.DailyHook = (w, now) =>
         {
             var extra = ExtraDaily?.Invoke(w, now);

@@ -96,6 +96,48 @@ public static class FightZone
         };
     }
 
+    /// <summary>Can A and B reach each other at all (the contact test, without building a zone)?</summary>
+    public static bool InReach(ScenarioDef world, string a, string b)
+    {
+        var pb = Points(world, b).ToList();
+        return pb.Count > 0 && Points(world, a).Any(p => pb.Any(o => Pacing.DistanceKm(p.Lon, p.Lat, o.Lon, o.Lat) <= ContactKm));
+    }
+
+    /// <summary>
+    /// A day of a war nobody is watching, resolved abstractly from nation totals (no zone, no geometry): each side
+    /// loses a few aircraft in proportion to the enemy's strength, a base component is hit and launchers expend
+    /// rounds. Written straight into the world forces. Returns report lines. Game tuning, not a model of anything.
+    /// </summary>
+    public static List<string> AbstractDay(ScenarioDef world, TheatreSnapshot forces, War war, DateTime day, Func<string, string> nationName)
+    {
+        var rep = new List<string>();
+        var rng = new Random(HashCode.Combine(war.Key.GetHashCode(StringComparison.Ordinal), day.DayOfYear, day.Year));
+        List<UnitDef> Air(string n) => world.Units.Where(u => u.Side == n && u.Kind is "air" or "aew" && !forces.DestroyedUnits.Contains(u.Id)).ToList();
+        double Strength(string n) => Air(n).Count + world.Launchers.Count(l => l.Side == n && forces.LauncherStock.GetValueOrDefault(l.Id, l.Stock) > 0)
+                                     + world.Units.Count(u => u.Side == n && u.Kind is "ship" or "sub" && !(forces.Ships.TryGetValue(u.Id, out var s) && s[0] <= 0));
+        var (sa, sb) = (Strength(war.A), Strength(war.B));
+        if (sa <= 0 || sb <= 0) return rep;
+        foreach (var (n, own, enemy) in new[] { (war.A, sa, sb), (war.B, sb, sa) })
+        {
+            var air = Air(n);
+            var expect = air.Count * 0.01 * Math.Clamp(enemy / own, 0.3, 3);
+            var lost = (int)expect + (rng.NextDouble() < expect % 1 ? 1 : 0);
+            for (var i = 0; i < lost && air.Count > 0; i++) { var u = air[rng.Next(air.Count)]; air.Remove(u); forces.DestroyedUnits.Add(u.Id); }
+            var hit = "";
+            var comps = forces.Components.Keys.Where(k => world.Sites.Any(s => s.Side == n && s.Class != "population-centre" && k.StartsWith(s.Id + "/"))).ToList();
+            if (comps.Count > 0 && rng.NextDouble() < 0.5 * Math.Clamp(enemy / own, 0.3, 2))
+            {
+                var k = comps[rng.Next(comps.Count)];
+                forces.Components[k] = Math.Max(0, forces.Components[k] - rng.Next(5, 21));
+                hit = $", {k.Replace('/', ' ')} hit";
+            }
+            foreach (var l in world.Launchers.Where(l => l.Side == n))
+                if (rng.NextDouble() < 0.3) forces.LauncherStock[l.Id] = Math.Max(0, forces.LauncherStock.GetValueOrDefault(l.Id, l.Stock) - 1);
+            if (lost > 0 || hit != "") rep.Add($"{day:yyyy-MM-dd} {nationName(n)}: {lost} aircraft lost{hit} (war with {nationName(n == war.A ? war.B : war.A)}, resolved off-screen)");
+        }
+        return rep;
+    }
+
     /// <summary>A zone's footprint for the strategic map and trade: centre and radius (km).</summary>
     public static (double Lon, double Lat, double Km) Footprint(ScenarioDef zone)
     {

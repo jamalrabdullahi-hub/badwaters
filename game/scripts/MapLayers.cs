@@ -142,28 +142,6 @@ public partial class MilitaryLayer : Node2D
     }
 }
 
-/// <summary>Simulated: active fight zones. There are no fixed theatres: each war fights where the two can reach each other.</summary>
-public partial class TheatreRings : Node2D
-{
-    public override void _Process(double delta) { if (Visible && Session.World.Wars.Count > 0) QueueRedraw(); }
-    public override void _Draw()
-    {
-        var z = GetViewport().GetCamera2D()?.Zoom.X ?? 1; var font = ThemeDB.FallbackFont;
-        var pulse = 0.45f + 0.25f * Mathf.Sin((float)Time.GetTicksMsec() / 400f);
-        foreach (var w in Session.World.Wars)
-        {
-            if (Session.Zone(w.Key) is not { } zone) continue;
-            var (lon, lat, km) = BadWaters.Sim.Command.FightZone.Footprint(zone);
-            var p = Session.Project(lon, lat);
-            var r = (float)(km / 111.0 * Session.PxPerDeg / Math.Cos(lat * Math.PI / 180));
-            var col = new Color("ff4d5a");
-            DrawCircle(p, r, new Color(col, 0.05f));
-            DrawArc(p, r, 0, Mathf.Tau, 96, new Color(col, pulse), 2.5f / z);
-            DrawString(font, p + new Vector2(-r * 0.4f, -r - 8 / z), $"WAR · {Session.NationName(w.A)} vs {Session.NationName(w.B)} · since {w.Started:d MMM}", HorizontalAlignment.Left, -1, (int)(13 / z), col);
-        }
-    }
-}
-
 /// <summary>Simulated: today's storm cells (see Weather). Redrawn when the date changes.</summary>
 public partial class WeatherLayer : Node2D
 {

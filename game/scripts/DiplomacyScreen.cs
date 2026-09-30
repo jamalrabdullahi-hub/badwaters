@@ -32,8 +32,8 @@ public partial class DiplomacyScreen : PanelContainer
         foreach (var w in Session.World.Wars.ToList())
         {
             var h = new HBoxContainer();
-            var zone = Session.Zone(w.Key);
-            var fp = zone == null ? "" : $" · fight zone {zone.Sites.Count(s => s.Class != "population-centre")} bases, {zone.Units.Count} aircraft and ships";
+            var engaged = Session.Campaign?.Mode.GetValueOrDefault(w.Key) == BadWaters.Sim.Command.TheatreMode.Fight;
+            var fp = !Session.InReach(w.A, w.B) ? " · forces out of reach" : engaged ? " · engaged in Theatre Ops" : " · resolved off-screen (open Theatre Ops to fight it)";
             var l = UiTheme.Text($"{Session.NationName(w.A)} vs {Session.NationName(w.B)} · since {w.Started:d MMM yyyy}{fp}", 13, UiTheme.Bad);
             l.SizeFlagsHorizontal = SizeFlags.ExpandFill;
             h.AddChild(l);
@@ -54,7 +54,7 @@ public partial class DiplomacyScreen : PanelContainer
             if (n.Id == Me) continue;
             var h = new HBoxContainer();
             var atWar = Session.World.AtWar(Me, n.Id);
-            var reach = withForces.Contains(n.Id) && withForces.Contains(Me) && Session.Zone(BadWaters.Sim.Command.FightZone.Key(Me, n.Id)) != null;
+            var reach = withForces.Contains(n.Id) && withForces.Contains(Me) && Session.InReach(Me, n.Id);
             var l = UiTheme.Text($"{n.Name}{(atWar ? " · AT WAR" : "")}{(withForces.Contains(n.Id) ? reach ? " · forces within reach of yours" : " · forces out of reach" : "")}", 13, atWar ? UiTheme.Bad : UiTheme.Ink);
             l.SizeFlagsHorizontal = SizeFlags.ExpandFill;
             h.AddChild(l);
