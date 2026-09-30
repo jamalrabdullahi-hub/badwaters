@@ -13,7 +13,6 @@ public sealed record RouteDef
     public string Mode { get; init; } = "sea";
     /// <summary>Waypoints as [lon, lat] pairs for drawing.</summary>
     public List<double[]> Path { get; init; } = new();
-    public string[] Theatres { get; init; } = Array.Empty<string>();
     /// <summary>Ids of <see cref="ChokepointDef"/>s the route passes; closing any of them closes the route.</summary>
     public string[] Chokepoints { get; init; } = Array.Empty<string>();
     public double Throughput { get; init; } = 100; // game units of goods per month at full flow

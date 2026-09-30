@@ -209,6 +209,7 @@ public partial class Shell : Control
     private Control _dock = null!;
 
     private Control _mapModes = null!;
+    private DiplomacyScreen? _diplomacy;
 
     private void Open(string name)
     {
@@ -217,6 +218,7 @@ public partial class Shell : Control
         if (_dev != null) _dev.Visible = name == "Development";
         if (_industry != null) _industry.Visible = name == "Industry";
         if (_trade != null) _trade.Visible = name == "Trade & Logistics";
+        if (_diplomacy != null) _diplomacy.Visible = name == "Diplomacy";
         var theatre = name == "Theatre Ops";
         if (_theatre != null) { _theatre.Visible = theatre; _theatre.Layer.Visible = theatre; }
         _mapUi.Visible = name == "Map";
@@ -235,6 +237,12 @@ public partial class Shell : Control
         {
             if (_industry == null) { _industry = new IndustryScreen(); _stack.AddChild(_industry); } else _industry.Refresh();
             _industry.Visible = true;
+            return;
+        }
+        if (name == "Diplomacy")
+        {
+            if (_diplomacy == null) { _diplomacy = new DiplomacyScreen(); _stack.AddChild(_diplomacy); } else _diplomacy.Refresh();
+            _diplomacy.Visible = true;
             return;
         }
         if (name == "Trade & Logistics")
@@ -383,7 +391,7 @@ public partial class Shell : Control
             if (DevScreenshot.Arg("genfrag") != null && _theatre != null) GD.Print(_theatre.GenerateDayFrag());
             _theatre?.DevPicks();
         }
-        if (DevScreenshot.Arg("screen") is { } screen) Open(screen switch { "dev" => "Development", "theatre" => "Theatre Ops", "industry" => "Industry", "trade" => "Trade & Logistics", _ => "Map" });
+        if (DevScreenshot.Arg("screen") is { } screen) Open(screen switch { "dev" => "Development", "theatre" => "Theatre Ops", "industry" => "Industry", "trade" => "Trade & Logistics", "diplomacy" => "Diplomacy", _ => "Map" });
         if (_theatre != null && DevScreenshot.Arg("run") is { } run && double.TryParse(run, out var secs))
         {
             if (DevScreenshot.Arg("fire") is { } target) _theatre.Trial.Launch(_theatre.Trial.Launchers.First(l => l.Def.Side == "red").Def.Id, target, 2);

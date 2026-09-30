@@ -8,7 +8,6 @@ namespace BadWaters.Data;
 
 public sealed record TechFieldDef(string Id, string Name, int MaxLevel);
 public sealed record GoodDef(string Id, string Name);
-public sealed record TheatreDef(string Id, string Name);
 
 /// <summary>All loaded content, with cross-reference validation. Everything comes from JSON; nothing is hardcoded.</summary>
 public sealed class GameContent
