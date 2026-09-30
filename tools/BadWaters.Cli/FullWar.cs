@@ -4,7 +4,7 @@ using BadWaters.Sim.Economy;
 using BadWaters.Sim.Theatre;
 
 /// <summary>
-/// fullwar [theatre] [days] [seed]: a whole war with everything on. Strategic economy and national stockpiles, a theatre
+/// fullwar [A:B] [days] [seed] (e.g. JPN:CHN; ECS and GULF still work): a whole war with everything on. Strategic economy and national stockpiles, a theatre
 /// at war (both commanders, logistics drawn from the nations, daily write-back), a strategic month every 30 days.
 /// </summary>
 static class FullWar
@@ -12,17 +12,23 @@ static class FullWar
     public static int Run(string[] args)
     {
         var gc = GameContent.Load(Path.Combine("data", "core"));
-        var theatre = args.Length > 1 ? args[1] : "ECS";
+        var pair = args.Length > 1 ? args[1] : "JPN:CHN";
+        pair = pair switch { "ECS" => "JPN:CHN", "GULF" => "ISR:IRN", _ => pair };
+        var (na, nb) = FightZone.Parse(pair);
+        var theatre = FightZone.Key(na, nb);
         var days = args.Length > 2 ? int.Parse(args[2]) : 30;
         var seed = args.Length > 3 ? int.Parse(args[3]) : 1;
         string? Nat(string name) => gc.Nations.Values.FirstOrDefault(x => x.Name == name || x.Id == name)?.Id;
-        var scn = gc.Scenarios.Values.First(s => s.Theatre == theatre);
-        var nations = scn.Sides.Values.Select(Nat).Where(n => n != null).Cast<string>().ToList();
+        string Name(string id) => gc.Nations.TryGetValue(id, out var nn) ? nn.Name : id;
+        var scn = FightZone.Build(gc.WorldOob!, na, nb, na, Name) ?? throw new InvalidOperationException($"{pair}: their forces can't reach each other");
+        var nations = new List<string> { na, nb };
         var ew = new EconomyWorld(gc.Economy, gc.Geo, gc.Catalog, gc.Designs, gc.Routes);
         var w = new BadWaters.Sim.World { Now = new DateTime(2020, 1, 1) };
         var sw0 = System.Diagnostics.Stopwatch.StartNew();
         ew.Start(w.Economy, nations, 2020, gc.TradeRegimes);
-        NationalMunitions.Seed(w.Economy, gc.Stores, gc.Scenarios.Values, Nat);
+        NationalMunitions.Seed(w.Economy, gc.Stores, new[] { gc.WorldOob! with { Sides = gc.WorldOob.Sites.Select(s => s.Side).Distinct().ToDictionary(n => n, n => n) } }, Nat);
+        w.Wars.Add(new War(na, nb, w.Now));
+        Console.WriteLine($"Fight zone {scn.Name}: {scn.Sites.Count} sites, {scn.Units.Count} aircraft and ships, {scn.Batteries.Count} batteries, {scn.Launchers.Count} launchers, {scn.Logistics?.Corridors.Count ?? 0} supply routes");
         ew.Strategy = new StrategicCommander(ew, gc.DispositionFor);
         foreach (var n in nations) { ew.AiNations.Add(n); w.Economy.Nations[n].AtWar = true; }
         ew.AtWar = n => nations.Contains(n);
@@ -43,7 +49,7 @@ static class FullWar
             return t;
         }
 
-        var camp = new TheatreCampaign(th => gc.Scenarios.Values.FirstOrDefault(s => s.Theatre == th), Build, Nat) { Geo = gc.Geo };
+        var camp = new TheatreCampaign(k => k == theatre ? scn : null, Build, Nat) { Geo = gc.Geo, WorldForces = () => w.Forces };
         var routes = gc.Routes.Keys.ToDictionary(k => k, _ => new BadWaters.Sim.Trade.RouteState());
         int Lost(InterceptTrial t, string side) => t.Air!.Destroyed.Count(id => t.Scenario.Units.First(u => u.Id == id).Side == side);
         for (var d = 1; d <= days; d++)

@@ -17,10 +17,9 @@ public class ChokepointTests
     private static (World W, Scheduler S) Fresh()
     {
         var w = new World { Now = new DateTime(2020, 1, 1), End = new DateTime(2050, 1, 1) };
-        foreach (var t in C.Theatres.Keys) w.Theatres[t] = new TheatreState { Id = t };
         foreach (var r in C.Routes.Keys) w.Routes[r] = new RouteState();
         var s = new Scheduler(w);
-        foreach (var r in C.Routes.Values) { s.RouteTheatres[r.Id] = r.Theatres.ToHashSet(); s.RouteDefs[r.Id] = r; }
+        foreach (var r in C.Routes.Values) s.RouteDefs[r.Id] = r;
         return (w, s);
     }
 
@@ -51,7 +50,7 @@ public class ChokepointTests
     public void Land_corridors_ignore_naval_threat()
     {
         var (w, s) = Fresh();
-        foreach (var t in w.Theatres.Values) t.HostileNavalThreat = 100;
+        s.RouteThreat = _ => (100, 0); // naval threat everywhere, no war
         s.AdvanceStrategic(BadWaters.Sim.Time.TurnLength.Week);
         Assert.Equal(RouteStatus.FullyOpen, w.Routes["europe-east-west"].Status);
         Assert.NotEqual(RouteStatus.FullyOpen, w.Routes["east-asia-europe"].Status);

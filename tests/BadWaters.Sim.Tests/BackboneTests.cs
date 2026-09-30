@@ -119,7 +119,6 @@ public class BackboneTests
     private static World NewWorld()
     {
         var w = new World { Now = new DateTime(2020, 1, 1), End = new DateTime(2050, 12, 31), Player = "JPN" };
-        foreach (var t in C.Value.Theatres.Keys) w.Theatres[t] = new TheatreState { Id = t };
         foreach (var r in C.Value.Routes.Keys) w.Routes[r] = new RouteState();
         return w;
     }
@@ -127,7 +126,6 @@ public class BackboneTests
     private static Scheduler NewScheduler(World w)
     {
         var s = new Scheduler(w);
-        foreach (var r in C.Value.Routes.Values) s.RouteTheatres[r.Id] = r.Theatres.ToHashSet();
         return s;
     }
 
@@ -145,11 +143,17 @@ public class BackboneTests
     {
         var w = NewWorld();
         var s = NewScheduler(w);
-        s.DailyHook = (world, now) => { if (now == new DateTime(2020, 3, 10)) { world.Theatres["ECS"].AtWar = true; world.Theatres["ECS"].PlayerInvolved = true; } return null; };
+        // the game's daily hook raises the interrupt the day a war involving the player starts (see Session)
+        s.DailyHook = (world, now) =>
+        {
+            if (now == new DateTime(2020, 3, 10)) world.Wars.Add(new BadWaters.Sim.Command.War("JPN", "CHN", now));
+            var fresh = world.Wars.FirstOrDefault(x => x.Involves(world.Player) && x.Started.Date == now.Date);
+            return fresh == null ? null : new Interrupt(now, "war", "war", fresh.Key);
+        };
         var irq = s.AdvanceStrategic(TurnLength.Year);
         Assert.NotNull(irq);
         Assert.Equal("war", irq!.Kind);
-        Assert.Equal("ECS", irq.Theatre);
+        Assert.Equal("CHN:JPN", irq.Theatre);
         Assert.Equal(new DateTime(2020, 3, 10), w.Now);
     }
 

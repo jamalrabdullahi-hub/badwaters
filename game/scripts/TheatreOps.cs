@@ -198,7 +198,7 @@ public partial class TheatreOps : Control
     /// <summary>Switch to another scenario (for example the one for a theatre that just went to war).</summary>
     public void Load(string scenarioId)
     {
-        Scenario = Session.Content.Scenarios[scenarioId];
+        Scenario = Session.ScenarioById(scenarioId) ?? Session.Content.Scenarios["intercept-trial"];
         _missile = DevScreenshot.Arg("missile") ?? Scenario.Launchers.FirstOrDefault()?.Missile ?? "";
         _interceptor = DevScreenshot.Arg("interceptor") ?? Scenario.Batteries.FirstOrDefault()?.Interceptor ?? "";
         _radar = Scenario.Batteries.FirstOrDefault()?.Radar ?? "";

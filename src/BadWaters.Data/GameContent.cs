@@ -18,7 +18,8 @@ public sealed class GameContent
     public Dictionary<string, GoodDef> Goods { get; } = new();
     public Dictionary<string, FactoryDef> Factories { get; } = new();
     public Dictionary<string, RouteDef> Routes { get; } = new();
-    public Dictionary<string, TheatreDef> Theatres { get; } = new();
+    /// <summary>The persistent world order of battle (data/core/world_oob.json): sides are nation ids.</summary>
+    public ScenarioDef? WorldOob { get; set; }
     public Dictionary<string, DesignDef> Designs { get; } = new();
     public Dictionary<string, ScenarioDef> Scenarios { get; } = new();
     public Dictionary<string, PresetDef> Presets { get; } = new();
@@ -139,7 +140,7 @@ public sealed class GameContent
         g.TradeRegimes.AddRange(l.Load<BadWaters.Sim.Economy.TradeRegime>("economy/trade.json"));
         g.Geo.Seeding = l.LoadObject<BadWaters.Sim.Economy.SeedingRules>("economy/seeding.json") ?? g.Geo.Seeding;
         g.Geo.Rules = l.LoadObject<BadWaters.Sim.Economy.EconomyRules>("economy/economy_rules.json") ?? g.Geo.Rules;
-        foreach (var x in l.Load<TheatreDef>("theatres.json")) g.Theatres[x.Id] = x;
+        g.WorldOob = l.LoadObject<ScenarioDef>("world_oob.json");
         foreach (var x in l.Load<RatingRule>("engineering/ratings.json")) g.Catalog.Ratings[x.Id] = x;
         foreach (var x in l.Load<ComponentTemplate>("components.json")) g.Catalog.Components[x.Id] = x;
         foreach (var f in new[] { "ships", "aircraft", "munitions", "ground" })
@@ -190,7 +191,7 @@ public sealed class GameContent
             if (fac.Produces != "" && !Goods.ContainsKey(fac.Produces)) Errors.Add($"factory {fac.Id}: produces unknown good {fac.Produces}");
             foreach (var g in fac.InputsPerWork.Keys) if (!Goods.ContainsKey(g)) Errors.Add($"factory {fac.Id}: unknown input {g}");
         }
-        foreach (var r in Routes.Values) foreach (var t in r.Theatres) if (!Theatres.ContainsKey(t)) Errors.Add($"route {r.Id}: unknown theatre {t}");
+
         foreach (var sc in Scenarios.Values)
         {
             foreach (var st in sc.Sites) if (!TargetPolicy.IsKnown(st.Class)) Errors.Add($"scenario {sc.Id}: site {st.Id} has unclassified class {st.Class}");

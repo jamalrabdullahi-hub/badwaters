@@ -45,6 +45,8 @@ public sealed class TheatreCampaign
     public double AutoStep { get; set; } = 60;
     /// <summary>Economy regions (national fuel and spares stocks for theatre logistics).</summary>
     public EconomyGeo? Geo { get; set; }
+    /// <summary>The persistent world state (World.Forces): a zone built fresh starts from it, and writes back into it.</summary>
+    public Func<TheatreSnapshot>? WorldForces { get; set; }
 
     public TheatreCampaign(Func<string, ScenarioDef?> scenarioFor, Func<ScenarioDef, int, InterceptTrial> build, Func<string, string?> nationOfSideName)
     { _scenarioFor = scenarioFor; _build = build; _nationOfSideName = nationOfSideName; }
@@ -58,6 +60,7 @@ public sealed class TheatreCampaign
         t = _build(sc, 1);
         t.Adaptive = true;
         if (snap != null) Restore(t, snap);
+        else if (WorldForces?.Invoke() is { } wf) Restore(t, wf, time: false); // semi-persistent: the world remembers
         Live[theatre] = t;
         Mode.TryAdd(theatre, TheatreMode.Auto);
         return t;
@@ -95,6 +98,7 @@ public sealed class TheatreCampaign
     /// <summary>Theatre → economy: losses, expended rounds, resupply from national production.</summary>
     public void WriteBack(World w, InterceptTrial t)
     {
+        Merge(w.Forces, Snapshot(t));
         var econ = w.Economy;
         foreach (var side in new[] { "blue", "red" })
         {
@@ -165,9 +169,23 @@ public sealed class TheatreCampaign
         RouteDamage = t.Logistics?.Corridors.Values.Where(c => c.Damage > 0).ToDictionary(c => c.Def.Id, c => c.Damage) ?? new(),
     };
 
-    public static void Restore(InterceptTrial t, TheatreSnapshot s)
+    /// <summary>Fold a zone's state into the world's (its assets overwrite; losses accumulate).</summary>
+    public static void Merge(TheatreSnapshot into, TheatreSnapshot s)
     {
-        t.SetTime(s.Time);
+        foreach (var id in s.DestroyedUnits) if (!into.DestroyedUnits.Contains(id)) into.DestroyedUnits.Add(id);
+        foreach (var (k, v) in s.UnitBases) into.UnitBases[k] = v;
+        foreach (var (k, v) in s.Components) into.Components[k] = v;
+        foreach (var (k, v) in s.LauncherStock) into.LauncherStock[k] = v;
+        foreach (var (k, v) in s.BatteryStock) into.BatteryStock[k] = v;
+        foreach (var (k, v) in s.Ships) into.Ships[k] = v;
+        foreach (var (k, v) in s.Supply) into.Supply[k] = v;
+        foreach (var (k, v) in s.StoreMagazines) into.StoreMagazines[k] = v;
+        foreach (var (k, v) in s.RouteDamage) into.RouteDamage[k] = v;
+    }
+
+    public static void Restore(InterceptTrial t, TheatreSnapshot s, bool time = true)
+    {
+        if (time) t.SetTime(s.Time);
         if (t.Air != null)
         {
             foreach (var id in s.DestroyedUnits) t.Air.Destroyed.Add(id);
@@ -189,9 +207,10 @@ public sealed class TheatreCampaign
             foreach (var (id, dmg) in s.RouteDamage) if (t.Logistics.Corridors.TryGetValue(id, out var c)) c.Damage = dmg;
         }
         if (t.Air != null && s.StoreMagazines.Count > 0)
-        {
-            t.Air.Munitions.ByBase.Clear();
-            foreach (var (b, m) in s.StoreMagazines) foreach (var (k, q) in m) t.Air.Munitions.Add(b, k, q);
-        }
+            foreach (var (b, m) in s.StoreMagazines.Where(x => t.Bases.ContainsKey(x.Key)))
+            {
+                t.Air.Munitions.ByBase.Remove(b);
+                foreach (var (k, q) in m) t.Air.Munitions.Add(b, k, q);
+            }
     }
 }

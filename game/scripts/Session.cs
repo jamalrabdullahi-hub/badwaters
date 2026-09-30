@@ -33,13 +33,13 @@ public static class Session
                 foreach (var (mode, n) in BadWaters.Sim.Economy.NationalMunitions.Transport(tne)) transport[(side, mode)] = n;
         var t = BadWaters.Sim.Command.TheatreFactory.Create(sc, Profile, Content.PresetInfo, Content.BaseTypes,
             side => Content.DoctrineFor(NationId(sc.Sides.GetValueOrDefault(side, ""))), seed, stores: Content.Stores, logistics: Content.Logistics, transport: transport);
-        // a theatre at war holds only what the nations have: its stocks are drawn from national stockpiles
-        if (t.Logistics != null && sc.Theatre != "" && World.Theatres.TryGetValue(sc.Theatre, out var wts) && wts.AtWar)
+        // a fight zone holds only what the nations have: its stocks are drawn from national stockpiles
+        if (t.Logistics != null && sc.Theatre != "" && World.Wars.Any(w => w.Key == sc.Theatre))
             foreach (var side in new[] { "blue", "red" })
                 if (NationId(sc.Sides.GetValueOrDefault(side, "")) is { } nid && World.Economy.Nations.TryGetValue(nid, out var dne))
                     foreach (var note in t.Logistics.DrawFromNation(side, dne, World.Economy, Content.Geo)) t.Report("logistics", $"{SideNameOf(sc, side)}: {note}.");
         // a campaign theatre that isn't at war shows the other side as "hostile, not at war": track only
-        if (sc.Theatre != "" && World.Theatres.TryGetValue(sc.Theatre, out var ts) && !ts.AtWar && DevScreenshot.Arg("war") == null) t.AtWar = false;
+        if (sc.Id.StartsWith("home-")) t.AtWar = false; // peacetime view: track only
         t.SiteDamaged += (site, frac) =>
         {
             var nation = NationId(t.Scenario.Sides.GetValueOrDefault(site.Side, ""));
@@ -50,6 +50,43 @@ public static class Session
         return t;
     }
     private static string SideNameOf(BadWaters.Sim.Theatre.ScenarioDef sc, string side) => sc.Sides.GetValueOrDefault(side, side);
+    // ---------------- the persistent world: wars and fight zones ----------------
+
+    /// <summary>Fight zones by war key, generated from the world order of battle (rebuilt when wars change).</summary>
+    public static Dictionary<string, BadWaters.Sim.Theatre.ScenarioDef?> Zones { get; } = new();
+    public static string NationName(string id) => Content.Nations.TryGetValue(id, out var n) ? n.Name : id;
+
+    public static BadWaters.Sim.Theatre.ScenarioDef? Zone(string warKey)
+    {
+        if (Zones.TryGetValue(warKey, out var z)) return z;
+        var (a, b) = BadWaters.Sim.Command.FightZone.Parse(warKey);
+        return Zones[warKey] = Content.WorldOob == null ? null : BadWaters.Sim.Command.FightZone.Build(Content.WorldOob, a, b, World.Player, NationName);
+    }
+
+    /// <summary>The player's peacetime view: own forces and the nearest foreign forces within reach (track only).</summary>
+    public static BadWaters.Sim.Theatre.ScenarioDef? Home() => Content.WorldOob == null ? null : BadWaters.Sim.Command.FightZone.Home(Content.WorldOob, World.Player, NationName);
+
+    /// <summary>Any playable scenario: a sandbox from the content, a war's fight zone, or the home view.</summary>
+    public static BadWaters.Sim.Theatre.ScenarioDef? ScenarioById(string id) =>
+        Content.Scenarios.GetValueOrDefault(id) ?? Zones.Values.FirstOrDefault(z => z?.Id == id) ?? (Home() is { } h && h.Id == id ? h : null);
+
+    public static void DeclareWar(string a, string b)
+    {
+        if (a == b || World.AtWar(a, b)) return;
+        World.Wars.Add(new BadWaters.Sim.Command.War(a, b, World.Now));
+        World.Log.Add($"{World.Now:yyyy-MM-dd} {NationName(a)} and {NationName(b)} are at war.");
+    }
+
+    public static void MakePeace(string a, string b)
+    {
+        var w = World.Wars.FirstOrDefault(x => x.Involves(a) && x.Involves(b));
+        if (w == null) return;
+        if (Campaign != null && Campaign.Live.TryGetValue(w.Key, out var t)) { Campaign.WriteBack(World, t); Campaign.Live.Remove(w.Key); Campaign.Days.Remove(w.Key); }
+        World.Wars.Remove(w);
+        Zones.Remove(w.Key);
+        World.Log.Add($"{World.Now:yyyy-MM-dd} {NationName(a)} and {NationName(b)} made peace; the fighting stops, the damage stays.");
+    }
+
     /// <summary>Nation id from a scenario side name ("China" → "CHN").</summary>
     public static string? NationId(string sideName) =>
         Content.Nations.ContainsKey(sideName) ? sideName : Content.Nations.Values.FirstOrDefault(n => n.Name == sideName)?.Id;
@@ -73,25 +110,37 @@ public static class Session
         foreach (var e in Content.Errors) GD.PushError(e);
         StartYear = year;
         World = new World { Now = new DateTime(year, 1, 1), End = new DateTime(2050, 12, 31), Player = nation };
-        foreach (var t in Content.Theatres.Keys) World.Theatres[t] = new TheatreState { Id = t };
         foreach (var r in Content.Routes.Keys) World.Routes[r] = new RouteState();
         Scheduler = new Scheduler(World);
-        foreach (var r in Content.Routes.Values) { Scheduler.RouteTheatres[r.Id] = r.Theatres.ToHashSet(); Scheduler.RoutePaths[r.Id] = r.Path; Scheduler.RouteDefs[r.Id] = r; }
+        foreach (var r in Content.Routes.Values) { Scheduler.RoutePaths[r.Id] = r.Path; Scheduler.RouteDefs[r.Id] = r; }
+        // shipping is threatened where a war's fight zone lies across the route
+        Scheduler.RouteThreat = id =>
+        {
+            if (!Scheduler.RoutePaths.TryGetValue(id, out var path)) return (0, 0);
+            foreach (var w in World.Wars)
+                if (Zone(w.Key) is { } z && BadWaters.Sim.Command.FightZone.Footprint(z) is var (lon, lat, km) && path.Any(p => BadWaters.Sim.Theatre.Pacing.DistanceKm(lon, lat, p[0], p[1]) <= km))
+                    return (80, 100);
+            return (0, 0);
+        };
         LoadLand();
         Econ = new BadWaters.Sim.Economy.EconomyWorld(Content.Economy, Content.Geo, Content.Catalog, Content.Designs, Content.Routes);
         Econ.Start(World.Economy, Content.Nations.Keys, year, Content.TradeRegimes);
         // national stockpiles of aircraft stores and missile rounds: what theatres can draw on
-        BadWaters.Sim.Economy.NationalMunitions.Seed(World.Economy, Content.Stores, Content.Scenarios.Values, NationId);
+        var worldSides = Content.WorldOob == null ? new List<BadWaters.Sim.Theatre.ScenarioDef>() : new() { Content.WorldOob with { Sides = Content.WorldOob.Sites.Select(s => s.Side).Distinct().ToDictionary(n => n, n => n) } };
+        BadWaters.Sim.Economy.NationalMunitions.Seed(World.Economy, Content.Stores, worldSides, NationId);
         // every other nation is run by its strategic AI; the player can delegate their own too
         Econ.Strategy = new BadWaters.Sim.Economy.StrategicCommander(Econ, Content.DispositionFor);
         foreach (var n in World.Economy.Nations.Keys.Where(n => n != nation)) Econ.AiNations.Add(n);
-        Econ.AtWar = n => World.Theatres.Values.Any(t => t.AtWar && Content.Scenarios.Values.Any(sc => sc.Theatre == t.Id && sc.Sides.Values.Any(v => NationId(v) == n)));
-        Campaign = new BadWaters.Sim.Command.TheatreCampaign(th => Content.Scenarios.Values.FirstOrDefault(x => x.Theatre == th), BuildTheatre, NationId) { Geo = Content.Geo };
+        Econ.AtWar = n => World.Wars.Any(w => w.Involves(n));
+        Zones.Clear();
+        Campaign = new BadWaters.Sim.Command.TheatreCampaign(Zone, BuildTheatre, NationId) { Geo = Content.Geo, WorldForces = () => World.Forces };
         Scheduler.DailyHook = (w, now) =>
         {
             var extra = ExtraDaily?.Invoke(w, now);
-            var wars = w.Theatres.Values.Where(t => t.AtWar).Select(t => t.Id).ToList();
+            var wars = w.Wars.Select(x => x.Key).ToList();
             var waiting = Campaign.Daily(w, wars);
+            var fresh = w.Wars.FirstOrDefault(x => x.Involves(w.Player) && x.Started.Date == now.Date);
+            if (fresh != null && extra == null) extra = new BadWaters.Sim.Interrupt(now, "war", $"War with {NationName(fresh.A == w.Player ? fresh.B : fresh.A)}: forces within reach of each other are fighting.", fresh.Key);
             foreach (var r in Campaign.Reports) w.Log.Add(r);
             Campaign.Reports.Clear();
             if (waiting != null) return new BadWaters.Sim.Interrupt(now, "theatre-fight", $"The war in {waiting} is waiting for you: fight it in Theatre Ops or auto-resolve.", waiting);

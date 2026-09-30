@@ -262,13 +262,13 @@ public partial class Shell : Control
                 };
             }
             _theatre.Visible = true; _theatre.Layer.Visible = true;
-            // a theatre at war with the player opens its own scenario; before a war, your own nation's theatre in
-            // "not at war" mode (track only); the proving-ground trial only for nations with no theatre
-            var war = Session.World.Theatres.Values.Where(t => t.AtWar && t.PlayerInvolved).Select(t => t.Id).ToHashSet();
-            var mine = Session.Content.Scenarios.Values.FirstOrDefault(x => x.Theatre != "" && x.Sides.Values.Any(n => Session.NationId(n) == Session.World.Player));
-            var id = DevScreenshot.Arg("scenario") ?? Session.Content.Scenarios.Values.FirstOrDefault(x => war.Contains(x.Theatre))?.Id ?? mine?.Id ?? "intercept-trial";
-            var nowAtWar = Session.Content.Scenarios.TryGetValue(id, out var target) && war.Contains(target.Theatre);
-            if (_theatre.Scenario.Id != id || (target?.Theatre is { Length: > 0 } && _theatre.Trial.AtWar != nowAtWar)) _theatre.Load(id); // the war started: switch to the live campaign theatre
+            // the persistent world: at war, the fight zone of your war (the one the banner named, else your first); in
+            // peace, your home forces and the nearest foreign forces within reach (track only); the proving-ground
+            // trial only when your nation has no forces in the world yet
+            var myWars = Session.World.Wars.Where(w => w.Involves(Session.World.Player)).ToList();
+            var key = myWars.FirstOrDefault(w => w.Key == _bannerTheatre)?.Key ?? myWars.FirstOrDefault()?.Key;
+            var id = DevScreenshot.Arg("scenario") ?? (key != null ? Session.Zone(key)?.Id : null) ?? Session.Home()?.Id ?? "intercept-trial";
+            if (_theatre.Scenario.Id != id) _theatre.Load(id);
             var sc = _theatre.Scenario;
             _map.CenterOn(sc.Center[0], sc.Center[1], sc.Zoom);
             _map.PanScreen(new Vector2(0, -TheatreOps.TopH / 2f)); // map-first: only the command bar covers it
@@ -347,13 +347,18 @@ public partial class Shell : Control
             Session.World.Routes["east-asia-europe"].Disruption = 40;
             Session.World.Routes["east-asia-australia"].Disruption = 25;
         }
-        if (DevScreenshot.Arg("war") is { } theatre)
+        // --war=JPN:CHN: those two go to war ten days in (old theatre ids ECS / GULF still work)
+        if (DevScreenshot.Arg("war") is { } warArg && WarPair(warArg) is { } wp)
             Session.ExtraDaily = (w, now) =>
             {
-                if ((now - new DateTime(Session.StartYear, 1, 1)).TotalDays >= 10) { w.Theatres[theatre].AtWar = true; w.Theatres[theatre].PlayerInvolved = true; w.Theatres[theatre].HostileNavalThreat = 80; }
+                if ((now - new DateTime(Session.StartYear, 1, 1)).TotalDays >= 10 && !w.AtWar(wp.A, wp.B)) Session.DeclareWar(wp.A, wp.B);
                 return null;
             };
     }
+
+    /// <summary>"JPN:CHN", or an old theatre id (ECS, GULF) mapped to its two nations.</summary>
+    private static (string A, string B)? WarPair(string arg) =>
+        arg.Contains(':') ? BadWaters.Sim.Command.FightZone.Parse(arg) : arg switch { "ECS" => ("JPN", "CHN"), "GULF" => ("ISR", "IRN"), _ => null };
 
     private void DevAfterBuild()
     {
@@ -367,11 +372,13 @@ public partial class Shell : Control
         if (DevScreenshot.Arg("sanction")?.Split(':') is { Length: >= 3 } sc)
             Session.World.Economy.Sanction(sc[0], sc[1], sc[2], sc.Length > 3 && sc[3] == "global");
         if (DevScreenshot.Arg("advance") is { } a) Advance(a == "year" ? TurnLength.Year : TurnLength.Month);
-        // --playwar=ECS: start the game already at war in that theatre and drop straight into Theatre Ops to fight it
-        if (DevScreenshot.Arg("playwar") is { } pw && Session.World.Theatres.TryGetValue(pw, out var pws))
+        // --playwar=JPN:CHN: start already at war and drop straight into Theatre Ops to fight it
+        if (DevScreenshot.Arg("playwar") is { } pwa && WarPair(pwa) is { } pw)
         {
-            pws.AtWar = true; pws.PlayerInvolved = true;
-            if (Session.Campaign != null) Session.Campaign.Mode[pw] = BadWaters.Sim.Command.TheatreMode.Fight;
+            Session.DeclareWar(pw.A, pw.B);
+            var key = BadWaters.Sim.Command.FightZone.Key(pw.A, pw.B);
+            if (Session.Campaign != null) Session.Campaign.Mode[key] = BadWaters.Sim.Command.TheatreMode.Fight;
+            _bannerTheatre = key;
             Open("Theatre Ops");
             if (DevScreenshot.Arg("genfrag") != null && _theatre != null) GD.Print(_theatre.GenerateDayFrag());
             _theatre?.DevPicks();

@@ -8,16 +8,6 @@ namespace BadWaters.Sim;
 /// <summary>Why a strategic advance stopped early.</summary>
 public sealed record Interrupt(DateTime At, string Kind, string Text, string? Theatre);
 
-/// <summary>Per-theatre state. When the player is at war there, it becomes the live Theatre Ops view.</summary>
-public sealed class TheatreState
-{
-    public required string Id { get; init; }
-    public bool AtWar { get; set; }
-    public bool PlayerInvolved { get; set; }
-    public double HostileNavalThreat { get; set; } // 0..100
-    public double FriendlySeaControl { get; set; } // 0..100
-}
-
 /// <summary>
 /// The single source of truth. The Strategic Map and Theatre Ops are two views of this object;
 /// neither owns separate state.
@@ -27,7 +17,12 @@ public sealed class World
     public DateTime Now { get; set; }
     public DateTime End { get; set; }
     public string Player { get; set; } = "";
-    public Dictionary<string, TheatreState> Theatres { get; set; } = new();
+    /// <summary>Wars between nations. There are no fixed theatres: each war fights where the two can reach each other.</summary>
+    public List<BadWaters.Sim.Command.War> Wars { get; set; } = new();
+    /// <summary>The persistent state of every military asset in the world (damage, losses, stocks, positions): fight
+    /// zones are built from it and write their results back into it.</summary>
+    public BadWaters.Sim.Command.TheatreSnapshot Forces { get; set; } = new();
+    public bool AtWar(string a, string b) => Wars.Any(w => w.Involves(a) && w.Involves(b));
     public Dictionary<string, RouteState> Routes { get; set; } = new();
     /// <summary>Chokepoints currently shut (id → who shut it).</summary>
     public Dictionary<string, string> ClosedChokepoints { get; set; } = new();
@@ -95,13 +90,9 @@ public sealed class Scheduler
         Interrupt? routeIrq = null;
         foreach (var (id, r) in _w.Routes)
         {
-            var hostile = 0.0; var friendly = 0.0; var war = 0.0;
-            foreach (var t in _w.Theatres.Values.Where(t => RouteTouches(id, t.Id)))
-            {
-                hostile = Math.Max(hostile, t.HostileNavalThreat);
-                friendly = Math.Max(friendly, t.FriendlySeaControl);
-                if (t.AtWar) war = 100;
-            }
+            // threat from active fight zones the route passes through (set by the game from its wars)
+            var (hostile, war) = RouteThreat?.Invoke(id) ?? (0, 0);
+            var friendly = 0.0;
             var def = RouteDefs.GetValueOrDefault(id);
             var shut = def != null && def.Chokepoints.Any(c => _w.ClosedChokepoints.ContainsKey(c));
             if (def?.Mode == "land") hostile = 0; // land corridors: only a regional war disrupts them
@@ -113,9 +104,6 @@ public sealed class Scheduler
                 routeIrq ??= new Interrupt(_w.Now, "route-closed", $"Trade route {id} is effectively closed.", null);
         }
         if (irq != null) return Record(irq);
-        foreach (var t in _w.Theatres.Values)
-            if (t.AtWar && t.PlayerInvolved)
-                return Record(new Interrupt(_w.Now, "war", $"You are at war in {t.Id}. Theatre Ops is live.", t.Id));
         return routeIrq == null ? null : Record(routeIrq);
     }
 
@@ -132,15 +120,14 @@ public sealed class Scheduler
         _w.Log.Add($"{_w.Now:yyyy-MM-dd} {id} {(closed ? "closed" : "reopened")}{(by != "" ? $" by {by}" : "")}.");
     }
 
-    /// <summary>Route↔theatre membership is registered by the data layer.</summary>
-    public Dictionary<string, HashSet<string>> RouteTheatres { get; } = new();
+    /// <summary>Hostile threat and war level (0..100) along a route, from the fight zones it crosses.</summary>
+    public Func<string, (double Hostile, double War)>? RouteThreat { get; set; }
     /// <summary>Route waypoints [lon, lat] for weather; registered by the data layer (optional).</summary>
     public Dictionary<string, List<double[]>> RoutePaths { get; } = new();
     /// <summary>Route definitions (mode and chokepoints); registered by the data layer (optional).</summary>
     public Dictionary<string, RouteDef> RouteDefs { get; } = new();
     /// <summary>Disruption points added by a full-strength storm on the route.</summary>
     public const double StormDisruption = 12;
-    private bool RouteTouches(string route, string theatre) => RouteTheatres.TryGetValue(route, out var s) && s.Contains(theatre);
 
     private Interrupt Record(Interrupt i) { _w.Log.Add($"{i.At:yyyy-MM-dd} {i.Text}"); return i; }
 }
